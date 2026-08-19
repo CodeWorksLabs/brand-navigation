@@ -1,0 +1,55 @@
+en:
+  brand_navigation:
+    open_menu: "Open brand navigation"
+    navigation_label: "Brand navigation"
+  theme_metadata:
+    description: "A brand header and submenu navigation theme component for Discourse."
+    settings:
+      enabled: "Render Brand Navigation on normal, non-embed Discourse pages."
+      outlet: "Place the bar above or below the core site header."
+      show_brand: "Show the configured brand identity."
+      brand_name: "Accessible brand name and optional visible text."
+      brand_url: "Destination for the brand identity."
+      brand_logo: "Logo used in light color schemes."
+      brand_logo_dark: "Optional logo used in dark color schemes."
+      brand_presentation: "Show the logo, name, or both."
+      brand_target: "Open the brand destination in the same or a new browsing context."
+      mobile_mode: "Use a compact header menu, a full bar, or no brand navigation on mobile."
+      navigation_items:
+        description: "Ordered top-level links and one-level submenus."
+        schema:
+          properties:
+            label:
+              label: "Label"
+              description: "Visible top-level navigation text."
+            url:
+              label: "URL"
+              description: "Used for a direct link when children are empty."
+            title:
+              label: "Description"
+              description: "Optional additional context exposed as a title."
+            icon:
+              label: "Icon"
+              description: "Optional Font Awesome 6 icon name."
+            target:
+              label: "Target"
+            visibility:
+              label: "Audience"
+            children:
+              label: "Submenu items"
+              description: "Ordered child links; arbitrary deep nesting is intentionally unsupported."
+              schema:
+                properties:
+                  label:
+                    label: "Label"
+                  url:
+                    label: "URL"
+                  title:
+                    label: "Description"
+                  icon:
+                    label: "Icon"
+                  target:
+                    label: "Target"
+                  visibility:
+                    label: "Audience"
+      custom_font_awesome_icons: "Font Awesome 6 icon names used by navigation entries."

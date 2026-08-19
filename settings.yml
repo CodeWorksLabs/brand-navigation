@@ -1,0 +1,138 @@
+enabled:
+  type: bool
+  default: true
+
+outlet:
+  type: enum
+  default: above-site-header
+  choices:
+    - above-site-header
+    - below-site-header
+
+show_brand:
+  type: bool
+  default: true
+
+brand_name:
+  type: string
+  default: ""
+
+brand_url:
+  type: string
+  default: "/"
+
+brand_logo:
+  type: upload
+  default: ""
+
+brand_logo_dark:
+  type: upload
+  default: ""
+
+brand_presentation:
+  type: enum
+  default: logo_and_name
+  choices:
+    - logo_and_name
+    - logo_only
+    - name_only
+
+brand_target:
+  type: enum
+  default: _self
+  choices:
+    - _self
+    - _blank
+
+mobile_mode:
+  type: enum
+  default: menu
+  choices:
+    - menu
+    - bar
+    - hidden
+
+navigation_items:
+  type: objects
+  default: []
+  schema:
+    name: navigation_item
+    identifier: label
+    properties:
+      label:
+        type: string
+        required: true
+        validations:
+          min_length: 1
+          max_length: 100
+      url:
+        type: string
+        validations:
+          max_length: 2048
+          url: true
+      title:
+        type: string
+        validations:
+          max_length: 200
+      icon:
+        type: string
+        validations:
+          max_length: 100
+      target:
+        type: enum
+        default: _self
+        choices:
+          - _self
+          - _blank
+      visibility:
+        type: enum
+        default: everyone
+        choices:
+          - everyone
+          - anonymous
+          - authenticated
+      children:
+        type: objects
+        schema:
+          name: navigation_child
+          identifier: label
+          properties:
+            label:
+              type: string
+              required: true
+              validations:
+                min_length: 1
+                max_length: 100
+            url:
+              type: string
+              required: true
+              validations:
+                min_length: 1
+                max_length: 2048
+                url: true
+            title:
+              type: string
+              validations:
+                max_length: 200
+            icon:
+              type: string
+              validations:
+                max_length: 100
+            target:
+              type: enum
+              default: _self
+              choices:
+                - _self
+                - _blank
+            visibility:
+              type: enum
+              default: everyone
+              choices:
+                - everyone
+                - anonymous
+                - authenticated
+
+custom_font_awesome_icons:
+  type: list
+  list_type: simple
+  default: ""
