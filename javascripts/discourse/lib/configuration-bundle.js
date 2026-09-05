@@ -53,7 +53,25 @@ export function validateBundle(bundle) {
     errors.push("custom_font_awesome_icons must be an array.");
   }
 
+  for (const item of bundle.settings.navigation_items || []) {
+    for (const child of item.children || []) {
+      if (child.url === "#") {
+        errors.push(
+          `Submenu item ${JSON.stringify(child.label)} uses a placeholder URL.`
+        );
+      }
+    }
+  }
+
   return errors;
+}
+
+export function themeSettingValue(name, value) {
+  if (name === "custom_font_awesome_icons" && Array.isArray(value)) {
+    return value.join("|");
+  }
+
+  return value;
 }
 
 export function createBundle(settings, metadata = {}) {

@@ -9,10 +9,17 @@ import {
   BUNDLE_VERSION,
   createBundle,
   PORTABLE_SETTINGS,
+  themeSettingValue,
   validateBundle,
 } from "../javascripts/discourse/lib/configuration-bundle.js";
 
-export { BUNDLE_FORMAT, BUNDLE_VERSION, createBundle, validateBundle };
+export {
+  BUNDLE_FORMAT,
+  BUNDLE_VERSION,
+  createBundle,
+  themeSettingValue,
+  validateBundle,
+};
 
 export function normalizeSettingValue(name, value) {
   if (name === "navigation_items") {

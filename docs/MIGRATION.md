@@ -49,11 +49,13 @@ remain a separate site-local step.
 3. Create one structured top-level item for every menu item.
 4. Add each submenu entry under its parent. Divider-only entries have no direct
    equivalent; use grouping and ordering instead.
-5. Replace `vdm`, `vdo`, and `vmo` device tokens with the component-wide mobile
+5. Omit placeholder links such as `#` until they have real destinations; Brand
+   Navigation validates submenu destinations instead of preserving no-op links.
+6. Replace `vdm`, `vdo`, and `vmo` device tokens with the component-wide mobile
    mode. Per-link device visibility is intentionally not retained.
-6. Keep color customization in the parent theme when needed; Brand Navigation
+7. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
-7. Disable Header Submenus, enable Brand Navigation, and run acceptance checks.
+8. Disable Header Submenus, enable Brand Navigation, and run acceptance checks.
 
 The same mapping applies to Pavilion's Dropdown Header: header links become
 top-level items, dropdown rows become children matched to their parent, and

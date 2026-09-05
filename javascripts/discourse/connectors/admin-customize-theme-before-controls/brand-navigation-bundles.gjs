@@ -7,6 +7,7 @@ import { i18n } from "discourse-i18n";
 import {
   createBundle,
   PORTABLE_SETTINGS,
+  themeSettingValue,
   validateBundle,
 } from "../../lib/configuration-bundle";
 
@@ -101,8 +102,10 @@ export default class BrandNavigationBundles extends Component {
           throw new Error(`This component does not define setting ${name}.`);
         }
 
-        await setting.updateSetting(this.theme.id, value);
-        setting.set("value", value);
+        const persistedValue = themeSettingValue(name, value);
+
+        await setting.updateSetting(this.theme.id, persistedValue);
+        setting.set("value", persistedValue);
       }
 
       this.success = i18n(

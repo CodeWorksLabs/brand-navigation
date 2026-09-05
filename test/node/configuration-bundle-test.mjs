@@ -6,6 +6,7 @@ import {
   BUNDLE_VERSION,
   createBundle,
   normalizeSettingValue,
+  themeSettingValue,
   validateBundle,
 } from "../../scripts/brand-navigation-config.mjs";
 
@@ -38,6 +39,25 @@ test("rejects unsafe or unsupported settings", () => {
   ]);
 });
 
+test("rejects placeholder submenu destinations", () => {
+  const errors = validateBundle({
+    format: BUNDLE_FORMAT,
+    version: BUNDLE_VERSION,
+    settings: {
+      navigation_items: [
+        {
+          label: "People",
+          children: [{ label: "Coming soon", url: "#" }],
+        },
+      ],
+    },
+  });
+
+  assert.deepEqual(errors, [
+    'Submenu item "Coming soon" uses a placeholder URL.',
+  ]);
+});
+
 test("serializes object and icon-list values for the Discourse endpoint", () => {
   assert.equal(
     normalizeSettingValue("navigation_items", [{ label: "Home" }]),
@@ -47,6 +67,13 @@ test("serializes object and icon-list values for the Discourse endpoint", () => 
     normalizeSettingValue("custom_font_awesome_icons", ["house", "comments"]),
     "house|comments"
   );
+  assert.equal(
+    themeSettingValue("custom_font_awesome_icons", ["house", "comments"]),
+    "house|comments"
+  );
+  assert.deepEqual(themeSettingValue("navigation_items", [{ label: "Home" }]), [
+    { label: "Home" },
+  ]);
 });
 
 test("normalizes serialized settings returned by Discourse exports", () => {

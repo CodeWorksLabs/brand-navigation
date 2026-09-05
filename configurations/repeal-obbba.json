@@ -75,36 +75,6 @@
         "visibility": "everyone"
       },
       {
-        "label": "People",
-        "presentation": "label_only",
-        "section": "left",
-        "target": "_self",
-        "visibility": "everyone",
-        "children": [
-          {
-            "label": "Voted for OBBBA",
-            "url": "#",
-            "presentation": "label_only",
-            "target": "_self",
-            "visibility": "everyone"
-          },
-          {
-            "label": "Voted Against OBBBA",
-            "url": "#",
-            "presentation": "label_only",
-            "target": "_self",
-            "visibility": "everyone"
-          },
-          {
-            "label": "Supports Repeal OBBBA Act",
-            "url": "#",
-            "presentation": "label_only",
-            "target": "_self",
-            "visibility": "everyone"
-          }
-        ]
-      },
-      {
         "label": "Social",
         "presentation": "label_only",
         "section": "left",
