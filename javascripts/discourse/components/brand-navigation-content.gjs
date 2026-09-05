@@ -46,11 +46,11 @@ export default class BrandNavigationContent extends Component {
       return;
     }
 
-    document.addEventListener("click", this.handleDocumentClick);
+    document.addEventListener("click", this.handleDocumentClick, true);
     document.addEventListener("keydown", this.handleDocumentKeydown);
 
     registerDestructor(this, () => {
-      document.removeEventListener("click", this.handleDocumentClick);
+      document.removeEventListener("click", this.handleDocumentClick, true);
       document.removeEventListener("keydown", this.handleDocumentKeydown);
       this.openSubmenus.clear();
     });
