@@ -22,9 +22,10 @@ In Discourse, open **Admin → Appearance → Themes & components**, select the
 **Components** tab, and install this repository from its Git URL. Then include
 **Brand Navigation** on the theme or themes that should use it.
 
-The component starts with safe defaults: the brand area is enabled but empty,
-navigation is empty, and mobile uses a compact menu. Configure the brand first,
-then add navigation entries through the structured `navigation_items` editor.
+The current testing release includes a visible sample brand and navigation set
+that demonstrates direct links, a submenu, an external link, icons, and
+audience visibility. Replace the sample values with site-specific content
+before production use. Mobile uses a compact menu by default.
 
 ## Navigation model
 
