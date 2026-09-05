@@ -6,11 +6,6 @@ NOT RELEASE-READY**
 
 Task disposition: **REPLACED BY PHIL — CONTINUE IN ANOTHER TASK**
 
-Latest authorized change: Phil resumed this task long enough to publish a
-temporary sample configuration for sandbox evaluation. The sample is intended
-to inform a future explicit testing and migration/move preset option; it is not
-yet that final option.
-
 ## Purpose and authority
 
 Brand Navigation is a newly authored Discourse theme component implementing an

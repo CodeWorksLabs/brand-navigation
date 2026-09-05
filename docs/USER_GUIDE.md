@@ -29,17 +29,6 @@ Discourse embed contexts.
 
 The exact administration labels can vary slightly between Discourse releases.
 
-## Start with the sample configuration
-
-The current testing release includes a sample brand and navigation set. It is
-designed to exercise a direct internal link, a submenu, an external
-new-window link, icons, and anonymous/authenticated visibility without manual
-data entry.
-
-Use the sample for evaluation, then replace its labels, URLs, and icons with
-site-specific values before production use. The sample is temporary while its
-shape is evaluated for a future explicit testing and migration/move preset.
-
 ## Updates and upgrades
 
 Yes. When Brand Navigation is installed from its Git repository, it uses the

@@ -15,7 +15,7 @@ show_brand:
 
 brand_name:
   type: string
-  default: "Brand Navigation"
+  default: ""
 
 brand_url:
   type: string
@@ -54,43 +54,7 @@ mobile_mode:
 
 navigation_items:
   type: objects
-  default:
-    - label: "Community"
-      url: "/latest"
-      title: "Browse the latest community discussions"
-      icon: "comments"
-      target: "_self"
-      visibility: "everyone"
-    - label: "Resources"
-      title: "Community resources"
-      icon: "book-open"
-      target: "_self"
-      visibility: "everyone"
-      children:
-        - label: "About"
-          url: "/about"
-          title: "Learn about this community"
-          icon: "circle-info"
-          target: "_self"
-          visibility: "everyone"
-        - label: "Discourse Meta"
-          url: "https://meta.discourse.org/"
-          title: "Visit the Discourse community"
-          icon: "globe"
-          target: "_blank"
-          visibility: "everyone"
-    - label: "Sign Up"
-      url: "/signup"
-      title: "Create an account"
-      icon: "user-plus"
-      target: "_self"
-      visibility: "anonymous"
-    - label: "My Preferences"
-      url: "/my/preferences"
-      title: "Manage your account preferences"
-      icon: "user-gear"
-      target: "_self"
-      visibility: "authenticated"
+  default: []
   schema:
     name: navigation_item
     identifier: label
@@ -171,4 +135,4 @@ navigation_items:
 custom_font_awesome_icons:
   type: list
   list_type: simple
-  default: "comments|book-open|circle-info|globe|user-plus|user-gear"
+  default: ""
