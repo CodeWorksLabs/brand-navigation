@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `cbd9522`.
+- Latest implementation commit: `fc2ced6`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,7 +89,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `cbd9522`, attached
+- Repeal Brand Navigation component id `19` is updated to `fc2ced6`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum.
 - Existing Repeal components remain enabled and untouched: Brand Header id `7`,
@@ -97,6 +97,10 @@ must not be used as this repository's working directory.
 - Brand Navigation and all three existing header components render together
   without an observed conflict or administrator warning. Phil reviewed the
   combined live result and reported that all four play well together.
+- Top-level URL and submenu behavior are independent. URL plus children renders
+  a functioning parent label link beside a separate caret control; children
+  without a URL retain the complete submenu trigger; URL without children is a
+  direct link. A row with neither URL nor children has no actionable output.
 - A versioned import/export utility now exists at
   `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
   Brand Navigation settings, preflights a target component, and applies all
@@ -178,13 +182,20 @@ Previously executed successfully:
   Sign Up, and My Preferences.
 - Repeal custom icon-list persistence: pass; all twelve icons render as separate
   administrator list entries after reload.
-- Repeal authenticated desktop render at `cbd9522`: pass; the brand, four
+- Repeal authenticated desktop render at `fc2ced6`: pass; the brand, four
   migrated navigation entries, ten right-side social links, and My Preferences
   render while all three predecessor components remain enabled.
-- Repeal submenu interaction at `cbd9522`: pass on a fresh page; a submenu opens
+- Repeal submenu interaction at `fc2ced6`: pass on a fresh page; a submenu opens
   normally and closes after an outside click on the core All categories heading.
   The document click handler uses capture phase so stopped bubbling in other
   Discourse components does not prevent closure.
+- Repeal linked-parent behavior at `fc2ced6`: pass. Repeal links to
+  `/c/repealobbbaact-us/15`, Pledge to `/c/repealobbbapledge-us/10`, and Social
+  to `/c/social/16`; their separate submenu controls open correctly and retain
+  outside-click closure. During manual administration, those paths were briefly
+  entered into the label fields due to field-index selection, then corrected
+  before final verification. This was an operator interaction incident, not a
+  component data-model or rendering behavior.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
