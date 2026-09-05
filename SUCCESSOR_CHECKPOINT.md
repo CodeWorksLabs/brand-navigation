@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **CONFIGURATION-BUNDLE IMPLEMENTATION PUSHED / SANDBOX CODE UPDATE VERIFIED / API ROUND-TRIP PENDING / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION IMPLEMENTED / LOCAL CHECKS PASS / SANDBOX RUNTIME UPDATE PENDING / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c51a7f6bd2c683b362ea785bbaf8baa02fc5c58f`.
-- Configuration-bundle implementation commit: `6def463`.
+- Latest implementation commit: `c1cc27b6581602494d5716b53430fdbb70df189e`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -67,6 +67,12 @@ must not be used as this repository's working directory.
 - Native `details`/`summary` submenu semantics, translated navigation labels,
   color-scheme variables, migration/rollback documentation, release material,
   and administrator/user documentation.
+- One-open-submenu behavior with closure on outside click, Escape, link
+  selection, or opening another submenu; Escape restores summary focus.
+- Administrator-facing JSON bundle import/export on Brand Navigation's own
+  component page when the component is attached to the administrator's active
+  theme. Imports use Discourse's theme-setting model API and do not attach or
+  enable the component.
 
 ## Current repository and runtime state
 
@@ -98,6 +104,10 @@ must not be used as this repository's working directory.
   sandbox accepted the updated remote component and its normal runtime render
   remains clean. The API import/export round trip has not run because no
   `DISCOURSE_API_KEY` or `DISCOURSE_API_USERNAME` is available to this task.
+- `c1cc27b` adds the supported admin-page bundle controls and polished submenu
+  closure behavior. Local lint, types, templates, styles, formatting, bundle
+  validation, and four Node tests pass. This commit has not yet been loaded or
+  exercised on the sandbox.
 
 ## Existing Repeal configuration known so far
 
@@ -116,15 +126,18 @@ must not be used as this repository's working directory.
 
 ## Verification evidence
 
-Executed successfully on Windows for `bc4ad96`:
+Executed successfully on Windows for `c1cc27b`:
 
 - `pnpm lint` (JavaScript, templates, CSS, formatting, and type checks): pass.
-- `pnpm lint:types`: pass.
-- Node smoke coverage for right-section and icon presentation: pass.
-- `git diff --check`: pass.
-- Sandbox desktop runtime render and translated accessibility landmark: pass.
 - `pnpm bundle validate configurations/repeal-obbba.json`: pass.
 - `pnpm test:config`: pass (4 tests).
+- `git diff --check`: pass.
+
+Previously executed successfully:
+
+- Node smoke coverage for right-section and icon presentation: pass.
+- Sandbox desktop runtime render and translated accessibility landmark at
+  `c51a7f6`: pass.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -138,16 +151,18 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. With explicit action-time approval, create a temporary sandbox-only admin
-   API key, exercise an export/import/restore round trip, and revoke the key.
-2. Update Repeal component `19` to `c51a7f6` after action-time
+1. Push `c1cc27b` and this refreshed checkpoint, then update the sandbox through
+   Discourse's normal component updater.
+2. Browser-test submenu closure and the administrator import/export controls on
+   the sandbox; no API key is needed for the UI workflow.
+3. Update Repeal component `19` to the verified commit after action-time
    confirmation.
-3. Apply `configurations/repeal-obbba.json` while component `19` remains
+4. Apply `configurations/repeal-obbba.json` while component `19` remains
    unattached.
-4. Obtain action-time confirmation before attaching it to live Repeal themes.
-5. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
+5. Obtain action-time confirmation before attaching it to live Repeal themes.
+6. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
    external-link safety, and coexistence with the existing components.
-6. Keep all predecessors available for rollback; disable them only if Phil
+7. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
