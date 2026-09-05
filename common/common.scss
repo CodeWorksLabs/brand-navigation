@@ -227,6 +227,23 @@
       opacity: 0;
     }
   }
+
+  &__paste-label {
+    display: block;
+    margin-block-start: 0.75em;
+    font-weight: 600;
+
+    textarea {
+      display: block;
+      box-sizing: border-box;
+      inline-size: 100%;
+      min-block-size: 8em;
+      margin-block-start: 0.35em;
+      font-family: monospace;
+      font-weight: normal;
+      resize: vertical;
+    }
+  }
 }
 
 .brand-navigation-menu {

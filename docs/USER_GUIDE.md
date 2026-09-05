@@ -74,8 +74,9 @@ or an instruction to enable the component.
 On the Brand Navigation administration page, the **Configuration bundles**
 panel appears immediately above the Preview/Export/Disable controls. Select
 **Export settings** to download the current portable configuration. To import,
-select **Choose bundle**, pick a `.json` bundle, review any validation errors,
-and then select **Import settings**.
+select **Choose bundle** and pick a `.json` bundle, or paste its contents into
+**Or paste bundle JSON**. Review any validation errors and then select **Import
+settings**.
 
 Discourse loads a theme component's administrator panel only when that
 component belongs to the administrator's active theme. If the bundle panel is

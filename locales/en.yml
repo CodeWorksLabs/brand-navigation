@@ -6,6 +6,8 @@ en:
       title: "Configuration bundles"
       description: "Export these settings or choose a validated Brand Navigation JSON bundle and import it without re-entering each navigation item. Bundles cannot attach or enable the component."
       choose: "Choose bundle"
+      paste: "Or paste bundle JSON"
+      paste_placeholder: "Paste a Brand Navigation configuration bundle here"
       import: "Import settings"
       export: "Export settings"
       import_success: "Configuration bundle imported. Refresh the forum to use the new settings."

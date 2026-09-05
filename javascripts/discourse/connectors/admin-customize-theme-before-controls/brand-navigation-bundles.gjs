@@ -12,6 +12,7 @@ import {
 
 export default class BrandNavigationBundles extends Component {
   @tracked bundle;
+  @tracked bundleText = "";
   @tracked errors = [];
   @tracked fileName;
   @tracked saving = false;
@@ -44,25 +45,44 @@ export default class BrandNavigationBundles extends Component {
     );
   }
 
+  loadBundleText(text, fileName) {
+    this.bundle = undefined;
+    this.bundleText = text;
+    this.errors = [];
+    this.fileName = fileName;
+    this.success = undefined;
+
+    if (!text.trim()) {
+      return;
+    }
+
+    try {
+      const bundle = JSON.parse(text);
+      this.errors = validateBundle(bundle);
+      this.bundle = this.errors.length ? undefined : bundle;
+    } catch (error) {
+      this.errors = [error.message];
+    }
+  }
+
   @action
   async selectBundle(event) {
     const [file] = event.target.files;
-    this.bundle = undefined;
-    this.errors = [];
-    this.fileName = file?.name;
-    this.success = undefined;
 
     if (!file) {
       return;
     }
 
     try {
-      const bundle = JSON.parse(await file.text());
-      this.errors = validateBundle(bundle);
-      this.bundle = this.errors.length ? undefined : bundle;
+      this.loadBundleText(await file.text(), file.name);
     } catch (error) {
       this.errors = [error.message];
     }
+  }
+
+  @action
+  updateBundleText(event) {
+    this.loadBundleText(event.target.value);
   }
 
   @action
@@ -154,6 +174,17 @@ export default class BrandNavigationBundles extends Component {
             class="btn-default"
           />
         </div>
+
+        <label class="brand-navigation-bundles__paste-label">
+          {{i18n (themePrefix "brand_navigation.bundles.paste")}}
+          <textarea
+            value={{this.bundleText}}
+            placeholder={{i18n
+              (themePrefix "brand_navigation.bundles.paste_placeholder")
+            }}
+            {{on "input" this.updateBundleText}}
+          ></textarea>
+        </label>
 
         {{#if this.fileName}}
           <p>{{this.fileName}}</p>
