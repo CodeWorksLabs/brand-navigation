@@ -17,7 +17,7 @@ Test the current stable and tests-passed Discourse branches where practical.
 
 | Context                    | Required result                                                             |
 | -------------------------- | --------------------------------------------------------------------------- |
-| Desktop, anonymous         | Allowed brand and links render; keyboard opens submenus                     |
+| Desktop, anonymous         | Allowed links render; only one submenu opens and Escape restores focus      |
 | Desktop, authenticated     | Authenticated entries render; anonymous-only entries do not                 |
 | Mobile menu                | One header control opens usable brand navigation                            |
 | Mobile bar                 | Responsive bar scrolls navigation without covering core controls            |

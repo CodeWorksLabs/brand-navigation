@@ -42,7 +42,8 @@ entry with no usable icon falls back to visible label text.
 
 ## Intentional constraints
 
-Native `details`/`summary` provides keyboard operation and persistent expanded
-state without a custom focus state machine. Internal and external URLs use the
-same validated setting; `_blank` links automatically receive
-`noopener noreferrer`.
+Native `details`/`summary` provides keyboard operation without a custom focus
+state machine. Brand Navigation permits one open submenu at a time and closes
+it after outside interaction, Escape, or link selection. Escape returns focus
+to the submenu summary. Internal and external URLs use the same validated
+setting; `_blank` links automatically receive `noopener noreferrer`.

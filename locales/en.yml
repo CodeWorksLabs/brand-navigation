@@ -2,6 +2,13 @@ en:
   brand_navigation:
     open_menu: "Open the brand navigation menu"
     navigation_label: "Brand navigation"
+    bundles:
+      title: "Configuration bundles"
+      description: "Export these settings or choose a validated Brand Navigation JSON bundle and import it without re-entering each navigation item. Bundles cannot attach or enable the component."
+      choose: "Choose bundle"
+      import: "Import settings"
+      export: "Export settings"
+      import_success: "Configuration bundle imported. Refresh the forum to use the new settings."
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
     settings:

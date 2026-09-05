@@ -208,6 +208,27 @@
   }
 }
 
+.brand-navigation-bundles {
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  label.btn {
+    position: relative;
+    overflow: hidden;
+
+    input[type="file"] {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      opacity: 0;
+    }
+  }
+}
+
 .brand-navigation-menu {
   display: flex;
   align-items: center;

@@ -71,7 +71,20 @@ each navigation row again. Bundles contain portable theme settings only. They
 do not contain API credentials, uploaded logo identifiers, theme attachments,
 or an instruction to enable the component.
 
-From a local checkout:
+On the Brand Navigation administration page, the **Configuration bundles**
+panel appears immediately above the Preview/Export/Disable controls. Select
+**Export settings** to download the current portable configuration. To import,
+select **Choose bundle**, pick a `.json` bundle, review any validation errors,
+and then select **Import settings**.
+
+Discourse loads a theme component's administrator panel only when that
+component belongs to the administrator's active theme. If the bundle panel is
+not visible on a newly installed component, leave Brand Navigation's `enabled`
+setting off, attach the component to the administrator's active theme, and
+reload its administration page. Import the bundle before enabling its visible
+navigation.
+
+The same operations are available from a local checkout for automation:
 
 ```text
 pnpm bundle validate configurations/repeal-obbba.json
@@ -210,7 +223,9 @@ navigation entries open immediately. Entries with a down-arrow are submenus;
 select the entry to expand it and then select a child link.
 
 Keyboard users can press Tab to reach links and submenu controls. Press Enter
-or Space on a submenu control to expand or collapse it. On mobile sites using
+or Space on a submenu control to expand or collapse it, or Escape to close it
+and return focus to its control. Opening another submenu, selecting one of its
+links, or selecting outside the submenu also closes it. On mobile sites using
 `menu` mode, open the Brand Navigation menu from its menu button in the
 Discourse header.
 
@@ -224,7 +239,7 @@ Before enabling the component broadly, check:
 4. Every direct link, submenu, and brand destination.
 5. Light and dark color schemes.
 6. Keyboard navigation: tab to links and submenu summaries, then use Enter or
-   Space to open a submenu.
+   Space to open a submenu and Escape to close it.
 7. New-window links.
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.

@@ -10,6 +10,12 @@ row. The tool calls Discourse's supported admin theme endpoint and
 updates only the portable Brand Navigation settings listed in the bundle. It
 does not attach or enable the component.
 
+For normal administrator use, the same operation is available in the
+**Configuration bundles** panel near the bottom of Brand Navigation's
+administration page. A newly installed component must be attached to the
+administrator's active theme before Discourse can load that panel; keep the
+component's `enabled` setting off until after import and verification.
+
 The repository's `configurations/repeal-obbba.json` file is the first migration
 fixture. It was assembled from observed Brand Header, Dropdown Header, and
 Custom Header Links (icons) settings and is also useful for exercising larger

@@ -1,0 +1,170 @@
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
+import { action } from "@ember/object";
+import DButton from "discourse/ui-kit/d-button";
+import { i18n } from "discourse-i18n";
+import {
+  createBundle,
+  PORTABLE_SETTINGS,
+  validateBundle,
+} from "../../lib/configuration-bundle";
+
+export default class BrandNavigationBundles extends Component {
+  @tracked bundle;
+  @tracked errors = [];
+  @tracked fileName;
+  @tracked saving = false;
+  @tracked success;
+
+  get theme() {
+    return this.args.outletArgs.theme;
+  }
+
+  get isBrandNavigation() {
+    const remoteUrl = this.theme?.remote_theme?.remote_url || "";
+    const settingNames = new Set(
+      (this.theme?.settings || []).map((setting) => setting.setting)
+    );
+
+    return (
+      (remoteUrl.includes("CodeWorksLabs/brand-navigation") ||
+        this.theme?.name === "Brand Navigation") &&
+      PORTABLE_SETTINGS.every((name) => settingNames.has(name))
+    );
+  }
+
+  get importDisabled() {
+    return !this.bundle || this.errors.length > 0 || this.saving;
+  }
+
+  currentSettings() {
+    return Object.fromEntries(
+      this.theme.settings.map((setting) => [setting.setting, setting.value])
+    );
+  }
+
+  @action
+  async selectBundle(event) {
+    const [file] = event.target.files;
+    this.bundle = undefined;
+    this.errors = [];
+    this.fileName = file?.name;
+    this.success = undefined;
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const bundle = JSON.parse(await file.text());
+      this.errors = validateBundle(bundle);
+      this.bundle = this.errors.length ? undefined : bundle;
+    } catch (error) {
+      this.errors = [error.message];
+    }
+  }
+
+  @action
+  async importBundle() {
+    if (this.importDisabled) {
+      return;
+    }
+
+    this.saving = true;
+    this.errors = [];
+    this.success = undefined;
+
+    try {
+      for (const [name, value] of Object.entries(this.bundle.settings)) {
+        const setting = this.theme.settings.find(
+          (candidate) => candidate.setting === name
+        );
+
+        if (!setting) {
+          throw new Error(`This component does not define setting ${name}.`);
+        }
+
+        await setting.updateSetting(this.theme.id, value);
+        setting.set("value", value);
+      }
+
+      this.success = i18n(
+        themePrefix("brand_navigation.bundles.import_success")
+      );
+    } catch (error) {
+      this.errors = [error.message];
+    } finally {
+      this.saving = false;
+    }
+  }
+
+  @action
+  exportBundle() {
+    const bundle = createBundle(this.currentSettings(), {
+      exported_at: new Date().toISOString(),
+      source_theme_id: this.theme.id,
+      source_theme_name: this.theme.name,
+    });
+    const blob = new Blob([`${JSON.stringify(bundle, null, 2)}\n`], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = "brand-navigation-settings.json";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  <template>
+    {{#if this.isBrandNavigation}}
+      <section class="brand-navigation-bundles control-unit">
+        <div class="mini-title">
+          {{i18n (themePrefix "brand_navigation.bundles.title")}}
+        </div>
+        <p class="description">
+          {{i18n (themePrefix "brand_navigation.bundles.description")}}
+        </p>
+        <div class="brand-navigation-bundles__controls">
+          <label class="btn btn-default">
+            {{i18n (themePrefix "brand_navigation.bundles.choose")}}
+            <input
+              type="file"
+              accept="application/json,.json"
+              {{on "change" this.selectBundle}}
+            />
+          </label>
+          <DButton
+            @action={{this.importBundle}}
+            @disabled={{this.importDisabled}}
+            @icon="upload"
+            @translatedLabel={{i18n
+              (themePrefix "brand_navigation.bundles.import")
+            }}
+            class="btn-primary"
+          />
+          <DButton
+            @action={{this.exportBundle}}
+            @icon="download"
+            @translatedLabel={{i18n
+              (themePrefix "brand_navigation.bundles.export")
+            }}
+            class="btn-default"
+          />
+        </div>
+
+        {{#if this.fileName}}
+          <p>{{this.fileName}}</p>
+        {{/if}}
+        {{#each this.errors as |error|}}
+          <div class="alert alert-error">{{error}}</div>
+        {{/each}}
+        {{#if this.success}}
+          <div class="alert alert-success">{{this.success}}</div>
+        {{/if}}
+      </section>
+    {{/if}}
+  </template>
+}

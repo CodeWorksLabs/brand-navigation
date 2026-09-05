@@ -1,4 +1,7 @@
 import Component from "@glimmer/component";
+import { registerDestructor } from "@ember/destroyable";
+import { on } from "@ember/modifier";
+import { action } from "@ember/object";
 import { service } from "@ember/service";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
@@ -12,6 +15,72 @@ import {
 export default class BrandNavigationContent extends Component {
   @service currentUser;
   @service siteSettings;
+
+  openSubmenus = new Set();
+
+  handleDocumentClick = (event) => {
+    const clickedInsideOpenSubmenu = [...this.openSubmenus].some((submenu) =>
+      submenu.contains(event.target)
+    );
+
+    if (!clickedInsideOpenSubmenu) {
+      this.closeSubmenus();
+    }
+  };
+
+  handleDocumentKeydown = (event) => {
+    if (event.key !== "Escape" || this.openSubmenus.size === 0) {
+      return;
+    }
+
+    const [submenu] = this.openSubmenus;
+    this.closeSubmenus();
+    submenu.querySelector("summary")?.focus();
+    event.preventDefault();
+  };
+
+  constructor(owner, args) {
+    super(owner, args);
+
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    document.addEventListener("click", this.handleDocumentClick);
+    document.addEventListener("keydown", this.handleDocumentKeydown);
+
+    registerDestructor(this, () => {
+      document.removeEventListener("click", this.handleDocumentClick);
+      document.removeEventListener("keydown", this.handleDocumentKeydown);
+      this.openSubmenus.clear();
+    });
+  }
+
+  closeSubmenus(except) {
+    for (const submenu of this.openSubmenus) {
+      if (submenu !== except) {
+        submenu.open = false;
+        this.openSubmenus.delete(submenu);
+      }
+    }
+  }
+
+  @action
+  submenuToggled(event) {
+    const submenu = event.currentTarget;
+
+    if (submenu.open) {
+      this.closeSubmenus(submenu);
+      this.openSubmenus.add(submenu);
+    } else {
+      this.openSubmenus.delete(submenu);
+    }
+  }
+
+  @action
+  submenuLinkSelected() {
+    this.closeSubmenus();
+  }
 
   get visibleItems() {
     return arrangeNavigationItems(
@@ -94,7 +163,10 @@ export default class BrandNavigationContent extends Component {
             {{#each this.visibleItems as |item|}}
               <li class={{item.itemClass}}>
                 {{#if item.children.length}}
-                  <details class="brand-navigation__submenu">
+                  <details
+                    class="brand-navigation__submenu"
+                    {{on "toggle" this.submenuToggled}}
+                  >
                     <summary aria-label={{item.label}} title={{item.title}}>
                       {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
                       {{#if item.showLabel}}<span>{{item.label}}</span>{{/if}}
@@ -111,6 +183,7 @@ export default class BrandNavigationContent extends Component {
                             rel={{this.linkRel child.target}}
                             aria-label={{child.label}}
                             title={{child.title}}
+                            {{on "click" this.submenuLinkSelected}}
                           >
                             {{#if child.showIcon}}{{dIcon child.icon}}{{/if}}
                             {{#if child.showLabel}}<span
