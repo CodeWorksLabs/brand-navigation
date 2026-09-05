@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **REPEAL MIGRATION STAGED AND HIDDEN / ADMIN IMPORT/EXPORT VERIFIED / VISIBLE CUTOVER PENDING / NOT RELEASE-READY**
+Disposition: **REPEAL MIGRATION LIVE / FOUR-COMPONENT COEXISTENCE VERIFIED / ADMIN IMPORT/EXPORT VERIFIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `50d614bdbdda71a9146ffebf97124d4db1597126`.
+- Latest implementation commit: `cbd9522`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,12 +89,14 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `50d614b`, attached
-  to Default, Foundation, and Horizon, and populated with the reviewed Repeal
-  migration. Its own `enabled` theme setting is off, so Brand Navigation is not
-  visible yet.
+- Repeal Brand Navigation component id `19` is updated to `cbd9522`, attached
+  to Default, Foundation, and Horizon, populated with the reviewed Repeal
+  migration, and enabled. It is visible on the live forum.
 - Existing Repeal components remain enabled and untouched: Brand Header id `7`,
   Dropdown Header id `8`, and Custom Header Links (icons) id `3`.
+- Brand Navigation and all three existing header components render together
+  without an observed conflict or administrator warning. Phil reviewed the
+  combined live result and reported that all four play well together.
 - A versioned import/export utility now exists at
   `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
   Brand Navigation settings, preflights a target component, and applies all
@@ -176,6 +178,13 @@ Previously executed successfully:
   Sign Up, and My Preferences.
 - Repeal custom icon-list persistence: pass; all twelve icons render as separate
   administrator list entries after reload.
+- Repeal authenticated desktop render at `cbd9522`: pass; the brand, four
+  migrated navigation entries, ten right-side social links, and My Preferences
+  render while all three predecessor components remain enabled.
+- Repeal submenu interaction at `cbd9522`: pass on a fresh page; a submenu opens
+  normally and closes after an outside click on the core All categories heading.
+  The document click handler uses capture phase so stopped bubbling in other
+  Discourse components does not prevent closure.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -189,10 +198,10 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Obtain action-time confirmation before switching Brand Navigation's own
-   `enabled` setting on; it is already attached to all three Repeal themes.
-2. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
-   external-link safety, and coexistence with the existing components.
+1. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
+   link safety; authenticated desktop coexistence and submenu behavior pass.
+2. Map the three People items only after replacing their no-op `#` values with
+   confirmed working destinations.
 3. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
