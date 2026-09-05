@@ -101,8 +101,6 @@
   }
 
   &__submenu {
-    position: static;
-
     summary {
       list-style: none;
 
@@ -175,6 +173,7 @@
   }
 
   &__submenu-group {
+    position: relative;
     display: flex;
     align-items: stretch;
 
@@ -182,8 +181,25 @@
       flex: 1 1 auto;
     }
 
-    &--linked > .brand-navigation__submenu {
-      flex: 0 0 auto;
+    &--linked {
+      padding-inline-end: 2.25rem;
+
+      > .brand-navigation__submenu {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+
+        > summary {
+          position: absolute;
+          inset-block: 0;
+          inset-inline-end: 0;
+          pointer-events: auto;
+        }
+
+        > ul {
+          pointer-events: auto;
+        }
+      }
     }
   }
 
