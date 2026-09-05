@@ -3,21 +3,27 @@ import { service } from "@ember/service";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
-import { isVisibleToUser, linkRel } from "../lib/brand-navigation";
+import {
+  arrangeNavigationItems,
+  isVisibleToUser,
+  linkRel,
+} from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
   @service currentUser;
   @service siteSettings;
 
   get visibleItems() {
-    return (settings.navigation_items || [])
-      .filter((item) => isVisibleToUser(item, this.currentUser))
-      .map((item) => ({
-        ...item,
-        children: (item.children || []).filter((child) =>
-          isVisibleToUser(child, this.currentUser)
-        ),
-      }));
+    return arrangeNavigationItems(
+      (settings.navigation_items || [])
+        .filter((item) => isVisibleToUser(item, this.currentUser))
+        .map((item) => ({
+          ...item,
+          children: (item.children || []).filter((child) =>
+            isVisibleToUser(child, this.currentUser)
+          ),
+        }))
+    );
   }
 
   get hasBrandLogo() {
@@ -82,16 +88,16 @@ export default class BrandNavigationContent extends Component {
       {{#if this.visibleItems.length}}
         <nav
           class="brand-navigation__nav"
-          aria-label={{i18n "brand_navigation.navigation_label"}}
+          aria-label={{i18n (themePrefix "brand_navigation.navigation_label")}}
         >
           <ul class="brand-navigation__items">
             {{#each this.visibleItems as |item|}}
-              <li class="brand-navigation__item">
+              <li class={{item.itemClass}}>
                 {{#if item.children.length}}
                   <details class="brand-navigation__submenu">
-                    <summary title={{item.title}}>
-                      {{#if item.icon}}{{dIcon item.icon}}{{/if}}
-                      <span>{{item.label}}</span>
+                    <summary aria-label={{item.label}} title={{item.title}}>
+                      {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
+                      {{#if item.showLabel}}<span>{{item.label}}</span>{{/if}}
                       {{dIcon "caret-down"}}
                     </summary>
                     <ul>
@@ -103,10 +109,12 @@ export default class BrandNavigationContent extends Component {
                             href={{child.url}}
                             target={{child.target}}
                             rel={{this.linkRel child.target}}
+                            aria-label={{child.label}}
                             title={{child.title}}
                           >
-                            {{#if child.icon}}{{dIcon child.icon}}{{/if}}
-                            <span>{{child.label}}</span>
+                            {{#if child.showIcon}}{{dIcon child.icon}}{{/if}}
+                            {{#if child.showLabel}}<span
+                              >{{child.label}}</span>{{/if}}
                           </a>
                           {{! template-lint-enable no-nested-interactive }}
                         </li>
@@ -118,10 +126,11 @@ export default class BrandNavigationContent extends Component {
                     href={{item.url}}
                     target={{item.target}}
                     rel={{this.linkRel item.target}}
+                    aria-label={{item.label}}
                     title={{item.title}}
                   >
-                    {{#if item.icon}}{{dIcon item.icon}}{{/if}}
-                    <span>{{item.label}}</span>
+                    {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
+                    {{#if item.showLabel}}<span>{{item.label}}</span>{{/if}}
                   </a>
                 {{/if}}
               </li>

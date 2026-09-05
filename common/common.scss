@@ -57,8 +57,8 @@
   }
 
   &__nav {
+    flex: 1 1 auto;
     min-width: 0;
-    margin-inline-start: auto;
   }
 
   &__items {
@@ -68,6 +68,10 @@
     padding: 0;
     margin: 0;
     list-style: none;
+  }
+
+  &__item--right-start {
+    margin-inline-start: auto;
   }
 
   &__item {
@@ -158,6 +162,10 @@
     }
   }
 
+  &__item--right &__submenu > ul {
+    inset-inline: auto 0;
+  }
+
   &--menu {
     width: min(22rem, calc(100vw - 1rem));
     color: var(--primary);
@@ -185,6 +193,10 @@
       summary {
         width: 100%;
       }
+    }
+
+    .brand-navigation__item--right-start {
+      margin-inline-start: 0;
     }
 
     .brand-navigation__submenu > ul {

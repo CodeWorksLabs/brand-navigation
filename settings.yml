@@ -59,11 +59,13 @@ navigation_items:
       url: "/latest"
       title: "Browse the latest community discussions"
       icon: "comments"
+      section: "left"
       target: "_self"
       visibility: "everyone"
     - label: "Resources"
       title: "Community resources"
       icon: "book-open"
+      section: "left"
       target: "_self"
       visibility: "everyone"
       children:
@@ -83,12 +85,14 @@ navigation_items:
       url: "/signup"
       title: "Create an account"
       icon: "user-plus"
+      section: "right"
       target: "_self"
       visibility: "anonymous"
     - label: "My Preferences"
       url: "/my/preferences"
       title: "Manage your account preferences"
       icon: "user-gear"
+      section: "right"
       target: "_self"
       visibility: "authenticated"
   schema:
@@ -114,6 +118,19 @@ navigation_items:
         type: string
         validations:
           max_length: 100
+      presentation:
+        type: enum
+        default: icon_and_label
+        choices:
+          - icon_and_label
+          - label_only
+          - icon_only
+      section:
+        type: enum
+        default: left
+        choices:
+          - left
+          - right
       target:
         type: enum
         default: _self
@@ -154,6 +171,13 @@ navigation_items:
               type: string
               validations:
                 max_length: 100
+            presentation:
+              type: enum
+              default: icon_and_label
+              choices:
+                - icon_and_label
+                - label_only
+                - icon_only
             target:
               type: enum
               default: _self

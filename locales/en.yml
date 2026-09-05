@@ -31,6 +31,12 @@ en:
             icon:
               label: "Icon"
               description: "Optional Font Awesome 6 icon name."
+            presentation:
+              label: "Presentation"
+              description: "Show the icon and label, label only, or icon only."
+            section:
+              label: "Section"
+              description: "Keep this item beside the brand or align it to the far edge."
             target:
               label: "Target"
             visibility:
@@ -48,6 +54,8 @@ en:
                     label: "Description"
                   icon:
                     label: "Icon"
+                  presentation:
+                    label: "Presentation"
                   target:
                     label: "Target"
                   visibility:

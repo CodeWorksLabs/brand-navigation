@@ -21,7 +21,7 @@ export default class BrandNavigationMenu extends Component {
     {{#if this.shouldRender}}
       <DMenu
         @icon="bars"
-        @title={{i18n "brand_navigation.open_menu"}}
+        @title={{i18n (themePrefix "brand_navigation.open_menu")}}
         id="brand-navigation-menu"
         class="brand-navigation-menu btn-flat"
       >

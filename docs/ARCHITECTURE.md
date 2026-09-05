@@ -32,7 +32,13 @@ or composer behavior.
 `navigation_items` uses Discourse's supported nested `objects` theme setting.
 Ordering is the editor's list order. A top-level entry with children becomes a
 native `details` submenu; otherwise its URL creates a direct link. Only one
-child level is represented by the schema.
+child level is represented by the schema. Top-level entries are grouped into
+logical `left` and `right` sections; CSS logical properties keep that layout
+usable in both left-to-right and right-to-left interfaces.
+
+Each item can render as icon-and-label, label-only, or icon-only. Labels remain
+required and provide accessible names even when visually omitted. An icon-only
+entry with no usable icon falls back to visible label text.
 
 ## Intentional constraints
 

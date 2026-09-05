@@ -98,15 +98,17 @@ Open `navigation_items` and add entries in the order they should appear.
 
 Each top-level entry supports:
 
-| Field        | Purpose                                                                              |
-| ------------ | ------------------------------------------------------------------------------------ |
-| `label`      | Required visible text.                                                               |
-| `url`        | Destination for a direct link. Leave it empty when the entry contains submenu items. |
-| `title`      | Optional additional description.                                                     |
-| `icon`       | Optional Font Awesome 6 icon name.                                                   |
-| `target`     | Open in the same window (`_self`) or a new window (`_blank`).                        |
-| `visibility` | Show to everyone, anonymous visitors, or authenticated users.                        |
-| `children`   | Ordered submenu links below this entry.                                              |
+| Field          | Purpose                                                                              |
+| -------------- | ------------------------------------------------------------------------------------ |
+| `label`        | Required visible text.                                                               |
+| `url`          | Destination for a direct link. Leave it empty when the entry contains submenu items. |
+| `title`        | Optional additional description.                                                     |
+| `icon`         | Optional Font Awesome 6 icon name.                                                   |
+| `presentation` | Show the icon and label, label only, or icon only.                                   |
+| `section`      | Keep the item beside the brand (`left`) or align it to the far edge (`right`).       |
+| `target`       | Open in the same window (`_self`) or a new window (`_blank`).                        |
+| `visibility`   | Show to everyone, anonymous visitors, or authenticated users.                        |
+| `children`     | Ordered submenu links below this entry.                                              |
 
 A top-level entry behaves as:
 
@@ -116,6 +118,15 @@ A top-level entry behaves as:
 Every child entry requires a label and URL. Child entries also support a title,
 icon, target, and visibility rule. Only one submenu level is supported; child
 entries cannot contain another submenu.
+
+For an icon-only link, keep a clear `label`: Brand Navigation uses it as the
+link's accessible name. If the configured icon is missing, the visible label
+appears automatically instead of leaving an empty link.
+
+Top-level items in the `left` section appear beside the brand. Items in the
+`right` section form a group at the far edge of the bar, which is useful for
+account links and calls to action. On mobile, both sections become one compact
+ordered list so every item remains easy to reach.
 
 Example navigation plan:
 
