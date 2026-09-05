@@ -17,6 +17,7 @@
     "navigation_items": [
       {
         "label": "Repeal",
+        "url": "/c/repealobbbaact-us/15",
         "title": "Repeal the One Big Beautiful Bill Act",
         "presentation": "label_only",
         "section": "left",
@@ -43,6 +44,7 @@
       },
       {
         "label": "Pledge",
+        "url": "/c/repealobbbapledge-us/10",
         "title": "Repeal the One Big Beautiful Bill Act Pledge",
         "presentation": "label_only",
         "section": "left",
@@ -76,6 +78,7 @@
       },
       {
         "label": "Social",
+        "url": "/c/social/16",
         "presentation": "label_only",
         "section": "left",
         "target": "_self",

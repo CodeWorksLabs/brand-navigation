@@ -31,7 +31,9 @@ validated configuration bundle to move settings without re-entering each row.
 Each top-level item may be either:
 
 - a direct link, when it has a URL and no children; or
-- a submenu, when it has one or more children.
+- a submenu trigger, when it has children but no URL; or
+- a linked parent with a separate submenu caret, when it has both a URL and
+  children.
 
 Only one child level is supported intentionally. Visibility can be `everyone`,
 `anonymous`, or `authenticated`. Use `_self` for normal forum navigation and

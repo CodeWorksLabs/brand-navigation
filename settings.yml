@@ -63,6 +63,7 @@ navigation_items:
       target: "_self"
       visibility: "everyone"
     - label: "Resources"
+      url: "/about"
       title: "Community resources"
       icon: "book-open"
       section: "left"

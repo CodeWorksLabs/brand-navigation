@@ -138,22 +138,24 @@ Open `navigation_items` and add entries in the order they should appear.
 
 Each top-level entry supports:
 
-| Field          | Purpose                                                                              |
-| -------------- | ------------------------------------------------------------------------------------ |
-| `label`        | Required visible text.                                                               |
-| `url`          | Destination for a direct link. Leave it empty when the entry contains submenu items. |
-| `title`        | Optional additional description.                                                     |
-| `icon`         | Optional Font Awesome 6 icon name.                                                   |
-| `presentation` | Show the icon and label, label only, or icon only.                                   |
-| `section`      | Keep the item beside the brand (`left`) or align it to the far edge (`right`).       |
-| `target`       | Open in the same window (`_self`) or a new window (`_blank`).                        |
-| `visibility`   | Show to everyone, anonymous visitors, or authenticated users.                        |
-| `children`     | Ordered submenu links below this entry.                                              |
+| Field          | Purpose                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| `label`        | Required visible text.                                                                     |
+| `url`          | Destination for the top-level label. It may also be used when the entry has submenu items. |
+| `title`        | Optional additional description.                                                           |
+| `icon`         | Optional Font Awesome 6 icon name.                                                         |
+| `presentation` | Show the icon and label, label only, or icon only.                                         |
+| `section`      | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
+| `target`       | Open in the same window (`_self`) or a new window (`_blank`).                              |
+| `visibility`   | Show to everyone, anonymous visitors, or authenticated users.                              |
+| `children`     | Ordered submenu links below this entry.                                                    |
 
 A top-level entry behaves as:
 
 - a direct link when it has a URL and no children; or
-- a submenu when it has one or more children.
+- a submenu control when it has children but no URL; or
+- a functioning parent link with a separate submenu caret when it has both a
+  URL and children.
 
 Every child entry requires a label and URL. Child entries also support a title,
 icon, target, and visibility rule. Only one submenu level is supported; child
@@ -173,7 +175,7 @@ Example navigation plan:
 | Top-level entry | URL       | Children               | Result                                                 |
 | --------------- | --------- | ---------------------- | ------------------------------------------------------ |
 | Community       | `/latest` | None                   | Direct internal link                                   |
-| Resources       | Empty     | Documentation, Support | Submenu                                                |
+| Resources       | `/about`  | Documentation, Support | Linked label plus a separate submenu caret             |
 | Account help    | `/faq`    | None                   | Direct link that can be limited to authenticated users |
 
 Use relative paths such as `/latest` for destinations on the same Discourse
@@ -220,10 +222,11 @@ protect restricted destinations with Discourse permissions.
 ## Use Brand Navigation as a visitor
 
 Select the brand logo or name to open the configured brand destination. Direct
-navigation entries open immediately. Entries with a down-arrow are submenus;
-select the entry to expand it and then select a child link.
+navigation entries open immediately. For a linked parent with children, select
+its label to visit the parent destination or its down-caret to open the submenu.
+When a parent has no URL, the complete entry opens its submenu.
 
-Keyboard users can press Tab to reach links and submenu controls. Press Enter
+Keyboard users can press Tab to reach links and submenu controls separately. Press Enter
 or Space on a submenu control to expand or collapse it, or Escape to close it
 and return focus to its control. Opening another submenu, selecting one of its
 links, or selecting outside the submenu also closes it. On mobile sites using
@@ -237,7 +240,7 @@ Before enabling the component broadly, check:
 1. A normal desktop page with a signed-out visitor.
 2. A normal desktop page with a signed-in user.
 3. Mobile layout in the selected mobile mode.
-4. Every direct link, submenu, and brand destination.
+4. Every direct link, linked submenu parent, child link, and brand destination.
 5. Light and dark color schemes.
 6. Keyboard navigation: tab to links and submenu summaries, then use Enter or
    Space to open a submenu and Escape to close it.

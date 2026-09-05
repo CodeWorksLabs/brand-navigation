@@ -78,6 +78,7 @@
     position: relative;
 
     > a,
+    .brand-navigation__parent-link,
     summary {
       display: flex;
       align-items: center;
@@ -162,6 +163,27 @@
     }
   }
 
+  &__submenu-group {
+    display: flex;
+    align-items: stretch;
+
+    > .brand-navigation__submenu {
+      flex: 1 1 auto;
+    }
+
+    &--linked > .brand-navigation__submenu {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__parent-link {
+    flex: 1 1 auto;
+  }
+
+  &__item &__submenu-toggle {
+    padding-inline: 0.55rem;
+  }
+
   &__item--right &__submenu > ul {
     inset-inline: auto 0;
   }
@@ -190,9 +212,14 @@
 
     .brand-navigation__item {
       > a,
+      .brand-navigation__parent-link,
       summary {
         width: 100%;
       }
+    }
+
+    .brand-navigation__item .brand-navigation__submenu-toggle {
+      width: auto;
     }
 
     .brand-navigation__item--right-start {

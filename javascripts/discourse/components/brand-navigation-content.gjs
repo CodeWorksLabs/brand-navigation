@@ -163,37 +163,72 @@ export default class BrandNavigationContent extends Component {
             {{#each this.visibleItems as |item|}}
               <li class={{item.itemClass}}>
                 {{#if item.children.length}}
-                  <details
-                    class="brand-navigation__submenu"
-                    {{on "toggle" this.submenuToggled}}
+                  <div
+                    class={{if
+                      item.url
+                      "brand-navigation__submenu-group brand-navigation__submenu-group--linked"
+                      "brand-navigation__submenu-group"
+                    }}
                   >
-                    <summary aria-label={{item.label}} title={{item.title}}>
-                      {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
-                      {{#if item.showLabel}}<span>{{item.label}}</span>{{/if}}
-                      {{dIcon "caret-down"}}
-                    </summary>
-                    <ul>
-                      {{#each item.children as |child|}}
-                        <li>
-                          {{! Native details allows links after its summary. }}
-                          {{! template-lint-disable no-nested-interactive }}
-                          <a
-                            href={{child.url}}
-                            target={{child.target}}
-                            rel={{this.linkRel child.target}}
-                            aria-label={{child.label}}
-                            title={{child.title}}
-                            {{on "click" this.submenuLinkSelected}}
-                          >
-                            {{#if child.showIcon}}{{dIcon child.icon}}{{/if}}
-                            {{#if child.showLabel}}<span
-                              >{{child.label}}</span>{{/if}}
-                          </a>
-                          {{! template-lint-enable no-nested-interactive }}
-                        </li>
-                      {{/each}}
-                    </ul>
-                  </details>
+                    {{#if item.url}}
+                      <a
+                        class="brand-navigation__parent-link"
+                        href={{item.url}}
+                        target={{item.target}}
+                        rel={{this.linkRel item.target}}
+                        aria-label={{item.label}}
+                        title={{item.title}}
+                      >
+                        {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
+                        {{#if item.showLabel}}<span>{{item.label}}</span>{{/if}}
+                      </a>
+                    {{/if}}
+                    <details
+                      class="brand-navigation__submenu"
+                      {{on "toggle" this.submenuToggled}}
+                    >
+                      <summary
+                        class={{if item.url "brand-navigation__submenu-toggle"}}
+                        aria-label={{if
+                          item.url
+                          (i18n
+                            (themePrefix "brand_navigation.open_submenu")
+                            label=item.label
+                          )
+                          item.label
+                        }}
+                        title={{item.title}}
+                      >
+                        {{#unless item.url}}
+                          {{#if item.showIcon}}{{dIcon item.icon}}{{/if}}
+                          {{#if item.showLabel}}<span
+                            >{{item.label}}</span>{{/if}}
+                        {{/unless}}
+                        {{dIcon "caret-down"}}
+                      </summary>
+                      <ul>
+                        {{#each item.children as |child|}}
+                          <li>
+                            {{! Native details allows links after its summary. }}
+                            {{! template-lint-disable no-nested-interactive }}
+                            <a
+                              href={{child.url}}
+                              target={{child.target}}
+                              rel={{this.linkRel child.target}}
+                              aria-label={{child.label}}
+                              title={{child.title}}
+                              {{on "click" this.submenuLinkSelected}}
+                            >
+                              {{#if child.showIcon}}{{dIcon child.icon}}{{/if}}
+                              {{#if child.showLabel}}<span
+                                >{{child.label}}</span>{{/if}}
+                            </a>
+                            {{! template-lint-enable no-nested-interactive }}
+                          </li>
+                        {{/each}}
+                      </ul>
+                    </details>
+                  </div>
                 {{else if item.url}}
                   <a
                     href={{item.url}}

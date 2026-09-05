@@ -12,6 +12,7 @@ RSpec.describe "Brand Navigation" do
         { label: "Latest", url: "/latest", target: "_self", visibility: "everyone" },
         {
           label: "Explore",
+          url: "/categories",
           visibility: "everyone",
           children: [
             { label: "Categories", url: "/categories", target: "_self", visibility: "everyone" },
@@ -28,7 +29,8 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_css("[data-brand-navigation]")
     expect(page).to have_link("Example", href: "/latest")
     expect(page).to have_link("Latest", href: "/latest")
-    expect(page).to have_css("details summary", text: "Explore")
+    expect(page).to have_link("Explore", href: "/categories")
+    expect(page).to have_css('details summary[aria-label="Open Explore submenu"]')
     expect(page).to have_link("Categories", href: "/categories", visible: :all)
   end
 

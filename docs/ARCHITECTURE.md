@@ -30,9 +30,11 @@ or composer behavior.
 ## Configuration model
 
 `navigation_items` uses Discourse's supported nested `objects` theme setting.
-Ordering is the editor's list order. A top-level entry with children becomes a
-native `details` submenu; otherwise its URL creates a direct link. Only one
-child level is represented by the schema. Top-level entries are grouped into
+Ordering is the editor's list order. A top-level entry with children uses a
+native `details` submenu. When that entry also has a URL, its label remains a
+normal link and a separate summary caret controls the submenu; without a URL,
+the complete summary is the submenu control. Only one child level is represented
+by the schema. Top-level entries are grouped into
 logical `left` and `right` sections; CSS logical properties keep that layout
 usable in both left-to-right and right-to-left interfaces.
 

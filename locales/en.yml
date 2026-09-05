@@ -1,6 +1,7 @@
 en:
   brand_navigation:
     open_menu: "Open the brand navigation menu"
+    open_submenu: "Open %{label} submenu"
     navigation_label: "Brand navigation"
     bundles:
       title: "Configuration bundles"
@@ -33,7 +34,7 @@ en:
               description: "Visible top-level navigation text."
             url:
               label: "URL"
-              description: "Used for a direct link when children are empty."
+              description: "Makes the label a link. With children, a separate caret opens the submenu."
             title:
               label: "Description"
               description: "Optional additional context exposed as a title."
