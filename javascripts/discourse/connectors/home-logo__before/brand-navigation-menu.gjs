@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import DMenu from "discourse/float-kit/components/d-menu";
 import EmbedMode from "discourse/lib/embed-mode";
+import { i18n } from "discourse-i18n";
 import BrandNavigationContent from "../../components/brand-navigation-content";
 
 export default class BrandNavigationMenu extends Component {

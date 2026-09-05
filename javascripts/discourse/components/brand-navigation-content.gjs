@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
+import { i18n } from "discourse-i18n";
 import { isVisibleToUser, linkRel } from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
