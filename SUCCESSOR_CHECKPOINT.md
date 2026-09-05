@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `fc2ced6`.
+- Latest implementation commit: `53a6871`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,7 +89,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `fc2ced6`, attached
+- Repeal Brand Navigation component id `19` is updated to `53a6871`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum.
 - Existing Repeal components remain enabled and untouched: Brand Header id `7`,
@@ -196,6 +196,9 @@ Previously executed successfully:
   entered into the label fields due to field-index selection, then corrected
   before final verification. This was an operator interaction incident, not a
   component data-model or rendering behavior.
+- Repeal caret presentation at `53a6871`: pass by live screenshot. Discourse's
+  global `summary::before` disclosure triangle is suppressed within Brand
+  Navigation, leaving only the component's small downward caret.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
