@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION IMPLEMENTED / LOCAL CHECKS PASS / SANDBOX RUNTIME UPDATE PENDING / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION IMPLEMENTED / LOCAL CHECKS PASS / SANDBOX RUNTIME VERIFIED / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -21,7 +21,7 @@ components without Phil's explicit direction.
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
-- Last sandbox-tested runtime commit: `c51a7f6bd2c683b362ea785bbaf8baa02fc5c58f`.
+- Last sandbox-tested runtime commit: `7baecce70aae2fd1a58929f0d7873cc6538267b1`.
 - Latest implementation commit: `c1cc27b6581602494d5716b53430fdbb70df189e`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
@@ -106,8 +106,11 @@ must not be used as this repository's working directory.
   `DISCOURSE_API_KEY` or `DISCOURSE_API_USERNAME` is available to this task.
 - `c1cc27b` adds the supported admin-page bundle controls and polished submenu
   closure behavior. Local lint, types, templates, styles, formatting, bundle
-  validation, and four Node tests pass. This commit has not yet been loaded or
-  exercised on the sandbox.
+  validation, and four Node tests pass. Sandbox theme component `1` was updated
+  through Discourse's normal updater to checkpoint head `7baecce`; the
+  Configuration Bundles controls render, outside-click closure passes, and
+  Escape closure restores focus to the Resources summary. File selection and
+  settings application have not yet been exercised through the browser UI.
 
 ## Existing Repeal configuration known so far
 
@@ -137,7 +140,10 @@ Previously executed successfully:
 
 - Node smoke coverage for right-section and icon presentation: pass.
 - Sandbox desktop runtime render and translated accessibility landmark at
-  `c51a7f6`: pass.
+  `7baecce`: pass.
+- Sandbox Resources outside-click closure: pass.
+- Sandbox Resources Escape closure and summary focus restoration: pass.
+- Sandbox administrator Configuration Bundles controls render: pass.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -151,18 +157,16 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Push `c1cc27b` and this refreshed checkpoint, then update the sandbox through
-   Discourse's normal component updater.
-2. Browser-test submenu closure and the administrator import/export controls on
-   the sandbox; no API key is needed for the UI workflow.
-3. Update Repeal component `19` to the verified commit after action-time
+1. Exercise a same-settings export/import round trip through the sandbox UI
+   when browser file selection is available; no API key is needed.
+2. Update Repeal component `19` to the verified commit after action-time
    confirmation.
-4. Apply `configurations/repeal-obbba.json` while component `19` remains
+3. Apply `configurations/repeal-obbba.json` while component `19` remains
    unattached.
-5. Obtain action-time confirmation before attaching it to live Repeal themes.
-6. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
+4. Obtain action-time confirmation before attaching it to live Repeal themes.
+5. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
    external-link safety, and coexistence with the existing components.
-7. Keep all predecessors available for rollback; disable them only if Phil
+6. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
