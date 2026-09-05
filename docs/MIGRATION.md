@@ -2,6 +2,23 @@
 
 Migrate in a staging theme or a copied production theme first.
 
+## Configuration bundles
+
+Use `pnpm bundle validate`, `pnpm bundle export`, and `pnpm bundle apply` to
+move a versioned JSON configuration without recreating every object-setting
+row. The tool calls Discourse's supported admin theme endpoint and
+updates only the portable Brand Navigation settings listed in the bundle. It
+does not attach or enable the component.
+
+The repository's `configurations/repeal-obbba.json` file is the first migration
+fixture. It was assembled from observed Brand Header, Dropdown Header, and
+Custom Header Links (icons) settings and is also useful for exercising larger
+menus, external destinations, icon-only links, and left/right sections.
+
+API credentials are supplied through `DISCOURSE_API_KEY` and
+`DISCOURSE_API_USERNAME`; they must never be stored in a bundle. Logo uploads
+remain a separate site-local step.
+
 ## From Brand Header
 
 1. Record `brand_name`, `website_url`, light/dark/mobile logos, text links,
@@ -31,6 +48,21 @@ Migrate in a staging theme or a copied production theme first.
 6. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
 7. Disable Header Submenus, enable Brand Navigation, and run acceptance checks.
+
+The same mapping applies to Pavilion's Dropdown Header: header links become
+top-level items, dropdown rows become children matched to their parent, and
+its icon list becomes `custom_font_awesome_icons`.
+
+## From Custom Header Links (icons)
+
+1. Export or record each title, icon, URL, device view, width, and target.
+2. Map each link to a top-level Brand Navigation item in the `right` section.
+3. Use `icon_only` presentation while retaining the full title as the required
+   accessible label.
+4. Map `blank` to `_blank` and `self` to `_self`.
+5. Add every used icon to `custom_font_awesome_icons`.
+6. Review mobile behavior. Brand Navigation intentionally uses a component-wide
+   mobile mode rather than per-link `vdm`, `vdo`, and `vmo` tokens.
 
 ## Rollback
 

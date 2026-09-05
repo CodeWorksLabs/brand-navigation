@@ -63,6 +63,32 @@ Discourse normally retains site-specific theme settings when it updates the
 component's code from Git. Recording the settings first still provides a safe
 recovery reference if a release changes the settings schema or defaults.
 
+### Move settings with a configuration bundle
+
+Brand Navigation includes a versioned JSON bundle tool so an administrator can
+export, validate, and apply a complete portable configuration without entering
+each navigation row again. Bundles contain portable theme settings only. They
+do not contain API credentials, uploaded logo identifiers, theme attachments,
+or an instruction to enable the component.
+
+From a local checkout:
+
+```text
+pnpm bundle validate configurations/repeal-obbba.json
+pnpm bundle export my-navigation.json --url https://forum.example.com --theme-id 19
+pnpm bundle apply my-navigation.json --url https://forum.example.com --theme-id 19
+```
+
+The `export` and `apply` commands read `DISCOURSE_API_KEY` and
+`DISCOURSE_API_USERNAME` from the process environment. Keep the API key out of
+the bundle, shell history, documentation, and source control. Review and
+validate a bundle before applying it.
+
+Applying a bundle updates only Brand Navigation settings through Discourse's
+admin theme endpoint. It cannot attach the component to a theme,
+enable it, change another component, or delete anything. Upload light and dark
+logos separately because Discourse upload identifiers are site-specific.
+
 ### If an upgrade causes a problem
 
 1. Set `enabled` off to stop Brand Navigation from rendering.
@@ -208,8 +234,9 @@ Before enabling the component broadly, check:
 Set `enabled` off to stop Brand Navigation from rendering. Disabling the
 component does not delete its configuration.
 
-When replacing Brand Header or Header Submenus, keep the earlier component and
-an export of its settings until Brand Navigation has passed staging. See
+When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
+keep the earlier component and an export of its settings until Brand Navigation
+has passed staging. See
 [Migration and rollback](MIGRATION.md) for the detailed procedure.
 
 ## Troubleshooting

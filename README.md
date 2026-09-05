@@ -22,9 +22,9 @@ In Discourse, open **Admin → Appearance → Themes & components**, select the
 **Components** tab, and install this repository from its Git URL. Then include
 **Brand Navigation** on the theme or themes that should use it.
 
-The component starts with safe defaults: the brand area is enabled but empty,
-navigation is empty, and mobile uses a compact menu. Configure the brand first,
-then add navigation entries through the structured `navigation_items` editor.
+The component starts with practical sample navigation and a compact mobile
+menu. Configure the structured `navigation_items` editor directly, or use a
+validated configuration bundle to move settings without re-entering each row.
 
 ## Navigation model
 
@@ -48,7 +48,9 @@ Brand Navigation was newly authored from its product specifications. Thanks to
 and
 [Discourse Header Submenus](https://github.com/discourse/discourse-header-submenus)
 for product inspiration and for their contributions to the Discourse theme
-component ecosystem.
+component ecosystem. Thanks also to
+[Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links)
+for demonstrating compact, accessible icon destinations in the core header.
 
 ## Support status
 

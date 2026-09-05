@@ -1,0 +1,328 @@
+{
+  "format": "brand-navigation-settings",
+  "version": 1,
+  "metadata": {
+    "name": "Repeal OBBBA navigation",
+    "description": "Migration fixture assembled from Brand Header, Dropdown Header, and Custom Header Links settings.",
+    "created": "2026-09-05"
+  },
+  "settings": {
+    "outlet": "below-site-header",
+    "show_brand": true,
+    "brand_name": "Repeal OBBBA",
+    "brand_url": "https://www.repealobbba.org/",
+    "brand_presentation": "name_only",
+    "brand_target": "_self",
+    "mobile_mode": "menu",
+    "navigation_items": [
+      {
+        "label": "Repeal",
+        "title": "Repeal the One Big Beautiful Bill Act",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone",
+        "children": [
+          {
+            "label": "RepealOBBBAact.us",
+            "url": "https://www.RepealOBBBAact.us",
+            "title": "H.R.1 - Repeal OBBBA Act | Repeal of the One Big Beautiful Bill Act 120th Congress (2027-2028) To be published at RepealOBBBAact.us",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Discuss the Repeal OBBBA Act",
+            "url": "/c/repealobbbaact-us/15",
+            "title": "Help draft the Repeal OBBBA Act",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          }
+        ]
+      },
+      {
+        "label": "Pledge",
+        "title": "Repeal the One Big Beautiful Bill Act Pledge",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone",
+        "children": [
+          {
+            "label": "RepealOBBBApledge.us",
+            "url": "https://www.RepealOBBBApledge.us",
+            "title": "Ask your elected or campaigning public officials if they have taken the Repeal the One Big Beautiful Bill Act Pledge at repealobbbapledge.us",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Discuss the Pledge",
+            "url": "/c/repealobbbapledge-us/10",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          }
+        ]
+      },
+      {
+        "label": "Stories",
+        "url": "/c/stories/7",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone"
+      },
+      {
+        "label": "People",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone",
+        "children": [
+          {
+            "label": "Voted for OBBBA",
+            "url": "#",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Voted Against OBBBA",
+            "url": "#",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Supports Repeal OBBBA Act",
+            "url": "#",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          }
+        ]
+      },
+      {
+        "label": "Social",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone",
+        "children": [
+          {
+            "label": "Bluesky",
+            "url": "https://bsky.app/profile/repealobbba.bsky.social",
+            "title": "@RepealOBBBA on Bluesky",
+            "icon": "fab-bluesky",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Discord",
+            "url": "https://discord.com/channels/1409647933401595997/1409647934508761170",
+            "title": "Repeal OBBBA on Discord",
+            "icon": "fab-discord",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Facebook",
+            "url": "https://www.facebook.com/RepealOBBBA/",
+            "title": "@RepealOBBBA on Facebook",
+            "icon": "fab-facebook",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "GitHub",
+            "url": "https://github.com/RepealOBBBA",
+            "icon": "fab-github",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/repealobbba/",
+            "icon": "fab-instagram",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Mastodon",
+            "url": "https://mastodon.social/@repealobbba",
+            "title": "@RepealOBBBA on Mastodon",
+            "icon": "fab-mastodon",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Reddit",
+            "url": "https://www.reddit.com/r/RepealOBBBA/",
+            "title": "@RepealOBBBA on Reddit",
+            "icon": "fab-reddit",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "TikTok",
+            "url": "https://www.tiktok.com/@RepealOBBBA",
+            "title": "@RepealOBBBA on TikTok",
+            "icon": "fab-tiktok",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "X",
+            "url": "https://x.com/RepealOBBBA",
+            "title": "@RepealOBBBA on X",
+            "icon": "fab-x-twitter",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          },
+          {
+            "label": "YouTube",
+            "url": "https://www.youtube.com/@RepealOBBBA",
+            "title": "@RepealOBBBA on YouTube",
+            "icon": "fab-youtube",
+            "presentation": "icon_and_label",
+            "target": "_blank",
+            "visibility": "everyone"
+          }
+        ]
+      },
+      {
+        "label": "@RepealOBBBA on Bluesky",
+        "url": "https://bsky.app/profile/repealobbba.bsky.social",
+        "icon": "fab-bluesky",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "Repeal OBBBA on Discord",
+        "url": "https://discord.com/channels/1409647933401595997/1409647934508761170",
+        "icon": "fab-discord",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on Facebook",
+        "url": "https://www.facebook.com/RepealOBBBA/",
+        "icon": "fab-facebook",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on GitHub",
+        "url": "https://github.com/RepealOBBBA",
+        "icon": "fab-github",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on Instagram",
+        "url": "https://www.instagram.com/repealobbba/",
+        "icon": "fab-instagram",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on Mastodon",
+        "url": "https://mastodon.social/@repealobbba",
+        "icon": "fab-mastodon",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on Reddit",
+        "url": "https://www.reddit.com/r/RepealOBBBA/",
+        "icon": "fab-reddit",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on TikTok",
+        "url": "https://www.tiktok.com/@RepealOBBBA",
+        "icon": "fab-tiktok",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on X",
+        "url": "https://x.com/RepealOBBBA",
+        "icon": "fab-x-twitter",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "@RepealOBBBA on YouTube",
+        "url": "https://www.youtube.com/@RepealOBBBA",
+        "icon": "fab-youtube",
+        "presentation": "icon_only",
+        "section": "right",
+        "target": "_blank",
+        "visibility": "everyone"
+      },
+      {
+        "label": "Sign Up",
+        "url": "/signup",
+        "icon": "user-plus",
+        "presentation": "icon_and_label",
+        "section": "right",
+        "target": "_self",
+        "visibility": "anonymous"
+      },
+      {
+        "label": "My Preferences",
+        "url": "/my/preferences",
+        "icon": "user-gear",
+        "presentation": "icon_and_label",
+        "section": "right",
+        "target": "_self",
+        "visibility": "authenticated"
+      }
+    ],
+    "custom_font_awesome_icons": [
+      "fab-bluesky",
+      "fab-discord",
+      "fab-facebook",
+      "fab-github",
+      "fab-instagram",
+      "fab-mastodon",
+      "fab-reddit",
+      "fab-tiktok",
+      "fab-x-twitter",
+      "fab-youtube",
+      "user-plus",
+      "user-gear"
+    ]
+  }
+}
