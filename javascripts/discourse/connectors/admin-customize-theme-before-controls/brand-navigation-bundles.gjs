@@ -24,14 +24,10 @@ export default class BrandNavigationBundles extends Component {
 
   get isBrandNavigation() {
     const remoteUrl = this.theme?.remote_theme?.remote_url || "";
-    const settingNames = new Set(
-      (this.theme?.settings || []).map((setting) => setting.setting)
-    );
 
     return (
-      (remoteUrl.includes("CodeWorksLabs/brand-navigation") ||
-        this.theme?.name === "Brand Navigation") &&
-      PORTABLE_SETTINGS.every((name) => settingNames.has(name))
+      remoteUrl.includes("CodeWorksLabs/brand-navigation") ||
+      this.theme?.name === "Brand Navigation"
     );
   }
 
