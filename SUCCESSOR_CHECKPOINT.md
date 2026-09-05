@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **CONFIGURATION-BUNDLE IMPLEMENTATION COMPLETE LOCALLY / VERIFICATION GREEN / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **CONFIGURATION-BUNDLE IMPLEMENTATION PUSHED / SANDBOX CODE UPDATE VERIFIED / API ROUND-TRIP PENDING / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -21,7 +21,7 @@ components without Phil's explicit direction.
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
-- Last sandbox-tested runtime commit: `bc4ad96a2d3eb903415155dd53a797b0875de12b`.
+- Last sandbox-tested runtime commit: `c51a7f6bd2c683b362ea785bbaf8baa02fc5c58f`.
 - Configuration-bundle implementation commit: `6def463`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
@@ -76,7 +76,7 @@ must not be used as this repository's working directory.
 - `bc4ad96` added left/right sections, icon presentation, and correctly scoped
   theme translations. It is committed and pushed.
 - Sandbox theme component id `1` is installed on Foundation and Horizon,
-  enabled, configured at `below-site-header`, and updated to `bc4ad96`.
+  enabled, configured at `below-site-header`, and updated to `c51a7f6`.
 - Sandbox runtime verification after a fresh forum navigation passed: the
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
@@ -94,8 +94,10 @@ must not be used as this repository's working directory.
 - `configurations/repeal-obbba.json` contains the inventoried Repeal migration
   as the first real bundle and large-menu test fixture.
 - The configuration-bundle work, documentation, expanded thanks, and tests are
-  committed in `6def463`. They have not yet been sandbox-tested or installed on
-  either forum at the time of this checkpoint.
+  committed in `6def463`; checkpoint commit `c51a7f6` is also pushed. The
+  sandbox accepted the updated remote component and its normal runtime render
+  remains clean. The API import/export round trip has not run because no
+  `DISCOURSE_API_KEY` or `DISCOURSE_API_USERNAME` is available to this task.
 
 ## Existing Repeal configuration known so far
 
@@ -136,17 +138,16 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Push `6def463` and this checkpoint to GitHub `main`.
-2. Update sandbox and exercise an import/export round trip there before using
-   the importer on Repeal.
-3. Update Repeal component `19` to the resulting commit after action-time
+1. With explicit action-time approval, create a temporary sandbox-only admin
+   API key, exercise an export/import/restore round trip, and revoke the key.
+2. Update Repeal component `19` to `c51a7f6` after action-time
    confirmation.
-4. Apply `configurations/repeal-obbba.json` while component `19` remains
+3. Apply `configurations/repeal-obbba.json` while component `19` remains
    unattached.
-5. Obtain action-time confirmation before attaching it to live Repeal themes.
-6. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
+4. Obtain action-time confirmation before attaching it to live Repeal themes.
+5. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
    external-link safety, and coexistence with the existing components.
-7. Keep all predecessors available for rollback; disable them only if Phil
+6. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
