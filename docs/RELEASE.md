@@ -5,7 +5,7 @@
 3. Execute the manual acceptance matrix in `TESTING.md`.
 4. Verify the migration and rollback procedures on a staging theme.
 5. Review dependency and Discourse compatibility changes.
-6. Recheck `ATTRIBUTION.md` against the release diff.
+6. Confirm the README thanks and product-inspiration credit remain accurate.
 7. Confirm no secrets, site-specific hosts, DiscussionBridge logic, official
    badges, Discourse logos, or official-status claims are present.
 8. Confirm `Brand Navigation` and `brand-navigation` remain appropriate for the

@@ -18,8 +18,9 @@ maintained and is not an official Discourse product.
 
 ## Installation
 
-In Discourse, open **Admin → Customize → Themes → Components → Install** and
-install this repository, then attach **Brand Navigation** to a theme.
+In Discourse, open **Admin → Appearance → Themes & components**, select the
+**Components** tab, and install this repository from its Git URL. Then include
+**Brand Navigation** on the theme or themes that should use it.
 
 The component starts with safe defaults: the brand area is enabled but empty,
 navigation is empty, and mobile uses a compact menu. Configure the brand first,
@@ -36,8 +37,18 @@ Only one child level is supported intentionally. Visibility can be `everyone`,
 `anonymous`, or `authenticated`. Use `_self` for normal forum navigation and
 `_blank` only when a new browsing context is genuinely useful.
 
-See [`docs/`](docs/) for scope, architecture, migration, testing, attribution,
-and release procedures.
+Start with the [administrator guide](docs/USER_GUIDE.md) for installation,
+configuration, verification, and troubleshooting. See [`docs/`](docs/) for
+scope, architecture, migration, testing, and release procedures.
+
+## Thanks
+
+Brand Navigation was newly authored from its product specifications. Thanks to
+[Discourse Brand Header](https://github.com/discourse/discourse-brand-header)
+and
+[Discourse Header Submenus](https://github.com/discourse/discourse-header-submenus)
+for product inspiration and for their contributions to the Discourse theme
+component ecosystem.
 
 ## Support status
 
@@ -48,4 +59,6 @@ their conventions.
 
 ## License
 
-MIT. See [LICENSE](LICENSE) and [docs/ATTRIBUTION.md](docs/ATTRIBUTION.md).
+Copyright (c) 2026 CodeWorksLabs. Licensed under the
+[GNU General Public License, version 2 or later](LICENSE)
+(`GPL-2.0-or-later`).

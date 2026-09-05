@@ -12,8 +12,9 @@ Migrate in a staging theme or a copied production theme first.
    light logo as the dark fallback and responsive sizing instead of a separate
    mobile-logo setting.
 5. Add text links as top-level `navigation_items`.
-6. Add icon-only predecessor links as labeled navigation entries. A visible
-   label is required for clear administration and accessibility.
+6. Add icon-only links from the earlier component as labeled navigation
+   entries. A visible label is required for clear administration and
+   accessibility.
 7. Select the equivalent outlet and mobile mode.
 8. Disable Brand Header, enable Brand Navigation, and run the acceptance checks.
 
@@ -33,14 +34,15 @@ Migrate in a staging theme or a copied production theme first.
 
 ## Rollback
 
-Do not remove either predecessor until the replacement has passed staging.
-Rollback is:
+Do not remove either earlier component until the replacement has passed
+staging. Rollback is:
 
 1. Disable Brand Navigation.
-2. Re-enable the predecessor component on the parent theme.
+2. Re-enable the earlier component on the parent theme.
 3. Restore its exported settings if they were changed.
 4. Verify normal pages, mobile navigation, authentication, and an embedded
    discussion.
 
-Brand Navigation does not mutate predecessor settings, core site settings, or
-DiscussionBridge, so rollback has no data migration to reverse.
+Brand Navigation does not mutate settings from either earlier component, core
+site settings, or DiscussionBridge, so rollback has no data migration to
+reverse.
