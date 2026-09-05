@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `53a6871`.
+- Latest implementation commit: `ce91a6f`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,9 +89,12 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `53a6871`, attached
+- Repeal Brand Navigation component id `19` is updated to `ce91a6f`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
-  migration, and enabled. It is visible on the live forum.
+  migration, and enabled. It is visible on the live forum. Phil moved its
+  runtime outlet to `above-site-header`, which he considers the likely common
+  placement; this is a site setting choice and has not changed the component's
+  packaged default.
 - Existing Repeal components remain enabled and untouched: Brand Header id `7`,
   Dropdown Header id `8`, and Custom Header Links (icons) id `3`.
 - Brand Navigation and all three existing header components render together
@@ -199,6 +202,12 @@ Previously executed successfully:
 - Repeal caret presentation at `53a6871`: pass by live screenshot. Discourse's
   global `summary::before` disclosure triangle is suppressed within Brand
   Navigation, leaving only the component's small downward caret.
+- Repeal linked-submenu alignment at `ce91a6f`: pass by live screenshot in the
+  `above-site-header` outlet. The opened Repeal child menu begins under its
+  parent label rather than under the separate caret or between adjacent
+  top-level items.
+- `pnpm lint`, `pnpm test:config` (5 tests), and `git diff --check` at
+  `ce91a6f`: pass.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
