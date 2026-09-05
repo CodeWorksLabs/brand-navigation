@@ -104,6 +104,10 @@
     summary {
       list-style: none;
 
+      &::marker {
+        content: "";
+      }
+
       &::-webkit-details-marker {
         display: none;
       }
