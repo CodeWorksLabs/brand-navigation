@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION VERIFIED / LOCAL CHECKS PASS / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **REPEAL MIGRATION STAGED AND HIDDEN / ADMIN IMPORT/EXPORT VERIFIED / VISIBLE CUTOVER PENDING / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
+- Latest implementation commit: `50d614bdbdda71a9146ffebf97124d4db1597126`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -84,14 +84,15 @@ must not be used as this repository's working directory.
 - `bc4ad96` added left/right sections, icon presentation, and correctly scoped
   theme translations. It is committed and pushed.
 - Sandbox theme component id `1` is installed on Foundation and Horizon,
-  enabled, configured at `below-site-header`, and updated to `c51a7f6`.
+  enabled, configured at `below-site-header`, and runtime-tested at `c15353e`.
 - Sandbox runtime verification after a fresh forum navigation passed: the
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is installed but not attached to a
-  theme. It was installed at `160a967` and still needs an update to `bc4ad96`
-  before configuration and activation.
+- Repeal Brand Navigation component id `19` is updated to `50d614b`, attached
+  to Default, Foundation, and Horizon, and populated with the reviewed Repeal
+  migration. Its own `enabled` theme setting is off, so Brand Navigation is not
+  visible yet.
 - Existing Repeal components remain enabled and untouched: Brand Header id `7`,
   Dropdown Header id `8`, and Custom Header Links (icons) id `3`.
 - A versioned import/export utility now exists at
@@ -120,6 +121,15 @@ must not be used as this repository's working directory.
   component's enabled state were unchanged. The Export settings control opened
   Chrome's save-location prompt at Documents, confirming download delivery and
   respect for the browser's ask-where-to-save preference.
+- Repeal runs Discourse `2026.7.0-latest +319`. Its admin model shape required
+  relaxing an unnecessary settings-array check in `6b782ff`; the supported
+  `admin-customize-theme-before-controls` outlet and `ThemeSettings#updateSetting`
+  API are present in that exact Discourse revision.
+- Repeal exposed two migration-data issues before cutover. The three People
+  entries used no-op `#` destinations and were rejected by the validated object
+  schema, so they are omitted until real destinations exist. The administrator
+  importer now converts icon arrays to Discourse's pipe-delimited list storage.
+  `50d614b` includes both corrections and rejects placeholder submenu URLs.
 
 ## Existing Repeal configuration known so far
 
@@ -133,16 +143,17 @@ must not be used as this repository's working directory.
   Instagram, Mastodon, Reddit, TikTok, X, and YouTube.
 - Dropdown Header and Custom Header Links values have now been inventoried and
   encoded in `configurations/repeal-obbba.json`, including all ten social URLs,
-  brand icons, `_blank` behavior, the Repeal/Pledge children, Stories, and the
-  three current `People` placeholder links.
+  brand icons, `_blank` behavior, the Repeal/Pledge children, and Stories. The
+  three current `People` placeholder links are documented but intentionally
+  omitted because they have no working destinations.
 
 ## Verification evidence
 
-Executed successfully on Windows for `c1cc27b`:
+Executed successfully on Windows for `50d614b`:
 
 - `pnpm lint` (JavaScript, templates, CSS, formatting, and type checks): pass.
 - `pnpm bundle validate configurations/repeal-obbba.json`: pass.
-- `pnpm test:config`: pass (4 tests).
+- `pnpm test:config`: pass (5 tests).
 - `git diff --check`: pass.
 
 Previously executed successfully:
@@ -158,6 +169,13 @@ Previously executed successfully:
 - Export bundle construction and serialization Node coverage: pass.
 - Browser download delivery from Export settings: pass; Chrome displayed its
   configured save-location prompt.
+- Repeal component update, attachment save, and hidden-state save: pass.
+- Repeal scalar settings import and reload persistence: pass.
+- Repeal navigation object import without invalid People placeholders: pass;
+  the editor shows Repeal, Pledge, Stories, Social, ten right-side social links,
+  Sign Up, and My Preferences.
+- Repeal custom icon-list persistence: pass; all twelve icons render as separate
+  administrator list entries after reload.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -171,14 +189,11 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Update Repeal component `19` to the verified commit after action-time
-   confirmation.
-2. Apply `configurations/repeal-obbba.json` while component `19` remains
-   unattached.
-3. Obtain action-time confirmation before attaching it to live Repeal themes.
-4. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
+1. Obtain action-time confirmation before switching Brand Navigation's own
+   `enabled` setting on; it is already attached to all three Repeal themes.
+2. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
    external-link safety, and coexistence with the existing components.
-5. Keep all predecessors available for rollback; disable them only if Phil
+3. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
