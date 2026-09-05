@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **ADMIN IMPORT AND SUBMENU INTERACTION VERIFIED / EXPORT DELIVERY PARTIAL / LOCAL CHECKS PASS / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION VERIFIED / LOCAL CHECKS PASS / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -117,9 +117,9 @@ must not be used as this repository's working directory.
   `brand_name` to `Brand Navigation Import Test`; a full page reload confirmed
   persistence. A second bundle restored `Brand Navigation`, and another reload
   confirmed that the temporary value was gone. Theme attachments and the
-  component's enabled state were unchanged. The Export settings control was
-  invoked without a page error, but the browser-control channel does not expose
-  its download destination, so downloaded-file delivery remains unconfirmed.
+  component's enabled state were unchanged. The Export settings control opened
+  Chrome's save-location prompt at Documents, confirming download delivery and
+  respect for the browser's ask-where-to-save preference.
 
 ## Existing Repeal configuration known so far
 
@@ -156,8 +156,8 @@ Previously executed successfully:
 - Sandbox pasted-JSON validation enables Import settings: pass.
 - Sandbox reversible import, reload, restore, and reload: pass.
 - Export bundle construction and serialization Node coverage: pass.
-- Browser download delivery from Export settings: invoked, not independently
-  confirmed.
+- Browser download delivery from Export settings: pass; Chrome displayed its
+  configured save-location prompt.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -171,16 +171,14 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Manually confirm that **Export settings** downloads
-   `brand-navigation-settings.json` in a normal administrator browser.
-2. Update Repeal component `19` to the verified commit after action-time
+1. Update Repeal component `19` to the verified commit after action-time
    confirmation.
-3. Apply `configurations/repeal-obbba.json` while component `19` remains
+2. Apply `configurations/repeal-obbba.json` while component `19` remains
    unattached.
-4. Obtain action-time confirmation before attaching it to live Repeal themes.
-5. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
+3. Obtain action-time confirmation before attaching it to live Repeal themes.
+4. Verify desktop/mobile, anonymous/authenticated visibility, keyboard use,
    external-link safety, and coexistence with the existing components.
-6. Keep all predecessors available for rollback; disable them only if Phil
+5. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
