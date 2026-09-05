@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **ADMIN IMPORT/EXPORT AND SUBMENU INTERACTION IMPLEMENTED / LOCAL CHECKS PASS / SANDBOX RUNTIME VERIFIED / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
+Disposition: **ADMIN IMPORT AND SUBMENU INTERACTION VERIFIED / EXPORT DELIVERY PARTIAL / LOCAL CHECKS PASS / REPEAL MIGRATION NOT YET APPLIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -21,8 +21,8 @@ components without Phil's explicit direction.
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
-- Last sandbox-tested runtime commit: `7baecce70aae2fd1a58929f0d7873cc6538267b1`.
-- Latest implementation commit: `c1cc27b6581602494d5716b53430fdbb70df189e`.
+- Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
+- Latest implementation commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -73,6 +73,8 @@ must not be used as this repository's working directory.
   component page when the component is attached to the administrator's active
   theme. Imports use Discourse's theme-setting model API and do not attach or
   enable the component.
+- Bundle imports accept either a selected `.json` file or pasted JSON, allowing
+  validation and import without browser file-picker automation.
 
 ## Current repository and runtime state
 
@@ -110,7 +112,14 @@ must not be used as this repository's working directory.
   through Discourse's normal updater to checkpoint head `7baecce`; the
   Configuration Bundles controls render, outside-click closure passes, and
   Escape closure restores focus to the Resources summary. File selection and
-  settings application have not yet been exercised through the browser UI.
+  settings application had not yet been exercised through the browser UI.
+- `c15353e` adds pasted-JSON import. On the sandbox, a partial bundle changed
+  `brand_name` to `Brand Navigation Import Test`; a full page reload confirmed
+  persistence. A second bundle restored `Brand Navigation`, and another reload
+  confirmed that the temporary value was gone. Theme attachments and the
+  component's enabled state were unchanged. The Export settings control was
+  invoked without a page error, but the browser-control channel does not expose
+  its download destination, so downloaded-file delivery remains unconfirmed.
 
 ## Existing Repeal configuration known so far
 
@@ -144,6 +153,11 @@ Previously executed successfully:
 - Sandbox Resources outside-click closure: pass.
 - Sandbox Resources Escape closure and summary focus restoration: pass.
 - Sandbox administrator Configuration Bundles controls render: pass.
+- Sandbox pasted-JSON validation enables Import settings: pass.
+- Sandbox reversible import, reload, restore, and reload: pass.
+- Export bundle construction and serialization Node coverage: pass.
+- Browser download delivery from Export settings: invoked, not independently
+  confirmed.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -157,8 +171,8 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Exercise a same-settings export/import round trip through the sandbox UI
-   when browser file selection is available; no API key is needed.
+1. Manually confirm that **Export settings** downloads
+   `brand-navigation-settings.json` in a normal administrator browser.
 2. Update Repeal component `19` to the verified commit after action-time
    confirmation.
 3. Apply `configurations/repeal-obbba.json` while component `19` remains
