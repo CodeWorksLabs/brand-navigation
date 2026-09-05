@@ -1,6 +1,6 @@
 en:
   brand_navigation:
-    open_menu: "Open brand navigation"
+    open_menu: "Open the brand navigation menu"
     navigation_label: "Brand navigation"
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
