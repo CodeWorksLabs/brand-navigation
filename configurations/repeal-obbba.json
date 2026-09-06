@@ -77,6 +77,37 @@
         "visibility": "everyone"
       },
       {
+        "label": "People",
+        "url": "/c/people/19",
+        "presentation": "label_only",
+        "section": "left",
+        "target": "_self",
+        "visibility": "everyone",
+        "children": [
+          {
+            "label": "Voted for OBBBA",
+            "url": "/t/voted-for-the-one-big-beautiful-bill-act/1146",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Voted Against OBBBA",
+            "url": "/t/voted-against-the-one-big-beautiful-bill-act/1147",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          },
+          {
+            "label": "Supports Repeal OBBBA Act",
+            "url": "/t/repeal-obbba-act-supporters/1148",
+            "presentation": "label_only",
+            "target": "_self",
+            "visibility": "everyone"
+          }
+        ]
+      },
+      {
         "label": "Social",
         "url": "/c/social/16",
         "presentation": "label_only",
