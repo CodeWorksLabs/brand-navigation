@@ -6,6 +6,8 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Accept six-digit administrator color values with or without a leading `#`
+  and normalize picker and configuration-bundle values to `#RRGGBB`.
 - Add administrator color pickers for bar background, bar text, hover/highlight,
   submenu background, and submenu text, with per-color Discourse palette
   inheritance and configuration-bundle portability.

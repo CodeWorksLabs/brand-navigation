@@ -1,3 +1,13 @@
+@use "sass:string";
+
+@function brand-navigation-color($value) {
+  @if string.slice($value, 1, 1) == "#" {
+    @return $value;
+  }
+
+  @return string.unquote("##{$value}");
+}
+
 .brand-navigation {
   --brand-navigation-background: var(--tertiary);
   --brand-navigation-foreground: var(--secondary);
@@ -6,23 +16,31 @@
   --brand-navigation-menu-foreground: var(--primary);
 
   @if $bar-background-color != "" {
-    --brand-navigation-background: #{$bar-background-color};
+    --brand-navigation-background: #{brand-navigation-color(
+        $bar-background-color
+      )};
   }
 
   @if $bar-text-color != "" {
-    --brand-navigation-foreground: #{$bar-text-color};
+    --brand-navigation-foreground: #{brand-navigation-color($bar-text-color)};
   }
 
   @if $hover-background-color != "" {
-    --brand-navigation-hover: #{$hover-background-color};
+    --brand-navigation-hover: #{brand-navigation-color(
+        $hover-background-color
+      )};
   }
 
   @if $submenu-background-color != "" {
-    --brand-navigation-menu-background: #{$submenu-background-color};
+    --brand-navigation-menu-background: #{brand-navigation-color(
+        $submenu-background-color
+      )};
   }
 
   @if $submenu-text-color != "" {
-    --brand-navigation-menu-foreground: #{$submenu-text-color};
+    --brand-navigation-menu-foreground: #{brand-navigation-color(
+        $submenu-text-color
+      )};
   }
   width: 100%;
   color: var(--brand-navigation-foreground);

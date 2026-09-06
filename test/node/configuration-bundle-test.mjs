@@ -10,6 +10,7 @@ import {
 } from "../../javascripts/discourse/lib/brand-navigation-admin.js";
 import {
   isSafeNavigationUrl,
+  normalizeColorSetting,
   readBundleFile,
 } from "../../javascripts/discourse/lib/configuration-bundle.js";
 
@@ -54,7 +55,7 @@ test("accepts inherited or six-digit hex appearance colors", () => {
       format: BUNDLE_FORMAT,
       version: BUNDLE_VERSION,
       settings: {
-        bar_background_color: "",
+        bar_background_color: "16324F",
         bar_text_color: "#fF00aA",
         hover_background_color: "#123456",
         submenu_background_color: "#ABCDEF",
@@ -63,6 +64,15 @@ test("accepts inherited or six-digit hex appearance colors", () => {
     }),
     []
   );
+});
+
+test("normalizes color settings to canonical uppercase hex", () => {
+  assert.equal(normalizeColorSetting("16324f"), "#16324F");
+  assert.equal(normalizeColorSetting("#ffffff"), "#FFFFFF");
+  assert.equal(themeSettingValue("bar_background_color", "16324f"), "#16324F");
+
+  const bundle = createBundle({ bar_background_color: "16324f" });
+  assert.equal(bundle.settings.bar_background_color, "#16324F");
 });
 
 test("rejects malformed appearance colors", () => {

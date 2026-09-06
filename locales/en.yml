@@ -38,11 +38,11 @@ en:
       brand_presentation: "Show the logo, name, or both."
       brand_target: "Open the brand destination in the same or a new browsing context."
       mobile_mode: "Use a compact header menu, a full bar, or no brand navigation on mobile."
-      bar_background_color: "Optional six-digit hex override for the bar background. Leave blank to inherit --tertiary."
-      bar_text_color: "Optional six-digit hex override for bar text and icons. Leave blank to inherit --secondary."
-      hover_background_color: "Optional six-digit hex override for hover and active highlights. Leave blank to inherit --quaternary-low."
-      submenu_background_color: "Optional six-digit hex override for submenu backgrounds. Leave blank to inherit --secondary."
-      submenu_text_color: "Optional six-digit hex override for submenu text and icons. Leave blank to inherit --primary."
+      bar_background_color: "Optional six-digit hex override for the bar background. A leading # is optional. Leave blank to inherit --tertiary."
+      bar_text_color: "Optional six-digit hex override for bar text and icons. A leading # is optional. Leave blank to inherit --secondary."
+      hover_background_color: "Optional six-digit hex override for hover and active highlights. A leading # is optional. Leave blank to inherit --quaternary-low."
+      submenu_background_color: "Optional six-digit hex override for submenu backgrounds. A leading # is optional. Leave blank to inherit --secondary."
+      submenu_text_color: "Optional six-digit hex override for submenu text and icons. A leading # is optional. Leave blank to inherit --primary."
       navigation_items:
         description: "Ordered top-level links and one-level submenus."
         schema:
