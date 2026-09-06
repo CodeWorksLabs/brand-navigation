@@ -56,7 +56,11 @@ function normalizedHexColor(value) {
   const hex = value?.trim();
 
   if (/^#[0-9a-f]{6}$/i.test(hex)) {
-    return hex;
+    return hex.toUpperCase();
+  }
+
+  if (/^[0-9a-f]{6}$/i.test(hex)) {
+    return `#${hex.toUpperCase()}`;
   }
 
   if (/^#[0-9a-f]{3}$/i.test(hex)) {
@@ -95,8 +99,10 @@ export default class BrandNavigationBundles extends Component {
     this.appearanceValues = Object.fromEntries(
       APPEARANCE_COLORS.map(({ setting }) => [
         setting,
-        this.theme.settings.find((candidate) => candidate.setting === setting)
-          ?.value || "",
+        normalizedHexColor(
+          this.theme.settings.find((candidate) => candidate.setting === setting)
+            ?.value
+        ) || "",
       ])
     );
   }

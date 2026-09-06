@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / ADMIN COLOR CONTROLS IMPLEMENTED LOCALLY / RUNTIME VERIFICATION PENDING / NOT RELEASED**
+Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / ADMIN COLOR CONTROLS MERGED AND SANDBOX-UPDATED / COLOR NORMALIZATION FOLLOW-UP PENDING / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -20,8 +20,8 @@ disable predecessor components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/admin-color-controls`.
-- Current color-control candidate: `ce7fb34`.
+- Current branch: `codex/normalize-color-values`.
+- Merged color-control head: `4d520d2`.
 - Current merged head: `317c4be`.
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
@@ -70,6 +70,19 @@ must not be used as this repository's working directory.
   for Discourse's banned phrase `color scheme`; the wording is corrected to
   `color palette` in the follow-up candidate. This was a locale-policy finding,
   not a code-build failure.
+
+## Color-value normalization follow-up
+
+- Sandbox testing found that Discourse's underlying string setting accepts
+  both `16324F` and `#FFFFFF`; the database retained those exact forms.
+- Branch `codex/normalize-color-values` makes rendering accept either six-digit
+  form, normalizes appearance-panel and configuration-bundle values to
+  uppercase `#RRGGBB`, and documents the accepted input.
+- Local ESLint, Ember template lint, Stylelint, type checking, changed-file
+  formatting, `git diff --check`, and all 22 Node configuration tests pass.
+- Official CI, merge, and sandbox update verification remain pending. The
+  sandbox currently has `bar_background_color=16324F` and
+  `bar_text_color=#FFFFFF`; no production forum was changed.
 
 ## Current multi-site checkpoint
 

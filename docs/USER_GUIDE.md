@@ -157,8 +157,8 @@ and select **Save colors** to override it. **Inherit all** clears all five
 overrides and returns the component to Discourse's palette variables.
 
 Appearance values are included in Brand Navigation configuration bundle
-exports. Imported colors must be blank (inherit) or a six-digit hex value such
-as `#1A2B3C`.
+exports. Colors may be entered as `#1A2B3C` or `1A2B3C`; the component renders
+both forms and normalizes picker and bundle values to canonical `#RRGGBB`.
 
 ## Add navigation
 

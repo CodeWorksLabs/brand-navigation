@@ -191,7 +191,7 @@ function validateSettings(settings, errors) {
 function validateOptionalColor(value, key, errors) {
   if (
     key in value &&
-    !/^#[0-9a-f]{6}$/i.test(value[key]) &&
+    !/^#?[0-9a-f]{6}$/i.test(value[key]) &&
     value[key] !== ""
   ) {
     errors.push(
@@ -430,6 +430,22 @@ export function themeSettingValue(name, value) {
     return value.join("|");
   }
 
+  if (COLOR_SETTINGS.includes(name)) {
+    return normalizeColorSetting(value);
+  }
+
+  return value;
+}
+
+export function normalizeColorSetting(value) {
+  if (typeof value === "string" && /^[0-9a-f]{6}$/i.test(value)) {
+    return `#${value.toUpperCase()}`;
+  }
+
+  if (typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value)) {
+    return value.toUpperCase();
+  }
+
   return value;
 }
 
@@ -450,6 +466,12 @@ export function createBundle(settings, metadata = {}) {
 
   if (typeof portable.navigation_items === "string") {
     portable.navigation_items = JSON.parse(portable.navigation_items);
+  }
+
+  for (const key of COLOR_SETTINGS) {
+    if (key in portable) {
+      portable[key] = normalizeColorSetting(portable[key]);
+    }
   }
 
   const bundle = {
