@@ -22,7 +22,8 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `4a65821`.
-- Latest implementation commit: `c02bf5a`.
+- Latest implementation commit: `12e764a`; administrator-label follow-up:
+  `310f743`.
 - Latest Repeal configuration commit: `a1b274d`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
@@ -102,7 +103,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `c02bf5a`, attached
+- Repeal Brand Navigation component id `19` is updated to `310f743`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum. Phil moved its
   runtime outlet to `above-site-header`, which he considers the likely common
@@ -283,6 +284,15 @@ Previously executed successfully:
   the viewport), use stronger child labels, readable subordinate text, and
   clearer spacing between choices. Menus without descriptions retain their
   compact width. Phil's existing live description text was unchanged.
+- Per-item device visibility at `310f743`: pass on the sandbox. The new
+  administrator label and help text render; changing Community to `mobile`
+  removed it from the authenticated desktop navigation after reload, and
+  restoring `both` brought it back. The sandbox configuration was restored.
+- Repeal update to `310f743`: pass. The Device visibility control renders in
+  the existing objects editor, all ten existing site-header social icons remain
+  visible under their backward-compatible blank/`both` behavior, and no Brand
+  Navigation administrator warning appeared. No Repeal item has yet been
+  changed to desktop-only or mobile-only.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
