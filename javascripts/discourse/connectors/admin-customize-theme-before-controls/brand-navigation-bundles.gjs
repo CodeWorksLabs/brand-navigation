@@ -114,7 +114,10 @@ export default class BrandNavigationBundles extends Component {
       for (const [name, value] of Object.entries(persistedSettings)) {
         this.theme.settings
           .find((setting) => setting.setting === name)
-          .set("value", value);
+          .set(
+            "value",
+            name === "navigation_items" ? this.bundle.settings[name] : value
+          );
       }
 
       this.success = i18n(

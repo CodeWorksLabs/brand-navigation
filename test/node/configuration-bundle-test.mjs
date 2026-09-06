@@ -261,9 +261,10 @@ test("serializes object and icon-list values for the Discourse endpoint", () => 
     themeSettingValue("custom_font_awesome_icons", ["house", "comments"]),
     "house|comments"
   );
-  assert.deepEqual(themeSettingValue("navigation_items", [{ label: "Home" }]), [
-    { label: "Home" },
-  ]);
+  assert.equal(
+    themeSettingValue("navigation_items", [{ label: "Home" }]),
+    '[{"label":"Home"}]'
+  );
 });
 
 test("requires a canonical HTTPS API origin and positive theme id", () => {
@@ -353,6 +354,7 @@ test("bundle import preflights every target setting before mutation", () => {
     settings: [
       { setting: "brand_name" },
       { setting: "custom_font_awesome_icons" },
+      { setting: "navigation_items" },
     ],
   };
 
@@ -361,11 +363,13 @@ test("bundle import preflights every target setting before mutation", () => {
       settings: {
         brand_name: "Example",
         custom_font_awesome_icons: ["house", "comments"],
+        navigation_items: [{ label: "Home", url: "/" }],
       },
     }),
     {
       brand_name: "Example",
       custom_font_awesome_icons: "house|comments",
+      navigation_items: '[{"label":"Home","url":"/"}]',
     }
   );
   assert.throws(

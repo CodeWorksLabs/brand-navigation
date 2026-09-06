@@ -387,6 +387,10 @@ function isBoundedString(value, minLength, maxLength) {
 }
 
 export function themeSettingValue(name, value) {
+  if (name === "navigation_items" && Array.isArray(value)) {
+    return JSON.stringify(value);
+  }
+
   if (name === "custom_font_awesome_icons" && Array.isArray(value)) {
     return value.join("|");
   }
