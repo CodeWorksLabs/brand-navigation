@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-05  
-Disposition: **STATIC SOURCE REVIEW PASS / RUNTIME VERIFICATION PENDING / NOT RELEASE-READY**
+Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
+Disposition: **IMPLEMENTATION COMPLETE / CURRENT CI PASS / SANDBOX RUNTIME PASS WITH DOCUMENTED GAPS / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -20,7 +20,11 @@ components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Branch: `main`
+- Main branch remains unchanged by the current verification gate.
+- Verification branch: `codex/v0.9.0-verification`
+- Draft pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
+- Current CI/browser-tested implementation commit: `13005b7` (the checkpoint
+  itself may create a later documentation-only head).
 - Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
 - Historical runtime evidence below identifies its own commit. It is not a
@@ -28,6 +32,59 @@ components without Phil's explicit direction.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
+
+## Current verification gate (supersedes older pending statements below)
+
+- The reviewed candidate was committed to the short-lived verification branch
+  and pushed without changing `main`. No tag or GitHub Release was created.
+- GitHub Actions run `34010799758` passed every lane at `13005b7`:
+  `check_for_tests`, linting (including Ruby, JavaScript, templates, styles,
+  formatting, and types), backend/English-locale validation, frontend QUnit,
+  and Ruby system tests. Configuration workflow run `34010799448` also passed.
+- The first CI run exposed only harness/package compatibility findings: a
+  missing standard development `Gemfile`, two English-locale uses of “color
+  scheme,” and application-style rather than relative theme-test imports.
+  Commit `13005b7` corrected all three, and the complete official workflow
+  subsequently passed.
+- Browser import initially proved that scalar settings persisted but object
+  settings did not. Current Discourse expects object-setting values serialized
+  for the theme update endpoint. Commit `1789301` aligned the browser importer
+  with that endpoint while retaining the parsed array in the local admin model;
+  the structured sandbox bundle then imported successfully.
+- Sandbox component id `2` tracks `codex/v0.9.0-verification`, is enabled and
+  attached to Foundation and Horizon, and is updated through `13005b7`.
+  Component id `1` is preserved, disabled, and detached as rollback material;
+  it was not deleted. This sandbox-only change prevents duplicate administrator
+  connectors while the candidate is evaluated.
+- Sandbox browser passes on the candidate: authenticated desktop render;
+  linked parent plus separate submenu control; outside-click and Escape closure
+  with focus restoration; safe `_blank` rel; 390px mobile menu, bar, and hidden
+  modes; unclipped bar submenu; site-header icon placement and safe rel; full-app
+  `embed_mode=true` exclusion while main content remains; structured bundle
+  import; unsafe-URL rejection before mutation; corrected locale; and
+  save-without-leaving behavior in the navigation-object editor.
+- The sandbox was restored to mobile `bar` mode after the reversible hidden-mode
+  check. No Repeal or other production installation was changed in this gate.
+- Remaining evidence gaps are explicit: classic embedded comments could not
+  render because the sandbox has no embed hosts configured; anonymous browser
+  visibility was not re-executed without disrupting Phil's authenticated admin
+  session; export construction is covered by automated tests, but the current
+  browser download could not be conclusively observed because Chrome's
+  save-location UI remained outside the automation result; light/dark, RTL,
+  screen-reader, and older-version consumer checks remain manual targets.
+- Windows still has no discoverable `ruby`, `gem`, or `bundle` commands on this
+  task's PowerShell PATH. Ubuntu WSL startup again timed out and was interrupted,
+  so its Ruby state remains unverified. This is no longer a coverage blocker for
+  the candidate because the official GitHub workflow executed and passed the
+  authored QUnit and Ruby system suites.
+- Final focused static review of commits `97807a1`, `1789301`, and `13005b7`
+  found no P0/P1 defect and confirmed that browser object serialization and the
+  parsed local model state are coherent. Its two P2 findings are addressed in
+  the documentation-only closure: bundle integrity is described precisely as
+  complete client preflight plus one update request, without claiming an
+  unproven server transaction; and the two Ruby lint tools are pinned to the
+  exact versions resolved by the passing workflow. A fresh official workflow
+  run is required on this closure commit.
 
 ## 2026-09-05 doctrine review and remediation
 
@@ -374,24 +431,23 @@ Previously executed successfully:
   portrait and landscape while Desktop-only icons remain excluded. The
   rotation/device-visibility defect is accepted as fixed.
 
-Authored but not executed in a compatible local Discourse test runtime:
+Executed by the official Discourse theme workflow at `13005b7`:
 
 - `test/unit/lib/brand-navigation-test.js`
 - `spec/system/brand_navigation_spec.rb`
 - `spec/system/core_features_spec.rb`
 
-Do not describe those specs as passing. Ruby, Gem, and Bundler were not
-discoverable on the Windows PowerShell PATH. Ubuntu WSL startup probes timed
-out, so WSL Ruby availability remains unverified.
+The QUnit suite and Ruby system specs pass in GitHub Actions run `34010799758`.
+They were not executed locally: Ruby, Gem, and Bundler remain undiscoverable on
+the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. Preserve the source-reviewed implementation unchanged and do not conflate
-   static source closure with runtime acceptance.
-2. Separately authorize and execute QUnit/Ruby system, GitHub workflow, browser,
-   responsive,
-   accessibility, embed, CLI synthetic-transport, and consumer verification.
-3. When correction and runtime gates permit, install and fully configure on
+1. Review the complete CI and sandbox evidence en masse and decide whether the
+   remaining manual gaps block merging the draft pull request.
+2. If accepted, merge the reviewed branch to `main` as a separate action. Do
+   not tag or publish a release merely by merging.
+3. When a separate consumer gate permits, install and fully configure on
    `https://forum.discussionbridge.dev/` and verify downstream embed exclusion
    on `https://bridge.demo.discussionbridge.dev/`.
 4. Test the older `https://www.r744.community/` Discourse build, then expand to

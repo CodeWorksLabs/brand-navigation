@@ -3,6 +3,8 @@
 source "https://rubygems.org"
 
 group :development do
-  gem "rubocop-discourse"
-  gem "syntax_tree"
+  # Keep CI lint behavior reproducible. Review these pins deliberately rather
+  # than allowing an unrelated upstream release to change a verification run.
+  gem "rubocop-discourse", "3.18.0"
+  gem "syntax_tree", "6.3.0"
 end
