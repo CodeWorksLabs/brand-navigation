@@ -62,7 +62,8 @@ must not be used as this repository's working directory.
 - Per-entry titles, Font Awesome icons, and safe `_blank` rel handling.
 - `everyone`, `anonymous`, and `authenticated` visibility.
 - Per-item `both`, `desktop`, and `mobile` device visibility for top-level and
-  child entries, evaluated against Discourse's supported mobile-layout state.
+  child entries, evaluated against Discourse's supported physical-device
+  capability.
 - Sandbox update to `12e764a` passed on Discourse `2026.9.0-latest+307`: the
   new device field was accepted by the objects schema, existing blank values
   retained `both` behavior, authenticated navigation continued rendering, and
@@ -293,6 +294,13 @@ Previously executed successfully:
   visible under their backward-compatible blank/`both` behavior, and no Brand
   Navigation administrator warning appeared. No Repeal item has yet been
   changed to desktop-only or mobile-only.
+- Phil's iPhone test found that portrait filtering worked but Desktop-only
+  icons returned in landscape. This was caused by the first implementation
+  using `site.mobileView`, which Discourse defines from its 40rem responsive
+  breakpoint. It was a semantic implementation defect, not ignored settings.
+  Per-item filtering now uses supported `capabilities.isMobileDevice`, which
+  remains a mobile phone classification across rotation; `mobile_mode` retains
+  its separate responsive-layout meaning.
 
 Authored but not executed in a compatible local Discourse test runtime:
 

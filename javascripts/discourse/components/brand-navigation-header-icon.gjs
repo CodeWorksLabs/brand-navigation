@@ -9,8 +9,8 @@ import {
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationHeaderIcon extends Component {
+  @service capabilities;
   @service currentUser;
-  @service site;
 
   get shouldRender() {
     const item = this.args.item;
@@ -22,7 +22,7 @@ export default class BrandNavigationHeaderIcon extends Component {
       Boolean(item.icon) &&
       !(item.children || []).length &&
       isVisibleToUser(item, this.currentUser) &&
-      isVisibleOnDevice(item, this.site.mobileView)
+      isVisibleOnDevice(item, this.capabilities.isMobileDevice)
     );
   }
 

@@ -9,12 +9,12 @@ export function isVisibleToUser(item, currentUser) {
   }
 }
 
-export function isVisibleOnDevice(item, mobileView) {
+export function isVisibleOnDevice(item, mobileDevice) {
   switch (item.device_visibility) {
     case "desktop":
-      return !mobileView;
+      return !mobileDevice;
     case "mobile":
-      return Boolean(mobileView);
+      return Boolean(mobileDevice);
     default:
       return true;
   }

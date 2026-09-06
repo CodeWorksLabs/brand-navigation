@@ -151,7 +151,7 @@ Each top-level entry supports:
 | `presentation`      | Show the icon and label, label only, or icon only.                                         |
 | `section`           | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
 | `surface`           | Show the item in the Brand Navigation `bar` or as a `site_header` icon.                    |
-| `device_visibility` | Show in both layouts, desktop/tablet only, or mobile only.                                 |
+| `device_visibility` | Show on both device classes, desktop/tablet only, or mobile phones only.                   |
 | `target`            | Open in the same window (`_self`) or a new window (`_blank`).                              |
 | `visibility`        | Show to everyone, anonymous visitors, or authenticated users.                              |
 | `children`          | Ordered submenu links below this entry.                                                    |
@@ -188,9 +188,15 @@ the default `bar` surface.
 Use `device_visibility` to control constrained mobile layouts independently for
 each item:
 
-- `both` shows the item in desktop/tablet and mobile layouts and is the default.
-- `desktop` shows the item only in the desktop/tablet layout.
-- `mobile` shows the item only in the mobile layout.
+- `both` shows the item on desktop/tablet devices and mobile phones and is the
+  default.
+- `desktop` shows the item only on desktop/tablet devices.
+- `mobile` shows the item only on mobile phones.
+
+Device visibility follows Discourse's supported physical-device capability, so
+rotating a phone does not make Desktop-only items appear. It is independent of
+`mobile_mode`, which controls whether the responsive mobile layout uses a menu,
+bar, or no Brand Navigation surface.
 
 For a large social set, keep a few priority `site_header` icons on `both`, mark
 the remainder `desktop`, and retain a Social submenu on `both` so every

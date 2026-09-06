@@ -49,9 +49,11 @@ adapting the established GPL-2.0 pattern in Discourse Icon Header Links.
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
 entry with no usable icon falls back to visible label text. Top-level and child
-items independently select `both`, `desktop`, or `mobile` device visibility;
-the components evaluate that setting against Discourse's `site.mobileView`
-state and omit nonmatching items from rendering.
+items independently select `both`, `desktop`, or `mobile` device visibility.
+The components evaluate that setting against Discourse's supported
+`capabilities.isMobileDevice` state and omit nonmatching items from rendering,
+so phone rotation cannot reclassify items. Component-wide responsive layout
+continues to use `site.mobileView` through the bar and menu boundaries.
 
 ## Intentional constraints
 

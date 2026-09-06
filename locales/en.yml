@@ -52,7 +52,7 @@ en:
               description: "Show this item in the Brand Navigation bar or as a direct icon link in the Discourse site header. Site-header items require a URL and icon and cannot contain children."
             device_visibility:
               label: "Device visibility"
-              description: "Show in both layouts, desktop/tablet only, or mobile only. Existing blank values behave as both."
+              description: "Show on both device classes, desktop/tablet only, or mobile phones only. Rotation does not change the device class. Existing blank values behave as both."
             target:
               label: "Target"
             visibility:
@@ -77,7 +77,7 @@ en:
                     label: "Presentation"
                   device_visibility:
                     label: "Device visibility"
-                    description: "Show in both layouts, desktop/tablet only, or mobile only. Existing blank values behave as both."
+                    description: "Show on both device classes, desktop/tablet only, or mobile phones only. Rotation does not change the device class. Existing blank values behave as both."
                   target:
                     label: "Target"
                   visibility:

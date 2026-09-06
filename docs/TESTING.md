@@ -45,7 +45,7 @@ Test the current stable and tests-passed Discourse branches where practical.
 | Mobile bar                 | Responsive bar scrolls navigation without covering core controls            |
 | Mobile hidden              | No brand-navigation surface renders                                         |
 | Site-header item           | Direct icon appears once with its tooltip, audience, target, and safe rel   |
-| Device-specific item       | Renders only in its selected desktop/mobile layout                          |
+| Device-specific item       | Renders only for its selected device class, unchanged across phone rotation |
 | Descriptive submenu        | Description appears below its label; empty entries remain compact           |
 | Administrator object save  | Settings persist and the structured editor remains open                     |
 | Light/dark schemes         | Correct logo fallback and readable scheme colors                            |

@@ -14,8 +14,8 @@ import {
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
+  @service capabilities;
   @service currentUser;
-  @service site;
   @service siteSettings;
 
   openSubmenus = new Set();
@@ -90,14 +90,14 @@ export default class BrandNavigationContent extends Component {
         .filter(
           (item) =>
             isVisibleToUser(item, this.currentUser) &&
-            isVisibleOnDevice(item, this.site.mobileView)
+            isVisibleOnDevice(item, this.capabilities.isMobileDevice)
         )
         .map((item) => ({
           ...item,
           children: (item.children || []).filter(
             (child) =>
               isVisibleToUser(child, this.currentUser) &&
-              isVisibleOnDevice(child, this.site.mobileView)
+              isVisibleOnDevice(child, this.capabilities.isMobileDevice)
           ),
         }))
     );
