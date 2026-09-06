@@ -45,7 +45,8 @@ remained. No production or consumer site was changed during this check.
 
 ## Top-level behavior candidate
 
-Pull request 3 (`codex/top-level-link-behavior`, commit `e53a7d0`) adds an
+Merged pull request 3 (`codex/top-level-link-behavior`, implementation commit
+`e53a7d0`, merge commit `317c4be`) adds an
 explicit `link_mode` to each top-level navigation item. GitHub Actions run
 `34019282463` passed the official Discourse lint, frontend QUnit, backend, and
 Ruby system jobs; configuration run `34019282181` passed all 19 Node tests.
@@ -66,6 +67,16 @@ surfaces, one `#main-outlet`, no broken-theme warning, and no captured console
 errors. The first save immediately after changing the component source loaded
 the new schema alongside the previous single-page-app validator and failed
 closed; reloading synchronized the assets and all subsequent saves passed.
+
+After pull request 3 merged, sandbox component id `2` was returned to `main`
+and reported up to date. The final post-merge smoke reconfirmed the linked
+Resources parent at `/about`, its separate submenu caret, submenu open and
+Escape focus return, and the Meta child link's `_blank` target with
+`noopener noreferrer`. The normal page had one Brand Navigation surface, one
+`#main-outlet`, no broken-theme warning, and no captured console errors.
+Full-app `?embed_mode=true` again excluded Brand Navigation while retaining
+`#main-outlet`, with no warning or captured console error. The browser was
+restored to the normal sandbox forum page.
 
 ## Remaining compatibility targets
 

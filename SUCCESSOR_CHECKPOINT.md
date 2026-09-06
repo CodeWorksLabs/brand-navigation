@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / TOP-LEVEL LINK MODE IN PROGRESS / NOT RELEASED**
+Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / TOP-LEVEL LINK MODE MERGED AND SANDBOX-VERIFIED / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -20,18 +20,18 @@ disable predecessor components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Main post-review checkpoint: `04dbb3d`.
-- Current working branch: `codex/top-level-link-behavior`
-- Current implementation commit: `e53a7d0` (the checkpoint evidence commit is
-  expected to follow it).
-- Current pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/3`
+- Current branch: `main`.
+- Current merged head: `317c4be`.
+- Top-level behavior implementation commit: `e53a7d0`; evidence commit:
+  `2cb2b2a`; merged pull request:
+  `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
 - Previous compatibility branch: `codex/r744-compatibility`
 - Current draft compatibility pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
 - Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
-- Current CI/browser-tested implementation commit: `13005b7` (the checkpoint
-  itself may create a later documentation-only head).
+- Current CI/browser-tested merged head: `317c4be` (the checkpoint itself may
+  create a later documentation-only head).
 - Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
 - Historical runtime evidence below identifies its own commit. It is not a
@@ -111,10 +111,11 @@ must not be used as this repository's working directory.
   Prettier, `git diff --check`, and all 19 Node configuration tests passed. The
   repository-wide Windows Prettier command still reports CRLF conversion on 19
   unchanged files; no unrelated formatting rewrite was made.
-- Pull request 3 is open and all checks are green. Official Discourse workflow
+- Pull request 3 merged as `317c4be`, and all checks are green. Official Discourse workflow
   run `34019282463` passed linting, frontend QUnit, backend, and Ruby system
   tests; configuration workflow run `34019282181` passed all 19 Node tests.
-- Sandbox component id `2` now tracks `codex/top-level-link-behavior`. After a
+- Sandbox component id `2` tracked `codex/top-level-link-behavior` for candidate
+  testing. After a
   required application reload following the source switch, the administrator
   editor displayed **Top-level behavior** and saved normally without leaving
   the editor.
@@ -126,6 +127,14 @@ must not be used as this repository's working directory.
   with the expected validation error and did not change the setting.
 - Full-app `?embed_mode=true` still produced zero Brand Navigation surfaces,
   one `#main-outlet`, no broken-theme warning, and no captured console errors.
+- After merge, sandbox component id `2` was switched back to `main` and reported
+  up to date. The final smoke test reconfirmed Resources as the `/about` parent
+  link with its separate submenu caret, submenu open and Escape focus return,
+  the Meta child link's `_blank`/`noopener noreferrer` safety, one normal-page
+  Brand Navigation surface, one core `#main-outlet`, no broken-theme warning,
+  and no captured console errors. Full-app `?embed_mode=true` again returned
+  zero Brand Navigation surfaces while preserving `#main-outlet`. The browser
+  was restored to the normal sandbox forum page.
 
 ## Post-merge sandbox checkpoint
 
@@ -562,14 +571,12 @@ the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. Review and merge pull request 3 when Phil chooses; then switch sandbox
-   component id `2` back to `main` and repeat the focused behavior/embed smoke.
-2. Close draft pull request 2 after Phil authorizes that repository action; do
+1. Close draft pull request 2 after Phil authorizes that repository action; do
    not merge its obsolete unsupported-version compatibility work.
-3. Record exact Discourse builds for the remaining installed sites when useful.
-4. Keep all predecessors available for rollback; disable them only if Phil
+2. Record exact Discourse builds for the remaining installed sites when useful.
+3. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
-5. Review the resulting multi-site evidence and decide whether to tag the first
+4. Review the resulting multi-site evidence and decide whether to tag the first
    preview as `v0.9.0`. A tag and GitHub Release remain separate actions.
 
 ## Out of scope
