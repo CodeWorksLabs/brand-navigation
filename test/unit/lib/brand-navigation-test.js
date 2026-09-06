@@ -5,10 +5,10 @@ import {
   isVisibleToUser,
   linkRel,
   linkTarget,
-} from "brand-navigation/discourse/lib/brand-navigation";
-import { isBrandNavigationObjectsEditor } from "brand-navigation/discourse/lib/brand-navigation-admin";
-import { isBrandNavigationTheme } from "brand-navigation/discourse/lib/brand-navigation-admin";
-import { isSafeNavigationUrl } from "brand-navigation/discourse/lib/configuration-bundle";
+} from "../../../discourse/lib/brand-navigation";
+import { isBrandNavigationObjectsEditor } from "../../../discourse/lib/brand-navigation-admin";
+import { isBrandNavigationTheme } from "../../../discourse/lib/brand-navigation-admin";
+import { isSafeNavigationUrl } from "../../../discourse/lib/configuration-bundle";
 
 module("Unit | Lib | brand-navigation", function () {
   test("audience visibility is explicit", function (assert) {
