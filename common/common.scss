@@ -182,7 +182,7 @@
     }
 
     &--linked {
-      padding-inline-end: 2.25rem;
+      padding-inline-end: 1.75rem;
 
       > .brand-navigation__submenu {
         position: absolute;
@@ -209,6 +209,16 @@
 
   &__item &__submenu-toggle {
     padding-inline: 0.55rem;
+  }
+
+  &__submenu-group--linked > &__parent-link {
+    padding-inline-end: 0.25rem;
+  }
+
+  &__submenu-group--linked > &__submenu > &__submenu-toggle {
+    justify-content: center;
+    width: 1.75rem;
+    padding-inline: 0;
   }
 
   &__item--right &__submenu > ul {
