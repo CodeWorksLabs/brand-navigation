@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `ce91a6f`.
+- Latest implementation commit: `00cf3ce`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,7 +89,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `ce91a6f`, attached
+- Repeal Brand Navigation component id `19` is updated to `00cf3ce`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum. Phil moved its
   runtime outlet to `above-site-header`, which he considers the likely common
@@ -206,8 +206,11 @@ Previously executed successfully:
   `above-site-header` outlet. The opened Repeal child menu begins under its
   parent label rather than under the separate caret or between adjacent
   top-level items.
+- Repeal linked-parent caret spacing at `00cf3ce`: pass by live screenshot. The
+  separate accessible submenu control is now visually adjacent to its parent
+  label while the child menu retains the corrected alignment.
 - `pnpm lint`, `pnpm test:config` (5 tests), and `git diff --check` at
-  `ce91a6f`: pass.
+  `00cf3ce`: pass.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
