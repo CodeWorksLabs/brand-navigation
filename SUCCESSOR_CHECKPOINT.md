@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **MERGED TO MAIN / CURRENT CI PASS / POST-MERGE SANDBOX PASS WITH DOCUMENTED GAPS / NOT RELEASED**
+Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / TOP-LEVEL LINK MODE IN PROGRESS / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -9,19 +9,26 @@ Brand Navigation is an independently maintained Discourse theme component for
 an optional brand header and one-level navigation hierarchy. It is not an
 official Discourse product.
 
-Phil authorized browser-based installation and testing on
-`https://sandbox-forum.discussionbridge.dev/` and installation/configuration on
-`https://forum.repealobbba.org/`. Browser administration is available through
-Phil's authenticated Chrome tabs. SSH is unnecessary and should be reserved for
-cases the supported UI cannot handle. Do not delete or disable predecessor
-components without Phil's explicit direction.
+Phil authorized browser-based installation, configuration, and testing on the
+DiscussionBridge sandbox, Repeal OBBBA Forum, DiscussionBridge Forum, The
+Bridge, Citizen Activist Network, and RVing Community. Browser administration
+is available through Phil's authenticated Chrome tabs. SSH is unnecessary and
+should be reserved for cases the supported UI cannot handle. Do not delete or
+disable predecessor components without Phil's explicit direction.
 
 ## Canonical locations
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Main merge commit: `e22dce231e2cd931c661afc45ae8483928233d2c`.
-- Verification branch: `codex/v0.9.0-verification`
+- Main post-review checkpoint: `04dbb3d`.
+- Current working branch: `codex/top-level-link-behavior`
+- Current implementation commit: `e53a7d0` (the checkpoint evidence commit is
+  expected to follow it).
+- Current pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/3`
+- Previous compatibility branch: `codex/r744-compatibility`
+- Current draft compatibility pull request:
+  `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
+- Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
 - Current CI/browser-tested implementation commit: `13005b7` (the checkpoint
   itself may create a later documentation-only head).
@@ -32,6 +39,93 @@ components without Phil's explicit direction.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
+
+## Current multi-site checkpoint
+
+- Main is installed, configured, and browser-smoke-tested on Repeal OBBBA
+  Forum, DiscussionBridge Forum, The Bridge, Citizen Activist Network, and
+  RVing Community. The DiscussionBridge sandbox remains the primary current
+  Discourse test environment.
+- DiscussionBridge Forum and The Bridge now each expose GitHub, Bluesky,
+  Discord, and YouTube as right-side `site_header` icon links. Each uses an
+  accessible tooltip, opens with `_blank`, and was inspected with
+  `rel="noopener noreferrer"`. Both sites showed no broken-theme warning.
+- The Bridge retained its Publishing, From The Bridge, Releases, Ecosystem, and
+  My Preferences navigation. Its full-app `?embed_mode=true` check returned no
+  Brand Navigation bar and no component social links while `#main-outlet`
+  remained present. The normal forum URL was restored afterward.
+- DiscussionBridge Forum has the same restrained four-icon social set and
+  passed normal rendering and full-app embed exclusion. These are site settings
+  only; no repository code changed to add them.
+- Citizen Activist Network has configured Community and Issues navigation and
+  passed normal authenticated rendering, submenu/Escape behavior, no-console-
+  error inspection, and full-app embed exclusion.
+- RVing Community has configured Community and RVing Network navigation, is
+  attached to Default, Foundation, and Horizon, and passed normal authenticated
+  rendering, link/submenu inspection, no-console-error inspection, and full-app
+  embed exclusion.
+- The original R744 `2026.2.0-latest` attempt exposed unsupported older module
+  APIs; that unsupported build remains explicitly outside the compatibility
+  claim. R744 was subsequently upgraded to the 2026.7 ESR and is now a verified
+  installation as recorded below. Draft pull request 2 is obsolete for the
+  R744 site and should be closed rather than merged.
+
+## R744 2026.7 ESR checkpoint
+
+- Phil explicitly authorized the live R744 upgrade and Brand Navigation test.
+- A fresh pre-upgrade Discourse backup was confirmed at
+  `/var/discourse/shared/web-only/backups/default/r744-community-2026-09-05-033639-v20260126204830.tar.gz`.
+- `/var/discourse/containers/web_only.yml` was backed up as
+  `web_only.yml.pre-2026.7-esr-20260905`, then pinned to
+  `version: release/2026.7`. The launcher repository was fast-forwarded and
+  `./launcher rebuild web_only` completed successfully.
+- The administrator dashboard reports Discourse `2026.7.2+14` at core commit
+  `2e46cff73b`. The configured source remains `release/2026.7`; a newer regular
+  release being advertised by the dashboard does not change that ESR pin.
+- Brand Navigation component id `1`, sourced from `main`, is enabled and
+  attached to Foundation and Horizon. Component id `2` remains preserved,
+  disabled, and unattached.
+- Authenticated normal-page smoke passed: one Brand Navigation surface, core
+  main content present, no broken-theme warning, and no captured console error.
+- Resources opened, Escape closed it and restored focus, and the external Meta
+  link retained `target="_blank"` with `rel="noopener noreferrer"`.
+- Full-app `?embed_mode=true` excluded Brand Navigation while retaining
+  `#main-outlet` and produced no broken-theme warning.
+- The component administrator page and `navigation_items` object editor loaded
+  normally on the ESR. The editor retained its in-place `Save Changes` control;
+  no setting mutation was required for this verification.
+- The launcher printed container environment values during rebuild. Secret
+  values are intentionally omitted from this checkpoint. SMTP, database, and
+  MaxMind credentials visible in the task record should be rotated separately;
+  no rotation was performed without Phil's direction.
+
+## Top-level Link / Submenu group checkpoint
+
+- Commit `e53a7d0` implements the per-item `link_mode`, with `link` preserving
+  the current linked-parent behavior and `group` suppressing the rendered URL
+  while retaining the saved value for later reuse.
+- Group mode is limited to bar items with actionable children. It is rejected
+  for core-header items and for items without children. Link mode requires a
+  URL. Configuration bundle import/export accepts and validates the field.
+- Local ESLint, Ember template lint, Stylelint, type checking, changed-file
+  Prettier, `git diff --check`, and all 19 Node configuration tests passed. The
+  repository-wide Windows Prettier command still reports CRLF conversion on 19
+  unchanged files; no unrelated formatting rewrite was made.
+- Pull request 3 is open and all checks are green. Official Discourse workflow
+  run `34019282463` passed linting, frontend QUnit, backend, and Ruby system
+  tests; configuration workflow run `34019282181` passed all 19 Node tests.
+- Sandbox component id `2` now tracks `codex/top-level-link-behavior`. After a
+  required application reload following the source switch, the administrator
+  editor displayed **Top-level behavior** and saved normally without leaving
+  the editor.
+- Resources passed the complete live round trip: `group` rendered the label as
+  a submenu-only button and exposed both children; changing it back to `link`
+  restored `/about` as the live parent destination plus the separate caret.
+  The saved URL survived group mode. The sandbox was left in Link mode.
+- Attempting group mode on Community without actionable children failed closed
+  with the expected validation error and did not change the setting.
+- Full-app `?embed_mode=true` still produced zero Brand Navigation surfaces,
+  one `#main-outlet`, no broken-theme warning, and no captured console errors.
 
 ## Post-merge sandbox checkpoint
 
@@ -468,15 +562,14 @@ the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. When a separate consumer gate permits, install and fully configure on
-   `https://forum.discussionbridge.dev/` and verify downstream embed exclusion
-   on `https://bridge.demo.discussionbridge.dev/`.
-2. Test the older `https://www.r744.community/` Discourse build, then expand to
-   Citizen Activist Network and RVing Community. Add sites to **In use on** only
-   after their stated coverage is verified.
-3. Keep all predecessors available for rollback; disable them only if Phil
+1. Review and merge pull request 3 when Phil chooses; then switch sandbox
+   component id `2` back to `main` and repeat the focused behavior/embed smoke.
+2. Close draft pull request 2 after Phil authorizes that repository action; do
+   not merge its obsolete unsupported-version compatibility work.
+3. Record exact Discourse builds for the remaining installed sites when useful.
+4. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
-4. Review the resulting multi-site evidence and decide whether to tag the first
+5. Review the resulting multi-site evidence and decide whether to tag the first
    preview as `v0.9.0`. A tag and GitHub Release remain separate actions.
 
 ## Out of scope

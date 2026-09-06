@@ -22,6 +22,7 @@ export default class BrandNavigationHeaderIcon extends Component {
       settings.enabled &&
       !EmbedMode.enabled &&
       !(this.site.mobileView && settings.mobile_mode === "hidden") &&
+      item.link_mode !== "group" &&
       Boolean(item.url) &&
       Boolean(item.icon) &&
       !(item.children || []).length &&

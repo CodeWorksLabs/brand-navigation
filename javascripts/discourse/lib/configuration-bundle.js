@@ -18,6 +18,7 @@ const ITEM_PRESENTATION_VALUES = new Set([
   "icon_only",
 ]);
 const SECTION_VALUES = new Set(["left", "right"]);
+const LINK_MODE_VALUES = new Set(["link", "group"]);
 const SURFACE_VALUES = new Set(["bar", "site_header"]);
 const TARGET_VALUES = new Set(["_self", "_blank"]);
 const VISIBILITY_VALUES = new Set(["everyone", "anonymous", "authenticated"]);
@@ -28,6 +29,7 @@ const TOP_LEVEL_KEYS = new Set(["format", "version", "metadata", "settings"]);
 const NAVIGATION_ITEM_KEYS = new Set([
   "label",
   "url",
+  "link_mode",
   "title",
   "icon",
   "presentation",
@@ -191,6 +193,7 @@ function validateNavigationItem(item, index, errors) {
   validateOptionalString(item, "description", 300, errors, path);
   validateOptionalString(item, "icon", 100, errors, path);
   validateOptionalUrl(item, "url", errors, path);
+  validateOptionalEnum(item, "link_mode", LINK_MODE_VALUES, errors, path);
   validateOptionalEnum(
     item,
     "presentation",
@@ -227,6 +230,8 @@ function validateNavigationItem(item, index, errors) {
   );
 
   const surface = item.surface || "bar";
+  const linkMode =
+    item.link_mode || (isNonEmptyString(item.url) ? "link" : "group");
   if (surface === "site_header") {
     if (!isNonEmptyString(item.url) || !isNonEmptyString(item.icon)) {
       errors.push(`${path} with site_header surface requires a URL and icon.`);
@@ -235,6 +240,15 @@ function validateNavigationItem(item, index, errors) {
     if ((children || []).length) {
       errors.push(`${path} with site_header surface cannot contain children.`);
     }
+    if (linkMode === "group") {
+      errors.push(
+        `${path} with site_header surface cannot use group link mode.`
+      );
+    }
+  } else if (linkMode === "group" && !(children || []).length) {
+    errors.push(`${path} with group link mode requires at least one child.`);
+  } else if (linkMode === "link" && !isNonEmptyString(item.url)) {
+    errors.push(`${path} with link mode requires a URL.`);
   } else if (!isNonEmptyString(item.url) && !(children || []).length) {
     errors.push(`${path} requires a URL or at least one child.`);
   }

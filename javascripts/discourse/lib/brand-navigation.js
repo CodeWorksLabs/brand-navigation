@@ -61,10 +61,17 @@ export function prepareNavigationItem(item, path = "item") {
       prepareNavigationItem(child, `${path}-child-${index}`)
     )
     .filter((child) => child.url);
+  const linkMode = item.link_mode || (item.url ? "link" : "group");
 
   return {
     ...item,
-    url: isSafeNavigationUrl(item.url) ? item.url : null,
+    linkMode,
+    url:
+      linkMode === "group"
+        ? null
+        : isSafeNavigationUrl(item.url)
+          ? item.url
+          : null,
     target: linkTarget(item.target),
     presentation,
     showIcon,
