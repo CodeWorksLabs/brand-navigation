@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **IMPLEMENTATION COMPLETE / CURRENT CI PASS / SANDBOX RUNTIME PASS WITH DOCUMENTED GAPS / NOT RELEASED**
+Disposition: **MERGED TO MAIN / CURRENT CI PASS / POST-MERGE SANDBOX PASS WITH DOCUMENTED GAPS / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -20,9 +20,9 @@ components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Main branch remains unchanged by the current verification gate.
+- Main merge commit: `e22dce231e2cd931c661afc45ae8483928233d2c`.
 - Verification branch: `codex/v0.9.0-verification`
-- Draft pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
+- Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
 - Current CI/browser-tested implementation commit: `13005b7` (the checkpoint
   itself may create a later documentation-only head).
 - Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
@@ -32,6 +32,27 @@ components without Phil's explicit direction.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
+
+## Post-merge sandbox checkpoint
+
+- Pull request 1 was marked ready and merged into `main` as `e22dce2`; merging
+  did not create a tag, GitHub Release, or deployment.
+- Sandbox component id `2` was changed from
+  `codex/v0.9.0-verification` to `main`. Discourse reported it up to date with
+  `main`, whose remote head was independently confirmed as `e22dce2`.
+- Authenticated normal-page smoke testing passed after the source change: one
+  Brand Navigation landmark rendered with Community, Resources, My Preferences,
+  and the configured site-header link while core main content remained.
+- Resources opened normally; its Discourse Meta `_blank` link retained
+  `noopener noreferrer`; Escape closed the submenu and restored focus.
+- The same structured configuration bundle was re-imported through the
+  administrator UI. Import succeeded, and a forum reload confirmed the brand
+  navigation and site-header item persisted.
+- Full-app `?embed_mode=true` smoke testing again found no bar, Brand Navigation
+  landmark, compact menu, or component site-header icon while core main content
+  remained. The browser was restored to the normal forum page afterward.
+- This post-merge smoke test changed only the authorized sandbox. Repeal and all
+  other production/consumer sites were untouched.
 
 ## Current verification gate (supersedes older pending statements below)
 
@@ -447,23 +468,16 @@ the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. Require the official Discourse Theme workflow and configuration workflow to
-   pass on the exact current closure head, including the pinned Ruby tools.
-2. Complete the narrow independent static closure of the residual architecture
-   wording and checkpoint sequence.
-3. Review the complete CI, static-review, and sandbox evidence en masse and
-   decide whether the remaining manual gaps block merging the draft pull
-   request.
-4. If accepted, merge the reviewed branch to `main` as a separate action. Do
-   not tag or publish a release merely by merging.
-5. When a separate consumer gate permits, install and fully configure on
+1. When a separate consumer gate permits, install and fully configure on
    `https://forum.discussionbridge.dev/` and verify downstream embed exclusion
    on `https://bridge.demo.discussionbridge.dev/`.
-6. Test the older `https://www.r744.community/` Discourse build, then expand to
+2. Test the older `https://www.r744.community/` Discourse build, then expand to
    Citizen Activist Network and RVing Community. Add sites to **In use on** only
    after their stated coverage is verified.
-7. Keep all predecessors available for rollback; disable them only if Phil
+3. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
+4. Review the resulting multi-site evidence and decide whether to tag the first
+   preview as `v0.9.0`. A tag and GitHub Release remain separate actions.
 
 ## Out of scope
 

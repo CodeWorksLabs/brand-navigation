@@ -31,6 +31,13 @@ sandbox has no embed hosts configured. Anonymous browser, light/dark, RTL,
 screen-reader, current export-download delivery, and older-version checks also
 remain open manual cases; automated visibility/export logic is green.
 
+After pull request 1 merged as `e22dce2`, sandbox component id `2` was switched
+to `main` and reported up to date. A focused post-merge smoke test reconfirmed
+authenticated normal rendering, safe submenu behavior and Escape focus return,
+successful structured re-import with reload persistence, and complete
+Brand Navigation exclusion from `?embed_mode=true` while core main content
+remained. No production or consumer site was changed during this check.
+
 ## Planned compatibility targets
 
 - Install and fully configure on `https://forum.discussionbridge.dev/`, then use
