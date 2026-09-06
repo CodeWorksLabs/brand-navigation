@@ -1,6 +1,7 @@
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { withPluginApi } from "discourse/lib/plugin-api";
+import { validateNavigationItems } from "../lib/configuration-bundle";
 import { isBrandNavigationObjectsEditor } from "../lib/brand-navigation-admin";
 
 export default {
@@ -22,6 +23,13 @@ export default {
               this.validationErrorMessage = undefined;
 
               try {
+                const errors = validateNavigationItems(this.data);
+
+                if (errors.length) {
+                  this.validationErrorMessage = errors.join(" ");
+                  return;
+                }
+
                 const result = await this.args.setting.updateSetting(
                   this.args.id,
                   this.data

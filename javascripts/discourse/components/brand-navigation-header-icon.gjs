@@ -2,15 +2,18 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
+import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
+  linkTarget,
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationHeaderIcon extends Component {
   @service capabilities;
   @service currentUser;
+  @service site;
 
   get shouldRender() {
     const item = this.args.item;
@@ -18,16 +21,22 @@ export default class BrandNavigationHeaderIcon extends Component {
     return (
       settings.enabled &&
       !EmbedMode.enabled &&
+      !(this.site.mobileView && settings.mobile_mode === "hidden") &&
       Boolean(item.url) &&
       Boolean(item.icon) &&
       !(item.children || []).length &&
       isVisibleToUser(item, this.currentUser) &&
-      isVisibleOnDevice(item, this.capabilities.isMobileDevice)
+      isVisibleOnDevice(item, this.capabilities.isMobileDevice) &&
+      isSafeNavigationUrl(item.url)
     );
   }
 
   get rel() {
-    return linkRel(this.args.item.target);
+    return linkRel(this.target);
+  }
+
+  get target() {
+    return linkTarget(this.args.item.target);
   }
 
   get title() {
@@ -40,7 +49,7 @@ export default class BrandNavigationHeaderIcon extends Component {
         <a
           class="btn no-text icon btn-flat"
           href={{@item.url}}
-          target={{@item.target}}
+          target={{this.target}}
           rel={{this.rel}}
           title={{this.title}}
           aria-label={{@item.label}}

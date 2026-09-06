@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, stat, writeFile } from "node:fs/promises";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
@@ -8,10 +8,13 @@ import {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,
   createBundle,
-  PORTABLE_SETTINGS,
+  MAX_BUNDLE_BYTES,
   themeSettingValue,
   validateBundle,
 } from "../javascripts/discourse/lib/configuration-bundle.js";
+
+const MAX_API_RESPONSE_BYTES = 1_000_000;
+const REQUEST_TIMEOUT_MS = 15_000;
 
 export {
   BUNDLE_FORMAT,
@@ -33,18 +36,38 @@ export function normalizeSettingValue(name, value) {
   return value;
 }
 
-function parseArguments(argv) {
+export function parseArguments(argv) {
   const [command, file, ...rest] = argv;
   const options = {};
 
-  for (let index = 0; index < rest.length; index += 2) {
-    options[rest[index]] = rest[index + 1];
+  for (let index = 0; index < rest.length; index += 1) {
+    const option = rest[index];
+
+    if (option === "--overwrite") {
+      options[option] = true;
+      continue;
+    }
+
+    if (!option?.startsWith("--") || index + 1 >= rest.length) {
+      throw new Error(`Invalid option ${JSON.stringify(option)}.`);
+    }
+
+    options[option] = rest[index + 1];
+    index += 1;
   }
 
   return { command, file, options };
 }
 
 async function readBundle(file) {
+  const fileStats = await stat(file);
+
+  if (fileStats.size > MAX_BUNDLE_BYTES) {
+    throw new Error(
+      `Bundle cannot exceed ${MAX_BUNDLE_BYTES.toLocaleString()} bytes.`
+    );
+  }
+
   const bundle = JSON.parse(await readFile(file, "utf8"));
   const errors = validateBundle(bundle);
 
@@ -55,14 +78,42 @@ async function readBundle(file) {
   return bundle;
 }
 
-function apiOptions(options) {
-  const baseUrl = options["--url"]?.replace(/\/$/, "");
-  const themeId = options["--theme-id"];
-  const apiKey = process.env.DISCOURSE_API_KEY;
-  const apiUsername = process.env.DISCOURSE_API_USERNAME;
+export function apiOptions(options, environment = process.env) {
+  const rawUrl = options["--url"];
+  const rawThemeId = options["--theme-id"];
+  const apiKey = environment.DISCOURSE_API_KEY;
+  const apiUsername = environment.DISCOURSE_API_USERNAME;
 
-  if (!baseUrl || !themeId) {
+  if (!rawUrl || !rawThemeId) {
     throw new Error("--url and --theme-id are required.");
+  }
+
+  if (rawUrl.trim() !== rawUrl) {
+    throw new Error("--url must be a canonical HTTPS forum origin.");
+  }
+
+  let url;
+  try {
+    url = new URL(rawUrl);
+  } catch {
+    throw new Error("--url must be a valid HTTPS forum origin.");
+  }
+
+  if (
+    url.protocol !== "https:" ||
+    url.username ||
+    url.password ||
+    (url.pathname !== "/" && url.pathname !== "") ||
+    url.search ||
+    url.hash
+  ) {
+    throw new Error(
+      "--url must be an HTTPS origin without credentials, path, query, or fragment."
+    );
+  }
+
+  if (!/^[1-9]\d*$/.test(rawThemeId)) {
+    throw new Error("--theme-id must be a positive integer.");
   }
 
   if (!apiKey || !apiUsername) {
@@ -71,7 +122,12 @@ function apiOptions(options) {
     );
   }
 
-  return { baseUrl, themeId, apiKey, apiUsername };
+  return {
+    baseUrl: url.origin,
+    themeId: rawThemeId,
+    apiKey,
+    apiUsername,
+  };
 }
 
 function headers({ apiKey, apiUsername }) {
@@ -81,6 +137,91 @@ function headers({ apiKey, apiUsername }) {
     "Api-Username": apiUsername,
     "Content-Type": "application/json",
   };
+}
+
+export async function fetchApi(
+  api,
+  path,
+  {
+    method = "GET",
+    body,
+    fetchImpl = fetch,
+    timeoutMs = REQUEST_TIMEOUT_MS,
+  } = {}
+) {
+  const response = await fetchImpl(`${api.baseUrl}${path}`, {
+    method,
+    headers: headers(api),
+    body,
+    redirect: "error",
+    signal: AbortSignal.timeout(timeoutMs),
+  });
+  const text = await readBoundedText(response);
+
+  if (!response.ok) {
+    throw new Error(
+      `Discourse request failed: ${response.status} ${sanitizeRemoteText(text)}`
+    );
+  }
+
+  return text;
+}
+
+export async function readBoundedText(
+  response,
+  maxBytes = MAX_API_RESPONSE_BYTES
+) {
+  const contentLength = Number(response.headers?.get?.("content-length"));
+
+  if (Number.isFinite(contentLength) && contentLength > maxBytes) {
+    await response.body?.cancel?.();
+    throw new Error(`Discourse response exceeds ${maxBytes} bytes.`);
+  }
+
+  if (!response.body?.getReader) {
+    const text = await response.text();
+
+    if (Buffer.byteLength(text, "utf8") > maxBytes) {
+      throw new Error(`Discourse response exceeds ${maxBytes} bytes.`);
+    }
+
+    return text;
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let total = 0;
+  let text = "";
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      total += value.byteLength;
+      if (total > maxBytes) {
+        await reader.cancel();
+        throw new Error(`Discourse response exceeds ${maxBytes} bytes.`);
+      }
+
+      text += decoder.decode(value, { stream: true });
+    }
+
+    return text + decoder.decode();
+  } finally {
+    reader.releaseLock();
+  }
+}
+
+export function sanitizeRemoteText(value) {
+  return String(value)
+    .replace(/[\u0000-\u001f\u007f-\u009f]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 2_000);
 }
 
 async function applyBundle(file, options) {
@@ -103,20 +244,11 @@ async function applyBundle(file, options) {
       normalizeSettingValue(name, value),
     ])
   );
-  const response = await fetch(
-    `${api.baseUrl}/admin/themes/${api.themeId}.json`,
-    {
-      method: "PUT",
-      headers: headers(api),
-      body: JSON.stringify({ theme: { settings } }),
-    }
-  );
 
-  if (!response.ok) {
-    throw new Error(
-      `Import failed: ${response.status} ${await response.text()}`
-    );
-  }
+  await fetchApi(api, `/admin/themes/${api.themeId}.json`, {
+    method: "PUT",
+    body: JSON.stringify({ theme: { settings } }),
+  });
 
   process.stdout.write(
     `Updated ${Object.keys(settings).length} settings on theme ${api.themeId}\n`
@@ -142,37 +274,43 @@ async function exportBundle(file, options) {
     source_theme_name: theme.name,
   });
 
-  await writeFile(file, `${JSON.stringify(bundle, null, 2)}\n`, "utf8");
+  await writeExportFile(
+    file,
+    `${JSON.stringify(bundle, null, 2)}\n`,
+    options["--overwrite"]
+  );
   process.stdout.write(`Exported ${file}\n`);
 }
 
-async function fetchTheme(api) {
-  const response = await fetch(
-    `${api.baseUrl}/admin/themes/${api.themeId}.json`,
-    {
-      headers: headers(api),
-    }
-  );
+export async function writeExportFile(file, contents, overwrite = false) {
+  await writeFile(file, contents, {
+    encoding: "utf8",
+    flag: overwrite ? "w" : "wx",
+  });
+}
 
-  if (!response.ok) {
-    throw new Error(
-      `Unable to read target theme: ${response.status} ${await response.text()}`
-    );
+async function fetchTheme(api) {
+  const text = await fetchApi(api, `/admin/themes/${api.themeId}.json`);
+  let payload;
+
+  try {
+    payload = JSON.parse(text);
+  } catch {
+    throw new Error("Discourse returned invalid JSON.");
   }
 
-  const payload = await response.json();
   return payload.theme || payload;
 }
 
 function usage() {
   return `Usage:
   pnpm bundle validate <bundle.json>
-  pnpm bundle apply <bundle.json> --url <forum-url> --theme-id <id>
-  pnpm bundle export <bundle.json> --url <forum-url> --theme-id <id>
+  pnpm bundle apply <bundle.json> --url <forum-origin> --theme-id <id>
+  pnpm bundle export <bundle.json> --url <forum-origin> --theme-id <id> [--overwrite]
 
-apply/export read DISCOURSE_API_KEY and DISCOURSE_API_USERNAME from the
-environment. Import updates settings only; it never attaches or enables a
-component.`;
+apply/export require a canonical HTTPS forum origin and read DISCOURSE_API_KEY
+and DISCOURSE_API_USERNAME from the environment. Import updates settings only;
+it never attaches or enables a component.`;
 }
 
 async function main() {
@@ -182,7 +320,23 @@ async function main() {
     throw new Error(usage());
   }
 
+  const allowedOptions = new Set(
+    command === "export"
+      ? ["--url", "--theme-id", "--overwrite"]
+      : ["--url", "--theme-id"]
+  );
+  const unknownOption = Object.keys(options).find(
+    (option) => !allowedOptions.has(option)
+  );
+  if (unknownOption) {
+    throw new Error(`Unsupported option ${unknownOption}.`);
+  }
+
   if (command === "validate") {
+    if (Object.keys(options).length) {
+      throw new Error("validate does not accept options.");
+    }
+
     await readBundle(file);
     process.stdout.write(`Valid ${BUNDLE_FORMAT} v${BUNDLE_VERSION} bundle\n`);
     return;

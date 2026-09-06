@@ -11,13 +11,12 @@
   .brand-navigation__nav {
     width: 100%;
     margin: 0;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
+    overflow: visible;
   }
 
   .brand-navigation__items {
-    width: max-content;
-    min-width: 100%;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .brand-navigation__item--right-start {

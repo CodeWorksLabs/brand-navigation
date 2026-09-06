@@ -42,6 +42,22 @@ These are known-working builds, not a claim that older versions are unsupported
 or that either build is the minimum required version. See the
 [testing record](docs/TESTING.md) for the acceptance matrix and coverage limits.
 
+## In use on
+
+### Production use
+
+- [Repeal OBBBA Forum](https://forum.repealobbba.org/) — configured navigation,
+  descriptions, audience/device visibility, and core-header social icons.
+
+### Testing and compatibility validation
+
+- [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/) —
+  current Discourse administrator and rendering checks.
+
+Sites are added here only after Brand Navigation has been installed and its
+stated coverage has been verified. Planned installations are tracked in the
+[testing record](docs/TESTING.md), not represented as current use.
+
 ## Navigation model
 
 Each top-level item may be either:
@@ -58,6 +74,17 @@ Only one child level is supported intentionally. Visibility can be `everyone`,
 Start with the [administrator guide](docs/USER_GUIDE.md) for installation,
 configuration, verification, and troubleshooting. See [`docs/`](docs/) for
 scope, architecture, migration, testing, and release procedures.
+
+## Versions and updates
+
+Discourse detects updates from commits on the installed remote branch. Brand
+Navigation additionally uses Semantic Versioning tags and matching GitHub
+Releases as human-readable release, support, and rollback identities. `main`
+must remain releasable; development occurs on short-lived branches.
+
+The first reviewed preview is planned as `v0.9.0`. Version `v1.0.0` is reserved
+for the documented, multi-site-tested release with no known release blockers.
+See the [changelog](CHANGELOG.md) and [release procedure](docs/RELEASE.md).
 
 ## Thanks
 

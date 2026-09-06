@@ -4,6 +4,7 @@ RSpec.describe "Brand Navigation" do
   let(:theme) { upload_theme_component }
 
   before do
+    theme.update_setting(:enabled, true)
     theme.update_setting(:brand_name, "Example")
     theme.update_setting(:brand_url, "/latest")
     theme.update_setting(
@@ -35,6 +36,9 @@ RSpec.describe "Brand Navigation" do
   end
 
   it "does not mount the application component in embed mode" do
+    visit("/")
+    expect(page).to have_css("[data-brand-navigation]")
+
     visit("/?embed_mode=true")
 
     expect(page).not_to have_css("[data-brand-navigation]")
@@ -49,6 +53,51 @@ RSpec.describe "Brand Navigation" do
 
     expect(page).not_to have_css("[data-brand-navigation]")
     expect(page).to have_css("#brand-navigation-menu")
+  end
+
+  it "hides every component surface in hidden mobile mode", mobile: true do
+    theme.update_setting(:mobile_mode, "bar")
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Social",
+          url: "https://example.com/social",
+          icon: "globe",
+          surface: "site_header",
+          visibility: "everyone",
+        },
+      ],
+    )
+    theme.save!
+
+    visit("/")
+    expect(page).to have_css("[data-brand-navigation]")
+    expect(page).to have_css(".brand-navigation-header-icon")
+
+    theme.update_setting(:mobile_mode, "hidden")
+    theme.save!
+
+    visit("/")
+
+    expect(page).not_to have_css("[data-brand-navigation]")
+    expect(page).not_to have_css("#brand-navigation-menu")
+    expect(page).not_to have_css(".brand-navigation-header-icon")
+  end
+
+  it "keeps mobile bar submenus reachable without a clipping scrollport", mobile: true do
+    theme.update_setting(:mobile_mode, "bar")
+    theme.save!
+
+    visit("/")
+    find('summary[aria-label="Open Explore submenu"]').click
+
+    expect(page).to have_link("Categories", href: "/categories", visible: true)
+    expect(
+      page.evaluate_script(
+        "getComputedStyle(document.querySelector('.brand-navigation__nav')).overflowX",
+      ),
+    ).to eq("visible")
   end
 
   it "keeps an administrator in the navigation editor after saving" do

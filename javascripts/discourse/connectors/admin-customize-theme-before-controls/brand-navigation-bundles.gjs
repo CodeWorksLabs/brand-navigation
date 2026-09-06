@@ -2,14 +2,20 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
+import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 import {
   createBundle,
+  MAX_BUNDLE_BYTES,
   PORTABLE_SETTINGS,
-  themeSettingValue,
+  readBundleFile,
   validateBundle,
 } from "../../lib/configuration-bundle";
+import {
+  isBrandNavigationTheme,
+  prepareThemeSettingsImport,
+} from "../../lib/brand-navigation-admin";
 
 export default class BrandNavigationBundles extends Component {
   @tracked bundle;
@@ -24,12 +30,7 @@ export default class BrandNavigationBundles extends Component {
   }
 
   get isBrandNavigation() {
-    const remoteUrl = this.theme?.remote_theme?.remote_url || "";
-
-    return (
-      remoteUrl.includes("CodeWorksLabs/brand-navigation") ||
-      this.theme?.name === "Brand Navigation"
-    );
+    return isBrandNavigationTheme(this.theme);
   }
 
   get importDisabled() {
@@ -53,6 +54,13 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
+    if (new TextEncoder().encode(text).length > MAX_BUNDLE_BYTES) {
+      this.errors = [
+        `Bundle cannot exceed ${MAX_BUNDLE_BYTES.toLocaleString()} bytes.`,
+      ];
+      return;
+    }
+
     try {
       const bundle = JSON.parse(text);
       this.errors = validateBundle(bundle);
@@ -71,7 +79,7 @@ export default class BrandNavigationBundles extends Component {
     }
 
     try {
-      this.loadBundleText(await file.text(), file.name);
+      this.loadBundleText(await readBundleFile(file), file.name);
     } catch (error) {
       this.errors = [error.message];
     }
@@ -93,26 +101,38 @@ export default class BrandNavigationBundles extends Component {
     this.success = undefined;
 
     try {
-      for (const [name, value] of Object.entries(this.bundle.settings)) {
-        const setting = this.theme.settings.find(
-          (candidate) => candidate.setting === name
-        );
+      const persistedSettings = prepareThemeSettingsImport(
+        this.theme,
+        this.bundle
+      );
 
-        if (!setting) {
-          throw new Error(`This component does not define setting ${name}.`);
-        }
+      await ajax(`/admin/themes/${this.theme.id}.json`, {
+        type: "PUT",
+        data: { theme: { settings: persistedSettings } },
+      });
 
-        const persistedValue = themeSettingValue(name, value);
-
-        await setting.updateSetting(this.theme.id, persistedValue);
-        setting.set("value", persistedValue);
+      for (const [name, value] of Object.entries(persistedSettings)) {
+        this.theme.settings
+          .find((setting) => setting.setting === name)
+          .set(
+            "value",
+            name === "navigation_items" ? this.bundle.settings[name] : value
+          );
       }
 
       this.success = i18n(
         themePrefix("brand_navigation.bundles.import_success")
       );
     } catch (error) {
-      this.errors = [error.message];
+      const responseErrors = error.jqXHR?.responseJSON?.errors;
+
+      this.errors = [
+        (Array.isArray(responseErrors)
+          ? responseErrors.join(" ")
+          : responseErrors) ||
+          error.message ||
+          "Import failed. Reload the component settings before retrying.",
+      ];
     } finally {
       this.saving = false;
     }
@@ -120,11 +140,21 @@ export default class BrandNavigationBundles extends Component {
 
   @action
   exportBundle() {
-    const bundle = createBundle(this.currentSettings(), {
-      exported_at: new Date().toISOString(),
-      source_theme_id: this.theme.id,
-      source_theme_name: this.theme.name,
-    });
+    let bundle;
+
+    try {
+      bundle = createBundle(this.currentSettings(), {
+        exported_at: new Date().toISOString(),
+        source_theme_id: this.theme.id,
+        source_theme_name: this.theme.name,
+      });
+    } catch (error) {
+      this.success = undefined;
+      this.errors = [error.message];
+      return;
+    }
+
+    this.errors = [];
     const blob = new Blob([`${JSON.stringify(bundle, null, 2)}\n`], {
       type: "application/json",
     });
@@ -189,10 +219,12 @@ export default class BrandNavigationBundles extends Component {
           <p>{{this.fileName}}</p>
         {{/if}}
         {{#each this.errors as |error|}}
-          <div class="alert alert-error">{{error}}</div>
+          <div class="alert alert-error" role="alert">{{error}}</div>
         {{/each}}
         {{#if this.success}}
-          <div class="alert alert-success">{{this.success}}</div>
+          <div class="alert alert-success" role="status" aria-live="polite">
+            {{this.success}}
+          </div>
         {{/if}}
       </section>
     {{/if}}
