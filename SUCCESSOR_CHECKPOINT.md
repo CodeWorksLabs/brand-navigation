@@ -58,8 +58,13 @@ must not be used as this repository's working directory.
 - Local JavaScript lint, Ember template lint, Stylelint, type checking,
   changed-file formatting, `git diff --check`, and all 21 Node configuration
   tests pass.
-- Runtime theme compilation and administrator/browser interaction on the
-  sandbox remain pending. No production forum has been changed.
+- Official Discourse workflow run `34051003085` passed linting, backend,
+  frontend QUnit, and browser-backed system tests on candidate `1fee5e8`.
+  Configuration workflow run `34051002649` passed all 21 Node tests.
+- Administrator/browser interaction on the sandbox remains pending because
+  this resumed task currently exposes no callable authenticated-browser
+  control despite the browser session being open. No production forum has
+  been changed.
 - The first official workflow passed configuration tests and the complete
   linting lane, then the backend lane rejected one administrator description
   for Discourse's banned phrase `color scheme`; the wording is corrected to
