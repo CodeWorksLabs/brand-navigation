@@ -48,7 +48,10 @@ adapting the established GPL-2.0 pattern in Discourse Icon Header Links.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
-entry with no usable icon falls back to visible label text.
+entry with no usable icon falls back to visible label text. Top-level and child
+items independently select `both`, `desktop`, or `mobile` device visibility;
+the components evaluate that setting against Discourse's `site.mobileView`
+state and omit nonmatching items from rendering.
 
 ## Intentional constraints
 

@@ -51,8 +51,9 @@ remain a separate site-local step.
    equivalent; use grouping and ordering instead.
 5. Omit placeholder links such as `#` until they have real destinations; Brand
    Navigation validates submenu destinations instead of preserving no-op links.
-6. Replace `vdm`, `vdo`, and `vmo` device tokens with the component-wide mobile
-   mode. Per-link device visibility is intentionally not retained.
+6. Map `vdm` to `both`, `vdo` to `desktop`, and `vmo` to `mobile` in each
+   item's `device_visibility`. Then choose the component-wide mobile mode that
+   controls whether mobile navigation uses the menu, full bar, or stays hidden.
 7. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
 8. Disable Header Submenus, enable Brand Navigation, and run acceptance checks.
@@ -71,8 +72,9 @@ its icon list becomes `custom_font_awesome_icons`.
    accessible label.
 4. Map `blank` to `_blank` and `self` to `_self`.
 5. Add every used icon to `custom_font_awesome_icons`.
-6. Review mobile behavior. Brand Navigation intentionally uses a component-wide
-   mobile mode rather than per-link `vdm`, `vdo`, and `vmo` tokens.
+6. Map each device view to `both`, `desktop`, or `mobile`, then review the
+   component-wide mobile mode. For crowded mobile headers, keep only priority
+   icons on `both` and mark the rest `desktop`.
 
 ## Rollback
 

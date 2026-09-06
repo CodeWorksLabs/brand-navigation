@@ -142,18 +142,19 @@ to the component's main settings page.
 
 Each top-level entry supports:
 
-| Field          | Purpose                                                                                    |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| `label`        | Required visible text.                                                                     |
-| `url`          | Destination for the top-level label. It may also be used when the entry has submenu items. |
-| `title`        | Optional hover tooltip.                                                                    |
-| `icon`         | Optional Font Awesome 6 icon name.                                                         |
-| `presentation` | Show the icon and label, label only, or icon only.                                         |
-| `section`      | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
-| `surface`      | Show the item in the Brand Navigation `bar` or as a `site_header` icon.                    |
-| `target`       | Open in the same window (`_self`) or a new window (`_blank`).                              |
-| `visibility`   | Show to everyone, anonymous visitors, or authenticated users.                              |
-| `children`     | Ordered submenu links below this entry.                                                    |
+| Field               | Purpose                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `label`             | Required visible text.                                                                     |
+| `url`               | Destination for the top-level label. It may also be used when the entry has submenu items. |
+| `title`             | Optional hover tooltip.                                                                    |
+| `icon`              | Optional Font Awesome 6 icon name.                                                         |
+| `presentation`      | Show the icon and label, label only, or icon only.                                         |
+| `section`           | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
+| `surface`           | Show the item in the Brand Navigation `bar` or as a `site_header` icon.                    |
+| `device_visibility` | Show in both layouts, desktop/tablet only, or mobile only.                                 |
+| `target`            | Open in the same window (`_self`) or a new window (`_blank`).                              |
+| `visibility`        | Show to everyone, anonymous visitors, or authenticated users.                              |
+| `children`          | Ordered submenu links below this entry.                                                    |
 
 A top-level entry behaves as:
 
@@ -163,10 +164,10 @@ A top-level entry behaves as:
   URL and children.
 
 Every child entry requires a label and URL. Child entries also support a hover
-tooltip, optional visible description, icon, target, and visibility rule. A
-visible description appears as secondary text below its label. Empty
-descriptions retain the compact menu. Only one submenu level is supported;
-child entries cannot contain another submenu.
+tooltip, optional visible description, icon, target, audience visibility, and
+device visibility. A visible description appears as secondary text below its
+label. Empty descriptions retain the compact menu. Only one submenu level is
+supported; child entries cannot contain another submenu.
 
 For an icon-only link, keep a clear `label`: Brand Navigation uses it as the
 link's accessible name. If the configured icon is missing, the visible label
@@ -183,6 +184,18 @@ useful for social destinations when bar space is limited. Site-header items
 must have a URL and icon and cannot contain children. Their label remains the
 accessible name and their title remains the optional tooltip. Other items keep
 the default `bar` surface.
+
+Use `device_visibility` to control constrained mobile layouts independently for
+each item:
+
+- `both` shows the item in desktop/tablet and mobile layouts and is the default.
+- `desktop` shows the item only in the desktop/tablet layout.
+- `mobile` shows the item only in the mobile layout.
+
+For a large social set, keep a few priority `site_header` icons on `both`, mark
+the remainder `desktop`, and retain a Social submenu on `both` so every
+destination remains reachable on mobile. Existing configurations without this
+field behave as `both`.
 
 Example navigation plan:
 
@@ -286,16 +299,19 @@ has passed staging. See
 
 - Confirm it has either a URL or at least one child.
 - Check its visibility rule using the appropriate signed-in or signed-out state.
+- Check its device visibility in the current desktop or mobile layout.
 
 ### A submenu is empty or incomplete
 
 - Confirm each child has both a label and a valid URL.
 - Check the visibility rule on each child.
+- Check the child device visibility in the current layout.
 
 ### The layout is crowded on mobile
 
-Change `mobile_mode` from `bar` to `menu`, reduce the number of top-level
-entries, or group related destinations under submenus.
+Change `mobile_mode` from `bar` to `menu`, mark lower-priority items as
+desktop-only, reduce the number of top-level entries, or group related
+destinations under submenus.
 
 ### The colors do not match the site
 

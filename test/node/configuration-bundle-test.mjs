@@ -58,6 +58,34 @@ test("rejects placeholder submenu destinations", () => {
   ]);
 });
 
+test("validates top-level and child device visibility", () => {
+  const errors = validateBundle({
+    format: BUNDLE_FORMAT,
+    version: BUNDLE_VERSION,
+    settings: {
+      navigation_items: [
+        {
+          label: "Desktop",
+          url: "/desktop",
+          device_visibility: "wide-screen",
+          children: [
+            {
+              label: "Mobile",
+              url: "/mobile",
+              device_visibility: "phone",
+            },
+          ],
+        },
+      ],
+    },
+  });
+
+  assert.deepEqual(errors, [
+    'Top-level item "Desktop" has invalid device_visibility.',
+    'Submenu item "Mobile" has invalid device_visibility.',
+  ]);
+});
+
 test("validates site-header items as direct icon links", () => {
   const bundle = createBundle({
     navigation_items: [

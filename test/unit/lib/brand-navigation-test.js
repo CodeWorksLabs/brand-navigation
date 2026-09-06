@@ -1,6 +1,7 @@
 import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
+  isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
 } from "brand-navigation/discourse/lib/brand-navigation";
@@ -15,6 +16,17 @@ module("Unit | Lib | brand-navigation", function () {
     assert.false(isVisibleToUser({ visibility: "anonymous" }, user));
     assert.false(isVisibleToUser({ visibility: "authenticated" }, null));
     assert.true(isVisibleToUser({ visibility: "authenticated" }, user));
+  });
+
+  test("device visibility is explicit and backward compatible", function (assert) {
+    assert.true(isVisibleOnDevice({}, false));
+    assert.true(isVisibleOnDevice({}, true));
+    assert.true(isVisibleOnDevice({ device_visibility: "both" }, false));
+    assert.true(isVisibleOnDevice({ device_visibility: "both" }, true));
+    assert.true(isVisibleOnDevice({ device_visibility: "desktop" }, false));
+    assert.false(isVisibleOnDevice({ device_visibility: "desktop" }, true));
+    assert.false(isVisibleOnDevice({ device_visibility: "mobile" }, false));
+    assert.true(isVisibleOnDevice({ device_visibility: "mobile" }, true));
   });
 
   test("new browsing contexts receive a safe rel", function (assert) {

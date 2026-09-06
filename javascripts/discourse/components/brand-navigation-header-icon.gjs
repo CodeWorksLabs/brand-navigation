@@ -2,10 +2,15 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
-import { isVisibleToUser, linkRel } from "../lib/brand-navigation";
+import {
+  isVisibleOnDevice,
+  isVisibleToUser,
+  linkRel,
+} from "../lib/brand-navigation";
 
 export default class BrandNavigationHeaderIcon extends Component {
   @service currentUser;
+  @service site;
 
   get shouldRender() {
     const item = this.args.item;
@@ -16,7 +21,8 @@ export default class BrandNavigationHeaderIcon extends Component {
       Boolean(item.url) &&
       Boolean(item.icon) &&
       !(item.children || []).length &&
-      isVisibleToUser(item, this.currentUser)
+      isVisibleToUser(item, this.currentUser) &&
+      isVisibleOnDevice(item, this.site.mobileView)
     );
   }
 

@@ -20,6 +20,7 @@ acceptance matrix below before claiming coverage on that environment.
 - Mobile compact-menu behavior.
 - Negative render assertion for `embed_mode=true`.
 - Unit coverage for audience visibility and `_blank` link safety.
+- Unit coverage for backward-compatible desktop/mobile item visibility.
 - Unit coverage for left/right navigation section grouping.
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
@@ -38,6 +39,7 @@ Test the current stable and tests-passed Discourse branches where practical.
 | Mobile bar                 | Responsive bar scrolls navigation without covering core controls            |
 | Mobile hidden              | No brand-navigation surface renders                                         |
 | Site-header item           | Direct icon appears once with its tooltip, audience, target, and safe rel   |
+| Device-specific item       | Renders only in its selected desktop/mobile layout                          |
 | Descriptive submenu        | Description appears below its label; empty entries remain compact           |
 | Administrator object save  | Settings persist and the structured editor remains open                     |
 | Light/dark schemes         | Correct logo fallback and readable scheme colors                            |

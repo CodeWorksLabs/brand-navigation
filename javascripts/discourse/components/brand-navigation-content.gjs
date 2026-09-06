@@ -8,12 +8,14 @@ import dIcon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import {
   arrangeNavigationItems,
+  isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
   @service currentUser;
+  @service site;
   @service siteSettings;
 
   openSubmenus = new Set();
@@ -85,11 +87,17 @@ export default class BrandNavigationContent extends Component {
   get visibleItems() {
     return arrangeNavigationItems(
       (settings.navigation_items || [])
-        .filter((item) => isVisibleToUser(item, this.currentUser))
+        .filter(
+          (item) =>
+            isVisibleToUser(item, this.currentUser) &&
+            isVisibleOnDevice(item, this.site.mobileView)
+        )
         .map((item) => ({
           ...item,
-          children: (item.children || []).filter((child) =>
-            isVisibleToUser(child, this.currentUser)
+          children: (item.children || []).filter(
+            (child) =>
+              isVisibleToUser(child, this.currentUser) &&
+              isVisibleOnDevice(child, this.site.mobileView)
           ),
         }))
     );

@@ -60,6 +60,8 @@ must not be used as this repository's working directory.
 - Ordered direct links and one-level submenus with internal/external URLs.
 - Per-entry titles, Font Awesome icons, and safe `_blank` rel handling.
 - `everyone`, `anonymous`, and `authenticated` visibility.
+- Per-item `both`, `desktop`, and `mobile` device visibility for top-level and
+  child entries, evaluated against Discourse's supported mobile-layout state.
 - Desktop placement above or below the core header.
 - Top-level left/right sections.
 - `icon_and_label`, `label_only`, and `icon_only` entry presentation, with a
@@ -287,12 +289,18 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Export Repeal's current live Brand Navigation settings so Phil's manually
+1. Verify the new per-item device visibility on the sandbox and Repeal mobile
+   layouts, then choose which priority Repeal social icons remain on `both` and
+   mark the rest `desktop`.
+2. Record `https://www.r744.community/` on Discourse `2026.2.0-latest` as the
+   planned older-version compatibility target; do not list it as known working
+   until installation and the acceptance checks actually pass.
+3. Export Repeal's current live Brand Navigation settings so Phil's manually
    added visible descriptions are captured in a portable bundle, then validate
    it before considering replacement of the repository sample.
-2. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
+4. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
    link safety; authenticated desktop coexistence and submenu behavior pass.
-3. Keep all predecessors available for rollback; disable them only if Phil
+5. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope

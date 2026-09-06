@@ -1,6 +1,8 @@
 export const BUNDLE_FORMAT = "brand-navigation-settings";
 export const BUNDLE_VERSION = 1;
 
+const DEVICE_VISIBILITY_VALUES = new Set(["both", "desktop", "mobile"]);
+
 export const PORTABLE_SETTINGS = [
   "outlet",
   "show_brand",
@@ -54,6 +56,8 @@ export function validateBundle(bundle) {
   }
 
   for (const item of bundle.settings.navigation_items || []) {
+    validateDeviceVisibility(item, "Top-level item", errors);
+
     if ((item.surface || "bar") === "site_header") {
       if (!item.url || !item.icon) {
         errors.push(
@@ -69,6 +73,8 @@ export function validateBundle(bundle) {
     }
 
     for (const child of item.children || []) {
+      validateDeviceVisibility(child, "Submenu item", errors);
+
       if (child.url === "#") {
         errors.push(
           `Submenu item ${JSON.stringify(child.label)} uses a placeholder URL.`
@@ -78,6 +84,17 @@ export function validateBundle(bundle) {
   }
 
   return errors;
+}
+
+function validateDeviceVisibility(item, kind, errors) {
+  if (
+    item.device_visibility &&
+    !DEVICE_VISIBILITY_VALUES.has(item.device_visibility)
+  ) {
+    errors.push(
+      `${kind} ${JSON.stringify(item.label)} has invalid device_visibility.`
+    );
+  }
 }
 
 export function themeSettingValue(name, value) {

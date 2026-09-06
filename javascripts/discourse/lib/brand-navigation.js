@@ -9,6 +9,17 @@ export function isVisibleToUser(item, currentUser) {
   }
 }
 
+export function isVisibleOnDevice(item, mobileView) {
+  switch (item.device_visibility) {
+    case "desktop":
+      return !mobileView;
+    case "mobile":
+      return Boolean(mobileView);
+    default:
+      return true;
+  }
+}
+
 export function linkRel(target) {
   return target === "_blank" ? "noopener noreferrer" : null;
 }

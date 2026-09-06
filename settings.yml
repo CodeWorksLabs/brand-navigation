@@ -138,6 +138,13 @@ navigation_items:
         choices:
           - bar
           - site_header
+      device_visibility:
+        type: enum
+        default: both
+        choices:
+          - both
+          - desktop
+          - mobile
       target:
         type: enum
         default: _self
@@ -189,6 +196,13 @@ navigation_items:
                 - icon_and_label
                 - label_only
                 - icon_only
+            device_visibility:
+              type: enum
+              default: both
+              choices:
+                - both
+                - desktop
+                - mobile
             target:
               type: enum
               default: _self

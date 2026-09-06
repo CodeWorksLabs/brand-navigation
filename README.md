@@ -13,6 +13,7 @@ maintained and is not an official Discourse product.
 - Desktop navigation and intentional mobile bar, menu, or hidden modes.
 - Structured object settings with validation instead of delimiter-based text.
 - Internal and external destinations, visibility rules, logos, names, and icons.
+- Per-item desktop/mobile visibility, including core-header icon control.
 - Keyboard-operable submenus built with native `details` and `summary` elements.
 - No DiscussionBridge-specific code or changes to Discourse authentication.
 
