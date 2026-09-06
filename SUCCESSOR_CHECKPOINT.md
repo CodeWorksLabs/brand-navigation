@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `4a65821`.
-- Latest implementation commit: `4a65821`.
+- Latest implementation commit: `c02bf5a`.
 - Latest Repeal configuration commit: `a1b274d`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
@@ -93,7 +93,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `4a65821`, attached
+- Repeal Brand Navigation component id `19` is updated to `c02bf5a`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum. Phil moved its
   runtime outlet to `above-site-header`, which he considers the likely common
@@ -181,11 +181,11 @@ must not be used as this repository's working directory.
 
 ## Verification evidence
 
-Executed successfully on Windows for `4a65821`:
+Executed successfully on Windows for `c02bf5a`:
 
 - `pnpm lint` (JavaScript, templates, CSS, formatting, and type checks): pass.
 - `pnpm bundle validate configurations/repeal-obbba.json`: pass.
-- `pnpm test:config`: pass (5 tests).
+- `pnpm test:config`: pass (6 tests).
 - `git diff --check`: pass.
 
 Previously executed successfully:
@@ -262,6 +262,11 @@ Previously executed successfully:
   editor to core behavior. Core admin-editor changes remain a maintenance risk.
 - `pnpm lint`, `pnpm test:config` (6 tests), Repeal bundle validation, and
   `git diff --check` at `4a65821`: pass.
+- Repeal visible-description presentation at `c02bf5a`: pass by live browser
+  inspection. Menus containing descriptions selectively widen to 21rem (within
+  the viewport), use stronger child labels, readable subordinate text, and
+  clearer spacing between choices. Menus without descriptions retain their
+  compact width. Phil's existing live description text was unchanged.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
