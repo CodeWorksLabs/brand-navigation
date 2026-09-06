@@ -60,6 +60,11 @@ must not be used as this repository's working directory.
   tests pass.
 - Runtime theme compilation and administrator/browser interaction on the
   sandbox remain pending. No production forum has been changed.
+- The first official workflow passed configuration tests and the complete
+  linting lane, then the backend lane rejected one administrator description
+  for Discourse's banned phrase `color scheme`; the wording is corrected to
+  `color palette` in the follow-up candidate. This was a locale-policy finding,
+  not a code-build failure.
 
 ## Current multi-site checkpoint
 

@@ -14,7 +14,7 @@ en:
       import_success: "Configuration bundle imported. Refresh the forum to use the new settings."
     appearance:
       title: "Appearance"
-      description: "Choose component colors or leave individual values inherited from the active Discourse color scheme."
+      description: "Choose component colors or leave individual values inherited from the active Discourse color palette."
       custom: "Custom"
       inherited: "Inherits %{variable}"
       save: "Save colors"
