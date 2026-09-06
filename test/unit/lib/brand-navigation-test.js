@@ -4,6 +4,7 @@ import {
   isVisibleToUser,
   linkRel,
 } from "brand-navigation/discourse/lib/brand-navigation";
+import { isBrandNavigationObjectsEditor } from "brand-navigation/discourse/lib/brand-navigation-admin";
 
 module("Unit | Lib | brand-navigation", function () {
   test("audience visibility is explicit", function (assert) {
@@ -89,5 +90,26 @@ module("Unit | Lib | brand-navigation", function () {
 
     assert.true(item.children[0].showDescription);
     assert.false(item.children[1].showDescription);
+  });
+
+  test("the stay-open save behavior is limited to Brand Navigation", function (assert) {
+    assert.true(
+      isBrandNavigationObjectsEditor({
+        setting: { setting: "navigation_items" },
+        schema: { name: "navigation_item" },
+      })
+    );
+    assert.false(
+      isBrandNavigationObjectsEditor({
+        setting: { setting: "other_items" },
+        schema: { name: "navigation_item" },
+      })
+    );
+    assert.false(
+      isBrandNavigationObjectsEditor({
+        setting: { setting: "navigation_items" },
+        schema: { name: "other_item" },
+      })
+    );
   });
 });

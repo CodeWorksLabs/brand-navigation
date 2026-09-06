@@ -50,4 +50,16 @@ RSpec.describe "Brand Navigation" do
     expect(page).not_to have_css("[data-brand-navigation]")
     expect(page).to have_css("#brand-navigation-menu")
   end
+
+  it "keeps an administrator in the navigation editor after saving" do
+    sign_in(Fabricate(:admin))
+    editor_path = "/admin/customize/themes/#{theme.id}/schema/navigation_items"
+
+    visit(editor_path)
+    expect(page).to have_button("Save Changes")
+    click_button("Save Changes")
+
+    expect(page).to have_current_path(editor_path)
+    expect(page).to have_css(".schema-setting-editor")
+  end
 end

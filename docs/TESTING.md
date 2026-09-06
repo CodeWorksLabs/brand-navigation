@@ -12,6 +12,7 @@
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
 - Unit coverage for icon/label presentation and missing-icon fallback.
+- Scoped administrator save behavior that remains in the navigation editor.
 
 ## Manual acceptance matrix
 
@@ -26,6 +27,7 @@ Test the current stable and tests-passed Discourse branches where practical.
 | Mobile hidden              | No brand-navigation surface renders                                         |
 | Site-header item           | Direct icon appears once with its tooltip, audience, target, and safe rel   |
 | Descriptive submenu        | Description appears below its label; empty entries remain compact           |
+| Administrator object save  | Settings persist and the structured editor remains open                     |
 | Light/dark schemes         | Correct logo fallback and readable scheme colors                            |
 | RTL locale                 | Logical positioning and submenu alignment remain usable                     |
 | `embed_mode=true` full app | No bar or mobile trigger mounts                                             |

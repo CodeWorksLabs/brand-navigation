@@ -135,6 +135,10 @@ empty even when `show_brand` is on.
 ## Add navigation
 
 Open `navigation_items` and add entries in the order they should appear.
+Selecting **Save Changes** persists the complete navigation configuration and
+keeps you in the structured editor so you can continue working or verify the
+saved entry. Use the Brand Navigation breadcrumb when you are ready to return
+to the component's main settings page.
 
 Each top-level entry supports:
 
