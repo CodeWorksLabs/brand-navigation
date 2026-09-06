@@ -24,6 +24,13 @@ const TARGET_VALUES = new Set(["_self", "_blank"]);
 const VISIBILITY_VALUES = new Set(["everyone", "anonymous", "authenticated"]);
 const DEVICE_VISIBILITY_VALUES = new Set(["both", "desktop", "mobile"]);
 const MOBILE_MODE_VALUES = new Set(["menu", "bar", "hidden"]);
+const COLOR_SETTINGS = [
+  "bar_background_color",
+  "bar_text_color",
+  "hover_background_color",
+  "submenu_background_color",
+  "submenu_text_color",
+];
 
 const TOP_LEVEL_KEYS = new Set(["format", "version", "metadata", "settings"]);
 const NAVIGATION_ITEM_KEYS = new Set([
@@ -60,6 +67,7 @@ export const PORTABLE_SETTINGS = [
   "brand_presentation",
   "brand_target",
   "mobile_mode",
+  ...COLOR_SETTINGS,
   "navigation_items",
   "custom_font_awesome_icons",
 ];
@@ -147,6 +155,7 @@ function validateSettings(settings, errors) {
   );
   validateOptionalEnum(settings, "brand_target", TARGET_VALUES, errors);
   validateOptionalEnum(settings, "mobile_mode", MOBILE_MODE_VALUES, errors);
+  COLOR_SETTINGS.forEach((key) => validateOptionalColor(settings, key, errors));
 
   if ("navigation_items" in settings) {
     errors.push(...validateNavigationItems(settings.navigation_items));
@@ -176,6 +185,18 @@ function validateSettings(settings, errors) {
         }
       });
     }
+  }
+}
+
+function validateOptionalColor(value, key, errors) {
+  if (
+    key in value &&
+    !/^#[0-9a-f]{6}$/i.test(value[key]) &&
+    value[key] !== ""
+  ) {
+    errors.push(
+      `${key} must be blank or a six-digit hex color such as #1A2B3C.`
+    );
   }
 }
 

@@ -6,6 +6,9 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Add administrator color pickers for bar background, bar text, hover/highlight,
+  submenu background, and submenu text, with per-color Discourse palette
+  inheritance and configuration-bundle portability.
 - Add an explicit per-item Link or Submenu group behavior so administrators can
   use a top-level label as navigation or as a submenu-only control without
   placeholder URLs.

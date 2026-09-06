@@ -143,6 +143,23 @@ The brand area is optional. Set `show_brand` off when you only want navigation.
 If neither a usable logo nor a brand name is configured, the brand area stays
 empty even when `show_brand` is on.
 
+## Configure colors
+
+The **Appearance** panel on the Brand Navigation administration page provides
+color pickers for the bar background, bar text and icons, hover/highlight
+background, submenu background, and submenu text and icons. Each color can be
+overridden independently.
+
+Leave **Custom** off to inherit the active Discourse color scheme. This is the
+recommended starting point because inherited colors automatically follow the
+site's light and dark palettes. Turn **Custom** on for a color, choose a value,
+and select **Save colors** to override it. **Inherit all** clears all five
+overrides and returns the component to Discourse's palette variables.
+
+Appearance values are included in Brand Navigation configuration bundle
+exports. Imported colors must be blank (inherit) or a six-digit hex value such
+as `#1A2B3C`.
+
 ## Add navigation
 
 Open `navigation_items` and add entries in the order they should appear.
