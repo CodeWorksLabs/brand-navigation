@@ -12,6 +12,19 @@ en:
       import: "Import settings"
       export: "Export settings"
       import_success: "Configuration bundle imported. Refresh the forum to use the new settings."
+    appearance:
+      title: "Appearance"
+      description: "Choose component colors or leave individual values inherited from the active Discourse color palette."
+      custom: "Custom"
+      inherited: "Inherits %{variable}"
+      save: "Save colors"
+      reset: "Inherit all"
+      save_success: "Brand Navigation colors saved."
+      bar_background: "Bar background"
+      bar_text: "Bar text"
+      hover_background: "Hover and highlight"
+      submenu_background: "Submenu background"
+      submenu_text: "Submenu text"
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
     settings:
@@ -25,6 +38,11 @@ en:
       brand_presentation: "Show the logo, name, or both."
       brand_target: "Open the brand destination in the same or a new browsing context."
       mobile_mode: "Use a compact header menu, a full bar, or no brand navigation on mobile."
+      bar_background_color: "Optional six-digit hex override for the bar background. Leave blank to inherit --tertiary."
+      bar_text_color: "Optional six-digit hex override for bar text and icons. Leave blank to inherit --secondary."
+      hover_background_color: "Optional six-digit hex override for hover and active highlights. Leave blank to inherit --quaternary-low."
+      submenu_background_color: "Optional six-digit hex override for submenu backgrounds. Leave blank to inherit --secondary."
+      submenu_text_color: "Optional six-digit hex override for submenu text and icons. Leave blank to inherit --primary."
       navigation_items:
         description: "Ordered top-level links and one-level submenus."
         schema:

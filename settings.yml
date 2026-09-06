@@ -54,6 +54,31 @@ mobile_mode:
     - bar
     - hidden
 
+bar_background_color:
+  type: string
+  default: ""
+  max: 7
+
+bar_text_color:
+  type: string
+  default: ""
+  max: 7
+
+hover_background_color:
+  type: string
+  default: ""
+  max: 7
+
+submenu_background_color:
+  type: string
+  default: ""
+  max: 7
+
+submenu_text_color:
+  type: string
+  default: ""
+  max: 7
+
 navigation_items:
   type: objects
   default:

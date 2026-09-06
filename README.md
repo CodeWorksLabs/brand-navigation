@@ -14,6 +14,8 @@ maintained and is not an official Discourse product.
 - Structured object settings with validation instead of delimiter-based text.
 - Internal and external destinations, visibility rules, logos, names, and icons.
 - Per-item desktop/mobile visibility, including core-header icon control.
+- Administrator color controls with independent bar, text, hover, and submenu
+  overrides that can continue inheriting the active Discourse color scheme.
 - Keyboard-operable submenus built with native `details` and `summary` elements.
 - No DiscussionBridge-specific code or changes to Discourse authentication.
 

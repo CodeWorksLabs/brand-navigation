@@ -31,6 +31,8 @@ import {
 test("validates a portable configuration bundle", () => {
   const bundle = createBundle({
     brand_name: "Example",
+    bar_background_color: "#123ABC",
+    bar_text_color: "",
     navigation_items: [{ label: "Home", url: "/" }],
     custom_font_awesome_icons: "house|comments",
   });
@@ -41,7 +43,43 @@ test("validates a portable configuration bundle", () => {
     "house",
     "comments",
   ]);
+  assert.equal(bundle.settings.bar_background_color, "#123ABC");
+  assert.equal(bundle.settings.bar_text_color, "");
   assert.deepEqual(validateBundle(bundle), []);
+});
+
+test("accepts inherited or six-digit hex appearance colors", () => {
+  assert.deepEqual(
+    validateBundle({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: {
+        bar_background_color: "",
+        bar_text_color: "#fF00aA",
+        hover_background_color: "#123456",
+        submenu_background_color: "#ABCDEF",
+        submenu_text_color: "#000000",
+      },
+    }),
+    []
+  );
+});
+
+test("rejects malformed appearance colors", () => {
+  assert.deepEqual(
+    validateBundle({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: {
+        bar_background_color: "red",
+        bar_text_color: "#fff",
+      },
+    }),
+    [
+      "bar_background_color must be blank or a six-digit hex color such as #1A2B3C.",
+      "bar_text_color must be blank or a six-digit hex color such as #1A2B3C.",
+    ]
+  );
 });
 
 test("rejects unsafe or unsupported settings", () => {
