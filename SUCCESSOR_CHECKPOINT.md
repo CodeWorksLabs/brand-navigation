@@ -62,6 +62,13 @@ must not be used as this repository's working directory.
 - `everyone`, `anonymous`, and `authenticated` visibility.
 - Per-item `both`, `desktop`, and `mobile` device visibility for top-level and
   child entries, evaluated against Discourse's supported mobile-layout state.
+- Sandbox update to `12e764a` passed on Discourse `2026.9.0-latest+307`: the
+  new device field was accepted by the objects schema, existing blank values
+  retained `both` behavior, authenticated navigation continued rendering, and
+  no administrator component warning appeared. The initial live schema check
+  exposed a raw `device_visibility` label; the follow-up locale metadata gives
+  top-level and child controls the administrator-facing label “Device
+  visibility” and explains the backward-compatible blank behavior.
 - Desktop placement above or below the core header.
 - Top-level left/right sections.
 - `icon_and_label`, `label_only`, and `icon_only` entry presentation, with a
