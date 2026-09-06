@@ -157,6 +157,7 @@ Each top-level entry supports:
 | ------------------- | ------------------------------------------------------------------------------------------ |
 | `label`             | Required visible text.                                                                     |
 | `url`               | Destination for the top-level label. It may also be used when the entry has submenu items. |
+| `link_mode`         | Use the parent label as a live link or as a submenu-only grouping control.                 |
 | `title`             | Optional hover tooltip.                                                                    |
 | `icon`              | Optional Font Awesome 6 icon name.                                                         |
 | `presentation`      | Show the icon and label, label only, or icon only.                                         |
@@ -173,6 +174,10 @@ A top-level entry behaves as:
 - a submenu control when it has children but no URL; or
 - a functioning parent link with a separate submenu caret when it has both a
   URL and children.
+
+Choose `group` when the top-level label should only open its submenu. Group
+mode preserves the saved URL for easy re-enabling but does not render it. This
+is preferable to placeholder destinations such as `#`.
 
 Every child entry requires a label and URL. Child entries also support a hover
 tooltip, optional visible description, icon, target, audience visibility, and

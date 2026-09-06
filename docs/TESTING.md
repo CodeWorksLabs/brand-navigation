@@ -4,10 +4,15 @@
 
 ### Verified installations
 
-| Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                    |
-| ------------------------ | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence |
-| DiscussionBridge sandbox | `2026.9.0-latest+307` | `b8565672b9` | Authenticated normal-page render and administrator component/settings surface                                                                         |
+| Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                         |
+| ------------------------ | --------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence      |
+| DiscussionBridge sandbox | `2026.9.0-latest+307` | `b8565672b9` | Authenticated normal-page render and administrator component/settings surface                                                                              |
+| DiscussionBridge Forum   | Not recorded          | Not recorded | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion                   |
+| The Bridge               | Not recorded          | Not recorded | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion        |
+| Citizen Activist Network | Not recorded          | Not recorded | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, and full-app embed exclusion                   |
+| RVing Community          | Not recorded          | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion            |
+| R744 Community           | `2026.7.2+14`         | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion |
 
 The builds above were read directly from each site's administrator dashboard on
 2026-09-05. They are evidence of known compatibility, not minimum-version
@@ -38,17 +43,18 @@ successful structured re-import with reload persistence, and complete
 Brand Navigation exclusion from `?embed_mode=true` while core main content
 remained. No production or consumer site was changed during this check.
 
-## Planned compatibility targets
+## Remaining compatibility targets
 
-- Install and fully configure on `https://forum.discussionbridge.dev/`, then use
-  `https://bridge.demo.discussionbridge.dev/` as the paired downstream embed
-  exclusion test rather than as a theme-component installation target.
-- `https://www.r744.community/` runs Discourse `2026.2.0-latest` and is the
-  planned older-version installation target. Brand Navigation has not yet been
-  installed or tested there, so this version is not listed as known working.
-- After the primary pair and older-version target, expand validation to
-  `https://forum.citizenactivist.network/` and
-  `https://www.rving.community/`.
+- The original R744 test on unsupported `2026.2.0-latest` exposed older module
+  APIs and is not a compatibility claim. On 2026-09-05 the site was backed up,
+  pinned to `release/2026.7`, rebuilt successfully as `2026.7.2+14`
+  (`2e46cff73b`), and verified with Brand Navigation from `main`. Component id
+  `1` is enabled on Foundation and Horizon; the duplicate component id `2`
+  remains preserved, disabled, and unattached. Draft pull request 2 is no
+  longer needed to support this site and should be closed rather than merged.
+- Record the exact Discourse builds for DiscussionBridge Forum, The Bridge,
+  Citizen Activist Network, and RVing Community from their administrator
+  dashboards when convenient.
 
 ## Automated gates
 

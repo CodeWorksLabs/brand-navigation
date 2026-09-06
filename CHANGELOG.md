@@ -6,6 +6,9 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Add an explicit per-item Link or Submenu group behavior so administrators can
+  use a top-level label as navigation or as a submenu-only control without
+  placeholder URLs.
 - Formalize release versioning and compatibility evidence.
 - Remediate the findings from complete codebase review
   `BN-CODEBASE-20260905`.

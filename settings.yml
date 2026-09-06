@@ -113,6 +113,13 @@ navigation_items:
         validations:
           max_length: 2048
           url: true
+      link_mode:
+        type: enum
+        default: link
+        choices:
+          - link
+          - group
+        description: Use the label as a live link or as a submenu grouping control. Group mode keeps the saved URL but does not render it.
       title:
         type: string
         validations:

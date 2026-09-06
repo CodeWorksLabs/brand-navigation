@@ -35,6 +35,10 @@ Brand Navigation has been manually verified on these exact Discourse builds:
   authenticated desktop navigation, linked submenus, visible descriptions,
   core-header icons, administrator settings, and coexistence with other header
   components.
+- `2026.7.2+14` (`2e46cff73b`) on R744 Community, including authenticated
+  desktop rendering, submenu keyboard behavior, safe external links,
+  administrator settings and structured navigation editor, and full-app embed
+  exclusion.
 - `2026.9.0-latest+307` (`b8565672b9`) on the DiscussionBridge sandbox,
   including authenticated rendering and the administrator component surface.
 
@@ -48,6 +52,17 @@ or that either build is the minimum required version. See the
 
 - [Repeal OBBBA Forum](https://forum.repealobbba.org/) — configured navigation,
   descriptions, audience/device visibility, and core-header social icons.
+- [DiscussionBridge Forum](https://forum.discussionbridge.dev/) — configured
+  navigation and accessible core-header links for GitHub, Bluesky, Discord, and
+  YouTube.
+- [The Bridge](https://bridge.demo.discussionbridge.dev/) — publishing-focused
+  navigation and the same restrained DiscussionBridge social set.
+- [Citizen Activist Network](https://forum.citizenactivist.network/) —
+  configured community and issue navigation.
+- [RVing Community](https://www.rving.community/) — configured community and
+  RVing Network navigation.
+- [R744 Community](https://www.r744.community/) — compatibility installation
+  pinned to the Discourse 2026.7 ESR release branch.
 
 ### Testing and compatibility validation
 

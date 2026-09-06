@@ -35,6 +35,9 @@ en:
             url:
               label: "URL"
               description: "Makes the label a link. With children, a separate caret opens the submenu."
+            link_mode:
+              label: "Top-level behavior"
+              description: "Use Link to make the label navigate, or Submenu group to make the label open only its submenu."
             title:
               label: "Tooltip"
               description: "Optional additional context exposed on hover."

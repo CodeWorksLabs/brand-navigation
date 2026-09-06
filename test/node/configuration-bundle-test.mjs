@@ -124,9 +124,31 @@ test("requires actionable rows and rejects nested child structures", () => {
   });
 
   assert.deepEqual(errors, [
-    "navigation_items[0] requires a URL or at least one child.",
+    "navigation_items[0] with group link mode requires at least one child.",
     "Unknown field: navigation_items[1].children[0].children.",
   ]);
+});
+
+test("supports explicit linked and submenu-group parents", () => {
+  const bundle = createBundle({
+    navigation_items: [
+      {
+        label: "Product",
+        url: "https://example.com/",
+        link_mode: "group",
+        children: [{ label: "Docs", url: "/docs" }],
+      },
+      {
+        label: "Community",
+        url: "/categories",
+        link_mode: "link",
+        children: [{ label: "Latest", url: "/latest" }],
+      },
+    ],
+  });
+
+  assert.equal(bundle.settings.navigation_items[0].link_mode, "group");
+  assert.equal(bundle.settings.navigation_items[1].link_mode, "link");
 });
 
 test("rejects placeholder submenu destinations", () => {

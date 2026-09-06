@@ -138,6 +138,28 @@ module("Unit | Lib | brand-navigation", function () {
     assert.true(item.hasVisibleDescriptions);
   });
 
+  test("submenu parents can render as groups without losing their saved URL", function (assert) {
+    const [group, linked] = arrangeNavigationItems([
+      {
+        label: "Product",
+        url: "https://example.com/",
+        link_mode: "group",
+        children: [{ label: "Docs", url: "/docs" }],
+      },
+      {
+        label: "Community",
+        url: "/categories",
+        link_mode: "link",
+        children: [{ label: "Latest", url: "/latest" }],
+      },
+    ]);
+
+    assert.strictEqual(group.url, null);
+    assert.strictEqual(group.linkMode, "group");
+    assert.strictEqual(linked.url, "/categories");
+    assert.strictEqual(linked.linkMode, "link");
+  });
+
   test("inert and unsafe navigation rows are removed", function (assert) {
     const items = arrangeNavigationItems([
       { label: "Inert" },
