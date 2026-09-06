@@ -2,22 +2,36 @@
 
 > A brand header and submenu navigation theme component for Discourse.
 
-Brand Navigation provides an optional brand identity and one-level navigation
-hierarchy in a single responsive, accessible component. It is independently
-maintained and is not an official Discourse product.
+Brand Navigation gives a Discourse site one coherent place for brand identity,
+primary links, submenus, and compact header icons. It is responsive,
+accessible, straightforward to administer, and independently maintained. It is
+not an official Discourse product.
 
-## Product guarantees
+## What Brand Navigation does
 
-- Brand and navigation content renders on normal Discourse application pages.
-- It never mounts in supported Discourse embed contexts.
-- Desktop navigation and intentional mobile bar, menu, or hidden modes.
-- Structured object settings with validation instead of delimiter-based text.
-- Internal and external destinations, visibility rules, logos, names, and icons.
-- Per-item desktop/mobile visibility, including core-header icon control.
-- Administrator color controls with independent bar, text, hover, and submenu
-  overrides that can continue inheriting the active Discourse color scheme.
-- Keyboard-operable submenus built with native `details` and `summary` elements.
-- No DiscussionBridge-specific code or changes to Discourse authentication.
+- Adds an optional logo, brand name, destination, and light/dark logo pairing.
+- Supports direct links, submenu-only groups, and linked parents with a separate
+  submenu caret.
+- Organizes top-level items into left and right sections with intentional
+  one-level dropdown navigation.
+- Moves compact destinations such as social links into the Discourse core
+  header when navigation-bar space is limited.
+- Controls every item's audience and desktop/mobile visibility independently.
+- Provides responsive mobile menu, full-bar, and hidden presentation modes.
+- Offers administrator color controls for the bar, text, hover state, and
+  submenus while allowing each value to inherit the active Discourse palette.
+- Imports and exports validated, versioned JSON configuration bundles for
+  migration, backup, and repeatable multi-site setup.
+- Uses structured object settings with validation rather than delimiter-based
+  configuration text.
+- Provides keyboard-operable submenus, accessible labels, safe new-window
+  links, and graceful icon fallbacks.
+- Ships translation-ready interface text that administrators can override per
+  locale.
+- Renders on normal Discourse application pages but never mounts in supported
+  Discourse embed contexts.
+- Leaves Discourse authentication, topic navigation, and composer behavior
+  untouched and contains no DiscussionBridge-specific compatibility code.
 
 ## Installation
 
@@ -103,6 +117,20 @@ The first reviewed preview is planned as `v0.9.0`. Version `v1.0.0` is reserved
 for the documented, multi-site-tested release with no known release blockers.
 See the [changelog](CHANGELOG.md) and [release procedure](docs/RELEASE.md).
 
+## Translations
+
+Brand Navigation uses Discourse's theme-translation system for its visitor
+accessibility labels, administration panels, setting descriptions, and status
+messages. English is the only language bundled for the first release.
+Administrators can provide local per-locale overrides in **Theme
+translations**, and reviewed translations are welcome as repository pull
+requests.
+
+Navigation labels, tooltips, and visible descriptions entered in component
+settings are site content rather than translation keys. The same configured
+content is currently shown in every visitor locale. See the
+[administrator guide](docs/USER_GUIDE.md#translate-the-interface) for details.
+
 ## Thanks
 
 Brand Navigation was newly authored from its product specifications. Thanks to
@@ -115,7 +143,11 @@ component ecosystem. Thanks also to
 for demonstrating compact, accessible icon destinations in the core header.
 Brand Navigation's header-icon registration follows Discourse's documented
 `api.headerIcons` API; its `curryComponent` registration pattern is adapted
-from that GPL-2.0 component.
+from that GPL-2.0 component. Pavilion's
+[Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
+also informed the presentation and administration exploration. See
+[Attribution and licensing](docs/ATTRIBUTION.md) for the precise distinction
+between product inspiration and adapted code.
 
 ## Support status
 

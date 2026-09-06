@@ -1,7 +1,51 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / ADMIN COLOR CONTROLS MERGED AND SANDBOX-UPDATED / COLOR NORMALIZATION FOLLOW-UP PENDING / NOT RELEASED**
+Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / RELEASE DOCUMENTATION IN PROGRESS / NOT RELEASED**
+
+## Current release-documentation checkpoint
+
+- Current working branch: `codex/release-docs`, created cleanly from
+  `origin/main` at `b0b5354481c30e1db1daf4db682368a6f9c9994d`.
+- Pull request 5 merged the color-normalization candidate into `main`; the
+  DiscussionBridge sandbox was updated through the normal Discourse UI and
+  reported itself current with `main`. Administrator checks confirmed that
+  colors with and without a leading `#` render correctly and that the
+  Appearance panel can return all five values to inherited palette behavior.
+- Obsolete draft pull request 2 was closed with an explanatory comment on
+  2026-09-06. It targeted the retired R744 `2026.2` compatibility experiment,
+  conflicted with current `main`, and was not merged. Its source branch remains
+  available so history has not been discarded.
+- Repeal OBBBA currently reports Discourse `2026.7.0-latest` at
+  `988c31e00fb73713c81b93cd47f68af0fb4c6273`. Its enabled Brand Navigation
+  component id 19 is attached to theme ids `1`, `-1`, and `-2`. It was updated
+  to `b0b5354` and Phil confirmed the resulting brand-color presentation looked
+  great. The current compatibility evidence records both that exact Discourse
+  build and component revision.
+- Current release-documentation work expands the README feature summary,
+  documents the English-first translation posture, adds administrator
+  translation guidance, strengthens the release translation/attribution gate,
+  and creates `docs/ATTRIBUTION.md` with a permanent reference to the precise
+  GPL `curryComponent` pattern adapted from Custom Header Links (icons).
+- Focused Prettier checks and `git diff --check` pass for the changed docs. All
+  22 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
+  lanes pass in the aggregate lint command; the aggregate Prettier lane still
+  reports pre-existing Windows checkout drift in unrelated files, so only the
+  changed documentation was formatted.
+- The resumed task still has no callable authenticated browser-control runtime.
+  Visual UI evidence must be gathered with Phil in the authenticated browser;
+  existing Pageant/SSH access may be used only when a read-only server check is
+  necessary.
+- The controlling nine-step release sequence is recorded under **Exact next
+  actions** below. The current position is Step 1: finish release preparation
+  and manual documentation/product polish.
+- Public presentation will use `codeworkslabs.dev` as the product-lab front
+  door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
+  shared canonical documentation at `docs.codeworkslabs.dev`. The durable
+  umbrella support entry is `support.codeworkslabs.dev`; independent product
+  communities such as `forum.discussionbridge.dev` remain independent. Exact
+  source repositories, paths, deployment ownership, and timing remain
+  unsettled. No site creation or publication is authorized.
 
 ## Purpose and authority
 
@@ -20,18 +64,18 @@ disable predecessor components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/normalize-color-values`.
+- Current branch: `codex/release-docs`.
 - Merged color-control head: `4d520d2`.
-- Current merged head: `317c4be`.
+- Current merged head: `b0b5354`.
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
 - Previous compatibility branch: `codex/r744-compatibility`
-- Current draft compatibility pull request:
+- Closed obsolete compatibility pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
 - Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
-- Current CI/browser-tested merged head: `317c4be` (the checkpoint itself may
+- Current CI/browser-tested merged head: `b0b5354` (the checkpoint itself may
   create a later documentation-only head).
 - Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
@@ -618,15 +662,41 @@ The QUnit suite and Ruby system specs pass in GitHub Actions run `34010799758`.
 They were not executed locally: Ruby, Gem, and Bundler remain undiscoverable on
 the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
+## Public presence direction
+
+Phil selected platform-oriented CodeWorksLabs discovery hostnames, including
+`discourse.codeworkslabs.dev` and `astro.codeworkslabs.dev`, with shared
+canonical documentation at `docs.codeworkslabs.dev`. Brand Navigation belongs
+on the Discourse platform surface rather than requiring its own product
+subdomain. Astro is the recommended implementation for public product/platform
+surfaces; Starlight remains the recommended documentation implementation.
+Exact paths, repositories, deployment ownership, and timing remain unsettled.
+No site, DNS, repository, publication, or deployment action was authorized.
+
+Phil also selected `support.codeworkslabs.dev` as the durable CodeWorksLabs
+umbrella support front door. It will route visitors to the appropriate docs,
+repository, issue tracker, shared community, or independent product community.
+`forum.discussionbridge.dev` remains the independent DiscussionBridge community
+and support forum. No shared CodeWorksLabs Discourse instance was authorized or
+declared necessary.
+
 ## Exact next actions
 
-1. Close draft pull request 2 after Phil authorizes that repository action; do
-   not merge its obsolete unsupported-version compatibility work.
-2. Record exact Discourse builds for the remaining installed sites when useful.
-3. Keep all predecessors available for rollback; disable them only if Phil
-   explicitly chooses the cutover.
-4. Review the resulting multi-site evidence and decide whether to tag the first
-   preview as `v0.9.0`. A tag and GitHub Release remain separate actions.
+1. Finish release preparation and manual documentation/product polish.
+2. Open one clean draft `v0.9.0` release-preparation pull request.
+3. Run CI and freeze the exact candidate commit and tree.
+4. Conduct the formal complete codebase review against that immutable
+   candidate.
+5. Evaluate all findings together and remediate them as one coherent batch.
+6. Perform the required correction-closure review and rerun affected tests.
+7. Conduct final manual acceptance on the resulting candidate.
+8. Merge only when review, CI, documentation, and manual acceptance are
+   complete.
+9. Confirm the merged tree matches the accepted candidate, then tag `v0.9.0`
+   and publish the release.
+
+Keep all predecessors available for rollback; disable them only if Phil
+explicitly chooses a site cutover.
 
 ## Out of scope
 

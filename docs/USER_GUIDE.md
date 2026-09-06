@@ -288,6 +288,31 @@ Each top-level and child item has an independent visibility setting:
 Visibility only controls presentation. It is not an authorization mechanism;
 protect restricted destinations with Discourse permissions.
 
+## Translate the interface
+
+Brand Navigation uses Discourse's theme-translation system for fixed visitor
+and administrator interface text. The first release bundles English in
+`locales/en.yml`. This includes navigation accessibility labels, appearance and
+configuration-bundle controls, setting descriptions, and status messages.
+
+An administrator can open **Theme translations** for Brand Navigation, select
+the locale to customize, and override individual strings without editing the
+component repository. These overrides belong to that Discourse site and locale;
+repeat the customization for every supported locale that needs different text.
+Repository updates normally retain local overrides, but removed or renamed
+translation keys should be checked during an upgrade.
+
+Navigation labels, tooltips, and visible descriptions entered in
+`navigation_items` are site configuration rather than translation keys. One
+configured value is currently shown to every locale. Sites that require
+localized navigation content should account for that limitation when enabling
+per-user locales.
+
+Reviewed translations can be contributed upstream by adding the appropriate
+locale YAML file with the same key structure as `locales/en.yml`. Do not rely on
+unreviewed machine translation for public interface text, accessibility labels,
+or administrator instructions.
+
 ## Use Brand Navigation as a visitor
 
 Select the brand logo or name to open the configured brand destination. Direct
