@@ -1,8 +1,11 @@
 # Attribution and licensing
 
 Brand Navigation was newly authored from its product specifications. It is an
-independent implementation rather than a merger or fork of its predecessor and
-neighboring components.
+independent implementation rather than a merger or fork of another component.
+
+See the [authorship and provenance record](PROVENANCE.md) for the AI-assisted
+authorship model, pinned upstream revisions, implementation-history evidence,
+and release controls behind this summary.
 
 ## Product inspiration
 
@@ -34,8 +37,8 @@ component and its arguments to the Discourse owner, and supplying the result to
 Permanent upstream reference:
 [initialize-for-header-icon-links.gjs at `dee14e3`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/javascripts/discourse/initializers/initialize-for-header-icon-links.gjs#L1-L27).
 
-Custom Header Links (icons) is licensed under GPL-2.0. Brand Navigation is
-licensed under GPL-2.0-or-later, which preserves compatible terms for the
-adapted pattern. No other copied or adapted predecessor code is currently
-identified. If future work copies or adapts code, this record and any required
-copyright or license notice must be updated in the same change.
+Custom Header Links (icons) supplies GPL version 2 license text. Brand
+Navigation declares GPL-2.0-only for its initial release. No other copied or
+adapted external code is currently identified. If future work copies or adapts
+code, this record and any required copyright or license notice must be updated
+in the same change.

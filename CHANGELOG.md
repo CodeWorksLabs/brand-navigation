@@ -6,6 +6,9 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Add a durable AI-assisted authorship and source-provenance record with pinned
+  upstream revisions, license evidence, implementation history, and release
+  controls.
 - Accept six-digit administrator color values with or without a leading `#`
   and normalize picker and configuration-bundle values to `#RRGGBB`.
 - Add administrator color pickers for bar background, bar text, hover/highlight,

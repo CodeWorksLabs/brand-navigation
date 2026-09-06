@@ -58,7 +58,8 @@ DiscussionBridge sandbox, Repeal OBBBA Forum, DiscussionBridge Forum, The
 Bridge, Citizen Activist Network, and RVing Community. Browser administration
 is available through Phil's authenticated Chrome tabs. SSH is unnecessary and
 should be reserved for cases the supported UI cannot handle. Do not delete or
-disable predecessor components without Phil's explicit direction.
+disable the other installed header components without Phil's explicit
+direction.
 
 ## Canonical locations
 
@@ -380,9 +381,9 @@ must not be used as this repository's working directory.
   Discourse.”
 - Do not imply Discourse ownership, maintenance, or official status.
 - Credit Brand Header and Header Submenus for product inspiration. The current
-  implementation was authored from specifications; no predecessor source code
-  was intentionally copied.
-- License: `GPL-2.0-or-later`.
+  implementation was authored from specifications; no source code from those
+  inspiration components was intentionally copied.
+- License: `GPL-2.0-only`.
 - Structured administration and safe defaults are first-class requirements.
 - One submenu level is supported; arbitrary deep nesting is excluded.
 - DiscussionBridge contains no compatibility logic for this component.
@@ -573,7 +574,7 @@ Previously executed successfully:
   administrator list entries after reload.
 - Repeal authenticated desktop render at `fc2ced6`: pass; the brand, four
   migrated navigation entries, ten right-side social links, and My Preferences
-  render while all three predecessor components remain enabled.
+  render while all three comparison components remain enabled.
 - Repeal submenu interaction at `fc2ced6`: pass on a fresh page; a submenu opens
   normally and closes after an outside click on the core All categories heading.
   The document click handler uses capture phase so stopped bubbling in other
@@ -603,8 +604,9 @@ Previously executed successfully:
   in the supported objects editor.
 - `pnpm lint`, `pnpm test:config` (6 tests), bundle validation, and
   `git diff --check` at `3cd8910`: pass.
-- Repeal `site_header` icon placement at `3cd8910`: pass. Before predecessor
-  disablement, both ten-icon sets rendered, proving Brand Navigation's set was
+- Repeal `site_header` icon placement at `3cd8910`: pass. Before the comparison
+  icon component was disabled, both ten-icon sets rendered, proving Brand
+  Navigation's set was
   present. After disabling Custom Header Links (icons) id `3`, a fresh page
   showed exactly one set of ten social icons in the core header and none in the
   upper Brand Navigation bar. My Preferences remained in the upper bar.
@@ -680,6 +682,34 @@ repository, issue tracker, shared community, or independent product community.
 and support forum. No shared CodeWorksLabs Discourse instance was authorized or
 declared necessary.
 
+## Authorship and provenance control
+
+Phil directed that Brand Navigation retain a durable, defensible record of its
+AI-assisted authorship and upstream source classifications before release. The new
+`docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
+implementation role, pinned upstream revisions and licenses, the exact
+adapted header-icon registration source, and release-time provenance controls.
+It also corrects the prior overbroad compatibility statement: the adapted
+source supplies GPL version 2 text but no explicit “or later” grant was found in
+the inspected upstream materials. Brand Navigation now declares
+`GPL-2.0-only`. A later licensing expansion requires documented permission for
+the adapted expression or replacement with independently authored code. No
+version had been tagged or published as a GitHub Release, but the already-public
+Git history retains the license declarations present on those commits. No
+external human recipient, adoption, or reliance is known; current repository
+signals show no forks, stars, or subscribers. GitHub clone traffic includes CI
+and installed-component activity and does not identify people. No ongoing
+support obligation is inferred from that historical record.
+
+Official-source verification confirms that Discourse Meta labels Brand Header,
+Header Submenus, and Custom Header Links (icons) as official and links to the
+same `discourse/*` repositories recorded in the provenance ledger. Pavilion
+Dropdown Header is the community component. The official repositories genuinely
+carry different licenses; official status does not establish a common license.
+Any clarification for the icon component must be addressed to the Discourse
+maintainers or another confirmed rights holder rather than assuming one
+historical contributor can grant it.
+
 ## Exact next actions
 
 1. Finish release preparation and manual documentation/product polish.
@@ -695,8 +725,8 @@ declared necessary.
 9. Confirm the merged tree matches the accepted candidate, then tag `v0.9.0`
    and publish the release.
 
-Keep all predecessors available for rollback; disable them only if Phil
-explicitly chooses a site cutover.
+Keep the previously installed comparison components available for rollback;
+disable them only if Phil explicitly chooses a site cutover.
 
 ## Out of scope
 

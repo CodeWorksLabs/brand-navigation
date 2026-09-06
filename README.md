@@ -147,7 +147,9 @@ from that GPL-2.0 component. Pavilion's
 [Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
 also informed the presentation and administration exploration. See
 [Attribution and licensing](docs/ATTRIBUTION.md) for the precise distinction
-between product inspiration and adapted code.
+between product inspiration and adapted code, and the
+[authorship and provenance record](docs/PROVENANCE.md) for the AI-assisted
+authorship model and reproducible source ledger.
 
 ## Support status
 
@@ -159,5 +161,4 @@ their conventions.
 ## License
 
 Copyright (c) 2026 CodeWorksLabs. Licensed under the
-[GNU General Public License, version 2 or later](LICENSE)
-(`GPL-2.0-or-later`).
+[GNU General Public License, version 2 only](LICENSE) (`GPL-2.0-only`).
