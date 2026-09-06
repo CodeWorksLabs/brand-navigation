@@ -26,6 +26,21 @@ The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
 validated configuration bundle to move settings without re-entering each row.
 
+## Known working Discourse versions
+
+Brand Navigation has been manually verified on these exact Discourse builds:
+
+- `2026.7.0-latest+319` (`988c31e00f`) on Repeal OBBBA Forum, including
+  authenticated desktop navigation, linked submenus, visible descriptions,
+  core-header icons, administrator settings, and coexistence with other header
+  components.
+- `2026.9.0-latest+307` (`b8565672b9`) on the DiscussionBridge sandbox,
+  including authenticated rendering and the administrator component surface.
+
+These are known-working builds, not a claim that older versions are unsupported
+or that either build is the minimum required version. See the
+[testing record](docs/TESTING.md) for the acceptance matrix and coverage limits.
+
 ## Navigation model
 
 Each top-level item may be either:

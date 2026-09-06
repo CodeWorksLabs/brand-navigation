@@ -1,5 +1,17 @@
 # Testing and acceptance
 
+## Known working environments
+
+| Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                    |
+| ------------------------ | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence |
+| DiscussionBridge sandbox | `2026.9.0-latest+307` | `b8565672b9` | Authenticated normal-page render and administrator component/settings surface                                                                         |
+
+The builds above were read directly from each site's administrator dashboard on
+2026-09-05. They are evidence of known compatibility, not minimum-version
+declarations. Features not named in a row should be evaluated through the
+acceptance matrix below before claiming coverage on that environment.
+
 ## Automated gates
 
 - JavaScript, template, style, formatting, and type linting.

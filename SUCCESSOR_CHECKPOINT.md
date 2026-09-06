@@ -149,6 +149,13 @@ must not be used as this repository's working directory.
   relaxing an unnecessary settings-array check in `6b782ff`; the supported
   `admin-customize-theme-before-controls` outlet and `ThemeSettings#updateSetting`
   API are present in that exact Discourse revision.
+- Compatibility documentation now records exact administrator-dashboard
+  builds rather than implying an unverified minimum version. Repeal is on
+  `2026.7.0-latest+319` at core commit `988c31e00f`; the DiscussionBridge
+  sandbox is on `2026.9.0-latest+307` at core commit `b8565672b9`. On
+  2026-09-05 Brand Navigation rendered on authenticated normal pages and its
+  administrator surface loaded on both builds. Repeal carries the broader
+  live interaction coverage enumerated below.
 - Repeal exposed two migration-data issues before cutover. The original three
   People entries used no-op `#` destinations and were correctly rejected by the
   validated object schema. Working destinations were later identified and are
