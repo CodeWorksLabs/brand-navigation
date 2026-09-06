@@ -22,6 +22,9 @@ disable predecessor components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Main post-review checkpoint: `04dbb3d`.
 - Current working branch: `codex/top-level-link-behavior`
+- Current implementation commit: `e53a7d0` (the checkpoint evidence commit is
+  expected to follow it).
+- Current pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/3`
 - Previous compatibility branch: `codex/r744-compatibility`
 - Current draft compatibility pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
@@ -95,6 +98,34 @@ must not be used as this repository's working directory.
   values are intentionally omitted from this checkpoint. SMTP, database, and
   MaxMind credentials visible in the task record should be rotated separately;
   no rotation was performed without Phil's direction.
+
+## Top-level Link / Submenu group checkpoint
+
+- Commit `e53a7d0` implements the per-item `link_mode`, with `link` preserving
+  the current linked-parent behavior and `group` suppressing the rendered URL
+  while retaining the saved value for later reuse.
+- Group mode is limited to bar items with actionable children. It is rejected
+  for core-header items and for items without children. Link mode requires a
+  URL. Configuration bundle import/export accepts and validates the field.
+- Local ESLint, Ember template lint, Stylelint, type checking, changed-file
+  Prettier, `git diff --check`, and all 19 Node configuration tests passed. The
+  repository-wide Windows Prettier command still reports CRLF conversion on 19
+  unchanged files; no unrelated formatting rewrite was made.
+- Pull request 3 is open and all checks are green. Official Discourse workflow
+  run `34019282463` passed linting, frontend QUnit, backend, and Ruby system
+  tests; configuration workflow run `34019282181` passed all 19 Node tests.
+- Sandbox component id `2` now tracks `codex/top-level-link-behavior`. After a
+  required application reload following the source switch, the administrator
+  editor displayed **Top-level behavior** and saved normally without leaving
+  the editor.
+- Resources passed the complete live round trip: `group` rendered the label as
+  a submenu-only button and exposed both children; changing it back to `link`
+  restored `/about` as the live parent destination plus the separate caret.
+  The saved URL survived group mode. The sandbox was left in Link mode.
+- Attempting group mode on Community without actionable children failed closed
+  with the expected validation error and did not change the setting.
+- Full-app `?embed_mode=true` still produced zero Brand Navigation surfaces,
+  one `#main-outlet`, no broken-theme warning, and no captured console errors.
 
 ## Post-merge sandbox checkpoint
 
@@ -531,9 +562,8 @@ the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. Finish and verify the optional top-level `link_mode` implementation on the
-   current working branch, then review the complete diff before any commit or
-   pull request.
+1. Review and merge pull request 3 when Phil chooses; then switch sandbox
+   component id `2` back to `main` and repeat the focused behavior/embed smoke.
 2. Close draft pull request 2 after Phil authorizes that repository action; do
    not merge its obsolete unsupported-version compatibility work.
 3. Record exact Discourse builds for the remaining installed sites when useful.

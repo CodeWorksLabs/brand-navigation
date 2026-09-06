@@ -43,6 +43,30 @@ successful structured re-import with reload persistence, and complete
 Brand Navigation exclusion from `?embed_mode=true` while core main content
 remained. No production or consumer site was changed during this check.
 
+## Top-level behavior candidate
+
+Pull request 3 (`codex/top-level-link-behavior`, commit `e53a7d0`) adds an
+explicit `link_mode` to each top-level navigation item. GitHub Actions run
+`34019282463` passed the official Discourse lint, frontend QUnit, backend, and
+Ruby system jobs; configuration run `34019282181` passed all 19 Node tests.
+
+Sandbox component id `2` was switched from `main` to the candidate branch for
+live verification. The administrator editor displayed **Top-level behavior**,
+accepted `group` for Resources, kept `/about` in the editor, and stayed on the
+editor after saving. On the normal forum page Resources rendered as one
+submenu-only button and opened its About and Discourse Meta children. A group
+selection on Community, which had no actionable children, was rejected with
+the expected validation message and was not saved. Resources was then restored
+to `link`; the normal page again rendered `/about` as the parent link with a
+separate submenu caret. The final sandbox setting is therefore Link, matching
+its pre-test behavior.
+
+After this round trip, `?embed_mode=true` returned zero Brand Navigation
+surfaces, one `#main-outlet`, no broken-theme warning, and no captured console
+errors. The first save immediately after changing the component source loaded
+the new schema alongside the previous single-page-app validator and failed
+closed; reloading synchronized the assets and all subsequent saves passed.
+
 ## Remaining compatibility targets
 
 - The original R744 test on unsupported `2026.2.0-latest` exposed older module
