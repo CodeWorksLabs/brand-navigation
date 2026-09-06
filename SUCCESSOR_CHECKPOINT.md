@@ -301,6 +301,10 @@ Previously executed successfully:
   Per-item filtering now uses supported `capabilities.isMobileDevice`, which
   remains a mobile phone classification across rotation; `mobile_mode` retains
   its separate responsive-layout meaning.
+- Repeal was updated to `61db961` with no component warning. Phil then verified
+  on a physical iPhone that the configured priority icons render correctly in
+  portrait and landscape while Desktop-only icons remain excluded. The
+  rotation/device-visibility defect is accepted as fixed.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
