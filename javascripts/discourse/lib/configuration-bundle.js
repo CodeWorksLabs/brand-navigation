@@ -54,6 +54,20 @@ export function validateBundle(bundle) {
   }
 
   for (const item of bundle.settings.navigation_items || []) {
+    if ((item.surface || "bar") === "site_header") {
+      if (!item.url || !item.icon) {
+        errors.push(
+          `Site-header item ${JSON.stringify(item.label)} requires a URL and icon.`
+        );
+      }
+
+      if ((item.children || []).length) {
+        errors.push(
+          `Site-header item ${JSON.stringify(item.label)} cannot contain submenu items.`
+        );
+      }
+    }
+
     for (const child of item.children || []) {
       if (child.url === "#") {
         errors.push(

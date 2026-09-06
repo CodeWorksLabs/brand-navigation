@@ -21,10 +21,13 @@ or composer behavior.
 
 ## Components
 
-- `brand-navigation` initializer: guarded outlet registration.
+- `brand-navigation` initializer: guarded bar outlet and site-header icon
+  registration.
 - `BrandNavigationBar`: desktop and optional mobile-bar boundary.
 - `brand-navigation-menu`: guarded compact mobile header entry.
 - `BrandNavigationContent`: shared brand and navigation presentation.
+- `BrandNavigationHeaderIcon`: guarded direct links registered through
+  Discourse's supported `api.headerIcons` API.
 - `brand-navigation` library: audience and safe-link policy.
 
 ## Configuration model
@@ -37,6 +40,11 @@ the complete summary is the submenu control. Only one child level is represented
 by the schema. Top-level entries are grouped into
 logical `left` and `right` sections; CSS logical properties keep that layout
 usable in both left-to-right and right-to-left interfaces.
+
+Top-level items with the `site_header` surface are excluded from the bar and
+registered as direct icon links through `api.headerIcons`. They require a URL
+and icon and do not support children. The registration uses `curryComponent`,
+adapting the established GPL-2.0 pattern in Discourse Icon Header Links.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only

@@ -53,6 +53,9 @@ for product inspiration and for their contributions to the Discourse theme
 component ecosystem. Thanks also to
 [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links)
 for demonstrating compact, accessible icon destinations in the core header.
+Brand Navigation's header-icon registration follows Discourse's documented
+`api.headerIcons` API; its `curryComponent` registration pattern is adapted
+from that GPL-2.0 component.
 
 ## Support status
 

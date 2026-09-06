@@ -132,6 +132,12 @@ navigation_items:
         choices:
           - left
           - right
+      surface:
+        type: enum
+        default: bar
+        choices:
+          - bar
+          - site_header
       target:
         type: enum
         default: _self
@@ -168,6 +174,10 @@ navigation_items:
               type: string
               validations:
                 max_length: 200
+            description:
+              type: string
+              validations:
+                max_length: 300
             icon:
               type: string
               validations:

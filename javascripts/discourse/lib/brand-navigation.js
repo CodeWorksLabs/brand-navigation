@@ -14,7 +14,9 @@ export function linkRel(target) {
 }
 
 export function arrangeNavigationItems(items) {
-  const preparedItems = items.map(prepareNavigationItem);
+  const preparedItems = items
+    .filter((item) => (item.surface || "bar") === "bar")
+    .map(prepareNavigationItem);
   const leftItems = preparedItems.filter((item) => item.section !== "right");
   const rightItems = preparedItems.filter((item) => item.section === "right");
 
@@ -32,15 +34,17 @@ export function arrangeNavigationItems(items) {
   ];
 }
 
-function prepareNavigationItem(item) {
+export function prepareNavigationItem(item) {
   const presentation = item.presentation || "icon_and_label";
   const showIcon = Boolean(item.icon) && presentation !== "label_only";
+  const showLabel = presentation !== "icon_only" || !showIcon;
 
   return {
     ...item,
     presentation,
     showIcon,
-    showLabel: presentation !== "icon_only" || !showIcon,
+    showLabel,
+    showDescription: showLabel && Boolean(item.description),
     children: (item.children || []).map(prepareNavigationItem),
   };
 }

@@ -9,6 +9,8 @@
 - Negative render assertion for `embed_mode=true`.
 - Unit coverage for audience visibility and `_blank` link safety.
 - Unit coverage for left/right navigation section grouping.
+- Unit coverage for excluding site-header items from the brand bar.
+- Unit coverage for optional visible submenu descriptions.
 - Unit coverage for icon/label presentation and missing-icon fallback.
 
 ## Manual acceptance matrix
@@ -22,6 +24,8 @@ Test the current stable and tests-passed Discourse branches where practical.
 | Mobile menu                | One header control opens usable brand navigation                            |
 | Mobile bar                 | Responsive bar scrolls navigation without covering core controls            |
 | Mobile hidden              | No brand-navigation surface renders                                         |
+| Site-header item           | Direct icon appears once with its tooltip, audience, target, and safe rel   |
+| Descriptive submenu        | Description appears below its label; empty entries remain compact           |
 | Light/dark schemes         | Correct logo fallback and readable scheme colors                            |
 | RTL locale                 | Logical positioning and submenu alignment remain usable                     |
 | `embed_mode=true` full app | No bar or mobile trigger mounts                                             |

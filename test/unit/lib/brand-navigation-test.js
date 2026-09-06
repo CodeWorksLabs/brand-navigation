@@ -41,6 +41,18 @@ module("Unit | Lib | brand-navigation", function () {
     );
   });
 
+  test("site-header items are excluded from the brand bar", function (assert) {
+    const items = arrangeNavigationItems([
+      { label: "Community" },
+      { label: "Bluesky", surface: "site_header" },
+    ]);
+
+    assert.deepEqual(
+      items.map((item) => item.label),
+      ["Community"]
+    );
+  });
+
   test("item presentation supports accessible icon-only links", function (assert) {
     const [iconOnly, missingIcon, labelOnly] = arrangeNavigationItems([
       { label: "Social", icon: "globe", presentation: "icon_only" },
@@ -57,5 +69,25 @@ module("Unit | Lib | brand-navigation", function () {
     );
     assert.false(labelOnly.showIcon);
     assert.true(labelOnly.showLabel);
+  });
+
+  test("visible submenu descriptions follow label presentation", function (assert) {
+    const [item] = arrangeNavigationItems([
+      {
+        label: "Resources",
+        children: [
+          { label: "Docs", description: "Read the documentation" },
+          {
+            label: "Status",
+            icon: "signal",
+            presentation: "icon_only",
+            description: "Service status",
+          },
+        ],
+      },
+    ]);
+
+    assert.true(item.children[0].showDescription);
+    assert.false(item.children[1].showDescription);
   });
 });

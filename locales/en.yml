@@ -36,8 +36,8 @@ en:
               label: "URL"
               description: "Makes the label a link. With children, a separate caret opens the submenu."
             title:
-              label: "Description"
-              description: "Optional additional context exposed as a title."
+              label: "Tooltip"
+              description: "Optional additional context exposed on hover."
             icon:
               label: "Icon"
               description: "Optional Font Awesome 6 icon name."
@@ -47,6 +47,9 @@ en:
             section:
               label: "Section"
               description: "Keep this item beside the brand or align it to the far edge."
+            surface:
+              label: "Surface"
+              description: "Show this item in the Brand Navigation bar or as a direct icon link in the Discourse site header. Site-header items require a URL and icon and cannot contain children."
             target:
               label: "Target"
             visibility:
@@ -61,7 +64,10 @@ en:
                   url:
                     label: "URL"
                   title:
-                    label: "Description"
+                    label: "Tooltip"
+                  description:
+                    label: "Visible description"
+                    description: "Optional secondary text displayed below the submenu label."
                   icon:
                     label: "Icon"
                   presentation:

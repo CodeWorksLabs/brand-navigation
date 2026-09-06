@@ -58,6 +58,26 @@ test("rejects placeholder submenu destinations", () => {
   ]);
 });
 
+test("validates site-header items as direct icon links", () => {
+  const bundle = createBundle({
+    navigation_items: [
+      { label: "No icon", url: "/about", surface: "site_header" },
+      {
+        label: "Has children",
+        url: "/about",
+        icon: "circle-info",
+        surface: "site_header",
+        children: [{ label: "Child", url: "/faq" }],
+      },
+    ],
+  });
+
+  assert.deepEqual(validateBundle(bundle), [
+    'Site-header item "No icon" requires a URL and icon.',
+    'Site-header item "Has children" cannot contain submenu items.',
+  ]);
+});
+
 test("serializes object and icon-list values for the Discourse endpoint", () => {
   assert.equal(
     normalizeSettingValue("navigation_items", [{ label: "Home" }]),

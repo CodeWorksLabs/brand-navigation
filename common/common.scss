@@ -151,7 +151,7 @@
 
       a {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.5rem;
         padding: 0.55rem 0.65rem;
         color: inherit;
@@ -183,6 +183,12 @@
 
     &--linked {
       padding-inline-end: 1.75rem;
+      border-radius: var(--d-border-radius);
+
+      &:hover,
+      &:focus-within {
+        background: var(--brand-navigation-hover);
+      }
 
       > .brand-navigation__submenu {
         position: absolute;
@@ -213,12 +219,35 @@
 
   &__submenu-group--linked > &__parent-link {
     padding-inline-end: 0.25rem;
+
+    &:hover,
+    &:focus-visible {
+      background: transparent;
+    }
   }
 
   &__submenu-group--linked > &__submenu > &__submenu-toggle {
     justify-content: center;
     width: 1.75rem;
     padding-inline: 0;
+
+    &:hover,
+    &:focus-visible {
+      background: transparent;
+    }
+  }
+
+  &__child-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  &__child-description {
+    color: var(--primary-medium);
+    font-size: var(--font-down-1);
+    line-height: var(--line-height-small);
+    white-space: normal;
   }
 
   &__item--right &__submenu > ul {

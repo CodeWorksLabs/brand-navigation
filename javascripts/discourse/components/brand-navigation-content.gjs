@@ -220,8 +220,18 @@ export default class BrandNavigationContent extends Component {
                               {{on "click" this.submenuLinkSelected}}
                             >
                               {{#if child.showIcon}}{{dIcon child.icon}}{{/if}}
-                              {{#if child.showLabel}}<span
-                                >{{child.label}}</span>{{/if}}
+                              {{#if child.showLabel}}
+                                <span class="brand-navigation__child-content">
+                                  <span
+                                    class="brand-navigation__child-label"
+                                  >{{child.label}}</span>
+                                  {{#if child.showDescription}}
+                                    <span
+                                      class="brand-navigation__child-description"
+                                    >{{child.description}}</span>
+                                  {{/if}}
+                                </span>
+                              {{/if}}
                             </a>
                             {{! template-lint-enable no-nested-interactive }}
                           </li>

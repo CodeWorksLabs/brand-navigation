@@ -142,10 +142,11 @@ Each top-level entry supports:
 | -------------- | ------------------------------------------------------------------------------------------ |
 | `label`        | Required visible text.                                                                     |
 | `url`          | Destination for the top-level label. It may also be used when the entry has submenu items. |
-| `title`        | Optional additional description.                                                           |
+| `title`        | Optional hover tooltip.                                                                    |
 | `icon`         | Optional Font Awesome 6 icon name.                                                         |
 | `presentation` | Show the icon and label, label only, or icon only.                                         |
 | `section`      | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
+| `surface`      | Show the item in the Brand Navigation `bar` or as a `site_header` icon.                    |
 | `target`       | Open in the same window (`_self`) or a new window (`_blank`).                              |
 | `visibility`   | Show to everyone, anonymous visitors, or authenticated users.                              |
 | `children`     | Ordered submenu links below this entry.                                                    |
@@ -157,9 +158,11 @@ A top-level entry behaves as:
 - a functioning parent link with a separate submenu caret when it has both a
   URL and children.
 
-Every child entry requires a label and URL. Child entries also support a title,
-icon, target, and visibility rule. Only one submenu level is supported; child
-entries cannot contain another submenu.
+Every child entry requires a label and URL. Child entries also support a hover
+tooltip, optional visible description, icon, target, and visibility rule. A
+visible description appears as secondary text below its label. Empty
+descriptions retain the compact menu. Only one submenu level is supported;
+child entries cannot contain another submenu.
 
 For an icon-only link, keep a clear `label`: Brand Navigation uses it as the
 link's accessible name. If the configured icon is missing, the visible label
@@ -169,6 +172,13 @@ Top-level items in the `left` section appear beside the brand. Items in the
 `right` section form a group at the far edge of the bar, which is useful for
 account links and calls to action. On mobile, both sections become one compact
 ordered list so every item remains easy to reach.
+
+Set a direct icon link's `surface` to `site_header` to place it among
+Discourse's core header icons instead of in the Brand Navigation bar. This is
+useful for social destinations when bar space is limited. Site-header items
+must have a URL and icon and cannot contain children. Their label remains the
+accessible name and their title remains the optional tooltip. Other items keep
+the default `bar` surface.
 
 Example navigation plan:
 

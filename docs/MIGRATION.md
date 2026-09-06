@@ -64,7 +64,9 @@ its icon list becomes `custom_font_awesome_icons`.
 ## From Custom Header Links (icons)
 
 1. Export or record each title, icon, URL, device view, width, and target.
-2. Map each link to a top-level Brand Navigation item in the `right` section.
+2. Map each link to a top-level Brand Navigation item. Choose the `right`
+   section on the `bar` surface, or choose `site_header` to retain its compact
+   location among Discourse's core header icons.
 3. Use `icon_only` presentation while retaining the full title as the required
    accessible label.
 4. Map `blank` to `_blank` and `self` to `_self`.
