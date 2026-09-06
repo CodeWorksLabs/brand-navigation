@@ -1,13 +1,13 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
-import EmbedMode from "discourse/lib/embed-mode";
+import { isSiteHeaderVisible } from "../lib/brand-navigation";
 import BrandNavigationContent from "./brand-navigation-content";
 
 export default class BrandNavigationBar extends Component {
   @service site;
 
   get shouldRender() {
-    if (!settings.enabled || EmbedMode.enabled) {
+    if (!settings.enabled || !isSiteHeaderVisible(this)) {
       return false;
     }
 

@@ -1,4 +1,3 @@
-import EmbedMode from "discourse/lib/embed-mode";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import BrandNavigationBar from "../components/brand-navigation-bar";
 import BrandNavigationHeaderIcon from "../components/brand-navigation-header-icon";
@@ -9,7 +8,7 @@ export default {
   name: "brand-navigation",
 
   initialize() {
-    if (!settings.enabled || EmbedMode.enabled) {
+    if (!settings.enabled) {
       return;
     }
 

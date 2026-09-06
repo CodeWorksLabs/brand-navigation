@@ -1,9 +1,9 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import dIcon from "discourse/helpers/d-icon";
-import EmbedMode from "discourse/lib/embed-mode";
 import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
+  isSiteHeaderVisible,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
@@ -24,7 +24,7 @@ export default class BrandNavigationHeaderIcon extends Component {
 
     return (
       settings.enabled &&
-      !EmbedMode.enabled &&
+      isSiteHeaderVisible(this) &&
       !(this.site.mobileView && settings.mobile_mode === "hidden") &&
       Boolean(item.url) &&
       Boolean(item.icon) &&

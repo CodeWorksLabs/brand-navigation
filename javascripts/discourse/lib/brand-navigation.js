@@ -1,4 +1,11 @@
+import { getOwner } from "@ember/owner";
 import { isSafeNavigationUrl } from "./configuration-bundle";
+
+export function isSiteHeaderVisible(component) {
+  return Boolean(
+    getOwner(component)?.lookup("controller:application")?.showSiteHeader
+  );
+}
 
 export function isVisibleToUser(item, currentUser) {
   switch (item.visibility) {
