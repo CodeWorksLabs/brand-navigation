@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **REPEAL MIGRATION LIVE / FOUR-COMPONENT COEXISTENCE VERIFIED / ADMIN IMPORT/EXPORT VERIFIED / NOT RELEASE-READY**
+Disposition: **REPEAL ICON CUTOVER LIVE / ADMIN IMPORT/EXPORT VERIFIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -23,6 +23,7 @@ components without Phil's explicit direction.
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
 - Latest implementation commit: `3cd8910`.
+- Latest Repeal configuration commit: `672da2e`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -95,8 +96,10 @@ must not be used as this repository's working directory.
   runtime outlet to `above-site-header`, which he considers the likely common
   placement; this is a site setting choice and has not changed the component's
   packaged default.
-- Existing Repeal components remain enabled and untouched: Brand Header id `7`,
-  Dropdown Header id `8`, and Custom Header Links (icons) id `3`.
+- Existing Repeal Brand Header id `7` and Dropdown Header id `8` remain enabled
+  and untouched. Custom Header Links (icons) id `3` is still installed with its
+  settings intact but was disabled after Brand Navigation's replacement icons
+  were verified in the core header.
 - Brand Navigation and all three existing header components render together
   without an observed conflict or administrator warning. Phil reviewed the
   combined live result and reported that all four play well together.
@@ -111,7 +114,8 @@ must not be used as this repository's working directory.
 - Direct top-level icon links can select the `site_header` surface to render
   once among Discourse's core header icons instead of in the Brand Navigation
   bar. This uses the supported `api.headerIcons` API. Existing entries default
-  to the bar, and no Repeal item has been moved to the site header yet.
+  to the bar. Repeal's ten standalone social links now use `site_header`; its
+  Social parent and submenu remain in the Brand Navigation bar.
 - A versioned import/export utility now exists at
   `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
   Brand Navigation settings, preflights a target component, and applies all
@@ -225,8 +229,11 @@ Previously executed successfully:
   in the supported objects editor.
 - `pnpm lint`, `pnpm test:config` (6 tests), bundle validation, and
   `git diff --check` at `3cd8910`: pass.
-- A configured `site_header` item has not yet been exercised in a live runtime;
-  selecting which Repeal items move is an administrator content decision.
+- Repeal `site_header` icon placement at `3cd8910`: pass. Before predecessor
+  disablement, both ten-icon sets rendered, proving Brand Navigation's set was
+  present. After disabling Custom Header Links (icons) id `3`, a fresh page
+  showed exactly one set of ten social icons in the core header and none in the
+  upper Brand Navigation bar. My Preferences remained in the upper bar.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -240,9 +247,8 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Decide which, if any, Repeal direct icon items should move from the bar to
-   the `site_header` surface and which submenu children should receive visible
-   descriptions; no content placement was changed automatically.
+1. Decide which Repeal submenu children, if any, should receive visible
+   descriptions; none were added automatically.
 2. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
    link safety; authenticated desktop coexistence and submenu behavior pass.
 3. Map the three People items only after replacing their no-op `#` values with
