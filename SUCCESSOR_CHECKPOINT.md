@@ -22,7 +22,7 @@ components without Phil's explicit direction.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
 - Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `00cf3ce`.
+- Latest implementation commit: `3cd8910`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -89,7 +89,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `00cf3ce`, attached
+- Repeal Brand Navigation component id `19` is updated to `3cd8910`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum. Phil moved its
   runtime outlet to `above-site-header`, which he considers the likely common
@@ -104,6 +104,14 @@ must not be used as this repository's working directory.
   a functioning parent label link beside a separate caret control; children
   without a URL retain the complete submenu trigger; URL without children is a
   direct link. A row with neither URL nor children has no actionable output.
+- Linked parent labels and their separate caret controls share one continuous
+  hover/focus highlight while retaining distinct link and submenu actions.
+- Child entries have separate optional tooltip and visible-description fields.
+  Empty descriptions retain compact menus.
+- Direct top-level icon links can select the `site_header` surface to render
+  once among Discourse's core header icons instead of in the Brand Navigation
+  bar. This uses the supported `api.headerIcons` API. Existing entries default
+  to the bar, and no Repeal item has been moved to the site header yet.
 - A versioned import/export utility now exists at
   `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
   Brand Navigation settings, preflights a target component, and applies all
@@ -209,8 +217,16 @@ Previously executed successfully:
 - Repeal linked-parent caret spacing at `00cf3ce`: pass by live screenshot. The
   separate accessible submenu control is now visually adjacent to its parent
   label while the child menu retains the corrected alignment.
-- `pnpm lint`, `pnpm test:config` (5 tests), and `git diff --check` at
-  `00cf3ce`: pass.
+- Repeal combined parent/caret highlight at `3cd8910`: pass by live screenshot.
+  Activating the separate caret highlights the complete linked group and the
+  child menu remains aligned beneath the parent label.
+- Repeal administrator schema at `3cd8910`: pass. The top-level `Surface`
+  control and separate child `Tooltip` and `Visible description` fields render
+  in the supported objects editor.
+- `pnpm lint`, `pnpm test:config` (6 tests), bundle validation, and
+  `git diff --check` at `3cd8910`: pass.
+- A configured `site_header` item has not yet been exercised in a live runtime;
+  selecting which Repeal items move is an administrator content decision.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -224,11 +240,14 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
+1. Decide which, if any, Repeal direct icon items should move from the bar to
+   the `site_header` surface and which submenu children should receive visible
+   descriptions; no content placement was changed automatically.
+2. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
    link safety; authenticated desktop coexistence and submenu behavior pass.
-2. Map the three People items only after replacing their no-op `#` values with
+3. Map the three People items only after replacing their no-op `#` values with
    confirmed working destinations.
-3. Keep all predecessors available for rollback; disable them only if Phil
+4. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope
