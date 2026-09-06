@@ -1,0 +1,14 @@
+name: Discourse Theme
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1

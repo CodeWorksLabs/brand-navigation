@@ -14,7 +14,7 @@ navigation on normal Discourse application pages.
 - Keyboard and assistive-technology semantics.
 - Theme and color-scheme compatibility through Discourse color variables.
 - Anonymous and authenticated audience rules.
-- Structured, validated administration with empty, safe defaults.
+- Structured, validated administration with disabled, safe sample defaults.
 - Explicit full-application and embed render boundaries.
 
 ## Excluded

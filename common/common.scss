@@ -332,6 +332,11 @@
     position: relative;
     overflow: hidden;
 
+    &:focus-within {
+      outline: 2px solid currentcolor;
+      outline-offset: 2px;
+    }
+
     input[type="file"] {
       position: absolute;
       inline-size: 1px;

@@ -1,6 +1,6 @@
 enabled:
   type: bool
-  default: true
+  default: false
 
 outlet:
   type: enum
@@ -16,10 +16,12 @@ show_brand:
 brand_name:
   type: string
   default: "Brand Navigation"
+  max: 100
 
 brand_url:
   type: string
   default: "/"
+  max: 2048
 
 brand_logo:
   type: upload
@@ -97,7 +99,7 @@ navigation_items:
       target: "_self"
       visibility: "authenticated"
   schema:
-    name: navigation_item
+    name: brand_navigation_item_v1
     identifier: label
     properties:
       label:
@@ -161,7 +163,7 @@ navigation_items:
       children:
         type: objects
         schema:
-          name: navigation_child
+          name: brand_navigation_child_v1
           identifier: label
           properties:
             label:

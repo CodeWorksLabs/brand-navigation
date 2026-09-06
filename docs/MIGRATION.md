@@ -10,6 +10,12 @@ row. The tool calls Discourse's supported admin theme endpoint and
 updates only the portable Brand Navigation settings listed in the bundle. It
 does not attach or enable the component.
 
+Bundle validation is fail-closed for field types, allowed values, URL schemes,
+unknown fields, navigation depth, size limits, and cross-field requirements.
+The browser importer sends one complete theme update after preflight rather than
+saving settings one at a time. If connectivity is lost after submission, reload
+the target component and verify its settings before retrying.
+
 For normal administrator use, the same operation is available in the
 **Configuration bundles** panel near the bottom of Brand Navigation's
 administration page. A newly installed component must be attached to the
@@ -24,6 +30,10 @@ menus, external destinations, icon-only links, and left/right sections.
 API credentials are supplied through `DISCOURSE_API_KEY` and
 `DISCOURSE_API_USERNAME`; they must never be stored in a bundle. Logo uploads
 remain a separate site-local step.
+
+CLI forum targets must be canonical HTTPS origins. Redirects are refused, and
+exports do not overwrite an existing file unless the operator supplies
+`--overwrite`.
 
 ## From Brand Header
 

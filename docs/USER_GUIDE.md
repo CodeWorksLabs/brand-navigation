@@ -25,7 +25,8 @@ Discourse embed contexts.
    repository URL.
 3. Add **Brand Navigation** to the theme or themes that should use it.
 4. Open the component settings.
-5. Leave `enabled` off while preparing settings on a live site.
+5. Leave the default `enabled` setting off while preparing and reviewing the
+   supplied sample settings on a live site.
 
 The exact administration labels can vary slightly between Discourse releases.
 
@@ -85,6 +86,11 @@ setting off, attach the component to the administrator's active theme, and
 reload its administration page. Import the bundle before enabling its visible
 navigation.
 
+The browser importer validates the complete portable schema and submits all
+settings in one Discourse theme update. It does not intentionally save a partial
+bundle. If the browser loses the response after submission, reload the
+component settings and verify the displayed values before retrying.
+
 The same operations are available from a local checkout for automation:
 
 ```text
@@ -97,6 +103,11 @@ The `export` and `apply` commands read `DISCOURSE_API_KEY` and
 `DISCOURSE_API_USERNAME` from the process environment. Keep the API key out of
 the bundle, shell history, documentation, and source control. Review and
 validate a bundle before applying it.
+
+The CLI accepts only a canonical HTTPS forum origin: no path, query, embedded
+credentials, or fragment. It refuses redirects, bounds response time and size,
+and sanitizes server error text. Export refuses to replace an existing file
+unless `--overwrite` is supplied explicitly.
 
 Applying a bundle updates only Brand Navigation settings through Discourse's
 admin theme endpoint. It cannot attach the component to a theme,
@@ -212,7 +223,9 @@ Example navigation plan:
 | Account help    | `/faq`    | None                   | Direct link that can be limited to authenticated users |
 
 Use relative paths such as `/latest` for destinations on the same Discourse
-site. Use complete `https://` URLs for external destinations. New-window links
+site. Use complete `https://` URLs for external destinations. Protocol-relative,
+HTTP, credential-bearing, script, placeholder, and malformed URLs are rejected
+by bundle/editor validation and fail closed at rendering. New-window links
 automatically receive the appropriate safety relationship attributes.
 
 ## Configure icons
@@ -236,7 +249,8 @@ If an icon does not appear, verify its name and confirm it is included in
 
 - `menu` adds a compact menu button to the Discourse header.
 - `bar` displays the full Brand Navigation bar.
-- `hidden` does not display Brand Navigation on mobile.
+- `hidden` does not display any Brand Navigation surface on a responsive mobile
+  view, including Brand Navigation links placed in the Discourse site header.
 
 Choose `menu` when space is limited or the navigation contains several items.
 Check both portrait and landscape layouts before using `bar`.

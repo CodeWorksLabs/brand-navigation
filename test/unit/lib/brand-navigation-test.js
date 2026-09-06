@@ -4,8 +4,11 @@ import {
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
+  linkTarget,
 } from "brand-navigation/discourse/lib/brand-navigation";
 import { isBrandNavigationObjectsEditor } from "brand-navigation/discourse/lib/brand-navigation-admin";
+import { isBrandNavigationTheme } from "brand-navigation/discourse/lib/brand-navigation-admin";
+import { isSafeNavigationUrl } from "brand-navigation/discourse/lib/configuration-bundle";
 
 module("Unit | Lib | brand-navigation", function () {
   test("audience visibility is explicit", function (assert) {
@@ -32,14 +35,24 @@ module("Unit | Lib | brand-navigation", function () {
   test("new browsing contexts receive a safe rel", function (assert) {
     assert.strictEqual(linkRel("_blank"), "noopener noreferrer");
     assert.strictEqual(linkRel("_self"), null);
+    assert.strictEqual(linkTarget("_blank"), "_blank");
+    assert.strictEqual(linkTarget("unexpected"), "_self");
+  });
+
+  test("navigation URLs fail closed", function (assert) {
+    assert.true(isSafeNavigationUrl("/latest"));
+    assert.true(isSafeNavigationUrl("https://example.com/path"));
+    assert.false(isSafeNavigationUrl("//example.com/path"));
+    assert.false(isSafeNavigationUrl("http://example.com/path"));
+    assert.false(isSafeNavigationUrl("javascript:alert(1)"));
   });
 
   test("navigation items are grouped into left and right sections", function (assert) {
     const items = arrangeNavigationItems([
-      { label: "Account", section: "right" },
-      { label: "Community", section: "left" },
-      { label: "Help" },
-      { label: "Sign Up", section: "right" },
+      { label: "Account", url: "/u/me", section: "right" },
+      { label: "Community", url: "/categories", section: "left" },
+      { label: "Help", url: "/faq" },
+      { label: "Sign Up", url: "/signup", section: "right" },
     ]);
 
     assert.deepEqual(
@@ -56,8 +69,13 @@ module("Unit | Lib | brand-navigation", function () {
 
   test("site-header items are excluded from the brand bar", function (assert) {
     const items = arrangeNavigationItems([
-      { label: "Community" },
-      { label: "Bluesky", surface: "site_header" },
+      { label: "Community", url: "/categories" },
+      {
+        label: "Bluesky",
+        url: "https://bsky.app/",
+        icon: "bluesky",
+        surface: "site_header",
+      },
     ]);
 
     assert.deepEqual(
@@ -68,9 +86,19 @@ module("Unit | Lib | brand-navigation", function () {
 
   test("item presentation supports accessible icon-only links", function (assert) {
     const [iconOnly, missingIcon, labelOnly] = arrangeNavigationItems([
-      { label: "Social", icon: "globe", presentation: "icon_only" },
-      { label: "Fallback", presentation: "icon_only" },
-      { label: "Text", icon: "comments", presentation: "label_only" },
+      {
+        label: "Social",
+        url: "/social",
+        icon: "globe",
+        presentation: "icon_only",
+      },
+      { label: "Fallback", url: "/fallback", presentation: "icon_only" },
+      {
+        label: "Text",
+        url: "/text",
+        icon: "comments",
+        presentation: "label_only",
+      },
     ]);
 
     assert.true(iconOnly.showIcon);
@@ -89,9 +117,14 @@ module("Unit | Lib | brand-navigation", function () {
       {
         label: "Resources",
         children: [
-          { label: "Docs", description: "Read the documentation" },
+          {
+            label: "Docs",
+            url: "/docs",
+            description: "Read the documentation",
+          },
           {
             label: "Status",
+            url: "/status",
             icon: "signal",
             presentation: "icon_only",
             description: "Service status",
@@ -105,23 +138,66 @@ module("Unit | Lib | brand-navigation", function () {
     assert.true(item.hasVisibleDescriptions);
   });
 
+  test("inert and unsafe navigation rows are removed", function (assert) {
+    const items = arrangeNavigationItems([
+      { label: "Inert" },
+      { label: "Unsafe", url: "javascript:alert(1)" },
+      { label: "Safe", url: "/safe" },
+    ]);
+
+    assert.deepEqual(
+      items.map((item) => item.label),
+      ["Safe"]
+    );
+  });
+
   test("the stay-open save behavior is limited to Brand Navigation", function (assert) {
     assert.true(
       isBrandNavigationObjectsEditor({
         setting: { setting: "navigation_items" },
-        schema: { name: "navigation_item" },
+        schema: { name: "brand_navigation_item_v1" },
       })
     );
     assert.false(
       isBrandNavigationObjectsEditor({
         setting: { setting: "other_items" },
-        schema: { name: "navigation_item" },
+        schema: { name: "brand_navigation_item_v1" },
       })
     );
     assert.false(
       isBrandNavigationObjectsEditor({
         setting: { setting: "navigation_items" },
         schema: { name: "other_item" },
+      })
+    );
+  });
+
+  test("administrator controls require the exact canonical repository", function (assert) {
+    assert.true(
+      isBrandNavigationTheme({
+        component: true,
+        remote_theme: {
+          remote_url: "https://github.com/CodeWorksLabs/brand-navigation.git",
+        },
+      })
+    );
+    assert.false(isBrandNavigationTheme({ name: "Brand Navigation" }));
+    assert.false(
+      isBrandNavigationTheme({
+        component: true,
+        remote_theme: {
+          remote_url:
+            "https://github.com/example/CodeWorksLabs/brand-navigation-lookalike",
+        },
+      })
+    );
+    assert.false(
+      isBrandNavigationTheme({
+        component: true,
+        remote_theme: {
+          remote_url:
+            "https://github.com:444/CodeWorksLabs/brand-navigation.git",
+        },
       })
     );
   });

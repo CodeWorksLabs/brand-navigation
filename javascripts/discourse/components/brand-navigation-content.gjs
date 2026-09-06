@@ -6,11 +6,13 @@ import { service } from "@ember/service";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   arrangeNavigationItems,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
+  linkTarget,
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
@@ -35,7 +37,14 @@ export default class BrandNavigationContent extends Component {
       return;
     }
 
-    const [submenu] = this.openSubmenus;
+    const submenu = [...this.openSubmenus].find((candidate) =>
+      candidate.contains(event.target)
+    );
+
+    if (!submenu) {
+      return;
+    }
+
     this.closeSubmenus();
     submenu.querySelector("summary")?.focus();
     event.preventDefault();
@@ -119,11 +128,19 @@ export default class BrandNavigationContent extends Component {
   }
 
   get shouldShowBrand() {
-    return settings.show_brand && (this.showBrandLogo || this.showBrandName);
+    return (
+      settings.show_brand &&
+      isSafeNavigationUrl(settings.brand_url) &&
+      (this.showBrandLogo || this.showBrandName)
+    );
   }
 
   get brandLabel() {
     return settings.brand_name || this.siteSettings.title;
+  }
+
+  get brandTarget() {
+    return linkTarget(settings.brand_target);
   }
 
   get lightLogo() {
@@ -144,8 +161,8 @@ export default class BrandNavigationContent extends Component {
         <a
           class="brand-navigation__brand"
           href={{settings.brand_url}}
-          target={{settings.brand_target}}
-          rel={{this.linkRel settings.brand_target}}
+          target={{this.brandTarget}}
+          rel={{this.linkRel this.brandTarget}}
           aria-label={{this.brandLabel}}
         >
           {{#if this.showBrandLogo}}
@@ -229,6 +246,10 @@ export default class BrandNavigationContent extends Component {
                               target={{child.target}}
                               rel={{this.linkRel child.target}}
                               aria-label={{child.label}}
+                              aria-describedby={{if
+                                child.showDescription
+                                child.descriptionId
+                              }}
                               title={{child.title}}
                               {{on "click" this.submenuLinkSelected}}
                             >
@@ -240,6 +261,7 @@ export default class BrandNavigationContent extends Component {
                                   >{{child.label}}</span>
                                   {{#if child.showDescription}}
                                     <span
+                                      id={{child.descriptionId}}
                                       class="brand-navigation__child-description"
                                     >{{child.description}}</span>
                                   {{/if}}

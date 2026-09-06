@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **REPEAL PEOPLE NAV LIVE / STAY-OPEN ADMIN SAVE VERIFIED / NOT RELEASE-READY**
+Disposition: **STATIC SOURCE REVIEW PASS / RUNTIME VERIFICATION PENDING / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -21,13 +21,79 @@ components without Phil's explicit direction.
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
-- Last sandbox-tested runtime commit: `4a65821`.
-- Latest implementation commit: `12e764a`; administrator-label follow-up:
-  `310f743`.
-- Latest Repeal configuration commit: `a1b274d`.
+- Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
+  tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
+- Historical runtime evidence below identifies its own commit. It is not a
+  claim that those earlier commits are current.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
+
+## 2026-09-05 doctrine review and remediation
+
+- Complete Static Review `BN-CODEBASE-20260905` used the approved Code Review
+  Doctrine at `C:\CodeProjects\Governance\Boss\CODE_REVIEW_DOCTRINE.md`,
+  52,273 bytes, SHA-256
+  `5610F2AB5B2E9DC2CD649E2E11321DEC6B5F1BACD174A1C32BABD49174888C5D`.
+- The independent reviewer inspected all 39 tracked members. Opening and
+  closing identity remained clean at the exact commit and tree above.
+- Disposition: `INTERNAL CODE REVIEW BLOCK`; P0 none, P1 seven, P2 six, P3 one.
+  The grouped findings cover mobile hidden/bar behavior, bundle validation and
+  atomicity, administrator component identity, CLI credential transport,
+  runtime evidence, direct-setting hardening, Escape ownership, accessible
+  descriptions/status, CLI bounds, lifecycle records, and export overwrite.
+- Phil accepted the review quality and authorized one local remediation batch
+  plus Semantic Versioning records. No commit, push, tag, GitHub Release, live
+  forum change, installation, deployment, or publication is part of the active
+  batch.
+- The local remediation now implements the complete grouped response: mobile
+  hidden mode suppresses registered header icons; mobile bar navigation wraps
+  without the clipping scrollport; bundle and navigation validation is
+  fail-closed; browser import uses one preflighted theme update; administrator
+  extensions use an exact remote/schema identity; CLI API access requires a
+  canonical HTTPS origin with redirects, time, response size, and terminal text
+  bounded; export overwrite is explicit; Escape ownership is scoped; visible
+  descriptions and bundle status have explicit accessibility relationships;
+  lifecycle/default records are reconciled; and CI/versioning records exist.
+- Local post-remediation evidence: `pnpm lint` passes all JavaScript, template,
+  CSS, formatting, and type gates; `pnpm test:config` passes 15/15; the Repeal
+  migration bundle validates; and `git diff --check` passes. QUnit and Ruby
+  system specs, including the newly authored mobile hidden/bar cases, remain
+  authored but unexecuted pending a compatible Discourse runtime gate.
+- The separate Review Reviewer Doctrine audit is not commissioned and creates
+  no current gate.
+- Version policy: Git tags and matching GitHub Releases use Semantic Versioning;
+  Discourse continues commit-based remote updates. The first planned reviewed
+  preview is `v0.9.0`; `v1.0.0` is reserved for documented multi-site readiness.
+- Focused correction review `BN-CORRECTION-CLOSURE-20260905` confirmed no P0,
+  but blocked the first correction batch on two P1 assurance regressions and
+  six P2/P3 hardening or record findings. The follow-up local batch makes QUnit
+  fixtures actionable, enables system specs explicitly with non-vacuous
+  negative baselines, validates exports, rejects delimiter-bearing icon tokens,
+  requires plain data objects and a canonical repository port, bounds browser
+  files before reading, pins CI dependencies to reviewed commit identities with
+  read-only permissions, and updates release/checkpoint guidance.
+- Follow-up evidence: `pnpm lint` passes; `pnpm test:config` passes 18/18; the
+  Repeal configuration validates; and `git diff --check` passes. QUnit, Ruby
+  system specs, both GitHub workflows, browser/runtime, embed, and consumer
+  checks remain unexecuted. No commit, push, tag, release, installation,
+  deployment, publication, or live forum mutation has occurred in either local
+  remediation batch.
+- The follow-up closure review source-closed seven of `BN-CV-01` through
+  `BN-CV-08` and found one remaining P1 assurance defect, `BN-FU-01`: the hidden
+  mobile system case did not first prove that its same configured site-header
+  icon rendered. The final narrow correction now configures the icon in mobile
+  bar mode, positively asserts both the bar and icon, changes only
+  `mobile_mode` to `hidden`, then asserts every component surface is absent.
+  That authored Ruby case remains unexecuted pending the compatible runtime
+  gate.
+- Final focused static closure independently replayed binary-diff identity
+  `bffd9fd8d778076355541202daf441eebb9cde72` and content manifest
+  `a750cc4d29d57c77ca810326a9ff0aa642f52af5c46451cb7cffc600778de557`.
+  It closed `BN-FU-01` and `BN-CV-02` at source and issued
+  `INTERNAL CODE REVIEW PASS`, with no P0-P3 finding remaining in the narrowly
+  commissioned static scope. This is not runtime, consumer, or release
+  acceptance.
 
 ## Settled product decisions
 
@@ -83,8 +149,9 @@ must not be used as this repository's working directory.
   selection, or opening another submenu; Escape restores summary focus.
 - Administrator-facing JSON bundle import/export on Brand Navigation's own
   component page when the component is attached to the administrator's active
-  theme. Imports use Discourse's theme-setting model API and do not attach or
-  enable the component.
+  theme. Historical imports used individual setting-model updates. The active
+  remediation batch replaces that path with one preflighted theme update; it
+  still does not attach or enable the component.
 - Bundle imports accept either a selected `.json` file or pasted JSON, allowing
   validation and import without browser file-picker automation.
 - Saving Brand Navigation's navigation-object editor remains on the editor page
@@ -276,8 +343,9 @@ Previously executed successfully:
 - The stay-open behavior uses Discourse's documented `api.modifyClass` against
   the core schema-setting editor because that save action currently exposes no
   narrower supported outlet or transformer. The override is restricted to the
-  `navigation_items`/`navigation_item` setting and delegates every other schema
-  editor to core behavior. Core admin-editor changes remain a maintenance risk.
+  `navigation_items`/`brand_navigation_item_v1` setting and delegates every
+  other schema editor to core behavior. Core admin-editor changes remain a
+  maintenance risk.
 - `pnpm lint`, `pnpm test:config` (6 tests), Repeal bundle validation, and
   `git diff --check` at `4a65821`: pass.
 - Repeal visible-description presentation at `c02bf5a`: pass by live browser
@@ -318,17 +386,17 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Verify the new per-item device visibility on the sandbox and Repeal mobile
-   layouts, then choose which priority Repeal social icons remain on `both` and
-   mark the rest `desktop`.
-2. Record `https://www.r744.community/` on Discourse `2026.2.0-latest` as the
-   planned older-version compatibility target; do not list it as known working
-   until installation and the acceptance checks actually pass.
-3. Export Repeal's current live Brand Navigation settings so Phil's manually
-   added visible descriptions are captured in a portable bundle, then validate
-   it before considering replacement of the repository sample.
-4. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
-   link safety; authenticated desktop coexistence and submenu behavior pass.
+1. Preserve the source-reviewed implementation unchanged and do not conflate
+   static source closure with runtime acceptance.
+2. Separately authorize and execute QUnit/Ruby system, GitHub workflow, browser,
+   responsive,
+   accessibility, embed, CLI synthetic-transport, and consumer verification.
+3. When correction and runtime gates permit, install and fully configure on
+   `https://forum.discussionbridge.dev/` and verify downstream embed exclusion
+   on `https://bridge.demo.discussionbridge.dev/`.
+4. Test the older `https://www.r744.community/` Discourse build, then expand to
+   Citizen Activist Network and RVing Community. Add sites to **In use on** only
+   after their stated coverage is verified.
 5. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 

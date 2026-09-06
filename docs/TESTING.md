@@ -1,6 +1,8 @@
 # Testing and acceptance
 
-## Known working environments
+## In use on
+
+### Verified installations
 
 | Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                    |
 | ------------------------ | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -14,9 +16,15 @@ acceptance matrix below before claiming coverage on that environment.
 
 ## Planned compatibility targets
 
+- Install and fully configure on `https://forum.discussionbridge.dev/`, then use
+  `https://bridge.demo.discussionbridge.dev/` as the paired downstream embed
+  exclusion test rather than as a theme-component installation target.
 - `https://www.r744.community/` runs Discourse `2026.2.0-latest` and is the
   planned older-version installation target. Brand Navigation has not yet been
   installed or tested there, so this version is not listed as known working.
+- After the primary pair and older-version target, expand validation to
+  `https://forum.citizenactivist.network/` and
+  `https://www.rving.community/`.
 
 ## Automated gates
 
@@ -32,28 +40,34 @@ acceptance matrix below before claiming coverage on that environment.
 - Unit coverage for optional visible submenu descriptions.
 - Unit coverage for icon/label presentation and missing-icon fallback.
 - Scoped administrator save behavior that remains in the navigation editor.
+- Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
+- Canonical HTTPS CLI origins, redirect refusal, bounded responses, and safe
+  error output.
+- Exact component identity for administrator extensions and atomic bundle
+  persistence.
 
 ## Manual acceptance matrix
 
 Test the current stable and tests-passed Discourse branches where practical.
 
-| Context                    | Required result                                                             |
-| -------------------------- | --------------------------------------------------------------------------- |
-| Desktop, anonymous         | Allowed links render; only one submenu opens and Escape restores focus      |
-| Desktop, authenticated     | Authenticated entries render; anonymous-only entries do not                 |
-| Mobile menu                | One header control opens usable brand navigation                            |
-| Mobile bar                 | Responsive bar scrolls navigation without covering core controls            |
-| Mobile hidden              | No brand-navigation surface renders                                         |
-| Site-header item           | Direct icon appears once with its tooltip, audience, target, and safe rel   |
-| Device-specific item       | Renders only for its selected device class, unchanged across phone rotation |
-| Descriptive submenu        | Description appears below its label; empty entries remain compact           |
-| Administrator object save  | Settings persist and the structured editor remains open                     |
-| Light/dark schemes         | Correct logo fallback and readable scheme colors                            |
-| RTL locale                 | Logical positioning and submenu alignment remain usable                     |
-| `embed_mode=true` full app | No bar or mobile trigger mounts                                             |
-| Classic embedded comments  | No global brand/navigation content appears                                  |
-| Embedded interaction       | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged |
-| Normal sign-in             | Full-application sign-in remains core Discourse behavior                    |
+| Context                     | Required result                                                             |
+| --------------------------- | --------------------------------------------------------------------------- |
+| Desktop, anonymous          | Allowed links render; only one submenu opens and Escape restores focus      |
+| Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                 |
+| Mobile menu                 | One header control opens usable brand navigation                            |
+| Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus              |
+| Mobile hidden               | No brand-navigation surface renders                                         |
+| Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel   |
+| Device-specific item        | Renders only for its selected device class, unchanged across phone rotation |
+| Descriptive submenu         | Description appears below its label; empty entries remain compact           |
+| Administrator object save   | Settings persist and the structured editor remains open                     |
+| Administrator bundle import | Valid settings persist together; failures do not leave a partial bundle     |
+| Light/dark schemes          | Correct logo fallback and readable scheme colors                            |
+| RTL locale                  | Logical positioning and submenu alignment remain usable                     |
+| `embed_mode=true` full app  | No bar or mobile trigger mounts                                             |
+| Classic embedded comments   | No global brand/navigation content appears                                  |
+| Embedded interaction        | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged |
+| Normal sign-in              | Full-application sign-in remains core Discourse behavior                    |
 
 Also test long labels, empty configuration, missing optional icons, external
 links, browser zoom, reduced viewport width, keyboard-only use, and screen
