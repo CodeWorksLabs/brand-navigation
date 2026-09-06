@@ -78,13 +78,17 @@ must not be used as this repository's working directory.
   the candidate because the official GitHub workflow executed and passed the
   authored QUnit and Ruby system suites.
 - Final focused static review of commits `97807a1`, `1789301`, and `13005b7`
-  found no P0/P1 defect and confirmed that browser object serialization and the
-  parsed local model state are coherent. Its two P2 findings are addressed in
-  the documentation-only closure: bundle integrity is described precisely as
-  complete client preflight plus one update request, without claiming an
-  unproven server transaction; and the two Ruby lint tools are pinned to the
-  exact versions resolved by the passing workflow. A fresh official workflow
-  run is required on this closure commit.
+  returned `INTERNAL CODE REVIEW PASS WITH P2/P3 FINDINGS`, found no P0/P1
+  defect, and confirmed that browser object serialization and the parsed local
+  model state are coherent. It raised two P2 findings: overstatement of
+  server-side atomicity and floating Ruby lint tools.
+- The first closure commit pinned the two Ruby lint tools to the exact versions
+  resolved by the passing workflow and corrected the test matrix, but its first
+  static closure check found one residual architecture statement plus a P3
+  checkpoint-sequencing issue. The present narrow correction describes bundle
+  integrity only as complete client preflight plus one update request, without
+  claiming an unproven server transaction, and makes a fresh official workflow
+  on the exact closure head an explicit pre-merge action.
 
 ## 2026-09-05 doctrine review and remediation
 
@@ -443,17 +447,22 @@ the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
 
 ## Exact next actions
 
-1. Review the complete CI and sandbox evidence en masse and decide whether the
-   remaining manual gaps block merging the draft pull request.
-2. If accepted, merge the reviewed branch to `main` as a separate action. Do
+1. Require the official Discourse Theme workflow and configuration workflow to
+   pass on the exact current closure head, including the pinned Ruby tools.
+2. Complete the narrow independent static closure of the residual architecture
+   wording and checkpoint sequence.
+3. Review the complete CI, static-review, and sandbox evidence en masse and
+   decide whether the remaining manual gaps block merging the draft pull
+   request.
+4. If accepted, merge the reviewed branch to `main` as a separate action. Do
    not tag or publish a release merely by merging.
-3. When a separate consumer gate permits, install and fully configure on
+5. When a separate consumer gate permits, install and fully configure on
    `https://forum.discussionbridge.dev/` and verify downstream embed exclusion
    on `https://bridge.demo.discussionbridge.dev/`.
-4. Test the older `https://www.r744.community/` Discourse build, then expand to
+6. Test the older `https://www.r744.community/` Discourse build, then expand to
    Citizen Activist Network and RVing Community. Add sites to **In use on** only
    after their stated coverage is verified.
-5. Keep all predecessors available for rollback; disable them only if Phil
+7. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope

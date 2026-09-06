@@ -45,8 +45,10 @@ The objects editor uses the component-specific schema identity
 `brand_navigation_item_v1`. Administrator extensions require either that
 identity or the exact canonical remote repository; mutable names and URL
 substrings do not grant write scope. Bundle imports validate the complete
-portable schema, preflight the target, and submit one Discourse theme update so
-individual settings are not committed piecemeal.
+portable schema, preflight the target, and submit one Discourse theme update
+rather than issuing a separate request for each setting. This does not assert a
+server-side transaction guarantee; after a server error, reload the current
+settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
 registered as direct icon links through `api.headerIcons`. They require a URL
