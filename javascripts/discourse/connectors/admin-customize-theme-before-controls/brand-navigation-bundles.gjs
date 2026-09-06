@@ -3,7 +3,6 @@ import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
-import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 import {
   createBundle,
@@ -185,23 +184,21 @@ export default class BrandNavigationBundles extends Component {
               {{on "change" this.selectBundle}}
             />
           </label>
-          <DButton
-            @action={{this.importBundle}}
-            @disabled={{this.importDisabled}}
-            @icon="upload"
-            @translatedLabel={{i18n
-              (themePrefix "brand_navigation.bundles.import")
-            }}
-            class="btn-primary"
-          />
-          <DButton
-            @action={{this.exportBundle}}
-            @icon="download"
-            @translatedLabel={{i18n
-              (themePrefix "brand_navigation.bundles.export")
-            }}
-            class="btn-default"
-          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            disabled={{this.importDisabled}}
+            {{on "click" this.importBundle}}
+          >
+            {{i18n (themePrefix "brand_navigation.bundles.import")}}
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            {{on "click" this.exportBundle}}
+          >
+            {{i18n (themePrefix "brand_navigation.bundles.export")}}
+          </button>
         </div>
 
         <label class="brand-navigation-bundles__paste-label">
