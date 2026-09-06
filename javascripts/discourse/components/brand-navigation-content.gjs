@@ -206,7 +206,12 @@ export default class BrandNavigationContent extends Component {
                         {{/unless}}
                         {{dIcon "caret-down"}}
                       </summary>
-                      <ul>
+                      <ul
+                        class={{if
+                          item.hasVisibleDescriptions
+                          "brand-navigation__submenu-list--described"
+                        }}
+                      >
                         {{#each item.children as |child|}}
                           <li>
                             {{! Native details allows links after its summary. }}

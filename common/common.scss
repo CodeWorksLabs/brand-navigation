@@ -169,6 +169,19 @@
           outline-offset: -2px;
         }
       }
+
+      &.brand-navigation__submenu-list--described {
+        min-width: min(21rem, 90vw);
+        padding: 0.5rem;
+
+        > li + li {
+          margin-block-start: 0.25rem;
+        }
+
+        a {
+          padding: 0.65rem 0.75rem;
+        }
+      }
     }
   }
 
@@ -241,12 +254,18 @@
     display: flex;
     min-width: 0;
     flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  &__child-label {
+    font-weight: 600;
+    line-height: var(--line-height-medium);
   }
 
   &__child-description {
-    color: var(--primary-medium);
+    color: var(--primary-high);
     font-size: var(--font-down-1);
-    line-height: var(--line-height-small);
+    line-height: 1.35;
     white-space: normal;
   }
 

@@ -38,6 +38,7 @@ export function prepareNavigationItem(item) {
   const presentation = item.presentation || "icon_and_label";
   const showIcon = Boolean(item.icon) && presentation !== "label_only";
   const showLabel = presentation !== "icon_only" || !showIcon;
+  const children = (item.children || []).map(prepareNavigationItem);
 
   return {
     ...item,
@@ -45,6 +46,7 @@ export function prepareNavigationItem(item) {
     showIcon,
     showLabel,
     showDescription: showLabel && Boolean(item.description),
-    children: (item.children || []).map(prepareNavigationItem),
+    children,
+    hasVisibleDescriptions: children.some((child) => child.showDescription),
   };
 }

@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05  
-Disposition: **REPEAL ICON CUTOVER LIVE / ADMIN IMPORT/EXPORT VERIFIED / NOT RELEASE-READY**
+Disposition: **REPEAL PEOPLE NAV LIVE / STAY-OPEN ADMIN SAVE VERIFIED / NOT RELEASE-READY**
 
 ## Purpose and authority
 
@@ -21,9 +21,9 @@ components without Phil's explicit direction.
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Branch: `main`
-- Last sandbox-tested runtime commit: `c15353ec044d2da2698c3b00fa05f2d7845ceae5`.
-- Latest implementation commit: `3cd8910`.
-- Latest Repeal configuration commit: `672da2e`.
+- Last sandbox-tested runtime commit: `4a65821`.
+- Latest implementation commit: `4a65821`.
+- Latest Repeal configuration commit: `a1b274d`.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
@@ -76,6 +76,9 @@ must not be used as this repository's working directory.
   enable the component.
 - Bundle imports accept either a selected `.json` file or pasted JSON, allowing
   validation and import without browser file-picker automation.
+- Saving Brand Navigation's navigation-object editor remains on the editor page
+  so administrators can continue working instead of being returned to the main
+  component settings screen.
 
 ## Current repository and runtime state
 
@@ -90,7 +93,7 @@ must not be used as this repository's working directory.
   component rendered, the landmark resolved to “Brand navigation,” the main
   links remained left, and authenticated “My Preferences” rendered at the
   right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `3cd8910`, attached
+- Repeal Brand Navigation component id `19` is updated to `4a65821`, attached
   to Default, Foundation, and Horizon, populated with the reviewed Repeal
   migration, and enabled. It is visible on the live forum. Phil moved its
   runtime outlet to `above-site-header`, which he considers the likely common
@@ -146,11 +149,13 @@ must not be used as this repository's working directory.
   relaxing an unnecessary settings-array check in `6b782ff`; the supported
   `admin-customize-theme-before-controls` outlet and `ThemeSettings#updateSetting`
   API are present in that exact Discourse revision.
-- Repeal exposed two migration-data issues before cutover. The three People
-  entries used no-op `#` destinations and were rejected by the validated object
-  schema, so they are omitted until real destinations exist. The administrator
-  importer now converts icon arrays to Discourse's pipe-delimited list storage.
-  `50d614b` includes both corrections and rejects placeholder submenu URLs.
+- Repeal exposed two migration-data issues before cutover. The original three
+  People entries used no-op `#` destinations and were correctly rejected by the
+  validated object schema. Working destinations were later identified and are
+  now included in both the live component and the local Repeal bundle. The
+  administrator importer converts icon arrays to Discourse's pipe-delimited
+  list storage. `50d614b` introduced both migration corrections and placeholder
+  URL rejection.
 
 ## Existing Repeal configuration known so far
 
@@ -164,13 +169,19 @@ must not be used as this repository's working directory.
   Instagram, Mastodon, Reddit, TikTok, X, and YouTube.
 - Dropdown Header and Custom Header Links values have now been inventoried and
   encoded in `configurations/repeal-obbba.json`, including all ten social URLs,
-  brand icons, `_blank` behavior, the Repeal/Pledge children, and Stories. The
-  three current `People` placeholder links are documented but intentionally
-  omitted because they have no working destinations.
+  brand icons, `_blank` behavior, the Repeal/Pledge children, and Stories.
+- People now links to `/c/people/19`, with working children for Voted for OBBBA
+  (`/t/voted-for-the-one-big-beautiful-bill-act/1146`), Voted Against OBBBA
+  (`/t/voted-against-the-one-big-beautiful-bill-act/1147`), and Supports Repeal
+  OBBBA Act (`/t/repeal-obbba-act-supporters/1148`).
+- Phil added visible descriptions directly in Repeal before the People change.
+  The live current-state editor was used to add People, preserving those edits.
+  Their exact live text is not yet mirrored in the local configuration bundle;
+  export the current live settings before using that bundle as a replacement.
 
 ## Verification evidence
 
-Executed successfully on Windows for `50d614b`:
+Executed successfully on Windows for `4a65821`:
 
 - `pnpm lint` (JavaScript, templates, CSS, formatting, and type checks): pass.
 - `pnpm bundle validate configurations/repeal-obbba.json`: pass.
@@ -234,6 +245,23 @@ Previously executed successfully:
   present. After disabling Custom Header Links (icons) id `3`, a fresh page
   showed exactly one set of ten social icons in the core header and none in the
   upper Brand Navigation bar. My Preferences remained in the upper bar.
+- Sandbox administrator save behavior at `4a65821`: pass. Clicking Save Changes
+  on `/admin/customize/themes/1/schema/navigation_items` persisted through the
+  supported setting model while the URL, editor, and Save Changes control
+  remained in place.
+- Repeal administrator save behavior at `4a65821`: pass on component id `19`.
+  The URL remained `/admin/customize/themes/19/schema/navigation_items`, and the
+  editor and Save Changes control remained present after saving.
+- Repeal People navigation at `4a65821`: pass. The parent link and separate
+  submenu caret render in Brand Navigation; opening the submenu exposes all
+  three intended labels and exact working topic destinations listed above.
+- The stay-open behavior uses Discourse's documented `api.modifyClass` against
+  the core schema-setting editor because that save action currently exposes no
+  narrower supported outlet or transformer. The override is restricted to the
+  `navigation_items`/`navigation_item` setting and delegates every other schema
+  editor to core behavior. Core admin-editor changes remain a maintenance risk.
+- `pnpm lint`, `pnpm test:config` (6 tests), Repeal bundle validation, and
+  `git diff --check` at `4a65821`: pass.
 
 Authored but not executed in a compatible local Discourse test runtime:
 
@@ -247,13 +275,12 @@ out, so WSL Ruby availability remains unverified.
 
 ## Exact next actions
 
-1. Decide which Repeal submenu children, if any, should receive visible
-   descriptions; none were added automatically.
+1. Export Repeal's current live Brand Navigation settings so Phil's manually
+   added visible descriptions are captured in a portable bundle, then validate
+   it before considering replacement of the repository sample.
 2. Verify Repeal mobile and anonymous behavior, embed exclusion, and external
    link safety; authenticated desktop coexistence and submenu behavior pass.
-3. Map the three People items only after replacing their no-op `#` values with
-   confirmed working destinations.
-4. Keep all predecessors available for rollback; disable them only if Phil
+3. Keep all predecessors available for rollback; disable them only if Phil
    explicitly chooses the cutover.
 
 ## Out of scope

@@ -90,6 +90,7 @@ module("Unit | Lib | brand-navigation", function () {
 
     assert.true(item.children[0].showDescription);
     assert.false(item.children[1].showDescription);
+    assert.true(item.hasVisibleDescriptions);
   });
 
   test("the stay-open save behavior is limited to Brand Navigation", function (assert) {
