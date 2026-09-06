@@ -7,7 +7,7 @@
     "created": "2026-09-05"
   },
   "settings": {
-    "outlet": "below-site-header",
+    "outlet": "above-site-header",
     "show_brand": true,
     "brand_name": "Repeal OBBBA",
     "brand_url": "https://www.repealobbba.org/",
@@ -179,6 +179,7 @@
         "url": "https://bsky.app/profile/repealobbba.bsky.social",
         "icon": "fab-bluesky",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -188,6 +189,7 @@
         "url": "https://discord.com/channels/1409647933401595997/1409647934508761170",
         "icon": "fab-discord",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -197,6 +199,7 @@
         "url": "https://www.facebook.com/RepealOBBBA/",
         "icon": "fab-facebook",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -206,6 +209,7 @@
         "url": "https://github.com/RepealOBBBA",
         "icon": "fab-github",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -215,6 +219,7 @@
         "url": "https://www.instagram.com/repealobbba/",
         "icon": "fab-instagram",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -224,6 +229,7 @@
         "url": "https://mastodon.social/@repealobbba",
         "icon": "fab-mastodon",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -233,6 +239,7 @@
         "url": "https://www.reddit.com/r/RepealOBBBA/",
         "icon": "fab-reddit",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -242,6 +249,7 @@
         "url": "https://www.tiktok.com/@RepealOBBBA",
         "icon": "fab-tiktok",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -251,6 +259,7 @@
         "url": "https://x.com/RepealOBBBA",
         "icon": "fab-x-twitter",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
@@ -260,6 +269,7 @@
         "url": "https://www.youtube.com/@RepealOBBBA",
         "icon": "fab-youtube",
         "presentation": "icon_only",
+        "surface": "site_header",
         "section": "right",
         "target": "_blank",
         "visibility": "everyone"
