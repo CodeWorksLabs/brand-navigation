@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / TOP-LEVEL LINK MODE MERGED AND SANDBOX-VERIFIED / NOT RELEASED**
+Disposition: **MAIN DEPLOYED TO CURRENT TEST SITES / R744 ESR PASS / ADMIN COLOR CONTROLS IMPLEMENTED LOCALLY / RUNTIME VERIFICATION PENDING / NOT RELEASED**
 
 ## Purpose and authority
 
@@ -20,7 +20,8 @@ disable predecessor components without Phil's explicit direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `main`.
+- Current branch: `codex/admin-color-controls`.
+- Current color-control candidate: `ce7fb34`.
 - Current merged head: `317c4be`.
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
@@ -39,6 +40,26 @@ disable predecessor components without Phil's explicit direction.
 
 The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
 must not be used as this repository's working directory.
+
+## Administrator color-control checkpoint
+
+- Candidate `ce7fb34` adds five independently optional appearance settings:
+  bar background, bar text/icons, hover/highlight background, submenu
+  background, and submenu text/icons.
+- Brand Navigation's existing administrator panel exposes native browser color
+  inputs with a per-color **Custom** switch, **Save colors**, and **Inherit
+  all**. Blank settings continue using Discourse's `--tertiary`, `--secondary`,
+  `--quaternary-low`, and `--primary` palette variables, preserving active
+  light/dark color-scheme behavior.
+- The five settings are portable in configuration bundles. Bundle validation
+  accepts only blank inheritance or six-digit hex colors.
+- The administrator guide, README, changelog, setting descriptions, and panel
+  labels are updated.
+- Local JavaScript lint, Ember template lint, Stylelint, type checking,
+  changed-file formatting, `git diff --check`, and all 21 Node configuration
+  tests pass.
+- Runtime theme compilation and administrator/browser interaction on the
+  sandbox remain pending. No production forum has been changed.
 
 ## Current multi-site checkpoint
 
