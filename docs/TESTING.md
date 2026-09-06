@@ -12,6 +12,12 @@ The builds above were read directly from each site's administrator dashboard on
 declarations. Features not named in a row should be evaluated through the
 acceptance matrix below before claiming coverage on that environment.
 
+## Planned compatibility targets
+
+- `https://www.r744.community/` runs Discourse `2026.2.0-latest` and is the
+  planned older-version installation target. Brand Navigation has not yet been
+  installed or tested there, so this version is not listed as known working.
+
 ## Automated gates
 
 - JavaScript, template, style, formatting, and type linting.
