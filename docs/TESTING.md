@@ -78,6 +78,11 @@ Full-app `?embed_mode=true` again excluded Brand Navigation while retaining
 `#main-outlet`, with no warning or captured console error. The browser was
 restored to the normal sandbox forum page.
 
+After that smoke test, Phil chose the new behavior for the live sandbox sample.
+Resources is currently saved as `group`: browser inspection confirmed a
+submenu button is present and no Resources parent link is rendered. Its saved
+`/about` value and both child destinations remain available in configuration.
+
 ## Remaining compatibility targets
 
 - The original R744 test on unsupported `2026.2.0-latest` exposed older module

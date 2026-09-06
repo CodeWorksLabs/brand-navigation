@@ -135,6 +135,11 @@ must not be used as this repository's working directory.
   and no captured console errors. Full-app `?embed_mode=true` again returned
   zero Brand Navigation surfaces while preserving `#main-outlet`. The browser
   was restored to the normal sandbox forum page.
+- Phil then clarified that the sandbox Resources item should demonstrate the
+  new submenu-only behavior rather than retain its historical link behavior.
+  Resources is now saved as `group`: the normal page exposes it as a submenu
+  button, not an `/about` parent link, while its About and Discourse Meta child
+  destinations remain available. This is the current sandbox configuration.
 
 ## Post-merge sandbox checkpoint
 
