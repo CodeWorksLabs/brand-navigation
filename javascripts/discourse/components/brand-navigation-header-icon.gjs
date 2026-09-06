@@ -15,8 +15,12 @@ export default class BrandNavigationHeaderIcon extends Component {
   @service currentUser;
   @service site;
 
+  get item() {
+    return this.args.item;
+  }
+
   get shouldRender() {
-    const item = this.args.item;
+    const item = this.item;
 
     return (
       settings.enabled &&
@@ -36,11 +40,11 @@ export default class BrandNavigationHeaderIcon extends Component {
   }
 
   get target() {
-    return linkTarget(this.args.item.target);
+    return linkTarget(this.item.target);
   }
 
   get title() {
-    return this.args.item.title || this.args.item.label;
+    return this.item.title || this.item.label;
   }
 
   <template>
@@ -48,13 +52,13 @@ export default class BrandNavigationHeaderIcon extends Component {
       <li class="brand-navigation-header-icon">
         <a
           class="btn no-text icon btn-flat"
-          href={{@item.url}}
+          href={{this.item.url}}
           target={{this.target}}
           rel={{this.rel}}
           title={{this.title}}
-          aria-label={{@item.label}}
+          aria-label={{this.item.label}}
         >
-          {{dIcon @item.icon}}
+          {{dIcon this.item.icon}}
         </a>
       </li>
     {{/if}}
