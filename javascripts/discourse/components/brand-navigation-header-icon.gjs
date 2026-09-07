@@ -2,13 +2,10 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
-import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
-  isVisibleOnDevice,
-  isVisibleToUser,
-  isUsableIcon,
   linkRel,
   linkTarget,
+  shouldRenderHeaderIcon,
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationHeaderIcon extends Component {
@@ -19,18 +16,15 @@ export default class BrandNavigationHeaderIcon extends Component {
   get shouldRender() {
     const item = this.args.item;
 
-    return (
-      settings.enabled &&
-      !EmbedMode.enabled &&
-      !(this.site.mobileView && settings.mobile_mode === "hidden") &&
-      item.link_mode !== "group" &&
-      Boolean(item.url) &&
-      isUsableIcon(item.icon) &&
-      !(item.children || []).length &&
-      isVisibleToUser(item, this.currentUser) &&
-      isVisibleOnDevice(item, this.capabilities.isMobileDevice) &&
-      isSafeNavigationUrl(item.url)
-    );
+    return shouldRenderHeaderIcon({
+      item,
+      enabled: settings.enabled,
+      embedMode: EmbedMode.enabled,
+      mobileView: this.site.mobileView,
+      mobileMode: settings.mobile_mode,
+      currentUser: this.currentUser,
+      mobileDevice: this.capabilities.isMobileDevice,
+    });
   }
 
   get rel() {

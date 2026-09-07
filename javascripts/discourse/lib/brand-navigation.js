@@ -39,6 +39,30 @@ export function isUsableIcon(icon, iconExists = isExistingIconId) {
   return Boolean(iconExists(REPLACEMENTS[icon] || icon));
 }
 
+export function shouldRenderHeaderIcon({
+  item,
+  enabled,
+  embedMode,
+  mobileView,
+  mobileMode,
+  currentUser,
+  mobileDevice,
+  iconExists = isExistingIconId,
+}) {
+  return (
+    enabled &&
+    !embedMode &&
+    !(mobileView && mobileMode === "hidden") &&
+    item.link_mode !== "group" &&
+    Boolean(item.url) &&
+    isUsableIcon(item.icon, iconExists) &&
+    !(item.children || []).length &&
+    isVisibleToUser(item, currentUser) &&
+    isVisibleOnDevice(item, mobileDevice) &&
+    isSafeNavigationUrl(item.url)
+  );
+}
+
 export function arrangeNavigationItems(items, iconExists = isExistingIconId) {
   const preparedItems = items
     .filter((item) => (item.surface || "bar") === "bar")

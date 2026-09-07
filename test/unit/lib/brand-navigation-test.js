@@ -6,6 +6,7 @@ import {
   isVisibleToUser,
   linkRel,
   linkTarget,
+  shouldRenderHeaderIcon,
 } from "../../../discourse/lib/brand-navigation";
 import { isBrandNavigationObjectsEditor } from "../../../discourse/lib/brand-navigation-admin";
 import { isBrandNavigationTheme } from "../../../discourse/lib/brand-navigation-admin";
@@ -134,6 +135,44 @@ module("Unit | Lib | brand-navigation", function () {
     assert.true(isUsableIcon("d-tracking", (icon) => icon === "bell"));
     assert.false(isUsableIcon("not-in-the-sprite", () => false));
     assert.false(isUsableIcon("", () => true));
+  });
+
+  test("site-header icon policy fails closed in unsupported contexts", function (assert) {
+    const item = {
+      label: "Social",
+      url: "https://example.com/social",
+      icon: "user",
+      visibility: "everyone",
+    };
+    const base = {
+      item,
+      enabled: true,
+      embedMode: false,
+      mobileView: false,
+      mobileMode: "bar",
+      currentUser: null,
+      mobileDevice: false,
+      iconExists: (icon) => icon === "user",
+    };
+
+    assert.true(shouldRenderHeaderIcon(base), "an available icon renders");
+    assert.false(
+      shouldRenderHeaderIcon({ ...base, iconExists: () => false }),
+      "an unavailable icon is omitted"
+    );
+    assert.false(
+      shouldRenderHeaderIcon({
+        ...base,
+        mobileView: true,
+        mobileMode: "hidden",
+        mobileDevice: true,
+      }),
+      "hidden mobile mode omits the icon"
+    );
+    assert.false(
+      shouldRenderHeaderIcon({ ...base, embedMode: true }),
+      "embed mode omits the icon"
+    );
   });
 
   test("unavailable submenu icons fall back to child labels", function (assert) {

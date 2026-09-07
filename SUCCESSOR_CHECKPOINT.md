@@ -111,6 +111,18 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   desktop scenario proves a configured available header icon renders, while
   the mobile scenario proves the bar, compact menu, and header-icon surface are
   all absent in hidden mode. Replacement exact-head CI remains required.
+- Follow-up head `d6d35c5db3569b2b0de16e3b0b59f126c8c0bd35` / tree
+  `e5f213b15445304d3343a44fea3de742f66d0fb4` passed configuration run
+  `34092593926` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34092594131`. The separated desktop header-icon
+  precondition was still the sole system failure, proving that runtime
+  `navigation_items` replacement cannot exercise initializer-time header-icon
+  registration in this prebuilt test bundle. Header-icon render policy is now
+  an exported pure function with direct available, unavailable, hidden-mobile,
+  and embed-mode unit coverage. The system suite retains positive browser
+  coverage for unavailable-icon label fallback and actual hidden bar/menu
+  surfaces without asserting impossible dynamic registration. Replacement
+  exact-head CI remains required.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
