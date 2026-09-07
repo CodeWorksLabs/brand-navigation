@@ -1,12 +1,247 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE REPLACEMENT CI GREEN / FINAL FREEZE PENDING / NOT RELEASED**
+Disposition: **PR 7 MERGED / PR 8 FINAL CORRECTION AUTHORIZED / IMPLEMENTATION IN PROGRESS / NOT FROZEN / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
-- Current working branch: `codex/authorship-provenance`, based on the current
-  release-documentation line and published at the matching remote branch.
+- PR 8 replacement candidate `683af89cdee2673af6e3d5f9fae35ee2ad0463a0`
+  / tree `3418ab1f984082e3e5defa2fb48b0d4ff0e48ddf` passed configuration
+  run `34103778561` (24/24) and complete current, exact Repeal 2026.7, and
+  exact R744 2026.7 lanes in Discourse Theme run `34103778968` (frontend
+  22/22 and system 30/30 on each core, plus backend on each and current lint).
+  Freeze comment `5568234464` records the exact candidate and clean/synchronized
+  branch controls. Dual focused closure review closed all four submitted
+  correction items with no remaining P0/P1 or new P2 in that submitted set.
+- Sidebar closure review `BN-PR8-CLOSURE-20260907-SIDEBAR-R3` identified one
+  additional P2 transition case: a retained direct-header item initially
+  excluded by responsive policy could become eligible before the primary SVG
+  sprite arrived without then joining the shared readiness observer. Phil
+  authorized one final correction batch. The implementation synchronizes the
+  subscription whenever responsive eligibility is reevaluated and adds a
+  rendered hidden-mobile to desktop to delayed-sprite regression. Exact-head
+  local checks and CI are pending; this batch is not frozen.
+- First implementation commit `4a75e9de450eb15409858558ad4db7a22a4e55a2`
+  passed configuration run `34111630208` and every backend/system/lint lane of
+  Discourse Theme run `34111630733`, but the same new frontend assertion failed
+  on all three cores. The fixture attempted to replace an already-instantiated
+  `site` service, so the component correctly saw the real desktop value and
+  subscribed immediately. The test now follows Discourse's own component-test
+  convention: it stubs the existing service's `mobileView` value and invokes
+  Ember's `rerender()` to retain the component across the transition. This was
+  a test-fixture defect, not a reported production-code failure. Replacement
+  exact-head CI is required.
+- Fixture-corrected commit `f1c7b2b1210d385aed3ed572bdde82cee2e81d75`
+  passed configuration run `34113175978`; its three frontend lanes in Theme
+  run `34113176415` failed the opposite transition assertion. Stubbing the
+  untracked service property and calling a generic rerender did not invalidate
+  the child component because none of its consumed arguments changed. The
+  fixture now changes a tracked copy of the same item argument after changing
+  `mobileView`, forcing reevaluation at the same component location without
+  remounting it. The failure again concerns only the test trigger; production
+  mobile-view invalidation is owned by Discourse's tracked site service.
+- The same sidebar review identified this checkpoint's obsolete pre-freeze
+  wording as record-only P3. This current section supersedes that wording.
+  Earlier pending-state entries below are retained as dated iteration history,
+  not current status. Because a committed file cannot self-record its own
+  post-commit CI result, the next immutable freeze comment remains the
+  authoritative exact-head CI and candidate record.
+
+- Frozen PR 8 candidate `d398d887419886eae4310fd1467b483a29ed30b4`
+  / tree `9640302b5403dfb2052bf9a5f64c5a77fb717e5b` passed configuration
+  run `34097326194` (24/24) and every lane of Discourse Theme run
+  `34097326701` (frontend 20/20; system 30/30). Its focused dual
+  correction-closure review nevertheless issued BLOCK: the new
+  `ensureSpriteSymbol` and `hasSpriteSymbol` imports do not exist on the two
+  documented 2026.7 core revisions, and anonymous lookup failure could settle
+  before the independently loaded primary sprite without a later render
+  invalidation. The internal lane additionally identified unbounded per-icon
+  search/rerender fan-out as P2; the sidebar lane retained one historical-state
+  P3 in this checkpoint.
+- The authorized coherent second replacement removes those newer core imports
+  and all per-icon searches. A shared, request-free `MutationObserver` waits
+  for Discourse's primary Font Awesome sprite, notifies live consumers once,
+  and disconnects; destroyed consumers unsubscribe, and ineligible items do
+  not subscribe. Direct membership still distinguishes loaded replacement
+  icons from genuinely unavailable icons. Unit and rendered component tests
+  now cover delayed readiness, accessible interim labels, bar/child/header
+  recovery, unavailable fallback/omission, shared observation, and teardown.
+- The Discourse workflow now adds exact-core test lanes for recorded Repeal
+  core `988c31e00fb73713c81b93cd47f68af0fb4c6273` and R744 core
+  `2e46cff73b07ecddbcc5603eb3fbf41d563577f6`, alongside current Discourse.
+  Local JavaScript, template, type, CSS, changed-file formatting, configuration
+  (24/24), and diff checks pass. The batch has been pushed for iterative CI but
+  is not frozen; complete green exact-core execution remains pending.
+- Batch commit `f88fc93` first exposed a theme-test-only absolute import error;
+  `2300de3` corrected the integration test to use the repository-relative
+  module convention. On `2300de3`, the new rendered delayed-readiness test
+  passed on current Discourse and the R744 2026.7 core, while all three
+  frontend lanes failed the same older unit fixture because it inserted test
+  symbols beside, rather than inside, the primary `.fontawesome` sprite. The
+  fixture now accurately mirrors both supported loaders. Replacement CI is
+  required; no product-code failure was reported by those runs.
+- On fixture-corrected head `bd74dc7`, all current and exact-2026.7 frontend
+  suites passed, including the new rendered delayed-readiness case. All three
+  system suites then exposed the same genuine timing fault on user-profile
+  routes: the sprite observer could update tracked `iconRevision` inside an
+  active render computation. The callback is now scheduled through Ember's
+  `afterRender` queue, and an already-ready sprite requires no callback because
+  getters inspect it directly. Fresh full-matrix CI is required.
+- Substantive replacement head
+  `e2f03d630031c7b9312c90bea89b62dae715cb1b` passed configuration run
+  `34103050555` (24/24) and the complete three-core Discourse Theme run
+  `34103038086`. Current Discourse, Repeal core `988c31e00f`, and R744 core
+  `2e46cff73b` each passed backend, frontend (22/22), and system (30/30)
+  execution; current linting also passed. This checkpoint-only evidence commit
+  must pass exact-head CI before a new immutable candidate can freeze and enter
+  dual focused closure review.
+
+- Phil explicitly accepted the two remaining P2 release-engineering risks for
+  `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
+  intentionally moving downstream dependencies inside the pinned Discourse
+  workflow. Both remain tracked improvements rather than undisclosed claims of
+  immutability.
+- Frozen candidate `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b` / tree
+  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9` passed configuration run
+  `34080419543` and every lane of Discourse Theme run `34080419924`.
+- Sandbox component 3 imported that exact candidate with zero commits behind
+  and no import error. Administrator bundle import and appearance save both
+  succeeded without leaving the editor. After a controlled Foundation-theme
+  cutover, desktop light/dark, phone portrait/landscape, anonymous visibility,
+  keyboard submenu behavior, external-link safety, and overflow/error checks
+  passed. Phil accepted the authenticated presentation, My Preferences versus
+  Sign Up behavior, and persistent Resources submenu.
+- Pull request 7 merged as `22c4499044a270c5b31172c477f2c22f9fc63b20`.
+  Its tree is exactly the accepted candidate tree above. No tag or GitHub
+  Release has yet been created; a minimal release-metadata correction must pass
+  its own gates first.
+- Pull request 8 froze at `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`
+  / tree `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`. Configuration
+  run `34085356922` and all five Discourse Theme lanes in run `34085357353`
+  passed. Internal review and the persistent sidebar Code Reviewer both issued
+  PASS dispositions with findings for that exact candidate.
+- Phil accepted live classic-embed, full RTL-locale, and screen-reader manual
+  execution as disclosed `v0.9.0` preview follow-ups, not as tests already
+  performed; all three remain required before `v1.0.0`.
+- The complete PR 8 finding census contains six findings. BN-06 and BN-15 are
+  the two previously accepted P2 release-engineering risks. Phil directed one
+  coherent correction batch for the four new findings: enabled shared-core
+  coverage (BN8-02), the Discourse object-setting byte preflight (BN8-03),
+  unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
+  (BN8-01).
+- Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
+  request 7. The first four-finding correction batch was committed, pushed,
+  frozen, and dual-reviewed. The P1/P3 replacement batch described below is the
+  current work and requires its own exact-head CI, freeze, and closure review.
+- Current correction-batch local evidence: all 24 Node configuration tests,
+  JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
+  formatting, Repeal fixture validation, and `git diff --check` pass. Ruby and
+  browser suites were not executed locally; exact GitHub execution evidence is
+  recorded below. The aggregate local lint command reports Windows checkout
+  formatting drift in 17 unchanged files; no changed file is among those
+  warnings.
+- First pushed batch commit `97f249ecb799b14b5089d6a6a9854bfda867005c`
+  / tree `1d088afef469709a8d263ab486ca55512a9c381e` passed configuration
+  run `34089230517`, plus test discovery, linting, and backend checks in
+  Discourse Theme run `34089231211`. Its frontend lane passed 15/17 QUnit
+  tests: the two failures were test assumptions that the interaction helper
+  could click a disabled button and that undeclared `signal` was available in
+  the test sprite. Its system lane passed 29/30 examples, including the new
+  enabled-core and unavailable-icon scenarios; the remaining historical mobile
+  scenario assumed `globe` was guaranteed in the active sprite. The corrected
+  fixtures use native disabled-button behavior, explicit unit icon
+  availability, and the core-guaranteed `search` icon. Replacement exact-head
+  CI is required before freeze.
+- Replacement head `b978a6d6d8ed798b2af5137b72f5d652391a62bc`
+  / tree `50a893fefa1d16a82351504f97295e2fa24053f7` passed configuration
+  run `34089873962` and test discovery, linting, backend, and all 17 frontend
+  tests in Discourse Theme run `34089874541`. The system lane again passed the
+  new enabled-core and unavailable-icon scenarios but retained one failure in
+  the older hidden-mobile scenario because the minimal test sprite does not
+  guarantee the substituted `search` icon. That fixture now uses
+  `caret-down`, which Brand Navigation itself statically requires. Another
+  exact-head system run is required; the prior green lanes do not carry forward
+  as a replacement-candidate disposition.
+- Follow-up head `abf52851002bf90bdf4094761a5709001ddf6ecb` / tree
+  `06a27c449b531396af7f5afb5076caa083bbdc44` passed configuration run
+  `34090334222` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34090334799`. The same older hidden-mobile system
+  scenario remained the sole failure because merely choosing a component-used
+  literal did not add a dynamically configured item icon to that test theme's
+  SVG subset. The scenario now exercises the documented administrator contract
+  by explicitly adding `caret-down` to `custom_font_awesome_icons` before
+  asserting the positive header-icon baseline and the subsequent hidden state.
+  Replacement exact-head CI remains required.
+- Follow-up head `415dd0ead3ed71473b340f41cf7c53de69a45f6d` / tree
+  `81fca3d1e82ee93f1a7266ceab270f46e17ecb23` passed configuration run
+  `34090828030` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34090828723`. Its system lane again passed 29/30
+  examples; the sole failure was the same positive header-icon prerequisite.
+  Evidence established that changing `custom_font_awesome_icons` after the test
+  component upload does not rebuild that page's SVG sprite. The fixture now
+  registers `caret-down` through Discourse's supported theme-modifier
+  `svg_icons` collection before visiting the page. Production behavior is
+  unchanged. Replacement exact-head CI remains required.
+- Follow-up head `a9eedecef974d5b51d12cd0fe204fa5f2278355d` / tree
+  `cfd0f324af7a367755305c99815d677091b34724` passed configuration run
+  `34091516312` and test discovery, linting, backend, and all
+  17 frontend tests in Discourse Theme run `34091516812`. Its system lane again
+  passed 29/30 examples; registering the icon through the uploaded component's
+  theme modifier did not update the already composed active theme sprite in the
+  system harness. The prerequisite now uses `user`, which the failed-page
+  artifact proves is present in the active core header sprite. This avoids
+  dynamically mutating sprite membership while preserving the scenario's
+  positive-then-hidden assertion. Replacement exact-head CI remains required.
+- Follow-up head `3db16f2a2588de15684d0ce1736d630a6b7766e9` / tree
+  `55e4db59303371f1fdf40e554b3ab7fc120909bf` passed configuration run
+  `34091962556` and test discovery, linting, backend, and all
+  17 frontend tests in Discourse Theme run `34091962977`. Its system lane again
+  passed 29/30 examples. The raw failure identified the positive custom-header
+  assertion on the mobile system-test page, whose core header does not expose
+  that custom outlet in this fixture. The test now separates the concerns: a
+  desktop scenario proves a configured available header icon renders, while
+  the mobile scenario proves the bar, compact menu, and header-icon surface are
+  all absent in hidden mode. Replacement exact-head CI remains required.
+- Follow-up head `d6d35c5db3569b2b0de16e3b0b59f126c8c0bd35` / tree
+  `e5f213b15445304d3343a44fea3de742f66d0fb4` passed configuration run
+  `34092593926` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34092594131`. The separated desktop header-icon
+  precondition was still the sole system failure, proving that runtime
+  `navigation_items` replacement cannot exercise initializer-time header-icon
+  registration in this prebuilt test bundle. Header-icon render policy is now
+  an exported pure function with direct available, unavailable, hidden-mobile,
+  and embed-mode unit coverage. The system suite retains positive browser
+  coverage for unavailable-icon label fallback and actual hidden bar/menu
+  surfaces without asserting impossible dynamic registration. Replacement
+  exact-head CI remains required.
+- Completed correction-code head
+  `36562ed47e576a65c5ba474569a17f32d67ca0d7` / tree
+  `24e6c0736508a0d5210d9425e49c424fa0409844` passed all exact-head checks:
+  configuration run `34093283060` and test discovery, linting, backend, all 18
+  frontend tests, and all 30 system examples in Discourse Theme run
+  `34093283449`. The current successor-record commit is documentation-only, but
+  it must also pass exact-head CI before the pull-request candidate is frozen.
+- Final first-batch candidate `9c77873401a6a2ccf21eba4f907f97fc19af1850`
+  / tree `96aef5a0b7baa1cc537b795ebc5f97c448dec019` passed all exact-head
+  checks in configuration run `34093777343` and Discourse Theme run
+  `34093777874`. Dual correction-closure review then identified a production
+  P1: Discourse's `isExistingIconId` membership list is initialized only in
+  development, so ordinary production would treat every configured icon as
+  unavailable. The sidebar review blocked BN8-04 closure; the internal review
+  additionally identified two P3 evidence-record issues, which the sidebar
+  review confirmed as one residual checkpoint P3.
+- The current replacement uses Discourse's exported `hasSpriteSymbol` helper to
+  inspect symbols loaded in the production SVG sprite, retains replacement-ID
+  mapping, adds a no-injected-predicate production-path test, classifies all
+  superseded checkpoint sections as historical, and narrows the system-test and
+  testing-guide claims to actual rendered bar fallback. Fresh CI and dual
+  closure review are required after commit and freeze.
+- Substantive replacement head `c83348aef4d5aa74f76a8966043cc114050d2a32`
+  / tree `3ac9802c9405f43537c57be44765d6daebda37f2` passed all exact-head
+  checks: configuration run `34096739720` passed all 24 Node cases; Discourse
+  Theme run `34096740176` passed discovery, linting, backend, all 20 frontend
+  tests, and all 30 system examples. The successor-record commit that records
+  this evidence must also pass current-head CI before replacement freeze.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -37,15 +272,13 @@ Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE
   existing Pageant/SSH access may be used only when a read-only server check is
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
-  issued review `BN-CODEBASE-20260907`. The first replacement was reviewed in
-  parallel by the internal review lane and the persistent sidebar Code Reviewer
-  task. The internal lane completed its review; the sidebar lane issued
-  `INCOMPLETE` reports with unresolved evidence requirements. Findings from
-  both lanes were evaluated together and remediated without promoting the
-  sidebar reports to completed reviews. Step 5 is complete. Step 6 remains open
-  because correction closure found the record-integrity blocker documented
-  below.
+  actions** below. Pull request 7 completed the implementation review,
+  remediation, correction closure, manual acceptance, and merge gates. Pull
+  request 8 is the release-metadata successor candidate. Its complete review is
+  finished and the authorized four-finding correction batch is implemented.
+  The remaining sequence is green current-head CI, freeze, dual
+  correction-closure review, remaining release-gate reconciliation, merge,
+  exact-tree confirmation, tag, and GitHub Release.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -72,10 +305,22 @@ direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/authorship-provenance`.
+- Current branch: `codex/v0.9.0-release-metadata`.
+- Current committed PR 8 head before the authorized correction batch:
+  `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`; tree
+  `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`.
+- Current merged `main` head: `22c4499044a270c5b31172c477f2c22f9fc63b20`;
+  tree `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
+- Exact browser-accepted implementation head:
+  `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b`; tree
+  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
+
+The remaining references in this section are historical and are not current
+branch, head, candidate, or release-gate claims:
+
 - Merged color-control head: `4d520d2`.
-- Current merged head: `4a03705` (documentation-only merge after the last
-  browser-tested implementation head).
+- Historical merged head `4a03705` was a documentation-only merge after its
+  then-current browser-tested implementation.
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
@@ -84,8 +329,7 @@ direction.
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
 - Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
-- Current CI/browser-tested merged head: `b0b5354` (the checkpoint itself may
-  create a later documentation-only head).
+- Historical CI/browser-tested merged head: `b0b5354`.
 - Historical first-review commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
 - Historical PR 7 pre-remediation freeze: commit
@@ -98,6 +342,10 @@ direction.
 directory. Use the canonical local repository path above.
 
 ## Formal review and remediation checkpoint
+
+This section is a dated history of PR 7 review and remediation. It does not
+override the current PR 8 state in **Current release-documentation checkpoint**
+or **Canonical locations** above.
 
 - Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
   Its first frozen candidate `80061e4` / tree `12a1292a` passed all six GitHub
@@ -240,11 +488,13 @@ directory. Use the canonical local repository path above.
   system suite passed 28/28. This checkpoint refresh must receive exact-head CI
   before the final correction-closure candidate freezes.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
-  review evidence. Candidate `552f09d` is superseded only by the record
-  correction above and likewise remains immutable evidence. No final manual
-  acceptance, merge, tag, or release has occurred.
+  review evidence. Candidate `552f09d` was superseded by the complete closure
+  correction batch: the record correction, production persistence seam,
+  rendered integration tests, and expanded lint discovery. Final checkpoint
+  commit `9f2a6e0` then recorded the closure evidence without changing product
+  behavior. Each remains immutable historical evidence.
 
-## Administrator color-control checkpoint
+## Historical administrator color-control checkpoint
 
 - Candidate `ce7fb34` adds five independently optional appearance settings:
   bar background, bar text/icons, hover/highlight background, submenu
@@ -264,7 +514,7 @@ directory. Use the canonical local repository path above.
 - Official Discourse workflow run `34051003085` passed linting, backend,
   frontend QUnit, and browser-backed system tests on candidate `1fee5e8`.
   Configuration workflow run `34051002649` passed all 21 Node tests.
-- Administrator/browser interaction on the sandbox remains pending because
+- At that historical gate, administrator/browser interaction on the sandbox remained pending because
   this resumed task currently exposes no callable authenticated-browser
   control despite the browser session being open. No production forum has
   been changed.
@@ -274,7 +524,7 @@ directory. Use the canonical local repository path above.
   `color palette` in the follow-up candidate. This was a locale-policy finding,
   not a code-build failure.
 
-## Color-value normalization follow-up
+## Historical color-value normalization follow-up
 
 - Sandbox testing found that Discourse's underlying string setting accepts
   both `16324F` and `#FFFFFF`; the database retained those exact forms.
@@ -283,7 +533,7 @@ directory. Use the canonical local repository path above.
   uppercase `#RRGGBB`, and documents the accepted input.
 - Local ESLint, Ember template lint, Stylelint, type checking, changed-file
   formatting, `git diff --check`, and all 22 Node configuration tests pass.
-- Official CI, merge, and sandbox update verification remain pending. The
+- At that historical gate, official CI, merge, and sandbox update verification remained pending. The
   sandbox currently has `bar_background_color=16324F` and
   `bar_text_color=#FFFFFF`; no production forum was changed.
 
@@ -315,7 +565,8 @@ directory. Use the canonical local repository path above.
   APIs; that unsupported build remains explicitly outside the compatibility
   claim. R744 was subsequently upgraded to the 2026.7 ESR and is now a verified
   installation as recorded below. Draft pull request 2 is obsolete for the
-  R744 site and should be closed rather than merged.
+  R744 site and was later closed without merge, as recorded in the current
+  release checkpoint above.
 
 ## R744 2026.7 ESR checkpoint
 
@@ -409,7 +660,7 @@ directory. Use the canonical local repository path above.
 - This post-merge smoke test changed only the authorized sandbox. Repeal and all
   other production/consumer sites were untouched.
 
-## Current verification gate (supersedes older pending statements below)
+## Historical verification gate — `13005b7` (superseded)
 
 - The reviewed candidate was committed to the short-lived verification branch
   and pushed without changing `main`. No tag or GitHub Release was created.
@@ -595,7 +846,7 @@ directory. Use the canonical local repository path above.
   so administrators can continue working instead of being returned to the main
   component settings screen.
 
-## Current repository and runtime state
+## Historical repository and runtime state — initial build period
 
 - `6bb45ec` fixed strict-mode GJS translation imports. It cleared the sandbox's
   administrator warning and produced no new Brand Navigation client error.
@@ -634,18 +885,18 @@ directory. Use the canonical local repository path above.
   bar. This uses the supported `api.headerIcons` API. Existing entries default
   to the bar. Repeal's ten standalone social links now use `site_header`; its
   Social parent and submenu remain in the Brand Navigation bar.
-- A versioned import/export utility now exists at
-  `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
-  Brand Navigation settings, preflights a target component, and applies all
-  bundled settings in one Discourse admin API request. It cannot attach or
-  enable a component.
+- At this historical stage, `scripts/brand-navigation-config.mjs` included
+  credentialed export/apply operations. Those operations were later removed
+  from the `v0.9.0` contract; the current script performs offline bundle
+  validation only.
 - `configurations/repeal-obbba.json` contains the inventoried Repeal migration
   as the first real bundle and large-menu test fixture.
 - The configuration-bundle work, documentation, expanded thanks, and tests are
   committed in `6def463`; checkpoint commit `c51a7f6` is also pushed. The
   sandbox accepted the updated remote component and its normal runtime render
-  remains clean. The API import/export round trip has not run because no
-  `DISCOURSE_API_KEY` or `DISCOURSE_API_USERNAME` is available to this task.
+  remains clean. The then-planned API import/export round trip did not run. It
+  is not a current verification requirement because the credentialed
+  operations were removed.
 - `c1cc27b` adds the supported admin-page bundle controls and polished submenu
   closure behavior. Local lint, types, templates, styles, formatting, bundle
   validation, and four Node tests pass. Sandbox theme component `1` was updated

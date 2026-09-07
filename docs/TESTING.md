@@ -28,9 +28,11 @@ merged. At implementation commit `13005b7`, official Discourse Theme workflow
 run `34010799758` passed linting, English-locale validation, frontend QUnit,
 backend, and Ruby system tests. Configuration workflow run `34010799448`
 passed all 18 Node bundle tests. This is historical implementation evidence,
-not the immutable candidate for the forthcoming `v0.9.0` release; that exact
-commit and tree will be recorded after the release-preparation pull request is
-complete.
+not the immutable `v0.9.0` candidate. The accepted release candidate is commit
+`9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b`, tree
+`8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`; configuration run
+`34080419543` and Discourse Theme run `34080419924` passed before manual
+acceptance and merge.
 
 The same branch was installed as sandbox component id `2` and verified for the
 desktop, 390px mobile menu/bar/hidden, keyboard submenu, safe external-link,
@@ -95,7 +97,7 @@ submenu button is present and no Resources parent link is rendered. Its saved
   (`2e46cff73b`), and verified with Brand Navigation from `main`. Component id
   `1` is enabled on Foundation and Horizon; the duplicate component id `2`
   remains preserved, disabled, and unattached. Draft pull request 2 is no
-  longer needed to support this site and should be closed rather than merged.
+  longer needed to support this site and was closed without merge.
 - Record the exact Discourse builds for DiscussionBridge Forum, The Bridge,
   Citizen Activist Network, and RVing Community from their administrator
   dashboards when convenient.
@@ -103,7 +105,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
 ## Automated gates
 
 - JavaScript, template, style, formatting, and type linting.
-- Discourse shared core-feature system specification.
+- Discourse shared core-feature system specification with Brand Navigation
+  internally enabled, plus an explicit rendered-presence assertion.
 - Normal-page rendering of brand, direct links, and native submenu.
 - Mobile compact-menu behavior.
 - Negative render assertion for `embed_mode=true`.
@@ -112,7 +115,16 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for left/right navigation section grouping.
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
-- Unit coverage for icon/label presentation and missing-icon fallback.
+- Unit coverage for delayed primary-sprite readiness, shared notification and
+  teardown, production-sprite icon membership, replacement icon IDs,
+  icon/label presentation, unavailable bar/submenu fallback, and omission of
+  unavailable direct site-header icons.
+- Rendered component coverage for a retained site-header item that starts
+  mobile-hidden, becomes eligible before sprite readiness, subscribes once,
+  and appears after the delayed primary symbol arrives.
+- Rendered system coverage for visible label fallback when a bar icon is
+  unavailable. The prebuilt system harness cannot dynamically register a new
+  `api.headerIcons` entry after the component initializer has run.
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
 - Bounded local bundle validation without forum credentials or network access.
@@ -120,7 +132,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
   signature, including locally uploaded components and incomplete-signature
   rejection.
 - Complete bundle preflight, immutable persistence snapshots, strict color
-  types, inert diagnostics, and export/import byte-limit symmetry.
+  types, inert diagnostics, whole-file symmetry, and Discourse's per-object
+  setting byte limit, including a rendered assertion that an oversized object
+  sends no persistence request and changes no setting.
 - Component-action deferred-completion coverage for submitted appearance and
   bundle snapshots, in-flight state, model reconciliation, dirty state,
   success state, current/exported settings, and unrelated color-draft

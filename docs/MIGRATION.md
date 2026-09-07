@@ -14,8 +14,11 @@ unknown fields, navigation depth, size limits, and cross-field requirements.
 The browser importer sends one complete theme update after preflight rather than
 saving settings one at a time. If connectivity is lost after submission, reload
 the target component and verify its settings before retrying.
-The same 1,000,000-byte ceiling applies to imports and generated exports;
-oversized settings must be shortened before a downloadable bundle is created.
+The same 1,000,000-byte file ceiling applies to imports and generated exports.
+The structured navigation data must also fit Discourse's 524,288-byte
+serialized object-setting limit. Brand Navigation checks both limits before an
+import request or downloadable bundle is created; oversized settings must be
+shortened first.
 
 For normal administrator use, the same operation is available in the
 **Configuration bundles** panel near the bottom of Brand Navigation's

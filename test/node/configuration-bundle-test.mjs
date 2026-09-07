@@ -17,6 +17,7 @@ import {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,
   createBundle,
+  MAX_THEME_OBJECT_SETTING_BYTES,
   serializeBundle,
   themeSettingValue,
   validateBundle,
@@ -325,7 +326,7 @@ test("oversized browser files are rejected before reading", async () => {
   assert.equal(read, false);
 });
 
-test("exports cannot create bundles larger than the importer accepts", () => {
+test("exports cannot create navigation settings larger than Discourse accepts", () => {
   const longUrl = `https://example.com/${"x".repeat(2028)}`;
   const children = Array.from({ length: 50 }, (_, index) => ({
     label: `Child ${index}`,
@@ -344,7 +345,7 @@ test("exports cannot create bundles larger than the importer accepts", () => {
 
   assert.throws(
     () => createBundle({ navigation_items: navigationItems }),
-    /cannot exceed 1,000,000 bytes.*Reduce the number or length/i
+    /navigation_items cannot exceed 524,288 serialized bytes/i
   );
 
   const bundle = createBundle({
@@ -352,6 +353,49 @@ test("exports cannot create bundles larger than the importer accepts", () => {
   });
   assert.ok(
     new TextEncoder().encode(serializeBundle(bundle)).length <= 1_000_000
+  );
+});
+
+test("preflights Discourse's object-setting byte limit before import", () => {
+  const navigationItems = (urlLength) => {
+    const url = `/${"x".repeat(urlLength)}`;
+
+    return Array.from({ length: 100 }, (_, index) => ({
+      label: `Parent ${index}`,
+      url,
+      children: [
+        { label: "First", url },
+        { label: "Second", url },
+      ],
+    }));
+  };
+
+  const belowLimit = navigationItems(1_700);
+  const aboveLimit = navigationItems(1_750);
+
+  assert.ok(
+    new TextEncoder().encode(JSON.stringify(belowLimit)).length <=
+      MAX_THEME_OBJECT_SETTING_BYTES
+  );
+  assert.deepEqual(
+    validateBundle({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: { navigation_items: belowLimit },
+    }),
+    []
+  );
+  assert.ok(
+    new TextEncoder().encode(JSON.stringify(aboveLimit)).length >
+      MAX_THEME_OBJECT_SETTING_BYTES
+  );
+  assert.deepEqual(
+    validateBundle({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: { navigation_items: aboveLimit },
+    }),
+    ["navigation_items cannot exceed 524,288 serialized bytes."]
   );
 });
 

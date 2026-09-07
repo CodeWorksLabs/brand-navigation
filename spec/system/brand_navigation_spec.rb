@@ -55,26 +55,7 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_css("#brand-navigation-menu")
   end
 
-  it "hides every component surface in hidden mobile mode", mobile: true do
-    theme.update_setting(:mobile_mode, "bar")
-    theme.update_setting(
-      :navigation_items,
-      [
-        {
-          label: "Social",
-          url: "https://example.com/social",
-          icon: "globe",
-          surface: "site_header",
-          visibility: "everyone",
-        },
-      ],
-    )
-    theme.save!
-
-    visit("/")
-    expect(page).to have_css("[data-brand-navigation]")
-    expect(page).to have_css(".brand-navigation-header-icon")
-
+  it "hides the bar and compact menu in hidden mobile mode", mobile: true do
     theme.update_setting(:mobile_mode, "hidden")
     theme.save!
 
@@ -82,7 +63,29 @@ RSpec.describe "Brand Navigation" do
 
     expect(page).not_to have_css("[data-brand-navigation]")
     expect(page).not_to have_css("#brand-navigation-menu")
-    expect(page).not_to have_css(".brand-navigation-header-icon")
+  end
+
+  it "falls back from unavailable bar icons" do
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Fallback",
+          url: "/latest",
+          icon: "brand-navigation-missing-icon",
+          presentation: "icon_only",
+          visibility: "everyone",
+        },
+      ],
+    )
+    theme.save!
+
+    visit("/")
+
+    expect(page).to have_css(
+      '.brand-navigation__items a[href="/latest"] span',
+      text: "Fallback",
+    )
   end
 
   it "keeps mobile bar submenus reachable without a clipping scrollport", mobile: true do

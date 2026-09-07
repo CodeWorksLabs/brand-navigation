@@ -6,6 +6,22 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+## 0.9.0 - 2026-09-07
+
+- Exercise the enabled component during Discourse's shared core-feature system
+  coverage.
+- Reject navigation data above Discourse's per-object setting limit before an
+  administrator import can send any settings.
+- Wait for Discourse's primary SVG sprite through a shared, request-free
+  readiness observer; check its loaded symbols; fall back to visible labels
+  when bar or submenu icons are unavailable; and omit unavailable direct
+  site-header icons.
+- Join that shared readiness observer when a retained site-header item becomes
+  eligible after its initial render, so responsive visibility changes cannot
+  strand a valid icon while the primary sprite is still loading.
+- Reconcile the successor checkpoint into one unambiguous current release
+  state while retaining dated historical evidence.
+
 - Make administrator imports and color saves use immutable request snapshots,
   disable conflicting controls while writes are pending, and reconcile imported
   colors with their visible controls after success.
@@ -46,6 +62,6 @@ to discover component updates from commits on the installed remote branch.
   required by the official Discourse component workflow.
 - Pin the Ruby lint-tool versions used by verification CI.
 
-The first tagged preview candidate is planned as `v0.9.0` after correction
-review and required runtime verification. Version `v1.0.0` is reserved for the
-documented, multi-site-tested release with no known release blockers.
+Version `v0.9.0` is the first reviewed preview release. Version `v1.0.0` is
+reserved for the documented, multi-site-tested release with no known release
+blockers.

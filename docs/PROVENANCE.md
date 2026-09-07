@@ -96,9 +96,9 @@ contributor should not be assumed to have authority to clarify the license for
 the complete upstream repository.
 
 No Brand Navigation version was tagged or published as a GitHub Release before
-this decision. The repository was already public, however, so earlier commits
-were distributed with the declarations present at that time. Changing the
-current declaration does not withdraw permissions that recipients may already
+the `v0.9.0` release process. The repository was already public, however, so
+earlier commits were distributed with the declarations present at that time.
+Changing the current declaration does not withdraw permissions recipients may already
 hold for those published commits. No external human recipient, adoption, or
 reliance is known: the repository currently has no forks, stars, or subscribers.
 GitHub traffic does record automated/client clone activity consistent with CI

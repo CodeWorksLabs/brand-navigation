@@ -113,7 +113,7 @@ Navigation additionally uses Semantic Versioning tags and matching GitHub
 Releases as human-readable release, support, and rollback identities. `main`
 must remain releasable; development occurs on short-lived branches.
 
-The first reviewed preview is planned as `v0.9.0`. Version `v1.0.0` is reserved
+The first reviewed preview release is `v0.9.0`. Version `v1.0.0` is reserved
 for the documented, multi-site-tested release with no known release blockers.
 See the [changelog](CHANGELOG.md) and [release procedure](docs/RELEASE.md).
 
