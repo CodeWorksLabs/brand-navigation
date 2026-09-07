@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE RECORD BLOCKER UNDER REMEDIATION / NOT RELEASED**
+Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE REPLACEMENT CI GREEN / FINAL FREEZE PENDING / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -232,6 +232,13 @@ directory. Use the canonical local repository path above.
   asserted DOM state before Ember finished rerendering after the controlled
   promise resolved. The tests now await the standard `settled()` helper after
   completion before inspecting rendered values; replacement CI is required.
+- Replacement commit `95d447bc230a1f97e9f95a4e0fb72479c6b7a686` / tree
+  `57e7ad5535633b04c84540fffea3f86c5cf04e50` passed configuration run
+  `34080068217` and all lanes in Discourse Theme run `34080068455`. QUnit
+  passed 14/14, including both component-level deferred-completion cases;
+  RuboCop and every other lint gate passed; backend passed; and the unchanged
+  system suite passed 28/28. This checkpoint refresh must receive exact-head CI
+  before the final correction-closure candidate freezes.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. Candidate `552f09d` is superseded only by the record
   correction above and likewise remains immutable evidence. No final manual
