@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / COHERENT REMEDIATION BATCH IN PROGRESS / NOT RELEASED**
+Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / REMEDIATION COMPLETE / REPLACEMENT CI GREEN / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -38,8 +38,10 @@ Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / COHERENT REM
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
   actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
-  issued review `BN-CODEBASE-20260907`; the current position is Step 5, coherent
-  remediation of the complete known finding batch.
+  issued review `BN-CODEBASE-20260907`; Steps 5 and the implementation/testing
+  portion of Step 6 are complete. The next exact candidate will be reviewed in
+  parallel by the internal review lane and the persistent sidebar Code Reviewer
+  task before their results are evaluated together.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -129,9 +131,17 @@ directory. Use the canonical local repository path above.
   because the newly authored color assertion searched for a conditional CSS
   modifier class that was absent in that fixture. The failure artifact showed
   the rendered submenu and configured colors. The test selector has been
-  corrected to use the stable `.brand-navigation__submenu > ul a` structure;
-  replacement exact-candidate CI is pending.
-- The replacement candidate is not frozen yet. No correction-closure review,
+  corrected to use the stable `.brand-navigation__submenu > ul a` structure.
+  Replacement commit `6315e0a` then passed all six checks: configuration run
+  `34073137065` and Discourse Theme run `34073137344`, including all 27 system
+  examples. The next checkpoint-only commit must also pass exact-head CI before
+  the candidate is frozen.
+- Phil directed the next review to both the internal review lane and the
+  persistent sidebar task titled `Code Reviewer`. Both must receive the same
+  immutable commit, tree, doctrine, scope, and evidence package. Their reports
+  remain separate until both finish and are then evaluated together; neither
+  inherits the other's conclusions.
+- The replacement candidate is not frozen yet. No dual correction-closure review,
   final manual acceptance, merge, tag, or release has occurred.
 
 ## Administrator color-control checkpoint
