@@ -6,6 +6,10 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Adopt Discourse's `d-compat/<YYYY>.<M>` compatibility-branch convention,
+  including the official daily branch-creation workflow and exact Discourse
+  2026.8 release coverage.
+
 ## 0.9.0 - 2026-09-07
 
 - Exercise the enabled component during Discourse's shared core-feature system

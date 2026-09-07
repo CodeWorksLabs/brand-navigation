@@ -79,11 +79,23 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
-`main` is the stable update channel used by ordinary Discourse remote-component
-installations. Build changes on short-lived branches and merge only a complete,
-reviewed batch. Discourse update detection remains commit-based; release tags
-provide durable human and rollback identities. Record both the version and
-short commit in every compatibility result.
+`main` is the stable update channel for current Discourse. Build changes on
+short-lived branches and merge only a complete, reviewed batch. Maintained
+older Discourse releases use branches named `d-compat/<YYYY>.<M>`. The official
+daily compatibility workflow creates a branch for each newly released
+Discourse version from the last first-parent `main` commit predating that core
+release. Because Brand Navigation was first published after Discourse 2026.7
+was cut, its initial 2026.7 branch must be seeded manually from a version tested
+against that release.
+
+When a compatible fix lands on `main`, backport it through a reviewed pull
+request whose base is the affected `d-compat` branch. Do not merge new features
+or unverified framework changes into compatibility branches. Keep an exact-core
+CI lane for every Discourse release that Brand Navigation actively maintains.
+Discourse update detection remains commit-based; release tags provide durable
+human and rollback identities. Record the Brand Navigation version, component
+commit, compatibility branch, Discourse version, and exact core commit in every
+compatibility result.
 
 Use `v0.9.x` for reviewed preview releases. Publish `v1.0.0` only after the
 documentation and planned multi-site compatibility work are complete and no

@@ -43,6 +43,13 @@ revision, the control changes to **Update to latest**. Remote components are
 eligible for Discourse's automatic-update behavior when that option is enabled
 for the installation.
 
+Install from the repository's default branch rather than pinning a custom
+branch. Brand Navigation's `main` branch targets current Discourse. For a
+maintained older Discourse release, the updater automatically selects the
+matching `d-compat/<YYYY>.<M>` branch when one exists. This selection is part of
+Discourse's native remote-theme update behavior; administrators do not need to
+choose the compatibility branch manually.
+
 This tracking only applies when Brand Navigation was installed from its Git
 repository. A component imported from a file or created locally is not linked
 to this repository and therefore cannot receive its updates through the normal

@@ -1,9 +1,28 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 FINAL CORRECTION AUTHORIZED / IMPLEMENTATION IN PROGRESS / NOT FROZEN / NOT TAGGED**
+Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compat-branching` / NOT MERGED**
 
 ## Current release-documentation checkpoint
+
+- PR 8 merged as `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
+  Its tree `23328df16e2703920778d71c226abe0a00f97cfb` exactly matches
+  the accepted candidate. Annotated tag `v0.9.0` and the published GitHub
+  preview release identify that merge and tree. Sandbox component 3 was
+  updated to candidate commit `222fdbe78b61fe284b7bf7925b04185f8c7e5c57`,
+  reported zero commits behind with no import error, and passed Phil's final
+  authenticated visual acceptance. PR comment `5573217066` is the immutable
+  release-closure record.
+- Phil authorized adoption of Discourse's current compatibility-branch
+  convention after official-source and ecosystem review. Work is isolated on
+  `codex/d-compat-branching` from released `main`. The batch adds the pinned
+  official daily `d-compat` workflow, an exact Discourse 2026.8 release CI
+  lane at core commit `badad7b0456a628e578bc48b9f8c1259422b5d58`, and
+  administrator/release documentation. No compatibility branch has been
+  pushed yet. `d-compat/2026.7` will be seeded from tested `v0.9.0`; a 2026.8
+  branch will be seeded only after its exact-core lane is green.
+- All PR 8 pending-state entries below are dated development history and no
+  longer describe the current release or repository state.
 
 - PR 8 replacement candidate `683af89cdee2673af6e3d5f9fae35ee2ad0463a0`
   / tree `3418ab1f984082e3e5defa2fb48b0d4ff0e48ddf` passed configuration

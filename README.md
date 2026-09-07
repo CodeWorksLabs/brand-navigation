@@ -111,7 +111,10 @@ scope, architecture, migration, testing, and release procedures.
 Discourse detects updates from commits on the installed remote branch. Brand
 Navigation additionally uses Semantic Versioning tags and matching GitHub
 Releases as human-readable release, support, and rollback identities. `main`
-must remain releasable; development occurs on short-lived branches.
+targets current Discourse; maintained older releases use Discourse's
+`d-compat/<YYYY>.<M>` compatibility branches. Development occurs on short-lived
+branches, and fixes for an older supported release are reviewed and backported
+to its matching compatibility branch.
 
 The first reviewed preview release is `v0.9.0`. Version `v1.0.0` is reserved
 for the documented, multi-site-tested release with no known release blockers.
