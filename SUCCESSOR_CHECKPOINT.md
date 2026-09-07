@@ -210,6 +210,13 @@ directory. Use the canonical local repository path above.
   component without a required owner argument. This was a test-harness setup
   defect, not a runtime component failure; the test construction now supplies
   both owner and arguments and requires replacement CI before any freeze.
+- Follow-up commit `390b2ca` supplied a non-null plain object as the owner.
+  Configuration run `34079040392` passed, and Discourse Theme run
+  `34079040637` again passed test discovery, linting, backend, and all 28 system
+  examples. The frontend lane showed that Glimmer requires an actual Ember
+  owner rather than an arbitrary object. The tests now initialize the standard
+  Discourse QUnit owner with `setupTest` and pass `getOwner(this)`; another
+  replacement CI run is required.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. Candidate `552f09d` is superseded only by the record
   correction above and likewise remains immutable evidence. No final manual

@@ -1,3 +1,5 @@
+import { getOwner } from "@ember/owner";
+import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
 import BrandNavigationBundles from "../../../discourse/connectors/admin-customize-theme-before-controls/brand-navigation-bundles";
 import {
@@ -47,15 +49,14 @@ function deferred() {
   return { promise, resolve };
 }
 
-module("Unit | Lib | brand-navigation", function () {
+module("Unit | Lib | brand-navigation", function (hooks) {
+  setupTest(hooks);
+
   test("appearance completion reconciles the submitted snapshot", async function (assert) {
     const theme = adminTheme();
-    const component = new BrandNavigationBundles(
-      {},
-      {
-        outletArgs: { theme },
-      }
-    );
+    const component = new BrandNavigationBundles(getOwner(this), {
+      outletArgs: { theme },
+    });
     const request = deferred();
 
     component.persistSettings = async (submittedSettings) => {
@@ -93,12 +94,9 @@ module("Unit | Lib | brand-navigation", function () {
 
   test("bundle completion uses its submitted snapshot and preserves unrelated color drafts", async function (assert) {
     const theme = adminTheme();
-    const component = new BrandNavigationBundles(
-      {},
-      {
-        outletArgs: { theme },
-      }
-    );
+    const component = new BrandNavigationBundles(getOwner(this), {
+      outletArgs: { theme },
+    });
     const request = deferred();
     const submittedText = JSON.stringify({
       format: "brand-navigation-settings",
