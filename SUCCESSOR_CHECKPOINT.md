@@ -38,8 +38,21 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   `36698aae084678151dffa875d49c8d59216d2733`. Its three exact setting
   hashes and lengths and both Foundation/Horizon attachments were preserved;
   it reports zero commits behind and no import error, and HTTP availability
-  passed. Phil confirmed the administrator UI reports it up to date with
-  `d-compat/2026.8`; fresh browser interaction confirmation remains separate.
+  passed. Phil confirmed the administrator UI reported it up to date with
+  `d-compat/2026.8`. Phil then upgraded PostgreSQL and Discourse; CAN returned
+  on `2026.9.0-latest+358` / core
+  `f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`, and Brand Navigation
+  automatically transitioned to default-branch `main` commit
+  `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. All three settings and both
+  theme attachments remained exact, with zero commits behind and no error;
+  HTTP 200 and freshly checked administrator up-to-date status passed. The
+  first application rebuild mistakenly targeted stale single-container
+  `app.yml` and could not bind ports owned by `web_only`; it did not replace or
+  stop the live split containers. The correct `web_only` rebuild succeeded,
+  and the resulting unused `app` container in `Created` state was removed. Its
+  configuration and images remain. This was an operator-target incident, not a
+  Brand Navigation or Discourse upgrade defect. Fresh browser interaction
+  confirmation remains separate.
 - RVing Community component `16` was updated through the native updater from
   `04dbb3d994362f3f900d3f10a916ae4ac7245713` to `d-compat/2026.8`
   commit `a628dcd74c9465903c7eacd59f63e50f6c9d37b6` on Discourse
@@ -51,12 +64,26 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   date with `d-compat/2026.8`. The site's two known failed email jobs are due
   to its intentionally unconfigured outbound provider and are unrelated to the
   component. Fresh browser interaction confirmation remains separate.
+- R744 Community live component `1` was updated through the native updater from
+  `04dbb3d994362f3f900d3f10a916ae4ac7245713` to `d-compat/2026.7`
+  commit `a628dcd74c9465903c7eacd59f63e50f6c9d37b6` on Discourse ESR
+  `2026.7.2+14` / core `2e46cff73b07ecddbcc5603eb3fbf41d563577f6`.
+  Its exact setting fingerprint and Foundation/Horizon attachments were
+  preserved; it reports zero commits behind and no import error, HTTP
+  availability passed, and Phil confirmed the administrator UI reports it up
+  to date with `d-compat/2026.7`. Historical component `2` remains untouched,
+  unattached, and pinned to `codex/r744-compatibility`; its component-level
+  enabled setting is false although its Discourse theme-record flag is true.
+  Fresh browser interaction confirmation remains separate. Phil directed that
+  R744 intentionally remain on the supported 2026.7 ESR line as the oldest
+  real-world compatibility canary, advancing when security/support requirements
+  demand it or before that line leaves support rather than merely to match newer
+  sites.
 - Documentation PR 12 at
-  `https://github.com/CodeWorksLabs/brand-navigation/pull/12` records both
-  installations. Its current head is
-  `9c1689973258326c810dd24b691593f11fcc467a`; CI restarted after The Bridge
-  evidence was added and remains pending. Do not merge until the current head's
-  required checks are green.
+  `https://github.com/CodeWorksLabs/brand-navigation/pull/12` records this
+  multi-site installation pass. Its exact head and checks are authoritative in
+  the pull request because each added installation record restarts CI. Do not
+  merge until the final current head's required checks are green.
 
 - PR 8 merged as `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
   Its tree `23328df16e2703920778d71c226abe0a00f97cfb` exactly matches
