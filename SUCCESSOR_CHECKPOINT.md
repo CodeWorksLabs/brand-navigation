@@ -10,7 +10,9 @@ product. Current product code is released and deployed; a documentation-only
 operator-readiness correction and the browser/runtime embed and RTL evidence
 are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
 screen-reader acceptance and final human confirmation of the recorded
-embed/RTL evidence remain before `v1.0.0`.
+embed/RTL evidence remain before `v1.0.0`. The selected next release identity is
+the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging and the
+planned public documentation work.
 
 ## Authoritative repository state
 
@@ -100,7 +102,8 @@ Subsequent repository verification confirmed that GitHub Issues is enabled on
 the public repository. The stale statement that new issue creation was
 restricted has been removed, and GitHub Issues is now the documented public
 intake route for support and product feedback. A private security-reporting
-channel and explicit response expectations remain unpublished.
+channel is now published at `security@codeworkslabs.dev` through the repository
+security policy; the mailbox is monitored by CodeWorksLabs.
 
 ## Remaining `v1.0.0` acceptance
 

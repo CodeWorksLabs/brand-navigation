@@ -68,6 +68,7 @@ to discover component updates from commits on the installed remote branch.
   required by the official Discourse component workflow.
 - Pin the Ruby lint-tool versions used by verification CI.
 
-Version `v0.9.0` is the first reviewed preview release. Version `v1.0.0` is
-reserved for the documented, multi-site-tested release with no known release
-blockers.
+Version `v0.9.0` is the first reviewed preview release. The next release
+candidate is `v1.0.0-rc.1`; subsequent candidate changes use increasing
+`v1.0.0-rc.N` identifiers. Version `v1.0.0` is reserved for the documented,
+multi-site-tested release with no known release blockers.
