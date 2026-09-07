@@ -1,9 +1,10 @@
 /* global settings */
 
 import { tracked } from "@glimmer/tracking";
-import Service from "@ember/service";
-import { clearRender, render, settled } from "@ember/test-helpers";
+import { getOwner } from "@ember/owner";
+import { clearRender, render, rerender, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
+import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import BrandNavigationContent from "../../../discourse/components/brand-navigation-content";
 import BrandNavigationHeaderIcon from "../../../discourse/components/brand-navigation-header-icon";
@@ -11,10 +12,6 @@ import { primarySpriteWatcher } from "../../../discourse/lib/brand-navigation";
 
 class TestState {
   @tracked showDisposable = true;
-}
-
-class TestSiteService extends Service {
-  @tracked mobileView = true;
 }
 
 module(
@@ -141,9 +138,11 @@ module(
       const originalSprite = primarySprite.innerHTML;
       const originalEnabled = settings.enabled;
       const originalMobileMode = settings.mobile_mode;
+      const mobileView = sinon.stub(
+        getOwner(this).lookup("service:site"),
+        "mobileView"
+      );
 
-      this.owner.register("service:site", TestSiteService);
-      this.site = this.owner.lookup("service:site");
       this.headerItem = {
         label: "Transitioning header",
         url: "/transitioning-header",
@@ -154,6 +153,7 @@ module(
       primarySprite.innerHTML = "";
       settings.enabled = true;
       settings.mobile_mode = "hidden";
+      mobileView.value(true);
 
       try {
         await render(
@@ -171,8 +171,8 @@ module(
           "an initially ineligible retained component does not subscribe"
         );
 
-        this.site.mobileView = false;
-        await settled();
+        mobileView.value(false);
+        await rerender();
 
         assert.strictEqual(
           primarySpriteWatcher.callbacks.size,

@@ -21,6 +21,16 @@ Disposition: **PR 7 MERGED / PR 8 FINAL CORRECTION AUTHORIZED / IMPLEMENTATION I
   subscription whenever responsive eligibility is reevaluated and adds a
   rendered hidden-mobile to desktop to delayed-sprite regression. Exact-head
   local checks and CI are pending; this batch is not frozen.
+- First implementation commit `4a75e9de450eb15409858558ad4db7a22a4e55a2`
+  passed configuration run `34111630208` and every backend/system/lint lane of
+  Discourse Theme run `34111630733`, but the same new frontend assertion failed
+  on all three cores. The fixture attempted to replace an already-instantiated
+  `site` service, so the component correctly saw the real desktop value and
+  subscribed immediately. The test now follows Discourse's own component-test
+  convention: it stubs the existing service's `mobileView` value and invokes
+  Ember's `rerender()` to retain the component across the transition. This was
+  a test-fixture defect, not a reported production-code failure. Replacement
+  exact-head CI is required.
 - The same sidebar review identified this checkpoint's obsolete pre-freeze
   wording as record-only P3. This current section supersedes that wording.
   Earlier pending-state entries below are retained as dated iteration history,
