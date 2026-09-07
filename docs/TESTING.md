@@ -361,3 +361,26 @@ Test the current stable and tests-passed Discourse branches where practical.
 Also test long labels, empty configuration, missing optional icons, external
 links, browser zoom, reduced viewport width, keyboard-only use, and screen
 reader navigation landmarks.
+
+## Remaining manual gates for `v1.0.0`
+
+The `v0.9.0` preview does not claim completed human verification for these
+three cases:
+
+1. A classic Discourse comments embed on an allowed external host, proving that
+   Brand Navigation does not mount while embedded discussion content and core
+   interaction controls remain available.
+2. A complete RTL-locale desktop/mobile pass covering layout, submenu
+   alignment, focus, keyboard behavior, responsive modes, themes, and embed
+   exclusion.
+3. Human screen-reader testing covering the navigation landmark, accessible
+   names, expanded/collapsed state, linked-parent and caret actions, focus
+   return, visible descriptions, icon links, responsive controls, and embed
+   exclusion.
+
+Execute these on a controlled test environment after the operator-documentation
+correction closes. Record the Discourse build and core commit, Brand Navigation
+commit/ref, theme, browser, viewport/device, account state, assistive technology
+and version when applicable, exact steps, and pass/fail result. Gather all
+findings before making a correction batch; automated accessibility tests do not
+substitute for these human checks.

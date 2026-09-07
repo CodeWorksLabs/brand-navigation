@@ -31,7 +31,7 @@ fixture. It was assembled from observed Brand Header, Dropdown Header, and
 Custom Header Links (icons) settings and is also useful for exercising larger
 menus, external destinations, icon-only links, and left/right sections.
 
-The first release intentionally provides no credentialed command-line
+The `v0.9.x` preview line intentionally provides no credentialed command-line
 apply/export client. A local checkout can validate a saved bundle without
 contacting a forum by running
 `pnpm bundle validate configurations/repeal-obbba.json`. Logo uploads remain a
@@ -88,7 +88,7 @@ its icon list becomes `custom_font_awesome_icons`.
    component-wide mobile mode. For crowded mobile headers, keep only priority
    icons on `both` and mark the rest `desktop`.
 
-## Rollback
+## Roll back to an earlier component
 
 Do not remove either earlier component until the replacement has passed
 staging. Rollback is:
@@ -102,3 +102,62 @@ staging. Rollback is:
 Brand Navigation does not mutate settings from either earlier component, core
 site settings, or DiscussionBridge, so rollback has no data migration to
 reverse.
+
+## Roll back Brand Navigation to a release tag
+
+Use this procedure when a Brand Navigation update causes a regression and the
+site needs the previous known-working Brand Navigation release. It keeps the
+same Discourse component record so its settings and theme attachments can be
+preserved. Test the complete procedure on staging first.
+
+Prerequisites:
+
+- Choose an existing Brand Navigation release tag that is documented as
+  compatible with the site's Discourse release. Do not invent or move a tag.
+- Export the current **Configuration bundle** and store it outside Discourse.
+- Record the current component commit, displayed branch or compatibility ref,
+  `enabled` value, and every attached parent theme.
+- Keep administrator access through Discourse safe mode available in case the
+  active theme cannot render normally.
+
+To pin the existing component to a release:
+
+1. Open **Admin → Appearance → Themes & components → Components → Brand
+   Navigation**.
+2. Set Brand Navigation's `enabled` setting off. Do not delete or detach it.
+3. Select **Change source**. Leave the repository URL as
+   `https://github.com/CodeWorksLabs/brand-navigation.git`.
+4. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
+   source change. Current Discourse uses this field for a named Git branch or
+   tag; the release tag pins the component to that immutable revision.
+5. Confirm the component reports the intended tag/commit with no import error.
+   Verify that its parent-theme attachments and settings remain present.
+6. If a setting needs restoration, import the saved configuration bundle only
+   after confirming that the selected release supports that bundle schema.
+7. Re-enable Brand Navigation and run the focused desktop, mobile,
+   anonymous/authenticated, link, color, and embed checks before ending the
+   rollback window.
+
+While pinned to a tag, the component does not advance with `main` or a
+`d-compat/<YYYY>.<M>` branch. Automatic update checks may still run, but the tag
+itself is immutable.
+
+To return to the supported current channel:
+
+1. Export the current bundle again and set Brand Navigation's `enabled` setting
+   off.
+2. Open **Change source**, leave the repository URL unchanged, clear **Branch**,
+   and submit the source change.
+3. Select **Check for updates**, then **Update to latest** when offered.
+   Discourse will follow repository-default `main` on current core or resolve
+   the maintained `d-compat/<YYYY>.<M>` ref appropriate to an older supported
+   core.
+4. Confirm the intended commit/ref, zero import errors, preserved settings, and
+   parent-theme attachments.
+5. Re-enable Brand Navigation and repeat the focused acceptance checks.
+
+Do not edit a Git-installed remote component locally, force-move a release tag,
+or delete and reinstall the component as a normal rollback method. If the
+source change fails, keep the component disabled, capture the displayed error,
+and restore the previously recorded source branch before making another
+attempt.
