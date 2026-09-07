@@ -50,9 +50,12 @@ function deferred() {
 module("Unit | Lib | brand-navigation", function () {
   test("appearance completion reconciles the submitted snapshot", async function (assert) {
     const theme = adminTheme();
-    const component = new BrandNavigationBundles(undefined, {
-      outletArgs: { theme },
-    });
+    const component = new BrandNavigationBundles(
+      {},
+      {
+        outletArgs: { theme },
+      }
+    );
     const request = deferred();
 
     component.persistSettings = async (submittedSettings) => {
@@ -90,9 +93,12 @@ module("Unit | Lib | brand-navigation", function () {
 
   test("bundle completion uses its submitted snapshot and preserves unrelated color drafts", async function (assert) {
     const theme = adminTheme();
-    const component = new BrandNavigationBundles(undefined, {
-      outletArgs: { theme },
-    });
+    const component = new BrandNavigationBundles(
+      {},
+      {
+        outletArgs: { theme },
+      }
+    );
     const request = deferred();
     const submittedText = JSON.stringify({
       format: "brand-navigation-settings",

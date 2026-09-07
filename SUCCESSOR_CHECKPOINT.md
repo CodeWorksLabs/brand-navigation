@@ -202,6 +202,14 @@ directory. Use the canonical local repository path above.
   independently inspectable exact-run log/environment evidence requirements.
   This edit corrects `BNC-01`; it supersedes the frozen record candidate and
   requires replacement identity, CI, freeze, and focused closure evidence.
+- First closure-remediation commit `fa603f2` added the corrected record and two
+  component-action deferred-completion tests. Configuration run `34078612707`
+  passed, and Discourse Theme run `34078613026` passed test discovery, linting,
+  backend, and all 28 system examples. Its frontend lane failed both new QUnit
+  examples before their assertions because the test constructed the Glimmer
+  component without a required owner argument. This was a test-harness setup
+  defect, not a runtime component failure; the test construction now supplies
+  both owner and arguments and requires replacement CI before any freeze.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. Candidate `552f09d` is superseded only by the record
   correction above and likewise remains immutable evidence. No final manual
