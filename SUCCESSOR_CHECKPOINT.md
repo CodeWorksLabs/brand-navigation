@@ -5,6 +5,30 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
 
 ## Current release-documentation checkpoint
 
+- Installation-verification pass on 2026-09-07 is active. DiscussionBridge
+  Forum component `3` was updated through Discourse's native updater from
+  `b0b5354481c30e1db1daf4db682368a6f9c9994d` to
+  `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`; its Discourse
+  `2026.8.0-latest.1+414` core selected `d-compat/2026.8`. All 15 stored
+  settings and both Foundation/Horizon attachments were preserved, no import
+  error was reported, and the public forum returned HTTP 200. Phil is updating
+  that forum's Discourse core through its administrator UI; the resulting core
+  identity and Brand Navigation ref still require post-upgrade verification.
+- The Bridge component `6` was updated through the native updater from
+  `b0b5354481c30e1db1daf4db682368a6f9c9994d` to current `main` commit
+  `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec` on Discourse
+  `2026.9.0-latest+188` / core `7dfd824b151fc5b206812e72f3aca6078a71b75f`.
+  All 15 settings and both Foundation/Horizon attachments were preserved, no
+  import error was reported, and HTTP availability passed. Phil refreshed the
+  administrator page and confirmed its up-to-date status; this core omits the
+  implicit `main` name from that message.
+- Documentation PR 12 at
+  `https://github.com/CodeWorksLabs/brand-navigation/pull/12` records both
+  installations. Its current head is
+  `9c1689973258326c810dd24b691593f11fcc467a`; CI restarted after The Bridge
+  evidence was added and remains pending. Do not merge until the current head's
+  required checks are green.
+
 - PR 8 merged as `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
   Its tree `23328df16e2703920778d71c226abe0a00f97cfb` exactly matches
   the accepted candidate. Annotated tag `v0.9.0` and the published GitHub
