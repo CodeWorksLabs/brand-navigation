@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 PRIOR CANDIDATE BLOCKED / SECOND REPLACEMENT BATCH IN PROGRESS / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 SECOND REPLACEMENT IMPLEMENTED / CHECKPOINT-ONLY HEAD REQUIRES CI / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -45,6 +45,14 @@ Disposition: **PR 7 MERGED / PR 8 PRIOR CANDIDATE BLOCKED / SECOND REPLACEMENT B
   active render computation. The callback is now scheduled through Ember's
   `afterRender` queue, and an already-ready sprite requires no callback because
   getters inspect it directly. Fresh full-matrix CI is required.
+- Substantive replacement head
+  `e2f03d630031c7b9312c90bea89b62dae715cb1b` passed configuration run
+  `34103050555` (24/24) and the complete three-core Discourse Theme run
+  `34103038086`. Current Discourse, Repeal core `988c31e00f`, and R744 core
+  `2e46cff73b` each passed backend, frontend (22/22), and system (30/30)
+  execution; current linting also passed. This checkpoint-only evidence commit
+  must pass exact-head CI before a new immutable candidate can freeze and enter
+  dual focused closure review.
 
 - Phil explicitly accepted the two remaining P2 release-engineering risks for
   `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
