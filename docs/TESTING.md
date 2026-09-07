@@ -119,6 +119,9 @@ approximately 369px content row; the trigger's outlet consequently collapsed
 to zero width. Operators should currently reserve mobile header capacity by
 marking additional social destinations **Desktop only**. Automatic overflow or
 priority handling is not implemented and requires separate product treatment.
+Changing one of the observed mobile social destinations to **Desktop only** on
+the Repeal installation stopped the overflow and restored the complete Brand
+Navigation menu trigger on the tested iPhone portrait viewport.
 
 ### DiscussionBridge Forum native compatibility transition — 2026-09-07
 
