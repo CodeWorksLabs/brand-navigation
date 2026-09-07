@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compat-branching` / NOT MERGED**
+Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
 
 ## Current release-documentation checkpoint
 
@@ -14,12 +14,14 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   authenticated visual acceptance. PR comment `5573217066` is the immutable
   release-closure record.
 - Phil authorized adoption of Discourse's current compatibility-branch
-  convention after official-source and ecosystem review. Work is isolated on
-  `codex/d-compat-branching` from released `main`. The batch adds the pinned
+  convention after official-source and ecosystem review. PR 9 merged as
+  `6d5ff2b22054fac10a74d50b4b8907b92ecd0bda`; its tree
+  `2a8ba5572001a1015a533dd3fcb7db7d49d589ee` exactly matches accepted
+  candidate `e0f4ae8fa24dbaa47e8098fc17a9fc3b108ece34`. The batch adds the pinned
   official daily `d-compat` workflow, an exact Discourse 2026.8 release CI
   lane at core commit `badad7b0456a628e578bc48b9f8c1259422b5d58`, and
-  administrator/release documentation. No compatibility branch has been
-  pushed yet. Dual review of candidate `74c8cbb` found that the upstream
+  administrator/release documentation. Dual review of candidate `74c8cbb`
+  found that the upstream
   date-based bootstrap would select the repository's initial commit for
   `d-compat/2026.8`. The correction batch therefore requires both 2026.7 and
   2026.8 branches to contain released `v0.9.0` before the writer can run,
@@ -49,8 +51,14 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   compatibility-PR workflow. The runbook now resolves that interaction by
   seeding both branches at reviewed descendant `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`,
   which contains the accepted product seed and corrected workflow. Fresh
-  documentation closure, remote seeding, ref verification, merge, and a guarded
-  writer check remain pending.
+  documentation closure passed in both review lanes. Remote branches
+  `d-compat/2026.7` and `d-compat/2026.8` were then created and independently
+  verified at exact commit `a628dcd`; both contain `v0.9.0` and the corrected
+  workflow blobs. Manual workflow-dispatch run `34149390948` passed the
+  read-only bootstrap guard and pinned writer job on merged `main`; both seeded
+  refs remained unchanged and no unreleased `d-compat/2026.9` branch was
+  created. PR 9 comment `5574155510` is the immutable operational closure
+  record.
 - All PR 8 pending-state entries below are dated development history and no
   longer describe the current release or repository state.
 
