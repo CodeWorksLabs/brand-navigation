@@ -6,6 +6,13 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Make administrator imports and color saves use immutable request snapshots,
+  disable conflicting controls while writes are pending, and reconcile imported
+  colors with their visible controls after success.
+- Prevent exports larger than the matching importer accepts, reject non-string
+  color values, and escape control characters in validation diagnostics.
+- Enable the Discourse RuboCop gate for Ruby system specifications and document
+  the intentionally moving dependencies inside the pinned Discourse workflow.
 - Replace the historical header-icon binding pattern with an independently
   authored lexical component factory while retaining the documented
   `api.headerIcons` integration and `GPL-2.0-or-later` license.

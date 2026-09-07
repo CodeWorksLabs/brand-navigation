@@ -116,8 +116,13 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
 - Bounded local bundle validation without forum credentials or network access.
-- Exact component identity for administrator extensions, complete client
-  preflight, and one bundle update request.
+- Schema-scoped object-editor identity and five-setting component-panel
+  signature, including locally uploaded components and incomplete-signature
+  rejection.
+- Complete bundle preflight, immutable persistence snapshots, strict color
+  types, inert diagnostics, and export/import byte-limit symmetry.
+- Browser-backed import coverage for persisted appearance reload, synchronized
+  picker state, and a clean post-import save state.
 
 ## Manual acceptance matrix
 

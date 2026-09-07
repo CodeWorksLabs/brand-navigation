@@ -37,6 +37,21 @@ export function prepareThemeSettingsImport(theme, bundle) {
   return values;
 }
 
+export function snapshotPlainData(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+export async function persistThemeSettings(themeId, settings, request) {
+  const submittedSettings = snapshotPlainData(settings);
+
+  await request(`/admin/themes/${themeId}.json`, {
+    type: "PUT",
+    data: { theme: { settings: submittedSettings } },
+  });
+
+  return submittedSettings;
+}
+
 export function isBrandNavigationObjectsEditor(args) {
   return (
     args?.setting?.setting === "navigation_items" &&

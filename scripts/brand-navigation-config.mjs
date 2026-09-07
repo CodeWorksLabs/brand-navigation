@@ -9,6 +9,7 @@ import {
   BUNDLE_VERSION,
   createBundle,
   MAX_BUNDLE_BYTES,
+  serializeBundle,
   themeSettingValue,
   validateBundle,
 } from "../javascripts/discourse/lib/configuration-bundle.js";
@@ -17,6 +18,7 @@ export {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,
   createBundle,
+  serializeBundle,
   themeSettingValue,
   validateBundle,
 };

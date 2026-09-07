@@ -3,7 +3,9 @@ import test from "node:test";
 
 import {
   isBrandNavigationTheme,
+  persistThemeSettings,
   prepareThemeSettingsImport,
+  snapshotPlainData,
 } from "../../javascripts/discourse/lib/brand-navigation-admin.js";
 import {
   isSafeNavigationUrl,
@@ -15,6 +17,7 @@ import {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,
   createBundle,
+  serializeBundle,
   themeSettingValue,
   validateBundle,
 } from "../../scripts/brand-navigation-config.mjs";
@@ -80,6 +83,20 @@ test("rejects malformed appearance colors", () => {
       "bar_text_color must be blank or a six-digit hex color such as #1A2B3C.",
     ]
   );
+});
+
+test("rejects non-string appearance colors without coercion", () => {
+  for (const value of [123456, true, null, [123456], { color: "123456" }]) {
+    const errors = validateBundle({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: { bar_background_color: value },
+    });
+
+    assert.deepEqual(errors, [
+      "bar_background_color must be blank or a six-digit hex color such as #1A2B3C.",
+    ]);
+  }
 });
 
 test("rejects unsafe or unsupported settings", () => {
@@ -308,6 +325,47 @@ test("oversized browser files are rejected before reading", async () => {
   assert.equal(read, false);
 });
 
+test("exports cannot create bundles larger than the importer accepts", () => {
+  const longUrl = `https://example.com/${"x".repeat(2028)}`;
+  const children = Array.from({ length: 50 }, (_, index) => ({
+    label: `Child ${index}`,
+    url: longUrl,
+    title: "t".repeat(200),
+    description: "d".repeat(300),
+    icon: "i".repeat(100),
+  }));
+  const navigationItems = Array.from({ length: 100 }, (_, index) => ({
+    label: `Parent ${index}`,
+    url: longUrl,
+    title: "t".repeat(200),
+    icon: "i".repeat(100),
+    children,
+  }));
+
+  assert.throws(
+    () => createBundle({ navigation_items: navigationItems }),
+    /cannot exceed 1,000,000 bytes.*Reduce the number or length/i
+  );
+
+  const bundle = createBundle({
+    navigation_items: [{ label: "Home", url: "/" }],
+  });
+  assert.ok(
+    new TextEncoder().encode(serializeBundle(bundle)).length <= 1_000_000
+  );
+});
+
+test("unknown fields are escaped for inert terminal diagnostics", () => {
+  const [error] = validateBundle({
+    format: BUNDLE_FORMAT,
+    version: BUNDLE_VERSION,
+    settings: { ["unsafe\u001b[2J\u0007"]: true },
+  });
+
+  assert.equal(error, "Unsupported setting: unsafe\\u001B[2J\\u0007.");
+  assert.equal(/[\u0000-\u001f\u007f]/.test(error), false);
+});
+
 test("serializes object and icon-list values for browser imports", () => {
   assert.equal(
     themeSettingValue("custom_font_awesome_icons", ["house", "comments"]),
@@ -388,6 +446,40 @@ test("bundle import preflights every target setting before mutation", () => {
       }),
     /does not define setting mobile_mode/
   );
+});
+
+test("administrator persistence uses an immutable request snapshot", async () => {
+  let releaseRequest;
+  let requestSettings;
+  const settings = { bar_background_color: "#111111" };
+  const request = (_url, options) => {
+    requestSettings = options.data.theme.settings;
+    return new Promise((resolve) => {
+      releaseRequest = resolve;
+    });
+  };
+
+  const persistence = persistThemeSettings(42, settings, request);
+  settings.bar_background_color = "#222222";
+
+  assert.deepEqual(requestSettings, { bar_background_color: "#111111" });
+  releaseRequest();
+  assert.deepEqual(await persistence, { bar_background_color: "#111111" });
+});
+
+test("bundle snapshots are not replaced by later editor input", () => {
+  const bundle = {
+    settings: {
+      navigation_items: [{ label: "First", url: "/first" }],
+    },
+  };
+  const submittedBundle = snapshotPlainData(bundle);
+
+  bundle.settings.navigation_items[0] = { label: "Second", url: "/second" };
+
+  assert.deepEqual(submittedBundle.settings.navigation_items, [
+    { label: "First", url: "/first" },
+  ]);
 });
 
 test("normalizes serialized settings returned by Discourse exports", () => {

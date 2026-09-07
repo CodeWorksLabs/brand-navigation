@@ -1,9 +1,17 @@
 # Release procedure
 
-Workflow dependencies are pinned to reviewed commit SHAs. Before changing a
-pin, resolve the intended upstream version, review its source and release notes,
-then run both workflows on the candidate. Retain the human-readable upstream
-major tag in the adjacent YAML comment.
+Direct actions in the component-owned configuration workflow and the outer
+Discourse reusable workflow are pinned to reviewed commit SHAs. The pinned
+Discourse workflow intentionally follows its own maintained action tags,
+Discourse core target, and test-container tags so CI exercises the current
+supported Discourse boundary. Exact release evidence must record the candidate,
+outer workflow revision, resolved Discourse core commit, tool versions, and
+available container/action identities from the run logs. This is a deliberate
+upstream-trust and compatibility-testing policy, not a claim that the complete
+transitive execution graph is immutable. Before changing a direct pin, resolve
+the intended upstream version, review its source and release notes, then run
+both workflows on the candidate. Retain the human-readable upstream major tag
+in the adjacent YAML comment.
 
 ## Release sequence
 

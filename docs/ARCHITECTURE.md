@@ -42,13 +42,17 @@ logical `left` and `right` sections; CSS logical properties keep that layout
 usable in both left-to-right and right-to-left interfaces.
 
 The objects editor uses the component-specific schema identity
-`brand_navigation_item_v1`. Administrator extensions require either that
-identity or the exact canonical remote repository; mutable names and URL
-substrings do not grant write scope. Bundle imports validate the complete
-portable schema, preflight the target, and submit one Discourse theme update
-rather than issuing a separate request for each setting. This does not assert a
-server-side transaction guarantee; after a server error, reload the current
-settings before retrying.
+`brand_navigation_item_v1`. Its save-stay behavior requires that identity. The
+component-wide appearance and bundle panel requires a theme component with the
+five-setting Brand Navigation signature. This avoids repository-location and
+mutable-name coupling while failing closed for incomplete signatures; it is a
+product signature, not cryptographic identity. Bundle imports validate the
+complete portable schema, preflight every target, snapshot the submitted data,
+and submit one Discourse theme update rather than issuing a separate request
+for each setting. While a request is pending, conflicting controls are disabled.
+After success, the model and appearance controls reconcile from the submitted
+snapshot. This does not assert a server-side transaction guarantee; after a
+server error, reload the current settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
 registered as direct icon links through `api.headerIcons`. They require a URL

@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / REMEDIATION COMPLETE / REPLACEMENT CI GREEN / NOT RELEASED**
+Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK / SECOND COHERENT REMEDIATION IN PROGRESS / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -28,7 +28,7 @@ Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / REMEDIATION 
   and records attribution, AI-assisted authorship, source provenance, and the
   selected `GPL-2.0-or-later` licensing posture.
 - Focused Prettier checks and `git diff --check` pass for the changed docs. All
-  22 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
+  23 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
   lanes pass in the aggregate lint command; the aggregate Prettier lane still
   reports pre-existing Windows checkout drift in unrelated files, so only the
   changed documentation was formatted.
@@ -112,7 +112,7 @@ directory. Use the canonical local repository path above.
   the detailed-validation translation claim; makes administrator enhancements
   survive local copies and repository moves; adds affected system/unit tests;
   and refreshes release records.
-- Ruby tooling has exact direct Gemfile pins but no `Gemfile.lock`; transitive
+- Ruby tooling has an exact direct Gemfile pin but no `Gemfile.lock`; transitive
   lint-tool resolution remains the known BN-06 P2. It is not being disguised as
   fully reproducible. The official Discourse repositories inspected during
   evaluation currently include lockfiles, but generating a trustworthy lock
@@ -141,8 +141,38 @@ directory. Use the canonical local repository path above.
   immutable commit, tree, doctrine, scope, and evidence package. Their reports
   remain separate until both finish and are then evaluated together; neither
   inherits the other's conclusions.
-- The replacement candidate is not frozen yet. No dual correction-closure review,
-  final manual acceptance, merge, tag, or release has occurred.
+- Replacement candidate `993f6badcd12964a56eb00a34e49bcb66610e999` /
+  tree `58a459175f1787309ebb2160fc952b9b5860620a` passed all six checks in
+  configuration run `34073989308` and Discourse Theme run `34073989626`, then
+  froze for dual review. Internal report `BN-V090-REPLACEMENT-20260907-R2` and
+  sidebar reports `BN-V090-REPLACEMENT-20260907-SIDEBAR-R1/R2` independently
+  completed under the controlling doctrine and Phil-authorized bounded
+  read-only inspection of eight exact public upstream revisions.
+- The reports converge on release blockers for stale post-import appearance
+  state, mutable in-flight administrator state, and exports too large for the
+  importer. They also confirm strict color-type, inert diagnostic, Ruby lint,
+  Ruby dependency-resolution, administrator-identity documentation, and
+  moving upstream workflow assurance work. The internal report's `BN-14`
+  claim that the direct pnpm action revision does not exist is rejected by the
+  exact-candidate configuration log: GitHub downloaded and executed
+  `pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa` and installed
+  pnpm `10.28.0` successfully. The sidebar report correctly treated its source
+  retrieval discrepancy as an evidence limitation rather than a defect.
+- The second coherent remediation batch is in progress. It snapshots submitted
+  settings, disables conflicting controls during writes, synchronizes imported
+  colors, enforces export/import byte symmetry and strict color types, escapes
+  diagnostic controls, aligns architecture/test/release records, enables the
+  Discourse RuboCop configuration, and adds affected Node/system coverage.
+  Ruby transitive locking remains a separately disclosed P2 decision because
+  no trusted local Ruby/Bundler runtime is available to generate a lockfile.
+- Current second-batch local evidence: 23/23 Node tests pass; JavaScript,
+  template, CSS, type, and changed-file formatting checks pass; the Repeal
+  fixture passes offline validation; and `git diff --check` passes. The new
+  browser-backed import/reload spec and enabled RuboCop gate are authored but
+  unexecuted locally and require exact-candidate GitHub execution.
+- Candidate `993f6ba` is superseded for implementation but remains immutable
+  review evidence. No replacement candidate is frozen yet. No final manual
+  acceptance, merge, tag, or release has occurred.
 
 ## Administrator color-control checkpoint
 

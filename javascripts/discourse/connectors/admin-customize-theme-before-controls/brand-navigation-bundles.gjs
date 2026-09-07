@@ -4,7 +4,7 @@ import { concat } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
-import { not } from "discourse/truth-helpers";
+import { not, or } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 import {
@@ -12,11 +12,14 @@ import {
   MAX_BUNDLE_BYTES,
   PORTABLE_SETTINGS,
   readBundleFile,
+  serializeBundle,
   validateBundle,
 } from "../../lib/configuration-bundle";
 import {
   isBrandNavigationTheme,
+  persistThemeSettings,
   prepareThemeSettingsImport,
+  snapshotPlainData,
 } from "../../lib/brand-navigation-admin";
 
 const APPEARANCE_COLORS = [
@@ -132,8 +135,10 @@ export default class BrandNavigationBundles extends Component {
   get appearanceDirty() {
     return APPEARANCE_COLORS.some(({ setting }) => {
       const persisted =
-        this.theme.settings.find((candidate) => candidate.setting === setting)
-          ?.value || "";
+        normalizedHexColor(
+          this.theme.settings.find((candidate) => candidate.setting === setting)
+            ?.value
+        ) || "";
       return persisted !== this.appearanceValues[setting];
     });
   }
@@ -230,21 +235,22 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
+    const submittedAppearance = snapshotPlainData(this.appearanceValues);
+
     this.saving = true;
     this.errors = [];
     this.success = undefined;
 
     try {
-      await ajax(`/admin/themes/${this.theme.id}.json`, {
-        type: "PUT",
-        data: { theme: { settings: this.appearanceValues } },
-      });
+      await persistThemeSettings(this.theme.id, submittedAppearance, ajax);
 
-      for (const [name, value] of Object.entries(this.appearanceValues)) {
+      for (const [name, value] of Object.entries(submittedAppearance)) {
         this.theme.settings
           .find((setting) => setting.setting === name)
           ?.set("value", value);
       }
+
+      this.appearanceValues = submittedAppearance;
 
       this.success = i18n(
         themePrefix("brand_navigation.appearance.save_success")
@@ -277,6 +283,8 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
+    const submittedBundle = snapshotPlainData(this.bundle);
+
     this.saving = true;
     this.errors = [];
     this.success = undefined;
@@ -284,22 +292,32 @@ export default class BrandNavigationBundles extends Component {
     try {
       const persistedSettings = prepareThemeSettingsImport(
         this.theme,
-        this.bundle
+        submittedBundle
       );
 
-      await ajax(`/admin/themes/${this.theme.id}.json`, {
-        type: "PUT",
-        data: { theme: { settings: persistedSettings } },
-      });
+      const submittedSettings = await persistThemeSettings(
+        this.theme.id,
+        persistedSettings,
+        ajax
+      );
 
-      for (const [name, value] of Object.entries(persistedSettings)) {
+      for (const [name, value] of Object.entries(submittedSettings)) {
         this.theme.settings
           .find((setting) => setting.setting === name)
           .set(
             "value",
-            name === "navigation_items" ? this.bundle.settings[name] : value
+            name === "navigation_items" ? submittedBundle.settings[name] : value
           );
       }
+
+      this.appearanceValues = Object.fromEntries(
+        APPEARANCE_COLORS.map(({ setting }) => [
+          setting,
+          setting in submittedSettings
+            ? normalizedHexColor(submittedSettings[setting]) || ""
+            : this.appearanceValues[setting],
+        ])
+      );
 
       this.success = i18n(
         themePrefix("brand_navigation.bundles.import_success")
@@ -336,7 +354,7 @@ export default class BrandNavigationBundles extends Component {
     }
 
     this.errors = [];
-    const blob = new Blob([`${JSON.stringify(bundle, null, 2)}\n`], {
+    const blob = new Blob([serializeBundle(bundle)], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
@@ -364,7 +382,7 @@ export default class BrandNavigationBundles extends Component {
               <input
                 type="color"
                 value={{color.value}}
-                disabled={{not color.enabled}}
+                disabled={{or this.saving (not color.enabled)}}
                 data-setting={{color.setting}}
                 aria-label={{i18n
                   (themePrefix
@@ -385,6 +403,7 @@ export default class BrandNavigationBundles extends Component {
                   <input
                     type="checkbox"
                     checked={{color.enabled}}
+                    disabled={{this.saving}}
                     data-setting={{color.setting}}
                     {{on "change" this.toggleAppearanceColor}}
                   />
@@ -439,6 +458,7 @@ export default class BrandNavigationBundles extends Component {
             <input
               type="file"
               accept="application/json,.json"
+              disabled={{this.saving}}
               {{on "change" this.selectBundle}}
             />
           </label>
@@ -453,6 +473,7 @@ export default class BrandNavigationBundles extends Component {
           />
           <DButton
             @action={{this.exportBundle}}
+            @disabled={{this.saving}}
             @icon="download"
             @translatedLabel={{i18n
               (themePrefix "brand_navigation.bundles.export")
@@ -465,6 +486,7 @@ export default class BrandNavigationBundles extends Component {
           {{i18n (themePrefix "brand_navigation.bundles.paste")}}
           <textarea
             value={{this.bundleText}}
+            disabled={{this.saving}}
             placeholder={{i18n
               (themePrefix "brand_navigation.bundles.paste_placeholder")
             }}

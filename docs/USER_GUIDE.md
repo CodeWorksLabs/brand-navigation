@@ -90,6 +90,10 @@ The browser importer validates the complete portable schema and submits all
 settings in one Discourse theme update. It does not intentionally save a partial
 bundle. If the browser loses the response after submission, reload the
 component settings and verify the displayed values before retrying.
+Conflicting appearance, file, paste, and export controls remain disabled while
+a save or import is pending. Export refuses to create a download larger than
+the importer's 1,000,000-byte ceiling, so every successful download remains
+eligible for re-import.
 
 An optional local command validates a saved bundle without contacting a forum:
 

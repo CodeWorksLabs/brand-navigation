@@ -166,4 +166,30 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_css(".brand-navigation-admin-panel")
     expect(page).to have_css(".brand-navigation-bundles")
   end
+
+  it "reconciles imported appearance settings with the visible controls" do
+    sign_in(Fabricate(:admin))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    bundle = {
+      format: "brand-navigation-settings",
+      version: 1,
+      settings: { bar_background_color: "#123456" },
+    }
+
+    visit(settings_path)
+    find(".brand-navigation-bundles textarea").set(bundle.to_json)
+    click_button("Import settings")
+
+    expect(page).to have_css(".alert-success", text: "Configuration bundle imported")
+    expect(
+      find('input[type="color"][data-setting="bar_background_color"]').value,
+    ).to eq("#123456")
+    expect(page).to have_button("Save colors", disabled: true)
+
+    visit(settings_path)
+    expect(
+      find('input[type="color"][data-setting="bar_background_color"]').value,
+    ).to eq("#123456")
+    expect(page).to have_button("Save colors", disabled: true)
+  end
 end
