@@ -84,14 +84,25 @@ short-lived branches and merge only a complete, reviewed batch. Maintained
 older Discourse releases use branches named `d-compat/<YYYY>.<M>`. The official
 daily compatibility workflow creates a branch for each newly released
 Discourse version from the last first-parent `main` commit predating that core
-release. Because Brand Navigation was first published after Discourse 2026.7
-was cut, its initial 2026.7 branch must be seeded manually from a version tested
-against that release.
+release.
+
+Brand Navigation requires a one-time manual bootstrap for both `2026.7` and
+`2026.8`. Seed both branches from released `v0.9.0` merge commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e` before merging or manually running
+the scheduled workflow. The workflow fails closed unless both branches contain
+that accepted seed, and serialized runs prevent concurrent branch writers. If
+either branch already exists at the wrong commit, do not run the workflow:
+inspect the ref, correct it through an explicitly authorized release operation,
+verify it contains the accepted seed, and only then retry.
 
 When a compatible fix lands on `main`, backport it through a reviewed pull
 request whose base is the affected `d-compat` branch. Do not merge new features
-or unverified framework changes into compatibility branches. Keep an exact-core
-CI lane for every Discourse release that Brand Navigation actively maintains.
+or unverified framework changes into compatibility branches. On `main` pull
+requests, keep an exact-core CI lane for every Discourse release that Brand
+Navigation actively maintains. On a pull request targeting a `d-compat` branch,
+Discourse's reusable workflow deliberately selects the matching moving release
+branch and Brand Navigation runs one clearly named compatibility-branch lane;
+obtain separate exact-core evidence when a backport needs it.
 Discourse update detection remains commit-based; release tags provide durable
 human and rollback identities. Record the Brand Navigation version, component
 commit, compatibility branch, Discourse version, and exact core commit in every

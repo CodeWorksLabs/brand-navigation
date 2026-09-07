@@ -19,15 +19,32 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   official daily `d-compat` workflow, an exact Discourse 2026.8 release CI
   lane at core commit `badad7b0456a628e578bc48b9f8c1259422b5d58`, and
   administrator/release documentation. No compatibility branch has been
-  pushed yet. `d-compat/2026.7` will be seeded from tested `v0.9.0`; a 2026.8
-  branch will be seeded only after its exact-core lane is green.
+  pushed yet. Dual review of candidate `74c8cbb` found that the upstream
+  date-based bootstrap would select the repository's initial commit for
+  `d-compat/2026.8`. The correction batch therefore requires both 2026.7 and
+  2026.8 to be seeded from released `v0.9.0` before the writer can run, verifies
+  those accepted seeds fail closed, and serializes writer executions.
 - Implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
-  passed configuration run `34144739257` (24/24) and all twenty jobs in
-  Discourse Theme run `34144739800`. Current Discourse, the two recorded exact
+  passed configuration run `34144739257` (24/24); Discourse Theme run
+  `34144739800` passed 17 applicable jobs with three duplicate lint jobs
+  intentionally skipped. Current Discourse, the two recorded exact
   2026.7 cores, and exact `v2026.8.0` core commit `badad7b0456` each passed
   backend, frontend (23/23), and system (30/30) lanes; current linting passed.
-  This evidence is now recorded in `docs/TESTING.md`. The documentation-only
-  evidence commit requires exact-head CI before PR 9 can freeze.
+  This evidence is now recorded in `docs/TESTING.md`.
+- Frozen candidate `74c8cbb49eeeafd3e94cf38d2a51e0ffc3e7e16c` / tree
+  `77cffdbfa5aead677c6c8bffe1a274021b8180dc` passed exact-head
+  configuration run `34145373387` and Discourse Theme run `34145373857`
+  (17 applicable jobs passed; three duplicate lint jobs were intentionally
+  skipped). Dual focused review blocked that candidate because the unseeded
+  upstream workflow would have published initial commit `857aba8` as
+  `d-compat/2026.8`. Both lanes also identified misleading exact-core names on
+  compatibility-branch pull requests, and the persistent lane identified the
+  historical twenty-pass wording corrected above. The current correction batch
+  adds the seed guard, serialized writer execution, and an explicit
+  compatibility-branch CI lane. Local formatting, JavaScript/template/type/CSS
+  linting, configuration tests (24/24), whitespace checks, and synthetic
+  absent/wrong/correct/descendant seed checks pass. Exact-head CI and focused
+  correction closure remain pending.
 - All PR 8 pending-state entries below are dated development history and no
   longer describe the current release or repository state.
 
