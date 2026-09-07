@@ -2,7 +2,7 @@
 
 import { tracked } from "@glimmer/tracking";
 import { getOwner } from "@ember/owner";
-import { clearRender, render, rerender, settled } from "@ember/test-helpers";
+import { clearRender, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
@@ -12,6 +12,7 @@ import { primarySpriteWatcher } from "../../../discourse/lib/brand-navigation";
 
 class TestState {
   @tracked showDisposable = true;
+  @tracked headerItem;
 }
 
 module(
@@ -143,7 +144,8 @@ module(
         "mobileView"
       );
 
-      this.headerItem = {
+      this.transitionState = new TestState();
+      this.transitionState.headerItem = {
         label: "Transitioning header",
         url: "/transitioning-header",
         icon: "d-tracking",
@@ -158,7 +160,9 @@ module(
       try {
         await render(
           <template>
-            <BrandNavigationHeaderIcon @item={{this.headerItem}} />
+            <BrandNavigationHeaderIcon
+              @item={{this.transitionState.headerItem}}
+            />
           </template>
         );
 
@@ -172,7 +176,10 @@ module(
         );
 
         mobileView.value(false);
-        await rerender();
+        this.transitionState.headerItem = {
+          ...this.transitionState.headerItem,
+        };
+        await settled();
 
         assert.strictEqual(
           primarySpriteWatcher.callbacks.size,

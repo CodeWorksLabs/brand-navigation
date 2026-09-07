@@ -31,6 +31,15 @@ Disposition: **PR 7 MERGED / PR 8 FINAL CORRECTION AUTHORIZED / IMPLEMENTATION I
   Ember's `rerender()` to retain the component across the transition. This was
   a test-fixture defect, not a reported production-code failure. Replacement
   exact-head CI is required.
+- Fixture-corrected commit `f1c7b2b1210d385aed3ed572bdde82cee2e81d75`
+  passed configuration run `34113175978`; its three frontend lanes in Theme
+  run `34113176415` failed the opposite transition assertion. Stubbing the
+  untracked service property and calling a generic rerender did not invalidate
+  the child component because none of its consumed arguments changed. The
+  fixture now changes a tracked copy of the same item argument after changing
+  `mobileView`, forcing reevaluation at the same component location without
+  remounting it. The failure again concerns only the test trigger; production
+  mobile-view invalidation is owned by Discourse's tracked site service.
 - The same sidebar review identified this checkpoint's obsolete pre-freeze
   wording as record-only P3. This current section supersedes that wording.
   Earlier pending-state entries below are retained as dated iteration history,
