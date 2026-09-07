@@ -7,23 +7,27 @@ Date: 2026-09-07
 Brand Navigation `v0.9.0` is a released public preview. The component is
 independently maintained by CodeWorksLabs and is not an official Discourse
 product. Current product code is released and deployed; a documentation-only
-operator-readiness correction is in progress before the remaining `v1.0.0`
-manual acceptance work.
+operator-readiness correction and the browser/runtime embed and RTL evidence
+are merged. Human screen-reader acceptance and final human confirmation of the
+recorded embed/RTL evidence remain before `v1.0.0`.
 
 ## Authoritative repository state
 
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
-- Stable branch before the active documentation batch: `main` at
-  `f3f41e5bae4e626e85e2d1987bc2375573ea8deb`, tree
-  `a8bbc5eba47cb31b40364b4c35985fd0f04ec88b`
+- Stable repository line: `main`. The latest completed acceptance-evidence
+  merge is `14724b3836f42f90165c74925de034063c66c31c`, tree
+  `9d55dbcf116e1ca10d8a04dd01a3983e095f3521`; obtain the live `main` identity
+  with `git rev-parse origin/main` rather than treating this checkpoint's own
+  future merge commit as self-identifying metadata.
 - Published preview: `v0.9.0`, release commit
   `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- Active local branch: `docs/operator-readiness-corrections`
+- No active implementation branch or unmerged product-code change exists. A
+  checkpoint-only repair may be in flight without changing that product state.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
@@ -67,7 +71,7 @@ attachments, import state, and HTTP availability were recorded during the
 2026-09-07 multi-site pass. Historical duplicate components remain only where
 explicitly documented as unattached rollback/test copies.
 
-## Active correction batch
+## Completed documentation correction
 
 Manual Boss and Product Boss completed independent read-only documentation and
 operator inspections of merged commit `f3f41e5`. Neither issued a formal code
