@@ -127,7 +127,7 @@ RSpec.describe "Brand Navigation" do
     visit("/")
     find('summary[aria-label="Open Explore submenu"]').click
 
-    child_link = find(".brand-navigation__submenu-list a", text: "Categories")
+    child_link = find(".brand-navigation__submenu > ul a", text: "Categories")
     description = find(".brand-navigation__child-description")
 
     expect(

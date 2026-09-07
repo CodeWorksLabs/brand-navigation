@@ -122,6 +122,15 @@ directory. Use the canonical local repository path above.
   local Node memory and is recorded as an environment/tool execution failure,
   not a product finding. Exact-candidate GitHub CI remains required after the
   batch is committed.
+- The first remediation CI pass used commit `a835ff6` / tree `73a8d24f`.
+  Configuration workflow run `34072665895` passed. Discourse Theme workflow
+  run `34072666154` passed linting, test discovery, backend tests, frontend
+  tests, and configuration tests; its system lane failed 1 of 27 examples
+  because the newly authored color assertion searched for a conditional CSS
+  modifier class that was absent in that fixture. The failure artifact showed
+  the rendered submenu and configured colors. The test selector has been
+  corrected to use the stable `.brand-navigation__submenu > ul a` structure;
+  replacement exact-candidate CI is pending.
 - The replacement candidate is not frozen yet. No correction-closure review,
   final manual acceptance, merge, tag, or release has occurred.
 
