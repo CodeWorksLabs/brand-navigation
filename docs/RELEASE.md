@@ -94,13 +94,15 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
-Until that support site exists, the actionable public contact point is the
-[Brand Navigation topic on Discourse Meta](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913).
+No public support intake is currently published. The earlier
+[Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
+is historical product-discussion context, not a Brand Navigation support desk.
 The repository's GitHub issue tracker currently restricts new issue creation
 and must not be advertised as an intake route unless that restriction is
 removed and verified. No private security-reporting channel is currently
 published. Do not publish credentials, personal data, or sensitive
-vulnerability details through either public surface.
+vulnerability details through either public surface. A verified public intake
+route and explicit support expectations remain release-readiness work.
 
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained

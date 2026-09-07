@@ -165,15 +165,14 @@ authorship model and reproducible source ledger.
 
 ## Support status
 
-The current public contact point is the
-[Brand Navigation topic on Discourse Meta](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913).
-Use it for non-sensitive feedback, compatibility reports, documentation
-problems, and feature requests. Include the Brand Navigation commit or release,
-Discourse build, active theme, browser/device context, and reproduction steps.
+No public support intake is currently published. The earlier
+[Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
+is historical product-discussion context, not a Brand Navigation support desk.
 The repository's GitHub issue tracker currently restricts new issue creation,
 so it is not advertised as an intake route. No private security-reporting
 channel is currently published. Do not post credentials, personal data, or
-non-public vulnerability details through either public surface.
+non-public vulnerability details through either public surface. A verified
+public intake route and support expectations remain release-readiness work.
 
 This independent-stage repository does not use Discourse logos, official
 badges, or language implying Discourse ownership or maintenance. If accepted

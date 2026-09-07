@@ -108,7 +108,9 @@ reverse.
 Use this procedure when a Brand Navigation update causes a regression and the
 site needs the previous known-working Brand Navigation release. It keeps the
 same Discourse component record so its settings and theme attachments can be
-preserved. Test the complete procedure on staging first.
+preserved. This procedure is provisional: the project has not yet recorded the
+complete pin-and-return workflow on staging. Review the current evidence in
+[`TESTING.md`](TESTING.md) and test the complete procedure on staging first.
 
 Prerequisites:
 

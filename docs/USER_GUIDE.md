@@ -126,6 +126,8 @@ upload identifiers are site-specific.
    rollback procedure and temporarily re-enable that component.
 3. To return Brand Navigation itself to a known release, follow
    [Roll back Brand Navigation to a release tag](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+   That procedure remains provisional until its complete staging evidence is
+   recorded in [`TESTING.md`](TESTING.md).
 4. Restore the previously recorded settings when required.
 5. Report the Brand Navigation release, Discourse version, active theme, and
    observed error before trying the update again.
@@ -371,8 +373,10 @@ has passed staging. See
 [Migration and rollback](MIGRATION.md) for the detailed procedure.
 
 For a regression caused by a Brand Navigation update, keep the existing
-component record and use the documented
+component record and review the provisional
 [release-tag rollback](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+It is not release-supported until its complete pin-and-return workflow is
+recorded on staging in [`TESTING.md`](TESTING.md).
 
 ## Troubleshooting
 
