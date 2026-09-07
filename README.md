@@ -178,9 +178,7 @@ relevant, include:
 
 Never post credentials, personal data, or non-public vulnerability details in
 a public issue. A private security-reporting channel is not yet published; for
-now, open a detail-free issue requesting private contact. The earlier
-[Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
-is historical product-discussion context, not a Brand Navigation support desk.
+now, open a detail-free issue requesting private contact.
 
 This independent-stage repository does not use Discourse logos, official
 badges, or language implying Discourse ownership or maintenance. If accepted
