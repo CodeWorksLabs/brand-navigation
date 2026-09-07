@@ -181,9 +181,7 @@ a public issue. A private security-reporting channel is not yet published; for
 now, open a detail-free issue requesting private contact.
 
 This independent-stage repository does not use Discourse logos, official
-badges, or language implying Discourse ownership or maintenance. If accepted
-by Discourse in the future, maintainers may rename or transfer it according to
-their conventions.
+badges, or language implying Discourse ownership or maintenance.
 
 ## License
 
