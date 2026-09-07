@@ -161,4 +161,5 @@ their conventions.
 ## License
 
 Copyright (c) 2026 CodeWorksLabs. Licensed under the
-[GNU General Public License, version 2 only](LICENSE) (`GPL-2.0-only`).
+[GNU General Public License, version 2 or later](LICENSE)
+(`GPL-2.0-or-later`).

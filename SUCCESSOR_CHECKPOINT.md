@@ -383,7 +383,7 @@ must not be used as this repository's working directory.
 - Credit Brand Header and Header Submenus for product inspiration. The current
   implementation was authored from specifications; no source code from those
   inspiration components was intentionally copied.
-- License: `GPL-2.0-only`.
+- License: `GPL-2.0-or-later`.
 - Structured administration and safe defaults are first-class requirements.
 - One submenu level is supported; arbitrary deep nesting is excluded.
 - DiscussionBridge contains no compatibility logic for this component.
@@ -689,17 +689,23 @@ AI-assisted authorship and upstream source classifications before release. The n
 `docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
 implementation role, pinned upstream revisions and licenses, the exact
 adapted header-icon registration source, and release-time provenance controls.
-It also corrects the prior overbroad compatibility statement: the adapted
-source supplies GPL version 2 text but no explicit “or later” grant was found in
-the inspected upstream materials. Brand Navigation now declares
-`GPL-2.0-only`. A later licensing expansion requires documented permission for
-the adapted expression or replacement with independently authored code. No
-version had been tagged or published as a GitHub Release, but the already-public
-Git history retains the license declarations present on those commits. No
-external human recipient, adoption, or reliance is known; current repository
-signals show no forks, stars, or subscribers. GitHub clone traffic includes CI
-and installed-component activity and does not identify people. No ongoing
-support obligation is inferred from that historical record.
+The adapted source supplies GPL version 2 text but no explicit “or later” grant
+was found in the inspected upstream materials. Before the first tagged release,
+Phil selected `GPL-2.0-or-later` for Brand Navigation, with the upstream credit,
+precise adapted-pattern reference, and licensing ambiguity preserved in the
+public provenance record. Any substantiated concern raised by a rights holder
+will be evaluated and corrected as necessary. No version had been tagged or
+published as a GitHub Release, but the already-public Git history retains the
+license declarations present on those commits. No external human recipient,
+adoption, or reliance is known; current repository signals show no forks,
+stars, or subscribers. GitHub clone traffic includes CI and installed-component
+activity and does not identify people. No ongoing support obligation is
+inferred from that historical record.
+
+Licensing-declaration verification on 2026-09-06: `pnpm test:config`
+passed all 22 tests and `git diff --check` passed. `pnpm lint:prettier`
+continued to report 24 pre-existing baseline files outside this six-file
+licensing/provenance change; none of the changed formatted files was reported.
 
 Official-source verification confirms that Discourse Meta labels Brand Header,
 Header Submenus, and Custom Header Links (icons) as official and links to the

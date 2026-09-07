@@ -38,7 +38,7 @@ Permanent upstream reference:
 [initialize-for-header-icon-links.gjs at `dee14e3`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/javascripts/discourse/initializers/initialize-for-header-icon-links.gjs#L1-L27).
 
 Custom Header Links (icons) supplies GPL version 2 license text. Brand
-Navigation declares GPL-2.0-only for its initial release. No other copied or
-adapted external code is currently identified. If future work copies or adapts
-code, this record and any required copyright or license notice must be updated
-in the same change.
+Navigation declares `GPL-2.0-or-later` and preserves the permanent upstream
+reference above. No other copied or adapted external code is currently
+identified. If future work copies or adapts code, this record and any required
+copyright or license notice must be updated in the same change.

@@ -2,7 +2,7 @@
   "name": "brand-navigation",
   "private": true,
   "type": "module",
-  "license": "GPL-2.0-only",
+  "license": "GPL-2.0-or-later",
   "devDependencies": {
     "@discourse/lint-configs": "2.43.0",
     "@glint/ember-tsc": "1.1.1",

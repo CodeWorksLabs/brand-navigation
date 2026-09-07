@@ -69,9 +69,9 @@ Permanent adapted-pattern reference:
 - The current initializer retains that pattern. The formal immutable-candidate
   codebase review must confirm that this ledger is complete before release.
 
-## License posture and open verification
+## License posture
 
-Brand Navigation declares `GPL-2.0-only`. The two MIT-licensed inspiration
+Brand Navigation declares `GPL-2.0-or-later`. The two MIT-licensed inspiration
 sources did not supply copied code, so their MIT notices are not incorporated
 as notices for copied code. They remain credited because they materially
 informed the product.
@@ -79,17 +79,17 @@ informed the product.
 The Custom Header Links (icons) repository contains the GPL version 2 license
 text, and GitHub classifies it as `GPL-2.0`. No explicit upstream statement
 granting the “or later” option was located in the inspected README, component
-metadata, package metadata, initializer, or license file. Brand Navigation uses
-the conservative `GPL-2.0-only` declaration for the initial release. A later
-release may adopt an “or later” declaration only after evidence establishes the
-necessary permission for the adapted expression, or after that expression is
-replaced with independently authored code.
+metadata, package metadata, initializer, or license file. Phil selected
+`GPL-2.0-or-later` for Brand Navigation before its first tagged release, with
+the upstream credit, precise adapted-pattern reference, and this ambiguity
+preserved in the public record. Any substantiated licensing concern raised by a
+rights holder will be evaluated and corrected as necessary.
 
 Because Custom Header Links (icons) is an official Discourse component, any
-license clarification or additional permission should come from the Discourse
-maintainers or another confirmed rights holder. An individual historical
-contributor should not be assumed to have authority to clarify the license for
-the complete repository.
+future license clarification should come from the Discourse maintainers or
+another confirmed rights holder. An individual historical contributor should
+not be assumed to have authority to clarify the license for the complete
+repository.
 
 No Brand Navigation version was tagged or published as a GitHub Release before
 this decision. The repository was already public, however, so earlier commits
