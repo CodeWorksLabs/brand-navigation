@@ -94,6 +94,32 @@ submenu-caret controls, focusable child links, visible-description association,
 named social icon links, mobile control name/state, and embed exclusion. The
 human screen-reader gate below remains open.
 
+### Partial iPhone VoiceOver evidence — 2026-09-07
+
+An anonymous portrait-mode pass on the public Repeal OBBBA Forum used Safari
+with iPhone VoiceOver. The exact iPhone model, iOS build, and VoiceOver version
+were not recorded, so this is bounded evidence rather than a completed
+screen-reader acceptance pass.
+
+VoiceOver announced the mobile trigger as **Brand Navigation, button** and
+activation exposed the menu items. A submenu control announced its open action
+and collapsed state. After activation, VoiceOver exposed each tested child's
+name and link role and read the visible description associated through
+`aria-describedby`. VoiceOver did not speak the outer mobile trigger's
+collapsed/expanded state during the observed sequence. Its two-finger scrub did
+not close the open submenu, and direct-toggle closure was not completed before
+the session ended. These observations remain open for a controlled follow-up.
+
+The same portrait session exposed a separate responsive-capacity limitation.
+With five Brand Navigation social destinations configured for mobile alongside
+Discourse's Log In, Search, and Navigation controls, the Brand Navigation menu
+trigger was largely obscured by Log In. A Chromium-compatible 390 by 844
+reproduction measured the fixed header panel at approximately 375px inside an
+approximately 369px content row; the trigger's outlet consequently collapsed
+to zero width. Operators should currently reserve mobile header capacity by
+marking additional social destinations **Desktop only**. Automatic overflow or
+priority handling is not implemented and requires separate product treatment.
+
 ### DiscussionBridge Forum native compatibility transition — 2026-09-07
 
 The DiscussionBridge Forum was running Discourse
@@ -429,10 +455,11 @@ two but does not substitute for final human confirmation:
 2. A complete RTL-locale desktop/mobile pass covering layout, submenu
    alignment, focus, keyboard behavior, responsive modes, themes, and embed
    exclusion.
-3. Human screen-reader testing covering the navigation landmark, accessible
-   names, expanded/collapsed state, linked-parent and caret actions, focus
-   return, visible descriptions, icon links, responsive controls, and embed
-   exclusion.
+3. Complete the human screen-reader testing begun in the partial iPhone
+   VoiceOver pass above, covering the navigation landmark, accessible names,
+   expanded/collapsed state, linked-parent and caret actions, dismissal and
+   focus return, visible descriptions, icon links, responsive controls, and
+   embed exclusion.
 
 Execute these on a controlled test environment after the operator-documentation
 correction closes. Record the Discourse build and core commit, Brand Navigation

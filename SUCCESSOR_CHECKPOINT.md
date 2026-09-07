@@ -8,8 +8,9 @@ Brand Navigation `v0.9.0` is a released public preview. The component is
 independently maintained by CodeWorksLabs and is not an official Discourse
 product. Current product code is released and deployed; a documentation-only
 operator-readiness correction and the browser/runtime embed and RTL evidence
-are merged. Human screen-reader acceptance and final human confirmation of the
-recorded embed/RTL evidence remain before `v1.0.0`.
+are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
+screen-reader acceptance and final human confirmation of the recorded
+embed/RTL evidence remain before `v1.0.0`.
 
 ## Authoritative repository state
 
@@ -103,14 +104,21 @@ RTL desktop/mobile interaction on Foundation and Horizon. The temporary embed
 fixture and all changed sandbox settings were removed or restored. Exact
 evidence and boundaries are recorded in `docs/TESTING.md`.
 
-Human confirmation remains required for these three gates on a controlled test
+Human confirmation remains required for these gates on a controlled test
 environment:
 
 1. classic Discourse embedded comments, including core interaction preservation
    and complete Brand Navigation exclusion;
 2. a full RTL-locale desktop/mobile interaction pass; and
-3. screen-reader testing of landmarks, names, state, focus, submenus, icons,
-   responsive controls, and embed exclusion.
+3. completion of the partial iPhone VoiceOver pass for landmarks, names, state,
+   focus, dismissal, submenus, icons, responsive controls, and embed exclusion.
+
+The partial VoiceOver pass confirmed announced menu items, submenu state,
+child-link roles, and visible descriptions. It did not confirm the outer
+trigger state or submenu dismissal/focus return. It also exposed a portrait
+capacity limit when five mobile social icons compete with Discourse's anonymous
+header controls: the Brand Navigation trigger can be obscured. The exact
+evidence and current operator mitigation are in `docs/TESTING.md`.
 
 Collect all findings before making another correction batch. `v1.0.0` becomes
 appropriate when these gates and any resulting blockers are closed, the exact
