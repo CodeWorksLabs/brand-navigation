@@ -22,8 +22,8 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   pushed yet. Dual review of candidate `74c8cbb` found that the upstream
   date-based bootstrap would select the repository's initial commit for
   `d-compat/2026.8`. The correction batch therefore requires both 2026.7 and
-  2026.8 to be seeded from released `v0.9.0` before the writer can run, verifies
-  those accepted seeds fail closed, and serializes writer executions.
+  2026.8 branches to contain released `v0.9.0` before the writer can run,
+  verifies those accepted seeds fail closed, and serializes writer executions.
 - Implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
   passed configuration run `34144739257` (24/24); Discourse Theme run
   `34144739800` passed 17 applicable jobs with three duplicate lint jobs
@@ -44,7 +44,13 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   compatibility-branch CI lane. Local formatting, JavaScript/template/type/CSS
   linting, configuration tests (24/24), whitespace checks, and synthetic
   absent/wrong/correct/descendant seed checks pass. Exact-head CI and focused
-  correction closure remain pending.
+  correction closure passed in the persistent lane, while the internal lane
+  blocked because branches seeded at exact `v0.9.0` would not contain the new
+  compatibility-PR workflow. The runbook now resolves that interaction by
+  seeding both branches at reviewed descendant `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`,
+  which contains the accepted product seed and corrected workflow. Fresh
+  documentation closure, remote seeding, ref verification, merge, and a guarded
+  writer check remain pending.
 - All PR 8 pending-state entries below are dated development history and no
   longer describe the current release or repository state.
 

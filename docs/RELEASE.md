@@ -87,13 +87,17 @@ Discourse version from the last first-parent `main` commit predating that core
 release.
 
 Brand Navigation requires a one-time manual bootstrap for both `2026.7` and
-`2026.8`. Seed both branches from released `v0.9.0` merge commit
-`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e` before merging or manually running
-the scheduled workflow. The workflow fails closed unless both branches contain
-that accepted seed, and serialized runs prevent concurrent branch writers. If
-either branch already exists at the wrong commit, do not run the workflow:
-inspect the ref, correct it through an explicitly authorized release operation,
-verify it contains the accepted seed, and only then retry.
+`2026.8`. Seed both branches from reviewed compatibility commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6` before merging or manually running
+the scheduled workflow. That commit contains released `v0.9.0` merge commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, leaves the accepted product runtime
+unchanged, and adds the corrected compatibility-pull-request workflow. The
+branch-creation workflow fails closed unless both branches contain the accepted
+`v0.9.0` seed, and serialized runs prevent concurrent branch writers. If either
+branch already exists at the wrong commit, do not run the workflow: inspect the
+ref, correct it through an explicitly authorized release operation, verify it
+contains both the accepted product seed and corrected workflow, and only then
+retry.
 
 When a compatible fix lands on `main`, backport it through a reviewed pull
 request whose base is the affected `d-compat` branch. Do not merge new features
