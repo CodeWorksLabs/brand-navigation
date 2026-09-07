@@ -113,8 +113,10 @@ scope, architecture, migration, testing, and release procedures.
 Discourse detects updates from commits on the installed remote branch. Brand
 Navigation additionally uses Semantic Versioning tags and matching GitHub
 Releases as human-readable release, support, and revision-recovery identities.
-The supported same-component procedure is documented in
+The same-component procedure is documented in
 [Migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+Treat it as provisional until the complete pin-and-return workflow is recorded
+on staging in the [testing record](docs/TESTING.md).
 `main` targets current Discourse; maintained older releases use Discourse's
 `d-compat/<YYYY>.<M>` compatibility branches. Development occurs on short-lived
 branches, and fixes for an older supported release are reviewed and backported
@@ -163,15 +165,15 @@ authorship model and reproducible source ledger.
 
 ## Support status
 
-Use the repository's
-[GitHub issue tracker](https://github.com/CodeWorksLabs/brand-navigation/issues)
-for reproducible bugs, compatibility reports, documentation problems, and
-feature requests. Include the Brand Navigation commit or release, Discourse
-build, active theme, browser/device context, and reproduction steps. Do not put
-credentials, personal data, or non-public vulnerability details in a public
-issue. A private security-reporting channel is not currently published; arrange
-a trusted private contact with the repository owner before sharing sensitive
-details.
+The current public contact point is the
+[Brand Navigation topic on Discourse Meta](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913).
+Use it for non-sensitive feedback, compatibility reports, documentation
+problems, and feature requests. Include the Brand Navigation commit or release,
+Discourse build, active theme, browser/device context, and reproduction steps.
+The repository's GitHub issue tracker currently restricts new issue creation,
+so it is not advertised as an intake route. No private security-reporting
+channel is currently published. Do not post credentials, personal data, or
+non-public vulnerability details through either public surface.
 
 This independent-stage repository does not use Discourse logos, official
 badges, or language implying Discourse ownership or maintenance. If accepted

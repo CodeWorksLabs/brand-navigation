@@ -82,9 +82,9 @@ and support surfaces.
 The exact documentation paths, source repository, release-tag synchronization,
 shared navigation, deployment ownership, and timing remain under discussion.
 The recommended framework split is Astro for public product and platform
-surfaces and Starlight for the shared documentation corpus. This direction does
-not require a public site for the first Brand Navigation release and does not
-authorize creating, publishing, or deploying any site.
+surfaces and Starlight for the shared documentation corpus. A public site was
+not required for the `v0.9.0` release. This direction does not authorize
+creating, publishing, or deploying any site.
 
 `support.codeworkslabs.dev` is the selected durable umbrella support front door.
 It may route visitors to documentation, repositories, issue trackers, shared
@@ -94,12 +94,13 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
-Until that support site exists, the actionable public support route is the
-[Brand Navigation GitHub issue tracker](https://github.com/CodeWorksLabs/brand-navigation/issues).
-Do not publish credentials, personal data, or sensitive vulnerability details
-there. No private security-reporting channel is currently published; establish
-a trusted private contact with the repository owner before transmitting
-sensitive details.
+Until that support site exists, the actionable public contact point is the
+[Brand Navigation topic on Discourse Meta](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913).
+The repository's GitHub issue tracker currently restricts new issue creation
+and must not be advertised as an intake route unless that restriction is
+removed and verified. No private security-reporting channel is currently
+published. Do not publish credentials, personal data, or sensitive
+vulnerability details through either public surface.
 
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained
@@ -130,11 +131,13 @@ Discourse's reusable workflow deliberately selects the matching moving release
 branch and Brand Navigation runs one clearly named compatibility-branch lane;
 obtain separate exact-core evidence when a backport needs it.
 Discourse update detection remains commit-based; release tags provide durable
-human and revision-recovery identities. Use the supported procedure in
+human and revision-recovery identities. Use the provisional procedure in
 [`MIGRATION.md`](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag)
-rather than editing remote component code. Record the Brand Navigation version,
-component commit, compatibility branch, Discourse version, and exact core
-commit in every compatibility result.
+rather than editing remote component code. It is not a release-supported
+recovery path until its complete pin-and-return workflow is recorded on staging
+in `TESTING.md`. Record the Brand Navigation version, component commit,
+configured Branch field value, resolved compatibility ref, Discourse version,
+and exact core commit in every compatibility result.
 
 Use `v0.9.x` for reviewed preview releases. Publish `v1.0.0` only after the
 documentation and planned multi-site compatibility work are complete and no

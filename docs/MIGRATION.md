@@ -115,8 +115,9 @@ Prerequisites:
 - Choose an existing Brand Navigation release tag that is documented as
   compatible with the site's Discourse release. Do not invent or move a tag.
 - Export the current **Configuration bundle** and store it outside Discourse.
-- Record the current component commit, displayed branch or compatibility ref,
-  `enabled` value, and every attached parent theme.
+- Record the current component commit, the exact configured **Branch** field
+  value (including blank/default), the separately displayed or resolved
+  compatibility ref, `enabled` value, and every attached parent theme.
 - Keep administrator access through Discourse safe mode available in case the
   active theme cannot render normally.
 
@@ -159,5 +160,7 @@ To return to the supported current channel:
 Do not edit a Git-installed remote component locally, force-move a release tag,
 or delete and reinstall the component as a normal rollback method. If the
 source change fails, keep the component disabled, capture the displayed error,
-and restore the previously recorded source branch before making another
-attempt.
+and restore the exact prior configured **Branch** field value—including a
+blank/default value—before making another attempt. After a native update,
+separately verify the resolved compatibility ref rather than copying that
+resolved ref into **Branch**.

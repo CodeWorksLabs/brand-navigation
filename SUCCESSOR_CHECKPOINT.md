@@ -110,7 +110,9 @@ candidate passes required CI/review, and final acceptance is complete.
    to the final candidate.
 3. Obtain Manual Boss and Product Boss read-only closure findings.
 4. Evaluate and close the combined findings before merging the documentation.
-5. Execute the three remaining `v1.0.0` manual acceptance gates above.
+5. On authorized staging, execute and record the complete same-component
+   release-tag rollback and return-to-current workflow.
+6. Execute the three remaining `v1.0.0` manual acceptance gates above.
 
 ## Out of scope
 
