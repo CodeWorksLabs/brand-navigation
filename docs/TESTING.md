@@ -39,6 +39,61 @@ The public forum returned HTTP 200. This is server-side installation and
 availability evidence; it does not replace the earlier browser-rendering
 record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
 
+### Sandbox embed and RTL browser evidence — 2026-09-07
+
+The sandbox remained on Discourse `2026.9.0-latest` at exact core commit
+`587b564093f20285dd15a02aea3eeb54886870e8`. Canonical component `3` was on
+`main` at Brand Navigation commit
+`56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`, tree
+`176d51fa7b5eed30833258b73befe99f3173d2b7`, with no import error and with both
+Foundation and Horizon attached. The later repository changes through merged
+`main` commit `dc0e935ab54eead212e41681320470b52fc6a775` are documentation-only; an
+exact runtime-path diff from `56de8bd` is empty.
+
+A temporary allowed host at `localhost:8765`, a dedicated temporary topic with
+one reply, and an exact `TopicEmbed` mapping supplied a real classic-comments
+fixture. Chromium `152.0.7977.76` loaded the external page at a 1280 by 1200
+viewport. The rendered classic embed contained the reply count, author, reply
+content, timestamp route, and **Continue Discussion** route. Its response and
+render contained no Brand Navigation bar, mobile trigger, header icon, runtime
+asset, or component class. The screenshot was visually inspected during the
+test.
+
+With Discourse's native full-app embed setting temporarily enabled, the same
+topic was loaded with `embed_mode=true` and an allowed external referrer at
+1440 by 1000 and 390 by 844 viewports. Both loads contained zero Brand
+Navigation bars, navigation landmarks, submenu summaries, and mobile triggers.
+Core Discourse still exposed the topic-progress landmark, post content, reply
+button, logged-out like prompts, copy-link actions, and **Sign in to reply**
+composer call to action. This confirms exclusion and availability; quote
+selection, completed sign-in, and authenticated composer submission were not
+executed in this pass.
+
+For RTL evidence, the sandbox default locale was temporarily set to Arabic.
+The browser reported `lang=ar` and computed `direction=rtl`. Foundation and
+Horizon were each exercised on desktop and in the component's mobile menu at
+390 by 844. The logical right section mirrored to the physical left, ordinary
+items remained grouped at the physical right, and every tested submenu stayed
+within the viewport. Keyboard **Enter** opened Resources, **Tab** reached its
+first child, and **Escape** closed it. Desktop focus returned to the submenu
+summary; mobile Escape closed the containing menu and returned focus to the
+Brand Navigation header control. RTL full-app desktop and mobile embeds also
+contained no Brand Navigation surface. Browser screenshots and computed
+geometry were inspected during the pass.
+
+The test restored `default_locale=en`, `embed_full_app=false`, and
+`embed_any_origin=false`, removed the temporary allowed-host and topic-embed
+records, and soft-deleted the dedicated topic. Post-cleanup verification found
+zero embeddable hosts, no active temporary mapping, and no active temporary
+topic.
+
+This is reproducible browser/runtime evidence, not a claim of completed human
+assistive-technology acceptance. A preparatory Chromium accessibility-tree pass
+also exposed the named Brand Navigation landmark, distinct linked-parent and
+submenu-caret controls, focusable child links, visible-description association,
+named social icon links, mobile control name/state, and embed exclusion. The
+human screen-reader gate below remains open.
+
 ### DiscussionBridge Forum native compatibility transition — 2026-09-07
 
 The DiscussionBridge Forum was running Discourse
@@ -365,7 +420,8 @@ reader navigation landmarks.
 ## Remaining manual gates for `v1.0.0`
 
 The `v0.9.0` preview does not claim completed human verification for these
-three cases:
+three cases. The browser/runtime evidence above materially advances the first
+two but does not substitute for final human confirmation:
 
 1. A classic Discourse comments embed on an allowed external host, proving that
    Brand Navigation does not mount while embedded discussion content and core
