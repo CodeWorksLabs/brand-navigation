@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLEMENTED / EXACT-HEAD CI IN PROGRESS / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLEMENTED / FREEZE REQUIRES GREEN CURRENT-HEAD CI / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -43,12 +43,11 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   pushed to pull request 8; it is not yet frozen or correction-closure reviewed.
 - Current correction-batch local evidence: all 24 Node configuration tests,
   JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
-  formatting, Repeal fixture validation, and `git diff --check` pass. The
-  enabled shared-core, unavailable-icon system, and rendered oversized-import
-  tests are authored but unexecuted locally; exact GitHub execution remains the
-  next verification gate. The aggregate local lint command reports Windows
-  checkout formatting drift in 17 unchanged files; no changed file is among
-  those warnings.
+  formatting, Repeal fixture validation, and `git diff --check` pass. Ruby and
+  browser suites were not executed locally; exact GitHub execution evidence is
+  recorded below. The aggregate local lint command reports Windows checkout
+  formatting drift in 17 unchanged files; no changed file is among those
+  warnings.
 - First pushed batch commit `97f249ecb799b14b5089d6a6a9854bfda867005c`
   / tree `1d088afef469709a8d263ab486ca55512a9c381e` passed configuration
   run `34089230517`, plus test discovery, linting, and backend checks in
@@ -123,6 +122,13 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   coverage for unavailable-icon label fallback and actual hidden bar/menu
   surfaces without asserting impossible dynamic registration. Replacement
   exact-head CI remains required.
+- Completed correction-code head
+  `36562ed47e576a65c5ba474569a17f32d67ca0d7` / tree
+  `24e6c0736508a0d5210d9425e49c424fa0409844` passed all exact-head checks:
+  configuration run `34093283060` and test discovery, linting, backend, all 18
+  frontend tests, and all 30 system examples in Discourse Theme run
+  `34093283449`. The current successor-record commit is documentation-only, but
+  it must also pass exact-head CI before the pull-request candidate is frozen.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -156,10 +162,10 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   actions** below. Pull request 7 completed the implementation review,
   remediation, correction closure, manual acceptance, and merge gates. Pull
   request 8 is the release-metadata successor candidate. Its complete review is
-  finished; the current gate is the authorized four-finding correction batch,
-  followed by exact replacement CI, freeze, dual correction-closure review,
-  remaining release-gate reconciliation, merge, exact-tree confirmation, tag,
-  and GitHub Release.
+  finished and the authorized four-finding correction batch is implemented.
+  The remaining sequence is green current-head CI, freeze, dual
+  correction-closure review, remaining release-gate reconciliation, merge,
+  exact-tree confirmation, tag, and GitHub Release.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
