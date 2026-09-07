@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PROGRESS / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLEMENTED / EXACT-HEAD CI IN PROGRESS / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -39,8 +39,8 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PR
   unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
   (BN8-01).
 - Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
-  request 7. Its last committed head is the frozen PR 8 candidate above; the
-  authorized four-finding correction batch is currently uncommitted.
+  request 7. The authorized four-finding correction batch is committed and
+  pushed to pull request 8; it is not yet frozen or correction-closure reviewed.
 - Current correction-batch local evidence: all 24 Node configuration tests,
   JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
   formatting, Repeal fixture validation, and `git diff --check` pass. The
@@ -81,6 +81,16 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PR
   by explicitly adding `caret-down` to `custom_font_awesome_icons` before
   asserting the positive header-icon baseline and the subsequent hidden state.
   Replacement exact-head CI remains required.
+- Follow-up head `415dd0ead3ed71473b340f41cf7c53de69a45f6d` / tree
+  `81fca3d1e82ee93f1a7266ceab270f46e17ecb23` passed configuration run
+  `34090828030` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34090828723`. Its system lane again passed 29/30
+  examples; the sole failure was the same positive header-icon prerequisite.
+  Evidence established that changing `custom_font_awesome_icons` after the test
+  component upload does not rebuild that page's SVG sprite. The fixture now
+  registers `caret-down` through Discourse's supported theme-modifier
+  `svg_icons` collection before visiting the page. Production behavior is
+  unchanged. Replacement exact-head CI remains required.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
