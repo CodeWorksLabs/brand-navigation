@@ -38,6 +38,13 @@ Disposition: **PR 7 MERGED / PR 8 PRIOR CANDIDATE BLOCKED / SECOND REPLACEMENT B
   symbols beside, rather than inside, the primary `.fontawesome` sprite. The
   fixture now accurately mirrors both supported loaders. Replacement CI is
   required; no product-code failure was reported by those runs.
+- On fixture-corrected head `bd74dc7`, all current and exact-2026.7 frontend
+  suites passed, including the new rendered delayed-readiness case. All three
+  system suites then exposed the same genuine timing fault on user-profile
+  routes: the sprite observer could update tracked `iconRevision` inside an
+  active render computation. The callback is now scheduled through Ember's
+  `afterRender` queue, and an already-ready sprite requires no callback because
+  getters inspect it directly. Fresh full-matrix CI is required.
 
 - Phil explicitly accepted the two remaining P2 release-engineering risks for
   `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the

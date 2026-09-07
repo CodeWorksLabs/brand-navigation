@@ -71,7 +71,6 @@ export class PrimarySpriteWatcher {
 
   subscribe(callback) {
     if (!this.document || isPrimarySpriteReady(this.document)) {
-      callback();
       return () => {};
     }
 

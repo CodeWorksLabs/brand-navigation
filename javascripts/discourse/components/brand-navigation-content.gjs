@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { registerDestructor } from "@ember/destroyable";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
+import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import LightDarkImg from "discourse/components/light-dark-img";
@@ -93,9 +94,11 @@ export default class BrandNavigationContent extends Component {
 
     if (hasEligibleIcon) {
       this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
-        if (!this.destroyed) {
-          this.iconRevision++;
-        }
+        scheduleOnce("afterRender", this, () => {
+          if (!this.destroyed) {
+            this.iconRevision++;
+          }
+        });
       });
     }
   }

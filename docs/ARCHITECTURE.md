@@ -72,9 +72,9 @@ Navigation consumers once and disconnects. This works with both the 2026.7 ESR
 loader and current Discourse without issuing per-icon network requests. Until
 the primary sprite is ready, icon-only bar/submenu entries expose their labels
 and direct header entries stay omitted. Destroyed components unsubscribe, and
-audience/device-ineligible entries do not create subscriptions. Top-level and
-child items independently select `both`, `desktop`, or `mobile` device
-visibility.
+the tracked readiness update is scheduled after the active render transaction.
+Audience/device-ineligible entries do not create subscriptions. Top-level and
+child items independently select `both`, `desktop`, or `mobile` device visibility.
 The components evaluate that setting against Discourse's supported
 `capabilities.isMobileDevice` state and omit nonmatching items from rendering,
 so phone rotation cannot reclassify items. Component-wide responsive layout
