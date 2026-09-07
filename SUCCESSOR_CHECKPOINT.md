@@ -21,6 +21,13 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compa
   administrator/release documentation. No compatibility branch has been
   pushed yet. `d-compat/2026.7` will be seeded from tested `v0.9.0`; a 2026.8
   branch will be seeded only after its exact-core lane is green.
+- Implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
+  passed configuration run `34144739257` (24/24) and all twenty jobs in
+  Discourse Theme run `34144739800`. Current Discourse, the two recorded exact
+  2026.7 cores, and exact `v2026.8.0` core commit `badad7b0456` each passed
+  backend, frontend (23/23), and system (30/30) lanes; current linting passed.
+  This evidence is now recorded in `docs/TESTING.md`. The documentation-only
+  evidence commit requires exact-head CI before PR 9 can freeze.
 - All PR 8 pending-state entries below are dated development history and no
   longer describe the current release or repository state.
 

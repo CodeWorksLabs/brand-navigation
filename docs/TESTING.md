@@ -19,6 +19,17 @@ The builds above were read directly from each site's administrator dashboard on
 declarations. Features not named in a row should be evaluated through the
 acceptance matrix below before claiming coverage on that environment.
 
+### Automated release compatibility
+
+PR 9 implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
+passed configuration run `34144739257` (24/24) and Discourse Theme run
+`34144739800`. The expanded theme matrix passed current Discourse plus exact
+Repeal and R744 2026.7 cores and exact Discourse `v2026.8.0` core commit
+`badad7b0456a628e578bc48b9f8c1259422b5d58`. Each core passed backend,
+frontend (23/23), and system (30/30) lanes; current linting also passed. This is
+automated compatibility evidence, not a claim of manual 2026.8 browser
+acceptance.
+
 ## Initial verification record
 
 The initial implementation candidate was verified on
