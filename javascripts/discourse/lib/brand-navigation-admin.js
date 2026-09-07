@@ -1,38 +1,22 @@
-const CANONICAL_REMOTE_PATH = "/codeworkslabs/brand-navigation";
 const UNIQUE_SCHEMA_NAME = "brand_navigation_item_v1";
+const COMPONENT_SETTING_SIGNATURE = [
+  "brand_presentation",
+  "custom_font_awesome_icons",
+  "mobile_mode",
+  "navigation_items",
+  "submenu_text_color",
+];
 
 export function isBrandNavigationTheme(theme) {
-  const remoteUrl = theme?.remote_theme?.remote_url;
-
-  if (theme?.component !== true || typeof remoteUrl !== "string") {
+  if (theme?.component !== true || !Array.isArray(theme.settings)) {
     return false;
   }
 
-  if (
-    /^git@github\.com:codeworkslabs\/brand-navigation(?:\.git)?$/i.test(
-      remoteUrl
-    )
-  ) {
-    return true;
-  }
+  const settingNames = new Set(
+    theme.settings.map((setting) => setting?.setting).filter(Boolean)
+  );
 
-  try {
-    const url = new URL(remoteUrl);
-    const path = url.pathname.replace(/\.git\/?$/i, "").replace(/\/$/, "");
-
-    return (
-      url.protocol === "https:" &&
-      url.hostname.toLowerCase() === "github.com" &&
-      (url.port === "" || url.port === "443") &&
-      path.toLowerCase() === CANONICAL_REMOTE_PATH &&
-      !url.username &&
-      !url.password &&
-      !url.search &&
-      !url.hash
-    );
-  } catch {
-    return false;
-  }
+  return COMPONENT_SETTING_SIGNATURE.every((name) => settingNames.has(name));
 }
 
 export function prepareThemeSettingsImport(theme, bundle) {
@@ -51,6 +35,21 @@ export function prepareThemeSettingsImport(theme, bundle) {
   }
 
   return values;
+}
+
+export function snapshotPlainData(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+export async function persistThemeSettings(themeId, settings, request) {
+  const submittedSettings = snapshotPlainData(settings);
+
+  await request(`/admin/themes/${themeId}.json`, {
+    type: "PUT",
+    data: { theme: { settings: submittedSettings } },
+  });
+
+  return submittedSettings;
 }
 
 export function isBrandNavigationObjectsEditor(args) {

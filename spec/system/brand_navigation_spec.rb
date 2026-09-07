@@ -100,6 +100,52 @@ RSpec.describe "Brand Navigation" do
     ).to eq("visible")
   end
 
+  it "uses configured submenu colors for labels, descriptions, and hover" do
+    theme.update_setting(:hover_background_color, "#123456")
+    theme.update_setting(:submenu_background_color, "#000000")
+    theme.update_setting(:submenu_text_color, "#FFFFFF")
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Explore",
+          url: "/categories",
+          visibility: "everyone",
+          children: [
+            {
+              label: "Categories",
+              url: "/categories",
+              description: "Browse every category",
+              visibility: "everyone",
+            },
+          ],
+        },
+      ],
+    )
+    theme.save!
+
+    visit("/")
+    find('summary[aria-label="Open Explore submenu"]').click
+
+    child_link = find(".brand-navigation__submenu > ul a", text: "Categories")
+    description = find(".brand-navigation__child-description")
+
+    expect(
+      page.evaluate_script("getComputedStyle(arguments[0]).color", child_link),
+    ).to eq("rgb(255, 255, 255)")
+    expect(
+      page.evaluate_script("getComputedStyle(arguments[0]).color", description),
+    ).to eq("rgb(255, 255, 255)")
+    expect(
+      page.evaluate_script("getComputedStyle(arguments[0]).opacity", description),
+    ).to eq("0.78")
+
+    child_link.hover
+    expect(
+      page.evaluate_script("getComputedStyle(arguments[0]).backgroundColor", child_link),
+    ).to eq("rgb(18, 52, 86)")
+  end
+
   it "keeps an administrator in the navigation editor after saving" do
     sign_in(Fabricate(:admin))
     editor_path = "/admin/customize/themes/#{theme.id}/schema/navigation_items"
@@ -110,5 +156,40 @@ RSpec.describe "Brand Navigation" do
 
     expect(page).to have_current_path(editor_path)
     expect(page).to have_css(".schema-setting-editor")
+  end
+
+  it "shows administrator enhancements for a locally uploaded component" do
+    sign_in(Fabricate(:admin))
+
+    visit("/admin/customize/themes/#{theme.id}")
+
+    expect(page).to have_css(".brand-navigation-admin-panel")
+    expect(page).to have_css(".brand-navigation-bundles")
+  end
+
+  it "reconciles imported appearance settings with the visible controls" do
+    sign_in(Fabricate(:admin))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    bundle = {
+      format: "brand-navigation-settings",
+      version: 1,
+      settings: { bar_background_color: "#123456" },
+    }
+
+    visit(settings_path)
+    find(".brand-navigation-bundles textarea").set(bundle.to_json)
+    click_button("Import settings")
+
+    expect(page).to have_css(".alert-success", text: "Configuration bundle imported")
+    expect(
+      find('input[type="color"][data-setting="bar_background_color"]').value,
+    ).to eq("#123456")
+    expect(page).to have_button("Save colors", disabled: true)
+
+    visit(settings_path)
+    expect(
+      find('input[type="color"][data-setting="bar_background_color"]').value,
+    ).to eq("#123456")
+    expect(page).to have_button("Save colors", disabled: true)
   end
 end

@@ -19,14 +19,18 @@ The builds above were read directly from each site's administrator dashboard on
 declarations. Features not named in a row should be evaluated through the
 acceptance matrix below before claiming coverage on that environment.
 
-## Verification candidate record
+## Initial verification record
 
-The `v0.9.0` candidate is maintained on
-`codex/v0.9.0-verification` in draft pull request
-`https://github.com/CodeWorksLabs/brand-navigation/pull/1`. At implementation
-commit `13005b7`, official Discourse Theme workflow run `34010799758` passed
-linting, English-locale validation, frontend QUnit, backend, and Ruby system
-tests. Configuration workflow run `34010799448` passed all 18 Node bundle tests.
+The initial implementation candidate was verified on
+`codex/v0.9.0-verification` in pull request
+`https://github.com/CodeWorksLabs/brand-navigation/pull/1`, which has since
+merged. At implementation commit `13005b7`, official Discourse Theme workflow
+run `34010799758` passed linting, English-locale validation, frontend QUnit,
+backend, and Ruby system tests. Configuration workflow run `34010799448`
+passed all 18 Node bundle tests. This is historical implementation evidence,
+not the immutable candidate for the forthcoming `v0.9.0` release; that exact
+commit and tree will be recorded after the release-preparation pull request is
+complete.
 
 The same branch was installed as sandbox component id `2` and verified for the
 desktop, 390px mobile menu/bar/hidden, keyboard submenu, safe external-link,
@@ -111,10 +115,18 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for icon/label presentation and missing-icon fallback.
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
-- Canonical HTTPS CLI origins, redirect refusal, bounded responses, and safe
-  error output.
-- Exact component identity for administrator extensions, complete client
-  preflight, and one bundle update request.
+- Bounded local bundle validation without forum credentials or network access.
+- Schema-scoped object-editor identity and five-setting component-panel
+  signature, including locally uploaded components and incomplete-signature
+  rejection.
+- Complete bundle preflight, immutable persistence snapshots, strict color
+  types, inert diagnostics, and export/import byte-limit symmetry.
+- Component-action deferred-completion coverage for submitted appearance and
+  bundle snapshots, in-flight state, model reconciliation, dirty state,
+  success state, current/exported settings, and unrelated color-draft
+  preservation.
+- Browser-backed import coverage for persisted appearance reload, synchronized
+  picker state, and a clean post-import save state.
 
 ## Manual acceptance matrix
 

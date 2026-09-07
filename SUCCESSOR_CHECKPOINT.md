@@ -1,12 +1,12 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / RELEASE DOCUMENTATION IN PROGRESS / NOT RELEASED**
+Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
+Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE REPLACEMENT CI GREEN / FINAL FREEZE PENDING / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
-- Current working branch: `codex/release-docs`, created cleanly from
-  `origin/main` at `b0b5354481c30e1db1daf4db682368a6f9c9994d`.
+- Current working branch: `codex/authorship-provenance`, based on the current
+  release-documentation line and published at the matching remote branch.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -25,10 +25,10 @@ Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / R
 - Current release-documentation work expands the README feature summary,
   documents the English-first translation posture, adds administrator
   translation guidance, strengthens the release translation/attribution gate,
-  and creates `docs/ATTRIBUTION.md` with a permanent reference to the precise
-  GPL `curryComponent` pattern adapted from Custom Header Links (icons).
+  and records attribution, AI-assisted authorship, source provenance, and the
+  selected `GPL-2.0-or-later` licensing posture.
 - Focused Prettier checks and `git diff --check` pass for the changed docs. All
-  22 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
+  23 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
   lanes pass in the aggregate lint command; the aggregate Prettier lane still
   reports pre-existing Windows checkout drift in unrelated files, so only the
   changed documentation was formatted.
@@ -37,8 +37,15 @@ Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / R
   existing Pageant/SSH access may be used only when a read-only server check is
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. The current position is Step 1: finish release preparation
-  and manual documentation/product polish.
+  actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
+  issued review `BN-CODEBASE-20260907`. The first replacement was reviewed in
+  parallel by the internal review lane and the persistent sidebar Code Reviewer
+  task. The internal lane completed its review; the sidebar lane issued
+  `INCOMPLETE` reports with unresolved evidence requirements. Findings from
+  both lanes were evaluated together and remediated without promoting the
+  sidebar reports to completed reviews. Step 5 is complete. Step 6 remains open
+  because correction closure found the record-integrity blocker documented
+  below.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -58,15 +65,17 @@ DiscussionBridge sandbox, Repeal OBBBA Forum, DiscussionBridge Forum, The
 Bridge, Citizen Activist Network, and RVing Community. Browser administration
 is available through Phil's authenticated Chrome tabs. SSH is unnecessary and
 should be reserved for cases the supported UI cannot handle. Do not delete or
-disable predecessor components without Phil's explicit direction.
+disable the other installed header components without Phil's explicit
+direction.
 
 ## Canonical locations
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/release-docs`.
+- Current branch: `codex/authorship-provenance`.
 - Merged color-control head: `4d520d2`.
-- Current merged head: `b0b5354`.
+- Current merged head: `4a03705` (documentation-only merge after the last
+  browser-tested implementation head).
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
@@ -77,13 +86,163 @@ disable predecessor components without Phil's explicit direction.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
 - Current CI/browser-tested merged head: `b0b5354` (the checkpoint itself may
   create a later documentation-only head).
-- Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
+- Historical first-review commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
+- Historical PR 7 pre-remediation freeze: commit
+  `80061e4c872443a6a2951c08c6adad102b7c32b2`; tree
+  `12a1292aa1fde6650a2a32b68dc1dbd559e56c08`.
 - Historical runtime evidence below identifies its own commit. It is not a
   claim that those earlier commits are current.
 
-The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
-must not be used as this repository's working directory.
+`C:\CodeProjects\CodeWorksLabs\Discourse` is not this repository's working
+directory. Use the canonical local repository path above.
+
+## Formal review and remediation checkpoint
+
+- Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
+  Its first frozen candidate `80061e4` / tree `12a1292a` passed all six GitHub
+  checks in runs `34070471390` and `34070471604`.
+- Complete codebase review `BN-CODEBASE-20260907` used the controlling Code
+  Review Doctrine at 52,273 bytes and SHA-256
+  `5610f2ab5b2e9dc2cd649e2e11321dec6b5f1bacd174a1c32babd49174888c5d`.
+  It issued `INTERNAL CODE REVIEW INCOMPLETE` with no P0, three confirmed P1,
+  three P2, and two P3 findings. Missing external-source and CLI-contract
+  evidence prevented an exhaustive acceptance disposition.
+- The known findings were evaluated together. The coherent remediation batch
+  keeps `GPL-2.0-or-later` while replacing the historical adapted icon-binding
+  expression; corrects submenu description and hover colors; retains browser
+  bundle import/export while removing credentialed CLI apply/export from the
+  `v0.9.0` contract; translates standard fallback status messages and narrows
+  the detailed-validation translation claim; makes administrator enhancements
+  survive local copies and repository moves; adds affected system/unit tests;
+  and refreshes release records.
+- Ruby tooling has an exact direct Gemfile pin but no `Gemfile.lock`; transitive
+  lint-tool resolution remains the known BN-06 P2. It is not being disguised as
+  fully reproducible. The official Discourse repositories inspected during
+  evaluation currently include lockfiles, but generating a trustworthy lock
+  requires an available Ruby/Bundler environment and is not fabricated by hand.
+- Current local evidence after the implementation slice: 18/18 Node
+  configuration tests pass; JavaScript, template, CSS, and type lanes pass when
+  run individually; the Repeal fixture passes offline validation; and
+  `git diff --check` passes. The concurrent aggregate lint command exhausted
+  local Node memory and is recorded as an environment/tool execution failure,
+  not a product finding. Exact-candidate GitHub CI remains required after the
+  batch is committed.
+- The first remediation CI pass used commit `a835ff6` / tree `73a8d24f`.
+  Configuration workflow run `34072665895` passed. Discourse Theme workflow
+  run `34072666154` passed linting, test discovery, backend tests, frontend
+  tests, and configuration tests; its system lane failed 1 of 27 examples
+  because the newly authored color assertion searched for a conditional CSS
+  modifier class that was absent in that fixture. The failure artifact showed
+  the rendered submenu and configured colors. The test selector has been
+  corrected to use the stable `.brand-navigation__submenu > ul a` structure.
+  Replacement commit `6315e0a` then passed all six checks: configuration run
+  `34073137065` and Discourse Theme run `34073137344`, including all 27 system
+  examples. The next checkpoint-only commit must also pass exact-head CI before
+  the candidate is frozen.
+- Phil directed the next review to both the internal review lane and the
+  persistent sidebar task titled `Code Reviewer`. Both must receive the same
+  immutable commit, tree, doctrine, scope, and evidence package. Their reports
+  remain separate until both finish and are then evaluated together; neither
+  inherits the other's conclusions.
+- Replacement candidate `993f6badcd12964a56eb00a34e49bcb66610e999` /
+  tree `58a459175f1787309ebb2160fc952b9b5860620a` passed all six checks in
+  configuration run `34073989308` and Discourse Theme run `34073989626`, then
+  froze for dual review. Internal report `BN-V090-REPLACEMENT-20260907-R2`
+  completed with the exact disposition `INTERNAL CODE REVIEW BLOCK` and three
+  named blockers. Sidebar reports
+  `BN-V090-REPLACEMENT-20260907-SIDEBAR-R1/R2` each issued the exact disposition
+  `INTERNAL CODE REVIEW INCOMPLETE`; they did not complete the original review
+  gate, and their unresolved Discourse-integration, runtime/CI, and material
+  action-artifact evidence requirements remain part of the release record.
+  Both lanes used the controlling doctrine and Phil-authorized bounded
+  read-only inspection of eight exact public upstream revisions.
+- Both lanes identified stale post-import appearance state as P1. Mutable
+  in-flight administrator state was P1 in the sidebar report and P2 internally;
+  exports too large for the importer were P1 internally and P2 in the sidebar
+  report. All three were conservatively treated as release blockers during the
+  coherent remediation batch. The reports also identified strict color-type,
+  inert diagnostic, Ruby lint, Ruby dependency-resolution,
+  administrator-identity documentation, and moving upstream workflow assurance
+  work. The internal report's `BN-14`
+  claim that the direct pnpm action revision does not exist is rejected by the
+  exact-candidate configuration log: GitHub downloaded and executed
+  `pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa` and installed
+  pnpm `10.28.0` successfully. The sidebar report correctly treated its source
+  retrieval discrepancy as an evidence limitation rather than a defect.
+- The second coherent remediation batch is in progress. It snapshots submitted
+  settings, disables conflicting controls during writes, synchronizes imported
+  colors, enforces export/import byte symmetry and strict color types, escapes
+  diagnostic controls, aligns architecture/test/release records, enables the
+  Discourse RuboCop configuration, and adds affected Node/system coverage.
+  Ruby transitive locking remains a separately disclosed P2 decision because
+  no trusted local Ruby/Bundler runtime is available to generate a lockfile.
+- Current second-batch local evidence: 23/23 Node tests pass; JavaScript,
+  template, CSS, type, and changed-file formatting checks pass; the Repeal
+  fixture passes offline validation; and `git diff --check` passes. The new
+  browser-backed import/reload spec and enabled RuboCop gate cannot execute in
+  the current local environment; their exact GitHub execution is recorded next.
+- Second-batch commit `563026e6505b6b17466c0a0fdb6dc67f5cfab869` /
+  tree `da480e1830a3970bfbc9376b68e0f3b4ea5de195` passed configuration run
+  `34076938530` and every Discourse Theme lane in run `34076938809`.
+  Configuration executed 23/23 tests; RuboCop executed against three Ruby files
+  with no offenses; the new browser-backed import/reload scenario passed; and
+  the complete system lane passed 28/28 examples.
+- Record commit `552f09d6ab7644a724a94202a9099e58921f5715` / tree
+  `f7c07e94ee6a84db61d35948a569b98ea29631cd` passed exact-head configuration
+  run `34077297071` and all Discourse Theme lanes in run `34077297327`, then
+  froze for correction closure. Internal closure report
+  `BN-V090-CLOSURE-20260907-R1` issued **INTERNAL CODE REVIEW PASS WITH P2/P3
+  FINDINGS**: every prior P1 was closed, while the unlocked Ruby transitive
+  graph and moving downstream Discourse CI references remain P2 policy
+  decisions. Sidebar closure report `BN-V090-CLOSURE-20260907-SIDEBAR-R1`
+  issued **INTERNAL CODE REVIEW INCOMPLETE** and confirmed P1 `BNC-01`: this checkpoint had
+  incorrectly promoted its prior `INCOMPLETE` reports to completed reviews. It
+  also retained unresolved administrator deferred-response execution and
+  independently inspectable exact-run log/environment evidence requirements.
+  This edit corrects `BNC-01`; it supersedes the frozen record candidate and
+  requires replacement identity, CI, freeze, and focused closure evidence.
+- First closure-remediation commit `fa603f2` added the corrected record and two
+  component-action deferred-completion tests. Configuration run `34078612707`
+  passed, and Discourse Theme run `34078613026` passed test discovery, linting,
+  backend, and all 28 system examples. Its frontend lane failed both new QUnit
+  examples before their assertions because the test constructed the Glimmer
+  component without a required owner argument. This was a test-harness setup
+  defect, not a runtime component failure; the test construction now supplies
+  both owner and arguments and requires replacement CI before any freeze.
+- Follow-up commit `390b2ca` supplied a non-null plain object as the owner.
+  Configuration run `34079040392` passed, and Discourse Theme run
+  `34079040637` again passed test discovery, linting, backend, and all 28 system
+  examples. The frontend lane showed that Glimmer requires an actual Ember
+  owner rather than an arbitrary object. The tests now initialize the standard
+  Discourse QUnit owner with `setupTest` and pass `getOwner(this)`; another
+  replacement CI run is required.
+- Follow-up commit `81aa7a3` initialized the normal QUnit owner, but
+  configuration run `34079297022` and every non-frontend lane in Discourse
+  Theme run `34079297357` again passed while Glimmer rejected direct manual
+  construction. Its current manager marks argument objects during rendering,
+  so even a genuine owner cannot make `new Component(...)` a supported test
+  path. The deferred cases now use Discourse's `setupRenderingTest`, render the
+  real component through its manager, interact through its administrator DOM,
+  and replace only the persistence method with a controlled deferred promise.
+  Replacement CI is required.
+- Rendering-test commit `bf1f02c` passed configuration run `34079799706` and
+  every non-frontend lane in Discourse Theme run `34079799973`, including all
+  28 system examples. Both new integration cases reached their assertions, but
+  asserted DOM state before Ember finished rerendering after the controlled
+  promise resolved. The tests now await the standard `settled()` helper after
+  completion before inspecting rendered values; replacement CI is required.
+- Replacement commit `95d447bc230a1f97e9f95a4e0fb72479c6b7a686` / tree
+  `57e7ad5535633b04c84540fffea3f86c5cf04e50` passed configuration run
+  `34080068217` and all lanes in Discourse Theme run `34080068455`. QUnit
+  passed 14/14, including both component-level deferred-completion cases;
+  RuboCop and every other lint gate passed; backend passed; and the unchanged
+  system suite passed 28/28. This checkpoint refresh must receive exact-head CI
+  before the final correction-closure candidate freezes.
+- Candidate `993f6ba` is superseded for implementation but remains immutable
+  review evidence. Candidate `552f09d` is superseded only by the record
+  correction above and likewise remains immutable evidence. No final manual
+  acceptance, merge, tag, or release has occurred.
 
 ## Administrator color-control checkpoint
 
@@ -380,8 +539,8 @@ must not be used as this repository's working directory.
   Discourse.”
 - Do not imply Discourse ownership, maintenance, or official status.
 - Credit Brand Header and Header Submenus for product inspiration. The current
-  implementation was authored from specifications; no predecessor source code
-  was intentionally copied.
+  implementation was authored from specifications; no source code from those
+  inspiration components was intentionally copied.
 - License: `GPL-2.0-or-later`.
 - Structured administration and safe defaults are first-class requirements.
 - One submenu level is supported; arbitrary deep nesting is excluded.
@@ -573,7 +732,7 @@ Previously executed successfully:
   administrator list entries after reload.
 - Repeal authenticated desktop render at `fc2ced6`: pass; the brand, four
   migrated navigation entries, ten right-side social links, and My Preferences
-  render while all three predecessor components remain enabled.
+  render while all three comparison components remain enabled.
 - Repeal submenu interaction at `fc2ced6`: pass on a fresh page; a submenu opens
   normally and closes after an outside click on the core All categories heading.
   The document click handler uses capture phase so stopped bubbling in other
@@ -603,8 +762,9 @@ Previously executed successfully:
   in the supported objects editor.
 - `pnpm lint`, `pnpm test:config` (6 tests), bundle validation, and
   `git diff --check` at `3cd8910`: pass.
-- Repeal `site_header` icon placement at `3cd8910`: pass. Before predecessor
-  disablement, both ten-icon sets rendered, proving Brand Navigation's set was
+- Repeal `site_header` icon placement at `3cd8910`: pass. Before the comparison
+  icon component was disabled, both ten-icon sets rendered, proving Brand
+  Navigation's set was
   present. After disabling Custom Header Links (icons) id `3`, a fresh page
   showed exactly one set of ten social icons in the core header and none in the
   upper Brand Navigation bar. My Preferences remained in the upper bar.
@@ -680,6 +840,55 @@ repository, issue tracker, shared community, or independent product community.
 and support forum. No shared CodeWorksLabs Discourse instance was authorized or
 declared necessary.
 
+## Authorship and provenance control
+
+Phil directed that Brand Navigation retain a durable, defensible record of its
+AI-assisted authorship and upstream source classifications before release. The new
+`docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
+implementation role, pinned upstream revisions and licenses, the exact
+historical header-icon registration source, and release-time provenance
+controls. The historical adapted source supplies GPL version 2 text but no
+explicit “or later” grant was found in the inspected upstream materials.
+Before the first tagged release, Brand Navigation replaced that expression
+with an independently authored lexical component factory and retained the
+permanent historical reference. The current implementation is declared
+`GPL-2.0-or-later`. No version had been tagged or
+published as a GitHub Release, but the already-public Git history retains the
+license declarations present on those commits. No external human recipient,
+adoption, or reliance is known; current repository signals show no forks,
+stars, or subscribers. GitHub clone traffic includes CI and installed-component
+activity and does not identify people. No ongoing support obligation is
+inferred from that historical record.
+
+Licensing-declaration verification on 2026-09-06: `pnpm test:config`
+passed all 22 tests and `git diff --check` passed. `pnpm lint:prettier`
+continued to report 24 pre-existing baseline files outside this six-file
+licensing/provenance change; none of the changed formatted files was reported.
+
+Terminology audit on 2026-09-06: the active release-preparation branch no
+longer describes Brand Header, Header Submenus, Dropdown Header, or Custom
+Header Links (icons) as components in a formal succession lineage. Durable
+documentation uses `inspiration sources`, `neighboring components`, and
+`adapted source` according to the actual relationship. Older branches and Git
+history retain earlier shorthand and are not release authority.
+
+Documentation freeze-readiness pass on 2026-09-06: every relative Markdown
+link target exists; current name and license declarations agree; no unresolved
+release-content placeholder was found; and `docs/TESTING.md` now distinguishes
+the merged initial verification record from the not-yet-frozen `v0.9.0`
+candidate. The future CodeWorksLabs public-site paths remain an explicitly
+non-blocking post-release discussion. Documentation content is ready to freeze
+for the release-preparation pull request.
+
+Official-source verification confirms that Discourse Meta labels Brand Header,
+Header Submenus, and Custom Header Links (icons) as official and links to the
+same `discourse/*` repositories recorded in the provenance ledger. Pavilion
+Dropdown Header is the community component. The official repositories genuinely
+carry different licenses; official status does not establish a common license.
+Any clarification for the icon component must be addressed to the Discourse
+maintainers or another confirmed rights holder rather than assuming one
+historical contributor can grant it.
+
 ## Exact next actions
 
 1. Finish release preparation and manual documentation/product polish.
@@ -695,8 +904,8 @@ declared necessary.
 9. Confirm the merged tree matches the accepted candidate, then tag `v0.9.0`
    and publish the release.
 
-Keep all predecessors available for rollback; disable them only if Phil
-explicitly chooses a site cutover.
+Keep the previously installed comparison components available for rollback;
+disable them only if Phil explicitly chooses a site cutover.
 
 ## Out of scope
 
