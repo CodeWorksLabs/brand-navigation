@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 CORRECTION CLOSURE BLOCKED / REPLACEMENT BATCH IN PROGRESS / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 REPLACEMENT BATCH IMPLEMENTED / FREEZE REQUIRES GREEN CURRENT-HEAD CI / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -145,6 +145,12 @@ Disposition: **PR 7 MERGED / PR 8 CORRECTION CLOSURE BLOCKED / REPLACEMENT BATCH
   superseded checkpoint sections as historical, and narrows the system-test and
   testing-guide claims to actual rendered bar fallback. Fresh CI and dual
   closure review are required after commit and freeze.
+- Substantive replacement head `c83348aef4d5aa74f76a8966043cc114050d2a32`
+  / tree `3ac9802c9405f43537c57be44765d6daebda37f2` passed all exact-head
+  checks: configuration run `34096739720` passed all 24 Node cases; Discourse
+  Theme run `34096740176` passed discovery, linting, backend, all 20 frontend
+  tests, and all 30 system examples. The successor-record commit that records
+  this evidence must also pass current-head CI before replacement freeze.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
