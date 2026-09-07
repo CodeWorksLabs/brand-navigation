@@ -71,8 +71,11 @@ explicitly documented as unattached rollback/test copies.
 
 Manual Boss and Product Boss completed independent read-only documentation and
 operator inspections of merged commit `f3f41e5`. Neither issued a formal code
-review disposition. Their combined findings contain no P0 and no identified
-product-code defect. The documentation batch must close:
+review disposition. Their combined findings contained no P0 and no identified
+product-code defect. The documentation correction was merged through pull
+request 13 at `dc0e935ab54eead212e41681320470b52fc6a775`; all GitHub CI lanes passed.
+Both Bosses then closed every submitted finding against the exact correction
+candidate, with no new P0-P3 finding in the final delta. The batch closed:
 
 1. stale instructions that could repeat the completed `v0.9.0` release;
 2. contradictory current and historical checkpoint state;
@@ -84,14 +87,20 @@ product-code defect. The documentation batch must close:
 8. the missing current support route; and
 9. obsolete “first release” wording.
 
-After the batch is complete, run the applicable CI matrix and return the exact
-candidate to Manual Boss and Product Boss for read-only correction closure.
-Evaluate both closure reports together before merge.
+The complete closure reports remain in the originating Manual Boss and Product
+Boss tasks. They are bounded documentation/product inspections, not formal code
+review dispositions.
 
 ## Remaining `v1.0.0` acceptance
 
-After documentation closure, execute and record these three manual gates on a
-controlled test environment:
+On 2026-09-07, reproducible sandbox browser/runtime work exercised classic
+comments, full-app embed exclusion and core-control availability, and Arabic
+RTL desktop/mobile interaction on Foundation and Horizon. The temporary embed
+fixture and all changed sandbox settings were removed or restored. Exact
+evidence and boundaries are recorded in `docs/TESTING.md`.
+
+Human confirmation remains required for these three gates on a controlled test
+environment:
 
 1. classic Discourse embedded comments, including core interaction preservation
    and complete Brand Navigation exclusion;
@@ -105,14 +114,14 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. Finish the documentation-only operator-readiness correction batch.
-2. Run formatting, link, configuration, and full GitHub CI checks appropriate
-   to the final candidate.
-3. Obtain Manual Boss and Product Boss read-only closure findings.
-4. Evaluate and close the combined findings before merging the documentation.
-5. On authorized staging, execute and record the complete same-component
+1. On authorized staging, execute and record the complete same-component
    release-tag rollback and return-to-current workflow.
-6. Execute the three remaining `v1.0.0` manual acceptance gates above.
+2. Conduct the human screen-reader pass, using the recorded accessibility-tree
+   evidence as a checklist rather than a substitute.
+3. Obtain final human confirmation of the recorded classic-embed and RTL
+   browser evidence, repeating any disputed case interactively.
+4. Gather any findings from all three gates before making another correction
+   batch.
 
 ## Out of scope
 
