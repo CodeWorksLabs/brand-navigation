@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK / SECOND COHERENT REMEDIATION IN PROGRESS / NOT RELEASED**
+Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK REMEDIATED / REPLACEMENT CI GREEN / CORRECTION-CLOSURE FREEZE PENDING / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -38,10 +38,11 @@ Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK / SECOND COHERENT REMEDIA
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
   actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
-  issued review `BN-CODEBASE-20260907`; Steps 5 and the implementation/testing
-  portion of Step 6 are complete. The next exact candidate will be reviewed in
+  issued review `BN-CODEBASE-20260907`. The first replacement was reviewed in
   parallel by the internal review lane and the persistent sidebar Code Reviewer
-  task before their results are evaluated together.
+  task; their findings were evaluated together and remediated. Step 5 is
+  complete. Step 6 now requires final exact-head CI, candidate freeze, and
+  correction-closure review.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -168,8 +169,15 @@ directory. Use the canonical local repository path above.
 - Current second-batch local evidence: 23/23 Node tests pass; JavaScript,
   template, CSS, type, and changed-file formatting checks pass; the Repeal
   fixture passes offline validation; and `git diff --check` passes. The new
-  browser-backed import/reload spec and enabled RuboCop gate are authored but
-  unexecuted locally and require exact-candidate GitHub execution.
+  browser-backed import/reload spec and enabled RuboCop gate cannot execute in
+  the current local environment; their exact GitHub execution is recorded next.
+- Second-batch commit `563026e6505b6b17466c0a0fdb6dc67f5cfab869` /
+  tree `da480e1830a3970bfbc9376b68e0f3b4ea5de195` passed configuration run
+  `34076938530` and every Discourse Theme lane in run `34076938809`.
+  Configuration executed 23/23 tests; RuboCop executed against three Ruby files
+  with no offenses; the new browser-backed import/reload scenario passed; and
+  the complete system lane passed 28/28 examples. The next record-only commit
+  must pass exact-head CI before the correction-closure candidate freezes.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. No replacement candidate is frozen yet. No final manual
   acceptance, merge, tag, or release has occurred.
