@@ -1,0 +1,44 @@
+name: Create new d-compat branch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: d-compat-branch
+  cancel-in-progress: false
+
+jobs:
+  verify_bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify accepted compatibility seeds
+        env:
+          ACCEPTED_SEED: d2527bfb3acdcf4204a33d35e0b13504f6d7c36e
+        run: |
+          set -euo pipefail
+
+          git init --quiet
+          git remote add origin "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git"
+          git fetch --quiet --no-tags origin \
+            "+refs/heads/d-compat/2026.7:refs/remotes/origin/d-compat/2026.7" \
+            "+refs/heads/d-compat/2026.8:refs/remotes/origin/d-compat/2026.8"
+
+          for branch in 2026.7 2026.8; do
+            if ! git merge-base --is-ancestor \
+              "${ACCEPTED_SEED}" \
+              "refs/remotes/origin/d-compat/${branch}"; then
+              echo "d-compat/${branch} does not contain accepted seed ${ACCEPTED_SEED}." >&2
+              exit 1
+            fi
+          done
+
+  create_branch:
+    needs: verify_bootstrap
+    permissions:
+      contents: write
+    uses: discourse/.github/.github/workflows/create-d-compat-branch.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1

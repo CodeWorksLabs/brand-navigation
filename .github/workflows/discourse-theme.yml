@@ -11,16 +11,30 @@ permissions:
 
 jobs:
   ci:
+    if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
 
   ci-repeal-2026-7:
+    if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
     with:
       core_ref: 988c31e00fb73713c81b93cd47f68af0fb4c6273
       skip_linting: true
 
   ci-r744-2026-7:
+    if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
     with:
       core_ref: 2e46cff73b07ecddbcc5603eb3fbf41d563577f6
       skip_linting: true
+
+  ci-2026-8-release:
+    if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
+    uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
+    with:
+      core_ref: badad7b0456a628e578bc48b9f8c1259422b5d58
+      skip_linting: true
+
+  ci-compatibility-branch:
+    if: ${{ startsWith(github.base_ref, 'd-compat/') }}
+    uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1

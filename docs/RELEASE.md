@@ -79,11 +79,38 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
-`main` is the stable update channel used by ordinary Discourse remote-component
-installations. Build changes on short-lived branches and merge only a complete,
-reviewed batch. Discourse update detection remains commit-based; release tags
-provide durable human and rollback identities. Record both the version and
-short commit in every compatibility result.
+`main` is the stable update channel for current Discourse. Build changes on
+short-lived branches and merge only a complete, reviewed batch. Maintained
+older Discourse releases use branches named `d-compat/<YYYY>.<M>`. The official
+daily compatibility workflow creates a branch for each newly released
+Discourse version from the last first-parent `main` commit predating that core
+release.
+
+Brand Navigation requires a one-time manual bootstrap for both `2026.7` and
+`2026.8`. Seed both branches from reviewed compatibility commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6` before merging or manually running
+the scheduled workflow. That commit contains released `v0.9.0` merge commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, leaves the accepted product runtime
+unchanged, and adds the corrected compatibility-pull-request workflow. The
+branch-creation workflow fails closed unless both branches contain the accepted
+`v0.9.0` seed, and serialized runs prevent concurrent branch writers. If either
+branch already exists at the wrong commit, do not run the workflow: inspect the
+ref, correct it through an explicitly authorized release operation, verify it
+contains both the accepted product seed and corrected workflow, and only then
+retry.
+
+When a compatible fix lands on `main`, backport it through a reviewed pull
+request whose base is the affected `d-compat` branch. Do not merge new features
+or unverified framework changes into compatibility branches. On `main` pull
+requests, keep an exact-core CI lane for every Discourse release that Brand
+Navigation actively maintains. On a pull request targeting a `d-compat` branch,
+Discourse's reusable workflow deliberately selects the matching moving release
+branch and Brand Navigation runs one clearly named compatibility-branch lane;
+obtain separate exact-core evidence when a backport needs it.
+Discourse update detection remains commit-based; release tags provide durable
+human and rollback identities. Record the Brand Navigation version, component
+commit, compatibility branch, Discourse version, and exact core commit in every
+compatibility result.
 
 Use `v0.9.x` for reviewed preview releases. Publish `v1.0.0` only after the
 documentation and planned multi-site compatibility work are complete and no
