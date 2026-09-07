@@ -4,9 +4,8 @@ Migrate in a staging theme or a copied production theme first.
 
 ## Configuration bundles
 
-Use `pnpm bundle validate`, `pnpm bundle export`, and `pnpm bundle apply` to
-move a versioned JSON configuration without recreating every object-setting
-row. The tool calls Discourse's supported admin theme endpoint and
+Use the **Configuration bundles** panel to export and import a versioned JSON
+configuration without recreating every object-setting row. The browser panel
 updates only the portable Brand Navigation settings listed in the bundle. It
 does not attach or enable the component.
 
@@ -27,13 +26,11 @@ fixture. It was assembled from observed Brand Header, Dropdown Header, and
 Custom Header Links (icons) settings and is also useful for exercising larger
 menus, external destinations, icon-only links, and left/right sections.
 
-API credentials are supplied through `DISCOURSE_API_KEY` and
-`DISCOURSE_API_USERNAME`; they must never be stored in a bundle. Logo uploads
-remain a separate site-local step.
-
-CLI forum targets must be canonical HTTPS origins. Redirects are refused, and
-exports do not overwrite an existing file unless the operator supplies
-`--overwrite`.
+The first release intentionally provides no credentialed command-line
+apply/export client. A local checkout can validate a saved bundle without
+contacting a forum by running
+`pnpm bundle validate configurations/repeal-obbba.json`. Logo uploads remain a
+separate site-local step.
 
 ## From Brand Header
 

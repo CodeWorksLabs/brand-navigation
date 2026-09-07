@@ -165,7 +165,9 @@ export default class BrandNavigationBundles extends Component {
 
     if (new TextEncoder().encode(text).length > MAX_BUNDLE_BYTES) {
       this.errors = [
-        `Bundle cannot exceed ${MAX_BUNDLE_BYTES.toLocaleString()} bytes.`,
+        i18n(themePrefix("brand_navigation.bundles.file_too_large"), {
+          count: MAX_BUNDLE_BYTES.toLocaleString(),
+        }),
       ];
       return;
     }
@@ -254,7 +256,7 @@ export default class BrandNavigationBundles extends Component {
           ? responseErrors.join(" ")
           : responseErrors) ||
           error.message ||
-          "Saving colors failed. Reload the component settings before retrying.",
+          i18n(themePrefix("brand_navigation.appearance.save_error")),
       ];
     } finally {
       this.saving = false;
@@ -310,7 +312,7 @@ export default class BrandNavigationBundles extends Component {
           ? responseErrors.join(" ")
           : responseErrors) ||
           error.message ||
-          "Import failed. Reload the component settings before retrying.",
+          i18n(themePrefix("brand_navigation.bundles.import_error")),
       ];
     } finally {
       this.saving = false;

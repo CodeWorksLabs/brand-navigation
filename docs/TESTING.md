@@ -115,8 +115,7 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for icon/label presentation and missing-icon fallback.
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
-- Canonical HTTPS CLI origins, redirect refusal, bounded responses, and safe
-  error output.
+- Bounded local bundle validation without forum credentials or network access.
 - Exact component identity for administrator extensions, complete client
   preflight, and one bundle update request.
 

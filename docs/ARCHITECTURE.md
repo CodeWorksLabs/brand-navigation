@@ -52,8 +52,9 @@ settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
 registered as direct icon links through `api.headerIcons`. They require a URL
-and icon and do not support children. The registration uses `curryComponent`,
-adapting the established GPL-2.0 pattern in Discourse Icon Header Links.
+and icon and do not support children. A locally authored lexical component
+factory binds each validated item to its header component without
+repository-specific owner state.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
@@ -66,8 +67,9 @@ continues to use `site.mobileView` through the bar and menu boundaries.
 
 Navigation sinks independently recheck URL safety and fail closed for malformed,
 protocol-relative, credential-bearing, non-HTTPS external, and script URLs.
-The optional CLI restricts administrator credentials to a canonical HTTPS
-origin, refuses redirects, and bounds response time, size, and terminal output.
+The optional local bundle validator reads bounded files and never connects to a
+forum. Browser import/export uses the authenticated Discourse administrator
+session and the component's administration page.
 
 ## Intentional constraints
 

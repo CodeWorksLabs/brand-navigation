@@ -52,14 +52,14 @@ GPL version 2 text. Official maintenance status does not replace or normalize
 those license files. Pavilion Dropdown Header is the community-maintained
 source in this inventory.
 
-| Upstream project                                                                        | Recorded revision                                                                                                   | License evidence                                                                                                                                  | How the source was used                                                                                                         |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| [Discourse Brand Header](https://github.com/discourse/discourse-brand-header)           | [`8fd8500`](https://github.com/discourse/discourse-brand-header/tree/8fd850083c15068cc420d87102a7862c559f4790)      | [MIT `LICENSE.txt`](https://github.com/discourse/discourse-brand-header/blob/8fd850083c15068cc420d87102a7862c559f4790/LICENSE.txt)                | Product inspiration only. No copied or adapted implementation is currently identified.                                          |
-| [Discourse Header Submenus](https://github.com/discourse/discourse-header-submenus)     | [`9659f84`](https://github.com/discourse/discourse-header-submenus/tree/9659f849a07db6fe6c94374aef6641622b24b22b)   | [MIT `LICENSE`](https://github.com/discourse/discourse-header-submenus/blob/9659f849a07db6fe6c94374aef6641622b24b22b/LICENSE)                     | Product inspiration and administrator-workflow study only. No copied or adapted implementation is currently identified.         |
-| [Pavilion Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)    | [`707425d`](https://github.com/paviliondev/discourse-dropdown-header/tree/707425d92c764a6f89516afcf304620a54872682) | [GPL version 2 `LICENSE.txt`](https://github.com/paviliondev/discourse-dropdown-header/blob/707425d92c764a6f89516afcf304620a54872682/LICENSE.txt) | Presentation and administrator-experience inspiration only. No copied or adapted implementation is currently identified.        |
-| [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links) | [`dee14e3`](https://github.com/discourse/discourse-icon-header-links/tree/dee14e37185e5e4db38497bd952352405a5826af) | [GPL version 2 `LICENSE`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/LICENSE)         | The narrow `curryComponent`/`api.headerIcons.add` registration pattern was adapted. The permanent source range is linked below. |
+| Upstream project                                                                        | Recorded revision                                                                                                   | License evidence                                                                                                                                  | How the source was used                                                                                                                                                        |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Discourse Brand Header](https://github.com/discourse/discourse-brand-header)           | [`8fd8500`](https://github.com/discourse/discourse-brand-header/tree/8fd850083c15068cc420d87102a7862c559f4790)      | [MIT `LICENSE.txt`](https://github.com/discourse/discourse-brand-header/blob/8fd850083c15068cc420d87102a7862c559f4790/LICENSE.txt)                | Product inspiration only. No copied or adapted implementation is currently identified.                                                                                         |
+| [Discourse Header Submenus](https://github.com/discourse/discourse-header-submenus)     | [`9659f84`](https://github.com/discourse/discourse-header-submenus/tree/9659f849a07db6fe6c94374aef6641622b24b22b)   | [MIT `LICENSE`](https://github.com/discourse/discourse-header-submenus/blob/9659f849a07db6fe6c94374aef6641622b24b22b/LICENSE)                     | Product inspiration and administrator-workflow study only. No copied or adapted implementation is currently identified.                                                        |
+| [Pavilion Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)    | [`707425d`](https://github.com/paviliondev/discourse-dropdown-header/tree/707425d92c764a6f89516afcf304620a54872682) | [GPL version 2 `LICENSE.txt`](https://github.com/paviliondev/discourse-dropdown-header/blob/707425d92c764a6f89516afcf304620a54872682/LICENSE.txt) | Presentation and administrator-experience inspiration only. No copied or adapted implementation is currently identified.                                                       |
+| [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links) | [`dee14e3`](https://github.com/discourse/discourse-icon-header-links/tree/dee14e37185e5e4db38497bd952352405a5826af) | [GPL version 2 `LICENSE`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/LICENSE)         | Product inspiration and a historical development-stage adapted pattern, replaced before the first tagged release. No copied or adapted implementation is currently identified. |
 
-Permanent adapted-pattern reference:
+Permanent historical adapted-pattern reference:
 [initialize-for-header-icon-links.gjs at `dee14e3`, lines 1–27](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/javascripts/discourse/initializers/initialize-for-header-icon-links.gjs#L1-L27).
 
 ## Implementation-history evidence
@@ -70,8 +70,9 @@ Permanent adapted-pattern reference:
   core-header icon registration.
 - Commit `3cd8910161f794764af299e551f4b6c5bebe9790` introduced the
   core-header icon feature and the recorded adapted registration pattern.
-- The current initializer retains that pattern. The formal immutable-candidate
-  codebase review must confirm that this ledger is complete before release.
+- The `v0.9.0` remediation replaced that pattern with an independently authored
+  lexical component factory before the first tagged release. The release review
+  must confirm the replacement and this ledger against the exact candidate.
 
 ## License posture
 
@@ -83,17 +84,16 @@ informed the product.
 The Custom Header Links (icons) repository contains the GPL version 2 license
 text, and GitHub classifies it as `GPL-2.0`. No explicit upstream statement
 granting the “or later” option was located in the inspected README, component
-metadata, package metadata, initializer, or license file. Phil selected
-`GPL-2.0-or-later` for Brand Navigation before its first tagged release, with
-the upstream credit, precise adapted-pattern reference, and this ambiguity
-preserved in the public record. Any substantiated licensing concern raised by a
-rights holder will be evaluated and corrected as necessary.
+metadata, package metadata, initializer, or license file. That ambiguity is
+preserved as development history, but the adapted expression was removed from
+the current release tree. CodeWorksLabs licenses the current independently
+authored implementation as `GPL-2.0-or-later`.
 
 Because Custom Header Links (icons) is an official Discourse component, any
-future license clarification should come from the Discourse maintainers or
-another confirmed rights holder. An individual historical contributor should
-not be assumed to have authority to clarify the license for the complete
-repository.
+clarification of its historical licensing should come from the Discourse
+maintainers or another confirmed rights holder. An individual historical
+contributor should not be assumed to have authority to clarify the license for
+the complete upstream repository.
 
 No Brand Navigation version was tagged or published as a GitHub Release before
 this decision. The repository was already public, however, so earlier commits

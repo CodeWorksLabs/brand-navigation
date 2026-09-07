@@ -61,3 +61,7 @@ export default class BrandNavigationHeaderIcon extends Component {
     {{/if}}
   </template>
 }
+
+export function headerIconFor(item) {
+  return <template><BrandNavigationHeaderIcon @item={{item}} /></template>;
+}

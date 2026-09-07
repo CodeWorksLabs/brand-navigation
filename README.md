@@ -121,7 +121,8 @@ See the [changelog](CHANGELOG.md) and [release procedure](docs/RELEASE.md).
 
 Brand Navigation uses Discourse's theme-translation system for its visitor
 accessibility labels, administration panels, setting descriptions, and status
-messages. English is the only language bundled for the first release.
+messages. Detailed bundle-schema validation messages are generated in English.
+English is the only language bundled for the first release.
 Administrators can provide local per-locale overrides in **Theme
 translations**, and reviewed translations are welcome as repository pull
 requests.
@@ -142,12 +143,13 @@ component ecosystem. Thanks also to
 [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links)
 for demonstrating compact, accessible icon destinations in the core header.
 Brand Navigation's header-icon registration follows Discourse's documented
-`api.headerIcons` API; its `curryComponent` registration pattern is adapted
-from that GPL-2.0 component. Pavilion's
+`api.headerIcons` API. Its current component-binding implementation is
+independently authored; the earlier implementation study is preserved in the
+provenance record. Pavilion's
 [Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
 also informed the presentation and administration exploration. See
-[Attribution and licensing](docs/ATTRIBUTION.md) for the precise distinction
-between product inspiration and adapted code, and the
+[Attribution and licensing](docs/ATTRIBUTION.md) for the precise source
+classifications, and the
 [authorship and provenance record](docs/PROVENANCE.md) for the AI-assisted
 authorship model and reproducible source ledger.
 

@@ -91,28 +91,16 @@ settings in one Discourse theme update. It does not intentionally save a partial
 bundle. If the browser loses the response after submission, reload the
 component settings and verify the displayed values before retrying.
 
-The same operations are available from a local checkout for automation:
+An optional local command validates a saved bundle without contacting a forum:
 
 ```text
 pnpm bundle validate configurations/repeal-obbba.json
-pnpm bundle export my-navigation.json --url https://forum.example.com --theme-id 19
-pnpm bundle apply my-navigation.json --url https://forum.example.com --theme-id 19
 ```
 
-The `export` and `apply` commands read `DISCOURSE_API_KEY` and
-`DISCOURSE_API_USERNAME` from the process environment. Keep the API key out of
-the bundle, shell history, documentation, and source control. Review and
-validate a bundle before applying it.
-
-The CLI accepts only a canonical HTTPS forum origin: no path, query, embedded
-credentials, or fragment. It refuses redirects, bounds response time and size,
-and sanitizes server error text. Export refuses to replace an existing file
-unless `--overwrite` is supplied explicitly.
-
-Applying a bundle updates only Brand Navigation settings through Discourse's
-admin theme endpoint. It cannot attach the component to a theme,
-enable it, change another component, or delete anything. Upload light and dark
-logos separately because Discourse upload identifiers are site-specific.
+Import and export are intentionally administrator-browser operations for the
+first release. Brand Navigation does not ship a credentialed command-line
+client. Upload light and dark logos separately because Discourse upload
+identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
@@ -301,6 +289,10 @@ component repository. These overrides belong to that Discourse site and locale;
 repeat the customization for every supported locale that needs different text.
 Repository updates normally retain local overrides, but removed or renamed
 translation keys should be checked during an upgrade.
+
+Detailed bundle-schema validation messages currently remain English. Standard
+panel labels, accessibility text, controls, success messages, and fallback
+failure messages use theme translation keys.
 
 Navigation labels, tooltips, and visible descriptions entered in
 `navigation_items` are site configuration rather than translation keys. One

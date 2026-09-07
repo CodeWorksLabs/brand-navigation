@@ -6,6 +6,17 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Replace the historical header-icon binding pattern with an independently
+  authored lexical component factory while retaining the documented
+  `api.headerIcons` integration and `GPL-2.0-or-later` license.
+- Make submenu descriptions inherit the configured submenu foreground and use
+  the configured hover/highlight color for submenu rows.
+- Keep browser-based settings import/export as the supported migration surface
+  and limit the local CLI to offline bundle validation.
+- Keep administrator appearance and bundle controls available for supported
+  local copies, mirrors, repository transfers, and maintained forks.
+- Add translated fallback messages and accurately document the English-only
+  detailed bundle-validation boundary.
 - Add a durable AI-assisted authorship and source-provenance record with pinned
   upstream revisions, license evidence, implementation history, and release
   controls.

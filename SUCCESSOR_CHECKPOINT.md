@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-05 (refreshed through 2026-09-06 UTC)
-Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / RELEASE DOCUMENTATION IN PROGRESS / NOT RELEASED**
+Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
+Disposition: **DRAFT PR 7 / FORMAL REVIEW COMPLETE BUT INCOMPLETE / COHERENT REMEDIATION BATCH IN PROGRESS / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -37,8 +37,9 @@ Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / R
   existing Pageant/SSH access may be used only when a read-only server check is
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. The current position is Step 1: finish release preparation
-  and manual documentation/product polish.
+  actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
+  issued review `BN-CODEBASE-20260907`; the current position is Step 5, coherent
+  remediation of the complete known finding batch.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -79,13 +80,50 @@ direction.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
 - Current CI/browser-tested merged head: `b0b5354` (the checkpoint itself may
   create a later documentation-only head).
-- Frozen reviewed commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
+- Historical first-review commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
+- Historical PR 7 pre-remediation freeze: commit
+  `80061e4c872443a6a2951c08c6adad102b7c32b2`; tree
+  `12a1292aa1fde6650a2a32b68dc1dbd559e56c08`.
 - Historical runtime evidence below identifies its own commit. It is not a
   claim that those earlier commits are current.
 
-The older path `C:\CodeProjects\CodeWorksLabs\Discourse` no longer exists and
-must not be used as this repository's working directory.
+`C:\CodeProjects\CodeWorksLabs\Discourse` is not this repository's working
+directory. Use the canonical local repository path above.
+
+## Formal review and remediation checkpoint
+
+- Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
+  Its first frozen candidate `80061e4` / tree `12a1292a` passed all six GitHub
+  checks in runs `34070471390` and `34070471604`.
+- Complete codebase review `BN-CODEBASE-20260907` used the controlling Code
+  Review Doctrine at 52,273 bytes and SHA-256
+  `5610f2ab5b2e9dc2cd649e2e11321dec6b5f1bacd174a1c32babd49174888c5d`.
+  It issued `INTERNAL CODE REVIEW INCOMPLETE` with no P0, three confirmed P1,
+  three P2, and two P3 findings. Missing external-source and CLI-contract
+  evidence prevented an exhaustive acceptance disposition.
+- The known findings were evaluated together. The coherent remediation batch
+  keeps `GPL-2.0-or-later` while replacing the historical adapted icon-binding
+  expression; corrects submenu description and hover colors; retains browser
+  bundle import/export while removing credentialed CLI apply/export from the
+  `v0.9.0` contract; translates standard fallback status messages and narrows
+  the detailed-validation translation claim; makes administrator enhancements
+  survive local copies and repository moves; adds affected system/unit tests;
+  and refreshes release records.
+- Ruby tooling has exact direct Gemfile pins but no `Gemfile.lock`; transitive
+  lint-tool resolution remains the known BN-06 P2. It is not being disguised as
+  fully reproducible. The official Discourse repositories inspected during
+  evaluation currently include lockfiles, but generating a trustworthy lock
+  requires an available Ruby/Bundler environment and is not fabricated by hand.
+- Current local evidence after the implementation slice: 18/18 Node
+  configuration tests pass; JavaScript, template, CSS, and type lanes pass when
+  run individually; the Repeal fixture passes offline validation; and
+  `git diff --check` passes. The concurrent aggregate lint command exhausted
+  local Node memory and is recorded as an environment/tool execution failure,
+  not a product finding. Exact-candidate GitHub CI remains required after the
+  batch is committed.
+- The replacement candidate is not frozen yet. No correction-closure review,
+  final manual acceptance, merge, tag, or release has occurred.
 
 ## Administrator color-control checkpoint
 
@@ -689,13 +727,13 @@ Phil directed that Brand Navigation retain a durable, defensible record of its
 AI-assisted authorship and upstream source classifications before release. The new
 `docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
 implementation role, pinned upstream revisions and licenses, the exact
-adapted header-icon registration source, and release-time provenance controls.
-The adapted source supplies GPL version 2 text but no explicit “or later” grant
-was found in the inspected upstream materials. Before the first tagged release,
-Phil selected `GPL-2.0-or-later` for Brand Navigation, with the upstream credit,
-precise adapted-pattern reference, and licensing ambiguity preserved in the
-public provenance record. Any substantiated concern raised by a rights holder
-will be evaluated and corrected as necessary. No version had been tagged or
+historical header-icon registration source, and release-time provenance
+controls. The historical adapted source supplies GPL version 2 text but no
+explicit “or later” grant was found in the inspected upstream materials.
+Before the first tagged release, Brand Navigation replaced that expression
+with an independently authored lexical component factory and retained the
+permanent historical reference. The current implementation is declared
+`GPL-2.0-or-later`. No version had been tagged or
 published as a GitHub Release, but the already-public Git history retains the
 license declarations present on those commits. No external human recipient,
 adoption, or reliance is known; current repository signals show no forks,
