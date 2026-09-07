@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLEMENTED / FREEZE REQUIRES GREEN CURRENT-HEAD CI / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 CORRECTION CLOSURE BLOCKED / REPLACEMENT BATCH IN PROGRESS / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -39,8 +39,9 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
   (BN8-01).
 - Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
-  request 7. The authorized four-finding correction batch is committed and
-  pushed to pull request 8; it is not yet frozen or correction-closure reviewed.
+  request 7. The first four-finding correction batch was committed, pushed,
+  frozen, and dual-reviewed. The P1/P3 replacement batch described below is the
+  current work and requires its own exact-head CI, freeze, and closure review.
 - Current correction-batch local evidence: all 24 Node configuration tests,
   JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
   formatting, Repeal fixture validation, and `git diff --check` pass. Ruby and
@@ -129,6 +130,21 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   frontend tests, and all 30 system examples in Discourse Theme run
   `34093283449`. The current successor-record commit is documentation-only, but
   it must also pass exact-head CI before the pull-request candidate is frozen.
+- Final first-batch candidate `9c77873401a6a2ccf21eba4f907f97fc19af1850`
+  / tree `96aef5a0b7baa1cc537b795ebc5f97c448dec019` passed all exact-head
+  checks in configuration run `34093777343` and Discourse Theme run
+  `34093777874`. Dual correction-closure review then identified a production
+  P1: Discourse's `isExistingIconId` membership list is initialized only in
+  development, so ordinary production would treat every configured icon as
+  unavailable. The sidebar review blocked BN8-04 closure; the internal review
+  additionally identified two P3 evidence-record issues, which the sidebar
+  review confirmed as one residual checkpoint P3.
+- The current replacement uses Discourse's exported `hasSpriteSymbol` helper to
+  inspect symbols loaded in the production SVG sprite, retains replacement-ID
+  mapping, adds a no-injected-predicate production-path test, classifies all
+  superseded checkpoint sections as historical, and narrows the system-test and
+  testing-guide claims to actual rendered bar fallback. Fresh CI and dual
+  closure review are required after commit and freeze.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -452,7 +468,8 @@ or **Canonical locations** above.
   APIs; that unsupported build remains explicitly outside the compatibility
   claim. R744 was subsequently upgraded to the 2026.7 ESR and is now a verified
   installation as recorded below. Draft pull request 2 is obsolete for the
-  R744 site and should be closed rather than merged.
+  R744 site and was later closed without merge, as recorded in the current
+  release checkpoint above.
 
 ## R744 2026.7 ESR checkpoint
 
@@ -546,7 +563,7 @@ or **Canonical locations** above.
 - This post-merge smoke test changed only the authorized sandbox. Repeal and all
   other production/consumer sites were untouched.
 
-## Current verification gate (supersedes older pending statements below)
+## Historical verification gate — `13005b7` (superseded)
 
 - The reviewed candidate was committed to the short-lived verification branch
   and pushed without changing `main`. No tag or GitHub Release was created.
@@ -732,7 +749,7 @@ or **Canonical locations** above.
   so administrators can continue working instead of being returned to the main
   component settings screen.
 
-## Current repository and runtime state
+## Historical repository and runtime state — initial build period
 
 - `6bb45ec` fixed strict-mode GJS translation imports. It cleared the sandbox's
   administrator warning and produced no new Brand Navigation client error.
@@ -771,18 +788,18 @@ or **Canonical locations** above.
   bar. This uses the supported `api.headerIcons` API. Existing entries default
   to the bar. Repeal's ten standalone social links now use `site_header`; its
   Social parent and submenu remain in the Brand Navigation bar.
-- A versioned import/export utility now exists at
-  `scripts/brand-navigation-config.mjs`. It validates bundles, exports portable
-  Brand Navigation settings, preflights a target component, and applies all
-  bundled settings in one Discourse admin API request. It cannot attach or
-  enable a component.
+- At this historical stage, `scripts/brand-navigation-config.mjs` included
+  credentialed export/apply operations. Those operations were later removed
+  from the `v0.9.0` contract; the current script performs offline bundle
+  validation only.
 - `configurations/repeal-obbba.json` contains the inventoried Repeal migration
   as the first real bundle and large-menu test fixture.
 - The configuration-bundle work, documentation, expanded thanks, and tests are
   committed in `6def463`; checkpoint commit `c51a7f6` is also pushed. The
   sandbox accepted the updated remote component and its normal runtime render
-  remains clean. The API import/export round trip has not run because no
-  `DISCOURSE_API_KEY` or `DISCOURSE_API_USERNAME` is available to this task.
+  remains clean. The then-planned API import/export round trip did not run. It
+  is not a current verification requirement because the credentialed
+  operations were removed.
 - `c1cc27b` adds the supported admin-page bundle controls and polished submenu
   closure behavior. Local lint, types, templates, styles, formatting, bundle
   validation, and four Node tests pass. Sandbox theme component `1` was updated

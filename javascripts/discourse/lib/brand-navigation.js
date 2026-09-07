@@ -1,4 +1,8 @@
-import { isExistingIconId, REPLACEMENTS } from "discourse/lib/icon-library";
+import { REPLACEMENTS } from "discourse/lib/icon-library";
+import {
+  ensureSpriteSymbol,
+  hasSpriteSymbol,
+} from "discourse/lib/svg-sprite-loader";
 import { isSafeNavigationUrl } from "./configuration-bundle";
 
 export function isVisibleToUser(item, currentUser) {
@@ -31,12 +35,30 @@ export function linkTarget(target) {
   return target === "_blank" ? "_blank" : "_self";
 }
 
-export function isUsableIcon(icon, iconExists = isExistingIconId) {
+export function resolvedIconId(icon) {
+  return REPLACEMENTS[icon] || icon;
+}
+
+export function isUsableIcon(icon, iconExists = hasSpriteSymbol) {
   if (!icon) {
     return false;
   }
 
-  return Boolean(iconExists(REPLACEMENTS[icon] || icon));
+  return Boolean(iconExists(resolvedIconId(icon)));
+}
+
+export async function ensureUsableIcon(
+  icon,
+  ensureIcon = ensureSpriteSymbol,
+  iconExists = hasSpriteSymbol
+) {
+  if (!icon) {
+    return false;
+  }
+
+  const resolvedIcon = resolvedIconId(icon);
+  await ensureIcon(resolvedIcon);
+  return Boolean(iconExists(resolvedIcon));
 }
 
 export function shouldRenderHeaderIcon({
@@ -47,7 +69,7 @@ export function shouldRenderHeaderIcon({
   mobileMode,
   currentUser,
   mobileDevice,
-  iconExists = isExistingIconId,
+  iconExists = hasSpriteSymbol,
 }) {
   return (
     enabled &&
@@ -63,7 +85,7 @@ export function shouldRenderHeaderIcon({
   );
 }
 
-export function arrangeNavigationItems(items, iconExists = isExistingIconId) {
+export function arrangeNavigationItems(items, iconExists = hasSpriteSymbol) {
   const preparedItems = items
     .filter((item) => (item.surface || "bar") === "bar")
     .map((item, index) =>
@@ -90,7 +112,7 @@ export function arrangeNavigationItems(items, iconExists = isExistingIconId) {
 export function prepareNavigationItem(
   item,
   path = "item",
-  iconExists = isExistingIconId
+  iconExists = hasSpriteSymbol
 ) {
   const presentation = item.presentation || "icon_and_label";
   const showIcon =

@@ -64,7 +64,12 @@ Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
 bar or submenu entry with no usable icon falls back to visible label text.
 Site-header entries with unavailable icons do not render, avoiding an empty
-core-header control. Top-level and child items independently select `both`,
+core-header control. Availability is determined from the symbols actually
+loaded in Discourse's production SVG sprite; development-only icon-list
+metadata is not used. Components ask Discourse's sprite loader to ensure each
+configured symbol and rerender after that asynchronous check. Until it
+completes, icon-only bar/submenu entries expose their labels and direct header
+entries stay omitted. Top-level and child items independently select `both`,
 `desktop`, or `mobile` device visibility.
 The components evaluate that setting against Discourse's supported
 `capabilities.isMobileDevice` state and omit nonmatching items from rendering,

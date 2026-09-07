@@ -3,12 +3,14 @@ import { registerDestructor } from "@ember/destroyable";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import { tracked } from "@glimmer/tracking";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   arrangeNavigationItems,
+  ensureUsableIcon,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
@@ -19,6 +21,9 @@ export default class BrandNavigationContent extends Component {
   @service capabilities;
   @service currentUser;
   @service siteSettings;
+
+  @tracked iconRevision = 0;
+  destroyed = false;
 
   openSubmenus = new Set();
 
@@ -61,10 +66,27 @@ export default class BrandNavigationContent extends Component {
     document.addEventListener("keydown", this.handleDocumentKeydown);
 
     registerDestructor(this, () => {
+      this.destroyed = true;
       document.removeEventListener("click", this.handleDocumentClick, true);
       document.removeEventListener("keydown", this.handleDocumentKeydown);
       this.openSubmenus.clear();
     });
+
+    const iconIds = new Set(
+      (settings.navigation_items || [])
+        .filter((item) => (item.surface || "bar") === "bar")
+        .flatMap((item) => [item, ...(item.children || [])])
+        .map((item) => item.icon)
+        .filter(Boolean)
+    );
+
+    for (const icon of iconIds) {
+      ensureUsableIcon(icon).then(() => {
+        if (!this.destroyed) {
+          this.iconRevision++;
+        }
+      });
+    }
   }
 
   closeSubmenus(except) {
@@ -94,6 +116,8 @@ export default class BrandNavigationContent extends Component {
   }
 
   get visibleItems() {
+    this.iconRevision;
+
     return arrangeNavigationItems(
       (settings.navigation_items || [])
         .filter(

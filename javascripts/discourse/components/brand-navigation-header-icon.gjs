@@ -1,8 +1,11 @@
 import Component from "@glimmer/component";
+import { registerDestructor } from "@ember/destroyable";
 import { service } from "@ember/service";
+import { tracked } from "@glimmer/tracking";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
 import {
+  ensureUsableIcon,
   linkRel,
   linkTarget,
   shouldRenderHeaderIcon,
@@ -13,7 +16,26 @@ export default class BrandNavigationHeaderIcon extends Component {
   @service currentUser;
   @service site;
 
+  @tracked iconRevision = 0;
+  destroyed = false;
+
+  constructor(owner, args) {
+    super(owner, args);
+
+    registerDestructor(this, () => {
+      this.destroyed = true;
+    });
+
+    ensureUsableIcon(args.item.icon).then(() => {
+      if (!this.destroyed) {
+        this.iconRevision++;
+      }
+    });
+  }
+
   get shouldRender() {
+    this.iconRevision;
+
     const item = this.args.item;
 
     return shouldRenderHeaderIcon({

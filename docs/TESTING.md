@@ -97,7 +97,7 @@ submenu button is present and no Resources parent link is rendered. Its saved
   (`2e46cff73b`), and verified with Brand Navigation from `main`. Component id
   `1` is enabled on Foundation and Horizon; the duplicate component id `2`
   remains preserved, disabled, and unattached. Draft pull request 2 is no
-  longer needed to support this site and should be closed rather than merged.
+  longer needed to support this site and was closed without merge.
 - Record the exact Discourse builds for DiscussionBridge Forum, The Bridge,
   Citizen Activist Network, and RVing Community from their administrator
   dashboards when convenient.
@@ -115,9 +115,12 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for left/right navigation section grouping.
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
-- Unit and system coverage for icon/label presentation, missing and unavailable
-  icon fallback, replacement icon IDs, and omission of unavailable direct
-  site-header icons.
+- Unit coverage for production-sprite icon membership, replacement icon IDs,
+  icon/label presentation, unavailable bar/submenu fallback, and omission of
+  unavailable direct site-header icons.
+- Rendered system coverage for visible label fallback when a bar icon is
+  unavailable. The prebuilt system harness cannot dynamically register a new
+  `api.headerIcons` entry after the component initializer has run.
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
 - Bounded local bundle validation without forum credentials or network access.

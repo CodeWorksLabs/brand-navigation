@@ -1,6 +1,7 @@
 import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
+  ensureUsableIcon,
   isUsableIcon,
   isVisibleOnDevice,
   isVisibleToUser,
@@ -135,6 +136,118 @@ module("Unit | Lib | brand-navigation", function () {
     assert.true(isUsableIcon("d-tracking", (icon) => icon === "bell"));
     assert.false(isUsableIcon("not-in-the-sprite", () => false));
     assert.false(isUsableIcon("", () => true));
+  });
+
+  test("icon loading resolves replacements before confirming availability", async function (assert) {
+    let ensuredIcon;
+
+    assert.true(
+      await ensureUsableIcon(
+        "d-tracking",
+        async (icon) => {
+          ensuredIcon = icon;
+        },
+        (icon) => icon === "bell"
+      )
+    );
+    assert.strictEqual(ensuredIcon, "bell");
+    assert.false(
+      await ensureUsableIcon(
+        "missing",
+        async () => {},
+        () => false
+      )
+    );
+  });
+
+  test("the default icon path inspects the production SVG sprite", async function (assert) {
+    const existingContainer = document.getElementById("svg-sprites");
+    const container = existingContainer || document.createElement("div");
+    const symbols = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+
+    if (!existingContainer) {
+      container.id = "svg-sprites";
+      document.body.appendChild(container);
+    }
+
+    symbols.innerHTML = `
+      <symbol id="brand-navigation-test-icon"></symbol>
+      <symbol id="bell"></symbol>
+    `;
+    container.appendChild(symbols);
+
+    try {
+      assert.true(isUsableIcon("brand-navigation-test-icon"));
+      assert.true(await ensureUsableIcon("brand-navigation-test-icon"));
+      assert.true(isUsableIcon("d-tracking"), "replacement symbols resolve");
+      assert.false(isUsableIcon("brand-navigation-test-missing"));
+
+      const [topLevel, parent] = arrangeNavigationItems([
+        {
+          label: "Top",
+          url: "/top",
+          icon: "brand-navigation-test-icon",
+          presentation: "icon_only",
+        },
+        {
+          label: "Parent",
+          children: [
+            {
+              label: "Child",
+              url: "/child",
+              icon: "d-tracking",
+              presentation: "icon_only",
+            },
+          ],
+        },
+      ]);
+
+      assert.true(topLevel.showIcon);
+      assert.false(topLevel.showLabel);
+      assert.true(parent.children[0].showIcon);
+      assert.false(parent.children[0].showLabel);
+      assert.true(
+        shouldRenderHeaderIcon({
+          item: {
+            label: "Header",
+            url: "/header",
+            icon: "brand-navigation-test-icon",
+            visibility: "everyone",
+          },
+          enabled: true,
+          embedMode: false,
+          mobileView: false,
+          mobileMode: "bar",
+          currentUser: null,
+          mobileDevice: false,
+        })
+      );
+      assert.false(
+        shouldRenderHeaderIcon({
+          item: {
+            label: "Missing header",
+            url: "/missing",
+            icon: "brand-navigation-test-missing",
+            visibility: "everyone",
+          },
+          enabled: true,
+          embedMode: false,
+          mobileView: false,
+          mobileMode: "bar",
+          currentUser: null,
+          mobileDevice: false,
+        }),
+        "a symbol absent from the production sprite omits the header target"
+      );
+    } finally {
+      symbols.remove();
+      if (!existingContainer) {
+        container.remove();
+      }
+    }
   });
 
   test("site-header icon policy fails closed in unsupported contexts", function (assert) {
