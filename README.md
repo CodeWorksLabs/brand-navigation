@@ -163,16 +163,24 @@ classifications, and the
 [authorship and provenance record](docs/PROVENANCE.md) for the AI-assisted
 authorship model and reproducible source ledger.
 
-## Support status
+## Support
 
-No public support intake is currently published. The earlier
+Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
+for bug reports, installation or configuration questions, compatibility
+reports, and feature requests. Search existing issues first and, where
+relevant, include:
+
+- the Brand Navigation release, branch, or commit;
+- the Discourse version and active theme;
+- browser, device, viewport, and signed-in state;
+- steps to reproduce, expected behavior, and actual behavior; and
+- a sanitized configuration bundle or relevant settings and console output.
+
+Never post credentials, personal data, or non-public vulnerability details in
+a public issue. A private security-reporting channel is not yet published; for
+now, open a detail-free issue requesting private contact. The earlier
 [Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
 is historical product-discussion context, not a Brand Navigation support desk.
-The repository's GitHub issue tracker currently restricts new issue creation,
-so it is not advertised as an intake route. No private security-reporting
-channel is currently published. Do not post credentials, personal data, or
-non-public vulnerability details through either public surface. A verified
-public intake route and support expectations remain release-readiness work.
 
 This independent-stage repository does not use Discourse logos, official
 badges, or language implying Discourse ownership or maintenance. If accepted

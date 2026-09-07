@@ -96,6 +96,12 @@ The complete closure reports remain in the originating Manual Boss and Product
 Boss tasks. They are bounded documentation/product inspections, not formal code
 review dispositions.
 
+Subsequent repository verification confirmed that GitHub Issues is enabled on
+the public repository. The stale statement that new issue creation was
+restricted has been removed, and GitHub Issues is now the documented public
+intake route for support and product feedback. A private security-reporting
+channel and explicit response expectations remain unpublished.
+
 ## Remaining `v1.0.0` acceptance
 
 On 2026-09-07, reproducible sandbox browser/runtime work exercised classic

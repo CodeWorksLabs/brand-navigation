@@ -94,15 +94,20 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
-No public support intake is currently published. The earlier
+The current public intake route is
+[GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues) for
+bugs, installation and configuration questions, compatibility reports, and
+feature requests. Reports should identify the component release, branch, or
+commit; Discourse version; active theme; browser/device context; reproduction
+steps; and sanitized settings or console evidence when relevant. The earlier
 [Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
 is historical product-discussion context, not a Brand Navigation support desk.
-The repository's GitHub issue tracker currently restricts new issue creation
-and must not be advertised as an intake route unless that restriction is
-removed and verified. No private security-reporting channel is currently
-published. Do not publish credentials, personal data, or sensitive
-vulnerability details through either public surface. A verified public intake
-route and explicit support expectations remain release-readiness work.
+
+No private security-reporting channel is currently published. Credentials,
+personal data, and non-public vulnerability details must not be posted in a
+public issue. Until a private channel exists, a reporter may open a
+detail-free issue requesting private contact. Publishing that private channel
+and explicit response expectations remains release-readiness work.
 
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained
