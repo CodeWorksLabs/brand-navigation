@@ -63,7 +63,7 @@ RSpec.describe "Brand Navigation" do
         {
           label: "Social",
           url: "https://example.com/social",
-          icon: "globe",
+          icon: "search",
           surface: "site_header",
           visibility: "everyone",
         },

@@ -1,4 +1,11 @@
-import { click, fillIn, render, settled, waitUntil } from "@ember/test-helpers";
+import {
+  click,
+  fillIn,
+  find,
+  render,
+  settled,
+  waitUntil,
+} from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import BrandNavigationBundles from "../../discourse/connectors/admin-customize-theme-before-controls/brand-navigation-bundles";
@@ -224,7 +231,8 @@ module(
           "navigation_items cannot exceed 524,288 serialized bytes"
         );
 
-      await click(".brand-navigation-bundles__controls .btn-primary");
+      find(".brand-navigation-bundles__controls .btn-primary").click();
+      await settled();
 
       assert.strictEqual(persistenceCalls, 0, "no settings request is sent");
       assert.strictEqual(

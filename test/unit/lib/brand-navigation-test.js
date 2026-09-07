@@ -159,25 +159,28 @@ module("Unit | Lib | brand-navigation", function () {
   });
 
   test("visible submenu descriptions follow label presentation", function (assert) {
-    const [item] = arrangeNavigationItems([
-      {
-        label: "Resources",
-        children: [
-          {
-            label: "Docs",
-            url: "/docs",
-            description: "Read the documentation",
-          },
-          {
-            label: "Status",
-            url: "/status",
-            icon: "signal",
-            presentation: "icon_only",
-            description: "Service status",
-          },
-        ],
-      },
-    ]);
+    const [item] = arrangeNavigationItems(
+      [
+        {
+          label: "Resources",
+          children: [
+            {
+              label: "Docs",
+              url: "/docs",
+              description: "Read the documentation",
+            },
+            {
+              label: "Status",
+              url: "/status",
+              icon: "signal",
+              presentation: "icon_only",
+              description: "Service status",
+            },
+          ],
+        },
+      ],
+      (icon) => icon === "signal"
+    );
 
     assert.true(item.children[0].showDescription);
     assert.false(item.children[1].showDescription);

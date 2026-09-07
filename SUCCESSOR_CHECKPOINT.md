@@ -49,6 +49,18 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PR
   next verification gate. The aggregate local lint command reports Windows
   checkout formatting drift in 17 unchanged files; no changed file is among
   those warnings.
+- First pushed batch commit `97f249ecb799b14b5089d6a6a9854bfda867005c`
+  / tree `1d088afef469709a8d263ab486ca55512a9c381e` passed configuration
+  run `34089230517`, plus test discovery, linting, and backend checks in
+  Discourse Theme run `34089231211`. Its frontend lane passed 15/17 QUnit
+  tests: the two failures were test assumptions that the interaction helper
+  could click a disabled button and that undeclared `signal` was available in
+  the test sprite. Its system lane passed 29/30 examples, including the new
+  enabled-core and unavailable-icon scenarios; the remaining historical mobile
+  scenario assumed `globe` was guaranteed in the active sprite. The corrected
+  fixtures use native disabled-button behavior, explicit unit icon
+  availability, and the core-guaranteed `search` icon. Replacement exact-head
+  CI is required before freeze.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
