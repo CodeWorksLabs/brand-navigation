@@ -15,8 +15,13 @@ in the adjacent YAML comment.
 
 ## Release sequence
 
+Choose the intended Semantic Versioning identifier before opening the release
+pull request. In the steps below, `<VERSION>` means that exact version without
+the leading `v`; the Git tag and GitHub Release use `v<VERSION>`. Never reuse or
+move an existing release tag.
+
 1. Finish release preparation and manual documentation/product polish.
-2. Open one clean draft `v0.9.0` release-preparation pull request.
+2. Open one clean draft `v<VERSION>` release-preparation pull request.
 3. Run CI and freeze the exact candidate commit and tree.
 4. Conduct the formal complete codebase review against that immutable
    candidate.
@@ -25,12 +30,22 @@ in the adjacent YAML comment.
 7. Conduct final manual acceptance on the resulting candidate.
 8. Merge only when review, CI, documentation, and manual acceptance are
    complete.
-9. Confirm the merged tree matches the accepted candidate, then tag `v0.9.0`
-   and publish the release.
+9. Confirm the merged tree matches the accepted candidate, then create the
+   annotated `v<VERSION>` tag and matching GitHub Release.
+
+### Completed `v0.9.0` release record
+
+The `v0.9.0` preview sequence is complete and must not be repeated. It was
+published on 2026-09-07 at merge commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
+`23328df16e2703920778d71c226abe0a00f97cfb`. The annotated `v0.9.0` tag and
+[GitHub Release](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v0.9.0)
+identify that release. Later documentation and compatibility work on `main`
+does not change the immutable `v0.9.0` identity.
 
 ## Release gates
 
-Before completing that sequence:
+Before completing a release sequence:
 
 1. Confirm the default branch is `main`.
 2. Run all lint, type, configuration, unit, and system-test gates.
@@ -50,7 +65,7 @@ Before completing that sequence:
 9. Confirm `Brand Navigation` and `brand-navigation` remain appropriate for the
    independent release stage.
 10. Confirm `CHANGELOG.md` moves the released entries out of **Unreleased**.
-11. Confirm the accepted candidate, merged tree, `v0.9.0` tag, and GitHub
+11. Confirm the accepted candidate, merged tree, `v<VERSION>` tag, and GitHub
     Release all identify the same tree. Include compatibility, upgrade,
     migration, and rollback notes in the release.
 
@@ -67,9 +82,9 @@ and support surfaces.
 The exact documentation paths, source repository, release-tag synchronization,
 shared navigation, deployment ownership, and timing remain under discussion.
 The recommended framework split is Astro for public product and platform
-surfaces and Starlight for the shared documentation corpus. This direction does
-not require a public site for the first Brand Navigation release and does not
-authorize creating, publishing, or deploying any site.
+surfaces and Starlight for the shared documentation corpus. A public site was
+not required for the `v0.9.0` release. This direction does not authorize
+creating, publishing, or deploying any site.
 
 `support.codeworkslabs.dev` is the selected durable umbrella support front door.
 It may route visitors to documentation, repositories, issue trackers, shared
@@ -79,6 +94,16 @@ appropriate. Mature product communities remain independent; in particular,
 forum. This support-routing decision does not authorize creating or deploying
 the support site or a shared CodeWorksLabs forum.
 
+No public support intake is currently published. The earlier
+[Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
+is historical product-discussion context, not a Brand Navigation support desk.
+The repository's GitHub issue tracker currently restricts new issue creation
+and must not be advertised as an intake route unless that restriction is
+removed and verified. No private security-reporting channel is currently
+published. Do not publish credentials, personal data, or sensitive
+vulnerability details through either public surface. A verified public intake
+route and explicit support expectations remain release-readiness work.
+
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained
 older Discourse releases use branches named `d-compat/<YYYY>.<M>`. The official
@@ -86,18 +111,18 @@ daily compatibility workflow creates a branch for each newly released
 Discourse version from the last first-parent `main` commit predating that core
 release.
 
-Brand Navigation requires a one-time manual bootstrap for both `2026.7` and
-`2026.8`. Seed both branches from reviewed compatibility commit
-`a628dcd74c9465903c7eacd59f63e50f6c9d37b6` before merging or manually running
-the scheduled workflow. That commit contains released `v0.9.0` merge commit
+The one-time manual bootstrap for `2026.7` and `2026.8` was completed on
+2026-09-07. Both compatibility branches currently identify reviewed commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. That commit contains released
+`v0.9.0` merge commit
 `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, leaves the accepted product runtime
 unchanged, and adds the corrected compatibility-pull-request workflow. The
 branch-creation workflow fails closed unless both branches contain the accepted
-`v0.9.0` seed, and serialized runs prevent concurrent branch writers. If either
-branch already exists at the wrong commit, do not run the workflow: inspect the
-ref, correct it through an explicitly authorized release operation, verify it
-contains both the accepted product seed and corrected workflow, and only then
-retry.
+`v0.9.0` seed, and serialized runs prevent concurrent branch writers. Do not
+reseed or force-move either existing branch as routine release preparation. If
+a branch is ever found at the wrong commit, stop the workflow, inspect the ref,
+and correct it only through an explicitly authorized and reviewed release
+operation.
 
 When a compatible fix lands on `main`, backport it through a reviewed pull
 request whose base is the affected `d-compat` branch. Do not merge new features
@@ -108,9 +133,13 @@ Discourse's reusable workflow deliberately selects the matching moving release
 branch and Brand Navigation runs one clearly named compatibility-branch lane;
 obtain separate exact-core evidence when a backport needs it.
 Discourse update detection remains commit-based; release tags provide durable
-human and rollback identities. Record the Brand Navigation version, component
-commit, compatibility branch, Discourse version, and exact core commit in every
-compatibility result.
+human and revision-recovery identities. Use the provisional procedure in
+[`MIGRATION.md`](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag)
+rather than editing remote component code. It is not a release-supported
+recovery path until its complete pin-and-return workflow is recorded on staging
+in `TESTING.md`. Record the Brand Navigation version, component commit,
+configured Branch field value, resolved compatibility ref, Discourse version,
+and exact core commit in every compatibility result.
 
 Use `v0.9.x` for reviewed preview releases. Publish `v1.0.0` only after the
 documentation and planned multi-site compatibility work are complete and no

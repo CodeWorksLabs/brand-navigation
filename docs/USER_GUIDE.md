@@ -21,8 +21,13 @@ Discourse embed contexts.
 ## Install the component
 
 1. In Discourse administration, open **Appearance → Themes & components**.
-2. Select the **Components** tab and install the component from its Git
-   repository URL.
+2. Select the **Components** tab, choose **Install → From a git repository**,
+   and enter:
+
+   ```text
+   https://github.com/CodeWorksLabs/brand-navigation.git
+   ```
+
 3. Add **Brand Navigation** to the theme or themes that should use it.
 4. Open the component settings.
 5. Leave the default `enabled` setting off while preparing and reviewing the
@@ -109,18 +114,22 @@ An optional local command validates a saved bundle without contacting a forum:
 pnpm bundle validate configurations/repeal-obbba.json
 ```
 
-Import and export are intentionally administrator-browser operations for the
-first release. Brand Navigation does not ship a credentialed command-line
-client. Upload light and dark logos separately because Discourse upload
-identifiers are site-specific.
+Import and export are intentionally administrator-browser operations in the
+`v0.9.x` preview line. Brand Navigation does not ship a credentialed
+command-line client. Upload light and dark logos separately because Discourse
+upload identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
 1. Set `enabled` off to stop Brand Navigation from rendering.
 2. If Brand Navigation replaced another component, follow the documented
    rollback procedure and temporarily re-enable that component.
-3. Restore the previously recorded settings when required.
-4. Report the Brand Navigation release, Discourse version, active theme, and
+3. To return Brand Navigation itself to a known release, follow
+   [Roll back Brand Navigation to a release tag](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+   That procedure remains provisional until its complete staging evidence is
+   recorded in [`TESTING.md`](TESTING.md).
+4. Restore the previously recorded settings when required.
+5. Report the Brand Navigation release, Discourse version, active theme, and
    observed error before trying the update again.
 
 Do not edit a Git-installed remote component locally to patch an upgrade.
@@ -293,7 +302,7 @@ protect restricted destinations with Discourse permissions.
 ## Translate the interface
 
 Brand Navigation uses Discourse's theme-translation system for fixed visitor
-and administrator interface text. The first release bundles English in
+and administrator interface text. The `v0.9.x` preview line bundles English in
 `locales/en.yml`. This includes navigation accessibility labels, appearance and
 configuration-bundle controls, setting descriptions, and status messages.
 
@@ -348,6 +357,11 @@ Before enabling the component broadly, check:
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.
 
+Automated checks cover keyboard behavior, accessible names, focus return,
+responsive visibility, and embed exclusion. They do not replace human
+screen-reader or RTL-locale acceptance. The exact completed and outstanding
+manual evidence is maintained in [`TESTING.md`](TESTING.md).
+
 ## Disable or roll back
 
 Set `enabled` off to stop Brand Navigation from rendering. Disabling the
@@ -357,6 +371,12 @@ When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation
 has passed staging. See
 [Migration and rollback](MIGRATION.md) for the detailed procedure.
+
+For a regression caused by a Brand Navigation update, keep the existing
+component record and review the provisional
+[release-tag rollback](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+It is not release-supported until its complete pin-and-return workflow is
+recorded on staging in [`TESTING.md`](TESTING.md).
 
 ## Troubleshooting
 
