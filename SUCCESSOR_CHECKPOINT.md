@@ -61,6 +61,16 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PR
   fixtures use native disabled-button behavior, explicit unit icon
   availability, and the core-guaranteed `search` icon. Replacement exact-head
   CI is required before freeze.
+- Replacement head `b978a6d6d8ed798b2af5137b72f5d652391a62bc`
+  / tree `50a893fefa1d16a82351504f97295e2fa24053f7` passed configuration
+  run `34089873962` and test discovery, linting, backend, and all 17 frontend
+  tests in Discourse Theme run `34089874541`. The system lane again passed the
+  new enabled-core and unavailable-icon scenarios but retained one failure in
+  the older hidden-mobile scenario because the minimal test sprite does not
+  guarantee the substituted `search` icon. That fixture now uses
+  `caret-down`, which Brand Navigation itself statically requires. Another
+  exact-head system run is required; the prior green lanes do not carry forward
+  as a replacement-candidate disposition.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
