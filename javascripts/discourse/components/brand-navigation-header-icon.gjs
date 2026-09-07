@@ -28,35 +28,33 @@ export default class BrandNavigationHeaderIcon extends Component {
       this.destroyed = true;
       this.unsubscribeFromPrimarySprite?.();
     });
+  }
 
-    const isEligible = shouldRenderHeaderIcon({
-      item: args.item,
-      enabled: settings.enabled,
-      embedMode: EmbedMode.enabled,
-      mobileView: this.site.mobileView,
-      mobileMode: settings.mobile_mode,
-      currentUser: this.currentUser,
-      mobileDevice: this.capabilities.isMobileDevice,
-      iconExists: () => true,
-    });
-
-    if (isEligible) {
-      this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
-        scheduleOnce("afterRender", this, () => {
-          if (!this.destroyed) {
-            this.iconRevision++;
-          }
-        });
-      });
+  updatePrimarySpriteSubscription(isEligible) {
+    if (!isEligible) {
+      this.unsubscribeFromPrimarySprite?.();
+      this.unsubscribeFromPrimarySprite = null;
+      return;
     }
+
+    if (this.unsubscribeFromPrimarySprite) {
+      return;
+    }
+
+    this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
+      scheduleOnce("afterRender", this, () => {
+        if (!this.destroyed) {
+          this.iconRevision++;
+        }
+      });
+    });
   }
 
   get shouldRender() {
     this.iconRevision;
 
     const item = this.args.item;
-
-    return shouldRenderHeaderIcon({
+    const context = {
       item,
       enabled: settings.enabled,
       embedMode: EmbedMode.enabled,
@@ -64,7 +62,15 @@ export default class BrandNavigationHeaderIcon extends Component {
       mobileMode: settings.mobile_mode,
       currentUser: this.currentUser,
       mobileDevice: this.capabilities.isMobileDevice,
+    };
+    const isEligible = shouldRenderHeaderIcon({
+      ...context,
+      iconExists: () => true,
     });
+
+    this.updatePrimarySpriteSubscription(isEligible);
+
+    return isEligible && shouldRenderHeaderIcon(context);
   }
 
   get rel() {

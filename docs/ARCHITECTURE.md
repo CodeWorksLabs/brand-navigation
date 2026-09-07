@@ -73,6 +73,9 @@ loader and current Discourse without issuing per-icon network requests. Until
 the primary sprite is ready, icon-only bar/submenu entries expose their labels
 and direct header entries stay omitted. Destroyed components unsubscribe, and
 the tracked readiness update is scheduled after the active render transaction.
+A retained direct-header component synchronizes its subscription whenever its
+responsive eligibility is reevaluated, so becoming eligible before sprite
+readiness still receives the single shared notification.
 Audience/device-ineligible entries do not create subscriptions. Top-level and
 child items independently select `both`, `desktop`, or `mobile` device visibility.
 The components evaluate that setting against Discourse's supported

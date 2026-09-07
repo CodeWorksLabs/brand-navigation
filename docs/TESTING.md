@@ -119,6 +119,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
   teardown, production-sprite icon membership, replacement icon IDs,
   icon/label presentation, unavailable bar/submenu fallback, and omission of
   unavailable direct site-header icons.
+- Rendered component coverage for a retained site-header item that starts
+  mobile-hidden, becomes eligible before sprite readiness, subscribes once,
+  and appears after the delayed primary symbol arrives.
 - Rendered system coverage for visible label fallback when a bar icon is
   unavailable. The prebuilt system harness cannot dynamically register a new
   `api.headerIcons` entry after the component initializer has run.

@@ -1,9 +1,32 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 SECOND REPLACEMENT IMPLEMENTED / CHECKPOINT-ONLY HEAD REQUIRES CI / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 FINAL CORRECTION AUTHORIZED / IMPLEMENTATION IN PROGRESS / NOT FROZEN / NOT TAGGED**
 
 ## Current release-documentation checkpoint
+
+- PR 8 replacement candidate `683af89cdee2673af6e3d5f9fae35ee2ad0463a0`
+  / tree `3418ab1f984082e3e5defa2fb48b0d4ff0e48ddf` passed configuration
+  run `34103778561` (24/24) and complete current, exact Repeal 2026.7, and
+  exact R744 2026.7 lanes in Discourse Theme run `34103778968` (frontend
+  22/22 and system 30/30 on each core, plus backend on each and current lint).
+  Freeze comment `5568234464` records the exact candidate and clean/synchronized
+  branch controls. Dual focused closure review closed all four submitted
+  correction items with no remaining P0/P1 or new P2 in that submitted set.
+- Sidebar closure review `BN-PR8-CLOSURE-20260907-SIDEBAR-R3` identified one
+  additional P2 transition case: a retained direct-header item initially
+  excluded by responsive policy could become eligible before the primary SVG
+  sprite arrived without then joining the shared readiness observer. Phil
+  authorized one final correction batch. The implementation synchronizes the
+  subscription whenever responsive eligibility is reevaluated and adds a
+  rendered hidden-mobile to desktop to delayed-sprite regression. Exact-head
+  local checks and CI are pending; this batch is not frozen.
+- The same sidebar review identified this checkpoint's obsolete pre-freeze
+  wording as record-only P3. This current section supersedes that wording.
+  Earlier pending-state entries below are retained as dated iteration history,
+  not current status. Because a committed file cannot self-record its own
+  post-commit CI result, the next immutable freeze comment remains the
+  authoritative exact-head CI and candidate record.
 
 - Frozen PR 8 candidate `d398d887419886eae4310fd1467b483a29ed30b4`
   / tree `9640302b5403dfb2052bf9a5f64c5a77fb717e5b` passed configuration

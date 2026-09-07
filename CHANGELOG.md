@@ -16,6 +16,9 @@ to discover component updates from commits on the installed remote branch.
   readiness observer; check its loaded symbols; fall back to visible labels
   when bar or submenu icons are unavailable; and omit unavailable direct
   site-header icons.
+- Join that shared readiness observer when a retained site-header item becomes
+  eligible after its initial render, so responsive visibility changes cannot
+  strand a valid icon while the primary sprite is still loading.
 - Reconcile the successor checkpoint into one unambiguous current release
   state while retaining dated historical evidence.
 
