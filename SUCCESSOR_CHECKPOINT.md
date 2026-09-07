@@ -217,6 +217,15 @@ directory. Use the canonical local repository path above.
   owner rather than an arbitrary object. The tests now initialize the standard
   Discourse QUnit owner with `setupTest` and pass `getOwner(this)`; another
   replacement CI run is required.
+- Follow-up commit `81aa7a3` initialized the normal QUnit owner, but
+  configuration run `34079297022` and every non-frontend lane in Discourse
+  Theme run `34079297357` again passed while Glimmer rejected direct manual
+  construction. Its current manager marks argument objects during rendering,
+  so even a genuine owner cannot make `new Component(...)` a supported test
+  path. The deferred cases now use Discourse's `setupRenderingTest`, render the
+  real component through its manager, interact through its administrator DOM,
+  and replace only the persistence method with a controlled deferred promise.
+  Replacement CI is required.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. Candidate `552f09d` is superseded only by the record
   correction above and likewise remains immutable evidence. No final manual
