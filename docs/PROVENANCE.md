@@ -24,6 +24,10 @@ or that ordinary framework patterns cannot resemble other Discourse code.
 Brand Navigation is not a fork, mechanical merger, translation, or stylesheet
 overlay of another component.
 
+This record classifies the other named projects as **inspiration sources** or,
+when discussing coexistence and migration, **neighboring components**. It does
+not place Brand Navigation in a formal succession lineage with those projects.
+
 The durable specification and acceptance basis is distributed across
 [`SCOPE.md`](SCOPE.md), [`ARCHITECTURE.md`](ARCHITECTURE.md),
 [`TESTING.md`](TESTING.md), the settings schema, Git history, and the repository

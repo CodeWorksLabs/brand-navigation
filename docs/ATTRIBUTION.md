@@ -1,7 +1,7 @@
 # Attribution and licensing
 
-Brand Navigation was newly authored from its product specifications. It is an
-independent implementation rather than a merger or fork of another component.
+Brand Navigation was newly authored from its product specifications as an
+independent theme component.
 
 See the [authorship and provenance record](PROVENANCE.md) for the AI-assisted
 authorship model, pinned upstream revisions, implementation-history evidence,

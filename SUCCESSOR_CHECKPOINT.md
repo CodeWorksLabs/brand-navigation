@@ -707,6 +707,13 @@ passed all 22 tests and `git diff --check` passed. `pnpm lint:prettier`
 continued to report 24 pre-existing baseline files outside this six-file
 licensing/provenance change; none of the changed formatted files was reported.
 
+Terminology audit on 2026-09-06: the active release-preparation branch no
+longer describes Brand Header, Header Submenus, Dropdown Header, or Custom
+Header Links (icons) as components in a formal succession lineage. Durable
+documentation uses `inspiration sources`, `neighboring components`, and
+`adapted source` according to the actual relationship. Older branches and Git
+history retain earlier shorthand and are not release authority.
+
 Official-source verification confirms that Discourse Meta labels Brand Header,
 Header Submenus, and Custom Header Links (icons) as official and links to the
 same `discourse/*` repositories recorded in the provenance ledger. Pavilion
