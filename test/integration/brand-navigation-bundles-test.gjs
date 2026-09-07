@@ -1,4 +1,4 @@
-import { click, fillIn, render, waitUntil } from "@ember/test-helpers";
+import { click, fillIn, render, settled, waitUntil } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import BrandNavigationBundles from "../../discourse/connectors/admin-customize-theme-before-controls/brand-navigation-bundles";
@@ -96,6 +96,7 @@ module(
       };
       persistence.release();
       await save;
+      await settled();
 
       assert
         .dom('input[type="color"][data-setting="bar_background_color"]')
@@ -158,6 +159,7 @@ module(
       );
       persistence.release();
       await importOperation;
+      await settled();
 
       assert
         .dom('input[type="color"][data-setting="bar_background_color"]')

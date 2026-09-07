@@ -226,6 +226,12 @@ directory. Use the canonical local repository path above.
   real component through its manager, interact through its administrator DOM,
   and replace only the persistence method with a controlled deferred promise.
   Replacement CI is required.
+- Rendering-test commit `bf1f02c` passed configuration run `34079799706` and
+  every non-frontend lane in Discourse Theme run `34079799973`, including all
+  28 system examples. Both new integration cases reached their assertions, but
+  asserted DOM state before Ember finished rerendering after the controlled
+  promise resolved. The tests now await the standard `settled()` helper after
+  completion before inspecting rendered values; replacement CI is required.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
   review evidence. Candidate `552f09d` is superseded only by the record
   correction above and likewise remains immutable evidence. No final manual
