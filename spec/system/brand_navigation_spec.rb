@@ -57,14 +57,13 @@ RSpec.describe "Brand Navigation" do
 
   it "hides every component surface in hidden mobile mode", mobile: true do
     theme.update_setting(:mobile_mode, "bar")
-    theme.theme_modifier_set.svg_icons = ["caret-down"]
     theme.update_setting(
       :navigation_items,
       [
         {
           label: "Social",
           url: "https://example.com/social",
-          icon: "caret-down",
+          icon: "user",
           surface: "site_header",
           visibility: "everyone",
         },

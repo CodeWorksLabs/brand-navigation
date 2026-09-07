@@ -91,6 +91,16 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   registers `caret-down` through Discourse's supported theme-modifier
   `svg_icons` collection before visiting the page. Production behavior is
   unchanged. Replacement exact-head CI remains required.
+- Follow-up head `a9eedecef974d5b51d12cd0fe204fa5f2278355d` / tree
+  `cfd0f324af7a367755305c99815d677091b34724` passed configuration run
+  `34091516312` and test discovery, linting, backend, and all
+  17 frontend tests in Discourse Theme run `34091516812`. Its system lane again
+  passed 29/30 examples; registering the icon through the uploaded component's
+  theme modifier did not update the already composed active theme sprite in the
+  system harness. The prerequisite now uses `user`, which the failed-page
+  artifact proves is present in the active core header sprite. This avoids
+  dynamically mutating sprite membership while preserving the scenario's
+  positive-then-hidden assertion. Replacement exact-head CI remains required.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
