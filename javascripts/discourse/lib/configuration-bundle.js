@@ -191,8 +191,8 @@ function validateSettings(settings, errors) {
 function validateOptionalColor(value, key, errors) {
   if (
     key in value &&
-    !/^#?[0-9a-f]{6}$/i.test(value[key]) &&
-    value[key] !== ""
+    (typeof value[key] !== "string" ||
+      (!/^#?[0-9a-f]{6}$/i.test(value[key]) && value[key] !== ""))
   ) {
     errors.push(
       `${key} must be blank or a six-digit hex color such as #1A2B3C.`
@@ -314,11 +314,20 @@ function validateUnknownKeys(
 ) {
   for (const key of Object.keys(value)) {
     if (!allowed.has(key)) {
+      const safeKey = escapeDiagnosticText(key);
       errors.push(
-        `${prefix}: ${path === "Settings" ? key : `${path}.${key}`}.`
+        `${prefix}: ${path === "Settings" ? safeKey : `${path}.${safeKey}`}.`
       );
     }
   }
+}
+
+function escapeDiagnosticText(value) {
+  return String(value).replace(
+    /[\u0000-\u001f\u007f]/g,
+    (character) =>
+      `\\u${character.codePointAt(0).toString(16).padStart(4, "0").toUpperCase()}`
+  );
 }
 
 function validateOptionalBoolean(value, key, errors, path = "settings") {
@@ -486,5 +495,22 @@ export function createBundle(settings, metadata = {}) {
     throw new Error(`Cannot export invalid settings: ${errors.join(" ")}`);
   }
 
+  // Apply the same byte ceiling to generated downloads and uploaded files so
+  // every successfully exported bundle can be accepted by the importer.
+  serializeBundle(bundle);
+
   return bundle;
+}
+
+export function serializeBundle(bundle) {
+  const text = `${JSON.stringify(bundle, null, 2)}\n`;
+  const bytes = new TextEncoder().encode(text).length;
+
+  if (bytes > MAX_BUNDLE_BYTES) {
+    throw new Error(
+      `Bundle cannot exceed ${MAX_BUNDLE_BYTES.toLocaleString()} bytes. Reduce the number or length of navigation items before exporting.`
+    );
+  }
+
+  return text;
 }

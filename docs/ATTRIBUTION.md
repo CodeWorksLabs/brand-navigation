@@ -1,8 +1,11 @@
 # Attribution and licensing
 
-Brand Navigation was newly authored from its product specifications. It is an
-independent implementation rather than a merger or fork of its predecessor and
-neighboring components.
+Brand Navigation was newly authored from its product specifications as an
+independent theme component.
+
+See the [authorship and provenance record](PROVENANCE.md) for the AI-assisted
+authorship model, pinned upstream revisions, implementation-history evidence,
+and release controls behind this summary.
 
 ## Product inspiration
 
@@ -23,19 +26,19 @@ Discourse theme-component pattern.
   demonstrated compact, accessible destinations registered in Discourse's core
   header.
 
-## Adapted implementation pattern
+## Historical implementation study
 
 Brand Navigation's core-header icon integration uses Discourse's documented
-`api.headerIcons` API. Its narrow `curryComponent` registration pattern was
-adapted from Custom Header Links (icons): importing `curryComponent`, binding a
-component and its arguments to the Discourse owner, and supplying the result to
-`api.headerIcons.add`.
+`api.headerIcons` API. During development, an early implementation adapted the
+narrow `curryComponent` registration pattern used by Custom Header Links
+(icons). Before the first tagged release, that implementation was replaced by
+an independently authored lexical component factory.
 
 Permanent upstream reference:
 [initialize-for-header-icon-links.gjs at `dee14e3`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/javascripts/discourse/initializers/initialize-for-header-icon-links.gjs#L1-L27).
 
-Custom Header Links (icons) is licensed under GPL-2.0. Brand Navigation is
-licensed under GPL-2.0-or-later, which preserves compatible terms for the
-adapted pattern. No other copied or adapted predecessor code is currently
-identified. If future work copies or adapts code, this record and any required
-copyright or license notice must be updated in the same change.
+The permanent reference preserves the development history; it does not classify
+the current release tree as containing that adapted expression. No copied or
+adapted external code is currently identified. Brand Navigation declares
+`GPL-2.0-or-later`. If future work copies or adapts code, this record and any
+required copyright or license notice must be updated in the same change.

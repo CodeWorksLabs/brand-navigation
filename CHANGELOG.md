@@ -6,6 +6,29 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Make administrator imports and color saves use immutable request snapshots,
+  disable conflicting controls while writes are pending, and reconcile imported
+  colors with their visible controls after success.
+- Add deferred-completion tests at the administrator component boundary for
+  save/import state and submitted-value reconciliation.
+- Prevent exports larger than the matching importer accepts, reject non-string
+  color values, and escape control characters in validation diagnostics.
+- Enable the Discourse RuboCop gate for Ruby system specifications and document
+  the intentionally moving dependencies inside the pinned Discourse workflow.
+- Replace the historical header-icon binding pattern with an independently
+  authored lexical component factory while retaining the documented
+  `api.headerIcons` integration and `GPL-2.0-or-later` license.
+- Make submenu descriptions inherit the configured submenu foreground and use
+  the configured hover/highlight color for submenu rows.
+- Keep browser-based settings import/export as the supported migration surface
+  and limit the local CLI to offline bundle validation.
+- Keep administrator appearance and bundle controls available for supported
+  local copies, mirrors, repository transfers, and maintained forks.
+- Add translated fallback messages and accurately document the English-only
+  detailed bundle-validation boundary.
+- Add a durable AI-assisted authorship and source-provenance record with pinned
+  upstream revisions, license evidence, implementation history, and release
+  controls.
 - Accept six-digit administrator color values with or without a leading `#`
   and normalize picker and configuration-bundle values to `#RRGGBB`.
 - Add administrator color pickers for bar background, bar text, hover/highlight,

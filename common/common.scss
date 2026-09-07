@@ -203,7 +203,7 @@
         &:hover,
         &:focus-visible {
           color: inherit;
-          background: var(--tertiary-low);
+          background: var(--brand-navigation-hover);
           outline-offset: -2px;
         }
       }
@@ -301,9 +301,10 @@
   }
 
   &__child-description {
-    color: var(--primary-high);
+    color: inherit;
     font-size: var(--font-down-1);
     line-height: 1.35;
+    opacity: 0.78;
     white-space: normal;
   }
 

@@ -42,18 +42,23 @@ logical `left` and `right` sections; CSS logical properties keep that layout
 usable in both left-to-right and right-to-left interfaces.
 
 The objects editor uses the component-specific schema identity
-`brand_navigation_item_v1`. Administrator extensions require either that
-identity or the exact canonical remote repository; mutable names and URL
-substrings do not grant write scope. Bundle imports validate the complete
-portable schema, preflight the target, and submit one Discourse theme update
-rather than issuing a separate request for each setting. This does not assert a
-server-side transaction guarantee; after a server error, reload the current
-settings before retrying.
+`brand_navigation_item_v1`. Its save-stay behavior requires that identity. The
+component-wide appearance and bundle panel requires a theme component with the
+five-setting Brand Navigation signature. This avoids repository-location and
+mutable-name coupling while failing closed for incomplete signatures; it is a
+product signature, not cryptographic identity. Bundle imports validate the
+complete portable schema, preflight every target, snapshot the submitted data,
+and submit one Discourse theme update rather than issuing a separate request
+for each setting. While a request is pending, conflicting controls are disabled.
+After success, the model and appearance controls reconcile from the submitted
+snapshot. This does not assert a server-side transaction guarantee; after a
+server error, reload the current settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
 registered as direct icon links through `api.headerIcons`. They require a URL
-and icon and do not support children. The registration uses `curryComponent`,
-adapting the established GPL-2.0 pattern in Discourse Icon Header Links.
+and icon and do not support children. A locally authored lexical component
+factory binds each validated item to its header component without
+repository-specific owner state.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
@@ -66,8 +71,9 @@ continues to use `site.mobileView` through the bar and menu boundaries.
 
 Navigation sinks independently recheck URL safety and fail closed for malformed,
 protocol-relative, credential-bearing, non-HTTPS external, and script URLs.
-The optional CLI restricts administrator credentials to a canonical HTTPS
-origin, refuses redirects, and bounds response time, size, and terminal output.
+The optional local bundle validator reads bounded files and never connects to a
+forum. Browser import/export uses the authenticated Discourse administrator
+session and the component's administration page.
 
 ## Intentional constraints
 

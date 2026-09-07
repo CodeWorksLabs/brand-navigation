@@ -194,33 +194,38 @@ module("Unit | Lib | brand-navigation", function () {
     );
   });
 
-  test("administrator controls require the exact canonical repository", function (assert) {
+  test("administrator controls follow the component across supported repository locations", function (assert) {
+    const settings = [
+      "brand_presentation",
+      "custom_font_awesome_icons",
+      "mobile_mode",
+      "navigation_items",
+      "submenu_text_color",
+    ].map((setting) => ({ setting }));
+
     assert.true(
       isBrandNavigationTheme({
         component: true,
+        settings,
         remote_theme: {
           remote_url: "https://github.com/CodeWorksLabs/brand-navigation.git",
         },
       })
     );
+
+    assert.true(
+      isBrandNavigationTheme({
+        component: true,
+        settings,
+      })
+    );
+
+    assert.false(
+      isBrandNavigationTheme({
+        component: true,
+        settings: settings.slice(0, -1),
+      })
+    );
     assert.false(isBrandNavigationTheme({ name: "Brand Navigation" }));
-    assert.false(
-      isBrandNavigationTheme({
-        component: true,
-        remote_theme: {
-          remote_url:
-            "https://github.com/example/CodeWorksLabs/brand-navigation-lookalike",
-        },
-      })
-    );
-    assert.false(
-      isBrandNavigationTheme({
-        component: true,
-        remote_theme: {
-          remote_url:
-            "https://github.com:444/CodeWorksLabs/brand-navigation.git",
-        },
-      })
-    );
   });
 });

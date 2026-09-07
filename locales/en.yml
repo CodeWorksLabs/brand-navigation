@@ -12,6 +12,8 @@ en:
       import: "Import settings"
       export: "Export settings"
       import_success: "Configuration bundle imported. Refresh the forum to use the new settings."
+      import_error: "Import failed. Reload the component settings before retrying."
+      file_too_large: "Bundle cannot exceed %{count} bytes."
     appearance:
       title: "Appearance"
       description: "Choose component colors or leave individual values inherited from the active Discourse color palette."
@@ -20,6 +22,7 @@ en:
       save: "Save colors"
       reset: "Inherit all"
       save_success: "Brand Navigation colors saved."
+      save_error: "Saving colors failed. Reload the component settings before retrying."
       bar_background: "Bar background"
       bar_text: "Bar text"
       hover_background: "Hover and highlight"
