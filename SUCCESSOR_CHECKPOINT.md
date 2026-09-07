@@ -30,6 +30,16 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   import error was reported, and HTTP availability passed. Phil refreshed the
   administrator page and confirmed its up-to-date status; this core omits the
   implicit `main` name from that message.
+- Citizen Activist Network component `1` was updated through the native updater
+  from `04dbb3d994362f3f900d3f10a916ae4ac7245713` to
+  `d-compat/2026.8` commit
+  `a628dcd74c9465903c7eacd59f63e50f6c9d37b6` on Discourse
+  `2026.8.0-latest.1+414` / core
+  `36698aae084678151dffa875d49c8d59216d2733`. Its three exact setting
+  hashes and lengths and both Foundation/Horizon attachments were preserved;
+  it reports zero commits behind and no import error, and HTTP availability
+  passed. Phil confirmed the administrator UI reports it up to date with
+  `d-compat/2026.8`; fresh browser interaction confirmation remains separate.
 - Documentation PR 12 at
   `https://github.com/CodeWorksLabs/brand-navigation/pull/12` records both
   installations. Its current head is
