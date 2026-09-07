@@ -4,15 +4,15 @@
 
 ### Verified installations
 
-| Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                         |
-| ------------------------ | --------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence      |
-| DiscussionBridge sandbox | `2026.9.0-latest+338` | `587b564093` | Authenticated normal-page render, administrator component/settings surface, and canonical-install reconciliation at Brand Navigation `c878693612`          |
-| DiscussionBridge Forum   | Not recorded          | Not recorded | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion                   |
-| The Bridge               | Not recorded          | Not recorded | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion        |
-| Citizen Activist Network | Not recorded          | Not recorded | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, and full-app embed exclusion                   |
-| RVing Community          | Not recorded          | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion            |
-| R744 Community           | `2026.7.2+14`         | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion |
+| Site                     | Discourse build        | Core commit  | Verified Brand Navigation coverage                                                                                                                                                          |
+| ------------------------ | ---------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repeal OBBBA Forum       | `2026.7.0-latest+319`  | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence                                       |
+| DiscussionBridge sandbox | `2026.9.0-latest+338`  | `587b564093` | Authenticated normal-page render, administrator component/settings surface, and canonical-install reconciliation at Brand Navigation `c878693612`                                           |
+| DiscussionBridge Forum   | `2026.9.0-latest+358`  | `f914fcb43e` | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` to `main` transition     |
+| The Bridge               | `2026.9.0-latest+188`  | `7dfd824b1`  | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `main` update                   |
+| Citizen Activist Network | `2026.9.0-latest+358`  | `f914fcb43e` | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` to `main` transition     |
+| RVing Community          | `2026.8.0-latest.1+18` | `3f4a87b135` | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` update            |
+| R744 Community           | `2026.7.2+14`          | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, full-app embed exclusion, and native `d-compat/2026.7` update |
 
 The original builds were read directly from each site's administrator dashboard
 on 2026-09-05. The sandbox identity was refreshed from its running server on
@@ -38,6 +38,166 @@ enabled and attached, with automatic updates enabled and no remote-theme error.
 The public forum returned HTTP 200. This is server-side installation and
 availability evidence; it does not replace the earlier browser-rendering
 record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
+
+### DiscussionBridge Forum native compatibility transition — 2026-09-07
+
+The DiscussionBridge Forum was running Discourse
+`2026.8.0-latest.1+414` at core commit
+`36698aae084678151dffa875d49c8d59216d2733`. Its single Brand Navigation
+installation, component `3`, followed the repository's default branch and was
+attached to both Foundation and Horizon.
+
+Discourse's native update check selected `d-compat/2026.8`, reporting candidate
+commit `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. The normal remote-theme update
+advanced the component from `b0b5354481c30e1db1daf4db682368a6f9c9994d`
+to that candidate. Post-update inspection reported the same local and remote
+commit, zero commits behind, matching local and remote compatibility refs, and
+no import error. All 15 stored setting values retained their exact pre-update
+hashes and lengths, both theme attachments remained present, and the public
+forum returned HTTP 200.
+
+This establishes a successful native compatibility-branch update with settings
+preservation on the recorded 2026.8 build. It is server-side installation and
+availability evidence; it does not claim a fresh browser visual, anonymous,
+mobile, accessibility, or embed pass.
+
+Phil then upgraded the forum through Discourse's administrator UI. During the
+upgrade, the public site served its branded maintenance page with a temporary
+unavailability explanation and automatic two-minute refresh. The forum
+returned successfully on Discourse `2026.9.0-latest+358` at core commit
+`f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`.
+
+Post-upgrade inspection confirmed that Discourse automatically moved Brand
+Navigation from `d-compat/2026.8` to the repository default branch at `main`
+commit `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. Local and remote commits
+matched, zero commits were behind, both compatibility refs were empty, and no
+import error was present. The component remained enabled and attached to both
+Foundation and Horizon. All 15 setting hashes and lengths still matched the
+pre-update snapshot, the public forum returned HTTP 200, and Phil confirmed the
+administrator UI reported **Theme is up-to-date, last checked: just now**. This
+proves the native compatibility-to-default-branch transition and configuration
+preservation across the recorded Discourse core upgrade; a fresh post-upgrade
+browser interaction matrix remains separate.
+
+### The Bridge native update — 2026-09-07
+
+The Bridge was running Discourse `2026.9.0-latest+188` at core commit
+`7dfd824b151fc5b206812e72f3aca6078a71b75f`. Its single Brand Navigation
+installation, component `6`, followed the repository's default branch and was
+attached to both Foundation and Horizon.
+
+Discourse's native update check selected the repository default branch with no
+compatibility ref and reported commit
+`56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. The normal remote-theme update
+advanced the component from `b0b5354481c30e1db1daf4db682368a6f9c9994d`
+to that commit. Post-update inspection reported matching local and remote
+commits, zero commits behind, no compatibility ref, and no import error. All 15
+stored setting values retained their exact pre-update hashes and lengths, both
+theme attachments remained present, and the public site returned HTTP 200.
+The refreshed administrator UI reported the theme up to date; this Discourse
+build omitted the implicit default-branch name from that message.
+
+This establishes a successful native default-branch update with settings
+preservation on the recorded 2026.9 build. It is server-side installation and
+availability evidence plus administrator status confirmation; it does not
+claim a fresh visual, anonymous, mobile, accessibility, or embed pass.
+
+### Citizen Activist Network native compatibility transition — 2026-09-07
+
+Citizen Activist Network was running Discourse `2026.8.0-latest.1+414` at core
+commit `36698aae084678151dffa875d49c8d59216d2733`. Its single Brand
+Navigation installation, component `1`, followed the repository's default
+branch and was enabled on Foundation and Horizon.
+
+Discourse's native update check selected `d-compat/2026.8` at commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. The normal remote-theme update
+advanced the component from `04dbb3d994362f3f900d3f10a916ae4ac7245713`
+to that compatibility commit. Post-update inspection reported matching local
+and remote commits, zero commits behind, matching local and remote
+compatibility refs, and no import error. All three stored setting values
+retained their exact pre-update hashes and lengths, both theme attachments
+remained present, and the public forum returned HTTP 200. Phil refreshed the
+administrator UI and confirmed **Theme is up-to-date with
+`d-compat/2026.8`**.
+
+This establishes a successful native compatibility-branch update with settings
+preservation on the recorded 2026.8 build. It is server-side installation and
+availability evidence plus administrator status confirmation; it does not
+claim a fresh visual, anonymous, mobile, accessibility, or embed pass.
+
+Phil then upgraded the forum's PostgreSQL and Discourse containers. The forum
+returned on Discourse `2026.9.0-latest+358` at core commit
+`f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`. Post-upgrade inspection
+confirmed that Discourse automatically moved Brand Navigation from
+`d-compat/2026.8` to repository-default `main` commit
+`56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. Local and remote commits
+matched, zero commits were behind, both compatibility refs were empty, and no
+import error was present. The component remained enabled on Foundation and
+Horizon, and all three setting hashes and lengths still matched the pre-update
+snapshot. The public forum returned HTTP 200, and Phil confirmed the refreshed
+administrator UI reported the theme up to date.
+
+This proves the native compatibility-to-default-branch transition and
+configuration preservation across the recorded PostgreSQL and Discourse core
+upgrade. A fresh post-upgrade browser interaction matrix remains separate.
+
+### RVing Community native compatibility update — 2026-09-07
+
+RVing Community was running Discourse `2026.8.0-latest.1+18` at core commit
+`3f4a87b13554cb3ea366cb3a29ed56fd4b2c3d03`. Its single Brand Navigation
+installation, component `16`, followed the repository's default branch and was
+enabled on Default, Foundation, and Horizon.
+
+Discourse's native update check selected `d-compat/2026.8` at commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. The normal remote-theme update
+advanced the component from `04dbb3d994362f3f900d3f10a916ae4ac7245713`
+to that compatibility commit. Post-update inspection reported matching local
+and remote commits, zero commits behind, matching local and remote
+compatibility refs, and no import error. All four stored setting values
+retained their exact pre-update hashes and lengths, all three theme attachments
+remained present, and the public forum returned HTTP 200. Phil refreshed the
+administrator UI and confirmed **Theme is up-to-date with
+`d-compat/2026.8`**.
+
+This establishes a successful native compatibility-branch update with settings
+preservation on the recorded 2026.8 build. It is server-side installation and
+availability evidence plus administrator status confirmation; it does not
+claim a fresh visual, anonymous, mobile, accessibility, or embed pass. Two
+failed email jobs observed during administration are attributable to the site's
+intentionally unconfigured outbound mail provider and are unrelated to Brand
+Navigation.
+
+### R744 Community native compatibility update — 2026-09-07
+
+R744 Community was running Discourse ESR `2026.7.2+14` at core commit
+`2e46cff73b07ecddbcc5603eb3fbf41d563577f6`. Read-only inventory found two
+Brand Navigation records. Component `1` was the live installation, enabled on
+Foundation and Horizon and following the repository default branch. Component
+`2` was an unattached historical compatibility-test copy pinned to
+`codex/r744-compatibility`; its Brand Navigation `enabled` setting was false,
+although the unattached Discourse theme record's enabled flag remained true.
+
+Discourse's native update check for live component `1` selected
+`d-compat/2026.7` at commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. The normal remote-theme update
+advanced it from `04dbb3d994362f3f900d3f10a916ae4ac7245713` to that
+compatibility commit. Post-update inspection reported matching local and
+remote commits, zero commits behind, matching local and remote compatibility
+refs, and no import error. Its stored enabled setting retained its exact
+pre-update hash and length, both live theme attachments remained present, and
+the public forum returned HTTP 200. Phil refreshed the administrator UI and
+confirmed **Theme is up-to-date with `d-compat/2026.7`**. Historical component
+`2` was not changed.
+
+This establishes the oldest recorded supported-line native update with
+settings preservation. It is server-side installation and availability
+evidence plus administrator status confirmation; it does not claim a fresh
+visual, anonymous, mobile, accessibility, or embed pass.
+
+R744 will intentionally remain on the supported 2026.7 ESR line as Brand
+Navigation's oldest real-world compatibility canary. Its Discourse core should
+advance when security or support requirements demand it, or before that release
+line leaves support, rather than solely to match newer test sites.
 
 ### Automated release compatibility
 
@@ -125,13 +285,15 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - The original R744 test on unsupported `2026.2.0-latest` exposed older module
   APIs and is not a compatibility claim. On 2026-09-05 the site was backed up,
   pinned to `release/2026.7`, rebuilt successfully as `2026.7.2+14`
-  (`2e46cff73b`), and verified with Brand Navigation from `main`. Component id
-  `1` is enabled on Foundation and Horizon; the duplicate component id `2`
-  remains preserved, disabled, and unattached. Draft pull request 2 is no
-  longer needed to support this site and was closed without merge.
-- Record the exact Discourse builds for DiscussionBridge Forum, The Bridge,
-  Citizen Activist Network, and RVing Community from their administrator
-  dashboards when convenient.
+  (`2e46cff73b`), and verified with Brand Navigation. Live component id `1` is
+  enabled on Foundation and Horizon and now follows `d-compat/2026.7`. The
+  duplicate component id `2` remains preserved and unattached on historical
+  branch `codex/r744-compatibility`; its component-level enabled setting is
+  false while its unattached Discourse theme-record flag is true. Draft pull
+  request 2 is no longer needed to support this site and was closed without
+  merge.
+- Refresh installation records when these sites change Discourse release lines
+  or Brand Navigation compatibility refs.
 
 ## Automated gates
 
