@@ -121,6 +121,10 @@ submenu button is present and no Resources parent link is rendered. Its saved
   rejection.
 - Complete bundle preflight, immutable persistence snapshots, strict color
   types, inert diagnostics, and export/import byte-limit symmetry.
+- Component-action deferred-completion coverage for submitted appearance and
+  bundle snapshots, in-flight state, model reconciliation, dirty state,
+  success state, current/exported settings, and unrelated color-draft
+  preservation.
 - Browser-backed import coverage for persisted appearance reload, synchronized
   picker state, and a clean post-import save state.
 

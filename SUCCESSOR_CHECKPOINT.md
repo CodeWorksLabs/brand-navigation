@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK REMEDIATED / REPLACEMENT CI GREEN / CORRECTION-CLOSURE FREEZE PENDING / NOT RELEASED**
+Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE RECORD BLOCKER UNDER REMEDIATION / NOT RELEASED**
 
 ## Current release-documentation checkpoint
 
@@ -40,9 +40,12 @@ Disposition: **DRAFT PR 7 / DUAL COMPLETE REVIEW BLOCK REMEDIATED / REPLACEMENT 
   actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
   issued review `BN-CODEBASE-20260907`. The first replacement was reviewed in
   parallel by the internal review lane and the persistent sidebar Code Reviewer
-  task; their findings were evaluated together and remediated. Step 5 is
-  complete. Step 6 now requires final exact-head CI, candidate freeze, and
-  correction-closure review.
+  task. The internal lane completed its review; the sidebar lane issued
+  `INCOMPLETE` reports with unresolved evidence requirements. Findings from
+  both lanes were evaluated together and remediated without promoting the
+  sidebar reports to completed reviews. Step 5 is complete. Step 6 remains open
+  because correction closure found the record-integrity blocker documented
+  below.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -145,15 +148,23 @@ directory. Use the canonical local repository path above.
 - Replacement candidate `993f6badcd12964a56eb00a34e49bcb66610e999` /
   tree `58a459175f1787309ebb2160fc952b9b5860620a` passed all six checks in
   configuration run `34073989308` and Discourse Theme run `34073989626`, then
-  froze for dual review. Internal report `BN-V090-REPLACEMENT-20260907-R2` and
-  sidebar reports `BN-V090-REPLACEMENT-20260907-SIDEBAR-R1/R2` independently
-  completed under the controlling doctrine and Phil-authorized bounded
+  froze for dual review. Internal report `BN-V090-REPLACEMENT-20260907-R2`
+  completed with the exact disposition `INTERNAL CODE REVIEW BLOCK` and three
+  named blockers. Sidebar reports
+  `BN-V090-REPLACEMENT-20260907-SIDEBAR-R1/R2` each issued the exact disposition
+  `INTERNAL CODE REVIEW INCOMPLETE`; they did not complete the original review
+  gate, and their unresolved Discourse-integration, runtime/CI, and material
+  action-artifact evidence requirements remain part of the release record.
+  Both lanes used the controlling doctrine and Phil-authorized bounded
   read-only inspection of eight exact public upstream revisions.
-- The reports converge on release blockers for stale post-import appearance
-  state, mutable in-flight administrator state, and exports too large for the
-  importer. They also confirm strict color-type, inert diagnostic, Ruby lint,
-  Ruby dependency-resolution, administrator-identity documentation, and
-  moving upstream workflow assurance work. The internal report's `BN-14`
+- Both lanes identified stale post-import appearance state as P1. Mutable
+  in-flight administrator state was P1 in the sidebar report and P2 internally;
+  exports too large for the importer were P1 internally and P2 in the sidebar
+  report. All three were conservatively treated as release blockers during the
+  coherent remediation batch. The reports also identified strict color-type,
+  inert diagnostic, Ruby lint, Ruby dependency-resolution,
+  administrator-identity documentation, and moving upstream workflow assurance
+  work. The internal report's `BN-14`
   claim that the direct pnpm action revision does not exist is rejected by the
   exact-candidate configuration log: GitHub downloaded and executed
   `pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa` and installed
@@ -176,10 +187,24 @@ directory. Use the canonical local repository path above.
   `34076938530` and every Discourse Theme lane in run `34076938809`.
   Configuration executed 23/23 tests; RuboCop executed against three Ruby files
   with no offenses; the new browser-backed import/reload scenario passed; and
-  the complete system lane passed 28/28 examples. The next record-only commit
-  must pass exact-head CI before the correction-closure candidate freezes.
+  the complete system lane passed 28/28 examples.
+- Record commit `552f09d6ab7644a724a94202a9099e58921f5715` / tree
+  `f7c07e94ee6a84db61d35948a569b98ea29631cd` passed exact-head configuration
+  run `34077297071` and all Discourse Theme lanes in run `34077297327`, then
+  froze for correction closure. Internal closure report
+  `BN-V090-CLOSURE-20260907-R1` issued **INTERNAL CODE REVIEW PASS WITH P2/P3
+  FINDINGS**: every prior P1 was closed, while the unlocked Ruby transitive
+  graph and moving downstream Discourse CI references remain P2 policy
+  decisions. Sidebar closure report `BN-V090-CLOSURE-20260907-SIDEBAR-R1`
+  issued **INTERNAL CODE REVIEW INCOMPLETE** and confirmed P1 `BNC-01`: this checkpoint had
+  incorrectly promoted its prior `INCOMPLETE` reports to completed reviews. It
+  also retained unresolved administrator deferred-response execution and
+  independently inspectable exact-run log/environment evidence requirements.
+  This edit corrects `BNC-01`; it supersedes the frozen record candidate and
+  requires replacement identity, CI, freeze, and focused closure evidence.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
-  review evidence. No replacement candidate is frozen yet. No final manual
+  review evidence. Candidate `552f09d` is superseded only by the record
+  correction above and likewise remains immutable evidence. No final manual
   acceptance, merge, tag, or release has occurred.
 
 ## Administrator color-control checkpoint

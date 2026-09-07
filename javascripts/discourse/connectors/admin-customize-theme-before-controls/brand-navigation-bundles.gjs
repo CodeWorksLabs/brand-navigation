@@ -157,6 +157,10 @@ export default class BrandNavigationBundles extends Component {
     );
   }
 
+  persistSettings(settings) {
+    return persistThemeSettings(this.theme.id, settings, ajax);
+  }
+
   loadBundleText(text, fileName) {
     this.bundle = undefined;
     this.bundleText = text;
@@ -242,7 +246,7 @@ export default class BrandNavigationBundles extends Component {
     this.success = undefined;
 
     try {
-      await persistThemeSettings(this.theme.id, submittedAppearance, ajax);
+      await this.persistSettings(submittedAppearance);
 
       for (const [name, value] of Object.entries(submittedAppearance)) {
         this.theme.settings
@@ -295,11 +299,7 @@ export default class BrandNavigationBundles extends Component {
         submittedBundle
       );
 
-      const submittedSettings = await persistThemeSettings(
-        this.theme.id,
-        persistedSettings,
-        ajax
-      );
+      const submittedSettings = await this.persistSettings(persistedSettings);
 
       for (const [name, value] of Object.entries(submittedSettings)) {
         this.theme.settings

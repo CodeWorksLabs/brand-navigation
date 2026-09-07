@@ -1,4 +1,5 @@
 import { module, test } from "qunit";
+import BrandNavigationBundles from "../../../discourse/connectors/admin-customize-theme-before-controls/brand-navigation-bundles";
 import {
   arrangeNavigationItems,
   isVisibleOnDevice,
@@ -10,7 +11,145 @@ import { isBrandNavigationObjectsEditor } from "../../../discourse/lib/brand-nav
 import { isBrandNavigationTheme } from "../../../discourse/lib/brand-navigation-admin";
 import { isSafeNavigationUrl } from "../../../discourse/lib/configuration-bundle";
 
+function setting(name, value = "") {
+  return {
+    setting: name,
+    value,
+    set(property, nextValue) {
+      this[property] = nextValue;
+    },
+  };
+}
+
+function adminTheme() {
+  return {
+    id: 42,
+    component: true,
+    settings: [
+      setting("brand_presentation", "name"),
+      setting("custom_font_awesome_icons", ""),
+      setting("mobile_mode", "bar"),
+      setting("navigation_items", "[]"),
+      setting("bar_background_color"),
+      setting("bar_text_color"),
+      setting("hover_background_color"),
+      setting("submenu_background_color"),
+      setting("submenu_text_color"),
+    ],
+  };
+}
+
+function deferred() {
+  let resolve;
+  const promise = new Promise((resolver) => {
+    resolve = resolver;
+  });
+  return { promise, resolve };
+}
+
 module("Unit | Lib | brand-navigation", function () {
+  test("appearance completion reconciles the submitted snapshot", async function (assert) {
+    const theme = adminTheme();
+    const component = new BrandNavigationBundles(undefined, {
+      outletArgs: { theme },
+    });
+    const request = deferred();
+
+    component.persistSettings = async (submittedSettings) => {
+      await request.promise;
+      return structuredClone(submittedSettings);
+    };
+    component.appearanceValues = {
+      ...component.appearanceValues,
+      bar_background_color: "#111111",
+    };
+
+    const save = component.saveAppearance();
+    assert.true(component.saving, "the component enters its in-flight state");
+
+    component.appearanceValues = {
+      ...component.appearanceValues,
+      bar_background_color: "#222222",
+    };
+    request.resolve();
+    await save;
+
+    assert.false(component.saving);
+    assert.strictEqual(
+      component.appearanceValues.bar_background_color,
+      "#111111"
+    );
+    assert.strictEqual(
+      theme.settings.find((item) => item.setting === "bar_background_color")
+        .value,
+      "#111111"
+    );
+    assert.false(component.appearanceDirty);
+    assert.ok(component.success);
+  });
+
+  test("bundle completion uses its submitted snapshot and preserves unrelated color drafts", async function (assert) {
+    const theme = adminTheme();
+    const component = new BrandNavigationBundles(undefined, {
+      outletArgs: { theme },
+    });
+    const request = deferred();
+    const submittedText = JSON.stringify({
+      format: "brand-navigation-settings",
+      version: 1,
+      settings: {
+        bar_background_color: "#123456",
+        navigation_items: [{ label: "Submitted", url: "/submitted" }],
+      },
+    });
+
+    component.persistSettings = async (submittedSettings) => {
+      await request.promise;
+      return structuredClone(submittedSettings);
+    };
+    component.appearanceValues = {
+      ...component.appearanceValues,
+      bar_text_color: "#ABCDEF",
+    };
+    component.loadBundleText(submittedText, "submitted.json");
+
+    const importOperation = component.importBundle();
+    assert.true(component.saving, "the component enters its in-flight state");
+    assert.true(component.importDisabled);
+
+    component.loadBundleText(
+      JSON.stringify({
+        format: "brand-navigation-settings",
+        version: 1,
+        settings: {
+          bar_background_color: "#654321",
+          navigation_items: [{ label: "Later", url: "/later" }],
+        },
+      })
+    );
+    request.resolve();
+    await importOperation;
+
+    assert.false(component.saving);
+    assert.strictEqual(
+      component.appearanceValues.bar_background_color,
+      "#123456"
+    );
+    assert.strictEqual(
+      component.appearanceValues.bar_text_color,
+      "#ABCDEF",
+      "a color not present in the bundle keeps its existing draft"
+    );
+    assert.deepEqual(
+      theme.settings.find((item) => item.setting === "navigation_items").value,
+      [{ label: "Submitted", url: "/submitted" }]
+    );
+    assert.deepEqual(component.currentSettings().navigation_items, [
+      { label: "Submitted", url: "/submitted" },
+    ]);
+    assert.ok(component.success);
+  });
+
   test("audience visibility is explicit", function (assert) {
     const user = { id: 1 };
 

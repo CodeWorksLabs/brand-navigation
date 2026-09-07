@@ -9,6 +9,8 @@ to discover component updates from commits on the installed remote branch.
 - Make administrator imports and color saves use immutable request snapshots,
   disable conflicting controls while writes are pending, and reconcile imported
   colors with their visible controls after success.
+- Add deferred-completion tests at the administrator component boundary for
+  save/import state and submitted-value reconciliation.
 - Prevent exports larger than the matching importer accepts, reject non-string
   color values, and escape control characters in validation diagnostics.
 - Enable the Discourse RuboCop gate for Ruby system specifications and document
