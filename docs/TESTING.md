@@ -7,17 +7,37 @@
 | Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                         |
 | ------------------------ | --------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence      |
-| DiscussionBridge sandbox | `2026.9.0-latest+307` | `b8565672b9` | Authenticated normal-page render and administrator component/settings surface                                                                              |
+| DiscussionBridge sandbox | `2026.9.0-latest+338` | `587b564093` | Authenticated normal-page render, administrator component/settings surface, and canonical-install reconciliation at Brand Navigation `c878693612`          |
 | DiscussionBridge Forum   | Not recorded          | Not recorded | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion                   |
 | The Bridge               | Not recorded          | Not recorded | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, and full-app embed exclusion        |
 | Citizen Activist Network | Not recorded          | Not recorded | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, and full-app embed exclusion                   |
 | RVing Community          | Not recorded          | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion            |
 | R744 Community           | `2026.7.2+14`         | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion |
 
-The builds above were read directly from each site's administrator dashboard on
-2026-09-05. They are evidence of known compatibility, not minimum-version
+The original builds were read directly from each site's administrator dashboard
+on 2026-09-05. The sandbox identity was refreshed from its running server on
+2026-09-07. They are evidence of known compatibility, not minimum-version
 declarations. Features not named in a row should be evaluated through the
 acceptance matrix below before claiming coverage on that environment.
+
+### Sandbox canonical-install reconciliation — 2026-09-07
+
+The sandbox contained three Brand Navigation imports. Read-only inventory
+established that component `1` was unattached, component `2` was attached only
+to Horizon with an older configuration, and component `3` held the accepted
+sandbox configuration on the default Foundation theme. Component `3` was made
+canonical: its source branch was changed to `main`, it updated without an
+import error to Brand Navigation commit
+`c878693612fd6f4b755e7e1a57f73f61c127a711`, and it was attached to both
+Foundation and Horizon. Its eleven stored setting values retained their exact
+pre-update hashes and lengths.
+
+Components `1` and `2` were detached, disabled, and left in place as rollback
+copies; they were not deleted. Post-change inventory showed only component `3`
+enabled and attached, with automatic updates enabled and no remote-theme error.
+The public forum returned HTTP 200. This is server-side installation and
+availability evidence; it does not replace the earlier browser-rendering
+record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
 
 ### Automated release compatibility
 
