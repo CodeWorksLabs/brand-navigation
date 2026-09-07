@@ -3,10 +3,10 @@
 import { tracked } from "@glimmer/tracking";
 import { clearRender, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
-import BrandNavigationContent from "discourse/components/brand-navigation-content";
-import BrandNavigationHeaderIcon from "discourse/components/brand-navigation-header-icon";
-import { primarySpriteWatcher } from "discourse/lib/brand-navigation";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import BrandNavigationContent from "../../../discourse/components/brand-navigation-content";
+import BrandNavigationHeaderIcon from "../../../discourse/components/brand-navigation-header-icon";
+import { primarySpriteWatcher } from "../../../discourse/lib/brand-navigation";
 
 class TestState {
   @tracked showDisposable = true;
