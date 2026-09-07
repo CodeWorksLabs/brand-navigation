@@ -6,14 +6,22 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
 ## Current release-documentation checkpoint
 
 - Installation-verification pass on 2026-09-07 is active. DiscussionBridge
-  Forum component `3` was updated through Discourse's native updater from
+  Forum component `3` was first updated through Discourse's native updater from
   `b0b5354481c30e1db1daf4db682368a6f9c9994d` to
   `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`; its Discourse
   `2026.8.0-latest.1+414` core selected `d-compat/2026.8`. All 15 stored
   settings and both Foundation/Horizon attachments were preserved, no import
-  error was reported, and the public forum returned HTTP 200. Phil is updating
-  that forum's Discourse core through its administrator UI; the resulting core
-  identity and Brand Navigation ref still require post-upgrade verification.
+  error was reported, and the public forum returned HTTP 200. Phil then updated
+  the forum through Discourse's administrator UI. Its branded maintenance page
+  was observed during the operation. The forum returned on
+  `2026.9.0-latest+358` / core
+  `f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`, and Discourse automatically
+  moved Brand Navigation to default-branch `main` commit
+  `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. The component remains enabled
+  on Foundation and Horizon with zero commits behind, no compatibility ref,
+  no error, and the same 15 exact setting hashes and lengths. HTTP availability
+  passed after the upgrade, and Phil confirmed the administrator UI's freshly
+  checked up-to-date status; a fresh browser interaction matrix is not claimed.
 - The Bridge component `6` was updated through the native updater from
   `b0b5354481c30e1db1daf4db682368a6f9c9994d` to current `main` commit
   `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec` on Discourse

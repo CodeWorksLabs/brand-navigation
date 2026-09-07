@@ -4,15 +4,15 @@
 
 ### Verified installations
 
-| Site                     | Discourse build         | Core commit  | Verified Brand Navigation coverage                                                                                                                                        |
-| ------------------------ | ----------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repeal OBBBA Forum       | `2026.7.0-latest+319`   | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence                     |
-| DiscussionBridge sandbox | `2026.9.0-latest+338`   | `587b564093` | Authenticated normal-page render, administrator component/settings surface, and canonical-install reconciliation at Brand Navigation `c878693612`                         |
-| DiscussionBridge Forum   | `2026.8.0-latest.1+414` | `36698aae08` | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` update |
-| The Bridge               | `2026.9.0-latest+188`   | `7dfd824b1`  | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `main` update |
-| Citizen Activist Network | Not recorded            | Not recorded | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, and full-app embed exclusion                                  |
-| RVing Community          | Not recorded            | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion                           |
-| R744 Community           | `2026.7.2+14`           | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion                |
+| Site                     | Discourse build       | Core commit  | Verified Brand Navigation coverage                                                                                                                                                      |
+| ------------------------ | --------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repeal OBBBA Forum       | `2026.7.0-latest+319` | `988c31e00f` | Authenticated desktop render, linked parents and submenus, visible descriptions, core-header icons, administrator settings, and component coexistence                                   |
+| DiscussionBridge sandbox | `2026.9.0-latest+338` | `587b564093` | Authenticated normal-page render, administrator component/settings surface, and canonical-install reconciliation at Brand Navigation `c878693612`                                       |
+| DiscussionBridge Forum   | `2026.9.0-latest+358` | `f914fcb43e` | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` to `main` transition |
+| The Bridge               | `2026.9.0-latest+188` | `7dfd824b1`  | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `main` update               |
+| Citizen Activist Network | Not recorded          | Not recorded | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, and full-app embed exclusion                                                |
+| RVing Community          | Not recorded          | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion                                         |
+| R744 Community           | `2026.7.2+14`         | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion                              |
 
 The original builds were read directly from each site's administrator dashboard
 on 2026-09-05. The sandbox identity was refreshed from its running server on
@@ -39,7 +39,7 @@ The public forum returned HTTP 200. This is server-side installation and
 availability evidence; it does not replace the earlier browser-rendering
 record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
 
-### DiscussionBridge Forum native compatibility update — 2026-09-07
+### DiscussionBridge Forum native compatibility transition — 2026-09-07
 
 The DiscussionBridge Forum was running Discourse
 `2026.8.0-latest.1+414` at core commit
@@ -60,6 +60,24 @@ This establishes a successful native compatibility-branch update with settings
 preservation on the recorded 2026.8 build. It is server-side installation and
 availability evidence; it does not claim a fresh browser visual, anonymous,
 mobile, accessibility, or embed pass.
+
+Phil then upgraded the forum through Discourse's administrator UI. During the
+upgrade, the public site served its branded maintenance page with a temporary
+unavailability explanation and automatic two-minute refresh. The forum
+returned successfully on Discourse `2026.9.0-latest+358` at core commit
+`f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`.
+
+Post-upgrade inspection confirmed that Discourse automatically moved Brand
+Navigation from `d-compat/2026.8` to the repository default branch at `main`
+commit `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. Local and remote commits
+matched, zero commits were behind, both compatibility refs were empty, and no
+import error was present. The component remained enabled and attached to both
+Foundation and Horizon. All 15 setting hashes and lengths still matched the
+pre-update snapshot, the public forum returned HTTP 200, and Phil confirmed the
+administrator UI reported **Theme is up-to-date, last checked: just now**. This
+proves the native compatibility-to-default-branch transition and configuration
+preservation across the recorded Discourse core upgrade; a fresh post-upgrade
+browser interaction matrix remains separate.
 
 ### The Bridge native update — 2026-09-07
 
