@@ -19,14 +19,18 @@ The builds above were read directly from each site's administrator dashboard on
 declarations. Features not named in a row should be evaluated through the
 acceptance matrix below before claiming coverage on that environment.
 
-## Verification candidate record
+## Initial verification record
 
-The `v0.9.0` candidate is maintained on
-`codex/v0.9.0-verification` in draft pull request
-`https://github.com/CodeWorksLabs/brand-navigation/pull/1`. At implementation
-commit `13005b7`, official Discourse Theme workflow run `34010799758` passed
-linting, English-locale validation, frontend QUnit, backend, and Ruby system
-tests. Configuration workflow run `34010799448` passed all 18 Node bundle tests.
+The initial implementation candidate was verified on
+`codex/v0.9.0-verification` in pull request
+`https://github.com/CodeWorksLabs/brand-navigation/pull/1`, which has since
+merged. At implementation commit `13005b7`, official Discourse Theme workflow
+run `34010799758` passed linting, English-locale validation, frontend QUnit,
+backend, and Ruby system tests. Configuration workflow run `34010799448`
+passed all 18 Node bundle tests. This is historical implementation evidence,
+not the immutable candidate for the forthcoming `v0.9.0` release; that exact
+commit and tree will be recorded after the release-preparation pull request is
+complete.
 
 The same branch was installed as sandbox component id `2` and verified for the
 desktop, 390px mobile menu/bar/hidden, keyboard submenu, safe external-link,

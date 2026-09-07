@@ -5,8 +5,8 @@ Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / R
 
 ## Current release-documentation checkpoint
 
-- Current working branch: `codex/release-docs`, created cleanly from
-  `origin/main` at `b0b5354481c30e1db1daf4db682368a6f9c9994d`.
+- Current working branch: `codex/authorship-provenance`, based on the current
+  release-documentation line and published at the matching remote branch.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -25,8 +25,8 @@ Disposition: **IMPLEMENTATION ON MAIN / SANDBOX AND REPEAL VISUALLY VERIFIED / R
 - Current release-documentation work expands the README feature summary,
   documents the English-first translation posture, adds administrator
   translation guidance, strengthens the release translation/attribution gate,
-  and creates `docs/ATTRIBUTION.md` with a permanent reference to the precise
-  GPL `curryComponent` pattern adapted from Custom Header Links (icons).
+  and records attribution, AI-assisted authorship, source provenance, and the
+  selected `GPL-2.0-or-later` licensing posture.
 - Focused Prettier checks and `git diff --check` pass for the changed docs. All
   22 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
   lanes pass in the aggregate lint command; the aggregate Prettier lane still
@@ -65,9 +65,10 @@ direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/release-docs`.
+- Current branch: `codex/authorship-provenance`.
 - Merged color-control head: `4d520d2`.
-- Current merged head: `b0b5354`.
+- Current merged head: `4a03705` (documentation-only merge after the last
+  browser-tested implementation head).
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
@@ -713,6 +714,14 @@ Header Links (icons) as components in a formal succession lineage. Durable
 documentation uses `inspiration sources`, `neighboring components`, and
 `adapted source` according to the actual relationship. Older branches and Git
 history retain earlier shorthand and are not release authority.
+
+Documentation freeze-readiness pass on 2026-09-06: every relative Markdown
+link target exists; current name and license declarations agree; no unresolved
+release-content placeholder was found; and `docs/TESTING.md` now distinguishes
+the merged initial verification record from the not-yet-frozen `v0.9.0`
+candidate. The future CodeWorksLabs public-site paths remain an explicitly
+non-blocking post-release discussion. Documentation content is ready to freeze
+for the release-preparation pull request.
 
 Official-source verification confirms that Discourse Meta labels Brand Header,
 Header Submenus, and Custom Header Links (icons) as official and links to the
