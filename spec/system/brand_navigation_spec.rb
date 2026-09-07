@@ -57,6 +57,7 @@ RSpec.describe "Brand Navigation" do
 
   it "hides every component surface in hidden mobile mode", mobile: true do
     theme.update_setting(:mobile_mode, "bar")
+    theme.update_setting(:custom_font_awesome_icons, "caret-down")
     theme.update_setting(
       :navigation_items,
       [

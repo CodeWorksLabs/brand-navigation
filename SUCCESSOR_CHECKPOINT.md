@@ -71,6 +71,16 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PR
   `caret-down`, which Brand Navigation itself statically requires. Another
   exact-head system run is required; the prior green lanes do not carry forward
   as a replacement-candidate disposition.
+- Follow-up head `abf52851002bf90bdf4094761a5709001ddf6ecb` / tree
+  `06a27c449b531396af7f5afb5076caa083bbdc44` passed configuration run
+  `34090334222` and test discovery, linting, backend, and all 17 frontend tests
+  in Discourse Theme run `34090334799`. The same older hidden-mobile system
+  scenario remained the sole failure because merely choosing a component-used
+  literal did not add a dynamically configured item icon to that test theme's
+  SVG subset. The scenario now exercises the documented administrator contract
+  by explicitly adding `caret-down` to `custom_font_awesome_icons` before
+  asserting the positive header-icon baseline and the subsequent hidden state.
+  Replacement exact-head CI remains required.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
