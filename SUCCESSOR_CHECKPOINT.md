@@ -1,12 +1,31 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **DRAFT PR 7 / DUAL REVIEW FINDINGS REMEDIATED / CORRECTION-CLOSURE REPLACEMENT CI GREEN / FINAL FREEZE PENDING / NOT RELEASED**
+Disposition: **PR 7 MERGED / EXACT TREE VERIFIED / MANUAL ACCEPTANCE PASSED / RELEASE METADATA CORRECTION IN PROGRESS / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
-- Current working branch: `codex/authorship-provenance`, based on the current
-  release-documentation line and published at the matching remote branch.
+- Phil explicitly accepted the two remaining P2 release-engineering risks for
+  `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
+  intentionally moving downstream dependencies inside the pinned Discourse
+  workflow. Both remain tracked improvements rather than undisclosed claims of
+  immutability.
+- Frozen candidate `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b` / tree
+  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9` passed configuration run
+  `34080419543` and every lane of Discourse Theme run `34080419924`.
+- Sandbox component 3 imported that exact candidate with zero commits behind
+  and no import error. Administrator bundle import and appearance save both
+  succeeded without leaving the editor. After a controlled Foundation-theme
+  cutover, desktop light/dark, phone portrait/landscape, anonymous visibility,
+  keyboard submenu behavior, external-link safety, and overflow/error checks
+  passed. Phil accepted the authenticated presentation, My Preferences versus
+  Sign Up behavior, and persistent Resources submenu.
+- Pull request 7 merged as `22c4499044a270c5b31172c477f2c22f9fc63b20`.
+  Its tree is exactly the accepted candidate tree above. No tag or GitHub
+  Release has yet been created; a minimal release-metadata correction must pass
+  its own gates first.
+- Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
+  request 7 and limited to final release-record corrections.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -240,9 +259,11 @@ directory. Use the canonical local repository path above.
   system suite passed 28/28. This checkpoint refresh must receive exact-head CI
   before the final correction-closure candidate freezes.
 - Candidate `993f6ba` is superseded for implementation but remains immutable
-  review evidence. Candidate `552f09d` is superseded only by the record
-  correction above and likewise remains immutable evidence. No final manual
-  acceptance, merge, tag, or release has occurred.
+  review evidence. Candidate `552f09d` was superseded by the complete closure
+  correction batch: the record correction, production persistence seam,
+  rendered integration tests, and expanded lint discovery. Final checkpoint
+  commit `9f2a6e0` then recorded the closure evidence without changing product
+  behavior. Each remains immutable historical evidence.
 
 ## Administrator color-control checkpoint
 

@@ -6,6 +6,8 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+## 0.9.0 - 2026-09-07
+
 - Make administrator imports and color saves use immutable request snapshots,
   disable conflicting controls while writes are pending, and reconcile imported
   colors with their visible controls after success.
@@ -46,6 +48,6 @@ to discover component updates from commits on the installed remote branch.
   required by the official Discourse component workflow.
 - Pin the Ruby lint-tool versions used by verification CI.
 
-The first tagged preview candidate is planned as `v0.9.0` after correction
-review and required runtime verification. Version `v1.0.0` is reserved for the
-documented, multi-site-tested release with no known release blockers.
+Version `v0.9.0` is the first reviewed preview release. Version `v1.0.0` is
+reserved for the documented, multi-site-tested release with no known release
+blockers.

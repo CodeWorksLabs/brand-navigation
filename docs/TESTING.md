@@ -28,9 +28,11 @@ merged. At implementation commit `13005b7`, official Discourse Theme workflow
 run `34010799758` passed linting, English-locale validation, frontend QUnit,
 backend, and Ruby system tests. Configuration workflow run `34010799448`
 passed all 18 Node bundle tests. This is historical implementation evidence,
-not the immutable candidate for the forthcoming `v0.9.0` release; that exact
-commit and tree will be recorded after the release-preparation pull request is
-complete.
+not the immutable `v0.9.0` candidate. The accepted release candidate is commit
+`9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b`, tree
+`8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`; configuration run
+`34080419543` and Discourse Theme run `34080419924` passed before manual
+acceptance and merge.
 
 The same branch was installed as sandbox component id `2` and verified for the
 desktop, 390px mobile menu/bar/hidden, keyboard submenu, safe external-link,
