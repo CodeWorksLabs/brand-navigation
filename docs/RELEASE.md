@@ -99,9 +99,7 @@ The current public intake route is
 bugs, installation and configuration questions, compatibility reports, and
 feature requests. Reports should identify the component release, branch, or
 commit; Discourse version; active theme; browser/device context; reproduction
-steps; and sanitized settings or console evidence when relevant. The earlier
-[Discourse Meta proposal](https://meta.discourse.org/t/combining-brand-header-and-header-submenus-plugins/389913)
-is historical product-discussion context, not a Brand Navigation support desk.
+steps; and sanitized settings or console evidence when relevant.
 
 No private security-reporting channel is currently published. Credentials,
 personal data, and non-public vulnerability details must not be posted in a
