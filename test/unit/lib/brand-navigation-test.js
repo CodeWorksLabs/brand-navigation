@@ -193,6 +193,9 @@ module("Unit | Lib | brand-navigation", function () {
   test("the default icon path inspects the loaded primary SVG sprite", function (assert) {
     const existingContainer = document.getElementById("svg-sprites");
     const container = existingContainer || document.createElement("div");
+    const existingPrimarySprite = container.querySelector(".fontawesome");
+    const primarySprite =
+      existingPrimarySprite || document.createElement("div");
     const symbols = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
@@ -202,12 +205,16 @@ module("Unit | Lib | brand-navigation", function () {
       container.id = "svg-sprites";
       document.body.appendChild(container);
     }
+    if (!existingPrimarySprite) {
+      primarySprite.className = "fontawesome";
+      container.appendChild(primarySprite);
+    }
 
     symbols.innerHTML = `
       <symbol id="brand-navigation-test-icon"></symbol>
       <symbol id="bell"></symbol>
     `;
-    container.appendChild(symbols);
+    primarySprite.appendChild(symbols);
 
     try {
       assert.true(isUsableIcon("brand-navigation-test-icon"));
@@ -273,6 +280,9 @@ module("Unit | Lib | brand-navigation", function () {
       );
     } finally {
       symbols.remove();
+      if (!existingPrimarySprite) {
+        primarySprite.remove();
+      }
       if (!existingContainer) {
         container.remove();
       }

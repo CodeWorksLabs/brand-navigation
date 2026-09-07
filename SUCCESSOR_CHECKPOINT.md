@@ -28,8 +28,16 @@ Disposition: **PR 7 MERGED / PR 8 PRIOR CANDIDATE BLOCKED / SECOND REPLACEMENT B
   core `988c31e00fb73713c81b93cd47f68af0fb4c6273` and R744 core
   `2e46cff73b07ecddbcc5603eb3fbf41d563577f6`, alongside current Discourse.
   Local JavaScript, template, type, CSS, changed-file formatting, configuration
-  (24/24), and diff checks pass. The batch is not yet committed or frozen, and
-  GitHub/exact-core execution remains pending.
+  (24/24), and diff checks pass. The batch has been pushed for iterative CI but
+  is not frozen; complete green exact-core execution remains pending.
+- Batch commit `f88fc93` first exposed a theme-test-only absolute import error;
+  `2300de3` corrected the integration test to use the repository-relative
+  module convention. On `2300de3`, the new rendered delayed-readiness test
+  passed on current Discourse and the R744 2026.7 core, while all three
+  frontend lanes failed the same older unit fixture because it inserted test
+  symbols beside, rather than inside, the primary `.fontawesome` sprite. The
+  fixture now accurately mirrors both supported loaders. Replacement CI is
+  required; no product-code failure was reported by those runs.
 
 - Phil explicitly accepted the two remaining P2 release-engineering risks for
   `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
