@@ -1,6 +1,7 @@
 export const BUNDLE_FORMAT = "brand-navigation-settings";
 export const BUNDLE_VERSION = 1;
 export const MAX_BUNDLE_BYTES = 1_000_000;
+export const MAX_THEME_OBJECT_SETTING_BYTES = 524_288;
 
 const MAX_NAVIGATION_ITEMS = 100;
 const MAX_CHILDREN_PER_ITEM = 50;
@@ -159,6 +160,16 @@ function validateSettings(settings, errors) {
 
   if ("navigation_items" in settings) {
     errors.push(...validateNavigationItems(settings.navigation_items));
+
+    if (
+      Array.isArray(settings.navigation_items) &&
+      encodedBytes(JSON.stringify(settings.navigation_items)) >
+        MAX_THEME_OBJECT_SETTING_BYTES
+    ) {
+      errors.push(
+        `navigation_items cannot exceed ${MAX_THEME_OBJECT_SETTING_BYTES.toLocaleString()} serialized bytes.`
+      );
+    }
   }
 
   if ("custom_font_awesome_icons" in settings) {
@@ -430,6 +441,10 @@ function isBoundedString(value, minLength, maxLength) {
   );
 }
 
+function encodedBytes(value) {
+  return new TextEncoder().encode(value).length;
+}
+
 export function themeSettingValue(name, value) {
   if (name === "navigation_items" && Array.isArray(value)) {
     return JSON.stringify(value);
@@ -504,7 +519,7 @@ export function createBundle(settings, metadata = {}) {
 
 export function serializeBundle(bundle) {
   const text = `${JSON.stringify(bundle, null, 2)}\n`;
-  const bytes = new TextEncoder().encode(text).length;
+  const bytes = encodedBytes(text);
 
   if (bytes > MAX_BUNDLE_BYTES) {
     throw new Error(

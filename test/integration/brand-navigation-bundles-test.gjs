@@ -181,5 +181,58 @@ module(
       );
       assert.dom(".alert-success").exists();
     });
+
+    test("oversized navigation data is rejected before persistence", async function (assert) {
+      const theme = adminTheme();
+      let persistenceCalls = 0;
+      this.outletArgs = { theme };
+      const url = `/${"x".repeat(1_750)}`;
+      const navigationItems = Array.from({ length: 100 }, (_, index) => ({
+        label: `Parent ${index}`,
+        url,
+        children: [
+          { label: "First", url },
+          { label: "Second", url },
+        ],
+      }));
+
+      BrandNavigationBundles.prototype.persistSettings = async function () {
+        persistenceCalls += 1;
+      };
+
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      await fillIn(
+        ".brand-navigation-bundles textarea",
+        JSON.stringify({
+          format: "brand-navigation-settings",
+          version: 1,
+          settings: { navigation_items: navigationItems },
+        })
+      );
+
+      assert
+        .dom(".brand-navigation-bundles__controls .btn-primary")
+        .isDisabled("import remains unavailable");
+      assert
+        .dom(".brand-navigation-bundles .alert-error")
+        .includesText(
+          "navigation_items cannot exceed 524,288 serialized bytes"
+        );
+
+      await click(".brand-navigation-bundles__controls .btn-primary");
+
+      assert.strictEqual(persistenceCalls, 0, "no settings request is sent");
+      assert.strictEqual(
+        theme.settings.find((item) => item.setting === "navigation_items")
+          .value,
+        "[]",
+        "the navigation setting remains unchanged"
+      );
+    });
   }
 );

@@ -6,6 +6,7 @@ import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   isVisibleOnDevice,
   isVisibleToUser,
+  isUsableIcon,
   linkRel,
   linkTarget,
 } from "../lib/brand-navigation";
@@ -24,7 +25,7 @@ export default class BrandNavigationHeaderIcon extends Component {
       !(this.site.mobileView && settings.mobile_mode === "hidden") &&
       item.link_mode !== "group" &&
       Boolean(item.url) &&
-      Boolean(item.icon) &&
+      isUsableIcon(item.icon) &&
       !(item.children || []).length &&
       isVisibleToUser(item, this.currentUser) &&
       isVisibleOnDevice(item, this.capabilities.isMobileDevice) &&

@@ -62,8 +62,10 @@ repository-specific owner state.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
-entry with no usable icon falls back to visible label text. Top-level and child
-items independently select `both`, `desktop`, or `mobile` device visibility.
+bar or submenu entry with no usable icon falls back to visible label text.
+Site-header entries with unavailable icons do not render, avoiding an empty
+core-header control. Top-level and child items independently select `both`,
+`desktop`, or `mobile` device visibility.
 The components evaluate that setting against Discourse's supported
 `capabilities.isMobileDevice` state and omit nonmatching items from rendering,
 so phone rotation cannot reclassify items. Component-wide responsive layout
@@ -73,7 +75,10 @@ Navigation sinks independently recheck URL safety and fail closed for malformed,
 protocol-relative, credential-bearing, non-HTTPS external, and script URLs.
 The optional local bundle validator reads bounded files and never connects to a
 forum. Browser import/export uses the authenticated Discourse administrator
-session and the component's administration page.
+session and the component's administration page. Import validation also
+enforces Discourse's 524,288-byte serialized object-setting limit before any
+settings request is sent; the complete bundle retains its separate
+1,000,000-byte file limit.
 
 ## Intentional constraints
 

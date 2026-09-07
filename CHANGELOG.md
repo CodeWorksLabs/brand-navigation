@@ -8,6 +8,15 @@ to discover component updates from commits on the installed remote branch.
 
 ## 0.9.0 - 2026-09-07
 
+- Exercise the enabled component during Discourse's shared core-feature system
+  coverage.
+- Reject navigation data above Discourse's per-object setting limit before an
+  administrator import can send any settings.
+- Fall back to visible labels when bar or submenu icons are unavailable, and
+  omit unavailable direct site-header icons.
+- Reconcile the successor checkpoint into one unambiguous current release
+  state while retaining dated historical evidence.
+
 - Make administrator imports and color saves use immutable request snapshots,
   disable conflicting controls while writes are pending, and reconcile imported
   colors with their visible controls after success.

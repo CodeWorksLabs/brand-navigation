@@ -1,7 +1,7 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / EXACT TREE VERIFIED / MANUAL ACCEPTANCE PASSED / RELEASE METADATA CORRECTION IN PROGRESS / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IN PROGRESS / NOT TAGGED**
 
 ## Current release-documentation checkpoint
 
@@ -24,8 +24,31 @@ Disposition: **PR 7 MERGED / EXACT TREE VERIFIED / MANUAL ACCEPTANCE PASSED / RE
   Its tree is exactly the accepted candidate tree above. No tag or GitHub
   Release has yet been created; a minimal release-metadata correction must pass
   its own gates first.
+- Pull request 8 froze at `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`
+  / tree `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`. Configuration
+  run `34085356922` and all five Discourse Theme lanes in run `34085357353`
+  passed. Internal review and the persistent sidebar Code Reviewer both issued
+  PASS dispositions with findings for that exact candidate.
+- Phil accepted live classic-embed, full RTL-locale, and screen-reader manual
+  execution as disclosed `v0.9.0` preview follow-ups, not as tests already
+  performed; all three remain required before `v1.0.0`.
+- The complete PR 8 finding census contains six findings. BN-06 and BN-15 are
+  the two previously accepted P2 release-engineering risks. Phil directed one
+  coherent correction batch for the four new findings: enabled shared-core
+  coverage (BN8-02), the Discourse object-setting byte preflight (BN8-03),
+  unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
+  (BN8-01).
 - Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
-  request 7 and limited to final release-record corrections.
+  request 7. Its last committed head is the frozen PR 8 candidate above; the
+  authorized four-finding correction batch is currently uncommitted.
+- Current correction-batch local evidence: all 24 Node configuration tests,
+  JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
+  formatting, Repeal fixture validation, and `git diff --check` pass. The
+  enabled shared-core, unavailable-icon system, and rendered oversized-import
+  tests are authored but unexecuted locally; exact GitHub execution remains the
+  next verification gate. The aggregate local lint command reports Windows
+  checkout formatting drift in 17 unchanged files; no changed file is among
+  those warnings.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
@@ -56,15 +79,13 @@ Disposition: **PR 7 MERGED / EXACT TREE VERIFIED / MANUAL ACCEPTANCE PASSED / RE
   existing Pageant/SSH access may be used only when a read-only server check is
   necessary.
 - The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. Steps 1–3 completed at historical candidate `80061e4`; Step 4
-  issued review `BN-CODEBASE-20260907`. The first replacement was reviewed in
-  parallel by the internal review lane and the persistent sidebar Code Reviewer
-  task. The internal lane completed its review; the sidebar lane issued
-  `INCOMPLETE` reports with unresolved evidence requirements. Findings from
-  both lanes were evaluated together and remediated without promoting the
-  sidebar reports to completed reviews. Step 5 is complete. Step 6 remains open
-  because correction closure found the record-integrity blocker documented
-  below.
+  actions** below. Pull request 7 completed the implementation review,
+  remediation, correction closure, manual acceptance, and merge gates. Pull
+  request 8 is the release-metadata successor candidate. Its complete review is
+  finished; the current gate is the authorized four-finding correction batch,
+  followed by exact replacement CI, freeze, dual correction-closure review,
+  remaining release-gate reconciliation, merge, exact-tree confirmation, tag,
+  and GitHub Release.
 - Public presentation will use `codeworkslabs.dev` as the product-lab front
   door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
   shared canonical documentation at `docs.codeworkslabs.dev`. The durable
@@ -91,10 +112,22 @@ direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/authorship-provenance`.
+- Current branch: `codex/v0.9.0-release-metadata`.
+- Current committed PR 8 head before the authorized correction batch:
+  `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`; tree
+  `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`.
+- Current merged `main` head: `22c4499044a270c5b31172c477f2c22f9fc63b20`;
+  tree `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
+- Exact browser-accepted implementation head:
+  `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b`; tree
+  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
+
+The remaining references in this section are historical and are not current
+branch, head, candidate, or release-gate claims:
+
 - Merged color-control head: `4d520d2`.
-- Current merged head: `4a03705` (documentation-only merge after the last
-  browser-tested implementation head).
+- Historical merged head `4a03705` was a documentation-only merge after its
+  then-current browser-tested implementation.
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
@@ -103,8 +136,7 @@ direction.
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
 - Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
 - Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
-- Current CI/browser-tested merged head: `b0b5354` (the checkpoint itself may
-  create a later documentation-only head).
+- Historical CI/browser-tested merged head: `b0b5354`.
 - Historical first-review commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
   tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
 - Historical PR 7 pre-remediation freeze: commit
@@ -117,6 +149,10 @@ direction.
 directory. Use the canonical local repository path above.
 
 ## Formal review and remediation checkpoint
+
+This section is a dated history of PR 7 review and remediation. It does not
+override the current PR 8 state in **Current release-documentation checkpoint**
+or **Canonical locations** above.
 
 - Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
   Its first frozen candidate `80061e4` / tree `12a1292a` passed all six GitHub

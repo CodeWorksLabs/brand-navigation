@@ -1,3 +1,4 @@
+import { isExistingIconId, REPLACEMENTS } from "discourse/lib/icon-library";
 import { isSafeNavigationUrl } from "./configuration-bundle";
 
 export function isVisibleToUser(item, currentUser) {
@@ -30,10 +31,20 @@ export function linkTarget(target) {
   return target === "_blank" ? "_blank" : "_self";
 }
 
-export function arrangeNavigationItems(items) {
+export function isUsableIcon(icon, iconExists = isExistingIconId) {
+  if (!icon) {
+    return false;
+  }
+
+  return Boolean(iconExists(REPLACEMENTS[icon] || icon));
+}
+
+export function arrangeNavigationItems(items, iconExists = isExistingIconId) {
   const preparedItems = items
     .filter((item) => (item.surface || "bar") === "bar")
-    .map((item, index) => prepareNavigationItem(item, `item-${index}`))
+    .map((item, index) =>
+      prepareNavigationItem(item, `item-${index}`, iconExists)
+    )
     .filter((item) => item.url || item.children.length);
   const leftItems = preparedItems.filter((item) => item.section !== "right");
   const rightItems = preparedItems.filter((item) => item.section === "right");
@@ -52,13 +63,18 @@ export function arrangeNavigationItems(items) {
   ];
 }
 
-export function prepareNavigationItem(item, path = "item") {
+export function prepareNavigationItem(
+  item,
+  path = "item",
+  iconExists = isExistingIconId
+) {
   const presentation = item.presentation || "icon_and_label";
-  const showIcon = Boolean(item.icon) && presentation !== "label_only";
+  const showIcon =
+    isUsableIcon(item.icon, iconExists) && presentation !== "label_only";
   const showLabel = presentation !== "icon_only" || !showIcon;
   const children = (item.children || [])
     .map((child, index) =>
-      prepareNavigationItem(child, `${path}-child-${index}`)
+      prepareNavigationItem(child, `${path}-child-${index}`, iconExists)
     )
     .filter((child) => child.url);
   const linkMode = item.link_mode || (item.url ? "link" : "group");

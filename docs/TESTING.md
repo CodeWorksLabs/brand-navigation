@@ -105,7 +105,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
 ## Automated gates
 
 - JavaScript, template, style, formatting, and type linting.
-- Discourse shared core-feature system specification.
+- Discourse shared core-feature system specification with Brand Navigation
+  internally enabled, plus an explicit rendered-presence assertion.
 - Normal-page rendering of brand, direct links, and native submenu.
 - Mobile compact-menu behavior.
 - Negative render assertion for `embed_mode=true`.
@@ -114,7 +115,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for left/right navigation section grouping.
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
-- Unit coverage for icon/label presentation and missing-icon fallback.
+- Unit and system coverage for icon/label presentation, missing and unavailable
+  icon fallback, replacement icon IDs, and omission of unavailable direct
+  site-header icons.
 - Scoped administrator save behavior that remains in the navigation editor.
 - Fail-closed bundle schema, URL, size, nested-field, and conditional validation.
 - Bounded local bundle validation without forum credentials or network access.
@@ -122,7 +125,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
   signature, including locally uploaded components and incomplete-signature
   rejection.
 - Complete bundle preflight, immutable persistence snapshots, strict color
-  types, inert diagnostics, and export/import byte-limit symmetry.
+  types, inert diagnostics, whole-file symmetry, and Discourse's per-object
+  setting byte limit, including a rendered assertion that an oversized object
+  sends no persistence request and changes no setting.
 - Component-action deferred-completion coverage for submitted appearance and
   bundle snapshots, in-flight state, model reconciliation, dirty state,
   success state, current/exported settings, and unrelated color-draft

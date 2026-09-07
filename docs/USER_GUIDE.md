@@ -92,8 +92,9 @@ bundle. If the browser loses the response after submission, reload the
 component settings and verify the displayed values before retrying.
 Conflicting appearance, file, paste, and export controls remain disabled while
 a save or import is pending. Export refuses to create a download larger than
-the importer's 1,000,000-byte ceiling, so every successful download remains
-eligible for re-import.
+the 1,000,000-byte file ceiling or with navigation data larger than Discourse's
+524,288-byte serialized object-setting limit, so every successful download
+remains eligible for re-import.
 
 An optional local command validates a saved bundle without contacting a forum:
 
@@ -195,8 +196,9 @@ label. Empty descriptions retain the compact menu. Only one submenu level is
 supported; child entries cannot contain another submenu.
 
 For an icon-only link, keep a clear `label`: Brand Navigation uses it as the
-link's accessible name. If the configured icon is missing, the visible label
-appears automatically instead of leaving an empty link.
+link's accessible name. If the configured icon is missing from Discourse's
+active icon set, the visible label appears automatically instead of leaving an
+empty bar or submenu link.
 
 Top-level items in the `left` section appear beside the brand. Items in the
 `right` section form a group at the far edge of the bar, which is useful for
@@ -207,8 +209,9 @@ Set a direct icon link's `surface` to `site_header` to place it among
 Discourse's core header icons instead of in the Brand Navigation bar. This is
 useful for social destinations when bar space is limited. Site-header items
 must have a URL and icon and cannot contain children. Their label remains the
-accessible name and their title remains the optional tooltip. Other items keep
-the default `bar` surface.
+accessible name and their title remains the optional tooltip. A direct
+site-header item whose icon is unavailable is omitted instead of rendering an
+empty header control. Other items keep the default `bar` surface.
 
 Use `device_visibility` to control constrained mobile layouts independently for
 each item:

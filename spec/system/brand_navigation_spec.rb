@@ -85,6 +85,37 @@ RSpec.describe "Brand Navigation" do
     expect(page).not_to have_css(".brand-navigation-header-icon")
   end
 
+  it "falls back from unavailable bar icons and omits unavailable header icons" do
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Fallback",
+          url: "/latest",
+          icon: "brand-navigation-missing-icon",
+          presentation: "icon_only",
+          visibility: "everyone",
+        },
+        {
+          label: "Missing header icon",
+          url: "/about",
+          icon: "brand-navigation-missing-icon",
+          surface: "site_header",
+          visibility: "everyone",
+        },
+      ],
+    )
+    theme.save!
+
+    visit("/")
+
+    expect(page).to have_css(
+      '.brand-navigation__items a[href="/latest"] span',
+      text: "Fallback",
+    )
+    expect(page).not_to have_css(".brand-navigation-header-icon")
+  end
+
   it "keeps mobile bar submenus reachable without a clipping scrollport", mobile: true do
     theme.update_setting(:mobile_mode, "bar")
     theme.save!

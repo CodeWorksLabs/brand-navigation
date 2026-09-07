@@ -1,6 +1,7 @@
 import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
+  isUsableIcon,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
@@ -85,21 +86,33 @@ module("Unit | Lib | brand-navigation", function () {
   });
 
   test("item presentation supports accessible icon-only links", function (assert) {
-    const [iconOnly, missingIcon, labelOnly] = arrangeNavigationItems([
-      {
-        label: "Social",
-        url: "/social",
-        icon: "globe",
-        presentation: "icon_only",
-      },
-      { label: "Fallback", url: "/fallback", presentation: "icon_only" },
-      {
-        label: "Text",
-        url: "/text",
-        icon: "comments",
-        presentation: "label_only",
-      },
-    ]);
+    const existingIcons = new Set(["globe", "comments"]);
+    const iconExists = (icon) => existingIcons.has(icon);
+    const [iconOnly, missingIcon, unavailableIcon, labelOnly] =
+      arrangeNavigationItems(
+        [
+          {
+            label: "Social",
+            url: "/social",
+            icon: "globe",
+            presentation: "icon_only",
+          },
+          { label: "Fallback", url: "/fallback", presentation: "icon_only" },
+          {
+            label: "Unavailable",
+            url: "/unavailable",
+            icon: "not-in-the-sprite",
+            presentation: "icon_only",
+          },
+          {
+            label: "Text",
+            url: "/text",
+            icon: "comments",
+            presentation: "label_only",
+          },
+        ],
+        iconExists
+      );
 
     assert.true(iconOnly.showIcon);
     assert.false(iconOnly.showLabel);
@@ -108,8 +121,41 @@ module("Unit | Lib | brand-navigation", function () {
       missingIcon.showLabel,
       "a missing icon safely falls back to its label"
     );
+    assert.false(unavailableIcon.showIcon);
+    assert.true(
+      unavailableIcon.showLabel,
+      "an unavailable icon safely falls back to its label"
+    );
     assert.false(labelOnly.showIcon);
     assert.true(labelOnly.showLabel);
+  });
+
+  test("icon availability follows Discourse replacements", function (assert) {
+    assert.true(isUsableIcon("d-tracking", (icon) => icon === "bell"));
+    assert.false(isUsableIcon("not-in-the-sprite", () => false));
+    assert.false(isUsableIcon("", () => true));
+  });
+
+  test("unavailable submenu icons fall back to child labels", function (assert) {
+    const [item] = arrangeNavigationItems(
+      [
+        {
+          label: "Resources",
+          children: [
+            {
+              label: "Docs",
+              url: "/docs",
+              icon: "not-in-the-sprite",
+              presentation: "icon_only",
+            },
+          ],
+        },
+      ],
+      () => false
+    );
+
+    assert.false(item.children[0].showIcon);
+    assert.true(item.children[0].showLabel);
   });
 
   test("visible submenu descriptions follow label presentation", function (assert) {
