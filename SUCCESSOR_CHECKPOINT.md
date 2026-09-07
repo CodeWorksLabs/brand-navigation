@@ -1,9 +1,35 @@
 # Brand Navigation successor checkpoint
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **PR 7 MERGED / PR 8 REPLACEMENT BATCH IMPLEMENTED / FREEZE REQUIRES GREEN CURRENT-HEAD CI / NOT TAGGED**
+Disposition: **PR 7 MERGED / PR 8 PRIOR CANDIDATE BLOCKED / SECOND REPLACEMENT BATCH IN PROGRESS / NOT TAGGED**
 
 ## Current release-documentation checkpoint
+
+- Frozen PR 8 candidate `d398d887419886eae4310fd1467b483a29ed30b4`
+  / tree `9640302b5403dfb2052bf9a5f64c5a77fb717e5b` passed configuration
+  run `34097326194` (24/24) and every lane of Discourse Theme run
+  `34097326701` (frontend 20/20; system 30/30). Its focused dual
+  correction-closure review nevertheless issued BLOCK: the new
+  `ensureSpriteSymbol` and `hasSpriteSymbol` imports do not exist on the two
+  documented 2026.7 core revisions, and anonymous lookup failure could settle
+  before the independently loaded primary sprite without a later render
+  invalidation. The internal lane additionally identified unbounded per-icon
+  search/rerender fan-out as P2; the sidebar lane retained one historical-state
+  P3 in this checkpoint.
+- The authorized coherent second replacement removes those newer core imports
+  and all per-icon searches. A shared, request-free `MutationObserver` waits
+  for Discourse's primary Font Awesome sprite, notifies live consumers once,
+  and disconnects; destroyed consumers unsubscribe, and ineligible items do
+  not subscribe. Direct membership still distinguishes loaded replacement
+  icons from genuinely unavailable icons. Unit and rendered component tests
+  now cover delayed readiness, accessible interim labels, bar/child/header
+  recovery, unavailable fallback/omission, shared observation, and teardown.
+- The Discourse workflow now adds exact-core test lanes for recorded Repeal
+  core `988c31e00fb73713c81b93cd47f68af0fb4c6273` and R744 core
+  `2e46cff73b07ecddbcc5603eb3fbf41d563577f6`, alongside current Discourse.
+  Local JavaScript, template, type, CSS, changed-file formatting, configuration
+  (24/24), and diff checks pass. The batch is not yet committed or frozen, and
+  GitHub/exact-core execution remains pending.
 
 - Phil explicitly accepted the two remaining P2 release-engineering risks for
   `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
@@ -403,7 +429,7 @@ or **Canonical locations** above.
   commit `9f2a6e0` then recorded the closure evidence without changing product
   behavior. Each remains immutable historical evidence.
 
-## Administrator color-control checkpoint
+## Historical administrator color-control checkpoint
 
 - Candidate `ce7fb34` adds five independently optional appearance settings:
   bar background, bar text/icons, hover/highlight background, submenu
@@ -423,7 +449,7 @@ or **Canonical locations** above.
 - Official Discourse workflow run `34051003085` passed linting, backend,
   frontend QUnit, and browser-backed system tests on candidate `1fee5e8`.
   Configuration workflow run `34051002649` passed all 21 Node tests.
-- Administrator/browser interaction on the sandbox remains pending because
+- At that historical gate, administrator/browser interaction on the sandbox remained pending because
   this resumed task currently exposes no callable authenticated-browser
   control despite the browser session being open. No production forum has
   been changed.
@@ -433,7 +459,7 @@ or **Canonical locations** above.
   `color palette` in the follow-up candidate. This was a locale-policy finding,
   not a code-build failure.
 
-## Color-value normalization follow-up
+## Historical color-value normalization follow-up
 
 - Sandbox testing found that Discourse's underlying string setting accepts
   both `16324F` and `#FFFFFF`; the database retained those exact forms.
@@ -442,7 +468,7 @@ or **Canonical locations** above.
   uppercase `#RRGGBB`, and documents the accepted input.
 - Local ESLint, Ember template lint, Stylelint, type checking, changed-file
   formatting, `git diff --check`, and all 22 Node configuration tests pass.
-- Official CI, merge, and sandbox update verification remain pending. The
+- At that historical gate, official CI, merge, and sandbox update verification remained pending. The
   sandbox currently has `bar_background_color=16324F` and
   `bar_text_color=#FFFFFF`; no production forum was changed.
 

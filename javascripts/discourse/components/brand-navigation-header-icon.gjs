@@ -5,9 +5,9 @@ import { tracked } from "@glimmer/tracking";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
 import {
-  ensureUsableIcon,
   linkRel,
   linkTarget,
+  primarySpriteWatcher,
   shouldRenderHeaderIcon,
 } from "../lib/brand-navigation";
 
@@ -18,19 +18,34 @@ export default class BrandNavigationHeaderIcon extends Component {
 
   @tracked iconRevision = 0;
   destroyed = false;
+  unsubscribeFromPrimarySprite = null;
 
   constructor(owner, args) {
     super(owner, args);
 
     registerDestructor(this, () => {
       this.destroyed = true;
+      this.unsubscribeFromPrimarySprite?.();
     });
 
-    ensureUsableIcon(args.item.icon).then(() => {
-      if (!this.destroyed) {
-        this.iconRevision++;
-      }
+    const isEligible = shouldRenderHeaderIcon({
+      item: args.item,
+      enabled: settings.enabled,
+      embedMode: EmbedMode.enabled,
+      mobileView: this.site.mobileView,
+      mobileMode: settings.mobile_mode,
+      currentUser: this.currentUser,
+      mobileDevice: this.capabilities.isMobileDevice,
+      iconExists: () => true,
     });
+
+    if (isEligible) {
+      this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
+        if (!this.destroyed) {
+          this.iconRevision++;
+        }
+      });
+    }
   }
 
   get shouldRender() {

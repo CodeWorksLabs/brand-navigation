@@ -1,12 +1,14 @@
 import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
-  ensureUsableIcon,
+  hasSpriteSymbol,
   isUsableIcon,
+  isPrimarySpriteReady,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
   linkTarget,
+  PrimarySpriteWatcher,
   shouldRenderHeaderIcon,
 } from "../../../discourse/lib/brand-navigation";
 import { isBrandNavigationObjectsEditor } from "../../../discourse/lib/brand-navigation-admin";
@@ -138,29 +140,57 @@ module("Unit | Lib | brand-navigation", function () {
     assert.false(isUsableIcon("", () => true));
   });
 
-  test("icon loading resolves replacements before confirming availability", async function (assert) {
-    let ensuredIcon;
+  test("primary sprite readiness notifies once after delayed symbol loading", async function (assert) {
+    const documentObject = document.implementation.createHTMLDocument();
+    const watcher = new PrimarySpriteWatcher(documentObject, MutationObserver);
+    let notifications = 0;
 
-    assert.true(
-      await ensureUsableIcon(
-        "d-tracking",
-        async (icon) => {
-          ensuredIcon = icon;
-        },
-        (icon) => icon === "bell"
-      )
+    watcher.subscribe(() => notifications++);
+    watcher.subscribe(() => notifications++);
+    assert.strictEqual(notifications, 0, "an empty sprite remains unresolved");
+
+    const container = documentObject.createElement("div");
+    container.id = "svg-sprites";
+    const sprites = documentObject.createElement("div");
+    sprites.className = "fontawesome";
+    container.appendChild(sprites);
+    documentObject.body.appendChild(container);
+
+    await new Promise((resolve) => setTimeout(resolve));
+    assert.strictEqual(
+      notifications,
+      0,
+      "an empty primary sprite remains unresolved"
     );
-    assert.strictEqual(ensuredIcon, "bell");
-    assert.false(
-      await ensureUsableIcon(
-        "missing",
-        async () => {},
-        () => false
-      )
-    );
+
+    sprites.innerHTML = '<svg><symbol id="globe"></symbol></svg>';
+    await new Promise((resolve) => setTimeout(resolve));
+
+    assert.strictEqual(notifications, 2);
+    assert.strictEqual(watcher.callbacks.size, 0);
+    assert.strictEqual(watcher.observer, null);
+    assert.true(isPrimarySpriteReady(documentObject));
+    assert.true(hasSpriteSymbol("globe", documentObject));
+    assert.false(hasSpriteSymbol("missing", documentObject));
   });
 
-  test("the default icon path inspects the production SVG sprite", async function (assert) {
+  test("primary sprite subscriptions are canceled before completion", function (assert) {
+    const documentObject = document.implementation.createHTMLDocument();
+    const watcher = new PrimarySpriteWatcher(documentObject, MutationObserver);
+    let notifications = 0;
+
+    const unsubscribe = watcher.subscribe(() => notifications++);
+    assert.strictEqual(watcher.callbacks.size, 1);
+    assert.ok(watcher.observer, "one shared observer services subscribers");
+
+    unsubscribe();
+
+    assert.strictEqual(notifications, 0);
+    assert.strictEqual(watcher.callbacks.size, 0);
+    assert.strictEqual(watcher.observer, null);
+  });
+
+  test("the default icon path inspects the loaded primary SVG sprite", function (assert) {
     const existingContainer = document.getElementById("svg-sprites");
     const container = existingContainer || document.createElement("div");
     const symbols = document.createElementNS(
@@ -181,7 +211,6 @@ module("Unit | Lib | brand-navigation", function () {
 
     try {
       assert.true(isUsableIcon("brand-navigation-test-icon"));
-      assert.true(await ensureUsableIcon("brand-navigation-test-icon"));
       assert.true(isUsableIcon("d-tracking"), "replacement symbols resolve");
       assert.false(isUsableIcon("brand-navigation-test-missing"));
 

@@ -12,9 +12,10 @@ to discover component updates from commits on the installed remote branch.
   coverage.
 - Reject navigation data above Discourse's per-object setting limit before an
   administrator import can send any settings.
-- Check the symbols loaded in Discourse's production SVG sprite, fall back to
-  visible labels when bar or submenu icons are unavailable, and omit
-  unavailable direct site-header icons.
+- Wait for Discourse's primary SVG sprite through a shared, request-free
+  readiness observer; check its loaded symbols; fall back to visible labels
+  when bar or submenu icons are unavailable; and omit unavailable direct
+  site-header icons.
 - Reconcile the successor checkpoint into one unambiguous current release
   state while retaining dated historical evidence.
 

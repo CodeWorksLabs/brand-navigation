@@ -10,11 +10,11 @@ import { i18n } from "discourse-i18n";
 import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   arrangeNavigationItems,
-  ensureUsableIcon,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
   linkTarget,
+  primarySpriteWatcher,
 } from "../lib/brand-navigation";
 
 export default class BrandNavigationContent extends Component {
@@ -24,6 +24,7 @@ export default class BrandNavigationContent extends Component {
 
   @tracked iconRevision = 0;
   destroyed = false;
+  unsubscribeFromPrimarySprite = null;
 
   openSubmenus = new Set();
 
@@ -69,19 +70,29 @@ export default class BrandNavigationContent extends Component {
       this.destroyed = true;
       document.removeEventListener("click", this.handleDocumentClick, true);
       document.removeEventListener("keydown", this.handleDocumentKeydown);
+      this.unsubscribeFromPrimarySprite?.();
       this.openSubmenus.clear();
     });
 
-    const iconIds = new Set(
-      (settings.navigation_items || [])
-        .filter((item) => (item.surface || "bar") === "bar")
-        .flatMap((item) => [item, ...(item.children || [])])
-        .map((item) => item.icon)
-        .filter(Boolean)
-    );
+    const hasEligibleIcon = (settings.navigation_items || [])
+      .filter(
+        (item) =>
+          (item.surface || "bar") === "bar" &&
+          isVisibleToUser(item, this.currentUser) &&
+          isVisibleOnDevice(item, this.capabilities.isMobileDevice)
+      )
+      .flatMap((item) => [
+        item,
+        ...(item.children || []).filter(
+          (child) =>
+            isVisibleToUser(child, this.currentUser) &&
+            isVisibleOnDevice(child, this.capabilities.isMobileDevice)
+        ),
+      ])
+      .some((item) => Boolean(item.icon));
 
-    for (const icon of iconIds) {
-      ensureUsableIcon(icon).then(() => {
+    if (hasEligibleIcon) {
+      this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
         if (!this.destroyed) {
           this.iconRevision++;
         }

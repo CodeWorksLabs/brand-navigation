@@ -66,11 +66,15 @@ bar or submenu entry with no usable icon falls back to visible label text.
 Site-header entries with unavailable icons do not render, avoiding an empty
 core-header control. Availability is determined from the symbols actually
 loaded in Discourse's production SVG sprite; development-only icon-list
-metadata is not used. Components ask Discourse's sprite loader to ensure each
-configured symbol and rerender after that asynchronous check. Until it
-completes, icon-only bar/submenu entries expose their labels and direct header
-entries stay omitted. Top-level and child items independently select `both`,
-`desktop`, or `mobile` device visibility.
+metadata is not used. One shared `MutationObserver` watches Discourse's primary
+Font Awesome sprite until it contains symbols, then notifies all live Brand
+Navigation consumers once and disconnects. This works with both the 2026.7 ESR
+loader and current Discourse without issuing per-icon network requests. Until
+the primary sprite is ready, icon-only bar/submenu entries expose their labels
+and direct header entries stay omitted. Destroyed components unsubscribe, and
+audience/device-ineligible entries do not create subscriptions. Top-level and
+child items independently select `both`, `desktop`, or `mobile` device
+visibility.
 The components evaluate that setting against Discourse's supported
 `capabilities.isMobileDevice` state and omit nonmatching items from rendering,
 so phone rotation cannot reclassify items. Component-wide responsive layout

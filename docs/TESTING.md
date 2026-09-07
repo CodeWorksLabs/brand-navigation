@@ -115,7 +115,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
 - Unit coverage for left/right navigation section grouping.
 - Unit coverage for excluding site-header items from the brand bar.
 - Unit coverage for optional visible submenu descriptions.
-- Unit coverage for production-sprite icon membership, replacement icon IDs,
+- Unit coverage for delayed primary-sprite readiness, shared notification and
+  teardown, production-sprite icon membership, replacement icon IDs,
   icon/label presentation, unavailable bar/submenu fallback, and omission of
   unavailable direct site-header icons.
 - Rendered system coverage for visible label fallback when a bar icon is
