@@ -55,8 +55,7 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_css("#brand-navigation-menu")
   end
 
-  it "hides every component surface in hidden mobile mode", mobile: true do
-    theme.update_setting(:mobile_mode, "bar")
+  it "renders an available configured site-header icon" do
     theme.update_setting(
       :navigation_items,
       [
@@ -74,8 +73,22 @@ RSpec.describe "Brand Navigation" do
     visit("/")
     expect(page).to have_css("[data-brand-navigation]")
     expect(page).to have_css(".brand-navigation-header-icon")
+  end
 
+  it "hides every component surface in hidden mobile mode", mobile: true do
     theme.update_setting(:mobile_mode, "hidden")
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Social",
+          url: "https://example.com/social",
+          icon: "user",
+          surface: "site_header",
+          visibility: "everyone",
+        },
+      ],
+    )
     theme.save!
 
     visit("/")

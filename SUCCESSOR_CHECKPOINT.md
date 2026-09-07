@@ -101,6 +101,16 @@ Disposition: **PR 7 MERGED / PR 8 REVIEWED / FOUR-FINDING CORRECTION BATCH IMPLE
   artifact proves is present in the active core header sprite. This avoids
   dynamically mutating sprite membership while preserving the scenario's
   positive-then-hidden assertion. Replacement exact-head CI remains required.
+- Follow-up head `3db16f2a2588de15684d0ce1736d630a6b7766e9` / tree
+  `55e4db59303371f1fdf40e554b3ab7fc120909bf` passed configuration run
+  `34091962556` and test discovery, linting, backend, and all
+  17 frontend tests in Discourse Theme run `34091962977`. Its system lane again
+  passed 29/30 examples. The raw failure identified the positive custom-header
+  assertion on the mobile system-test page, whose core header does not expose
+  that custom outlet in this fixture. The test now separates the concerns: a
+  desktop scenario proves a configured available header icon renders, while
+  the mobile scenario proves the bar, compact menu, and header-icon surface are
+  all absent in hidden mode. Replacement exact-head CI remains required.
 - Pull request 5 merged the color-normalization candidate into `main`; the
   DiscussionBridge sandbox was updated through the normal Discourse UI and
   reported itself current with `main`. Administrator checks confirmed that
