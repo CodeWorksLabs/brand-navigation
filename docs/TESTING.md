@@ -11,7 +11,7 @@
 | DiscussionBridge Forum   | `2026.9.0-latest+358`   | `f914fcb43e` | Configured navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` to `main` transition |
 | The Bridge               | `2026.9.0-latest+188`   | `7dfd824b1`  | Configured publishing navigation, four accessible social header links, safe `_blank` rel, normal authenticated render, full-app embed exclusion, and native `main` update               |
 | Citizen Activist Network | `2026.8.0-latest.1+414` | `36698aae08` | Configured Community/Issues navigation, submenu keyboard smoke, clean console, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` update               |
-| RVing Community          | Not recorded            | Not recorded | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, and full-app embed exclusion                                         |
+| RVing Community          | `2026.8.0-latest.1+18`  | `3f4a87b135` | Configured Community/RVing Network navigation, three-theme attachment, clean console, normal authenticated render, full-app embed exclusion, and native `d-compat/2026.8` update        |
 | R744 Community           | `2026.7.2+14`           | `2e46cff73b` | Authenticated normal-page render, submenu/Escape focus behavior, safe `_blank` rel, administrator settings and object editor, and full-app embed exclusion                              |
 
 The original builds were read directly from each site's administrator dashboard
@@ -125,6 +125,32 @@ preservation on the recorded 2026.8 build. It is server-side installation and
 availability evidence plus administrator status confirmation; it does not
 claim a fresh visual, anonymous, mobile, accessibility, or embed pass.
 
+### RVing Community native compatibility update — 2026-09-07
+
+RVing Community was running Discourse `2026.8.0-latest.1+18` at core commit
+`3f4a87b13554cb3ea366cb3a29ed56fd4b2c3d03`. Its single Brand Navigation
+installation, component `16`, followed the repository's default branch and was
+enabled on Default, Foundation, and Horizon.
+
+Discourse's native update check selected `d-compat/2026.8` at commit
+`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. The normal remote-theme update
+advanced the component from `04dbb3d994362f3f900d3f10a916ae4ac7245713`
+to that compatibility commit. Post-update inspection reported matching local
+and remote commits, zero commits behind, matching local and remote
+compatibility refs, and no import error. All four stored setting values
+retained their exact pre-update hashes and lengths, all three theme attachments
+remained present, and the public forum returned HTTP 200. Phil refreshed the
+administrator UI and confirmed **Theme is up-to-date with
+`d-compat/2026.8`**.
+
+This establishes a successful native compatibility-branch update with settings
+preservation on the recorded 2026.8 build. It is server-side installation and
+availability evidence plus administrator status confirmation; it does not
+claim a fresh visual, anonymous, mobile, accessibility, or embed pass. Two
+failed email jobs observed during administration are attributable to the site's
+intentionally unconfigured outbound mail provider and are unrelated to Brand
+Navigation.
+
 ### Automated release compatibility
 
 PR 9 implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
@@ -215,8 +241,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
   `1` is enabled on Foundation and Horizon; the duplicate component id `2`
   remains preserved, disabled, and unattached. Draft pull request 2 is no
   longer needed to support this site and was closed without merge.
-- Record the exact Discourse build for RVing Community from its administrator
-  dashboard when convenient.
+- Refresh installation records when these sites change Discourse release lines
+  or Brand Navigation compatibility refs.
 
 ## Automated gates
 
