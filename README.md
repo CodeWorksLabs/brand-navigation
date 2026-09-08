@@ -116,7 +116,9 @@ Only one child level is supported intentionally. Visibility can be `everyone`,
 
 Start with the [administrator guide](docs/USER_GUIDE.md) for installation,
 configuration, verification, and troubleshooting. See [`docs/`](docs/) for
-scope, architecture, migration, testing, and release procedures.
+scope, architecture, migration, testing, and release procedures. The
+[project history](docs/PROJECT_HISTORY.md) preserves the product decisions and
+development narrative behind the current release.
 
 ## Versions and updates
 
