@@ -144,7 +144,9 @@ upload identifiers are site-specific.
 3. To return Brand Navigation itself to a known release, follow
    [Roll back Brand Navigation to a release tag](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
    That procedure remains provisional until its complete staging evidence is
-   recorded in [`TESTING.md`](TESTING.md).
+   recorded in [`TESTING.md`](TESTING.md). After removing every visitor-facing
+   attachment as directed there, turn or confirm native **Enabled?** on so the
+   isolated staging preview and custom bundle panel can load.
 4. Restore the previously recorded settings when required.
 5. Report the Brand Navigation release, Discourse version, active theme, and
    observed error before trying the update again.
