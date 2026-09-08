@@ -51,9 +51,25 @@ setting and confirmed the navigation rendered correctly.
 The exercise exposed a product flaw: Discourse's component-level **Enabled?**
 control and the component's legacy internal `Enabled` setting could contradict
 one another and did not synchronize. The `v1.0.0-rc.1` correction removes the
-internal setting and relies only on Discourse's native control. The return from
-the pinned tag to repository-default `main` remains to be completed and
-recorded; this section must not yet be treated as complete rollback evidence.
+internal setting and relies only on Discourse's native control.
+
+Component `3` was then disabled through the native control and returned to a
+blank **Branch** field. Discourse resolved repository-default `main` at exact
+commit `56ee6f874efb85dfd6976928954f0dcd74aab3c8`, with zero commits behind and no
+import error. Both parent-theme attachments and every recorded setting hash
+were preserved. The component was re-enabled through the native control and
+the public forum returned HTTP 200. Final human visual confirmation of the
+returned `main` rendering was not separately recorded before the RC test began.
+
+For the single-switch RC test, component `3` was disabled and changed to
+`release/v1.0.0-rc.1` at exact commit
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`. The import reported no error, zero
+commits behind, preserved settings and both parent-theme attachments, and no
+longer defined `enabled` as a component setting. The earlier value remains as
+an inert stored row, which allows an intentional `v0.9.0` rollback to recover
+it. Component `3` was enabled through Discourse's native control and the public
+forum returned HTTP 200. Human visual confirmation remains required for the RC
+render and administrator surface.
 
 ### Sandbox embed and RTL browser evidence — 2026-09-07
 

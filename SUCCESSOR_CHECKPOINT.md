@@ -140,16 +140,20 @@ candidate passes required CI/review, and final acceptance is complete.
 
 1. Finish the authorized sandbox rollback exercise by returning component `3`
    from `v0.9.0` to repository-default `main`, preserving settings and theme
-   attachments, then verify normal rendering. The last read-only inventory
-   found the native component control off, the legacy `v0.9.0` setting true,
-   and the component pinned to `v0.9.0` at `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
-2. Rename the three retained sandbox records to `Brand Navigation #1`, `Brand
-Navigation #2`, and `Brand Navigation #3` for unambiguous administration.
-3. Install and verify the release-branch single-switch correction on the
-   authorized sandbox before treating the behavior as accepted runtime
-   evidence.
-4. Finish RC preparation, run required gates, freeze the exact candidate, and
+   attachments, then verify normal rendering. The source return and server-side
+   preservation checks are complete; separate human visual confirmation of the
+   brief returned-`main` state was not recorded before RC installation.
+2. Obtain Phil's visual confirmation that sandbox component `3` on
+   `release/v1.0.0-rc.1` renders normally and exposes only Discourse's native
+   **Enabled?** activation control.
+3. Finish RC preparation, run required gates, freeze the exact candidate, and
    conduct the doctrine-controlled complete codebase review before release.
+
+Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
+and `Brand Navigation #3`. Components `1` and `2` remain disabled and
+unattached. Component `3` is enabled on Foundation and Horizon at RC commit
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`, with no import error and zero
+commits behind. Its current schema contains no internal `enabled` setting.
 
 ## Out of scope
 
