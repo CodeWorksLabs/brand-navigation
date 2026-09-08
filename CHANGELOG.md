@@ -6,6 +6,8 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+## 1.0.0-rc.1 - 2026-09-07
+
 - Remove the duplicate Brand Navigation `enabled` setting and use Discourse's
   component-level **Enabled?** control as the single source of truth.
 - Document a working staging-theme preparation and bundle-import workflow for
@@ -76,7 +78,7 @@ to discover component updates from commits on the installed remote branch.
   required by the official Discourse component workflow.
 - Pin the Ruby lint-tool versions used by verification CI.
 
-Version `v0.9.0` is the first reviewed preview release. The next release
-candidate is `v1.0.0-rc.1`; subsequent candidate changes use increasing
-`v1.0.0-rc.N` identifiers. Version `v1.0.0` is reserved for the documented,
-multi-site-tested release with no known release blockers.
+Version `v0.9.0` is the first reviewed preview release. Version
+`v1.0.0-rc.1` is the first stable-track release candidate; subsequent candidate
+changes use increasing `v1.0.0-rc.N` identifiers. Version `v1.0.0` is reserved
+for the documented, multi-site-tested release with no known release blockers.
