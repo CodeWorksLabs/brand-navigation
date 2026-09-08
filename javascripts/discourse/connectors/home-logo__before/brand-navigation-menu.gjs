@@ -10,7 +10,6 @@ export default class BrandNavigationMenu extends Component {
 
   get shouldRender() {
     return (
-      settings.enabled &&
       !EmbedMode.enabled &&
       this.site.mobileView &&
       settings.mobile_mode === "menu"

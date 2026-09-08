@@ -7,7 +7,7 @@ export default class BrandNavigationBar extends Component {
   @service site;
 
   get shouldRender() {
-    if (!settings.enabled || EmbedMode.enabled) {
+    if (EmbedMode.enabled) {
       return false;
     }
 
