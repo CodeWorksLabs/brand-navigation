@@ -25,9 +25,10 @@ staging workflow now has dedicated system coverage and exact-head CI. Both
 focused closure lanes passed the frozen package with P2/P3 findings and no
 P0/P1. Two subsequent complete-codebase review lanes independently passed the
 exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
-together. A documentation correction batch is now active; its replacement
-identities and verification must supersede the reviewed freeze before final
-manual acceptance.
+together. The resulting documentation correction batch is implemented across
+all three lines and its first exact-head CI is green. A checkpoint-only refresh
+now follows; final exact-head CI and impact-scoped correction-closure review
+remain required before manual acceptance.
 
 ## Authoritative repository state
 
@@ -47,14 +48,18 @@ manual acceptance.
   `b816d1b8bc5bbf8b4d6a5cf46795602b87909f16`, tree
   `caa42247968705bb5248b82468fa066ef3c6777e`. This identity is superseded as
   soon as the active documentation correction batch is committed.
-- Compatibility correction heads: 2026.7 pull request 20 at
-  `75828c17ae65ace0a94204cda1904d04481ba6d3`, and 2026.8 pull request 21 at
-  `984c94b9303925214ecd3bd9abdc7d7047bf8518`. Both resolve to tree
-  `5332c1182a943c42b49e78e56821f9460d1b5679`.
-- Exact-head GitHub Actions runs for the complete-review freeze are green: PR19
-  theme run `34185736110` plus configuration run `34185735751`; PR20 theme run
-  `34184858223` plus configuration run `34184857973`; PR21 theme run
-  `34184862584` plus configuration run `34184862278`.
+- Documentation-correction heads immediately preceding this checkpoint-only
+  refresh: PR19 `826fbcbe18c932da8a083525fc02a6c5b420d08e`, tree
+  `07305e9f4b17370f33253e643e0053e6c4651450`; PR20
+  `db709dff5e37e0eb4730f6141ddffc2d1fd4a8e6`; and PR21
+  `9a1b6f67365745715db9e7ca348dce5670901517`. The two compatibility heads share
+  tree `504324e05ade77a1817e7335b4d77acb8c118da5`, and their README, docs, and
+  successor checkpoint are byte-aligned with PR19.
+- First exact-head correction CI is green: PR19 theme run `34187429929` plus
+  configuration run `34187429272`; PR20 theme run `34187455791` plus
+  configuration run `34187455481`; PR21 theme run `34187470248` plus
+  configuration run `34187469890`. The checkpoint-only replacement heads need
+  their own final CI before closure.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
@@ -165,11 +170,10 @@ limitations are still accurately disclosed.
 
 ## Exact next actions
 
-1. Complete one coherent documentation correction across PR19, PR20, and PR21,
-   then freeze their replacement heads and trees.
-2. Run exact-head CI for all three replacement heads.
+1. Commit and push this checkpoint-only refresh to PR19, PR20, and PR21.
+2. Run final exact-head CI for all three checkpoint heads.
 3. Commission doctrine-bound impact-scoped correction-closure review of the
-   documentation delta and cross-line package consistency.
+   complete documentation delta and cross-line package consistency.
 4. Complete the remaining controlled manual acceptance evidence, or preserve
    any explicitly accepted accessibility limitation accurately in release
    documentation.
