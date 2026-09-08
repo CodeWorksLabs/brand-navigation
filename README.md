@@ -48,6 +48,12 @@ Then include **Brand Navigation** on the theme or themes that should use it.
 Use Discourse's component-level **Enabled?** control as the single activation
 switch. Brand Navigation does not add a second enable setting.
 
+For an unpublished setup or configuration-bundle import, first attach the
+enabled component only to a non-default staging theme and use Discourse's theme
+preview. The [administrator guide](docs/USER_GUIDE.md#installation) explains
+the complete preparation workflow; a disabled component cannot load its custom
+bundle panel.
+
 The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
 validated configuration bundle to move settings without re-entering each row.

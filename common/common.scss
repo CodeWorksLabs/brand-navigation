@@ -356,6 +356,35 @@
       margin-block-start: 0.25rem;
       box-shadow: none;
     }
+
+    .brand-navigation__submenu-group--linked {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 1.75rem;
+      padding-inline-end: 0;
+
+      > .brand-navigation__parent-link {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      > .brand-navigation__submenu {
+        position: static;
+        display: contents;
+        pointer-events: auto;
+
+        > summary {
+          position: static;
+          grid-column: 2;
+          grid-row: 1;
+          pointer-events: auto;
+        }
+
+        > ul {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+      }
+    }
   }
 }
 

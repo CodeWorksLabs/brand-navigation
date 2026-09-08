@@ -28,12 +28,16 @@ Discourse embed contexts.
    https://github.com/CodeWorksLabs/brand-navigation.git
    ```
 
-3. Leave Discourse's component-level **Enabled?** control off while preparing
-   the component.
-4. Add **Brand Navigation** to the theme or themes that should use it, then
-   open the component settings.
-5. Review the supplied sample settings, then turn Discourse's **Enabled?**
-   control on when the navigation is ready for visitors.
+3. Do not attach the component to a visitor-facing theme yet. Add it to a
+   non-default staging theme that visitors do not use.
+4. Turn Discourse's component-level **Enabled?** control on. Discourse does not
+   load a disabled component's JavaScript, including Brand Navigation's bundle
+   panel.
+5. Use Discourse's **Preview** control for the staging theme, then open Brand
+   Navigation's settings in that preview context. Configure the supplied sample
+   settings or import a configuration bundle and verify the staging preview.
+6. Attach the prepared component to the intended visitor-facing theme only when
+   the navigation is ready.
 
 Discourse's component-level **Enabled?** control is the single source of truth
 for activation. Brand Navigation intentionally has no separate enable setting.
@@ -96,12 +100,17 @@ select **Choose bundle** and pick a `.json` bundle, or paste its contents into
 **Or paste bundle JSON**. Review any validation errors and then select **Import
 settings**.
 
-Discourse loads a theme component's administrator panel only when that
-component belongs to the administrator's active theme. If the bundle panel is
-not visible on a newly installed component, leave Discourse's component-level
-**Enabled?** control off, attach the component to the administrator's active
-theme, and reload its administration page. Import the bundle before turning
-the component on.
+Discourse loads a theme component's custom administrator JavaScript only when
+the component is enabled and belongs to the resolved theme. For a newly
+installed component, use the non-default staging-theme procedure in
+[Installation](#installation): attach Brand Navigation only to that staging
+theme, enable the component, open the staging theme's Discourse preview, and
+then open Brand Navigation's settings within the preview context. Import and
+verify the bundle before attaching the component to a visitor-facing theme.
+
+Turning the native **Enabled?** control off also removes the custom bundle
+panel. This is expected Discourse component loading behavior, not a separate
+Brand Navigation activation state.
 
 The browser importer validates the complete portable schema and submits all
 settings in one Discourse theme update. It does not intentionally save a partial

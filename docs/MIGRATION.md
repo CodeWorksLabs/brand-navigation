@@ -22,10 +22,13 @@ shortened first.
 
 For normal administrator use, the same operation is available in the
 **Configuration bundles** panel near the bottom of Brand Navigation's
-administration page. A newly installed component must be attached to the
-administrator's active theme before Discourse can load that panel; keep
-Discourse's component-level **Enabled?** control off until after import and
-verification.
+administration page. Discourse does not load a disabled component's custom
+JavaScript, so the panel cannot be used while the native **Enabled?** control is
+off. Prepare a new installation without publishing it by attaching the enabled
+component only to a non-default staging theme, opening that theme through
+Discourse's **Preview** control, and then opening Brand Navigation's settings in
+the preview context. Import and verify the bundle there before attaching Brand
+Navigation to a visitor-facing theme.
 
 The repository's `configurations/repeal-obbba.json` file is the first migration
 fixture. It was assembled from observed Brand Header, Dropdown Header, and
@@ -42,8 +45,8 @@ separate site-local step.
 
 1. Record `brand_name`, `website_url`, light/dark/mobile logos, text links,
    icon links, targets, mobile behavior, and outlet.
-2. Install Brand Navigation but leave Discourse's component-level **Enabled?**
-   control off.
+2. Install Brand Navigation and prepare it on an enabled, non-default staging
+   theme as described above; do not attach it to a visitor-facing theme yet.
 3. Map the brand name and `website_url` to `brand_name` and `brand_url`.
 4. Upload the light and dark logos. Brand Navigation intentionally uses the
    light logo as the dark fallback and responsive sizing instead of a separate
@@ -60,8 +63,8 @@ separate site-local step.
 
 1. Export or copy the `Menu_items`, `Submenu_items`, icon list, placement, and
    color choices before changing anything.
-2. Install Brand Navigation but leave Discourse's component-level **Enabled?**
-   control off.
+2. Install Brand Navigation and prepare it on an enabled, non-default staging
+   theme as described above; do not attach it to a visitor-facing theme yet.
 3. Create one structured top-level item for every menu item.
 4. Add each submenu entry under its parent. Divider-only entries have no direct
    equivalent; use grouping and ordering instead.

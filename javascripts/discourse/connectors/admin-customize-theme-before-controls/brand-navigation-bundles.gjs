@@ -93,9 +93,12 @@ export default class BrandNavigationBundles extends Component {
   @tracked bundleText = "";
   @tracked errors = [];
   @tracked fileName;
+  @tracked readingBundle = false;
   @tracked saving = false;
   @tracked success;
   @tracked appearanceValues = {};
+
+  bundleSelection = 0;
 
   constructor() {
     super(...arguments);
@@ -110,6 +113,11 @@ export default class BrandNavigationBundles extends Component {
     );
   }
 
+  willDestroy() {
+    this.bundleSelection++;
+    super.willDestroy();
+  }
+
   get theme() {
     return this.args.outletArgs.theme;
   }
@@ -119,7 +127,12 @@ export default class BrandNavigationBundles extends Component {
   }
 
   get importDisabled() {
-    return !this.bundle || this.errors.length > 0 || this.saving;
+    return (
+      !this.bundle ||
+      this.errors.length > 0 ||
+      this.readingBundle ||
+      this.saving
+    );
   }
 
   get appearanceColors() {
@@ -161,6 +174,10 @@ export default class BrandNavigationBundles extends Component {
     return persistThemeSettings(this.theme.id, settings, ajax);
   }
 
+  readBundle(file) {
+    return readBundleFile(file);
+  }
+
   loadBundleText(text, fileName) {
     this.bundle = undefined;
     this.bundleText = text;
@@ -198,15 +215,35 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
+    const selection = ++this.bundleSelection;
+    this.bundle = undefined;
+    this.bundleText = "";
+    this.errors = [];
+    this.fileName = file.name;
+    this.readingBundle = true;
+    this.success = undefined;
+
     try {
-      this.loadBundleText(await readBundleFile(file), file.name);
+      const text = await this.readBundle(file);
+
+      if (selection === this.bundleSelection) {
+        this.loadBundleText(text, file.name);
+      }
     } catch (error) {
-      this.errors = [error.message];
+      if (selection === this.bundleSelection) {
+        this.errors = [error.message];
+      }
+    } finally {
+      if (selection === this.bundleSelection) {
+        this.readingBundle = false;
+      }
     }
   }
 
   @action
   updateBundleText(event) {
+    this.bundleSelection++;
+    this.readingBundle = false;
     this.loadBundleText(event.target.value);
   }
 
@@ -465,6 +502,7 @@ export default class BrandNavigationBundles extends Component {
           <DButton
             @action={{this.importBundle}}
             @disabled={{this.importDisabled}}
+            @isLoading={{this.readingBundle}}
             @icon="upload"
             @translatedLabel={{i18n
               (themePrefix "brand_navigation.bundles.import")

@@ -14,7 +14,16 @@ identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
 and the planned public documentation work. Release preparation is active on
 `release/v1.0.0-rc.1`. The release-branch correction removes the duplicate
 Brand Navigation `enabled` setting so Discourse's component-level **Enabled?**
-control becomes the single activation source.
+control becomes the single activation source. Pull request 19's first frozen
+candidate, `d878fba49c37f0a0f573753716a8999c01b62ffb`, passed every CI lane but is
+superseded for review by one authorized correction batch. The sidebar review
+confirmed two P1 issues: disabled components cannot load the custom bundle
+panel despite the former setup instructions, and both maintained compatibility
+branches still retained the removed internal activation setting. It also
+confirmed two P2 issues: stale asynchronous file reads could replace newer
+bundle input, and linked submenu children could leave normal mobile-menu flow.
+The internal review found no P0/P1 issue and recorded only nonblocking P2/P3
+risks, but its PASS does not override the sidebar review's confirmed findings.
 
 ## Authoritative repository state
 
@@ -138,12 +147,15 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. Run pull request 19 CI on the final documentation-evidence commit. Its parent
-   `f6ca29b9b911936df1cbb4306411574b5bd50e34` passed configuration workflow
-   `34176240352` and all required current, 2026.8, and 2026.7 Discourse Theme
-   lanes in workflow `34176242873`.
-2. Freeze the resulting exact commit and tree, then conduct the
-   doctrine-controlled complete codebase review before release.
+1. Complete the authorized four-finding correction batch on pull request 19:
+   document an enabled non-live staging-theme import workflow, generation-guard
+   file reads, keep linked mobile submenus in flow, and remove the duplicate
+   activation setting from both maintained compatibility branches.
+2. Run focused local checks, exact current/2026.8/2026.7 pull-request CI, and
+   the affected administrator/mobile system coverage.
+3. Refreeze the replacement candidate and exact compatibility commits, then
+   obtain impact-scoped correction closure and completion of the outstanding
+   complete-codebase review scope before final manual acceptance or merge.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
 and `Brand Navigation #3`. Components `1` and `2` remain disabled and

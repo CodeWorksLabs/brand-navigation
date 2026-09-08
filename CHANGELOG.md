@@ -8,6 +8,12 @@ to discover component updates from commits on the installed remote branch.
 
 - Remove the duplicate Brand Navigation `enabled` setting and use Discourse's
   component-level **Enabled?** control as the single source of truth.
+- Document a working staging-theme preparation and bundle-import workflow for
+  the native single-switch model.
+- Prevent an older asynchronous bundle-file read from replacing a newer file
+  selection or pasted configuration.
+- Keep linked-parent submenu children in normal mobile-menu flow so they cannot
+  overlap following items.
 - Adopt Discourse's `d-compat/<YYYY>.<M>` compatibility-branch convention,
   including the official daily branch-creation workflow and exact Discourse
   2026.8 release coverage.
