@@ -1,1214 +1,212 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **v0.9.0 RELEASED / d-compat ADOPTION IN PROGRESS ON `codex/d-compat-branching` / NOT MERGED**
+Date: 2026-09-07
 
-## Current release-documentation checkpoint
+## Current disposition
 
-- PR 8 merged as `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
-  Its tree `23328df16e2703920778d71c226abe0a00f97cfb` exactly matches
-  the accepted candidate. Annotated tag `v0.9.0` and the published GitHub
-  preview release identify that merge and tree. Sandbox component 3 was
-  updated to candidate commit `222fdbe78b61fe284b7bf7925b04185f8c7e5c57`,
-  reported zero commits behind with no import error, and passed Phil's final
-  authenticated visual acceptance. PR comment `5573217066` is the immutable
-  release-closure record.
-- Phil authorized adoption of Discourse's current compatibility-branch
-  convention after official-source and ecosystem review. Work is isolated on
-  `codex/d-compat-branching` from released `main`. The batch adds the pinned
-  official daily `d-compat` workflow, an exact Discourse 2026.8 release CI
-  lane at core commit `badad7b0456a628e578bc48b9f8c1259422b5d58`, and
-  administrator/release documentation. No compatibility branch has been
-  pushed yet. Dual review of candidate `74c8cbb` found that the upstream
-  date-based bootstrap would select the repository's initial commit for
-  `d-compat/2026.8`. The correction batch therefore requires both 2026.7 and
-  2026.8 to be seeded from released `v0.9.0` before the writer can run, verifies
-  those accepted seeds fail closed, and serializes writer executions.
-- Implementation commit `24071e75f189cb4512cf8ce37d8b1576aa0f652d`
-  passed configuration run `34144739257` (24/24); Discourse Theme run
-  `34144739800` passed 17 applicable jobs with three duplicate lint jobs
-  intentionally skipped. Current Discourse, the two recorded exact
-  2026.7 cores, and exact `v2026.8.0` core commit `badad7b0456` each passed
-  backend, frontend (23/23), and system (30/30) lanes; current linting passed.
-  This evidence is now recorded in `docs/TESTING.md`.
-- Frozen candidate `74c8cbb49eeeafd3e94cf38d2a51e0ffc3e7e16c` / tree
-  `77cffdbfa5aead677c6c8bffe1a274021b8180dc` passed exact-head
-  configuration run `34145373387` and Discourse Theme run `34145373857`
-  (17 applicable jobs passed; three duplicate lint jobs were intentionally
-  skipped). Dual focused review blocked that candidate because the unseeded
-  upstream workflow would have published initial commit `857aba8` as
-  `d-compat/2026.8`. Both lanes also identified misleading exact-core names on
-  compatibility-branch pull requests, and the persistent lane identified the
-  historical twenty-pass wording corrected above. The current correction batch
-  adds the seed guard, serialized writer execution, and an explicit
-  compatibility-branch CI lane. Local formatting, JavaScript/template/type/CSS
-  linting, configuration tests (24/24), whitespace checks, and synthetic
-  absent/wrong/correct/descendant seed checks pass. Exact-head CI and focused
-  correction closure remain pending.
-- All PR 8 pending-state entries below are dated development history and no
-  longer describe the current release or repository state.
+Brand Navigation `v0.9.0` is a released public preview. The component is
+independently maintained by CodeWorksLabs and is not an official Discourse
+product. Current product code is released and deployed; a documentation-only
+operator-readiness correction and the browser/runtime embed and RTL evidence
+are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
+screen-reader acceptance is explicitly not claimed. The selected next release
+identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
+and the planned public documentation work. Release preparation is active on
+`release/v1.0.0-rc.1`. The authorized correction batch is implemented on pull
+requests 19, 20, and 21. It removes the duplicate Brand Navigation `enabled`
+setting, documents the enabled non-live staging-theme import workflow, guards
+against stale asynchronous bundle reads, and keeps linked submenu children in
+normal mobile-menu flow. The sidebar correction-closure review left the revised
+staging-preview workflow unproved and required a stronger mobile geometry
+oracle. A separate internal closure review also found that the async-read and
+mobile-flow fixes were initially absent from the two maintained compatibility
+branches. The geometry oracle and package inconsistency are corrected; the
+staging workflow now has dedicated system coverage and exact-head CI. Both
+focused closure lanes passed the frozen package with P2/P3 findings and no
+P0/P1. Two subsequent complete-codebase review lanes independently passed the
+exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
+together. The resulting documentation correction batch is implemented across
+all three lines and its exact-head CI is green. The two correction-closure lanes
+then found no P0/P1 but identified missing compatibility-package security-policy
+files plus three narrow rollback/checkpoint wording defects. This final small
+correction includes those fixes. A subsequent sidebar narrow review found that
+the emergency rollback entry still requested an export before re-enabling the
+isolated staging component; the procedure is now reordered to close that final
+interaction. Its exact replacement identities, CI, and impact-scoped closure
+must be established before manual acceptance.
 
-- PR 8 replacement candidate `683af89cdee2673af6e3d5f9fae35ee2ad0463a0`
-  / tree `3418ab1f984082e3e5defa2fb48b0d4ff0e48ddf` passed configuration
-  run `34103778561` (24/24) and complete current, exact Repeal 2026.7, and
-  exact R744 2026.7 lanes in Discourse Theme run `34103778968` (frontend
-  22/22 and system 30/30 on each core, plus backend on each and current lint).
-  Freeze comment `5568234464` records the exact candidate and clean/synchronized
-  branch controls. Dual focused closure review closed all four submitted
-  correction items with no remaining P0/P1 or new P2 in that submitted set.
-- Sidebar closure review `BN-PR8-CLOSURE-20260907-SIDEBAR-R3` identified one
-  additional P2 transition case: a retained direct-header item initially
-  excluded by responsive policy could become eligible before the primary SVG
-  sprite arrived without then joining the shared readiness observer. Phil
-  authorized one final correction batch. The implementation synchronizes the
-  subscription whenever responsive eligibility is reevaluated and adds a
-  rendered hidden-mobile to desktop to delayed-sprite regression. Exact-head
-  local checks and CI are pending; this batch is not frozen.
-- First implementation commit `4a75e9de450eb15409858558ad4db7a22a4e55a2`
-  passed configuration run `34111630208` and every backend/system/lint lane of
-  Discourse Theme run `34111630733`, but the same new frontend assertion failed
-  on all three cores. The fixture attempted to replace an already-instantiated
-  `site` service, so the component correctly saw the real desktop value and
-  subscribed immediately. The test now follows Discourse's own component-test
-  convention: it stubs the existing service's `mobileView` value and invokes
-  Ember's `rerender()` to retain the component across the transition. This was
-  a test-fixture defect, not a reported production-code failure. Replacement
-  exact-head CI is required.
-- Fixture-corrected commit `f1c7b2b1210d385aed3ed572bdde82cee2e81d75`
-  passed configuration run `34113175978`; its three frontend lanes in Theme
-  run `34113176415` failed the opposite transition assertion. Stubbing the
-  untracked service property and calling a generic rerender did not invalidate
-  the child component because none of its consumed arguments changed. The
-  fixture now changes a tracked copy of the same item argument after changing
-  `mobileView`, forcing reevaluation at the same component location without
-  remounting it. The failure again concerns only the test trigger; production
-  mobile-view invalidation is owned by Discourse's tracked site service.
-- The same sidebar review identified this checkpoint's obsolete pre-freeze
-  wording as record-only P3. This current section supersedes that wording.
-  Earlier pending-state entries below are retained as dated iteration history,
-  not current status. Because a committed file cannot self-record its own
-  post-commit CI result, the next immutable freeze comment remains the
-  authoritative exact-head CI and candidate record.
+## Authoritative repository state
 
-- Frozen PR 8 candidate `d398d887419886eae4310fd1467b483a29ed30b4`
-  / tree `9640302b5403dfb2052bf9a5f64c5a77fb717e5b` passed configuration
-  run `34097326194` (24/24) and every lane of Discourse Theme run
-  `34097326701` (frontend 20/20; system 30/30). Its focused dual
-  correction-closure review nevertheless issued BLOCK: the new
-  `ensureSpriteSymbol` and `hasSpriteSymbol` imports do not exist on the two
-  documented 2026.7 core revisions, and anonymous lookup failure could settle
-  before the independently loaded primary sprite without a later render
-  invalidation. The internal lane additionally identified unbounded per-icon
-  search/rerender fan-out as P2; the sidebar lane retained one historical-state
-  P3 in this checkpoint.
-- The authorized coherent second replacement removes those newer core imports
-  and all per-icon searches. A shared, request-free `MutationObserver` waits
-  for Discourse's primary Font Awesome sprite, notifies live consumers once,
-  and disconnects; destroyed consumers unsubscribe, and ineligible items do
-  not subscribe. Direct membership still distinguishes loaded replacement
-  icons from genuinely unavailable icons. Unit and rendered component tests
-  now cover delayed readiness, accessible interim labels, bar/child/header
-  recovery, unavailable fallback/omission, shared observation, and teardown.
-- The Discourse workflow now adds exact-core test lanes for recorded Repeal
-  core `988c31e00fb73713c81b93cd47f68af0fb4c6273` and R744 core
-  `2e46cff73b07ecddbcc5603eb3fbf41d563577f6`, alongside current Discourse.
-  Local JavaScript, template, type, CSS, changed-file formatting, configuration
-  (24/24), and diff checks pass. The batch has been pushed for iterative CI but
-  is not frozen; complete green exact-core execution remains pending.
-- Batch commit `f88fc93` first exposed a theme-test-only absolute import error;
-  `2300de3` corrected the integration test to use the repository-relative
-  module convention. On `2300de3`, the new rendered delayed-readiness test
-  passed on current Discourse and the R744 2026.7 core, while all three
-  frontend lanes failed the same older unit fixture because it inserted test
-  symbols beside, rather than inside, the primary `.fontawesome` sprite. The
-  fixture now accurately mirrors both supported loaders. Replacement CI is
-  required; no product-code failure was reported by those runs.
-- On fixture-corrected head `bd74dc7`, all current and exact-2026.7 frontend
-  suites passed, including the new rendered delayed-readiness case. All three
-  system suites then exposed the same genuine timing fault on user-profile
-  routes: the sprite observer could update tracked `iconRevision` inside an
-  active render computation. The callback is now scheduled through Ember's
-  `afterRender` queue, and an already-ready sprite requires no callback because
-  getters inspect it directly. Fresh full-matrix CI is required.
-- Substantive replacement head
-  `e2f03d630031c7b9312c90bea89b62dae715cb1b` passed configuration run
-  `34103050555` (24/24) and the complete three-core Discourse Theme run
-  `34103038086`. Current Discourse, Repeal core `988c31e00f`, and R744 core
-  `2e46cff73b` each passed backend, frontend (22/22), and system (30/30)
-  execution; current linting also passed. This checkpoint-only evidence commit
-  must pass exact-head CI before a new immutable candidate can freeze and enter
-  dual focused closure review.
+- Repository: `https://github.com/CodeWorksLabs/brand-navigation`
+- Canonical local checkout:
+  `C:\CodeProjects\Products\Discourse Brand Navigation`
+- Stable repository line: `main`, currently
+  `56ee6f874efb85dfd6976928954f0dcd74aab3c8`. Obtain the live identity with
+  `git rev-parse origin/main` rather than relying on this checkpoint after
+  later merges.
+- Published preview: `v0.9.0`, release commit
+  `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
+  `23328df16e2703920778d71c226abe0a00f97cfb`
+- Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
+  at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
+- Complete-review freeze: PR19 candidate
+  `b816d1b8bc5bbf8b4d6a5cf46795602b87909f16`, tree
+  `caa42247968705bb5248b82468fa066ef3c6777e`. This identity is superseded as
+  soon as the active documentation correction batch is committed.
+- Documentation-correction heads immediately preceding this checkpoint-only
+  refresh: PR19 `826fbcbe18c932da8a083525fc02a6c5b420d08e`, tree
+  `07305e9f4b17370f33253e643e0053e6c4651450`; PR20
+  `db709dff5e37e0eb4730f6141ddffc2d1fd4a8e6`; and PR21
+  `9a1b6f67365745715db9e7ca348dce5670901517`. The two compatibility heads share
+  tree `504324e05ade77a1817e7335b4d77acb8c118da5`, and their README, docs, and
+  successor checkpoint are byte-aligned with PR19.
+- First exact-head correction CI is green: PR19 theme run `34187429929` plus
+  configuration run `34187429272`; PR20 theme run `34187455791` plus
+  configuration run `34187455481`; PR21 theme run `34187470248` plus
+  configuration run `34187469890`. The checkpoint-only replacement heads need
+  their own final CI before closure.
 
-- Phil explicitly accepted the two remaining P2 release-engineering risks for
-  `v0.9.0`: the absence of a trusted Ruby transitive lockfile and the
-  intentionally moving downstream dependencies inside the pinned Discourse
-  workflow. Both remain tracked improvements rather than undisclosed claims of
-  immutability.
-- Frozen candidate `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b` / tree
-  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9` passed configuration run
-  `34080419543` and every lane of Discourse Theme run `34080419924`.
-- Sandbox component 3 imported that exact candidate with zero commits behind
-  and no import error. Administrator bundle import and appearance save both
-  succeeded without leaving the editor. After a controlled Foundation-theme
-  cutover, desktop light/dark, phone portrait/landscape, anonymous visibility,
-  keyboard submenu behavior, external-link safety, and overflow/error checks
-  passed. Phil accepted the authenticated presentation, My Preferences versus
-  Sign Up behavior, and persistent Resources submenu.
-- Pull request 7 merged as `22c4499044a270c5b31172c477f2c22f9fc63b20`.
-  Its tree is exactly the accepted candidate tree above. No tag or GitHub
-  Release has yet been created; a minimal release-metadata correction must pass
-  its own gates first.
-- Pull request 8 froze at `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`
-  / tree `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`. Configuration
-  run `34085356922` and all five Discourse Theme lanes in run `34085357353`
-  passed. Internal review and the persistent sidebar Code Reviewer both issued
-  PASS dispositions with findings for that exact candidate.
-- Phil accepted live classic-embed, full RTL-locale, and screen-reader manual
-  execution as disclosed `v0.9.0` preview follow-ups, not as tests already
-  performed; all three remain required before `v1.0.0`.
-- The complete PR 8 finding census contains six findings. BN-06 and BN-15 are
-  the two previously accepted P2 release-engineering risks. Phil directed one
-  coherent correction batch for the four new findings: enabled shared-core
-  coverage (BN8-02), the Discourse object-setting byte preflight (BN8-03),
-  unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
-  (BN8-01).
-- Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
-  request 7. The first four-finding correction batch was committed, pushed,
-  frozen, and dual-reviewed. The P1/P3 replacement batch described below is the
-  current work and requires its own exact-head CI, freeze, and closure review.
-- Current correction-batch local evidence: all 24 Node configuration tests,
-  JavaScript lint, Ember template lint, type checking, CSS lint, changed-file
-  formatting, Repeal fixture validation, and `git diff --check` pass. Ruby and
-  browser suites were not executed locally; exact GitHub execution evidence is
-  recorded below. The aggregate local lint command reports Windows checkout
-  formatting drift in 17 unchanged files; no changed file is among those
-  warnings.
-- First pushed batch commit `97f249ecb799b14b5089d6a6a9854bfda867005c`
-  / tree `1d088afef469709a8d263ab486ca55512a9c381e` passed configuration
-  run `34089230517`, plus test discovery, linting, and backend checks in
-  Discourse Theme run `34089231211`. Its frontend lane passed 15/17 QUnit
-  tests: the two failures were test assumptions that the interaction helper
-  could click a disabled button and that undeclared `signal` was available in
-  the test sprite. Its system lane passed 29/30 examples, including the new
-  enabled-core and unavailable-icon scenarios; the remaining historical mobile
-  scenario assumed `globe` was guaranteed in the active sprite. The corrected
-  fixtures use native disabled-button behavior, explicit unit icon
-  availability, and the core-guaranteed `search` icon. Replacement exact-head
-  CI is required before freeze.
-- Replacement head `b978a6d6d8ed798b2af5137b72f5d652391a62bc`
-  / tree `50a893fefa1d16a82351504f97295e2fa24053f7` passed configuration
-  run `34089873962` and test discovery, linting, backend, and all 17 frontend
-  tests in Discourse Theme run `34089874541`. The system lane again passed the
-  new enabled-core and unavailable-icon scenarios but retained one failure in
-  the older hidden-mobile scenario because the minimal test sprite does not
-  guarantee the substituted `search` icon. That fixture now uses
-  `caret-down`, which Brand Navigation itself statically requires. Another
-  exact-head system run is required; the prior green lanes do not carry forward
-  as a replacement-candidate disposition.
-- Follow-up head `abf52851002bf90bdf4094761a5709001ddf6ecb` / tree
-  `06a27c449b531396af7f5afb5076caa083bbdc44` passed configuration run
-  `34090334222` and test discovery, linting, backend, and all 17 frontend tests
-  in Discourse Theme run `34090334799`. The same older hidden-mobile system
-  scenario remained the sole failure because merely choosing a component-used
-  literal did not add a dynamically configured item icon to that test theme's
-  SVG subset. The scenario now exercises the documented administrator contract
-  by explicitly adding `caret-down` to `custom_font_awesome_icons` before
-  asserting the positive header-icon baseline and the subsequent hidden state.
-  Replacement exact-head CI remains required.
-- Follow-up head `415dd0ead3ed71473b340f41cf7c53de69a45f6d` / tree
-  `81fca3d1e82ee93f1a7266ceab270f46e17ecb23` passed configuration run
-  `34090828030` and test discovery, linting, backend, and all 17 frontend tests
-  in Discourse Theme run `34090828723`. Its system lane again passed 29/30
-  examples; the sole failure was the same positive header-icon prerequisite.
-  Evidence established that changing `custom_font_awesome_icons` after the test
-  component upload does not rebuild that page's SVG sprite. The fixture now
-  registers `caret-down` through Discourse's supported theme-modifier
-  `svg_icons` collection before visiting the page. Production behavior is
-  unchanged. Replacement exact-head CI remains required.
-- Follow-up head `a9eedecef974d5b51d12cd0fe204fa5f2278355d` / tree
-  `cfd0f324af7a367755305c99815d677091b34724` passed configuration run
-  `34091516312` and test discovery, linting, backend, and all
-  17 frontend tests in Discourse Theme run `34091516812`. Its system lane again
-  passed 29/30 examples; registering the icon through the uploaded component's
-  theme modifier did not update the already composed active theme sprite in the
-  system harness. The prerequisite now uses `user`, which the failed-page
-  artifact proves is present in the active core header sprite. This avoids
-  dynamically mutating sprite membership while preserving the scenario's
-  positive-then-hidden assertion. Replacement exact-head CI remains required.
-- Follow-up head `3db16f2a2588de15684d0ce1736d630a6b7766e9` / tree
-  `55e4db59303371f1fdf40e554b3ab7fc120909bf` passed configuration run
-  `34091962556` and test discovery, linting, backend, and all
-  17 frontend tests in Discourse Theme run `34091962977`. Its system lane again
-  passed 29/30 examples. The raw failure identified the positive custom-header
-  assertion on the mobile system-test page, whose core header does not expose
-  that custom outlet in this fixture. The test now separates the concerns: a
-  desktop scenario proves a configured available header icon renders, while
-  the mobile scenario proves the bar, compact menu, and header-icon surface are
-  all absent in hidden mode. Replacement exact-head CI remains required.
-- Follow-up head `d6d35c5db3569b2b0de16e3b0b59f126c8c0bd35` / tree
-  `e5f213b15445304d3343a44fea3de742f66d0fb4` passed configuration run
-  `34092593926` and test discovery, linting, backend, and all 17 frontend tests
-  in Discourse Theme run `34092594131`. The separated desktop header-icon
-  precondition was still the sole system failure, proving that runtime
-  `navigation_items` replacement cannot exercise initializer-time header-icon
-  registration in this prebuilt test bundle. Header-icon render policy is now
-  an exported pure function with direct available, unavailable, hidden-mobile,
-  and embed-mode unit coverage. The system suite retains positive browser
-  coverage for unavailable-icon label fallback and actual hidden bar/menu
-  surfaces without asserting impossible dynamic registration. Replacement
-  exact-head CI remains required.
-- Completed correction-code head
-  `36562ed47e576a65c5ba474569a17f32d67ca0d7` / tree
-  `24e6c0736508a0d5210d9425e49c424fa0409844` passed all exact-head checks:
-  configuration run `34093283060` and test discovery, linting, backend, all 18
-  frontend tests, and all 30 system examples in Discourse Theme run
-  `34093283449`. The current successor-record commit is documentation-only, but
-  it must also pass exact-head CI before the pull-request candidate is frozen.
-- Final first-batch candidate `9c77873401a6a2ccf21eba4f907f97fc19af1850`
-  / tree `96aef5a0b7baa1cc537b795ebc5f97c448dec019` passed all exact-head
-  checks in configuration run `34093777343` and Discourse Theme run
-  `34093777874`. Dual correction-closure review then identified a production
-  P1: Discourse's `isExistingIconId` membership list is initialized only in
-  development, so ordinary production would treat every configured icon as
-  unavailable. The sidebar review blocked BN8-04 closure; the internal review
-  additionally identified two P3 evidence-record issues, which the sidebar
-  review confirmed as one residual checkpoint P3.
-- The current replacement uses Discourse's exported `hasSpriteSymbol` helper to
-  inspect symbols loaded in the production SVG sprite, retains replacement-ID
-  mapping, adds a no-injected-predicate production-path test, classifies all
-  superseded checkpoint sections as historical, and narrows the system-test and
-  testing-guide claims to actual rendered bar fallback. Fresh CI and dual
-  closure review are required after commit and freeze.
-- Substantive replacement head `c83348aef4d5aa74f76a8966043cc114050d2a32`
-  / tree `3ac9802c9405f43537c57be44765d6daebda37f2` passed all exact-head
-  checks: configuration run `34096739720` passed all 24 Node cases; Discourse
-  Theme run `34096740176` passed discovery, linting, backend, all 20 frontend
-  tests, and all 30 system examples. The successor-record commit that records
-  this evidence must also pass current-head CI before replacement freeze.
-- Pull request 5 merged the color-normalization candidate into `main`; the
-  DiscussionBridge sandbox was updated through the normal Discourse UI and
-  reported itself current with `main`. Administrator checks confirmed that
-  colors with and without a leading `#` render correctly and that the
-  Appearance panel can return all five values to inherited palette behavior.
-- Obsolete draft pull request 2 was closed with an explanatory comment on
-  2026-09-06. It targeted the retired R744 `2026.2` compatibility experiment,
-  conflicted with current `main`, and was not merged. Its source branch remains
-  available so history has not been discarded.
-- Repeal OBBBA currently reports Discourse `2026.7.0-latest` at
-  `988c31e00fb73713c81b93cd47f68af0fb4c6273`. Its enabled Brand Navigation
-  component id 19 is attached to theme ids `1`, `-1`, and `-2`. It was updated
-  to `b0b5354` and Phil confirmed the resulting brand-color presentation looked
-  great. The current compatibility evidence records both that exact Discourse
-  build and component revision.
-- Current release-documentation work expands the README feature summary,
-  documents the English-first translation posture, adds administrator
-  translation guidance, strengthens the release translation/attribution gate,
-  and records attribution, AI-assisted authorship, source provenance, and the
-  selected `GPL-2.0-or-later` licensing posture.
-- Focused Prettier checks and `git diff --check` pass for the changed docs. All
-  23 Node configuration-bundle tests pass. JavaScript, template, CSS, and type
-  lanes pass in the aggregate lint command; the aggregate Prettier lane still
-  reports pre-existing Windows checkout drift in unrelated files, so only the
-  changed documentation was formatted.
-- The resumed task still has no callable authenticated browser-control runtime.
-  Visual UI evidence must be gathered with Phil in the authenticated browser;
-  existing Pageant/SSH access may be used only when a read-only server check is
-  necessary.
-- The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. Pull request 7 completed the implementation review,
-  remediation, correction closure, manual acceptance, and merge gates. Pull
-  request 8 is the release-metadata successor candidate. Its complete review is
-  finished and the authorized four-finding correction batch is implemented.
-  The remaining sequence is green current-head CI, freeze, dual
-  correction-closure review, remaining release-gate reconciliation, merge,
-  exact-tree confirmation, tag, and GitHub Release.
-- Public presentation will use `codeworkslabs.dev` as the product-lab front
-  door, platform discovery hostnames such as `discourse.codeworkslabs.dev`, and
-  shared canonical documentation at `docs.codeworkslabs.dev`. The durable
-  umbrella support entry is `support.codeworkslabs.dev`; independent product
-  communities such as `forum.discussionbridge.dev` remain independent. Exact
-  source repositories, paths, deployment ownership, and timing remain
-  unsettled. No site creation or publication is authorized.
+The detailed pre-release and compatibility-branch chronology is preserved in
+[`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
+used as current operational instruction.
 
-## Purpose and authority
+## Product invariants
 
-Brand Navigation is an independently maintained Discourse theme component for
-an optional brand header and one-level navigation hierarchy. It is not an
-official Discourse product.
+- Brand Navigation is a modern, independently designed Discourse theme
+  component for optional brand identity, primary links, one-level submenus,
+  responsive navigation, and compact core-header destinations.
+- Administration is a first-class product surface with structured settings,
+  validation, safe defaults, appearance controls, and browser-based
+  configuration bundle import/export.
+- Site-global Brand Navigation content must never mount in supported Discourse
+  embed contexts. Enforcement stays at the component render/connector boundary
+  using supported Discourse embed state—never CSS hiding, hostname checks, DOM
+  selectors, or DiscussionBridge-specific compatibility code.
+- Core topic navigation, embedded discussion content, sign-in, reply, like,
+  quote, composer, and normal full-application behavior remain owned by
+  Discourse.
+- Normal non-embed pages retain the intended brand and navigation surfaces.
+- Public identity remains **Brand Navigation**, repository slug
+  `brand-navigation`, with no official-status claim or Discourse branding.
+- License remains `GPL-2.0-or-later`; attribution and provenance records remain
+  precise about inspiration, independently authored work, and adapted source.
 
-Phil authorized browser-based installation, configuration, and testing on the
-DiscussionBridge sandbox, Repeal OBBBA Forum, DiscussionBridge Forum, The
-Bridge, Citizen Activist Network, and RVing Community. Browser administration
-is available through Phil's authenticated Chrome tabs. SSH is unnecessary and
-should be reserved for cases the supported UI cannot handle. Do not delete or
-disable the other installed header components without Phil's explicit
-direction.
+## Verified installations
 
-## Canonical locations
+The canonical table and exact evidence are in
+[`docs/TESTING.md`](docs/TESTING.md). Current coverage includes:
 
-- Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
-- Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/v0.9.0-release-metadata`.
-- Current committed PR 8 head before the authorized correction batch:
-  `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`; tree
-  `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`.
-- Current merged `main` head: `22c4499044a270c5b31172c477f2c22f9fc63b20`;
-  tree `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
-- Exact browser-accepted implementation head:
-  `9f2a6e0c0c18b075e796ff0e7a15e1e8917b6d8b`; tree
-  `8eca2b3bb2137ea2a24c4cc4574f518e9227e2a9`.
+- Discourse `2026.9`: DiscussionBridge sandbox, DiscussionBridge Forum, The
+  Bridge, and Citizen Activist Network on repository-default `main`.
+- Discourse `2026.8`: RVing Community on `d-compat/2026.8`.
+- Discourse `2026.7` ESR: Repeal OBBBA Forum and R744 Community on the maintained
+  2026.7 line. R744 intentionally remains the oldest real-world compatibility
+  canary while that core remains supported.
 
-The remaining references in this section are historical and are not current
-branch, head, candidate, or release-gate claims:
+Native update checks, compatibility selection, setting preservation, theme
+attachments, import state, and HTTP availability were recorded during the
+2026-09-07 multi-site pass. Historical duplicate components remain only where
+explicitly documented as unattached rollback/test copies.
 
-- Merged color-control head: `4d520d2`.
-- Historical merged head `4a03705` was a documentation-only merge after its
-  then-current browser-tested implementation.
-- Top-level behavior implementation commit: `e53a7d0`; evidence commit:
-  `2cb2b2a`; merged pull request:
-  `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
-- Previous compatibility branch: `codex/r744-compatibility`
-- Closed obsolete compatibility pull request:
-  `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
-- Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
-- Merged pull request: `https://github.com/CodeWorksLabs/brand-navigation/pull/1`
-- Historical CI/browser-tested merged head: `b0b5354`.
-- Historical first-review commit: `2b699c3c173ac3c3d5ef223ec3c45cb6c7770bb7`;
-  tree `0e895ab0a208a2fa0db895f4c48192a9fd22adca`.
-- Historical PR 7 pre-remediation freeze: commit
-  `80061e4c872443a6a2951c08c6adad102b7c32b2`; tree
-  `12a1292aa1fde6650a2a32b68dc1dbd559e56c08`.
-- Historical runtime evidence below identifies its own commit. It is not a
-  claim that those earlier commits are current.
+## Completed documentation correction
 
-`C:\CodeProjects\CodeWorksLabs\Discourse` is not this repository's working
-directory. Use the canonical local repository path above.
+Manual Boss and Product Boss completed independent read-only documentation and
+operator inspections of merged commit `f3f41e5`. Neither issued a formal code
+review disposition. Their combined findings contained no P0 and no identified
+product-code defect. The documentation correction was merged through pull
+request 13 at `dc0e935ab54eead212e41681320470b52fc6a775`; all GitHub CI lanes passed.
+Both Bosses then closed every submitted finding against the exact correction
+candidate, with no new P0-P3 finding in the final delta. The batch closed:
 
-## Formal review and remediation checkpoint
+1. stale instructions that could repeat the completed `v0.9.0` release;
+2. contradictory current and historical checkpoint state;
+3. the missing same-component revision rollback procedure;
+4. the omitted copyable installation URL;
+5. accessibility wording beyond completed human evidence;
+6. a stale README sandbox build;
+7. production/demo/sandbox classification;
+8. the missing current support route; and
+9. obsolete “first release” wording.
 
-This section is a dated history of PR 7 review and remediation. It does not
-override the current PR 8 state in **Current release-documentation checkpoint**
-or **Canonical locations** above.
+The complete closure reports remain in the originating Manual Boss and Product
+Boss tasks. They are bounded documentation/product inspections, not formal code
+review dispositions.
 
-- Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
-  Its first frozen candidate `80061e4` / tree `12a1292a` passed all six GitHub
-  checks in runs `34070471390` and `34070471604`.
-- Complete codebase review `BN-CODEBASE-20260907` used the controlling Code
-  Review Doctrine at 52,273 bytes and SHA-256
-  `5610f2ab5b2e9dc2cd649e2e11321dec6b5f1bacd174a1c32babd49174888c5d`.
-  It issued `INTERNAL CODE REVIEW INCOMPLETE` with no P0, three confirmed P1,
-  three P2, and two P3 findings. Missing external-source and CLI-contract
-  evidence prevented an exhaustive acceptance disposition.
-- The known findings were evaluated together. The coherent remediation batch
-  keeps `GPL-2.0-or-later` while replacing the historical adapted icon-binding
-  expression; corrects submenu description and hover colors; retains browser
-  bundle import/export while removing credentialed CLI apply/export from the
-  `v0.9.0` contract; translates standard fallback status messages and narrows
-  the detailed-validation translation claim; makes administrator enhancements
-  survive local copies and repository moves; adds affected system/unit tests;
-  and refreshes release records.
-- Ruby tooling has an exact direct Gemfile pin but no `Gemfile.lock`; transitive
-  lint-tool resolution remains the known BN-06 P2. It is not being disguised as
-  fully reproducible. The official Discourse repositories inspected during
-  evaluation currently include lockfiles, but generating a trustworthy lock
-  requires an available Ruby/Bundler environment and is not fabricated by hand.
-- Current local evidence after the implementation slice: 18/18 Node
-  configuration tests pass; JavaScript, template, CSS, and type lanes pass when
-  run individually; the Repeal fixture passes offline validation; and
-  `git diff --check` passes. The concurrent aggregate lint command exhausted
-  local Node memory and is recorded as an environment/tool execution failure,
-  not a product finding. Exact-candidate GitHub CI remains required after the
-  batch is committed.
-- The first remediation CI pass used commit `a835ff6` / tree `73a8d24f`.
-  Configuration workflow run `34072665895` passed. Discourse Theme workflow
-  run `34072666154` passed linting, test discovery, backend tests, frontend
-  tests, and configuration tests; its system lane failed 1 of 27 examples
-  because the newly authored color assertion searched for a conditional CSS
-  modifier class that was absent in that fixture. The failure artifact showed
-  the rendered submenu and configured colors. The test selector has been
-  corrected to use the stable `.brand-navigation__submenu > ul a` structure.
-  Replacement commit `6315e0a` then passed all six checks: configuration run
-  `34073137065` and Discourse Theme run `34073137344`, including all 27 system
-  examples. The next checkpoint-only commit must also pass exact-head CI before
-  the candidate is frozen.
-- Phil directed the next review to both the internal review lane and the
-  persistent sidebar task titled `Code Reviewer`. Both must receive the same
-  immutable commit, tree, doctrine, scope, and evidence package. Their reports
-  remain separate until both finish and are then evaluated together; neither
-  inherits the other's conclusions.
-- Replacement candidate `993f6badcd12964a56eb00a34e49bcb66610e999` /
-  tree `58a459175f1787309ebb2160fc952b9b5860620a` passed all six checks in
-  configuration run `34073989308` and Discourse Theme run `34073989626`, then
-  froze for dual review. Internal report `BN-V090-REPLACEMENT-20260907-R2`
-  completed with the exact disposition `INTERNAL CODE REVIEW BLOCK` and three
-  named blockers. Sidebar reports
-  `BN-V090-REPLACEMENT-20260907-SIDEBAR-R1/R2` each issued the exact disposition
-  `INTERNAL CODE REVIEW INCOMPLETE`; they did not complete the original review
-  gate, and their unresolved Discourse-integration, runtime/CI, and material
-  action-artifact evidence requirements remain part of the release record.
-  Both lanes used the controlling doctrine and Phil-authorized bounded
-  read-only inspection of eight exact public upstream revisions.
-- Both lanes identified stale post-import appearance state as P1. Mutable
-  in-flight administrator state was P1 in the sidebar report and P2 internally;
-  exports too large for the importer were P1 internally and P2 in the sidebar
-  report. All three were conservatively treated as release blockers during the
-  coherent remediation batch. The reports also identified strict color-type,
-  inert diagnostic, Ruby lint, Ruby dependency-resolution,
-  administrator-identity documentation, and moving upstream workflow assurance
-  work. The internal report's `BN-14`
-  claim that the direct pnpm action revision does not exist is rejected by the
-  exact-candidate configuration log: GitHub downloaded and executed
-  `pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa` and installed
-  pnpm `10.28.0` successfully. The sidebar report correctly treated its source
-  retrieval discrepancy as an evidence limitation rather than a defect.
-- The second coherent remediation batch is in progress. It snapshots submitted
-  settings, disables conflicting controls during writes, synchronizes imported
-  colors, enforces export/import byte symmetry and strict color types, escapes
-  diagnostic controls, aligns architecture/test/release records, enables the
-  Discourse RuboCop configuration, and adds affected Node/system coverage.
-  Ruby transitive locking remains a separately disclosed P2 decision because
-  no trusted local Ruby/Bundler runtime is available to generate a lockfile.
-- Current second-batch local evidence: 23/23 Node tests pass; JavaScript,
-  template, CSS, type, and changed-file formatting checks pass; the Repeal
-  fixture passes offline validation; and `git diff --check` passes. The new
-  browser-backed import/reload spec and enabled RuboCop gate cannot execute in
-  the current local environment; their exact GitHub execution is recorded next.
-- Second-batch commit `563026e6505b6b17466c0a0fdb6dc67f5cfab869` /
-  tree `da480e1830a3970bfbc9376b68e0f3b4ea5de195` passed configuration run
-  `34076938530` and every Discourse Theme lane in run `34076938809`.
-  Configuration executed 23/23 tests; RuboCop executed against three Ruby files
-  with no offenses; the new browser-backed import/reload scenario passed; and
-  the complete system lane passed 28/28 examples.
-- Record commit `552f09d6ab7644a724a94202a9099e58921f5715` / tree
-  `f7c07e94ee6a84db61d35948a569b98ea29631cd` passed exact-head configuration
-  run `34077297071` and all Discourse Theme lanes in run `34077297327`, then
-  froze for correction closure. Internal closure report
-  `BN-V090-CLOSURE-20260907-R1` issued **INTERNAL CODE REVIEW PASS WITH P2/P3
-  FINDINGS**: every prior P1 was closed, while the unlocked Ruby transitive
-  graph and moving downstream Discourse CI references remain P2 policy
-  decisions. Sidebar closure report `BN-V090-CLOSURE-20260907-SIDEBAR-R1`
-  issued **INTERNAL CODE REVIEW INCOMPLETE** and confirmed P1 `BNC-01`: this checkpoint had
-  incorrectly promoted its prior `INCOMPLETE` reports to completed reviews. It
-  also retained unresolved administrator deferred-response execution and
-  independently inspectable exact-run log/environment evidence requirements.
-  This edit corrects `BNC-01`; it supersedes the frozen record candidate and
-  requires replacement identity, CI, freeze, and focused closure evidence.
-- First closure-remediation commit `fa603f2` added the corrected record and two
-  component-action deferred-completion tests. Configuration run `34078612707`
-  passed, and Discourse Theme run `34078613026` passed test discovery, linting,
-  backend, and all 28 system examples. Its frontend lane failed both new QUnit
-  examples before their assertions because the test constructed the Glimmer
-  component without a required owner argument. This was a test-harness setup
-  defect, not a runtime component failure; the test construction now supplies
-  both owner and arguments and requires replacement CI before any freeze.
-- Follow-up commit `390b2ca` supplied a non-null plain object as the owner.
-  Configuration run `34079040392` passed, and Discourse Theme run
-  `34079040637` again passed test discovery, linting, backend, and all 28 system
-  examples. The frontend lane showed that Glimmer requires an actual Ember
-  owner rather than an arbitrary object. The tests now initialize the standard
-  Discourse QUnit owner with `setupTest` and pass `getOwner(this)`; another
-  replacement CI run is required.
-- Follow-up commit `81aa7a3` initialized the normal QUnit owner, but
-  configuration run `34079297022` and every non-frontend lane in Discourse
-  Theme run `34079297357` again passed while Glimmer rejected direct manual
-  construction. Its current manager marks argument objects during rendering,
-  so even a genuine owner cannot make `new Component(...)` a supported test
-  path. The deferred cases now use Discourse's `setupRenderingTest`, render the
-  real component through its manager, interact through its administrator DOM,
-  and replace only the persistence method with a controlled deferred promise.
-  Replacement CI is required.
-- Rendering-test commit `bf1f02c` passed configuration run `34079799706` and
-  every non-frontend lane in Discourse Theme run `34079799973`, including all
-  28 system examples. Both new integration cases reached their assertions, but
-  asserted DOM state before Ember finished rerendering after the controlled
-  promise resolved. The tests now await the standard `settled()` helper after
-  completion before inspecting rendered values; replacement CI is required.
-- Replacement commit `95d447bc230a1f97e9f95a4e0fb72479c6b7a686` / tree
-  `57e7ad5535633b04c84540fffea3f86c5cf04e50` passed configuration run
-  `34080068217` and all lanes in Discourse Theme run `34080068455`. QUnit
-  passed 14/14, including both component-level deferred-completion cases;
-  RuboCop and every other lint gate passed; backend passed; and the unchanged
-  system suite passed 28/28. This checkpoint refresh must receive exact-head CI
-  before the final correction-closure candidate freezes.
-- Candidate `993f6ba` is superseded for implementation but remains immutable
-  review evidence. Candidate `552f09d` was superseded by the complete closure
-  correction batch: the record correction, production persistence seam,
-  rendered integration tests, and expanded lint discovery. Final checkpoint
-  commit `9f2a6e0` then recorded the closure evidence without changing product
-  behavior. Each remains immutable historical evidence.
+Subsequent repository verification confirmed that GitHub Issues is enabled on
+the public repository. The stale statement that new issue creation was
+restricted has been removed, and GitHub Issues is now the documented public
+intake route for support and product feedback. A private security-reporting
+channel is now published at `security@codeworkslabs.dev` through the repository
+security policy; the mailbox is monitored by CodeWorksLabs.
 
-## Historical administrator color-control checkpoint
+## Remaining `v1.0.0` acceptance
 
-- Candidate `ce7fb34` adds five independently optional appearance settings:
-  bar background, bar text/icons, hover/highlight background, submenu
-  background, and submenu text/icons.
-- Brand Navigation's existing administrator panel exposes native browser color
-  inputs with a per-color **Custom** switch, **Save colors**, and **Inherit
-  all**. Blank settings continue using Discourse's `--tertiary`, `--secondary`,
-  `--quaternary-low`, and `--primary` palette variables, preserving active
-  light/dark color-scheme behavior.
-- The five settings are portable in configuration bundles. Bundle validation
-  accepts only blank inheritance or six-digit hex colors.
-- The administrator guide, README, changelog, setting descriptions, and panel
-  labels are updated.
-- Local JavaScript lint, Ember template lint, Stylelint, type checking,
-  changed-file formatting, `git diff --check`, and all 21 Node configuration
-  tests pass.
-- Official Discourse workflow run `34051003085` passed linting, backend,
-  frontend QUnit, and browser-backed system tests on candidate `1fee5e8`.
-  Configuration workflow run `34051002649` passed all 21 Node tests.
-- At that historical gate, administrator/browser interaction on the sandbox remained pending because
-  this resumed task currently exposes no callable authenticated-browser
-  control despite the browser session being open. No production forum has
-  been changed.
-- The first official workflow passed configuration tests and the complete
-  linting lane, then the backend lane rejected one administrator description
-  for Discourse's banned phrase `color scheme`; the wording is corrected to
-  `color palette` in the follow-up candidate. This was a locale-policy finding,
-  not a code-build failure.
+On 2026-09-07, reproducible sandbox browser/runtime work exercised classic
+comments, full-app embed exclusion and core-control availability, and Arabic
+RTL desktop/mobile interaction on Foundation and Horizon. The temporary embed
+fixture and all changed sandbox settings were removed or restored. Exact
+evidence and boundaries are recorded in `docs/TESTING.md`.
 
-## Historical color-value normalization follow-up
+Human confirmation remains required for these gates on a controlled test
+environment:
 
-- Sandbox testing found that Discourse's underlying string setting accepts
-  both `16324F` and `#FFFFFF`; the database retained those exact forms.
-- Branch `codex/normalize-color-values` makes rendering accept either six-digit
-  form, normalizes appearance-panel and configuration-bundle values to
-  uppercase `#RRGGBB`, and documents the accepted input.
-- Local ESLint, Ember template lint, Stylelint, type checking, changed-file
-  formatting, `git diff --check`, and all 22 Node configuration tests pass.
-- At that historical gate, official CI, merge, and sandbox update verification remained pending. The
-  sandbox currently has `bar_background_color=16324F` and
-  `bar_text_color=#FFFFFF`; no production forum was changed.
+1. classic Discourse embedded comments, including core interaction preservation
+   and complete Brand Navigation exclusion;
+2. a full RTL-locale desktop/mobile interaction pass; and
+3. completion of the partial iPhone VoiceOver pass for landmarks, names, state,
+   focus, dismissal, submenus, icons, responsive controls, and embed exclusion.
 
-## Current multi-site checkpoint
+The partial VoiceOver pass confirmed announced menu items, submenu state,
+child-link roles, and visible descriptions. It did not confirm the outer
+trigger state or submenu dismissal/focus return. It also exposed a portrait
+capacity limit when five mobile social icons compete with Discourse's anonymous
+header controls: the Brand Navigation trigger can be obscured. The exact
+evidence and current operator mitigation are in `docs/TESTING.md`.
 
-- Main is installed, configured, and browser-smoke-tested on Repeal OBBBA
-  Forum, DiscussionBridge Forum, The Bridge, Citizen Activist Network, and
-  RVing Community. The DiscussionBridge sandbox remains the primary current
-  Discourse test environment.
-- DiscussionBridge Forum and The Bridge now each expose GitHub, Bluesky,
-  Discord, and YouTube as right-side `site_header` icon links. Each uses an
-  accessible tooltip, opens with `_blank`, and was inspected with
-  `rel="noopener noreferrer"`. Both sites showed no broken-theme warning.
-- The Bridge retained its Publishing, From The Bridge, Releases, Ecosystem, and
-  My Preferences navigation. Its full-app `?embed_mode=true` check returned no
-  Brand Navigation bar and no component social links while `#main-outlet`
-  remained present. The normal forum URL was restored afterward.
-- DiscussionBridge Forum has the same restrained four-icon social set and
-  passed normal rendering and full-app embed exclusion. These are site settings
-  only; no repository code changed to add them.
-- Citizen Activist Network has configured Community and Issues navigation and
-  passed normal authenticated rendering, submenu/Escape behavior, no-console-
-  error inspection, and full-app embed exclusion.
-- RVing Community has configured Community and RVing Network navigation, is
-  attached to Default, Foundation, and Horizon, and passed normal authenticated
-  rendering, link/submenu inspection, no-console-error inspection, and full-app
-  embed exclusion.
-- The original R744 `2026.2.0-latest` attempt exposed unsupported older module
-  APIs; that unsupported build remains explicitly outside the compatibility
-  claim. R744 was subsequently upgraded to the 2026.7 ESR and is now a verified
-  installation as recorded below. Draft pull request 2 is obsolete for the
-  R744 site and was later closed without merge, as recorded in the current
-  release checkpoint above.
-
-## R744 2026.7 ESR checkpoint
-
-- Phil explicitly authorized the live R744 upgrade and Brand Navigation test.
-- A fresh pre-upgrade Discourse backup was confirmed at
-  `/var/discourse/shared/web-only/backups/default/r744-community-2026-09-05-033639-v20260126204830.tar.gz`.
-- `/var/discourse/containers/web_only.yml` was backed up as
-  `web_only.yml.pre-2026.7-esr-20260905`, then pinned to
-  `version: release/2026.7`. The launcher repository was fast-forwarded and
-  `./launcher rebuild web_only` completed successfully.
-- The administrator dashboard reports Discourse `2026.7.2+14` at core commit
-  `2e46cff73b`. The configured source remains `release/2026.7`; a newer regular
-  release being advertised by the dashboard does not change that ESR pin.
-- Brand Navigation component id `1`, sourced from `main`, is enabled and
-  attached to Foundation and Horizon. Component id `2` remains preserved,
-  disabled, and unattached.
-- Authenticated normal-page smoke passed: one Brand Navigation surface, core
-  main content present, no broken-theme warning, and no captured console error.
-- Resources opened, Escape closed it and restored focus, and the external Meta
-  link retained `target="_blank"` with `rel="noopener noreferrer"`.
-- Full-app `?embed_mode=true` excluded Brand Navigation while retaining
-  `#main-outlet` and produced no broken-theme warning.
-- The component administrator page and `navigation_items` object editor loaded
-  normally on the ESR. The editor retained its in-place `Save Changes` control;
-  no setting mutation was required for this verification.
-- The launcher printed container environment values during rebuild. Secret
-  values are intentionally omitted from this checkpoint. SMTP, database, and
-  MaxMind credentials visible in the task record should be rotated separately;
-  no rotation was performed without Phil's direction.
-
-## Top-level Link / Submenu group checkpoint
-
-- Commit `e53a7d0` implements the per-item `link_mode`, with `link` preserving
-  the current linked-parent behavior and `group` suppressing the rendered URL
-  while retaining the saved value for later reuse.
-- Group mode is limited to bar items with actionable children. It is rejected
-  for core-header items and for items without children. Link mode requires a
-  URL. Configuration bundle import/export accepts and validates the field.
-- Local ESLint, Ember template lint, Stylelint, type checking, changed-file
-  Prettier, `git diff --check`, and all 19 Node configuration tests passed. The
-  repository-wide Windows Prettier command still reports CRLF conversion on 19
-  unchanged files; no unrelated formatting rewrite was made.
-- Pull request 3 merged as `317c4be`, and all checks are green. Official Discourse workflow
-  run `34019282463` passed linting, frontend QUnit, backend, and Ruby system
-  tests; configuration workflow run `34019282181` passed all 19 Node tests.
-- Sandbox component id `2` tracked `codex/top-level-link-behavior` for candidate
-  testing. After a
-  required application reload following the source switch, the administrator
-  editor displayed **Top-level behavior** and saved normally without leaving
-  the editor.
-- Resources passed the complete live round trip: `group` rendered the label as
-  a submenu-only button and exposed both children; changing it back to `link`
-  restored `/about` as the live parent destination plus the separate caret.
-  The saved URL survived group mode. The sandbox was left in Link mode.
-- Attempting group mode on Community without actionable children failed closed
-  with the expected validation error and did not change the setting.
-- Full-app `?embed_mode=true` still produced zero Brand Navigation surfaces,
-  one `#main-outlet`, no broken-theme warning, and no captured console errors.
-- After merge, sandbox component id `2` was switched back to `main` and reported
-  up to date. The final smoke test reconfirmed Resources as the `/about` parent
-  link with its separate submenu caret, submenu open and Escape focus return,
-  the Meta child link's `_blank`/`noopener noreferrer` safety, one normal-page
-  Brand Navigation surface, one core `#main-outlet`, no broken-theme warning,
-  and no captured console errors. Full-app `?embed_mode=true` again returned
-  zero Brand Navigation surfaces while preserving `#main-outlet`. The browser
-  was restored to the normal sandbox forum page.
-- Phil then clarified that the sandbox Resources item should demonstrate the
-  new submenu-only behavior rather than retain its historical link behavior.
-  Resources is now saved as `group`: the normal page exposes it as a submenu
-  button, not an `/about` parent link, while its About and Discourse Meta child
-  destinations remain available. This is the current sandbox configuration.
-
-## Post-merge sandbox checkpoint
-
-- Pull request 1 was marked ready and merged into `main` as `e22dce2`; merging
-  did not create a tag, GitHub Release, or deployment.
-- Sandbox component id `2` was changed from
-  `codex/v0.9.0-verification` to `main`. Discourse reported it up to date with
-  `main`, whose remote head was independently confirmed as `e22dce2`.
-- Authenticated normal-page smoke testing passed after the source change: one
-  Brand Navigation landmark rendered with Community, Resources, My Preferences,
-  and the configured site-header link while core main content remained.
-- Resources opened normally; its Discourse Meta `_blank` link retained
-  `noopener noreferrer`; Escape closed the submenu and restored focus.
-- The same structured configuration bundle was re-imported through the
-  administrator UI. Import succeeded, and a forum reload confirmed the brand
-  navigation and site-header item persisted.
-- Full-app `?embed_mode=true` smoke testing again found no bar, Brand Navigation
-  landmark, compact menu, or component site-header icon while core main content
-  remained. The browser was restored to the normal forum page afterward.
-- This post-merge smoke test changed only the authorized sandbox. Repeal and all
-  other production/consumer sites were untouched.
-
-## Historical verification gate — `13005b7` (superseded)
-
-- The reviewed candidate was committed to the short-lived verification branch
-  and pushed without changing `main`. No tag or GitHub Release was created.
-- GitHub Actions run `34010799758` passed every lane at `13005b7`:
-  `check_for_tests`, linting (including Ruby, JavaScript, templates, styles,
-  formatting, and types), backend/English-locale validation, frontend QUnit,
-  and Ruby system tests. Configuration workflow run `34010799448` also passed.
-- The first CI run exposed only harness/package compatibility findings: a
-  missing standard development `Gemfile`, two English-locale uses of “color
-  scheme,” and application-style rather than relative theme-test imports.
-  Commit `13005b7` corrected all three, and the complete official workflow
-  subsequently passed.
-- Browser import initially proved that scalar settings persisted but object
-  settings did not. Current Discourse expects object-setting values serialized
-  for the theme update endpoint. Commit `1789301` aligned the browser importer
-  with that endpoint while retaining the parsed array in the local admin model;
-  the structured sandbox bundle then imported successfully.
-- Sandbox component id `2` tracks `codex/v0.9.0-verification`, is enabled and
-  attached to Foundation and Horizon, and is updated through `13005b7`.
-  Component id `1` is preserved, disabled, and detached as rollback material;
-  it was not deleted. This sandbox-only change prevents duplicate administrator
-  connectors while the candidate is evaluated.
-- Sandbox browser passes on the candidate: authenticated desktop render;
-  linked parent plus separate submenu control; outside-click and Escape closure
-  with focus restoration; safe `_blank` rel; 390px mobile menu, bar, and hidden
-  modes; unclipped bar submenu; site-header icon placement and safe rel; full-app
-  `embed_mode=true` exclusion while main content remains; structured bundle
-  import; unsafe-URL rejection before mutation; corrected locale; and
-  save-without-leaving behavior in the navigation-object editor.
-- The sandbox was restored to mobile `bar` mode after the reversible hidden-mode
-  check. No Repeal or other production installation was changed in this gate.
-- Remaining evidence gaps are explicit: classic embedded comments could not
-  render because the sandbox has no embed hosts configured; anonymous browser
-  visibility was not re-executed without disrupting Phil's authenticated admin
-  session; export construction is covered by automated tests, but the current
-  browser download could not be conclusively observed because Chrome's
-  save-location UI remained outside the automation result; light/dark, RTL,
-  screen-reader, and older-version consumer checks remain manual targets.
-- Windows still has no discoverable `ruby`, `gem`, or `bundle` commands on this
-  task's PowerShell PATH. Ubuntu WSL startup again timed out and was interrupted,
-  so its Ruby state remains unverified. This is no longer a coverage blocker for
-  the candidate because the official GitHub workflow executed and passed the
-  authored QUnit and Ruby system suites.
-- Final focused static review of commits `97807a1`, `1789301`, and `13005b7`
-  returned `INTERNAL CODE REVIEW PASS WITH P2/P3 FINDINGS`, found no P0/P1
-  defect, and confirmed that browser object serialization and the parsed local
-  model state are coherent. It raised two P2 findings: overstatement of
-  server-side atomicity and floating Ruby lint tools.
-- The first closure commit pinned the two Ruby lint tools to the exact versions
-  resolved by the passing workflow and corrected the test matrix, but its first
-  static closure check found one residual architecture statement plus a P3
-  checkpoint-sequencing issue. The present narrow correction describes bundle
-  integrity only as complete client preflight plus one update request, without
-  claiming an unproven server transaction, and makes a fresh official workflow
-  on the exact closure head an explicit pre-merge action.
-
-## 2026-09-05 doctrine review and remediation
-
-- Complete Static Review `BN-CODEBASE-20260905` used the approved Code Review
-  Doctrine at `C:\CodeProjects\Governance\Boss\CODE_REVIEW_DOCTRINE.md`,
-  52,273 bytes, SHA-256
-  `5610F2AB5B2E9DC2CD649E2E11321DEC6B5F1BACD174A1C32BABD49174888C5D`.
-- The independent reviewer inspected all 39 tracked members. Opening and
-  closing identity remained clean at the exact commit and tree above.
-- Disposition: `INTERNAL CODE REVIEW BLOCK`; P0 none, P1 seven, P2 six, P3 one.
-  The grouped findings cover mobile hidden/bar behavior, bundle validation and
-  atomicity, administrator component identity, CLI credential transport,
-  runtime evidence, direct-setting hardening, Escape ownership, accessible
-  descriptions/status, CLI bounds, lifecycle records, and export overwrite.
-- Phil accepted the review quality and authorized one local remediation batch
-  plus Semantic Versioning records. No commit, push, tag, GitHub Release, live
-  forum change, installation, deployment, or publication is part of the active
-  batch.
-- The local remediation now implements the complete grouped response: mobile
-  hidden mode suppresses registered header icons; mobile bar navigation wraps
-  without the clipping scrollport; bundle and navigation validation is
-  fail-closed; browser import uses one preflighted theme update; administrator
-  extensions use an exact remote/schema identity; CLI API access requires a
-  canonical HTTPS origin with redirects, time, response size, and terminal text
-  bounded; export overwrite is explicit; Escape ownership is scoped; visible
-  descriptions and bundle status have explicit accessibility relationships;
-  lifecycle/default records are reconciled; and CI/versioning records exist.
-- Local post-remediation evidence: `pnpm lint` passes all JavaScript, template,
-  CSS, formatting, and type gates; `pnpm test:config` passes 15/15; the Repeal
-  migration bundle validates; and `git diff --check` passes. QUnit and Ruby
-  system specs, including the newly authored mobile hidden/bar cases, remain
-  authored but unexecuted pending a compatible Discourse runtime gate.
-- The separate Review Reviewer Doctrine audit is not commissioned and creates
-  no current gate.
-- Version policy: Git tags and matching GitHub Releases use Semantic Versioning;
-  Discourse continues commit-based remote updates. The first planned reviewed
-  preview is `v0.9.0`; `v1.0.0` is reserved for documented multi-site readiness.
-- Focused correction review `BN-CORRECTION-CLOSURE-20260905` confirmed no P0,
-  but blocked the first correction batch on two P1 assurance regressions and
-  six P2/P3 hardening or record findings. The follow-up local batch makes QUnit
-  fixtures actionable, enables system specs explicitly with non-vacuous
-  negative baselines, validates exports, rejects delimiter-bearing icon tokens,
-  requires plain data objects and a canonical repository port, bounds browser
-  files before reading, pins CI dependencies to reviewed commit identities with
-  read-only permissions, and updates release/checkpoint guidance.
-- Follow-up evidence: `pnpm lint` passes; `pnpm test:config` passes 18/18; the
-  Repeal configuration validates; and `git diff --check` passes. QUnit, Ruby
-  system specs, both GitHub workflows, browser/runtime, embed, and consumer
-  checks remain unexecuted. No commit, push, tag, release, installation,
-  deployment, publication, or live forum mutation has occurred in either local
-  remediation batch.
-- The follow-up closure review source-closed seven of `BN-CV-01` through
-  `BN-CV-08` and found one remaining P1 assurance defect, `BN-FU-01`: the hidden
-  mobile system case did not first prove that its same configured site-header
-  icon rendered. The final narrow correction now configures the icon in mobile
-  bar mode, positively asserts both the bar and icon, changes only
-  `mobile_mode` to `hidden`, then asserts every component surface is absent.
-  That authored Ruby case remains unexecuted pending the compatible runtime
-  gate.
-- Final focused static closure independently replayed binary-diff identity
-  `bffd9fd8d778076355541202daf441eebb9cde72` and content manifest
-  `a750cc4d29d57c77ca810326a9ff0aa642f52af5c46451cb7cffc600778de557`.
-  It closed `BN-FU-01` and `BN-CV-02` at source and issued
-  `INTERNAL CODE REVIEW PASS`, with no P0-P3 finding remaining in the narrowly
-  commissioned static scope. This is not runtime, consumer, or release
-  acceptance.
-
-## Settled product decisions
-
-- Visible name: `Brand Navigation`; repository slug: `brand-navigation`.
-- Description: “A brand header and submenu navigation theme component for
-  Discourse.”
-- Do not imply Discourse ownership, maintenance, or official status.
-- Credit Brand Header and Header Submenus for product inspiration. The current
-  implementation was authored from specifications; no source code from those
-  inspiration components was intentionally copied.
-- License: `GPL-2.0-or-later`.
-- Structured administration and safe defaults are first-class requirements.
-- One submenu level is supported; arbitrary deep nesting is excluded.
-- DiscussionBridge contains no compatibility logic for this component.
-
-## Non-negotiable runtime invariants
-
-- Site-global brand/navigation content must not mount in supported Discourse
-  embed contexts.
-- Enforce exclusion at initializer and render boundaries using supported
-  `EmbedMode.enabled` state.
-- Do not use CSS hiding, hostname checks, DOM selectors, or DiscussionBridge
-  detection for embed exclusion.
-- Leave classic `embedded_header` and core embed behavior untouched.
-- Preserve embedded content, topic navigation, sign-in, reply, like, quote,
-  composer, and normal full-application sign-in behavior.
-
-## Implemented surface
-
-- Optional brand name, URL, light/dark logo, presentation, and target.
-- Ordered direct links and one-level submenus with internal/external URLs.
-- Per-entry titles, Font Awesome icons, and safe `_blank` rel handling.
-- `everyone`, `anonymous`, and `authenticated` visibility.
-- Per-item `both`, `desktop`, and `mobile` device visibility for top-level and
-  child entries, evaluated against Discourse's supported physical-device
-  capability.
-- Sandbox update to `12e764a` passed on Discourse `2026.9.0-latest+307`: the
-  new device field was accepted by the objects schema, existing blank values
-  retained `both` behavior, authenticated navigation continued rendering, and
-  no administrator component warning appeared. The initial live schema check
-  exposed a raw `device_visibility` label; the follow-up locale metadata gives
-  top-level and child controls the administrator-facing label “Device
-  visibility” and explains the backward-compatible blank behavior.
-- Desktop placement above or below the core header.
-- Top-level left/right sections.
-- `icon_and_label`, `label_only`, and `icon_only` entry presentation, with a
-  visible-label fallback when an icon is unavailable.
-- Mobile `menu`, `bar`, and `hidden` modes.
-- Native `details`/`summary` submenu semantics, translated navigation labels,
-  color-scheme variables, migration/rollback documentation, release material,
-  and administrator/user documentation.
-- One-open-submenu behavior with closure on outside click, Escape, link
-  selection, or opening another submenu; Escape restores summary focus.
-- Administrator-facing JSON bundle import/export on Brand Navigation's own
-  component page when the component is attached to the administrator's active
-  theme. Historical imports used individual setting-model updates. The active
-  remediation batch replaces that path with one preflighted theme update; it
-  still does not attach or enable the component.
-- Bundle imports accept either a selected `.json` file or pasted JSON, allowing
-  validation and import without browser file-picker automation.
-- Saving Brand Navigation's navigation-object editor remains on the editor page
-  so administrators can continue working instead of being returned to the main
-  component settings screen.
-
-## Historical repository and runtime state — initial build period
-
-- `6bb45ec` fixed strict-mode GJS translation imports. It cleared the sandbox's
-  administrator warning and produced no new Brand Navigation client error.
-- `160a967` added practical sample defaults.
-- `bc4ad96` added left/right sections, icon presentation, and correctly scoped
-  theme translations. It is committed and pushed.
-- Sandbox theme component id `1` is installed on Foundation and Horizon,
-  enabled, configured at `below-site-header`, and runtime-tested at `c15353e`.
-- Sandbox runtime verification after a fresh forum navigation passed: the
-  component rendered, the landmark resolved to “Brand navigation,” the main
-  links remained left, and authenticated “My Preferences” rendered at the
-  right edge. No component warning was present.
-- Repeal Brand Navigation component id `19` is updated to `310f743`, attached
-  to Default, Foundation, and Horizon, populated with the reviewed Repeal
-  migration, and enabled. It is visible on the live forum. Phil moved its
-  runtime outlet to `above-site-header`, which he considers the likely common
-  placement; this is a site setting choice and has not changed the component's
-  packaged default.
-- Existing Repeal Brand Header id `7` and Dropdown Header id `8` remain enabled
-  and untouched. Custom Header Links (icons) id `3` is still installed with its
-  settings intact but was disabled after Brand Navigation's replacement icons
-  were verified in the core header.
-- Brand Navigation and all three existing header components render together
-  without an observed conflict or administrator warning. Phil reviewed the
-  combined live result and reported that all four play well together.
-- Top-level URL and submenu behavior are independent. URL plus children renders
-  a functioning parent label link beside a separate caret control; children
-  without a URL retain the complete submenu trigger; URL without children is a
-  direct link. A row with neither URL nor children has no actionable output.
-- Linked parent labels and their separate caret controls share one continuous
-  hover/focus highlight while retaining distinct link and submenu actions.
-- Child entries have separate optional tooltip and visible-description fields.
-  Empty descriptions retain compact menus.
-- Direct top-level icon links can select the `site_header` surface to render
-  once among Discourse's core header icons instead of in the Brand Navigation
-  bar. This uses the supported `api.headerIcons` API. Existing entries default
-  to the bar. Repeal's ten standalone social links now use `site_header`; its
-  Social parent and submenu remain in the Brand Navigation bar.
-- At this historical stage, `scripts/brand-navigation-config.mjs` included
-  credentialed export/apply operations. Those operations were later removed
-  from the `v0.9.0` contract; the current script performs offline bundle
-  validation only.
-- `configurations/repeal-obbba.json` contains the inventoried Repeal migration
-  as the first real bundle and large-menu test fixture.
-- The configuration-bundle work, documentation, expanded thanks, and tests are
-  committed in `6def463`; checkpoint commit `c51a7f6` is also pushed. The
-  sandbox accepted the updated remote component and its normal runtime render
-  remains clean. The then-planned API import/export round trip did not run. It
-  is not a current verification requirement because the credentialed
-  operations were removed.
-- `c1cc27b` adds the supported admin-page bundle controls and polished submenu
-  closure behavior. Local lint, types, templates, styles, formatting, bundle
-  validation, and four Node tests pass. Sandbox theme component `1` was updated
-  through Discourse's normal updater to checkpoint head `7baecce`; the
-  Configuration Bundles controls render, outside-click closure passes, and
-  Escape closure restores focus to the Resources summary. File selection and
-  settings application had not yet been exercised through the browser UI.
-- `c15353e` adds pasted-JSON import. On the sandbox, a partial bundle changed
-  `brand_name` to `Brand Navigation Import Test`; a full page reload confirmed
-  persistence. A second bundle restored `Brand Navigation`, and another reload
-  confirmed that the temporary value was gone. Theme attachments and the
-  component's enabled state were unchanged. The Export settings control opened
-  Chrome's save-location prompt at Documents, confirming download delivery and
-  respect for the browser's ask-where-to-save preference.
-- Repeal runs Discourse `2026.7.0-latest +319`. Its admin model shape required
-  relaxing an unnecessary settings-array check in `6b782ff`; the supported
-  `admin-customize-theme-before-controls` outlet and `ThemeSettings#updateSetting`
-  API are present in that exact Discourse revision.
-- Compatibility documentation now records exact administrator-dashboard
-  builds rather than implying an unverified minimum version. Repeal is on
-  `2026.7.0-latest+319` at core commit `988c31e00f`; the DiscussionBridge
-  sandbox is on `2026.9.0-latest+307` at core commit `b8565672b9`. On
-  2026-09-05 Brand Navigation rendered on authenticated normal pages and its
-  administrator surface loaded on both builds. Repeal carries the broader
-  live interaction coverage enumerated below.
-- Repeal exposed two migration-data issues before cutover. The original three
-  People entries used no-op `#` destinations and were correctly rejected by the
-  validated object schema. Working destinations were later identified and are
-  now included in both the live component and the local Repeal bundle. The
-  administrator importer converts icon arrays to Discourse's pipe-delimited
-  list storage. `50d614b` introduced both migration corrections and placeholder
-  URL rejection.
-
-## Existing Repeal configuration known so far
-
-- Brand Header: name `Repeal OBBBA`, URL `https://www.repealobbba.org/`, outlet
-  `below-site-header`, and top-level links Pledge, Repeal, and Stories.
-- Known Pledge URL: `/c/repealobbbapledge-us/10`.
-- Known Repeal URL: `/c/repealobbbaact-us/15`.
-- Known Stories URL: `/c/stories/7`.
-- Dropdown Header top-level groups: Repeal, Pledge, Stories, People, Social.
-- Social destinations already observed: Bluesky, Discord, Facebook, GitHub,
-  Instagram, Mastodon, Reddit, TikTok, X, and YouTube.
-- Dropdown Header and Custom Header Links values have now been inventoried and
-  encoded in `configurations/repeal-obbba.json`, including all ten social URLs,
-  brand icons, `_blank` behavior, the Repeal/Pledge children, and Stories.
-- People now links to `/c/people/19`, with working children for Voted for OBBBA
-  (`/t/voted-for-the-one-big-beautiful-bill-act/1146`), Voted Against OBBBA
-  (`/t/voted-against-the-one-big-beautiful-bill-act/1147`), and Supports Repeal
-  OBBBA Act (`/t/repeal-obbba-act-supporters/1148`).
-- Phil added visible descriptions directly in Repeal before the People change.
-  The live current-state editor was used to add People, preserving those edits.
-  Their exact live text is not yet mirrored in the local configuration bundle;
-  export the current live settings before using that bundle as a replacement.
-
-## Verification evidence
-
-Executed successfully on Windows for `c02bf5a`:
-
-- `pnpm lint` (JavaScript, templates, CSS, formatting, and type checks): pass.
-- `pnpm bundle validate configurations/repeal-obbba.json`: pass.
-- `pnpm test:config`: pass (6 tests).
-- `git diff --check`: pass.
-
-Previously executed successfully:
-
-- Node smoke coverage for right-section and icon presentation: pass.
-- Sandbox desktop runtime render and translated accessibility landmark at
-  `7baecce`: pass.
-- Sandbox Resources outside-click closure: pass.
-- Sandbox Resources Escape closure and summary focus restoration: pass.
-- Sandbox administrator Configuration Bundles controls render: pass.
-- Sandbox pasted-JSON validation enables Import settings: pass.
-- Sandbox reversible import, reload, restore, and reload: pass.
-- Export bundle construction and serialization Node coverage: pass.
-- Browser download delivery from Export settings: pass; Chrome displayed its
-  configured save-location prompt.
-- Repeal component update, attachment save, and hidden-state save: pass.
-- Repeal scalar settings import and reload persistence: pass.
-- Repeal navigation object import without invalid People placeholders: pass;
-  the editor shows Repeal, Pledge, Stories, Social, ten right-side social links,
-  Sign Up, and My Preferences.
-- Repeal custom icon-list persistence: pass; all twelve icons render as separate
-  administrator list entries after reload.
-- Repeal authenticated desktop render at `fc2ced6`: pass; the brand, four
-  migrated navigation entries, ten right-side social links, and My Preferences
-  render while all three comparison components remain enabled.
-- Repeal submenu interaction at `fc2ced6`: pass on a fresh page; a submenu opens
-  normally and closes after an outside click on the core All categories heading.
-  The document click handler uses capture phase so stopped bubbling in other
-  Discourse components does not prevent closure.
-- Repeal linked-parent behavior at `fc2ced6`: pass. Repeal links to
-  `/c/repealobbbaact-us/15`, Pledge to `/c/repealobbbapledge-us/10`, and Social
-  to `/c/social/16`; their separate submenu controls open correctly and retain
-  outside-click closure. During manual administration, those paths were briefly
-  entered into the label fields due to field-index selection, then corrected
-  before final verification. This was an operator interaction incident, not a
-  component data-model or rendering behavior.
-- Repeal caret presentation at `53a6871`: pass by live screenshot. Discourse's
-  global `summary::before` disclosure triangle is suppressed within Brand
-  Navigation, leaving only the component's small downward caret.
-- Repeal linked-submenu alignment at `ce91a6f`: pass by live screenshot in the
-  `above-site-header` outlet. The opened Repeal child menu begins under its
-  parent label rather than under the separate caret or between adjacent
-  top-level items.
-- Repeal linked-parent caret spacing at `00cf3ce`: pass by live screenshot. The
-  separate accessible submenu control is now visually adjacent to its parent
-  label while the child menu retains the corrected alignment.
-- Repeal combined parent/caret highlight at `3cd8910`: pass by live screenshot.
-  Activating the separate caret highlights the complete linked group and the
-  child menu remains aligned beneath the parent label.
-- Repeal administrator schema at `3cd8910`: pass. The top-level `Surface`
-  control and separate child `Tooltip` and `Visible description` fields render
-  in the supported objects editor.
-- `pnpm lint`, `pnpm test:config` (6 tests), bundle validation, and
-  `git diff --check` at `3cd8910`: pass.
-- Repeal `site_header` icon placement at `3cd8910`: pass. Before the comparison
-  icon component was disabled, both ten-icon sets rendered, proving Brand
-  Navigation's set was
-  present. After disabling Custom Header Links (icons) id `3`, a fresh page
-  showed exactly one set of ten social icons in the core header and none in the
-  upper Brand Navigation bar. My Preferences remained in the upper bar.
-- Sandbox administrator save behavior at `4a65821`: pass. Clicking Save Changes
-  on `/admin/customize/themes/1/schema/navigation_items` persisted through the
-  supported setting model while the URL, editor, and Save Changes control
-  remained in place.
-- Repeal administrator save behavior at `4a65821`: pass on component id `19`.
-  The URL remained `/admin/customize/themes/19/schema/navigation_items`, and the
-  editor and Save Changes control remained present after saving.
-- Repeal People navigation at `4a65821`: pass. The parent link and separate
-  submenu caret render in Brand Navigation; opening the submenu exposes all
-  three intended labels and exact working topic destinations listed above.
-- The stay-open behavior uses Discourse's documented `api.modifyClass` against
-  the core schema-setting editor because that save action currently exposes no
-  narrower supported outlet or transformer. The override is restricted to the
-  `navigation_items`/`brand_navigation_item_v1` setting and delegates every
-  other schema editor to core behavior. Core admin-editor changes remain a
-  maintenance risk.
-- `pnpm lint`, `pnpm test:config` (6 tests), Repeal bundle validation, and
-  `git diff --check` at `4a65821`: pass.
-- Repeal visible-description presentation at `c02bf5a`: pass by live browser
-  inspection. Menus containing descriptions selectively widen to 21rem (within
-  the viewport), use stronger child labels, readable subordinate text, and
-  clearer spacing between choices. Menus without descriptions retain their
-  compact width. Phil's existing live description text was unchanged.
-- Per-item device visibility at `310f743`: pass on the sandbox. The new
-  administrator label and help text render; changing Community to `mobile`
-  removed it from the authenticated desktop navigation after reload, and
-  restoring `both` brought it back. The sandbox configuration was restored.
-- Repeal update to `310f743`: pass. The Device visibility control renders in
-  the existing objects editor, all ten existing site-header social icons remain
-  visible under their backward-compatible blank/`both` behavior, and no Brand
-  Navigation administrator warning appeared. No Repeal item has yet been
-  changed to desktop-only or mobile-only.
-- Phil's iPhone test found that portrait filtering worked but Desktop-only
-  icons returned in landscape. This was caused by the first implementation
-  using `site.mobileView`, which Discourse defines from its 40rem responsive
-  breakpoint. It was a semantic implementation defect, not ignored settings.
-  Per-item filtering now uses supported `capabilities.isMobileDevice`, which
-  remains a mobile phone classification across rotation; `mobile_mode` retains
-  its separate responsive-layout meaning.
-- Repeal was updated to `61db961` with no component warning. Phil then verified
-  on a physical iPhone that the configured priority icons render correctly in
-  portrait and landscape while Desktop-only icons remain excluded. The
-  rotation/device-visibility defect is accepted as fixed.
-
-Executed by the official Discourse theme workflow at `13005b7`:
-
-- `test/unit/lib/brand-navigation-test.js`
-- `spec/system/brand_navigation_spec.rb`
-- `spec/system/core_features_spec.rb`
-
-The QUnit suite and Ruby system specs pass in GitHub Actions run `34010799758`.
-They were not executed locally: Ruby, Gem, and Bundler remain undiscoverable on
-the Windows PowerShell PATH, and Ubuntu WSL startup timed out.
-
-## Public presence direction
-
-Phil selected platform-oriented CodeWorksLabs discovery hostnames, including
-`discourse.codeworkslabs.dev` and `astro.codeworkslabs.dev`, with shared
-canonical documentation at `docs.codeworkslabs.dev`. Brand Navigation belongs
-on the Discourse platform surface rather than requiring its own product
-subdomain. Astro is the recommended implementation for public product/platform
-surfaces; Starlight remains the recommended documentation implementation.
-Exact paths, repositories, deployment ownership, and timing remain unsettled.
-No site, DNS, repository, publication, or deployment action was authorized.
-
-Phil also selected `support.codeworkslabs.dev` as the durable CodeWorksLabs
-umbrella support front door. It will route visitors to the appropriate docs,
-repository, issue tracker, shared community, or independent product community.
-`forum.discussionbridge.dev` remains the independent DiscussionBridge community
-and support forum. No shared CodeWorksLabs Discourse instance was authorized or
-declared necessary.
-
-## Authorship and provenance control
-
-Phil directed that Brand Navigation retain a durable, defensible record of its
-AI-assisted authorship and upstream source classifications before release. The new
-`docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
-implementation role, pinned upstream revisions and licenses, the exact
-historical header-icon registration source, and release-time provenance
-controls. The historical adapted source supplies GPL version 2 text but no
-explicit “or later” grant was found in the inspected upstream materials.
-Before the first tagged release, Brand Navigation replaced that expression
-with an independently authored lexical component factory and retained the
-permanent historical reference. The current implementation is declared
-`GPL-2.0-or-later`. No version had been tagged or
-published as a GitHub Release, but the already-public Git history retains the
-license declarations present on those commits. No external human recipient,
-adoption, or reliance is known; current repository signals show no forks,
-stars, or subscribers. GitHub clone traffic includes CI and installed-component
-activity and does not identify people. No ongoing support obligation is
-inferred from that historical record.
-
-Licensing-declaration verification on 2026-09-06: `pnpm test:config`
-passed all 22 tests and `git diff --check` passed. `pnpm lint:prettier`
-continued to report 24 pre-existing baseline files outside this six-file
-licensing/provenance change; none of the changed formatted files was reported.
-
-Terminology audit on 2026-09-06: the active release-preparation branch no
-longer describes Brand Header, Header Submenus, Dropdown Header, or Custom
-Header Links (icons) as components in a formal succession lineage. Durable
-documentation uses `inspiration sources`, `neighboring components`, and
-`adapted source` according to the actual relationship. Older branches and Git
-history retain earlier shorthand and are not release authority.
-
-Documentation freeze-readiness pass on 2026-09-06: every relative Markdown
-link target exists; current name and license declarations agree; no unresolved
-release-content placeholder was found; and `docs/TESTING.md` now distinguishes
-the merged initial verification record from the not-yet-frozen `v0.9.0`
-candidate. The future CodeWorksLabs public-site paths remain an explicitly
-non-blocking post-release discussion. Documentation content is ready to freeze
-for the release-preparation pull request.
-
-Official-source verification confirms that Discourse Meta labels Brand Header,
-Header Submenus, and Custom Header Links (icons) as official and links to the
-same `discourse/*` repositories recorded in the provenance ledger. Pavilion
-Dropdown Header is the community component. The official repositories genuinely
-carry different licenses; official status does not establish a common license.
-Any clarification for the icon component must be addressed to the Discourse
-maintainers or another confirmed rights holder rather than assuming one
-historical contributor can grant it.
+Both complete reviews collected their findings before correction. The accepted
+durable P2 risks remain tracked: Ruby lint transitives and parts of the reusable
+CI graph move; dense mobile header icons require operator restraint; complete
+current-candidate human accessibility and full pin-return rollback exercises
+remain outstanding. The correction batch addresses stale activation, release,
+migration, rollback, keyboard-evidence, and export-metadata wording. `v1.0.0`
+becomes appropriate when the replacement candidate passes required CI and
+impact-scoped review, final manual acceptance is complete, and the remaining
+limitations are still accurately disclosed.
 
 ## Exact next actions
 
-1. Finish release preparation and manual documentation/product polish.
-2. Open one clean draft `v0.9.0` release-preparation pull request.
-3. Run CI and freeze the exact candidate commit and tree.
-4. Conduct the formal complete codebase review against that immutable
-   candidate.
-5. Evaluate all findings together and remediate them as one coherent batch.
-6. Perform the required correction-closure review and rerun affected tests.
-7. Conduct final manual acceptance on the resulting candidate.
-8. Merge only when review, CI, documentation, and manual acceptance are
-   complete.
-9. Confirm the merged tree matches the accepted candidate, then tag `v0.9.0`
-   and publish the release.
+This plan begins after the commit containing this checkpoint; do not repeat a
+step already evidenced against the current live heads.
 
-Keep the previously installed comparison components available for rollback;
-disable them only if Phil explicitly chooses a site cutover.
+1. Synchronize this final wording correction and `SECURITY.md` across PR19,
+   PR20, and PR21, then record their exact replacement heads and trees.
+2. Confirm final exact-head CI for all three replacements; run it if no matching
+   evidence exists.
+3. Complete doctrine-bound impact-scoped correction closure for the final delta
+   and cross-line package consistency.
+4. Complete the remaining controlled manual acceptance evidence, or preserve
+   any explicitly accepted accessibility limitation accurately in release
+   documentation.
+5. Merge only after correction closure, complete review, CI, and final
+   acceptance permit it.
+
+Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
+and `Brand Navigation #3`. Components `1` and `2` remain disabled and
+unattached. Component `3` is enabled on Foundation and Horizon and follows
+`release/v1.0.0-rc.1`, with no import error and zero commits behind at the last
+inspection. The single-switch runtime implementation entered that branch at
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`; obtain the exact live installed
+identity from Discourse rather than treating this checkpoint as a moving branch
+pointer. Its current schema contains no internal `enabled` setting.
+Phil confirmed the RC rendered correctly and Discourse reported it up to date
+with the release branch.
 
 ## Out of scope
 
-- CMS behavior or general page building.
-- Arbitrary deep navigation nesting.
-- Authentication replacement.
-- Changes to core Discourse embedding.
-- DiscussionBridge compatibility code.
+- CMS behavior, general page building, or arbitrary deep navigation nesting.
+- Authentication replacement or changes to core Discourse embedding.
+- DiscussionBridge-specific compatibility code.
 - Hostname, CSS, or DOM-selector embed workarounds.
-- Literal Discourse-core integration as an initial requirement.
-- Official-status claims, repository transfer, or public release without a
-  separate decision.
+- Literal Discourse-core integration, official-status claims, repository
+  transfer, or official branding without Discourse maintainer acceptance.
+- Live installation, deployment, or publication unless separately authorized.

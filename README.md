@@ -4,8 +4,10 @@
 
 Brand Navigation gives a Discourse site one coherent place for brand identity,
 primary links, submenus, and compact header icons. It is responsive,
-accessible, straightforward to administer, and independently maintained. It is
-not an official Discourse product.
+keyboard-aware, straightforward to administer, and independently maintained.
+It is not an official Discourse product. Automated accessibility coverage is
+supplemented by the explicit manual evidence and open checks in the
+[testing record](docs/TESTING.md).
 
 ## What Brand Navigation does
 
@@ -36,8 +38,21 @@ not an official Discourse product.
 ## Installation
 
 In Discourse, open **Admin → Appearance → Themes & components**, select the
-**Components** tab, and install this repository from its Git URL. Then include
-**Brand Navigation** on the theme or themes that should use it.
+**Components** tab, choose **Install → From a git repository**, and use:
+
+```text
+https://github.com/CodeWorksLabs/brand-navigation.git
+```
+
+Then include **Brand Navigation** on the theme or themes that should use it.
+Use Discourse's component-level **Enabled?** control as the single activation
+switch. Brand Navigation does not add a second enable setting.
+
+For an unpublished setup or configuration-bundle import, first attach the
+enabled component only to a non-default staging theme and use Discourse's theme
+preview. The [administrator guide](docs/USER_GUIDE.md#install-the-component) explains
+the complete preparation workflow; a disabled component cannot load its custom
+bundle panel.
 
 The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
@@ -45,34 +60,22 @@ validated configuration bundle to move settings without re-entering each row.
 
 ## Known working Discourse versions
 
-Brand Navigation has been manually verified on these exact Discourse builds:
-
-- `2026.7.0-latest+319` (`988c31e00f`) on Repeal OBBBA Forum, including
-  authenticated desktop navigation, linked submenus, visible descriptions,
-  core-header icons, administrator settings, and coexistence with other header
-  components.
-- `2026.7.2+14` (`2e46cff73b`) on R744 Community, including authenticated
-  desktop rendering, submenu keyboard behavior, safe external links,
-  administrator settings and structured navigation editor, and full-app embed
-  exclusion.
-- `2026.9.0-latest+307` (`b8565672b9`) on the DiscussionBridge sandbox,
-  including authenticated rendering and the administrator component surface.
-
-These are known-working builds, not a claim that older versions are unsupported
-or that either build is the minimum required version. See the
-[testing record](docs/TESTING.md) for the acceptance matrix and coverage limits.
+Brand Navigation has recorded manual and native-update evidence across
+Discourse 2026.7 ESR, 2026.8, and 2026.9 installations. Exact builds, core
+commits, component refs, dates, and coverage limits change as sites are updated,
+so the canonical evidence lives only in the
+[testing record](docs/TESTING.md). These known-working builds are not minimum
+version declarations.
 
 ## In use on
 
-### Production use
+### Production installations
 
 - [Repeal OBBBA Forum](https://forum.repealobbba.org/) — configured navigation,
   descriptions, audience/device visibility, and core-header social icons.
 - [DiscussionBridge Forum](https://forum.discussionbridge.dev/) — configured
   navigation and accessible core-header links for GitHub, Bluesky, Discord, and
   YouTube.
-- [The Bridge](https://bridge.demo.discussionbridge.dev/) — publishing-focused
-  navigation and the same restrained DiscussionBridge social set.
 - [Citizen Activist Network](https://forum.citizenactivist.network/) —
   configured community and issue navigation.
 - [RVing Community](https://www.rving.community/) — configured community and
@@ -80,14 +83,21 @@ or that either build is the minimum required version. See the
 - [R744 Community](https://www.r744.community/) — compatibility installation
   pinned to the Discourse 2026.7 ESR release branch.
 
-### Testing and compatibility validation
+### Demonstration installation
+
+- [The Bridge](https://bridge.demo.discussionbridge.dev/) — publishing-focused
+  navigation and the same restrained DiscussionBridge social set.
+
+### Test and compatibility installation
 
 - [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/) —
   current Discourse administrator and rendering checks.
 
 Sites are added here only after Brand Navigation has been installed and its
-stated coverage has been verified. Planned installations are tracked in the
-[testing record](docs/TESTING.md), not represented as current use.
+stated coverage has been verified. These groupings describe site purpose, not
+an assurance that every site runs the same component commit. Exact installed
+versions and planned checks are tracked in the
+[testing record](docs/TESTING.md).
 
 ## Navigation model
 
@@ -110,22 +120,29 @@ scope, architecture, migration, testing, and release procedures.
 
 Discourse detects updates from commits on the installed remote branch. Brand
 Navigation additionally uses Semantic Versioning tags and matching GitHub
-Releases as human-readable release, support, and rollback identities. `main`
-targets current Discourse; maintained older releases use Discourse's
+Releases as human-readable release, support, and revision-recovery identities.
+The same-component procedure is documented in
+[Migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+Treat it as provisional until the complete pin-and-return workflow is recorded
+on staging in the [testing record](docs/TESTING.md).
+`main` targets current Discourse; maintained older releases use Discourse's
 `d-compat/<YYYY>.<M>` compatibility branches. Development occurs on short-lived
 branches, and fixes for an older supported release are reviewed and backported
 to its matching compatibility branch.
 
-The first reviewed preview release is `v0.9.0`. Version `v1.0.0` is reserved
-for the documented, multi-site-tested release with no known release blockers.
-See the [changelog](CHANGELOG.md) and [release procedure](docs/RELEASE.md).
+The reviewed `v0.9.0` preview was published on 2026-09-07. The next release
+candidate is `v1.0.0-rc.1`; GitHub presents it as a prerelease while it ages on
+the verified installations and the public documentation surfaces are built.
+Version `v1.0.0` remains reserved for the documented, multi-site-tested release
+with no known release blockers. See the [changelog](CHANGELOG.md) and
+[release procedure](docs/RELEASE.md).
 
 ## Translations
 
 Brand Navigation uses Discourse's theme-translation system for its visitor
 accessibility labels, administration panels, setting descriptions, and status
 messages. Detailed bundle-schema validation messages are generated in English.
-English is the only language bundled for the first release.
+English is the only language bundled in the `v0.9.x` preview line.
 Administrators can provide local per-locale overrides in **Theme
 translations**, and reviewed translations are welcome as repository pull
 requests.
@@ -156,12 +173,26 @@ classifications, and the
 [authorship and provenance record](docs/PROVENANCE.md) for the AI-assisted
 authorship model and reproducible source ledger.
 
-## Support status
+## Support
+
+Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
+for bug reports, installation or configuration questions, compatibility
+reports, and feature requests. Search existing issues first and, where
+relevant, include:
+
+- the Brand Navigation release, branch, or commit;
+- the Discourse version and active theme;
+- browser, device, viewport, and signed-in state;
+- steps to reproduce, expected behavior, and actual behavior; and
+- a sanitized configuration bundle or relevant settings and console output.
+
+Never post credentials, personal data, or non-public vulnerability details in
+a public issue. Report suspected vulnerabilities privately to
+[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) and follow the
+[security policy](SECURITY.md).
 
 This independent-stage repository does not use Discourse logos, official
-badges, or language implying Discourse ownership or maintenance. If accepted
-by Discourse in the future, maintainers may rename or transfer it according to
-their conventions.
+badges, or language implying Discourse ownership or maintenance.
 
 ## License
 

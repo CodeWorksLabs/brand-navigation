@@ -56,7 +56,6 @@ export default class BrandNavigationHeaderIcon extends Component {
     const item = this.args.item;
     const context = {
       item,
-      enabled: settings.enabled,
       embedMode: EmbedMode.enabled,
       mobileView: this.site.mobileView,
       mobileMode: settings.mobile_mode,

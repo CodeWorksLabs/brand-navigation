@@ -4,7 +4,7 @@ RSpec.describe "Brand Navigation" do
   let(:theme) { upload_theme_component }
 
   before do
-    theme.update_setting(:enabled, true)
+    theme.enabled = true
     theme.update_setting(:brand_name, "Example")
     theme.update_setting(:brand_url, "/latest")
     theme.update_setting(
@@ -53,6 +53,60 @@ RSpec.describe "Brand Navigation" do
 
     expect(page).not_to have_css("[data-brand-navigation]")
     expect(page).to have_css("#brand-navigation-menu")
+  end
+
+  it "keeps linked submenu children in mobile menu flow", mobile: true do
+    theme.update_setting(:mobile_mode, "menu")
+    theme.update_setting(
+      :navigation_items,
+      [
+        {
+          label: "Explore",
+          url: "/categories",
+          visibility: "everyone",
+          children: [
+            { label: "Categories", url: "/categories", visibility: "everyone" },
+            { label: "Latest", url: "/latest", visibility: "everyone" },
+          ],
+        },
+        { label: "About", url: "/about", visibility: "everyone" },
+      ],
+    )
+    theme.save!
+
+    visit("/")
+    find("#brand-navigation-menu").click
+    find('summary[aria-label="Open Explore submenu"]').click
+
+    linked_item = find(".brand-navigation__item", text: "Explore")
+    submenu_list = find(".brand-navigation__submenu > ul")
+    following_item = all(".brand-navigation__item")[1]
+    linked_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      linked_item,
+    )
+    linked_bottom = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().bottom",
+      linked_item,
+    )
+    submenu_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      submenu_list,
+    )
+    submenu_bottom = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().bottom",
+      submenu_list,
+    )
+    following_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      following_item,
+    )
+
+    expect(page).to have_link("Latest", href: "/latest", visible: true)
+    expect(submenu_top).to be >= linked_top
+    expect(submenu_bottom).to be <= linked_bottom
+    expect(submenu_bottom).to be <= following_top
+    expect(linked_bottom).to be <= following_top
   end
 
   it "hides the bar and compact menu in hidden mobile mode", mobile: true do
@@ -194,5 +248,44 @@ RSpec.describe "Brand Navigation" do
       find('input[type="color"][data-setting="bar_background_color"]').value,
     ).to eq("#123456")
     expect(page).to have_button("Save colors", disabled: true)
+  end
+
+  context "with an unpublished staging theme" do
+    let(:staging_theme) { Fabricate(:theme, enabled: true, user_selectable: false) }
+    let(:theme) { upload_theme_component(parent_theme_id: staging_theme.id) }
+
+    it "imports settings through preview without activating the visitor theme" do
+      sign_in(Fabricate(:admin))
+      settings_path =
+        "/admin/customize/themes/#{theme.id}?preview_theme_id=#{staging_theme.id}"
+      bundle = {
+        format: "brand-navigation-settings",
+        version: 1,
+        settings: {
+          bar_background_color: "#123456",
+          navigation_items: [{ label: "Staged", url: "/latest" }],
+        },
+      }
+
+      visit("/")
+      expect(page).not_to have_css("[data-brand-navigation]")
+
+      visit("/?preview_theme_id=#{staging_theme.id}")
+      expect(page).to have_css("[data-brand-navigation]")
+
+      visit(settings_path)
+      expect(page).to have_css(".brand-navigation-bundles")
+      find(".brand-navigation-bundles textarea").set(bundle.to_json)
+      click_button("Import settings")
+      expect(page).to have_css(".alert-success", text: "Configuration bundle imported")
+
+      visit(settings_path)
+      expect(
+        find('input[type="color"][data-setting="bar_background_color"]').value,
+      ).to eq("#123456")
+
+      visit("/")
+      expect(page).not_to have_css("[data-brand-navigation]")
+    end
   end
 end
