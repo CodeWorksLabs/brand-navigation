@@ -103,7 +103,7 @@ settings**.
 Discourse loads a theme component's custom administrator JavaScript only when
 the component is enabled and belongs to the resolved theme. For a newly
 installed component, use the non-default staging-theme procedure in
-[Installation](#installation): attach Brand Navigation only to that staging
+[Install the component](#install-the-component): attach Brand Navigation only to that staging
 theme, enable the component, open the staging theme's Discourse preview, and
 then open Brand Navigation's settings within the preview context. Import and
 verify the bundle before attaching the component to a visitor-facing theme.

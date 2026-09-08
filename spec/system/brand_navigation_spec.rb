@@ -79,10 +79,23 @@ RSpec.describe "Brand Navigation" do
     find('summary[aria-label="Open Explore submenu"]').click
 
     linked_item = find(".brand-navigation__item", text: "Explore")
+    submenu_list = find(".brand-navigation__submenu > ul")
     following_item = all(".brand-navigation__item")[1]
+    linked_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      linked_item,
+    )
     linked_bottom = page.evaluate_script(
       "arguments[0].getBoundingClientRect().bottom",
       linked_item,
+    )
+    submenu_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      submenu_list,
+    )
+    submenu_bottom = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().bottom",
+      submenu_list,
     )
     following_top = page.evaluate_script(
       "arguments[0].getBoundingClientRect().top",
@@ -90,6 +103,9 @@ RSpec.describe "Brand Navigation" do
     )
 
     expect(page).to have_link("Latest", href: "/latest", visible: true)
+    expect(submenu_top).to be >= linked_top
+    expect(submenu_bottom).to be <= linked_bottom
+    expect(submenu_bottom).to be <= following_top
     expect(linked_bottom).to be <= following_top
   end
 

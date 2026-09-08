@@ -50,7 +50,7 @@ switch. Brand Navigation does not add a second enable setting.
 
 For an unpublished setup or configuration-bundle import, first attach the
 enabled component only to a non-default staging theme and use Discourse's theme
-preview. The [administrator guide](docs/USER_GUIDE.md#installation) explains
+preview. The [administrator guide](docs/USER_GUIDE.md#install-the-component) explains
 the complete preparation workflow; a disabled component cannot load its custom
 bundle panel.
 
