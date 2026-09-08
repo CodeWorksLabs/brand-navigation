@@ -3,6 +3,8 @@
 RSpec.describe "Core features" do
   let(:theme) { upload_theme_or_component }
 
+  before { theme.update!(enabled: true) }
+
   it "runs with Brand Navigation active" do
     visit("/")
 

@@ -138,13 +138,13 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. Finish the authorized sandbox rollback exercise by returning component `3`
-   from `v0.9.0` to repository-default `main`, preserving settings and theme
-   attachments, then verify normal rendering. The source return and server-side
-   preservation checks are complete; separate human visual confirmation of the
-   brief returned-`main` state was not recorded before RC installation.
-2. Finish RC preparation, run required gates, freeze the exact candidate, and
-   conduct the doctrine-controlled complete codebase review before release.
+1. Rerun pull request 19 CI after the system fixtures were corrected to persist
+   Discourse's native component activation state. The first run passed all
+   completed configuration, lint, backend, and frontend lanes but failed the
+   explicit rendered-presence example in each system lane because its fixture
+   no longer saved after the obsolete setting assignment was removed.
+2. When every required lane passes, freeze the exact candidate and conduct the
+   doctrine-controlled complete codebase review before release.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
 and `Brand Navigation #3`. Components `1` and `2` remain disabled and
