@@ -143,10 +143,7 @@ candidate passes required CI/review, and final acceptance is complete.
    attachments, then verify normal rendering. The source return and server-side
    preservation checks are complete; separate human visual confirmation of the
    brief returned-`main` state was not recorded before RC installation.
-2. Obtain Phil's visual confirmation that sandbox component `3` on
-   `release/v1.0.0-rc.1` renders normally and exposes only Discourse's native
-   **Enabled?** activation control.
-3. Finish RC preparation, run required gates, freeze the exact candidate, and
+2. Finish RC preparation, run required gates, freeze the exact candidate, and
    conduct the doctrine-controlled complete codebase review before release.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
@@ -157,6 +154,8 @@ inspection. The single-switch runtime implementation entered that branch at
 `86c9083b8f83dc21d95fc772d5fc7b08e475bc14`; obtain the exact live installed
 identity from Discourse rather than treating this checkpoint as a moving branch
 pointer. Its current schema contains no internal `enabled` setting.
+Phil confirmed the RC rendered correctly and Discourse reported it up to date
+with the release branch.
 
 ## Out of scope
 

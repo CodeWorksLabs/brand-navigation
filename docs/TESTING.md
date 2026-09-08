@@ -68,8 +68,10 @@ commits behind, preserved settings and both parent-theme attachments, and no
 longer defined `enabled` as a component setting. The earlier value remains as
 an inert stored row, which allows an intentional `v0.9.0` rollback to recover
 it. Component `3` was enabled through Discourse's native control and the public
-forum returned HTTP 200. Human visual confirmation remains required for the RC
-render and administrator surface.
+forum returned HTTP 200. Phil then confirmed the RC rendered correctly in the
+sandbox and that Discourse reported the component up to date with
+`release/v1.0.0-rc.1`. Server inspection separately confirmed that the
+administrator schema no longer defines an internal `enabled` setting.
 
 ### Sandbox embed and RTL browser evidence — 2026-09-07
 
