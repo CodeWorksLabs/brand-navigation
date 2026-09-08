@@ -4,6 +4,7 @@ import {
   find,
   render,
   settled,
+  triggerEvent,
   waitUntil,
 } from "@ember/test-helpers";
 import { module, test } from "qunit";
@@ -64,10 +65,90 @@ module(
 
     const originalPersistSettings =
       BrandNavigationBundles.prototype.persistSettings;
+    const originalReadBundle = BrandNavigationBundles.prototype.readBundle;
 
     hooks.afterEach(function () {
       BrandNavigationBundles.prototype.persistSettings =
         originalPersistSettings;
+      BrandNavigationBundles.prototype.readBundle = originalReadBundle;
+    });
+
+    test("only the latest file or pasted bundle can replace pending import state", async function (assert) {
+      const theme = adminTheme();
+      const pendingReads = new Map();
+      this.outletArgs = { theme };
+
+      BrandNavigationBundles.prototype.readBundle = function (file) {
+        return new Promise((resolve, reject) => {
+          pendingReads.set(file.name, { resolve, reject });
+        });
+      };
+
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      const fileInput = find('.brand-navigation-bundles input[type="file"]');
+      const firstFile = { name: "first.json" };
+      const secondFile = { name: "second.json" };
+      const thirdFile = { name: "third.json" };
+      const bundleText = (label) =>
+        JSON.stringify({
+          format: "brand-navigation-settings",
+          version: 1,
+          settings: { navigation_items: [{ label, url: `/${label}` }] },
+        });
+
+      Object.defineProperty(fileInput, "files", {
+        configurable: true,
+        value: [firstFile],
+      });
+      const firstSelection = triggerEvent(fileInput, "change");
+      await waitUntil(() => pendingReads.has(firstFile.name));
+
+      assert
+        .dom(".brand-navigation-bundles__controls .btn-primary")
+        .isDisabled("import is unavailable while a file is being read");
+
+      Object.defineProperty(fileInput, "files", {
+        configurable: true,
+        value: [secondFile],
+      });
+      const secondSelection = triggerEvent(fileInput, "change");
+      await waitUntil(() => pendingReads.has(secondFile.name));
+
+      pendingReads.get(secondFile.name).resolve(bundleText("second"));
+      await secondSelection;
+      assert
+        .dom(".brand-navigation-bundles textarea")
+        .hasValue(bundleText("second"));
+      assert.dom(".brand-navigation-bundles").includesText("second.json");
+
+      pendingReads.get(firstFile.name).resolve(bundleText("first"));
+      await firstSelection;
+      assert
+        .dom(".brand-navigation-bundles textarea")
+        .hasValue(bundleText("second"), "an older completion is ignored");
+      assert.dom(".brand-navigation-bundles").includesText("second.json");
+
+      Object.defineProperty(fileInput, "files", {
+        configurable: true,
+        value: [thirdFile],
+      });
+      const thirdSelection = triggerEvent(fileInput, "change");
+      await waitUntil(() => pendingReads.has(thirdFile.name));
+      await fillIn(".brand-navigation-bundles textarea", bundleText("pasted"));
+      pendingReads.get(thirdFile.name).resolve(bundleText("third"));
+      await thirdSelection;
+
+      assert
+        .dom(".brand-navigation-bundles textarea")
+        .hasValue(
+          bundleText("pasted"),
+          "pasted input cancels an older file read"
+        );
     });
 
     test("appearance completion reconciles the submitted snapshot", async function (assert) {
