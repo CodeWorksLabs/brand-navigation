@@ -21,15 +21,21 @@ Discourse embed contexts.
 ## Install the component
 
 1. In Discourse administration, open **Appearance → Themes & components**.
-2. Select the **Components** tab and install the component from its Git
-   repository URL.
+2. Select the **Components** tab, choose **Install → From a git repository**,
+   and enter:
+
+   ```text
+   https://github.com/CodeWorksLabs/brand-navigation.git
+   ```
+
 3. Do not attach the component to a visitor-facing theme yet. Add it to a
    non-default staging theme that visitors do not use.
 4. Turn Discourse's component-level **Enabled?** control on. Discourse does not
    load a disabled component's JavaScript, including Brand Navigation's bundle
    panel.
-5. Use Discourse's **Preview** control for the staging theme, configure or import
-   settings in that preview context, and verify the result.
+5. Use Discourse's **Preview** control for the staging theme, then open Brand
+   Navigation's settings in that preview context. Configure the supplied sample
+   settings or import a configuration bundle and verify the staging preview.
 6. Attach the prepared component to the intended visitor-facing theme only when
    the navigation is ready.
 
@@ -83,7 +89,9 @@ recovery reference if a release changes the settings schema or defaults.
 
 Brand Navigation includes a versioned JSON bundle tool so an administrator can
 export, validate, and apply a complete portable configuration without entering
-each navigation row again. Bundles contain portable theme settings only. They
+each navigation row again. Bundles contain the portable theme settings plus
+non-functional export metadata: `exported_at`, `source_theme_id`, and
+`source_theme_name`. The importer does not apply those metadata fields. Bundles
 do not contain API credentials, uploaded logo identifiers, theme attachments,
 or an instruction to enable the component.
 
@@ -95,13 +103,16 @@ select **Choose bundle** and pick a `.json` bundle, or paste its contents into
 settings**.
 
 Discourse loads a theme component's custom administrator JavaScript only when
-the component is enabled and belongs to the resolved theme. For a new
-installation, follow the non-default staging-theme procedure above and open
-Brand Navigation's settings within that theme's preview context. Import and
+the component is enabled and belongs to the resolved theme. For a newly
+installed component, use the non-default staging-theme procedure in
+[Install the component](#install-the-component): attach Brand Navigation only to that staging
+theme, enable the component, open the staging theme's Discourse preview, and
+then open Brand Navigation's settings within the preview context. Import and
 verify the bundle before attaching the component to a visitor-facing theme.
 
 Turning the native **Enabled?** control off also removes the custom bundle
-panel. This is expected Discourse component loading behavior.
+panel. This is expected Discourse component loading behavior, not a separate
+Brand Navigation activation state.
 
 The browser importer validates the complete portable schema and submits all
 settings in one Discourse theme update. It does not intentionally save a partial
@@ -119,10 +130,10 @@ An optional local command validates a saved bundle without contacting a forum:
 pnpm bundle validate configurations/repeal-obbba.json
 ```
 
-Import and export are intentionally administrator-browser operations for the
-first release. Brand Navigation does not ship a credentialed command-line
-client. Upload light and dark logos separately because Discourse upload
-identifiers are site-specific.
+Import and export are intentionally administrator-browser operations in the
+`v0.9.x` preview line. Brand Navigation does not ship a credentialed
+command-line client. Upload light and dark logos separately because Discourse
+upload identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
@@ -130,8 +141,12 @@ identifiers are site-specific.
    Navigation from rendering.
 2. If Brand Navigation replaced another component, follow the documented
    rollback procedure and temporarily re-enable that component.
-3. Restore the previously recorded settings when required.
-4. Report the Brand Navigation release, Discourse version, active theme, and
+3. To return Brand Navigation itself to a known release, follow
+   [Roll back Brand Navigation to a release tag](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+   That procedure remains provisional until its complete staging evidence is
+   recorded in [`TESTING.md`](TESTING.md).
+4. Restore the previously recorded settings when required.
+5. Report the Brand Navigation release, Discourse version, active theme, and
    observed error before trying the update again.
 
 Do not edit a Git-installed remote component locally to patch an upgrade.
@@ -304,7 +319,7 @@ protect restricted destinations with Discourse permissions.
 ## Translate the interface
 
 Brand Navigation uses Discourse's theme-translation system for fixed visitor
-and administrator interface text. The first release bundles English in
+and administrator interface text. The `v0.9.x` preview line bundles English in
 `locales/en.yml`. This includes navigation accessibility labels, appearance and
 configuration-bundle controls, setting descriptions, and status messages.
 
@@ -359,6 +374,13 @@ Before enabling the component broadly, check:
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.
 
+Automated checks cover accessible names, responsive visibility, mobile layout,
+and embed exclusion. Keyboard and focus-return behavior has source and partial
+manual evidence, but not a dedicated current-candidate automated focus-return
+regression. These checks do not replace human screen-reader or RTL-locale
+acceptance. The exact completed and outstanding manual evidence is maintained
+in [`TESTING.md`](TESTING.md).
+
 ## Disable or roll back
 
 Turn off Discourse's component-level **Enabled?** control to stop Brand
@@ -369,6 +391,12 @@ When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation
 has passed staging. See
 [Migration and rollback](MIGRATION.md) for the detailed procedure.
+
+For a regression caused by a Brand Navigation update, keep the existing
+component record and review the provisional
+[release-tag rollback](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
+It is not release-supported until its complete pin-and-return workflow is
+recorded on staging in [`TESTING.md`](TESTING.md).
 
 ## Troubleshooting
 
