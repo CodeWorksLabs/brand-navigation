@@ -4,7 +4,7 @@ RSpec.describe "Brand Navigation" do
   let(:theme) { upload_theme_component }
 
   before do
-    theme.update_setting(:enabled, true)
+    theme.enabled = true
     theme.update_setting(:brand_name, "Example")
     theme.update_setting(:brand_url, "/latest")
     theme.update_setting(
@@ -86,6 +86,7 @@ RSpec.describe "Brand Navigation" do
       '.brand-navigation__items a[href="/latest"] span',
       text: "Fallback",
     )
+    theme.save!
   end
 
   it "keeps mobile bar submenus reachable without a clipping scrollport", mobile: true do

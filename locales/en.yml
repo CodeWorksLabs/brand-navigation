@@ -31,7 +31,6 @@ en:
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
     settings:
-      enabled: "Render Brand Navigation on normal, non-embed Discourse pages."
       outlet: "Place the bar above or below the core site header."
       show_brand: "Show the configured brand identity."
       brand_name: "Accessible brand name and optional visible text."
