@@ -12,18 +12,16 @@ are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
 screen-reader acceptance is explicitly not claimed. The selected next release
 identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
 and the planned public documentation work. Release preparation is active on
-`release/v1.0.0-rc.1`. The release-branch correction removes the duplicate
-Brand Navigation `enabled` setting so Discourse's component-level **Enabled?**
-control becomes the single activation source. Pull request 19's first frozen
-candidate, `d878fba49c37f0a0f573753716a8999c01b62ffb`, passed every CI lane but is
-superseded for review by one authorized correction batch. The sidebar review
-confirmed two P1 issues: disabled components cannot load the custom bundle
-panel despite the former setup instructions, and both maintained compatibility
-branches still retained the removed internal activation setting. It also
-confirmed two P2 issues: stale asynchronous file reads could replace newer
-bundle input, and linked submenu children could leave normal mobile-menu flow.
-The internal review found no P0/P1 issue and recorded only nonblocking P2/P3
-risks, but its PASS does not override the sidebar review's confirmed findings.
+`release/v1.0.0-rc.1`. The authorized correction batch is implemented on pull
+requests 19, 20, and 21. It removes the duplicate Brand Navigation `enabled`
+setting, documents the enabled non-live staging-theme import workflow, guards
+against stale asynchronous bundle reads, and keeps linked submenu children in
+normal mobile-menu flow. The first correction-closure review was incomplete
+because the async-read and mobile-flow fixes were initially absent from the two
+maintained compatibility branches. That package inconsistency is now corrected
+and all three replacement heads have green exact-head CI. A new doctrine-bound
+correction-closure review is required; no prior disposition carries forward to
+these changed candidates.
 
 ## Authoritative repository state
 
@@ -39,10 +37,17 @@ risks, but its PASS does not override the sidebar review's confirmed findings.
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- Active release-preparation branch: `release/v1.0.0-rc.1`, based on `main`.
-  Commit `a92788a8415f0f6f644127ef9ec76b2e502a800e` publishes the RC support policy
-  and monitored `security@codeworkslabs.dev` route. Obtain the branch's current
-  identity with `git rev-parse release/v1.0.0-rc.1` after later corrections.
+- Active release-preparation branch: `release/v1.0.0-rc.1`, based on `main`, at
+  candidate `48788ff6312b57fa0a22f253c8afde2d3799ff80`, tree
+  `8fce7f4fd4ad5161a744d667db5d463c4a61750e` before this checkpoint refresh.
+- Compatibility correction heads: 2026.7 pull request 20 at
+  `91c065f6ee2c699e343f010238ee53260b2afd58`, and 2026.8 pull request 21 at
+  `10510ede559bf5097620859e2eaf6283318c45a3`. Both resolve to tree
+  `374f27b508835336922bb198bed4bbff56310ad6`.
+- Exact-head GitHub Actions runs are green: PR19 run `34183509075` plus
+  configuration run `34183508773`; PR20 run `34183665497` plus configuration
+  run `34183665160`; PR21 run `34183670300` plus configuration run
+  `34183669767`.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
@@ -147,15 +152,15 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. Complete the authorized four-finding correction batch on pull request 19:
-   document an enabled non-live staging-theme import workflow, generation-guard
-   file reads, keep linked mobile submenus in flow, and remove the duplicate
-   activation setting from both maintained compatibility branches.
-2. Run focused local checks, exact current/2026.8/2026.7 pull-request CI, and
-   the affected administrator/mobile system coverage.
-3. Refreeze the replacement candidate and exact compatibility commits, then
-   obtain impact-scoped correction closure and completion of the outstanding
-   complete-codebase review scope before final manual acceptance or merge.
+1. Freeze the checkpoint-refresh commit as the final PR19 replacement head and
+   rerun its exact-head CI.
+2. Commission a new doctrine-bound correction-closure review of the final PR19,
+   PR20, and PR21 heads. The review must verify the four corrections and their
+   interaction across all maintained release lines.
+3. Complete the remaining controlled manual acceptance evidence, or preserve
+   any explicitly accepted accessibility limitation accurately in release
+   documentation.
+4. Merge only after correction closure, CI, and final acceptance permit it.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
 and `Brand Navigation #3`. Components `1` and `2` remain disabled and
