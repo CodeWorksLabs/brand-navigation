@@ -45,6 +45,14 @@ https://github.com/CodeWorksLabs/brand-navigation.git
 ```
 
 Then include **Brand Navigation** on the theme or themes that should use it.
+Use Discourse's component-level **Enabled?** control as the single activation
+switch. Brand Navigation does not add a second enable setting.
+
+For an unpublished setup or configuration-bundle import, first attach the
+enabled component only to a non-default staging theme and use Discourse's theme
+preview. The [administrator guide](docs/USER_GUIDE.md#install-the-component) explains
+the complete preparation workflow; a disabled component cannot load its custom
+bundle panel.
 
 The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
@@ -122,9 +130,11 @@ on staging in the [testing record](docs/TESTING.md).
 branches, and fixes for an older supported release are reviewed and backported
 to its matching compatibility branch.
 
-The reviewed `v0.9.0` preview was published on 2026-09-07. Version `v1.0.0` is
-reserved for the documented, multi-site-tested release with no known release
-blockers. See the [changelog](CHANGELOG.md) and
+The reviewed `v0.9.0` preview was published on 2026-09-07. The next release
+candidate is `v1.0.0-rc.1`; GitHub presents it as a prerelease while it ages on
+the verified installations and the public documentation surfaces are built.
+Version `v1.0.0` remains reserved for the documented, multi-site-tested release
+with no known release blockers. See the [changelog](CHANGELOG.md) and
 [release procedure](docs/RELEASE.md).
 
 ## Translations
@@ -177,8 +187,9 @@ relevant, include:
 - a sanitized configuration bundle or relevant settings and console output.
 
 Never post credentials, personal data, or non-public vulnerability details in
-a public issue. A private security-reporting channel is not yet published; for
-now, open a detail-free issue requesting private contact.
+a public issue. Report suspected vulnerabilities privately to
+[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) and follow the
+[security policy](SECURITY.md).
 
 This independent-stage repository does not use Discourse logos, official
 badges, or language implying Discourse ownership or maintenance.

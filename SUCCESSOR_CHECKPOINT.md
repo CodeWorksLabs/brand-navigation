@@ -9,26 +9,62 @@ independently maintained by CodeWorksLabs and is not an official Discourse
 product. Current product code is released and deployed; a documentation-only
 operator-readiness correction and the browser/runtime embed and RTL evidence
 are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
-screen-reader acceptance and final human confirmation of the recorded
-embed/RTL evidence remain before `v1.0.0`.
+screen-reader acceptance is explicitly not claimed. The selected next release
+identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
+and the planned public documentation work. Release preparation is active on
+`release/v1.0.0-rc.1`. The authorized correction batch is implemented on pull
+requests 19, 20, and 21. It removes the duplicate Brand Navigation `enabled`
+setting, documents the enabled non-live staging-theme import workflow, guards
+against stale asynchronous bundle reads, and keeps linked submenu children in
+normal mobile-menu flow. The sidebar correction-closure review left the revised
+staging-preview workflow unproved and required a stronger mobile geometry
+oracle. A separate internal closure review also found that the async-read and
+mobile-flow fixes were initially absent from the two maintained compatibility
+branches. The geometry oracle and package inconsistency are corrected; the
+staging workflow now has dedicated system coverage and exact-head CI. Both
+focused closure lanes passed the frozen package with P2/P3 findings and no
+P0/P1. Two subsequent complete-codebase review lanes independently passed the
+exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
+together. The resulting documentation correction batch is implemented across
+all three lines and its exact-head CI is green. The two correction-closure lanes
+then found no P0/P1 but identified missing compatibility-package security-policy
+files plus three narrow rollback/checkpoint wording defects. This final small
+correction includes those fixes. A subsequent sidebar narrow review found that
+the emergency rollback entry still requested an export before re-enabling the
+isolated staging component; the procedure is now reordered to close that final
+interaction. Its exact replacement identities, CI, and impact-scoped closure
+must be established before manual acceptance.
 
 ## Authoritative repository state
 
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
-- Stable repository line: `main`. The latest completed acceptance-evidence
-  merge is `14724b3836f42f90165c74925de034063c66c31c`, tree
-  `9d55dbcf116e1ca10d8a04dd01a3983e095f3521`; obtain the live `main` identity
-  with `git rev-parse origin/main` rather than treating this checkpoint's own
-  future merge commit as self-identifying metadata.
+- Stable repository line: `main`, currently
+  `56ee6f874efb85dfd6976928954f0dcd74aab3c8`. Obtain the live identity with
+  `git rev-parse origin/main` rather than relying on this checkpoint after
+  later merges.
 - Published preview: `v0.9.0`, release commit
   `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- No active implementation branch or unmerged product-code change exists. A
-  checkpoint-only repair may be in flight without changing that product state.
+- Complete-review freeze: PR19 candidate
+  `b816d1b8bc5bbf8b4d6a5cf46795602b87909f16`, tree
+  `caa42247968705bb5248b82468fa066ef3c6777e`. This identity is superseded as
+  soon as the active documentation correction batch is committed.
+- Documentation-correction heads immediately preceding this checkpoint-only
+  refresh: PR19 `826fbcbe18c932da8a083525fc02a6c5b420d08e`, tree
+  `07305e9f4b17370f33253e643e0053e6c4651450`; PR20
+  `db709dff5e37e0eb4730f6141ddffc2d1fd4a8e6`; and PR21
+  `9a1b6f67365745715db9e7ca348dce5670901517`. The two compatibility heads share
+  tree `504324e05ade77a1817e7335b4d77acb8c118da5`, and their README, docs, and
+  successor checkpoint are byte-aligned with PR19.
+- First exact-head correction CI is green: PR19 theme run `34187429929` plus
+  configuration run `34187429272`; PR20 theme run `34187455791` plus
+  configuration run `34187455481`; PR21 theme run `34187470248` plus
+  configuration run `34187469890`. The checkpoint-only replacement heads need
+  their own final CI before closure.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
@@ -100,7 +136,8 @@ Subsequent repository verification confirmed that GitHub Issues is enabled on
 the public repository. The stale statement that new issue creation was
 restricted has been removed, and GitHub Issues is now the documented public
 intake route for support and product feedback. A private security-reporting
-channel and explicit response expectations remain unpublished.
+channel is now published at `security@codeworkslabs.dev` through the repository
+security policy; the mailbox is monitored by CodeWorksLabs.
 
 ## Remaining `v1.0.0` acceptance
 
@@ -126,20 +163,43 @@ capacity limit when five mobile social icons compete with Discourse's anonymous
 header controls: the Brand Navigation trigger can be obscured. The exact
 evidence and current operator mitigation are in `docs/TESTING.md`.
 
-Collect all findings before making another correction batch. `v1.0.0` becomes
-appropriate when these gates and any resulting blockers are closed, the exact
-candidate passes required CI/review, and final acceptance is complete.
+Both complete reviews collected their findings before correction. The accepted
+durable P2 risks remain tracked: Ruby lint transitives and parts of the reusable
+CI graph move; dense mobile header icons require operator restraint; complete
+current-candidate human accessibility and full pin-return rollback exercises
+remain outstanding. The correction batch addresses stale activation, release,
+migration, rollback, keyboard-evidence, and export-metadata wording. `v1.0.0`
+becomes appropriate when the replacement candidate passes required CI and
+impact-scoped review, final manual acceptance is complete, and the remaining
+limitations are still accurately disclosed.
 
 ## Exact next actions
 
-1. On authorized staging, execute and record the complete same-component
-   release-tag rollback and return-to-current workflow.
-2. Conduct the human screen-reader pass, using the recorded accessibility-tree
-   evidence as a checklist rather than a substitute.
-3. Obtain final human confirmation of the recorded classic-embed and RTL
-   browser evidence, repeating any disputed case interactively.
-4. Gather any findings from all three gates before making another correction
-   batch.
+This plan begins after the commit containing this checkpoint; do not repeat a
+step already evidenced against the current live heads.
+
+1. Synchronize this final wording correction and `SECURITY.md` across PR19,
+   PR20, and PR21, then record their exact replacement heads and trees.
+2. Confirm final exact-head CI for all three replacements; run it if no matching
+   evidence exists.
+3. Complete doctrine-bound impact-scoped correction closure for the final delta
+   and cross-line package consistency.
+4. Complete the remaining controlled manual acceptance evidence, or preserve
+   any explicitly accepted accessibility limitation accurately in release
+   documentation.
+5. Merge only after correction closure, complete review, CI, and final
+   acceptance permit it.
+
+Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
+and `Brand Navigation #3`. Components `1` and `2` remain disabled and
+unattached. Component `3` is enabled on Foundation and Horizon and follows
+`release/v1.0.0-rc.1`, with no import error and zero commits behind at the last
+inspection. The single-switch runtime implementation entered that branch at
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`; obtain the exact live installed
+identity from Discourse rather than treating this checkpoint as a moving branch
+pointer. Its current schema contains no internal `enabled` setting.
+Phil confirmed the RC rendered correctly and Discourse reported it up to date
+with the release branch.
 
 ## Out of scope
 

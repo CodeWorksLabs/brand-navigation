@@ -28,10 +28,19 @@ Discourse embed contexts.
    https://github.com/CodeWorksLabs/brand-navigation.git
    ```
 
-3. Add **Brand Navigation** to the theme or themes that should use it.
-4. Open the component settings.
-5. Leave the default `enabled` setting off while preparing and reviewing the
-   supplied sample settings on a live site.
+3. Do not attach the component to a visitor-facing theme yet. Add it to a
+   non-default staging theme that visitors do not use.
+4. Turn Discourse's component-level **Enabled?** control on. Discourse does not
+   load a disabled component's JavaScript, including Brand Navigation's bundle
+   panel.
+5. Use Discourse's **Preview** control for the staging theme, then open Brand
+   Navigation's settings in that preview context. Configure the supplied sample
+   settings or import a configuration bundle and verify the staging preview.
+6. Attach the prepared component to the intended visitor-facing theme only when
+   the navigation is ready.
+
+Discourse's component-level **Enabled?** control is the single source of truth
+for activation. Brand Navigation intentionally has no separate enable setting.
 
 The exact administration labels can vary slightly between Discourse releases.
 
@@ -80,7 +89,9 @@ recovery reference if a release changes the settings schema or defaults.
 
 Brand Navigation includes a versioned JSON bundle tool so an administrator can
 export, validate, and apply a complete portable configuration without entering
-each navigation row again. Bundles contain portable theme settings only. They
+each navigation row again. Bundles contain the portable theme settings plus
+non-functional export metadata: `exported_at`, `source_theme_id`, and
+`source_theme_name`. The importer does not apply those metadata fields. Bundles
 do not contain API credentials, uploaded logo identifiers, theme attachments,
 or an instruction to enable the component.
 
@@ -91,12 +102,17 @@ select **Choose bundle** and pick a `.json` bundle, or paste its contents into
 **Or paste bundle JSON**. Review any validation errors and then select **Import
 settings**.
 
-Discourse loads a theme component's administrator panel only when that
-component belongs to the administrator's active theme. If the bundle panel is
-not visible on a newly installed component, leave Brand Navigation's `enabled`
-setting off, attach the component to the administrator's active theme, and
-reload its administration page. Import the bundle before enabling its visible
-navigation.
+Discourse loads a theme component's custom administrator JavaScript only when
+the component is enabled and belongs to the resolved theme. For a newly
+installed component, use the non-default staging-theme procedure in
+[Install the component](#install-the-component): attach Brand Navigation only to that staging
+theme, enable the component, open the staging theme's Discourse preview, and
+then open Brand Navigation's settings within the preview context. Import and
+verify the bundle before attaching the component to a visitor-facing theme.
+
+Turning the native **Enabled?** control off also removes the custom bundle
+panel. This is expected Discourse component loading behavior, not a separate
+Brand Navigation activation state.
 
 The browser importer validates the complete portable schema and submits all
 settings in one Discourse theme update. It does not intentionally save a partial
@@ -121,13 +137,16 @@ upload identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
-1. Set `enabled` off to stop Brand Navigation from rendering.
+1. Turn off Discourse's component-level **Enabled?** control to stop Brand
+   Navigation from rendering.
 2. If Brand Navigation replaced another component, follow the documented
    rollback procedure and temporarily re-enable that component.
 3. To return Brand Navigation itself to a known release, follow
    [Roll back Brand Navigation to a release tag](MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
    That procedure remains provisional until its complete staging evidence is
-   recorded in [`TESTING.md`](TESTING.md).
+   recorded in [`TESTING.md`](TESTING.md). It handles an already-disabled
+   component by first isolating it on a non-default staging theme, then turning
+   native **Enabled?** on before requiring the preview or configuration export.
 4. Restore the previously recorded settings when required.
 5. Report the Brand Navigation release, Discourse version, active theme, and
    observed error before trying the update again.
@@ -357,15 +376,18 @@ Before enabling the component broadly, check:
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.
 
-Automated checks cover keyboard behavior, accessible names, focus return,
-responsive visibility, and embed exclusion. They do not replace human
-screen-reader or RTL-locale acceptance. The exact completed and outstanding
-manual evidence is maintained in [`TESTING.md`](TESTING.md).
+Automated checks cover accessible names, responsive visibility, mobile layout,
+and embed exclusion. Keyboard and focus-return behavior has source and partial
+manual evidence, but not a dedicated current-candidate automated focus-return
+regression. These checks do not replace human screen-reader or RTL-locale
+acceptance. The exact completed and outstanding manual evidence is maintained
+in [`TESTING.md`](TESTING.md).
 
 ## Disable or roll back
 
-Set `enabled` off to stop Brand Navigation from rendering. Disabling the
-component does not delete its configuration.
+Turn off Discourse's component-level **Enabled?** control to stop Brand
+Navigation from rendering. Disabling the component does not delete its
+configuration.
 
 When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation
@@ -382,7 +404,7 @@ recorded on staging in [`TESTING.md`](TESTING.md).
 
 ### Nothing appears
 
-- Confirm `enabled` is on.
+- Confirm Discourse's component-level **Enabled?** control is on.
 - Confirm the component is attached to the active theme.
 - Add at least one navigation item or configure a visible brand name or logo.
 - If testing on mobile, confirm `mobile_mode` is not `hidden`.

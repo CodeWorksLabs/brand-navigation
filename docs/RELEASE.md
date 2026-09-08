@@ -101,11 +101,10 @@ feature requests. Reports should identify the component release, branch, or
 commit; Discourse version; active theme; browser/device context; reproduction
 steps; and sanitized settings or console evidence when relevant.
 
-No private security-reporting channel is currently published. Credentials,
-personal data, and non-public vulnerability details must not be posted in a
-public issue. Until a private channel exists, a reporter may open a
-detail-free issue requesting private contact. Publishing that private channel
-and explicit response expectations remains release-readiness work.
+Suspected vulnerabilities must be reported privately to
+[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
+repository's [security policy](../SECURITY.md). Credentials, personal data, and
+non-public vulnerability details must not be posted in a public issue.
 
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained
@@ -150,6 +149,9 @@ known release blocker remains. After `v1.0.0`, increment PATCH for compatible
 fixes, MINOR for compatible features, and MAJOR for intentionally breaking
 configuration or migration changes.
 
-If Discourse accepts and maintains the component, follow maintainer direction
-for repository transfer, naming, metadata, branding, compatibility, and
-release procedures.
+Use SemVer prerelease identifiers such as `v1.0.0-rc.1`, `v1.0.0-rc.2`, and so
+on for immutable release candidates. Mark each matching GitHub Release as a
+prerelease. The human-facing title may use “Brand Navigation v1.0.0 RC1,” but
+the Git tag remains `v1.0.0-rc.1`. If an RC changes, publish the next numbered
+RC rather than moving or reusing its tag. Final `v1.0.0` may identify the same
+accepted tree as the last RC when no repository change is required.

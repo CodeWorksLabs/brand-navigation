@@ -6,6 +6,14 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+- Remove the duplicate Brand Navigation `enabled` setting and use Discourse's
+  component-level **Enabled?** control as the single source of truth.
+- Document a working staging-theme preparation and bundle-import workflow for
+  the native single-switch model.
+- Prevent an older asynchronous bundle-file read from replacing a newer file
+  selection or pasted configuration.
+- Keep linked-parent submenu children in normal mobile-menu flow so they cannot
+  overlap following items.
 - Adopt Discourse's `d-compat/<YYYY>.<M>` compatibility-branch convention,
   including the official daily branch-creation workflow and exact Discourse
   2026.8 release coverage.
@@ -68,6 +76,7 @@ to discover component updates from commits on the installed remote branch.
   required by the official Discourse component workflow.
 - Pin the Ruby lint-tool versions used by verification CI.
 
-Version `v0.9.0` is the first reviewed preview release. Version `v1.0.0` is
-reserved for the documented, multi-site-tested release with no known release
-blockers.
+Version `v0.9.0` is the first reviewed preview release. The next release
+candidate is `v1.0.0-rc.1`; subsequent candidate changes use increasing
+`v1.0.0-rc.N` identifiers. Version `v1.0.0` is reserved for the documented,
+multi-site-tested release with no known release blockers.

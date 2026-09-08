@@ -126,7 +126,6 @@ export function isUsableIcon(icon, iconExists = hasSpriteSymbol) {
 
 export function shouldRenderHeaderIcon({
   item,
-  enabled,
   embedMode,
   mobileView,
   mobileMode,
@@ -135,7 +134,6 @@ export function shouldRenderHeaderIcon({
   iconExists = hasSpriteSymbol,
 }) {
   return (
-    enabled &&
     !embedMode &&
     !(mobileView && mobileMode === "hidden") &&
     item.link_mode !== "group" &&

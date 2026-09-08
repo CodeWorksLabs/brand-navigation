@@ -39,6 +39,56 @@ The public forum returned HTTP 200. This is server-side installation and
 availability evidence; it does not replace the earlier browser-rendering
 record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
 
+### Sandbox release-tag rollback exercise — 2026-09-07
+
+Canonical component `3` was disabled through Discourse's component-level
+**Enabled?** control, then changed from repository-default `main` to immutable
+tag `v0.9.0`. Read-only inventory confirmed exact release commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, no import error, and preserved
+Foundation and Horizon attachments. Phil enabled the `v0.9.0` legacy internal
+setting and confirmed the navigation rendered correctly.
+
+The exercise exposed a product flaw: Discourse's component-level **Enabled?**
+control and the component's legacy internal `Enabled` setting could contradict
+one another and did not synchronize. The `v1.0.0-rc.1` correction removes the
+internal setting and relies only on Discourse's native control.
+
+Component `3` was then disabled through the native control and returned to a
+blank **Branch** field. Discourse resolved repository-default `main` at exact
+commit `56ee6f874efb85dfd6976928954f0dcd74aab3c8`, with zero commits behind and no
+import error. Both parent-theme attachments and every recorded setting hash
+were preserved. The component was re-enabled through the native control and
+the public forum returned HTTP 200. Final human visual confirmation of the
+returned `main` rendering was not separately recorded before the RC test began.
+
+For the single-switch RC test, component `3` was disabled and changed to
+`release/v1.0.0-rc.1` at exact commit
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`. The import reported no error, zero
+commits behind, preserved settings and both parent-theme attachments, and no
+longer defined `enabled` as a component setting. The earlier value remains as
+an inert stored row, which allows an intentional `v0.9.0` rollback to recover
+it. Component `3` was enabled through Discourse's native control and the public
+forum returned HTTP 200. Phil then confirmed the RC rendered correctly in the
+sandbox and that Discourse reported the component up to date with
+`release/v1.0.0-rc.1`. Server inspection separately confirmed that the
+administrator schema no longer defines an internal `enabled` setting.
+
+### Single-switch CI correction — 2026-09-07
+
+Pull request 19's first CI run after removal of the internal `enabled` setting
+passed configuration, lint, backend, and frontend coverage but failed the
+explicit rendered-presence example in all four system-test lanes. The normal
+Brand Navigation system suite still rendered successfully. Inspection showed
+that the shared core-feature fixture no longer persisted the uploaded component
+after its obsolete theme-setting assignment was removed.
+
+Commit `f6ca29b9b911936df1cbb4306411574b5bd50e34` corrected both system fixtures
+to persist Discourse's native `Theme.enabled` state. Configuration workflow run
+`34176240352` passed, and Discourse Theme workflow run `34176242873` then passed
+lint, backend, frontend, and system coverage on current Discourse, 2026.8, and
+both 2026.7 targets. This verifies that the automated fixture now exercises the
+same single activation source as the product.
+
 ### Sandbox embed and RTL browser evidence — 2026-09-07
 
 The sandbox remained on Discourse `2026.9.0-latest` at exact core commit
@@ -372,8 +422,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
   (`2e46cff73b`), and verified with Brand Navigation. Live component id `1` is
   enabled on Foundation and Horizon and now follows `d-compat/2026.7`. The
   duplicate component id `2` remains preserved and unattached on historical
-  branch `codex/r744-compatibility`; its component-level enabled setting is
-  false while its unattached Discourse theme-record flag is true. Draft pull
+  branch `codex/r744-compatibility`; its legacy Brand Navigation `enabled`
+  setting is false while its unattached Discourse theme-record flag is true.
+  Draft pull
   request 2 is no longer needed to support this site and was closed without
   merge.
 - Refresh installation records when these sites change Discourse release lines
@@ -383,7 +434,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
 
 - JavaScript, template, style, formatting, and type linting.
 - Discourse shared core-feature system specification with Brand Navigation
-  internally enabled, plus an explicit rendered-presence assertion.
+  enabled through Discourse's native component state, plus an explicit
+  rendered-presence assertion.
 - Normal-page rendering of brand, direct links, and native submenu.
 - Mobile compact-menu behavior.
 - Negative render assertion for `embed_mode=true`.
@@ -416,6 +468,10 @@ submenu button is present and no Resources parent link is rendered. Its saved
   bundle snapshots, in-flight state, model reconciliation, dirty state,
   success state, current/exported settings, and unrelated color-draft
   preservation.
+- Deferred file-selection coverage proving that only the latest selected file
+  or pasted bundle may replace pending import state.
+- Mobile-menu geometry coverage proving that an open linked-parent submenu
+  occupies layout space before its following navigation item.
 - Browser-backed import coverage for persisted appearance reload, synchronized
   picker state, and a clean post-import save state.
 
@@ -423,24 +479,24 @@ submenu button is present and no Resources parent link is rendered. Its saved
 
 Test the current stable and tests-passed Discourse branches where practical.
 
-| Context                     | Required result                                                                                         |
-| --------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Desktop, anonymous          | Allowed links render; only one submenu opens and Escape restores focus                                  |
-| Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                                             |
-| Mobile menu                 | One header control opens usable brand navigation                                                        |
-| Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus                                          |
-| Mobile hidden               | No brand-navigation surface renders                                                                     |
-| Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel                               |
-| Device-specific item        | Renders only for its selected device class, unchanged across phone rotation                             |
-| Descriptive submenu         | Description appears below its label; empty entries remain compact                                       |
-| Administrator object save   | Settings persist and the structured editor remains open                                                 |
-| Administrator bundle import | Complete bundle preflight occurs before one update request; reload after a server error before retrying |
-| Light/dark schemes          | Correct logo fallback and readable scheme colors                                                        |
-| RTL locale                  | Logical positioning and submenu alignment remain usable                                                 |
-| `embed_mode=true` full app  | No bar or mobile trigger mounts                                                                         |
-| Classic embedded comments   | No global brand/navigation content appears                                                              |
-| Embedded interaction        | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged                             |
-| Normal sign-in              | Full-application sign-in remains core Discourse behavior                                                |
+| Context                     | Required result                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Desktop, anonymous          | Allowed links render; only one submenu opens and Escape restores focus                                 |
+| Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                                            |
+| Mobile menu                 | One header control opens usable brand navigation                                                       |
+| Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus                                         |
+| Mobile hidden               | No brand-navigation surface renders                                                                    |
+| Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel                              |
+| Device-specific item        | Renders only for its selected device class, unchanged across phone rotation                            |
+| Descriptive submenu         | Description appears below its label; empty entries remain compact                                      |
+| Administrator object save   | Settings persist and the structured editor remains open                                                |
+| Administrator bundle import | Prepare through an enabled non-live staging theme; complete preflight occurs before one update request |
+| Light/dark schemes          | Correct logo fallback and readable scheme colors                                                       |
+| RTL locale                  | Logical positioning and submenu alignment remain usable                                                |
+| `embed_mode=true` full app  | No bar or mobile trigger mounts                                                                        |
+| Classic embedded comments   | No global brand/navigation content appears                                                             |
+| Embedded interaction        | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged                            |
+| Normal sign-in              | Full-application sign-in remains core Discourse behavior                                               |
 
 Also test long labels, empty configuration, missing optional icons, external
 links, browser zoom, reduced viewport width, keyboard-only use, and screen
