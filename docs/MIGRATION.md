@@ -135,34 +135,34 @@ Prerequisites:
 
 - Choose an existing Brand Navigation release tag that is documented as
   compatible with the site's Discourse release. Do not invent or move a tag.
-- Export the current **Configuration bundle** and store it outside Discourse.
-- Record the current component commit, the exact configured **Branch** field
-  value (including blank/default), the separately displayed or resolved
-  compatibility ref, component-level **Enabled?** state, and every attached
-  parent theme.
-- Prepare a non-default staging theme that visitors do not use. Attach Brand
-  Navigation to it and verify its preview before starting the source change.
 - Keep administrator access through Discourse safe mode available in case the
   active theme cannot render normally.
 
 To pin the existing component to a release:
 
 1. Open **Admin → Appearance → Themes & components → Components → Brand
-   Navigation**.
-2. Record and temporarily remove every visitor-facing parent-theme attachment.
-   Keep only the non-default staging-theme attachment and leave Discourse's
-   native **Enabled?** control on. This keeps the custom bundle panel available
-   in preview while removing Brand Navigation from ordinary visitor pages.
-3. Select **Change source**. Leave the repository URL as
+   Navigation**. Record the current component commit, exact configured
+   **Branch** field value (including blank/default), separately displayed or
+   resolved compatibility ref, native **Enabled?** state, and every attached
+   parent theme.
+2. Attach Brand Navigation to a non-default staging theme that visitors do not
+   use, then temporarily remove every visitor-facing parent-theme attachment.
+   Keep only the staging-theme attachment.
+3. Turn or confirm Discourse's native **Enabled?** control on and open the
+   staging theme through **Preview**. Export the current **Configuration bundle**
+   and store it outside Discourse before changing source. If the preview or
+   bundle panel cannot load, stop and restore the recorded source, activation,
+   and attachment state.
+4. Select **Change source**. Leave the repository URL as
    `https://github.com/CodeWorksLabs/brand-navigation.git`.
-4. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
+5. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
    source change. Current Discourse uses this field for a named Git branch or
    tag; the release tag pins the component to that immutable revision.
-5. In the staging-theme preview, confirm the component reports the intended
+6. In the staging-theme preview, confirm the component reports the intended
    tag/commit with no import error and that its settings remain present.
-6. If a setting needs restoration, import the saved configuration bundle only
+7. If a setting needs restoration, import the saved configuration bundle only
    after confirming that the selected release supports that bundle schema.
-7. Verify the staging preview, then restore the recorded visitor-facing
+8. Verify the staging preview, then restore the recorded visitor-facing
    parent-theme attachments. Run the focused desktop, mobile,
    anonymous/authenticated, link, color, and embed checks before ending the
    rollback window.

@@ -29,8 +29,11 @@ together. The resulting documentation correction batch is implemented across
 all three lines and its exact-head CI is green. The two correction-closure lanes
 then found no P0/P1 but identified missing compatibility-package security-policy
 files plus three narrow rollback/checkpoint wording defects. This final small
-correction includes those fixes; its exact replacement identities, CI, and
-impact-scoped closure must be established before manual acceptance.
+correction includes those fixes. A subsequent sidebar narrow review found that
+the emergency rollback entry still requested an export before re-enabling the
+isolated staging component; the procedure is now reordered to close that final
+interaction. Its exact replacement identities, CI, and impact-scoped closure
+must be established before manual acceptance.
 
 ## Authoritative repository state
 
