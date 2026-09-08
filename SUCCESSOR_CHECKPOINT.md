@@ -26,9 +26,11 @@ focused closure lanes passed the frozen package with P2/P3 findings and no
 P0/P1. Two subsequent complete-codebase review lanes independently passed the
 exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
 together. The resulting documentation correction batch is implemented across
-all three lines and its first exact-head CI is green. A checkpoint-only refresh
-now follows; final exact-head CI and impact-scoped correction-closure review
-remain required before manual acceptance.
+all three lines and its exact-head CI is green. The two correction-closure lanes
+then found no P0/P1 but identified missing compatibility-package security-policy
+files plus three narrow rollback/checkpoint wording defects. This final small
+correction includes those fixes; its exact replacement identities, CI, and
+impact-scoped closure must be established before manual acceptance.
 
 ## Authoritative repository state
 
@@ -170,10 +172,15 @@ limitations are still accurately disclosed.
 
 ## Exact next actions
 
-1. Commit and push this checkpoint-only refresh to PR19, PR20, and PR21.
-2. Run final exact-head CI for all three checkpoint heads.
-3. Commission doctrine-bound impact-scoped correction-closure review of the
-   complete documentation delta and cross-line package consistency.
+This plan begins after the commit containing this checkpoint; do not repeat a
+step already evidenced against the current live heads.
+
+1. Synchronize this final wording correction and `SECURITY.md` across PR19,
+   PR20, and PR21, then record their exact replacement heads and trees.
+2. Confirm final exact-head CI for all three replacements; run it if no matching
+   evidence exists.
+3. Complete doctrine-bound impact-scoped correction closure for the final delta
+   and cross-line package consistency.
 4. Complete the remaining controlled manual acceptance evidence, or preserve
    any explicitly accepted accessibility limitation accurately in release
    documentation.
