@@ -73,6 +73,22 @@ sandbox and that Discourse reported the component up to date with
 `release/v1.0.0-rc.1`. Server inspection separately confirmed that the
 administrator schema no longer defines an internal `enabled` setting.
 
+### Single-switch CI correction — 2026-09-07
+
+Pull request 19's first CI run after removal of the internal `enabled` setting
+passed configuration, lint, backend, and frontend coverage but failed the
+explicit rendered-presence example in all four system-test lanes. The normal
+Brand Navigation system suite still rendered successfully. Inspection showed
+that the shared core-feature fixture no longer persisted the uploaded component
+after its obsolete theme-setting assignment was removed.
+
+Commit `f6ca29b9b911936df1cbb4306411574b5bd50e34` corrected both system fixtures
+to persist Discourse's native `Theme.enabled` state. Configuration workflow run
+`34176240352` passed, and Discourse Theme workflow run `34176242873` then passed
+lint, backend, frontend, and system coverage on current Discourse, 2026.8, and
+both 2026.7 targets. This verifies that the automated fixture now exercises the
+same single activation source as the product.
+
 ### Sandbox embed and RTL browser evidence — 2026-09-07
 
 The sandbox remained on Discourse `2026.9.0-latest` at exact core commit

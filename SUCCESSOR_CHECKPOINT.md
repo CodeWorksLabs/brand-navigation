@@ -138,12 +138,11 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. Rerun pull request 19 CI after the system fixtures were corrected to persist
-   Discourse's native component activation state. The first run passed all
-   completed configuration, lint, backend, and frontend lanes but failed the
-   explicit rendered-presence example in each system lane because its fixture
-   no longer saved after the obsolete setting assignment was removed.
-2. When every required lane passes, freeze the exact candidate and conduct the
+1. Run pull request 19 CI on the final documentation-evidence commit. Its parent
+   `f6ca29b9b911936df1cbb4306411574b5bd50e34` passed configuration workflow
+   `34176240352` and all required current, 2026.8, and 2026.7 Discourse Theme
+   lanes in workflow `34176242873`.
+2. Freeze the resulting exact commit and tree, then conduct the
    doctrine-controlled complete codebase review before release.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
