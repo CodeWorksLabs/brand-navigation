@@ -126,7 +126,8 @@ identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
-1. Set `enabled` off to stop Brand Navigation from rendering.
+1. Turn off Discourse's component-level **Enabled?** control to stop Brand
+   Navigation from rendering.
 2. If Brand Navigation replaced another component, follow the documented
    rollback procedure and temporarily re-enable that component.
 3. Restore the previously recorded settings when required.
@@ -360,8 +361,9 @@ Before enabling the component broadly, check:
 
 ## Disable or roll back
 
-Set `enabled` off to stop Brand Navigation from rendering. Disabling the
-component does not delete its configuration.
+Turn off Discourse's component-level **Enabled?** control to stop Brand
+Navigation from rendering. Disabling the component does not delete its
+configuration.
 
 When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation
@@ -372,7 +374,7 @@ has passed staging. See
 
 ### Nothing appears
 
-- Confirm `enabled` is on.
+- Confirm Discourse's component-level **Enabled?** control is on.
 - Confirm the component is attached to the active theme.
 - Add at least one navigation item or configure a visible brand name or logo.
 - If testing on mobile, confirm `mobile_mode` is not `hidden`.

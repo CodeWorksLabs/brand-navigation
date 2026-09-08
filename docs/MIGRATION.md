@@ -97,7 +97,8 @@ its icon list becomes `custom_font_awesome_icons`.
 Do not remove either earlier component until the replacement has passed
 staging. Rollback is:
 
-1. Disable Brand Navigation.
+1. Turn off Discourse's component-level **Enabled?** control for Brand
+   Navigation.
 2. Re-enable the earlier component on the parent theme.
 3. Restore its exported settings if they were changed.
 4. Verify normal pages, mobile navigation, authentication, and an embedded
