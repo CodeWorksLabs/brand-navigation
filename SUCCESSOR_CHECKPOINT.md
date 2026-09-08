@@ -21,9 +21,10 @@ staging-preview workflow unproved and required a stronger mobile geometry
 oracle. A separate internal closure review also found that the async-read and
 mobile-flow fixes were initially absent from the two maintained compatibility
 branches. The geometry oracle and package inconsistency are corrected; the
-staging workflow now has dedicated system coverage in the active correction
-queue. The focused correction gate does not complete or replace the outstanding
-complete-codebase review.
+staging workflow now has dedicated system coverage and exact-head CI. Both
+focused closure lanes passed the frozen package with P2/P3 findings and no
+P0/P1. No candidate change is queued. The focused correction gate does not
+complete or replace the outstanding complete-codebase review.
 
 ## Authoritative repository state
 
@@ -39,17 +40,18 @@ complete-codebase review.
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- Active release-preparation branch: `release/v1.0.0-rc.1`, based on `main`, at
-  candidate `48788ff6312b57fa0a22f253c8afde2d3799ff80`, tree
-  `8fce7f4fd4ad5161a744d667db5d463c4a61750e` before this checkpoint refresh.
+- Implementation and evidence freeze immediately preceding this checkpoint-only
+  refresh: PR19 candidate `04f7818d9acaae2ab6c7b91c535b58de451708e8`,
+  tree `945ff382acd7ab7acc9c9637c0ff7e78fe6cad52`. Obtain the active
+  `release/v1.0.0-rc.1` head directly after later record-only commits.
 - Compatibility correction heads: 2026.7 pull request 20 at
-  `91c065f6ee2c699e343f010238ee53260b2afd58`, and 2026.8 pull request 21 at
-  `10510ede559bf5097620859e2eaf6283318c45a3`. Both resolve to tree
-  `374f27b508835336922bb198bed4bbff56310ad6`.
-- Exact-head GitHub Actions runs are green: PR19 run `34183509075` plus
-  configuration run `34183508773`; PR20 run `34183665497` plus configuration
-  run `34183665160`; PR21 run `34183670300` plus configuration run
-  `34183669767`.
+  `75828c17ae65ace0a94204cda1904d04481ba6d3`, and 2026.8 pull request 21 at
+  `984c94b9303925214ecd3bd9abdc7d7047bf8518`. Both resolve to tree
+  `5332c1182a943c42b49e78e56821f9460d1b5679`.
+- Exact-head GitHub Actions runs for that implementation freeze are green: PR19
+  theme run `34184843252` plus configuration run `34184842989`; PR20 theme run
+  `34184858223` plus configuration run `34184857973`; PR21 theme run
+  `34184862584` plus configuration run `34184862278`.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
