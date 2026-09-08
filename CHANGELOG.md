@@ -6,7 +6,7 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
-## 1.0.0-rc.1 - 2026-09-07
+## 1.0.0-rc.1 - 2026-09-08
 
 - Remove the duplicate Brand Navigation `enabled` setting and use Discourse's
   component-level **Enabled?** control as the single source of truth.
