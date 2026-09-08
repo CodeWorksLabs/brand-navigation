@@ -89,7 +89,9 @@ recovery reference if a release changes the settings schema or defaults.
 
 Brand Navigation includes a versioned JSON bundle tool so an administrator can
 export, validate, and apply a complete portable configuration without entering
-each navigation row again. Bundles contain portable theme settings only. They
+each navigation row again. Bundles contain the portable theme settings plus
+non-functional export metadata: `exported_at`, `source_theme_id`, and
+`source_theme_name`. The importer does not apply those metadata fields. Bundles
 do not contain API credentials, uploaded logo identifiers, theme attachments,
 or an instruction to enable the component.
 
@@ -372,10 +374,12 @@ Before enabling the component broadly, check:
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.
 
-Automated checks cover keyboard behavior, accessible names, focus return,
-responsive visibility, and embed exclusion. They do not replace human
-screen-reader or RTL-locale acceptance. The exact completed and outstanding
-manual evidence is maintained in [`TESTING.md`](TESTING.md).
+Automated checks cover accessible names, responsive visibility, mobile layout,
+and embed exclusion. Keyboard and focus-return behavior has source and partial
+manual evidence, but not a dedicated current-candidate automated focus-return
+regression. These checks do not replace human screen-reader or RTL-locale
+acceptance. The exact completed and outstanding manual evidence is maintained
+in [`TESTING.md`](TESTING.md).
 
 ## Disable or roll back
 

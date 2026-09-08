@@ -7,7 +7,8 @@ Migrate in a staging theme or a copied production theme first.
 Use the **Configuration bundles** panel to export and import a versioned JSON
 configuration without recreating every object-setting row. The browser panel
 updates only the portable Brand Navigation settings listed in the bundle. It
-does not attach or enable the component.
+does not apply the bundle's non-functional `exported_at`, `source_theme_id`, or
+`source_theme_name` metadata, and it does not attach or enable the component.
 
 Bundle validation is fail-closed for field types, allowed values, URL schemes,
 unknown fields, navigation depth, size limits, and cross-field requirements.
@@ -56,8 +57,11 @@ separate site-local step.
    entries. A visible label is required for clear administration and
    accessibility.
 7. Select the equivalent outlet and mobile mode.
-8. Disable Brand Header, turn Brand Navigation's component-level **Enabled?**
-   control on, and run the acceptance checks.
+8. During the controlled cutover, attach the prepared Brand Navigation
+   component to the intended visitor-facing theme, disable Brand Header, confirm
+   Brand Navigation's native **Enabled?** control remains on, and immediately
+   run the acceptance checks. Restore Brand Header if the replacement is not
+   visible and usable.
 
 ## From Header Submenus
 
@@ -75,8 +79,11 @@ separate site-local step.
    controls whether mobile navigation uses the menu, full bar, or stays hidden.
 7. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
-8. Disable Header Submenus, turn Brand Navigation's component-level
-   **Enabled?** control on, and run acceptance checks.
+8. During the controlled cutover, attach the prepared Brand Navigation
+   component to the intended visitor-facing theme, disable Header Submenus,
+   confirm Brand Navigation's native **Enabled?** control remains on, and
+   immediately run the acceptance checks. Restore Header Submenus if the
+   replacement is not visible and usable.
 
 The same mapping applies to Pavilion's Dropdown Header: header links become
 top-level items, dropdown rows become children matched to their parent, and
@@ -95,6 +102,10 @@ its icon list becomes `custom_font_awesome_icons`.
 6. Map each device view to `both`, `desktop`, or `mobile`, then review the
    component-wide mobile mode. For crowded mobile headers, keep only priority
    icons on `both` and mark the rest `desktop`.
+7. During the controlled cutover, attach the prepared Brand Navigation
+   component to the intended visitor-facing theme, disable Custom Header Links
+   (icons), confirm Brand Navigation's native **Enabled?** control remains on,
+   and immediately verify the header at desktop and narrow mobile widths.
 
 ## Roll back to an earlier component
 
@@ -129,6 +140,8 @@ Prerequisites:
   value (including blank/default), the separately displayed or resolved
   compatibility ref, component-level **Enabled?** state, and every attached
   parent theme.
+- Prepare a non-default staging theme that visitors do not use. Attach Brand
+  Navigation to it and verify its preview before starting the source change.
 - Keep administrator access through Discourse safe mode available in case the
   active theme cannot render normally.
 
@@ -136,20 +149,23 @@ To pin the existing component to a release:
 
 1. Open **Admin → Appearance → Themes & components → Components → Brand
    Navigation**.
-2. Turn off Discourse's component-level **Enabled?** control. Do not delete or
-   detach the component.
+2. Record and temporarily remove every visitor-facing parent-theme attachment.
+   Keep only the non-default staging-theme attachment and leave Discourse's
+   native **Enabled?** control on. This keeps the custom bundle panel available
+   in preview while removing Brand Navigation from ordinary visitor pages.
 3. Select **Change source**. Leave the repository URL as
    `https://github.com/CodeWorksLabs/brand-navigation.git`.
 4. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
    source change. Current Discourse uses this field for a named Git branch or
    tag; the release tag pins the component to that immutable revision.
-5. Confirm the component reports the intended tag/commit with no import error.
-   Verify that its parent-theme attachments and settings remain present.
+5. In the staging-theme preview, confirm the component reports the intended
+   tag/commit with no import error and that its settings remain present.
 6. If a setting needs restoration, import the saved configuration bundle only
    after confirming that the selected release supports that bundle schema.
-7. Turn the component-level **Enabled?** control on and run the focused desktop,
-   mobile, anonymous/authenticated, link, color, and embed checks before ending
-   the rollback window.
+7. Verify the staging preview, then restore the recorded visitor-facing
+   parent-theme attachments. Run the focused desktop, mobile,
+   anonymous/authenticated, link, color, and embed checks before ending the
+   rollback window.
 
 The `v0.9.0` release also exposes a legacy `Enabled` setting inside Brand
 Navigation's own settings. That release requires both activation controls to
@@ -163,19 +179,23 @@ itself is immutable.
 
 To return to the supported current channel:
 
-1. Export the current bundle again and turn off Discourse's component-level
-   **Enabled?** control.
+1. Export the current bundle again, record and temporarily remove every
+   visitor-facing parent-theme attachment, and keep only the non-default staging
+   theme attached. Leave the native **Enabled?** control on so the custom bundle
+   panel remains available in preview.
 2. Open **Change source**, leave the repository URL unchanged, clear **Branch**,
    and submit the source change.
 3. Select **Check for updates**, then **Update to latest** when offered.
    Discourse will follow repository-default `main` on current core or resolve
    the maintained `d-compat/<YYYY>.<M>` ref appropriate to an older supported
    core.
-4. Confirm the intended commit/ref, zero import errors, preserved settings, and
-   parent-theme attachments.
-5. Turn the component-level **Enabled?** control on and repeat the focused
-   acceptance checks. On the current channel, this is the only activation
-   control; the `v0.9.0` legacy setting is no longer shown or read.
+4. In the staging-theme preview, confirm the intended commit/ref, zero import
+   errors, and preserved settings. Import the saved bundle there if restoration
+   is required and supported by the selected version.
+5. Verify the staging preview, restore the recorded visitor-facing parent-theme
+   attachments, and repeat the focused acceptance checks. On the current
+   channel, native **Enabled?** is the only activation control; the `v0.9.0`
+   legacy setting is no longer shown or read.
 
 Do not edit a Git-installed remote component locally, force-move a release tag,
 or delete and reinstall the component as a normal rollback method. If the

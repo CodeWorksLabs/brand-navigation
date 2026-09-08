@@ -23,8 +23,11 @@ mobile-flow fixes were initially absent from the two maintained compatibility
 branches. The geometry oracle and package inconsistency are corrected; the
 staging workflow now has dedicated system coverage and exact-head CI. Both
 focused closure lanes passed the frozen package with P2/P3 findings and no
-P0/P1. No candidate change is queued. The focused correction gate does not
-complete or replace the outstanding complete-codebase review.
+P0/P1. Two subsequent complete-codebase review lanes independently passed the
+exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
+together. A documentation correction batch is now active; its replacement
+identities and verification must supersede the reviewed freeze before final
+manual acceptance.
 
 ## Authoritative repository state
 
@@ -40,16 +43,16 @@ complete or replace the outstanding complete-codebase review.
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- Implementation and evidence freeze immediately preceding this checkpoint-only
-  refresh: PR19 candidate `04f7818d9acaae2ab6c7b91c535b58de451708e8`,
-  tree `945ff382acd7ab7acc9c9637c0ff7e78fe6cad52`. Obtain the active
-  `release/v1.0.0-rc.1` head directly after later record-only commits.
+- Complete-review freeze: PR19 candidate
+  `b816d1b8bc5bbf8b4d6a5cf46795602b87909f16`, tree
+  `caa42247968705bb5248b82468fa066ef3c6777e`. This identity is superseded as
+  soon as the active documentation correction batch is committed.
 - Compatibility correction heads: 2026.7 pull request 20 at
   `75828c17ae65ace0a94204cda1904d04481ba6d3`, and 2026.8 pull request 21 at
   `984c94b9303925214ecd3bd9abdc7d7047bf8518`. Both resolve to tree
   `5332c1182a943c42b49e78e56821f9460d1b5679`.
-- Exact-head GitHub Actions runs for that implementation freeze are green: PR19
-  theme run `34184843252` plus configuration run `34184842989`; PR20 theme run
+- Exact-head GitHub Actions runs for the complete-review freeze are green: PR19
+  theme run `34185736110` plus configuration run `34185735751`; PR20 theme run
   `34184858223` plus configuration run `34184857973`; PR21 theme run
   `34184862584` plus configuration run `34184862278`.
 
@@ -150,19 +153,23 @@ capacity limit when five mobile social icons compete with Discourse's anonymous
 header controls: the Brand Navigation trigger can be obscured. The exact
 evidence and current operator mitigation are in `docs/TESTING.md`.
 
-Collect all findings before making another correction batch. `v1.0.0` becomes
-appropriate when these gates and any resulting blockers are closed, the exact
-candidate passes required CI/review, and final acceptance is complete.
+Both complete reviews collected their findings before correction. The accepted
+durable P2 risks remain tracked: Ruby lint transitives and parts of the reusable
+CI graph move; dense mobile header icons require operator restraint; complete
+current-candidate human accessibility and full pin-return rollback exercises
+remain outstanding. The correction batch addresses stale activation, release,
+migration, rollback, keyboard-evidence, and export-metadata wording. `v1.0.0`
+becomes appropriate when the replacement candidate passes required CI and
+impact-scoped review, final manual acceptance is complete, and the remaining
+limitations are still accurately disclosed.
 
 ## Exact next actions
 
-1. Freeze the checkpoint-refresh commit as the final PR19 replacement head and
-   rerun its exact-head CI.
-2. Commission a new doctrine-bound correction-closure review of the final PR19,
-   PR20, and PR21 heads. The review must verify the four corrections and their
-   interaction across all maintained release lines.
-3. Complete the outstanding doctrine-bound complete-codebase review against the
-   final immutable release package.
+1. Complete one coherent documentation correction across PR19, PR20, and PR21,
+   then freeze their replacement heads and trees.
+2. Run exact-head CI for all three replacement heads.
+3. Commission doctrine-bound impact-scoped correction-closure review of the
+   documentation delta and cross-line package consistency.
 4. Complete the remaining controlled manual acceptance evidence, or preserve
    any explicitly accepted accessibility limitation accurately in release
    documentation.
