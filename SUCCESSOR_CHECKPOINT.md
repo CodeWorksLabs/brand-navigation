@@ -16,12 +16,14 @@ and the planned public documentation work. Release preparation is active on
 requests 19, 20, and 21. It removes the duplicate Brand Navigation `enabled`
 setting, documents the enabled non-live staging-theme import workflow, guards
 against stale asynchronous bundle reads, and keeps linked submenu children in
-normal mobile-menu flow. The first correction-closure review was incomplete
-because the async-read and mobile-flow fixes were initially absent from the two
-maintained compatibility branches. That package inconsistency is now corrected
-and all three replacement heads have green exact-head CI. A new doctrine-bound
-correction-closure review is required; no prior disposition carries forward to
-these changed candidates.
+normal mobile-menu flow. The sidebar correction-closure review left the revised
+staging-preview workflow unproved and required a stronger mobile geometry
+oracle. A separate internal closure review also found that the async-read and
+mobile-flow fixes were initially absent from the two maintained compatibility
+branches. The geometry oracle and package inconsistency are corrected; the
+staging workflow now has dedicated system coverage in the active correction
+queue. The focused correction gate does not complete or replace the outstanding
+complete-codebase review.
 
 ## Authoritative repository state
 
@@ -157,10 +159,13 @@ candidate passes required CI/review, and final acceptance is complete.
 2. Commission a new doctrine-bound correction-closure review of the final PR19,
    PR20, and PR21 heads. The review must verify the four corrections and their
    interaction across all maintained release lines.
-3. Complete the remaining controlled manual acceptance evidence, or preserve
+3. Complete the outstanding doctrine-bound complete-codebase review against the
+   final immutable release package.
+4. Complete the remaining controlled manual acceptance evidence, or preserve
    any explicitly accepted accessibility limitation accurately in release
    documentation.
-4. Merge only after correction closure, CI, and final acceptance permit it.
+5. Merge only after correction closure, complete review, CI, and final
+   acceptance permit it.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
 and `Brand Navigation #3`. Components `1` and `2` remain disabled and
