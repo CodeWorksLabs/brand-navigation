@@ -9,7 +9,7 @@ export default {
   name: "brand-navigation",
 
   initialize() {
-    if (!settings.enabled || EmbedMode.enabled) {
+    if (EmbedMode.enabled) {
       return;
     }
 

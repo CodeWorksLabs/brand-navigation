@@ -25,7 +25,6 @@ module(
       const primarySprite = spriteContainer.querySelector(".fontawesome");
       const originalSprite = primarySprite.innerHTML;
       const originalItems = settings.navigation_items;
-      const originalEnabled = settings.enabled;
       this.state = new TestState();
       this.headerItem = {
         label: "Header",
@@ -47,7 +46,6 @@ module(
       };
 
       primarySprite.innerHTML = "";
-      settings.enabled = true;
       settings.navigation_items = [
         {
           label: "Replacement bar",
@@ -128,7 +126,6 @@ module(
       } finally {
         await clearRender();
         settings.navigation_items = originalItems;
-        settings.enabled = originalEnabled;
         primarySprite.innerHTML = originalSprite;
       }
     });
@@ -137,7 +134,6 @@ module(
       const spriteContainer = document.querySelector("#svg-sprites");
       const primarySprite = spriteContainer.querySelector(".fontawesome");
       const originalSprite = primarySprite.innerHTML;
-      const originalEnabled = settings.enabled;
       const originalMobileMode = settings.mobile_mode;
       const mobileView = sinon.stub(
         getOwner(this).lookup("service:site"),
@@ -153,7 +149,6 @@ module(
       };
 
       primarySprite.innerHTML = "";
-      settings.enabled = true;
       settings.mobile_mode = "hidden";
       mobileView.value(true);
 
@@ -198,7 +193,6 @@ module(
         assert.strictEqual(primarySpriteWatcher.observer, null);
       } finally {
         await clearRender();
-        settings.enabled = originalEnabled;
         settings.mobile_mode = originalMobileMode;
         primarySprite.innerHTML = originalSprite;
       }

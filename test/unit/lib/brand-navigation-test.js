@@ -253,7 +253,6 @@ module("Unit | Lib | brand-navigation", function () {
             icon: "brand-navigation-test-icon",
             visibility: "everyone",
           },
-          enabled: true,
           embedMode: false,
           mobileView: false,
           mobileMode: "bar",
@@ -269,7 +268,6 @@ module("Unit | Lib | brand-navigation", function () {
             icon: "brand-navigation-test-missing",
             visibility: "everyone",
           },
-          enabled: true,
           embedMode: false,
           mobileView: false,
           mobileMode: "bar",
@@ -298,7 +296,6 @@ module("Unit | Lib | brand-navigation", function () {
     };
     const base = {
       item,
-      enabled: true,
       embedMode: false,
       mobileView: false,
       mobileMode: "bar",

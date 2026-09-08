@@ -39,6 +39,11 @@ In Discourse, open **Admin → Appearance → Themes & components**, select the
 **Components** tab, and install this repository from its Git URL. Then include
 **Brand Navigation** on the theme or themes that should use it.
 
+Use Discourse's component-level **Enabled?** control as the single activation
+switch. For an unpublished setup or bundle import, first attach the enabled
+component only to a non-default staging theme and use Discourse's theme preview;
+see the [administrator guide](docs/USER_GUIDE.md#install-the-component).
+
 The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
 validated configuration bundle to move settings without re-entering each row.
