@@ -199,8 +199,10 @@ To return to the supported current channel:
 
 Do not edit a Git-installed remote component locally, force-move a release tag,
 or delete and reinstall the component as a normal rollback method. If the
-source change fails, keep the component disabled, capture the displayed error,
+source change fails, turn native **Enabled?** off, capture the displayed error,
 and restore the exact prior configured **Branch** field value—including a
-blank/default value—before making another attempt. After a native update,
-separately verify the resolved compatibility ref rather than copying that
-resolved ref into **Branch**.
+blank/default value—before making another attempt. Before reopening the custom
+bundle panel, confirm that only the non-default staging theme is attached, turn
+native **Enabled?** on, and return through that theme's preview. After a native
+update, separately verify the resolved compatibility ref rather than copying
+that resolved ref into **Branch**.
