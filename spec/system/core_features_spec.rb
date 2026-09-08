@@ -3,12 +3,7 @@
 RSpec.describe "Core features" do
   let(:theme) { upload_theme_or_component }
 
-  before do
-    theme.update_setting(:enabled, true)
-    theme.save!
-  end
-
-  it "runs with Brand Navigation enabled" do
+  it "runs with Brand Navigation active" do
     visit("/")
 
     expect(page).to have_css("[data-brand-navigation]")

@@ -9,28 +9,31 @@ independently maintained by CodeWorksLabs and is not an official Discourse
 product. Current product code is released and deployed; a documentation-only
 operator-readiness correction and the browser/runtime embed and RTL evidence
 are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
-screen-reader acceptance and final human confirmation of the recorded
-embed/RTL evidence remain before `v1.0.0`. The selected next release identity is
-the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging and the
-planned public documentation work.
+screen-reader acceptance is explicitly not claimed. The selected next release
+identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
+and the planned public documentation work. Release preparation is active on
+`release/v1.0.0-rc.1`. The release-branch correction removes the duplicate
+Brand Navigation `enabled` setting so Discourse's component-level **Enabled?**
+control becomes the single activation source.
 
 ## Authoritative repository state
 
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
-- Stable repository line: `main`. The latest completed acceptance-evidence
-  merge is `14724b3836f42f90165c74925de034063c66c31c`, tree
-  `9d55dbcf116e1ca10d8a04dd01a3983e095f3521`; obtain the live `main` identity
-  with `git rev-parse origin/main` rather than treating this checkpoint's own
-  future merge commit as self-identifying metadata.
+- Stable repository line: `main`, currently
+  `56ee6f874efb85dfd6976928954f0dcd74aab3c8`. Obtain the live identity with
+  `git rev-parse origin/main` rather than relying on this checkpoint after
+  later merges.
 - Published preview: `v0.9.0`, release commit
   `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
   `23328df16e2703920778d71c226abe0a00f97cfb`
 - Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
   at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- No active implementation branch or unmerged product-code change exists. A
-  checkpoint-only repair may be in flight without changing that product state.
+- Active release-preparation branch: `release/v1.0.0-rc.1`, based on `main`.
+  Commit `a92788a8415f0f6f644127ef9ec76b2e502a800e` publishes the RC support policy
+  and monitored `security@codeworkslabs.dev` route. Obtain the branch's current
+  identity with `git rev-parse release/v1.0.0-rc.1` after later corrections.
 
 The detailed pre-release and compatibility-branch chronology is preserved in
 [`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
@@ -135,14 +138,18 @@ candidate passes required CI/review, and final acceptance is complete.
 
 ## Exact next actions
 
-1. On authorized staging, execute and record the complete same-component
-   release-tag rollback and return-to-current workflow.
-2. Conduct the human screen-reader pass, using the recorded accessibility-tree
-   evidence as a checklist rather than a substitute.
-3. Obtain final human confirmation of the recorded classic-embed and RTL
-   browser evidence, repeating any disputed case interactively.
-4. Gather any findings from all three gates before making another correction
-   batch.
+1. Finish the authorized sandbox rollback exercise by returning component `3`
+   from `v0.9.0` to repository-default `main`, preserving settings and theme
+   attachments, then verify normal rendering. The last read-only inventory
+   found the native component control off, the legacy `v0.9.0` setting true,
+   and the component pinned to `v0.9.0` at `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`.
+2. Rename the three retained sandbox records to `Brand Navigation #1`, `Brand
+Navigation #2`, and `Brand Navigation #3` for unambiguous administration.
+3. Install and verify the release-branch single-switch correction on the
+   authorized sandbox before treating the behavior as accepted runtime
+   evidence.
+4. Finish RC preparation, run required gates, freeze the exact candidate, and
+   conduct the doctrine-controlled complete codebase review before release.
 
 ## Out of scope
 

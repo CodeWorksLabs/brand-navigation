@@ -45,6 +45,8 @@ https://github.com/CodeWorksLabs/brand-navigation.git
 ```
 
 Then include **Brand Navigation** on the theme or themes that should use it.
+Use Discourse's component-level **Enabled?** control as the single activation
+switch. Brand Navigation does not add a second enable setting.
 
 The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a

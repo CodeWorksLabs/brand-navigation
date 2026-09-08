@@ -28,10 +28,15 @@ Discourse embed contexts.
    https://github.com/CodeWorksLabs/brand-navigation.git
    ```
 
-3. Add **Brand Navigation** to the theme or themes that should use it.
-4. Open the component settings.
-5. Leave the default `enabled` setting off while preparing and reviewing the
-   supplied sample settings on a live site.
+3. Leave Discourse's component-level **Enabled?** control off while preparing
+   the component.
+4. Add **Brand Navigation** to the theme or themes that should use it, then
+   open the component settings.
+5. Review the supplied sample settings, then turn Discourse's **Enabled?**
+   control on when the navigation is ready for visitors.
+
+Discourse's component-level **Enabled?** control is the single source of truth
+for activation. Brand Navigation intentionally has no separate enable setting.
 
 The exact administration labels can vary slightly between Discourse releases.
 
@@ -93,10 +98,10 @@ settings**.
 
 Discourse loads a theme component's administrator panel only when that
 component belongs to the administrator's active theme. If the bundle panel is
-not visible on a newly installed component, leave Brand Navigation's `enabled`
-setting off, attach the component to the administrator's active theme, and
-reload its administration page. Import the bundle before enabling its visible
-navigation.
+not visible on a newly installed component, leave Discourse's component-level
+**Enabled?** control off, attach the component to the administrator's active
+theme, and reload its administration page. Import the bundle before turning
+the component on.
 
 The browser importer validates the complete portable schema and submits all
 settings in one Discourse theme update. It does not intentionally save a partial
@@ -121,7 +126,8 @@ upload identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
-1. Set `enabled` off to stop Brand Navigation from rendering.
+1. Turn off Discourse's component-level **Enabled?** control to stop Brand
+   Navigation from rendering.
 2. If Brand Navigation replaced another component, follow the documented
    rollback procedure and temporarily re-enable that component.
 3. To return Brand Navigation itself to a known release, follow
@@ -364,8 +370,9 @@ manual evidence is maintained in [`TESTING.md`](TESTING.md).
 
 ## Disable or roll back
 
-Set `enabled` off to stop Brand Navigation from rendering. Disabling the
-component does not delete its configuration.
+Turn off Discourse's component-level **Enabled?** control to stop Brand
+Navigation from rendering. Disabling the component does not delete its
+configuration.
 
 When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation
@@ -382,7 +389,7 @@ recorded on staging in [`TESTING.md`](TESTING.md).
 
 ### Nothing appears
 
-- Confirm `enabled` is on.
+- Confirm Discourse's component-level **Enabled?** control is on.
 - Confirm the component is attached to the active theme.
 - Add at least one navigation item or configure a visible brand name or logo.
 - If testing on mobile, confirm `mobile_mode` is not `hidden`.

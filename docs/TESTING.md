@@ -39,6 +39,22 @@ The public forum returned HTTP 200. This is server-side installation and
 availability evidence; it does not replace the earlier browser-rendering
 record or claim a fresh anonymous, mobile, accessibility, or embed visual pass.
 
+### Sandbox release-tag rollback exercise — 2026-09-07
+
+Canonical component `3` was disabled through Discourse's component-level
+**Enabled?** control, then changed from repository-default `main` to immutable
+tag `v0.9.0`. Read-only inventory confirmed exact release commit
+`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, no import error, and preserved
+Foundation and Horizon attachments. Phil enabled the `v0.9.0` legacy internal
+setting and confirmed the navigation rendered correctly.
+
+The exercise exposed a product flaw: Discourse's component-level **Enabled?**
+control and the component's legacy internal `Enabled` setting could contradict
+one another and did not synchronize. The `v1.0.0-rc.1` correction removes the
+internal setting and relies only on Discourse's native control. The return from
+the pinned tag to repository-default `main` remains to be completed and
+recorded; this section must not yet be treated as complete rollback evidence.
+
 ### Sandbox embed and RTL browser evidence — 2026-09-07
 
 The sandbox remained on Discourse `2026.9.0-latest` at exact core commit
@@ -372,8 +388,9 @@ submenu button is present and no Resources parent link is rendered. Its saved
   (`2e46cff73b`), and verified with Brand Navigation. Live component id `1` is
   enabled on Foundation and Horizon and now follows `d-compat/2026.7`. The
   duplicate component id `2` remains preserved and unattached on historical
-  branch `codex/r744-compatibility`; its component-level enabled setting is
-  false while its unattached Discourse theme-record flag is true. Draft pull
+  branch `codex/r744-compatibility`; its legacy Brand Navigation `enabled`
+  setting is false while its unattached Discourse theme-record flag is true.
+  Draft pull
   request 2 is no longer needed to support this site and was closed without
   merge.
 - Refresh installation records when these sites change Discourse release lines
@@ -383,7 +400,8 @@ submenu button is present and no Resources parent link is rendered. Its saved
 
 - JavaScript, template, style, formatting, and type linting.
 - Discourse shared core-feature system specification with Brand Navigation
-  internally enabled, plus an explicit rendered-presence assertion.
+  enabled through Discourse's native component state, plus an explicit
+  rendered-presence assertion.
 - Normal-page rendering of brand, direct links, and native submenu.
 - Mobile compact-menu behavior.
 - Negative render assertion for `embed_mode=true`.

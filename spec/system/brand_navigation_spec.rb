@@ -4,7 +4,6 @@ RSpec.describe "Brand Navigation" do
   let(:theme) { upload_theme_component }
 
   before do
-    theme.update_setting(:enabled, true)
     theme.update_setting(:brand_name, "Example")
     theme.update_setting(:brand_url, "/latest")
     theme.update_setting(

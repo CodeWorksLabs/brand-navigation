@@ -23,8 +23,9 @@ shortened first.
 For normal administrator use, the same operation is available in the
 **Configuration bundles** panel near the bottom of Brand Navigation's
 administration page. A newly installed component must be attached to the
-administrator's active theme before Discourse can load that panel; keep the
-component's `enabled` setting off until after import and verification.
+administrator's active theme before Discourse can load that panel; keep
+Discourse's component-level **Enabled?** control off until after import and
+verification.
 
 The repository's `configurations/repeal-obbba.json` file is the first migration
 fixture. It was assembled from observed Brand Header, Dropdown Header, and
@@ -41,7 +42,8 @@ separate site-local step.
 
 1. Record `brand_name`, `website_url`, light/dark/mobile logos, text links,
    icon links, targets, mobile behavior, and outlet.
-2. Install Brand Navigation but leave `enabled` off.
+2. Install Brand Navigation but leave Discourse's component-level **Enabled?**
+   control off.
 3. Map the brand name and `website_url` to `brand_name` and `brand_url`.
 4. Upload the light and dark logos. Brand Navigation intentionally uses the
    light logo as the dark fallback and responsive sizing instead of a separate
@@ -51,13 +53,15 @@ separate site-local step.
    entries. A visible label is required for clear administration and
    accessibility.
 7. Select the equivalent outlet and mobile mode.
-8. Disable Brand Header, enable Brand Navigation, and run the acceptance checks.
+8. Disable Brand Header, turn Brand Navigation's component-level **Enabled?**
+   control on, and run the acceptance checks.
 
 ## From Header Submenus
 
 1. Export or copy the `Menu_items`, `Submenu_items`, icon list, placement, and
    color choices before changing anything.
-2. Install Brand Navigation but leave `enabled` off.
+2. Install Brand Navigation but leave Discourse's component-level **Enabled?**
+   control off.
 3. Create one structured top-level item for every menu item.
 4. Add each submenu entry under its parent. Divider-only entries have no direct
    equivalent; use grouping and ordering instead.
@@ -68,7 +72,8 @@ separate site-local step.
    controls whether mobile navigation uses the menu, full bar, or stays hidden.
 7. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
-8. Disable Header Submenus, enable Brand Navigation, and run acceptance checks.
+8. Disable Header Submenus, turn Brand Navigation's component-level
+   **Enabled?** control on, and run acceptance checks.
 
 The same mapping applies to Pavilion's Dropdown Header: header links become
 top-level items, dropdown rows become children matched to their parent, and
@@ -119,7 +124,8 @@ Prerequisites:
 - Export the current **Configuration bundle** and store it outside Discourse.
 - Record the current component commit, the exact configured **Branch** field
   value (including blank/default), the separately displayed or resolved
-  compatibility ref, `enabled` value, and every attached parent theme.
+  compatibility ref, component-level **Enabled?** state, and every attached
+  parent theme.
 - Keep administrator access through Discourse safe mode available in case the
   active theme cannot render normally.
 
@@ -127,7 +133,8 @@ To pin the existing component to a release:
 
 1. Open **Admin → Appearance → Themes & components → Components → Brand
    Navigation**.
-2. Set Brand Navigation's `enabled` setting off. Do not delete or detach it.
+2. Turn off Discourse's component-level **Enabled?** control. Do not delete or
+   detach the component.
 3. Select **Change source**. Leave the repository URL as
    `https://github.com/CodeWorksLabs/brand-navigation.git`.
 4. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
@@ -137,9 +144,15 @@ To pin the existing component to a release:
    Verify that its parent-theme attachments and settings remain present.
 6. If a setting needs restoration, import the saved configuration bundle only
    after confirming that the selected release supports that bundle schema.
-7. Re-enable Brand Navigation and run the focused desktop, mobile,
-   anonymous/authenticated, link, color, and embed checks before ending the
-   rollback window.
+7. Turn the component-level **Enabled?** control on and run the focused desktop,
+   mobile, anonymous/authenticated, link, color, and embed checks before ending
+   the rollback window.
+
+The `v0.9.0` release also exposes a legacy `Enabled` setting inside Brand
+Navigation's own settings. That release requires both activation controls to
+be on before it renders. Set the legacy setting deliberately while testing the
+rollback; it is removed on the current channel because it duplicated and could
+contradict Discourse's native component control.
 
 While pinned to a tag, the component does not advance with `main` or a
 `d-compat/<YYYY>.<M>` branch. Automatic update checks may still run, but the tag
@@ -147,8 +160,8 @@ itself is immutable.
 
 To return to the supported current channel:
 
-1. Export the current bundle again and set Brand Navigation's `enabled` setting
-   off.
+1. Export the current bundle again and turn off Discourse's component-level
+   **Enabled?** control.
 2. Open **Change source**, leave the repository URL unchanged, clear **Branch**,
    and submit the source change.
 3. Select **Check for updates**, then **Update to latest** when offered.
@@ -157,7 +170,9 @@ To return to the supported current channel:
    core.
 4. Confirm the intended commit/ref, zero import errors, preserved settings, and
    parent-theme attachments.
-5. Re-enable Brand Navigation and repeat the focused acceptance checks.
+5. Turn the component-level **Enabled?** control on and repeat the focused
+   acceptance checks. On the current channel, this is the only activation
+   control; the `v0.9.0` legacy setting is no longer shown or read.
 
 Do not edit a Git-installed remote component locally, force-move a release tag,
 or delete and reinstall the component as a normal rollback method. If the
