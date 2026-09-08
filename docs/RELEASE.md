@@ -69,22 +69,23 @@ Before completing a release sequence:
     Release all identify the same tree. Include compatibility, upgrade,
     migration, and rollback notes in the release.
 
-## Public documentation direction and open questions
+## Public documentation architecture
 
-The selected direction is a shared CodeWorksLabs documentation site at
-`https://docs.codeworkslabs.dev/` plus platform-oriented discovery sites such
-as `discourse.codeworkslabs.dev` and `astro.codeworkslabs.dev`. Brand Navigation
-would be presented through the Discourse platform site, with its canonical
-documentation in the shared documentation site. Mature products that warrant
-an independent ecosystem may retain their own domain, documentation, demos,
-and support surfaces.
+The settled CodeWorksLabs architecture uses `https://codeworkslabs.dev/` for
+the apex and product catalog, `https://docs.codeworkslabs.dev/` for shared Astro
+Starlight documentation, and `https://demo.codeworkslabs.dev/` for the demo
+index and chooser. Platform-specific demonstrations live at hosts such as
+`https://astro.demo.codeworkslabs.dev/` and
+`https://discourse.demo.codeworkslabs.dev/`, with future platforms following
+the `{platform}.demo.codeworkslabs.dev` convention.
 
-The exact documentation paths, source repository, release-tag synchronization,
-shared navigation, deployment ownership, and timing remain under discussion.
-The recommended framework split is Astro for public product and platform
-surfaces and Starlight for the shared documentation corpus. A public site was
-not required for the `v0.9.0` release. This direction does not authorize
-creating, publishing, or deploying any site.
+Brand Navigation is the first product ready to feature. Its source-backed copy,
+claim limits, links, asset inventory, and canonical-source contract are in
+[`PUBLIC_SITE_HANDOFF.md`](PUBLIC_SITE_HANDOFF.md). Product and procedural truth
+remains governed by this repository even when the shared sites adapt it for
+discovery. A public site was not required for the `v0.9.0` or
+`v1.0.0-rc.1` release. This architecture record and handoff do not authorize
+publishing or deploying a site.
 
 `support.codeworkslabs.dev` is the selected durable umbrella support front door.
 It may route visitors to documentation, repositories, issue trackers, shared

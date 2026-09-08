@@ -81,6 +81,32 @@ The release includes:
 - Discourse compatibility-branch automation and packages; and
 - the latest-release badge.
 
+## CodeWorksLabs public-site handoff
+
+Phil authorized a source-backed content handoff for the separate CodeWorksLabs
+Astro and Starlight build on 2026-09-08. The complete bundle is
+[`docs/PUBLIC_SITE_HANDOFF.md`](docs/PUBLIC_SITE_HANDOFF.md). It records the
+approved product identity and copy, release and installation links,
+compatibility and testing limits, support and contribution routes, provenance,
+canonical-source ownership, live-demo evidence, and publication checks.
+
+The settled host architecture is:
+
+- `codeworkslabs.dev` for the apex and product catalog;
+- `docs.codeworkslabs.dev` for shared Astro Starlight documentation;
+- `demo.codeworkslabs.dev` for the demo index and chooser; and
+- `{platform}.demo.codeworkslabs.dev` for platform demonstrations, beginning
+  with `astro.demo.codeworkslabs.dev` and
+  `discourse.demo.codeworkslabs.dev`.
+
+No CodeWorksLabs site or external system was changed from this repository
+task. A read-only check on 2026-09-08 found the existing The Bridge demo URL
+returning HTTP 200, while the settled CodeWorksLabs apex, docs, and demo hosts
+did not resolve in the task environment. The repository contains no approved
+product screenshots, logos, or video assets. The handoff therefore marks the
+new destinations and media as missing or unverified rather than presenting
+them as published deliverables.
+
 ## Accepted residual risks and limitations
 
 - Full current-candidate human screen-reader coverage remains incomplete. A
@@ -115,8 +141,10 @@ model.
    compatibility or operator reports.
 2. Keep [`docs/TESTING.md`](docs/TESTING.md) current as supported Discourse
    versions and installation refs change.
-3. Build the planned CodeWorksLabs public documentation surfaces separately;
-   do not imply they already exist as release deliverables.
+3. Use the source-backed public-site bundle to build the CodeWorksLabs product,
+   documentation, and demo surfaces separately; verify DNS, deployment, exact
+   product refs, and any media before publication, and do not imply those
+   surfaces already exist as release deliverables.
 4. When stable-release criteria are met, freeze a new exact `v1.0.0`
    candidate, run required CI and doctrine-controlled review, perform final
    manual acceptance, then merge, tag, and publish the exact accepted tree.

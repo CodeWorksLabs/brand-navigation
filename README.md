@@ -134,9 +134,10 @@ on staging in the [testing record](docs/TESTING.md).
 branches, and fixes for an older supported release are reviewed and backported
 to its matching compatibility branch.
 
-The reviewed `v0.9.0` preview was published on 2026-09-07. The next release
-candidate is `v1.0.0-rc.1`; GitHub presents it as a prerelease while it ages on
-the verified installations and the public documentation surfaces are built.
+The reviewed `v0.9.0` preview was published on 2026-09-07. The current
+stable-track release candidate, `v1.0.0-rc.1`, was published on 2026-09-08;
+GitHub presents it as a prerelease while it ages on the verified installations
+and the public documentation surfaces are built.
 Version `v1.0.0` remains reserved for the documented, multi-site-tested release
 with no known release blockers. See the [changelog](CHANGELOG.md) and
 [release procedure](docs/RELEASE.md).
