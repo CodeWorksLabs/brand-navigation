@@ -1,5 +1,7 @@
 # Brand Navigation
 
+[![Latest release](https://img.shields.io/github/v/release/CodeWorksLabs/brand-navigation?include_prereleases&sort=semver&label=release)](https://github.com/CodeWorksLabs/brand-navigation/releases)
+
 > A brand header and submenu navigation theme component for Discourse.
 
 Brand Navigation gives a Discourse site one coherent place for brand identity,
