@@ -151,9 +151,12 @@ candidate passes required CI/review, and final acceptance is complete.
 
 Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
 and `Brand Navigation #3`. Components `1` and `2` remain disabled and
-unattached. Component `3` is enabled on Foundation and Horizon at RC commit
-`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`, with no import error and zero
-commits behind. Its current schema contains no internal `enabled` setting.
+unattached. Component `3` is enabled on Foundation and Horizon and follows
+`release/v1.0.0-rc.1`, with no import error and zero commits behind at the last
+inspection. The single-switch runtime implementation entered that branch at
+`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`; obtain the exact live installed
+identity from Discourse rather than treating this checkpoint as a moving branch
+pointer. Its current schema contains no internal `enabled` setting.
 
 ## Out of scope
 
