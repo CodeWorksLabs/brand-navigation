@@ -1,6 +1,6 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-08
+Date: 2026-09-09
 
 ## Current disposition
 
@@ -109,6 +109,18 @@ that its site-owned review corrections were then live. The repository still
 contains no approved product screenshots, logos, or video assets; no
 CodeWorksLabs-hosted Brand Navigation product demo was verified in this task.
 
+A second read-only review on 2026-09-09 found all 28 sitemap routes returning
+HTTP 200, the nine mirrored source pages carrying one H1 and the exact source
+commit, and the earlier content, provenance, metadata, and routing corrections
+substantially complete. Phil then authorized the remaining site-owned fixes and
+they were queued to the existing CodeWorksLabs site task: simplify the five
+product-hero actions so the issue link does not wrap alone at the inspected
+desktop breakpoint, route the footer Security link through the published
+security guidance, and either add approved social-card imagery or downgrade
+the docs Twitter card from `summary_large_image` to `summary`. The handoff
+explicitly preserves all confirmed-good corrections and does not authorize
+merging Brand Navigation pull request 24.
+
 On 2026-09-09, Phil authorized publishing the documentation-recovery branch.
 `docs/project-history` now tracks `origin/docs/project-history`, and
 [pull request 24](https://github.com/CodeWorksLabs/brand-navigation/pull/24)
@@ -150,10 +162,9 @@ model.
    compatibility or operator reports.
 2. Keep [`docs/TESTING.md`](docs/TESTING.md) current as supported Discourse
    versions and installation refs change.
-3. Use the source-backed public-site bundle to build the CodeWorksLabs product,
-   documentation, and demo surfaces separately; verify DNS, deployment, exact
-   product refs, and any media before publication, and do not imply those
-   surfaces already exist as release deliverables.
+3. Receive and verify the separately queued CodeWorksLabs site corrections;
+   keep site-owned presentation changes distinct from repository-owned product
+   truth and require approved provenance before adding product media.
 4. When stable-release criteria are met, freeze a new exact `v1.0.0`
    candidate, run required CI and doctrine-controlled review, perform final
    manual acceptance, then merge, tag, and publish the exact accepted tree.
