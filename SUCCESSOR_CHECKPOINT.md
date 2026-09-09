@@ -1,205 +1,175 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-07
+Date: 2026-09-09
 
 ## Current disposition
 
-Brand Navigation `v0.9.0` is a released public preview. The component is
-independently maintained by CodeWorksLabs and is not an official Discourse
-product. Current product code is released and deployed; a documentation-only
-operator-readiness correction and the browser/runtime embed and RTL evidence
-are merged. A bounded iPhone VoiceOver pass is now recorded, but complete human
-screen-reader acceptance is explicitly not claimed. The selected next release
-identity is the SemVer prerelease `v1.0.0-rc.1`; final `v1.0.0` follows RC aging
-and the planned public documentation work. Release preparation is active on
-`release/v1.0.0-rc.1`. The authorized correction batch is implemented on pull
-requests 19, 20, and 21. It removes the duplicate Brand Navigation `enabled`
-setting, documents the enabled non-live staging-theme import workflow, guards
-against stale asynchronous bundle reads, and keeps linked submenu children in
-normal mobile-menu flow. The sidebar correction-closure review left the revised
-staging-preview workflow unproved and required a stronger mobile geometry
-oracle. A separate internal closure review also found that the async-read and
-mobile-flow fixes were initially absent from the two maintained compatibility
-branches. The geometry oracle and package inconsistency are corrected; the
-staging workflow now has dedicated system coverage and exact-head CI. Both
-focused closure lanes passed the frozen package with P2/P3 findings and no
-P0/P1. Two subsequent complete-codebase review lanes independently passed the
-exact three-line frozen package with no P0/P1 and reported their P2/P3 findings
-together. The resulting documentation correction batch is implemented across
-all three lines and its exact-head CI is green. The two correction-closure lanes
-then found no P0/P1 but identified missing compatibility-package security-policy
-files plus three narrow rollback/checkpoint wording defects. This final small
-correction includes those fixes. A subsequent sidebar narrow review found that
-the emergency rollback entry still requested an export before re-enabling the
-isolated staging component; the procedure is now reordered to close that final
-interaction. Its exact replacement identities, CI, and impact-scoped closure
-must be established before manual acceptance.
+Brand Navigation `v1.0.0-rc.1` is published as a GitHub prerelease and is in
+its release-candidate aging period. It is independently maintained by
+CodeWorksLabs and is not an official Discourse product. No release-blocking
+defect is known at this checkpoint.
+
+The Codex application no longer displays the original development transcript.
+The active task still received retained context, but that context is not a
+durable user-visible archive. A readable reconstruction is now preserved in
+[`docs/PROJECT_HISTORY.md`](docs/PROJECT_HISTORY.md). Exact claims continue to
+be governed by Git, the release metadata, and the repository evidence records.
 
 ## Authoritative repository state
 
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
-- Stable repository line: `main`, currently
-  `56ee6f874efb85dfd6976928954f0dcd74aab3c8`. Obtain the live identity with
-  `git rev-parse origin/main` rather than relying on this checkpoint after
-  later merges.
-- Published preview: `v0.9.0`, release commit
-  `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
-  `23328df16e2703920778d71c226abe0a00f97cfb`
-- Maintained compatibility refs: `d-compat/2026.7` and `d-compat/2026.8`, both
-  at `a628dcd74c9465903c7eacd59f63e50f6c9d37b6`
-- Complete-review freeze: PR19 candidate
-  `b816d1b8bc5bbf8b4d6a5cf46795602b87909f16`, tree
-  `caa42247968705bb5248b82468fa066ef3c6777e`. This identity is superseded as
-  soon as the active documentation correction batch is committed.
-- Documentation-correction heads immediately preceding this checkpoint-only
-  refresh: PR19 `826fbcbe18c932da8a083525fc02a6c5b420d08e`, tree
-  `07305e9f4b17370f33253e643e0053e6c4651450`; PR20
-  `db709dff5e37e0eb4730f6141ddffc2d1fd4a8e6`; and PR21
-  `9a1b6f67365745715db9e7ca348dce5670901517`. The two compatibility heads share
-  tree `504324e05ade77a1817e7335b4d77acb8c118da5`, and their README, docs, and
-  successor checkpoint are byte-aligned with PR19.
-- First exact-head correction CI is green: PR19 theme run `34187429929` plus
-  configuration run `34187429272`; PR20 theme run `34187455791` plus
-  configuration run `34187455481`; PR21 theme run `34187470248` plus
-  configuration run `34187469890`. The checkpoint-only replacement heads need
-  their own final CI before closure.
+- Default branch at checkpoint:
+  `ed1640b049763c37694f8c3bb5f9f69cbd21f658`
+- Default-branch tree:
+  `f3b97c11c93dc00c2e66df346ec4c0b032ab5581`
+- Published prerelease: `v1.0.0-rc.1`
+- Annotated tag object:
+  `06c7b0386eef69f4ad358aa9f0e7590558975ef9`
+- Tag target: the exact default-branch commit and tree above
+- Release URL:
+  `https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.1`
+- Published preview: `v0.9.0`
+- Maintained compatibility branches: `d-compat/2026.7` and
+  `d-compat/2026.8`
 
-The detailed pre-release and compatibility-branch chronology is preserved in
-[`docs/HISTORICAL_CHECKPOINT.md`](docs/HISTORICAL_CHECKPOINT.md). It must not be
-used as current operational instruction.
+Resolve live moving refs before acting; do not assume the hashes above remain
+the current branch heads after later work. Never mutate a published tag.
 
 ## Product invariants
 
-- Brand Navigation is a modern, independently designed Discourse theme
-  component for optional brand identity, primary links, one-level submenus,
-  responsive navigation, and compact core-header destinations.
-- Administration is a first-class product surface with structured settings,
-  validation, safe defaults, appearance controls, and browser-based
-  configuration bundle import/export.
+- Public identity is **Brand Navigation**, repository slug
+  `brand-navigation`, described as a brand header and submenu navigation theme
+  component for Discourse.
+- It is independently maintained and makes no official Discourse-status claim.
+- Discourse's component-level **Enabled?** control is the single activation
+  switch.
+- Administration remains a first-class surface with structured validated
+  settings, safe defaults, color inheritance, and browser-based configuration
+  bundle import/export.
 - Site-global Brand Navigation content must never mount in supported Discourse
-  embed contexts. Enforcement stays at the component render/connector boundary
-  using supported Discourse embed state—never CSS hiding, hostname checks, DOM
-  selectors, or DiscussionBridge-specific compatibility code.
-- Core topic navigation, embedded discussion content, sign-in, reply, like,
-  quote, composer, and normal full-application behavior remain owned by
-  Discourse.
-- Normal non-embed pages retain the intended brand and navigation surfaces.
-- Public identity remains **Brand Navigation**, repository slug
-  `brand-navigation`, with no official-status claim or Discourse branding.
-- License remains `GPL-2.0-or-later`; attribution and provenance records remain
-  precise about inspiration, independently authored work, and adapted source.
+  embed contexts. Enforcement stays at the component render and connector
+  boundaries using supported Discourse state.
+- Do not introduce CSS hiding, hostname checks, downstream DOM-selector embed
+  detection, or DiscussionBridge-specific compatibility code.
+- Core topic navigation, embedded discussion content, authentication, reply,
+  like, quote, composer, and full-app behavior remain owned by Discourse.
+- One submenu child level is intentional.
+- License remains `GPL-2.0-or-later`; attribution and provenance must precisely
+  distinguish inspiration, historical study, and current code.
 
-## Verified installations
+## Verified release state
 
-The canonical table and exact evidence are in
-[`docs/TESTING.md`](docs/TESTING.md). Current coverage includes:
+The release candidate went through exact-candidate CI, two complementary
+review lanes, correction-closure review, manual acceptance, exact-tree merge,
+post-merge CI, annotated tagging, and GitHub prerelease publication.
 
-- Discourse `2026.9`: DiscussionBridge sandbox, DiscussionBridge Forum, The
-  Bridge, and Citizen Activist Network on repository-default `main`.
-- Discourse `2026.8`: RVing Community on `d-compat/2026.8`.
-- Discourse `2026.7` ESR: Repeal OBBBA Forum and R744 Community on the maintained
-  2026.7 line. R744 intentionally remains the oldest real-world compatibility
-  canary while that core remains supported.
+The canonical multi-site installation and update evidence is in
+[`docs/TESTING.md`](docs/TESTING.md). It includes current/default and
+compatibility-branch behavior across the DiscussionBridge sandbox, Repeal
+OBBBA Forum, DiscussionBridge Forum, The Bridge, Citizen Activist Network,
+RVing Community, and R744 Community.
 
-Native update checks, compatibility selection, setting preservation, theme
-attachments, import state, and HTTP availability were recorded during the
-2026-09-07 multi-site pass. Historical duplicate components remain only where
-explicitly documented as unattached rollback/test copies.
+The exact release contents are summarized in [`CHANGELOG.md`](CHANGELOG.md).
+The release includes:
 
-## Completed documentation correction
+- native single-switch activation;
+- staging-theme bundle preparation guidance and test coverage;
+- protection against stale asynchronous bundle reads;
+- corrected mobile linked-parent submenu flow;
+- Discourse compatibility-branch automation and packages; and
+- the latest-release badge.
 
-Manual Boss and Product Boss completed independent read-only documentation and
-operator inspections of merged commit `f3f41e5`. Neither issued a formal code
-review disposition. Their combined findings contained no P0 and no identified
-product-code defect. The documentation correction was merged through pull
-request 13 at `dc0e935ab54eead212e41681320470b52fc6a775`; all GitHub CI lanes passed.
-Both Bosses then closed every submitted finding against the exact correction
-candidate, with no new P0-P3 finding in the final delta. The batch closed:
+## CodeWorksLabs public-site handoff
 
-1. stale instructions that could repeat the completed `v0.9.0` release;
-2. contradictory current and historical checkpoint state;
-3. the missing same-component revision rollback procedure;
-4. the omitted copyable installation URL;
-5. accessibility wording beyond completed human evidence;
-6. a stale README sandbox build;
-7. production/demo/sandbox classification;
-8. the missing current support route; and
-9. obsolete “first release” wording.
+Phil authorized a source-backed content handoff for the separate CodeWorksLabs
+Astro and Starlight build on 2026-09-08. The complete bundle is
+[`docs/PUBLIC_SITE_HANDOFF.md`](docs/PUBLIC_SITE_HANDOFF.md). It records the
+approved product identity and copy, release and installation links,
+compatibility and testing limits, support and contribution routes, provenance,
+canonical-source ownership, live-demo evidence, and publication checks.
 
-The complete closure reports remain in the originating Manual Boss and Product
-Boss tasks. They are bounded documentation/product inspections, not formal code
-review dispositions.
+The settled host architecture is:
 
-Subsequent repository verification confirmed that GitHub Issues is enabled on
-the public repository. The stale statement that new issue creation was
-restricted has been removed, and GitHub Issues is now the documented public
-intake route for support and product feedback. A private security-reporting
-channel is now published at `security@codeworkslabs.dev` through the repository
-security policy; the mailbox is monitored by CodeWorksLabs.
+- `codeworkslabs.dev` for the apex and product catalog;
+- `docs.codeworkslabs.dev` for shared Astro Starlight documentation;
+- `demo.codeworkslabs.dev` for the demo index and chooser; and
+- `{platform}.demo.codeworkslabs.dev` for platform demonstrations, beginning
+  with `astro.demo.codeworkslabs.dev` and
+  `discourse.demo.codeworkslabs.dev`.
 
-## Remaining `v1.0.0` acceptance
+No CodeWorksLabs site or external system was changed from this repository
+task. A read-only check on 2026-09-08 found the existing The Bridge demo URL
+returning HTTP 200, while the settled CodeWorksLabs apex, docs, and demo hosts
+did not yet resolve in the task environment. A follow-up read-only review on
+2026-09-09 confirmed that the apex, documentation, demo index, and Discourse
+demo hub were deployed and returning HTTP 200. The separate site task reported
+that its site-owned review corrections were then live. The repository still
+contains no approved product screenshots, logos, or video assets; no
+CodeWorksLabs-hosted Brand Navigation product demo was verified in this task.
 
-On 2026-09-07, reproducible sandbox browser/runtime work exercised classic
-comments, full-app embed exclusion and core-control availability, and Arabic
-RTL desktop/mobile interaction on Foundation and Horizon. The temporary embed
-fixture and all changed sandbox settings were removed or restored. Exact
-evidence and boundaries are recorded in `docs/TESTING.md`.
+A second read-only review on 2026-09-09 found all 28 sitemap routes returning
+HTTP 200, the nine mirrored source pages carrying one H1 and the exact source
+commit, and the earlier content, provenance, metadata, and routing corrections
+substantially complete. Phil then authorized the remaining site-owned fixes and
+they were queued to the existing CodeWorksLabs site task: reorganize the
+product-hero actions so installation, documentation, and demo status are
+prominent while release, source, and issue links form a compact secondary row;
+route the install action through the staging-first guide; route the footer
+Security link through the published security guidance; and either add approved
+social-card imagery or downgrade the docs Twitter card from
+`summary_large_image` to `summary`. The handoff explicitly preserves all
+confirmed-good corrections and does not authorize merging Brand Navigation
+pull request 24.
 
-Human confirmation remains required for these gates on a controlled test
-environment:
+On 2026-09-09, Phil authorized publishing the documentation-recovery branch.
+`docs/project-history` now tracks `origin/docs/project-history`, and
+[pull request 24](https://github.com/CodeWorksLabs/brand-navigation/pull/24)
+is the active documentation-only reconciliation into `main`. Resolve its live
+head and checks before acting. The pull request does not authorize merging or
+change the immutable `v1.0.0-rc.1` tag.
 
-1. classic Discourse embedded comments, including core interaction preservation
-   and complete Brand Navigation exclusion;
-2. a full RTL-locale desktop/mobile interaction pass; and
-3. completion of the partial iPhone VoiceOver pass for landmarks, names, state,
-   focus, dismissal, submenus, icons, responsive controls, and embed exclusion.
+## Accepted residual risks and limitations
 
-The partial VoiceOver pass confirmed announced menu items, submenu state,
-child-link roles, and visible descriptions. It did not confirm the outer
-trigger state or submenu dismissal/focus return. It also exposed a portrait
-capacity limit when five mobile social icons compete with Discourse's anonymous
-header controls: the Brand Navigation trigger can be obscured. The exact
-evidence and current operator mitigation are in `docs/TESTING.md`.
+- Full current-candidate human screen-reader coverage remains incomplete. A
+  bounded VoiceOver pass confirmed several key announcements and states, but
+  the documentation does not claim complete accessibility acceptance.
+- Dense mobile core-header icon sets can crowd Discourse's own controls.
+  Operators should use per-item device visibility to reserve mobile space.
+- Complete pin-and-return rollback remains provisional until the full workflow
+  is recorded on staging.
+- Ruby lint transitives and some reusable CI dependencies are not completely
+  immutable and require ongoing release-engineering monitoring.
+- Framework coupling in the administrator editor and SVG sprite readiness
+  remains a maintenance watch area as Discourse evolves.
 
-Both complete reviews collected their findings before correction. The accepted
-durable P2 risks remain tracked: Ruby lint transitives and parts of the reusable
-CI graph move; dense mobile header icons require operator restraint; complete
-current-candidate human accessibility and full pin-return rollback exercises
-remain outstanding. The correction batch addresses stale activation, release,
-migration, rollback, keyboard-evidence, and export-metadata wording. `v1.0.0`
-becomes appropriate when the replacement candidate passes required CI and
-impact-scoped review, final manual acceptance is complete, and the remaining
-limitations are still accurately disclosed.
+## Review process position
+
+For important candidates, retain both review lanes:
+
+- internal subagent review for fast candidate-bound technical scrutiny and
+  iterative correction closure; and
+- the visible sidebar Code Reviewer for independent, operator-observable
+  formal release gates.
+
+Neither lane replaces the controlling Code Review Doctrine. A changed
+candidate requires fresh evidence and disposition. The sidebar reviewer should
+wait for Phil's in-task `proceed` before starting when Phil wants to select its
+model.
 
 ## Exact next actions
 
-This plan begins after the commit containing this checkpoint; do not repeat a
-step already evidenced against the current live heads.
-
-1. Synchronize this final wording correction and `SECURITY.md` across PR19,
-   PR20, and PR21, then record their exact replacement heads and trees.
-2. Confirm final exact-head CI for all three replacements; run it if no matching
-   evidence exists.
-3. Complete doctrine-bound impact-scoped correction closure for the final delta
-   and cross-line package consistency.
-4. Complete the remaining controlled manual acceptance evidence, or preserve
-   any explicitly accepted accessibility limitation accurately in release
-   documentation.
-5. Merge only after correction closure, complete review, CI, and final
-   acceptance permit it.
-
-Sandbox components are now named `Brand Navigation #1`, `Brand Navigation #2`,
-and `Brand Navigation #3`. Components `1` and `2` remain disabled and
-unattached. Component `3` is enabled on Foundation and Horizon and follows
-`release/v1.0.0-rc.1`, with no import error and zero commits behind at the last
-inspection. The single-switch runtime implementation entered that branch at
-`86c9083b8f83dc21d95fc772d5fc7b08e475bc14`; obtain the exact live installed
-identity from Discourse rather than treating this checkpoint as a moving branch
-pointer. Its current schema contains no internal `enabled` setting.
-Phil confirmed the RC rendered correctly and Discourse reported it up to date
-with the release branch.
+1. Let `v1.0.0-rc.1` age on the verified installations and triage meaningful
+   compatibility or operator reports.
+2. Keep [`docs/TESTING.md`](docs/TESTING.md) current as supported Discourse
+   versions and installation refs change.
+3. Receive and verify the separately queued CodeWorksLabs site corrections;
+   keep site-owned presentation changes distinct from repository-owned product
+   truth and require approved provenance before adding product media.
+4. When stable-release criteria are met, freeze a new exact `v1.0.0`
+   candidate, run required CI and doctrine-controlled review, perform final
+   manual acceptance, then merge, tag, and publish the exact accepted tree.
 
 ## Out of scope
 
@@ -209,4 +179,4 @@ with the release branch.
 - Hostname, CSS, or DOM-selector embed workarounds.
 - Literal Discourse-core integration, official-status claims, repository
   transfer, or official branding without Discourse maintainer acceptance.
-- Live installation, deployment, or publication unless separately authorized.
+- Live installation, deployment, or publication without explicit authority.
