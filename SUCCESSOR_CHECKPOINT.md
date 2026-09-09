@@ -113,13 +113,15 @@ A second read-only review on 2026-09-09 found all 28 sitemap routes returning
 HTTP 200, the nine mirrored source pages carrying one H1 and the exact source
 commit, and the earlier content, provenance, metadata, and routing corrections
 substantially complete. Phil then authorized the remaining site-owned fixes and
-they were queued to the existing CodeWorksLabs site task: simplify the five
-product-hero actions so the issue link does not wrap alone at the inspected
-desktop breakpoint, route the footer Security link through the published
-security guidance, and either add approved social-card imagery or downgrade
-the docs Twitter card from `summary_large_image` to `summary`. The handoff
-explicitly preserves all confirmed-good corrections and does not authorize
-merging Brand Navigation pull request 24.
+they were queued to the existing CodeWorksLabs site task: reorganize the
+product-hero actions so installation, documentation, and demo status are
+prominent while release, source, and issue links form a compact secondary row;
+route the install action through the staging-first guide; route the footer
+Security link through the published security guidance; and either add approved
+social-card imagery or downgrade the docs Twitter card from
+`summary_large_image` to `summary`. The handoff explicitly preserves all
+confirmed-good corrections and does not authorize merging Brand Navigation
+pull request 24.
 
 On 2026-09-09, Phil authorized publishing the documentation-recovery branch.
 `docs/project-history` now tracks `origin/docs/project-history`, and
