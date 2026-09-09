@@ -102,10 +102,19 @@ The settled host architecture is:
 No CodeWorksLabs site or external system was changed from this repository
 task. A read-only check on 2026-09-08 found the existing The Bridge demo URL
 returning HTTP 200, while the settled CodeWorksLabs apex, docs, and demo hosts
-did not resolve in the task environment. The repository contains no approved
-product screenshots, logos, or video assets. The handoff therefore marks the
-new destinations and media as missing or unverified rather than presenting
-them as published deliverables.
+did not yet resolve in the task environment. A follow-up read-only review on
+2026-09-09 confirmed that the apex, documentation, demo index, and Discourse
+demo hub were deployed and returning HTTP 200. The separate site task reported
+that its site-owned review corrections were then live. The repository still
+contains no approved product screenshots, logos, or video assets; no
+CodeWorksLabs-hosted Brand Navigation product demo was verified in this task.
+
+On 2026-09-09, Phil authorized publishing the documentation-recovery branch.
+`docs/project-history` now tracks `origin/docs/project-history`, and
+[pull request 24](https://github.com/CodeWorksLabs/brand-navigation/pull/24)
+is the active documentation-only reconciliation into `main`. Resolve its live
+head and checks before acting. The pull request does not authorize merging or
+change the immutable `v1.0.0-rc.1` tag.
 
 ## Accepted residual risks and limitations
 
