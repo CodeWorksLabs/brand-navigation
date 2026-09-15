@@ -130,10 +130,11 @@ An optional local command validates a saved bundle without contacting a forum:
 pnpm bundle validate configurations/repeal-obbba.json
 ```
 
-Import and export are intentionally administrator-browser operations in the
-`v0.9.x` preview line. Brand Navigation does not ship a credentialed
-command-line client. Upload light and dark logos separately because Discourse
-upload identifiers are site-specific.
+Import and export are intentionally administrator-browser operations in
+`v1.0.0-rc.1`. Brand Navigation does not ship a credentialed command-line
+client; adding one would be future product scope rather than part of the
+current RC. Upload light and dark logos separately because Discourse upload
+identifiers are site-specific.
 
 ### If an upgrade causes a problem
 
@@ -321,9 +322,11 @@ protect restricted destinations with Discourse permissions.
 ## Translate the interface
 
 Brand Navigation uses Discourse's theme-translation system for fixed visitor
-and administrator interface text. The `v0.9.x` preview line bundles English in
-`locales/en.yml`. This includes navigation accessibility labels, appearance and
-configuration-bundle controls, setting descriptions, and status messages.
+and administrator interface text. The current `v1.0.0-rc.1` release bundles
+only English in `locales/en.yml`. Additional bundled locales would be future
+release scope rather than part of the current RC. The English catalog includes
+navigation accessibility labels, appearance and configuration-bundle controls,
+setting descriptions, and status messages.
 
 An administrator can open **Theme translations** for Brand Navigation, select
 the locale to customize, and override individual strings without editing the
@@ -432,3 +435,17 @@ destinations under submenus.
 
 Brand Navigation uses Discourse color-scheme variables. Check the active theme
 and color scheme before adding parent-theme overrides.
+
+### Report a problem
+
+Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
+for non-sensitive bugs, installation or configuration questions, compatibility
+reports, and feature requests. Include the Brand Navigation release, branch, or
+commit; Discourse version and active theme; browser, device, viewport, and
+signed-in state; reproduction steps; and sanitized settings or console evidence
+when relevant.
+
+Never post credentials, personal data, or non-public vulnerability details in a
+public issue. Report suspected vulnerabilities privately to
+[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
+[security policy](../SECURITY.md).

@@ -136,8 +136,9 @@ to its matching compatibility branch.
 
 The reviewed `v0.9.0` preview was published on 2026-09-07. The current
 stable-track release candidate, `v1.0.0-rc.1`, was published on 2026-09-08;
-GitHub presents it as a prerelease while it ages on the verified installations
-and the public documentation surfaces are built.
+GitHub presents it as a prerelease while it ages on the verified installations.
+The public documentation is published at
+[docs.codeworkslabs.dev/brand-navigation](https://docs.codeworkslabs.dev/brand-navigation/).
 Version `v1.0.0` remains reserved for the documented, multi-site-tested release
 with no known release blockers. See the [changelog](CHANGELOG.md) and
 [release procedure](docs/RELEASE.md).
@@ -147,7 +148,8 @@ with no known release blockers. See the [changelog](CHANGELOG.md) and
 Brand Navigation uses Discourse's theme-translation system for its visitor
 accessibility labels, administration panels, setting descriptions, and status
 messages. Detailed bundle-schema validation messages are generated in English.
-English is the only language bundled in the `v0.9.x` preview line.
+The current `v1.0.0-rc.1` release bundles only English. Additional bundled
+locales would be future release scope rather than part of the current RC.
 Administrators can provide local per-locale overrides in **Theme
 translations**, and reviewed translations are welcome as repository pull
 requests.

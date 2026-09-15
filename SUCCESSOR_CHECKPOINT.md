@@ -1,6 +1,24 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-09
+Date: 2026-09-14
+
+## Public documentation owner correction — 2026-09-14
+
+Phil authorized a local canonical-documentation correction after the first
+read-only public owner gate. The correction updates `README.md`,
+`docs/USER_GUIDE.md`, and `docs/MIGRATION.md` to identify
+`v1.0.0-rc.1` as the current published prerelease, identify the shared public
+documentation as published, scope the browser-only bundle workflow and
+English-only bundled locale accurately to RC1, and give troubleshooting a
+direct GitHub Issues route while preserving private security reporting.
+
+No executable, setting, package, release tag, compatibility branch, shared-docs
+mirror, live site, or deployment state changed. Targeted Prettier validation,
+local Markdown link checks, the public documentation/release/issues/security
+destinations, and all 24 configuration tests passed. The repository-wide
+Prettier command still reports 31 pre-existing unrelated files; this correction
+does not reformat them. Refreshing and publishing the shared-docs mirror remain
+separate authorized work before the owner gate can be repeated.
 
 ## Current disposition
 

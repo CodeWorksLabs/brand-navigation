@@ -36,9 +36,10 @@ fixture. It was assembled from observed Brand Header, Dropdown Header, and
 Custom Header Links (icons) settings and is also useful for exercising larger
 menus, external destinations, icon-only links, and left/right sections.
 
-The `v0.9.x` preview line intentionally provides no credentialed command-line
-apply/export client. A local checkout can validate a saved bundle without
-contacting a forum by running
+`v1.0.0-rc.1` intentionally provides no credentialed command-line apply/export
+client; adding one would be future product scope rather than part of the current
+RC. A local checkout can validate a saved bundle without contacting a forum by
+running
 `pnpm bundle validate configurations/repeal-obbba.json`. Logo uploads remain a
 separate site-local step.
 
