@@ -71,9 +71,9 @@ be governed by Git, the release metadata, and the repository evidence records.
 - Publication source state: remote `main` and `docs/project-history` both
   resolved to `8cd82e0`; later checkpoint-only history does not change the nine
   mirrored source documents
-- Default branch at checkpoint:
+- Published documentation source commit:
   `8cd82e099fd181e0b3403ea2181190d12abcf037`
-- Default-branch tree:
+- Published documentation source tree:
   `5714747b9137042cf03eb5d3709bfbfe2d7e9c07`
 - Published prerelease: `v1.0.0-rc.1`
 - Annotated tag object:
