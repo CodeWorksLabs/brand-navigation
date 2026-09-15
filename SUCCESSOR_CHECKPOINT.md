@@ -19,18 +19,24 @@ published to that site.
 No executable, setting, package, release tag, compatibility branch, shared-docs
 mirror, live site, or deployment state changed. Targeted Prettier validation,
 local Markdown link checks, the public documentation/release/issues/security
-destinations, and all 24 configuration tests passed. The repository-wide
-Prettier command still reports 31 pre-existing unrelated files; this correction
-does not reformat them. Synchronizing and publishing this correction to the
-shared-docs mirror remain separate authorized work and must wait for the review
-and finding-closure sequence below.
+destinations, and all 24 configuration tests passed. Commit
+`93b72ce74fb0fbbe72d1748450a98079eb61d44c` adds only
+`* text=auto eol=lf` to `.gitattributes`, closing the former Windows
+clean-checkout report of 31 Prettier failures. Full lint, all 24 configuration
+tests, and a repository-wide Prettier check in a fresh detached Windows
+worktree passed at that identity. The 31-file report is superseded and is not a
+current failure.
 
-Manual Boss reviewed exact commit `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`
-and returned **NOT READY** for one checkpoint-only ambiguity between the
-already-published documentation site and this unpublished correction. The
-immediate ordered transitions are: Manual disposition → Brand Boss review →
-evaluation and closure of findings → separately authorized mirror
-synchronization, build, and deployment → live verification.
+Manual Boss first returned **NOT READY** on exact commit
+`12bcfa1c51e5d182231647dbf33224e4ab5cf42c` because this checkpoint was
+ambiguous about the already-published documentation site versus the unpublished
+correction. Commit `de5fd2e004991eea3a1dd90c322ea7ec237ca1fb` corrected that
+ambiguity, after which Manual Boss returned **READY** for Product Boss. Product
+Boss then found the documentation itself product-truthful and coherent but
+blocked its gate because this checkpoint still carried the superseded Manual
+Boss and Prettier states and incorrectly routed the next gate to Brand Boss.
+Those are historical dispositions against earlier exact candidates; Product
+Boss read-only verification of this corrected checkpoint is the current gate.
 
 ## Current disposition
 
@@ -50,6 +56,16 @@ be governed by Git, the release metadata, and the repository evidence records.
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
+- Documentation branch: `docs/project-history`
+- Documentation candidate HEAD:
+  `93b72ce74fb0fbbe72d1748450a98079eb61d44c`
+- Documentation candidate tree:
+  `370820eba2c005816a93298f26c7e3b78a4eec96`
+- Candidate commits: `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`,
+  `de5fd2e004991eea3a1dd90c322ea7ec237ca1fb`, and
+  `93b72ce74fb0fbbe72d1748450a98079eb61d44c`
+- Candidate state before this checkpoint-only correction: clean, three commits
+  ahead of `origin/docs/project-history`, with nothing pushed
 - Default branch at checkpoint:
   `ed1640b049763c37694f8c3bb5f9f69cbd21f658`
 - Default-branch tree:
@@ -190,13 +206,16 @@ model.
 
 ## Exact next actions
 
-1. Preserve Manual Boss's **NOT READY** disposition on exact commit `12bcfa1`;
-   this checkpoint correction does not promote or replace that disposition.
-2. Send the exact checkpoint-correction commit to Brand Boss for review through
-   the authorized coordinating lane.
-3. Evaluate Brand Boss findings together and close every accepted finding before
-   any shared-docs synchronization or publication action.
-4. After that closure and only with separate authority, synchronize and publish
+1. Preserve Manual Boss's initial **NOT READY** disposition on exact commit
+   `12bcfa1` as superseded history and its later **READY** disposition after
+   checkpoint clarification as the current completed Manual gate.
+2. Commit only this checkpoint correction and the dated-history heading
+   clarification, then return the exact replacement identity to Product Boss
+   for read-only verification.
+3. Evaluate and close any Product Boss finding before any shared-docs
+   synchronization or publication action.
+4. After Product Boss closes its gate and only with separate authority,
+   synchronize and publish
    this correction through the shared-docs mirror, build, and deployment lanes.
 5. Verify the live Brand Navigation pages, release/source/edit/support/security
    targets, and corrected wording at the exact deployed identity.

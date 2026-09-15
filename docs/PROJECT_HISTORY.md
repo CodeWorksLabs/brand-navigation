@@ -300,7 +300,10 @@ the planned public CodeWorksLabs documentation surfaces are ready.
   is why this reconstructed history exists. It does not supersede Git or the
   repository's evidence records.
 
-## Current position and next horizon
+## Position as reconstructed on 2026-09-08
+
+This section records the position understood on its reconstruction date. For
+current state and next actions, use [`SUCCESSOR_CHECKPOINT.md`](../SUCCESSOR_CHECKPOINT.md).
 
 Brand Navigation is published at `v1.0.0-rc.1` and is in its release-candidate
 aging period. The next work is observation and issue triage, continued testing
