@@ -11,10 +11,12 @@ read-only public owner gate. The correction updates `README.md`,
 bundle workflow and English-only bundled locale accurately to RC1, and give
 troubleshooting a direct GitHub Issues route while preserving private security
 reporting. The shared public documentation site and its Brand Navigation
-section already exist and are published. Canonical product-document correction
-commit `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`, tree
-`f38495198c7402539a491dacdd4834913899b261`, has not yet been synchronized or
-published to that site.
+section are published. The accepted documentation history now culminates at
+commit `8cd82e099fd181e0b3403ea2181190d12abcf037`, tree
+`5714747b9137042cf03eb5d3709bfbfe2d7e9c07`, and both `main` and
+`docs/project-history` resolved to that exact commit on GitHub at publication.
+The shared site mirrors the nine canonical source documents from that commit;
+this checkpoint-only closeout changes none of those nine sources.
 
 No executable, setting, package, release tag, compatibility branch, shared-docs
 mirror, live site, or deployment state changed. Targeted Prettier validation,
@@ -33,10 +35,11 @@ ambiguous about the already-published documentation site versus the unpublished
 correction. Commit `de5fd2e004991eea3a1dd90c322ea7ec237ca1fb` corrected that
 ambiguity, after which Manual Boss returned **READY** for Product Boss. Product
 Boss then found the documentation itself product-truthful and coherent but
-blocked its gate because this checkpoint still carried the superseded Manual
-Boss and Prettier states and incorrectly routed the next gate to Brand Boss.
-Those are historical dispositions against earlier exact candidates; Product
-Boss read-only verification of this corrected checkpoint is the current gate.
+blocked its first gate because this checkpoint still carried the superseded
+Manual Boss and Prettier states and incorrectly routed the next gate to Brand
+Boss. Commit `8cd82e0` corrected those statements. Product Boss independently
+verified that exact replacement and returned **READY — PRODUCT/DOCUMENTATION
+GATE CLOSED** with no remaining P0, P1, or P2 correction.
 
 ## Current disposition
 
@@ -58,22 +61,31 @@ be governed by Git, the release metadata, and the repository evidence records.
   `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Documentation branch: `docs/project-history`
 - Documentation candidate HEAD:
-  `93b72ce74fb0fbbe72d1748450a98079eb61d44c`
+  `8cd82e099fd181e0b3403ea2181190d12abcf037`
 - Documentation candidate tree:
-  `370820eba2c005816a93298f26c7e3b78a4eec96`
+  `5714747b9137042cf03eb5d3709bfbfe2d7e9c07`
 - Candidate commits: `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`,
   `de5fd2e004991eea3a1dd90c322ea7ec237ca1fb`, and
-  `93b72ce74fb0fbbe72d1748450a98079eb61d44c`
-- Candidate state before this checkpoint-only correction: clean, three commits
-  ahead of `origin/docs/project-history`, with nothing pushed
+  `93b72ce74fb0fbbe72d1748450a98079eb61d44c`, followed by checkpoint closure
+  commit `8cd82e099fd181e0b3403ea2181190d12abcf037`
+- Publication source state: remote `main` and `docs/project-history` both
+  resolved to `8cd82e0`; later checkpoint-only history does not change the nine
+  mirrored source documents
 - Default branch at checkpoint:
-  `ed1640b049763c37694f8c3bb5f9f69cbd21f658`
+  `8cd82e099fd181e0b3403ea2181190d12abcf037`
 - Default-branch tree:
-  `f3b97c11c93dc00c2e66df346ec4c0b032ab5581`
+  `5714747b9137042cf03eb5d3709bfbfe2d7e9c07`
 - Published prerelease: `v1.0.0-rc.1`
 - Annotated tag object:
   `06c7b0386eef69f4ad358aa9f0e7590558975ef9`
-- Tag target: the exact default-branch commit and tree above
+- Immutable tag target:
+  `ed1640b049763c37694f8c3bb5f9f69cbd21f658`, tree
+  `f3b97c11c93dc00c2e66df346ec4c0b032ab5581`
+- Shared-docs source commit:
+  `85ceeb1053d9ce9f0397d3cd0964e615a4d6c1dc`, tree
+  `4e6eac803252ba7a32da82cf0864b11b4a226d49`
+- Live shared-docs Worker version:
+  `9b0092d1-3dcf-49b8-8e2f-bd358dfa4837`
 - Release URL:
   `https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.1`
 - Published preview: `v0.9.0`
@@ -206,23 +218,12 @@ model.
 
 ## Exact next actions
 
-1. Preserve Manual Boss's initial **NOT READY** disposition on exact commit
-   `12bcfa1` as superseded history and its later **READY** disposition after
-   checkpoint clarification as the current completed Manual gate.
-2. Commit only this checkpoint correction and the dated-history heading
-   clarification, then return the exact replacement identity to Product Boss
-   for read-only verification.
-3. Evaluate and close any Product Boss finding before any shared-docs
-   synchronization or publication action.
-4. After Product Boss closes its gate and only with separate authority,
-   synchronize and publish
-   this correction through the shared-docs mirror, build, and deployment lanes.
-5. Verify the live Brand Navigation pages, release/source/edit/support/security
-   targets, and corrected wording at the exact deployed identity.
-6. Then continue `v1.0.0-rc.1` aging, triage meaningful compatibility or
+1. Continue `v1.0.0-rc.1` aging, triage meaningful compatibility or
    operator reports, and keep [`docs/TESTING.md`](docs/TESTING.md) current as
    supported Discourse versions and installation refs change.
-7. When stable-release criteria are met, freeze a new exact `v1.0.0`
+2. Treat future product or shared-documentation changes as a new bounded update;
+   do not mutate the published RC tag.
+3. When stable-release criteria are met, freeze a new exact `v1.0.0`
    candidate, run required CI and doctrine-controlled review, perform final
    manual acceptance, then merge, tag, and publish the exact accepted tree.
 
