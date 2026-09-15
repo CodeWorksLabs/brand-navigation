@@ -7,18 +7,30 @@ Date: 2026-09-14
 Phil authorized a local canonical-documentation correction after the first
 read-only public owner gate. The correction updates `README.md`,
 `docs/USER_GUIDE.md`, and `docs/MIGRATION.md` to identify
-`v1.0.0-rc.1` as the current published prerelease, identify the shared public
-documentation as published, scope the browser-only bundle workflow and
-English-only bundled locale accurately to RC1, and give troubleshooting a
-direct GitHub Issues route while preserving private security reporting.
+`v1.0.0-rc.1` as the current published prerelease, scope the browser-only
+bundle workflow and English-only bundled locale accurately to RC1, and give
+troubleshooting a direct GitHub Issues route while preserving private security
+reporting. The shared public documentation site and its Brand Navigation
+section already exist and are published. Canonical product-document correction
+commit `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`, tree
+`f38495198c7402539a491dacdd4834913899b261`, has not yet been synchronized or
+published to that site.
 
 No executable, setting, package, release tag, compatibility branch, shared-docs
 mirror, live site, or deployment state changed. Targeted Prettier validation,
 local Markdown link checks, the public documentation/release/issues/security
 destinations, and all 24 configuration tests passed. The repository-wide
 Prettier command still reports 31 pre-existing unrelated files; this correction
-does not reformat them. Refreshing and publishing the shared-docs mirror remain
-separate authorized work before the owner gate can be repeated.
+does not reformat them. Synchronizing and publishing this correction to the
+shared-docs mirror remain separate authorized work and must wait for the review
+and finding-closure sequence below.
+
+Manual Boss reviewed exact commit `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`
+and returned **NOT READY** for one checkpoint-only ambiguity between the
+already-published documentation site and this unpublished correction. The
+immediate ordered transitions are: Manual disposition → Brand Boss review →
+evaluation and closure of findings → separately authorized mirror
+synchronization, build, and deployment → live verification.
 
 ## Current disposition
 
@@ -178,14 +190,20 @@ model.
 
 ## Exact next actions
 
-1. Let `v1.0.0-rc.1` age on the verified installations and triage meaningful
-   compatibility or operator reports.
-2. Keep [`docs/TESTING.md`](docs/TESTING.md) current as supported Discourse
-   versions and installation refs change.
-3. Receive and verify the separately queued CodeWorksLabs site corrections;
-   keep site-owned presentation changes distinct from repository-owned product
-   truth and require approved provenance before adding product media.
-4. When stable-release criteria are met, freeze a new exact `v1.0.0`
+1. Preserve Manual Boss's **NOT READY** disposition on exact commit `12bcfa1`;
+   this checkpoint correction does not promote or replace that disposition.
+2. Send the exact checkpoint-correction commit to Brand Boss for review through
+   the authorized coordinating lane.
+3. Evaluate Brand Boss findings together and close every accepted finding before
+   any shared-docs synchronization or publication action.
+4. After that closure and only with separate authority, synchronize and publish
+   this correction through the shared-docs mirror, build, and deployment lanes.
+5. Verify the live Brand Navigation pages, release/source/edit/support/security
+   targets, and corrected wording at the exact deployed identity.
+6. Then continue `v1.0.0-rc.1` aging, triage meaningful compatibility or
+   operator reports, and keep [`docs/TESTING.md`](docs/TESTING.md) current as
+   supported Discourse versions and installation refs change.
+7. When stable-release criteria are met, freeze a new exact `v1.0.0`
    candidate, run required CI and doctrine-controlled review, perform final
    manual acceptance, then merge, tag, and publish the exact accepted tree.
 
