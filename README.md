@@ -67,10 +67,6 @@ See Brand Navigation running on the
 these live configurations. Site content and navigation may change after the
 screenshots are captured.
 
-### Administration
-
-![Brand Navigation administration example](docs/images/previews/brand-navigation-administration.png)
-
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)

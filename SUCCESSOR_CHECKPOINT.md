@@ -5,11 +5,12 @@ Date: 2026-10-15
 ## Repository preview gallery — 2026-10-15
 
 Phil authorized publication of a dedicated `README.md#preview` section for the
-Brand Navigation component topic and explicitly supplied an administration
-screenshot for inclusion. The reviewer initially included it, then exceeded
-authority by rejecting and removing it based on the reviewer's own
-interpretation. The correction restores the exact supplied image as the
-administration example without adding explanatory claims not provided by Phil.
+Brand Navigation component topic. The reviewer twice mishandled an unrelated
+Discourse global Branding-settings screenshot: first by inventing a connection
+to Brand Navigation and later by restoring the same wrong image as a Brand
+Navigation administration example. The final correction removes the image and
+the entire inaccurate Administration subsection. It must not be restored or
+used as Brand Navigation product evidence.
 
 The preview gallery also contains three visitor-facing Brand Navigation
 examples from Repeal OBBBA Forum, The Bridge demonstration site, and RVing
