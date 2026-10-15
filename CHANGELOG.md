@@ -6,6 +6,17 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+Planned candidate: `v1.0.0-rc.2`.
+
+- Add direct text links and icons with labels to the Discourse core header.
+  The new `header_presentation` control defaults to `icon_only`, preserving
+  existing site-header entries. Text remains available when an optional icon
+  has not loaded or is unavailable.
+- Validate and round-trip the new presentation setting in configuration
+  bundles, retaining safe URLs, audience/device rules, and embed exclusion.
+- Document migration from the separate text-based Custom Header Links
+  component and identify its current contribution to The Bridge screenshot.
+
 ## 1.0.0-rc.1 - 2026-09-08
 
 - Remove the duplicate Brand Navigation `enabled` setting and use Discourse's

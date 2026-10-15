@@ -1,5 +1,25 @@
 # Testing and acceptance
 
+## RC2 core-header text-link candidate — 2026-10-15
+
+The next candidate adds `header_presentation` for direct core-header links.
+Existing items default to `icon_only`; explicit `label_only` and
+`icon_and_label` preserve the label without requiring an available icon.
+The Bridge's current Versions & Status link remains supplied by its separate
+Custom Header Links component until an accepted candidate is installed and
+that link is migrated.
+
+Local configuration tests pass (26/26), including text-link round trips,
+backward-compatible icon settings, unsafe URLs, invalid presentation, groups,
+and children. Template lint, stylesheet lint, type checking, Ruby syntax, and
+targeted formatting checks pass. Local Windows ESLint also fails on unchanged
+HEAD code because its Babel path handling and theme-global configuration are
+incompatible with this environment; browser and CI evidence is pending.
+New QUnit cases cover rendering before sprite readiness, escaped label text,
+safe new-window attributes, optional-icon recovery, and visibility boundaries.
+System cases cover desktop/mobile sizing, core controls, keyboard focus, and
+embed exclusion. These cases are added but their execution is not yet claimed.
+
 ## In use on
 
 ### Verified installations

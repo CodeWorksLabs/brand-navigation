@@ -66,13 +66,16 @@ en:
               description: "Optional Font Awesome 6 icon name."
             presentation:
               label: "Presentation"
-              description: "Show the icon and label, label only, or icon only."
+              description: "For bar items, show the icon and label, label only, or icon only."
             section:
               label: "Section"
               description: "Keep this item beside the brand or align it to the far edge."
             surface:
               label: "Surface"
-              description: "Show this item in the Brand Navigation bar or as a direct icon link in the Discourse site header. Site-header items require a URL and icon and cannot contain children."
+              description: "Show this item in the Brand Navigation bar or as a direct link in the Discourse site header. Site-header items require a URL and cannot contain children."
+            header_presentation:
+              label: "Site-header presentation"
+              description: "For site-header items, show icon only (the existing default), label only, or icon and label. Icon-only links require an icon; text links can omit it."
             device_visibility:
               label: "Device visibility"
               description: "Show on both device classes, desktop/tablet only, or mobile phones only. Rotation does not change the device class. Existing blank values behave as both."

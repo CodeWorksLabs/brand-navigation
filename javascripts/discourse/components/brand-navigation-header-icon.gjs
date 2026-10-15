@@ -6,6 +6,7 @@ import { tracked } from "@glimmer/tracking";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
 import {
+  headerLinkPresentation,
   linkRel,
   linkTarget,
   primarySpriteWatcher,
@@ -67,9 +68,24 @@ export default class BrandNavigationHeaderIcon extends Component {
       iconExists: () => true,
     });
 
-    this.updatePrimarySpriteSubscription(isEligible);
+    this.updatePrimarySpriteSubscription(
+      isEligible &&
+        Boolean(item.icon) &&
+        item.header_presentation !== "label_only"
+    );
 
     return isEligible && shouldRenderHeaderIcon(context);
+  }
+
+  get presentation() {
+    this.iconRevision;
+    return headerLinkPresentation(this.args.item);
+  }
+
+  get linkClass() {
+    return this.presentation.showLabel
+      ? "btn icon btn-flat brand-navigation-header-link--with-text"
+      : "btn no-text icon btn-flat";
   }
 
   get rel() {
@@ -86,16 +102,23 @@ export default class BrandNavigationHeaderIcon extends Component {
 
   <template>
     {{#if this.shouldRender}}
-      <li class="brand-navigation-header-icon">
+      <li class="brand-navigation-header-icon brand-navigation-header-link">
         <a
-          class="btn no-text icon btn-flat"
+          class={{this.linkClass}}
           href={{@item.url}}
           target={{this.target}}
           rel={{this.rel}}
           title={{this.title}}
           aria-label={{@item.label}}
         >
-          {{dIcon @item.icon}}
+          {{#if this.presentation.showIcon}}
+            {{dIcon @item.icon}}
+          {{/if}}
+          {{#if this.presentation.showLabel}}
+            <span
+              class="brand-navigation-header-link__label"
+            >{{@item.label}}</span>
+          {{/if}}
         </a>
       </li>
     {{/if}}

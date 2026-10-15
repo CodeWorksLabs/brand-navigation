@@ -2,6 +2,25 @@
 
 Date: 2026-10-15
 
+## Active RC2 work — core-header text links
+
+Phil authorized adding the text-link capability missing from the separate
+Custom Header Links component and accepted `v1.0.0-rc.2` as the next candidate.
+The Bridge currently retains Custom Header Links component 5 for Versions &
+Status; Brand Navigation is component 6. That text link has not been migrated.
+Implementation adds `header_presentation` to top-level navigation items with
+an `icon_only` default so existing core-header icons retain their appearance.
+Explicit `label_only` and `icon_and_label` support direct text links using the
+existing supported header API and shared audience/device/embed/safe-URL rules.
+Implementation, documentation, QUnit coverage, and desktop/mobile system tests
+are prepared locally. All 26 configuration tests, template/style/type checks,
+Ruby syntax, and targeted formatting pass. Windows ESLint fails on unchanged
+HEAD as well as this candidate (Babel file-URL path handling and theme globals);
+the existing main CI at `3129838` is green. Next: create the RC2 draft PR and
+run its Discourse CI, correct any failures, and record the exact candidate.
+No RC2 release or live-site change has occurred. Formal review, manual release
+acceptance, and The Bridge cutover remain pending.
+
 ## Repository preview gallery — 2026-10-15
 
 Phil authorized publication of a dedicated `README.md#preview` section for the

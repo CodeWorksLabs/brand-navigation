@@ -41,6 +41,7 @@ const NAVIGATION_ITEM_KEYS = new Set([
   "title",
   "icon",
   "presentation",
+  "header_presentation",
   "section",
   "surface",
   "device_visibility",
@@ -234,6 +235,13 @@ function validateNavigationItem(item, index, errors) {
     path
   );
   validateOptionalEnum(item, "section", SECTION_VALUES, errors, path);
+  validateOptionalEnum(
+    item,
+    "header_presentation",
+    ITEM_PRESENTATION_VALUES,
+    errors,
+    path
+  );
   validateOptionalEnum(item, "surface", SURFACE_VALUES, errors, path);
   validateOptionalEnum(
     item,
@@ -265,8 +273,16 @@ function validateNavigationItem(item, index, errors) {
   const linkMode =
     item.link_mode || (isNonEmptyString(item.url) ? "link" : "group");
   if (surface === "site_header") {
-    if (!isNonEmptyString(item.url) || !isNonEmptyString(item.icon)) {
-      errors.push(`${path} with site_header surface requires a URL and icon.`);
+    if (!isNonEmptyString(item.url)) {
+      errors.push(`${path} with site_header surface requires a URL.`);
+    }
+    if (
+      (item.header_presentation || "icon_only") === "icon_only" &&
+      !isNonEmptyString(item.icon)
+    ) {
+      errors.push(
+        `${path} with icon_only site_header presentation requires an icon.`
+      );
     }
 
     if ((children || []).length) {

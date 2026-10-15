@@ -96,8 +96,9 @@ its icon list becomes `custom_font_awesome_icons`.
 2. Map each link to a top-level Brand Navigation item. Choose the `right`
    section on the `bar` surface, or choose `site_header` to retain its compact
    location among Discourse's core header icons.
-3. Use `icon_only` presentation while retaining the full title as the required
-   accessible label.
+3. Use `icon_only` presentation on the bar, or `icon_only` site-header
+   presentation (`header_presentation`) on the core header, while retaining
+   the full title as the required accessible label.
 4. Map `blank` to `_blank` and `self` to `_self`.
 5. Add every used icon to `custom_font_awesome_icons`.
 6. Map each device view to `both`, `desktop`, or `mobile`, then review the
@@ -107,6 +108,25 @@ its icon list becomes `custom_font_awesome_icons`.
    component to the intended visitor-facing theme, disable Custom Header Links
    (icons), confirm Brand Navigation's native **Enabled?** control remains on,
    and immediately verify the header at desktop and narrow mobile widths.
+
+## From Custom Header Links (text links)
+
+The text-based Custom Header Links component is separate from Custom Header
+Links (icons). Its replacement capability is planned for `v1.0.0-rc.2` and is
+not available in RC1.
+
+1. Record each label, URL, tooltip, target, and desktop/mobile visibility.
+2. Add a top-level item with `surface: site_header` and
+   `header_presentation: label_only`. Use `icon_and_label` if an icon is also
+   wanted. Copy the original destination and target and map device visibility.
+3. Prepare and test the replacement on a staging theme. Keep long labels short
+   enough for the available header space; use desktop-only visibility when
+   appropriate. Header links remain direct links; they do not support submenus.
+4. During cutover, detach or disable the text-based Custom Header Links
+   component on the affected themes, refresh, and confirm each link appears
+   exactly once. Verify desktop/mobile layout, keyboard focus, anonymous and
+   signed-in controls, and topic-header scrolling before accepting the change.
+5. Keep the original component and its configuration available for rollback.
 
 ## Roll back to an earlier component
 

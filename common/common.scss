@@ -489,3 +489,40 @@
   display: flex;
   align-items: center;
 }
+
+.d-header-icons .brand-navigation-header-link {
+  flex: 0 1 auto;
+  min-width: 0;
+
+  .brand-navigation-header-link--with-text {
+    box-sizing: border-box;
+    gap: 0.4em;
+    width: auto;
+    max-width: min(14rem, 30vw);
+    padding-inline: 0.5em;
+    color: var(--header_primary);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--header_primary);
+      background: var(--primary-low);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tertiary);
+      outline-offset: -2px;
+    }
+
+    .d-icon {
+      flex: 0 0 auto;
+      width: 1em;
+      font-size: var(--font-0);
+    }
+  }
+
+  &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

@@ -9,6 +9,7 @@ navigation on normal Discourse application pages.
 - Brand logo, dark-scheme logo, name, destination, and presentation.
 - Ordered top-level links and one child submenu level.
 - Internal and external destinations.
+- Direct text, icon, and icon-with-label links in the core Discourse header.
 - Desktop, tablet, and mobile behavior.
 - Mobile bar, compact menu, and hidden modes.
 - Keyboard and assistive-technology semantics.

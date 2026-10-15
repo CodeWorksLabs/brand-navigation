@@ -254,7 +254,7 @@ test("validates top-level and child device visibility", () => {
   ]);
 });
 
-test("validates site-header items as direct icon links", () => {
+test("validates site-header links and requires icons only for icon-only presentation", () => {
   assert.throws(
     () =>
       createBundle({
@@ -269,8 +269,67 @@ test("validates site-header items as direct icon links", () => {
           },
         ],
       }),
-    /requires a URL and icon.*cannot contain children/
+    /icon_only site_header presentation requires an icon.*cannot contain children/
   );
+});
+
+test("round trips text and combined site-header links without changing legacy icon settings", () => {
+  const items = [
+    { label: "Legacy", url: "/latest", icon: "house", surface: "site_header" },
+    {
+      label: "Versions & Status",
+      url: "/status",
+      surface: "site_header",
+      header_presentation: "label_only",
+      device_visibility: "desktop",
+      visibility: "everyone",
+      target: "_blank",
+    },
+    {
+      label: "Help",
+      url: "/faq",
+      surface: "site_header",
+      header_presentation: "icon_and_label",
+      icon: "circle-info",
+    },
+    {
+      label: "Text fallback",
+      url: "/about",
+      surface: "site_header",
+      header_presentation: "icon_and_label",
+    },
+  ];
+  const bundle = createBundle({ navigation_items: items });
+  assert.deepEqual(validateBundle(bundle), []);
+  assert.deepEqual(
+    JSON.parse(serializeBundle(bundle)).settings.navigation_items,
+    items
+  );
+});
+
+test("text header links still reject unsafe, missing, grouped, nested, and unknown settings", () => {
+  const base = {
+    label: "Status",
+    url: "/status",
+    surface: "site_header",
+    header_presentation: "label_only",
+  };
+  for (const invalid of [
+    { ...base, url: "javascript:alert(1)" },
+    { ...base, url: "" },
+    { ...base, label: " " },
+    { ...base, link_mode: "group" },
+    { ...base, children: [{ label: "Child", url: "/faq" }] },
+    { ...base, header_presentation: "unknown" },
+    {
+      label: "Parent",
+      children: [
+        { label: "Child", url: "/faq", header_presentation: "label_only" },
+      ],
+    },
+  ]) {
+    assert.throws(() => createBundle({ navigation_items: [invalid] }));
+  }
 });
 
 test("exports are validated and icon lists round trip losslessly", () => {
