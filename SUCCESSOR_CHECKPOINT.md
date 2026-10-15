@@ -12,22 +12,33 @@ Implementation adds `header_presentation` to top-level navigation items with
 an `icon_only` default so existing core-header icons retain their appearance.
 Explicit `label_only` and `icon_and_label` support direct text links using the
 existing supported header API and shared audience/device/embed/safe-URL rules.
-Implementation, documentation, QUnit coverage, and desktop/mobile system tests
-are prepared locally. All 26 configuration tests, template/style/type checks,
-Ruby syntax, and targeted formatting pass. Windows ESLint fails on unchanged
-HEAD as well as this candidate (Babel file-URL path handling and theme globals);
-the existing main CI at `3129838` is green. Draft
-[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25) targets main
-from `feature/site-header-text-links`. Initial candidate `93f7c24` passed all
-27 frontend tests in all four Discourse lanes and the 26-test configuration
-workflow. Its lint failure was RSpec context wording; its two new system cases
-failed because the keyboard assertion used a Selenium-only driver API.
-Both test-harness issues are corrected, and unrelated Ruby formatter churn is
-removed. Product executable bytes are unchanged by this correction. Next:
-confirm the corrected candidate's full CI matrix is green, record its exact
-commit/tree, and obtain release review and manual acceptance.
-No RC2 release or live-site change has occurred. Formal review, manual release
-acceptance, and The Bridge cutover remain pending.
+Implementation and verification are prepared in draft
+[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25), targeting
+main from `feature/site-header-text-links`.
+
+- Tested implementation commit: `6c7383dd5597d65c7f1e0f9ffdf123d075fab898`.
+- Tested tree: `4682d861dec9029622459a5a3e633730d63aba94`.
+- CI merge commit: `0fa60378a91d11bd2dc5f6a645cf0e348cbf3975`, with that same
+  tree, based on main `3129838a8e102219e05568ea5c7058420723593c`.
+- [Discourse CI run 38812437699](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437699)
+  passed the full lint gate and all four frontend/backend/system lanes.
+  Each frontend lane passed 27 tests and each system lane passed 34 examples.
+- [Configuration run 38812437412](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437412)
+  passed all 26 tests. Local configuration tests, template/style/type checks,
+  Ruby syntax, and formatting also passed.
+
+Windows ESLint reproduces a local environment failure on unchanged HEAD
+(Babel file-URL path handling and theme globals); the clean Linux CI lint gate
+passes. The first CI attempt at `93f7c24` found two test-harness issues (RSpec
+context wording and a Selenium-only keyboard API); both are corrected, and the
+replacement run above is green. CI screenshots were inspected for desktop text
+rendering and mobile truncation with the full accessible label retained.
+
+The subsequent evidence-record update changes documentation only. Resolve the
+latest PR head and checks before release review. No RC2 release or live-site
+change has occurred. Formal review, manual release acceptance, and The Bridge
+cutover remain pending. The screenshot-gallery administration image is still
+waiting for Phil's replacement attachment and has not been re-added.
 
 ## Repository preview gallery — 2026-10-15
 
@@ -262,14 +273,17 @@ model.
 
 ## Exact next actions
 
-1. Continue `v1.0.0-rc.1` aging, triage meaningful compatibility or
-   operator reports, and keep [`docs/TESTING.md`](docs/TESTING.md) current as
-   supported Discourse versions and installation refs change.
-2. Treat future product or shared-documentation changes as a new bounded update;
-   do not mutate the published RC tag.
-3. When stable-release criteria are met, freeze a new exact `v1.0.0`
-   candidate, run required CI and doctrine-controlled review, perform final
-   manual acceptance, then merge, tag, and publish the exact accepted tree.
+1. Resolve the latest head and checks of draft PR 25, then freeze the RC2
+   candidate and obtain the required doctrine-controlled release review and
+   manual acceptance. Implementation CI is green at the identity above.
+2. After release acceptance and publication authority, merge/tag/publish
+   `v1.0.0-rc.2` under the existing release procedure. Preserve the RC1 tag.
+3. Migrate The Bridge's Versions & Status link to Brand Navigation only after
+   the accepted version is installed and live cutover is authorized; verify
+   the link once per theme and retire the separate text-link component there.
+4. Resume the administration screenshot insertion when Phil supplies the
+   replacement image. Embed it directly after “screenshots are captured.” and
+   before “Repeal OBBBA Forum,” as requested.
 
 ## Out of scope
 

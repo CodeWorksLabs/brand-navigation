@@ -9,21 +9,35 @@ The Bridge's current Versions & Status link remains supplied by its separate
 Custom Header Links component until an accepted candidate is installed and
 that link is migrated.
 
-Local configuration tests pass (26/26), including text-link round trips,
-backward-compatible icon settings, unsafe URLs, invalid presentation, groups,
-and children. Template lint, stylesheet lint, type checking, Ruby syntax, and
-targeted formatting checks pass. Local Windows ESLint also fails on unchanged
-HEAD code because its Babel path handling and theme-global configuration are
-incompatible with this environment. Initial candidate `93f7c24` passed all
-27 frontend tests in all four CI lanes and the configuration workflow in
-[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25).
-New QUnit cases cover rendering before sprite readiness, escaped label text,
-safe new-window attributes, optional-icon recovery, and visibility boundaries.
-System cases cover desktop/mobile sizing, core controls, keyboard focus, and
-embed exclusion. Initial system execution reached the keyboard step, then
-failed because the test called a Selenium-only API on Discourse's Playwright
-driver. That test call and an RSpec context-name lint violation are corrected;
-the complete corrected CI matrix remains to be confirmed.
+Implementation commit `6c7383dd5597d65c7f1e0f9ffdf123d075fab898`, tree
+`4682d861dec9029622459a5a3e633730d63aba94`, passed
+[Discourse CI run 38812437699](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437699)
+in [draft PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25).
+The CI merge commit `0fa60378a91d11bd2dc5f6a645cf0e348cbf3975` has the same tree.
+
+| Lane           | Discourse core                             | Frontend  | System    |
+| -------------- | ------------------------------------------ | --------- | --------- |
+| Current        | `60cbc8e4e4e52253d3fa2175b7f2431a38cb9487` | 27 passed | 34 passed |
+| Repeal 2026.7  | `988c31e00fb73713c81b93cd47f68af0fb4c6273` | 27 passed | 34 passed |
+| R744 2026.7    | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | 27 passed | 34 passed |
+| 2026.8 release | `badad7b0456a628e578bc48b9f8c1259422b5d58` | 27 passed | 34 passed |
+
+The full Linux lint gate and backend lanes passed.
+[Configuration run 38812437412](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437412)
+passed 26 tests, including text-link round trips, legacy icon defaults, unsafe
+URLs, invalid presentation, groups, and children. Local configuration tests,
+template/style/type checks, Ruby syntax, and formatting also passed. Windows
+ESLint reproduces local Babel path/theme-global failures on unchanged HEAD;
+the clean CI lint gate passes.
+
+QUnit verifies rendering before sprite readiness, escaped label text, safe
+new-window attributes, optional-icon recovery, and visibility boundaries.
+System tests verify desktop/mobile sizing, retained core controls, keyboard
+focus, and embed exclusion. Desktop/mobile CI screenshots were inspected.
+The initial run at `93f7c24` failed an RSpec context-name check and a
+Selenium-only keyboard-test call; the corrected run above passes both.
+This is implementation/test evidence; release review, manual acceptance, and
+the live demo cutover remain pending.
 
 ## In use on
 
