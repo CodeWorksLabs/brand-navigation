@@ -67,6 +67,10 @@ See Brand Navigation running on the
 these live configurations. Site content and navigation may change after the
 screenshots are captured.
 
+### Administration
+
+[Brand Navigation administration example](https://github.com/CodeWorksLabs/brand-navigation/blob/main/docs/images/previews/brand-navigation-administration.png) ([image](https://github.com/CodeWorksLabs/brand-navigation/raw/main/docs/images/previews/brand-navigation-administration.png))
+
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)

@@ -5,20 +5,22 @@ Date: 2026-10-15
 ## Repository preview gallery — 2026-10-15
 
 Phil authorized publication of a dedicated `README.md#preview` section for the
-Brand Navigation component topic. The reviewer twice mishandled an unrelated
-Discourse global Branding-settings screenshot: first by inventing a connection
-to Brand Navigation and later by restoring the same wrong image as a Brand
-Navigation administration example. The final correction removes the image and
-the entire inaccurate Administration subsection. It must not be restored or
-used as Brand Navigation product evidence.
+Brand Navigation component topic. Phil explicitly directed that the supplied
+R744 Community administration screenshot be used as the Brand Navigation
+administration example. The exact supplied PNG is published at
+`docs/images/previews/brand-navigation-administration.png`, and the Preview
+section links to both its GitHub page and raw image. No explanatory product
+claims are inferred from the screenshot.
 
 The preview gallery also contains three visitor-facing Brand Navigation
 examples from Repeal OBBBA Forum, The Bridge demonstration site, and RVing
 Community, with links to the live DiscussionBridge demo and each pictured
-site. Validation passed local Prettier for `README.md` and this checkpoint, all
-24 configuration tests, PNG decoding/dimension inspection for the assets, and
-`git diff --check`. No executable component, settings schema, release tag,
-compatibility branch, live Discourse configuration, or deployment changed.
+site. The copied administration asset matches the supplied file at SHA-256
+`072A31B451CF9FAE630A6B3872ADEC279C45ABCC9A48276015B71CA860473598`
+and decodes as a 923 × 2431 PNG. Targeted Prettier, all 24 configuration tests,
+and `git diff --check` pass. No executable component, settings schema, release
+tag, compatibility branch, live Discourse configuration, or deployment
+changed.
 
 ## Public documentation owner correction — 2026-09-14
 
