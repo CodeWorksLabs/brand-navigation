@@ -60,6 +60,39 @@ The component starts with practical sample navigation and a compact mobile
 menu. Configure the structured `navigation_items` editor directly, or use a
 validated configuration bundle to move settings without re-entering each row.
 
+## Preview
+
+See Brand Navigation running on the
+[DiscussionBridge demo](https://bridge.demo.discussionbridge.dev/), or compare
+these live configurations. Site content and navigation may change after the
+screenshots are captured.
+
+### Administrator branding settings
+
+The Discourse site logo shown in the core header below Brand Navigation is
+configured under **Admin → All site settings → Branding**. Brand Navigation's
+optional brand-bar logo is uploaded separately in the component settings.
+
+![Discourse administrator Branding settings showing the logo, small logo, mobile and dark variants, icons, and social-preview image fields](docs/images/previews/discourse-admin-branding-settings.png)
+
+### Repeal OBBBA Forum
+
+[Open the live forum](https://forum.repealobbba.org/)
+
+![Brand Navigation on the Repeal OBBBA Forum, with a red brand bar, linked parents, submenu carets, and a core-header social-icon row](docs/images/previews/repeal-obbba-header.png)
+
+### The Bridge demonstration site
+
+[Open the live demo](https://bridge.demo.discussionbridge.dev/)
+
+![Brand Navigation on The Bridge demonstration site, with publishing, release, and ecosystem navigation plus core-header destinations](docs/images/previews/the-bridge-header.png)
+
+### RVing Community
+
+[Open the live community](https://www.rving.community/)
+
+![Brand Navigation on RVing Community, with a blue brand bar, community and resource menus, and anonymous sign-up controls](docs/images/previews/rving-community-header.png)
+
 ## Known working Discourse versions
 
 Brand Navigation has recorded manual and native-update evidence across
