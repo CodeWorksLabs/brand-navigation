@@ -5,22 +5,20 @@ Date: 2026-10-15
 ## Repository preview gallery — 2026-10-15
 
 Phil authorized publication of a dedicated `README.md#preview` section for the
-Brand Navigation component topic and supplied four screenshots. Commit
-`de25bfe` adds the complete Discourse administrator Branding settings page plus
-three visitor-facing Brand Navigation examples from Repeal OBBBA Forum, The
-Bridge demonstration site, and RVing Community. The section links to the live
-DiscussionBridge demo and each pictured site. It states accurately that the
-Discourse site logo shown in the core header is configured under **Admin → All
-site settings → Branding**, while Brand Navigation's optional brand-bar logo is
-uploaded separately in the component settings.
+Brand Navigation component topic. Commit `de25bfe` initially included an
+unrelated Discourse global Branding-settings screenshot due to reviewer error.
+The immediate correction removes that screenshot and its README subsection;
+it was not Brand Navigation's component-settings interface and must not be used
+as component evidence.
 
-The supplied R744 administrator screenshot is intentionally included to show
-the administration surface; it is not presented as a rendered-component
-screenshot. The three narrow captures demonstrate rendered header variations.
-Validation at the content commit passed local Prettier for `README.md`, all 24
-configuration tests, PNG decoding/dimension inspection for all four assets,
-and `git diff --check`. No executable component, settings schema, release tag,
-compatibility branch, live Discourse configuration, or deployment changed.
+The retained preview gallery contains three visitor-facing Brand Navigation
+examples from Repeal OBBBA Forum, The Bridge demonstration site, and RVing
+Community, with links to the live DiscussionBridge demo and each pictured
+site. Validation passed local Prettier for `README.md` and this checkpoint, all
+24 configuration tests, PNG decoding/dimension inspection for the retained
+assets, and `git diff --check`. No executable component, settings schema,
+release tag, compatibility branch, live Discourse configuration, or deployment
+changed.
 
 ## Public documentation owner correction — 2026-09-14
 

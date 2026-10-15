@@ -67,14 +67,6 @@ See Brand Navigation running on the
 these live configurations. Site content and navigation may change after the
 screenshots are captured.
 
-### Administrator branding settings
-
-The Discourse site logo shown in the core header below Brand Navigation is
-configured under **Admin → All site settings → Branding**. Brand Navigation's
-optional brand-bar logo is uploaded separately in the component settings.
-
-![Discourse administrator Branding settings showing the logo, small logo, mobile and dark variants, icons, and social-preview image fields](docs/images/previews/discourse-admin-branding-settings.png)
-
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)
