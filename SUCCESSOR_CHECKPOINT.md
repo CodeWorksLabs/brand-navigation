@@ -16,8 +16,16 @@ Implementation, documentation, QUnit coverage, and desktop/mobile system tests
 are prepared locally. All 26 configuration tests, template/style/type checks,
 Ruby syntax, and targeted formatting pass. Windows ESLint fails on unchanged
 HEAD as well as this candidate (Babel file-URL path handling and theme globals);
-the existing main CI at `3129838` is green. Next: create the RC2 draft PR and
-run its Discourse CI, correct any failures, and record the exact candidate.
+the existing main CI at `3129838` is green. Draft
+[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25) targets main
+from `feature/site-header-text-links`. Initial candidate `93f7c24` passed all
+27 frontend tests in all four Discourse lanes and the 26-test configuration
+workflow. Its lint failure was RSpec context wording; its two new system cases
+failed because the keyboard assertion used a Selenium-only driver API.
+Both test-harness issues are corrected, and unrelated Ruby formatter churn is
+removed. Product executable bytes are unchanged by this correction. Next:
+confirm the corrected candidate's full CI matrix is green, record its exact
+commit/tree, and obtain release review and manual acceptance.
 No RC2 release or live-site change has occurred. Formal review, manual release
 acceptance, and The Bridge cutover remain pending.
 

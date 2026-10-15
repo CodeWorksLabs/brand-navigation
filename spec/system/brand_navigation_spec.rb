@@ -10,26 +10,16 @@ RSpec.describe "Brand Navigation" do
     theme.update_setting(
       :navigation_items,
       [
-        {
-          label: "Latest",
-          url: "/latest",
-          target: "_self",
-          visibility: "everyone"
-        },
+        { label: "Latest", url: "/latest", target: "_self", visibility: "everyone" },
         {
           label: "Explore",
           url: "/categories",
           visibility: "everyone",
           children: [
-            {
-              label: "Categories",
-              url: "/categories",
-              target: "_self",
-              visibility: "everyone"
-            }
-          ]
-        }
-      ]
+            { label: "Categories", url: "/categories", target: "_self", visibility: "everyone" },
+          ],
+        },
+      ],
     )
     theme.save!
   end
@@ -41,9 +31,7 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_link("Example", href: "/latest")
     expect(page).to have_link("Latest", href: "/latest")
     expect(page).to have_link("Explore", href: "/categories")
-    expect(page).to have_css(
-      'details summary[aria-label="Open Explore submenu"]'
-    )
+    expect(page).to have_css('details summary[aria-label="Open Explore submenu"]')
     expect(page).to have_link("Categories", href: "/categories", visible: :all)
   end
 
@@ -55,17 +43,15 @@ RSpec.describe "Brand Navigation" do
           label: "Versions & Status",
           url: "/latest",
           surface: "site_header",
-          header_presentation: "label_only"
-        }
-      ]
+          header_presentation: "label_only",
+        },
+      ],
     )
     theme.save!
     visit("/")
     expect(page).to have_css("[data-brand-navigation]")
-    expect(page).to have_css(
-      ".brand-navigation-header-link",
-      text: "Versions & Status"
-    )
+
+    expect(page).to have_css(".brand-navigation-header-link", text: "Versions & Status")
 
     visit("/?embed_mode=true")
 
@@ -84,50 +70,41 @@ RSpec.describe "Brand Navigation" do
             url: "/latest",
             surface: "site_header",
             header_presentation: "label_only",
-            target: "_blank"
-          }
-        ]
+            target: "_blank",
+          },
+        ],
       )
       theme.save!
       visit("/")
 
-      link =
-        find(
-          ".d-header-icons .brand-navigation-header-link a",
-          text: "Versions & Status"
-        )
+      link = find(".d-header-icons .brand-navigation-header-link a", text: "Versions & Status")
       expect(link["rel"]).to eq("noopener noreferrer")
       expect(link["target"]).to eq("_blank")
       expect(link["aria-label"]).to eq("Versions & Status")
       expect(link).not_to have_css("svg")
-      expect(page).not_to have_css(
-        ".brand-navigation__items",
-        text: "Versions & Status"
-      )
+      expect(page).not_to have_css(".brand-navigation__items", text: "Versions & Status")
       expect(page).to have_css(".d-header .login-button", visible: true)
       expect(
         page.evaluate_script(
           "arguments[0].getBoundingClientRect().width <= Math.min(224, innerWidth * 0.3) + 1",
-          link
-        )
+          link,
+        ),
       ).to eq(true)
       expect(
-        page.evaluate_script(
-          "document.documentElement.scrollWidth <= innerWidth"
-        )
+        page.evaluate_script("document.documentElement.scrollWidth <= innerWidth"),
       ).to eq(true)
 
       link.send_keys(:tab)
-      page.driver.browser.switch_to.active_element.send_keys(%i[shift tab])
+      find(":focus").send_keys([:shift, :tab])
       expect(
-        page.evaluate_script("document.activeElement === arguments[0]", link)
+        page.evaluate_script("document.activeElement === arguments[0]", link),
       ).to eq(true)
     end
   end
 
   include_examples "a core-header text link"
 
-  context "on mobile", mobile: true do
+  context "with a mobile device", mobile: true do
     include_examples "a core-header text link"
   end
 
@@ -152,11 +129,11 @@ RSpec.describe "Brand Navigation" do
           visibility: "everyone",
           children: [
             { label: "Categories", url: "/categories", visibility: "everyone" },
-            { label: "Latest", url: "/latest", visibility: "everyone" }
-          ]
+            { label: "Latest", url: "/latest", visibility: "everyone" },
+          ],
         },
-        { label: "About", url: "/about", visibility: "everyone" }
-      ]
+        { label: "About", url: "/about", visibility: "everyone" },
+      ],
     )
     theme.save!
 
@@ -167,31 +144,26 @@ RSpec.describe "Brand Navigation" do
     linked_item = find(".brand-navigation__item", text: "Explore")
     submenu_list = find(".brand-navigation__submenu > ul")
     following_item = all(".brand-navigation__item")[1]
-    linked_top =
-      page.evaluate_script(
-        "arguments[0].getBoundingClientRect().top",
-        linked_item
-      )
-    linked_bottom =
-      page.evaluate_script(
-        "arguments[0].getBoundingClientRect().bottom",
-        linked_item
-      )
-    submenu_top =
-      page.evaluate_script(
-        "arguments[0].getBoundingClientRect().top",
-        submenu_list
-      )
-    submenu_bottom =
-      page.evaluate_script(
-        "arguments[0].getBoundingClientRect().bottom",
-        submenu_list
-      )
-    following_top =
-      page.evaluate_script(
-        "arguments[0].getBoundingClientRect().top",
-        following_item
-      )
+    linked_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      linked_item,
+    )
+    linked_bottom = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().bottom",
+      linked_item,
+    )
+    submenu_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      submenu_list,
+    )
+    submenu_bottom = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().bottom",
+      submenu_list,
+    )
+    following_top = page.evaluate_script(
+      "arguments[0].getBoundingClientRect().top",
+      following_item,
+    )
 
     expect(page).to have_link("Latest", href: "/latest", visible: true)
     expect(submenu_top).to be >= linked_top
@@ -219,9 +191,9 @@ RSpec.describe "Brand Navigation" do
           url: "/latest",
           icon: "brand-navigation-missing-icon",
           presentation: "icon_only",
-          visibility: "everyone"
-        }
-      ]
+          visibility: "everyone",
+        },
+      ],
     )
     theme.save!
 
@@ -229,12 +201,11 @@ RSpec.describe "Brand Navigation" do
 
     expect(page).to have_css(
       '.brand-navigation__items a[href="/latest"] span',
-      text: "Fallback"
+      text: "Fallback",
     )
   end
 
-  it "keeps mobile bar submenus reachable without a clipping scrollport",
-     mobile: true do
+  it "keeps mobile bar submenus reachable without a clipping scrollport", mobile: true do
     theme.update_setting(:mobile_mode, "bar")
     theme.save!
 
@@ -244,8 +215,8 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_link("Categories", href: "/categories", visible: true)
     expect(
       page.evaluate_script(
-        "getComputedStyle(document.querySelector('.brand-navigation__nav')).overflowX"
-      )
+        "getComputedStyle(document.querySelector('.brand-navigation__nav')).overflowX",
+      ),
     ).to eq("visible")
   end
 
@@ -265,11 +236,11 @@ RSpec.describe "Brand Navigation" do
               label: "Categories",
               url: "/categories",
               description: "Browse every category",
-              visibility: "everyone"
-            }
-          ]
-        }
-      ]
+              visibility: "everyone",
+            },
+          ],
+        },
+      ],
     )
     theme.save!
 
@@ -280,24 +251,18 @@ RSpec.describe "Brand Navigation" do
     description = find(".brand-navigation__child-description")
 
     expect(
-      page.evaluate_script("getComputedStyle(arguments[0]).color", child_link)
+      page.evaluate_script("getComputedStyle(arguments[0]).color", child_link),
     ).to eq("rgb(255, 255, 255)")
     expect(
-      page.evaluate_script("getComputedStyle(arguments[0]).color", description)
+      page.evaluate_script("getComputedStyle(arguments[0]).color", description),
     ).to eq("rgb(255, 255, 255)")
     expect(
-      page.evaluate_script(
-        "getComputedStyle(arguments[0]).opacity",
-        description
-      )
+      page.evaluate_script("getComputedStyle(arguments[0]).opacity", description),
     ).to eq("0.78")
 
     child_link.hover
     expect(
-      page.evaluate_script(
-        "getComputedStyle(arguments[0]).backgroundColor",
-        child_link
-      )
+      page.evaluate_script("getComputedStyle(arguments[0]).backgroundColor", child_link),
     ).to eq("rgb(18, 52, 86)")
   end
 
@@ -328,35 +293,28 @@ RSpec.describe "Brand Navigation" do
     bundle = {
       format: "brand-navigation-settings",
       version: 1,
-      settings: {
-        bar_background_color: "#123456"
-      }
+      settings: { bar_background_color: "#123456" },
     }
 
     visit(settings_path)
     find(".brand-navigation-bundles textarea").set(bundle.to_json)
     click_button("Import settings")
 
-    expect(page).to have_css(
-      ".alert-success",
-      text: "Configuration bundle imported"
-    )
+    expect(page).to have_css(".alert-success", text: "Configuration bundle imported")
     expect(
-      find('input[type="color"][data-setting="bar_background_color"]').value
+      find('input[type="color"][data-setting="bar_background_color"]').value,
     ).to eq("#123456")
     expect(page).to have_button("Save colors", disabled: true)
 
     visit(settings_path)
     expect(
-      find('input[type="color"][data-setting="bar_background_color"]').value
+      find('input[type="color"][data-setting="bar_background_color"]').value,
     ).to eq("#123456")
     expect(page).to have_button("Save colors", disabled: true)
   end
 
   context "with an unpublished staging theme" do
-    let(:staging_theme) do
-      Fabricate(:theme, enabled: true, user_selectable: false)
-    end
+    let(:staging_theme) { Fabricate(:theme, enabled: true, user_selectable: false) }
     let(:theme) { upload_theme_component(parent_theme_id: staging_theme.id) }
 
     it "imports settings through preview without activating the visitor theme" do
@@ -368,8 +326,8 @@ RSpec.describe "Brand Navigation" do
         version: 1,
         settings: {
           bar_background_color: "#123456",
-          navigation_items: [{ label: "Staged", url: "/latest" }]
-        }
+          navigation_items: [{ label: "Staged", url: "/latest" }],
+        },
       }
 
       visit("/")
@@ -382,14 +340,11 @@ RSpec.describe "Brand Navigation" do
       expect(page).to have_css(".brand-navigation-bundles")
       find(".brand-navigation-bundles textarea").set(bundle.to_json)
       click_button("Import settings")
-      expect(page).to have_css(
-        ".alert-success",
-        text: "Configuration bundle imported"
-      )
+      expect(page).to have_css(".alert-success", text: "Configuration bundle imported")
 
       visit(settings_path)
       expect(
-        find('input[type="color"][data-setting="bar_background_color"]').value
+        find('input[type="color"][data-setting="bar_background_color"]').value,
       ).to eq("#123456")
 
       visit("/")

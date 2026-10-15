@@ -14,11 +14,16 @@ backward-compatible icon settings, unsafe URLs, invalid presentation, groups,
 and children. Template lint, stylesheet lint, type checking, Ruby syntax, and
 targeted formatting checks pass. Local Windows ESLint also fails on unchanged
 HEAD code because its Babel path handling and theme-global configuration are
-incompatible with this environment; browser and CI evidence is pending.
+incompatible with this environment. Initial candidate `93f7c24` passed all
+27 frontend tests in all four CI lanes and the configuration workflow in
+[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25).
 New QUnit cases cover rendering before sprite readiness, escaped label text,
 safe new-window attributes, optional-icon recovery, and visibility boundaries.
 System cases cover desktop/mobile sizing, core controls, keyboard focus, and
-embed exclusion. These cases are added but their execution is not yet claimed.
+embed exclusion. Initial system execution reached the keyboard step, then
+failed because the test called a Selenium-only API on Discourse's Playwright
+driver. That test call and an RSpec context-name lint violation are corrected;
+the complete corrected CI matrix remains to be confirmed.
 
 ## In use on
 
