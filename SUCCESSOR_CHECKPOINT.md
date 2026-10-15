@@ -1,6 +1,26 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-09-14
+Date: 2026-10-15
+
+## Repository preview gallery — 2026-10-15
+
+Phil authorized publication of a dedicated `README.md#preview` section for the
+Brand Navigation component topic and supplied four screenshots. Commit
+`de25bfe` adds the complete Discourse administrator Branding settings page plus
+three visitor-facing Brand Navigation examples from Repeal OBBBA Forum, The
+Bridge demonstration site, and RVing Community. The section links to the live
+DiscussionBridge demo and each pictured site. It states accurately that the
+Discourse site logo shown in the core header is configured under **Admin → All
+site settings → Branding**, while Brand Navigation's optional brand-bar logo is
+uploaded separately in the component settings.
+
+The supplied R744 administrator screenshot is intentionally included to show
+the administration surface; it is not presented as a rendered-component
+screenshot. The three narrow captures demonstrate rendered header variations.
+Validation at the content commit passed local Prettier for `README.md`, all 24
+configuration tests, PNG decoding/dimension inspection for all four assets,
+and `git diff --check`. No executable component, settings schema, release tag,
+compatibility branch, live Discourse configuration, or deployment changed.
 
 ## Public documentation owner correction — 2026-09-14
 
@@ -60,17 +80,16 @@ be governed by Git, the release metadata, and the repository evidence records.
 - Canonical local checkout:
   `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Documentation branch: `docs/project-history`
-- Documentation candidate HEAD:
-  `8cd82e099fd181e0b3403ea2181190d12abcf037`
-- Documentation candidate tree:
-  `5714747b9137042cf03eb5d3709bfbfe2d7e9c07`
+- Preview-gallery content commit:
+  `de25bfe` (tree `8d64a050527cac8b98e78259131f03d2d2ed5dae`)
 - Candidate commits: `12bcfa1c51e5d182231647dbf33224e4ab5cf42c`,
   `de5fd2e004991eea3a1dd90c322ea7ec237ca1fb`, and
   `93b72ce74fb0fbbe72d1748450a98079eb61d44c`, followed by checkpoint closure
   commit `8cd82e099fd181e0b3403ea2181190d12abcf037`
-- Publication source state: remote `main` and `docs/project-history` both
-  resolved to `8cd82e0`; later checkpoint-only history does not change the nine
-  mirrored source documents
+- Pre-gallery repository state: remote `main` and `docs/project-history` both
+  resolved to `f87fa98ceccab92285bbc40fc28a817ec09cf4d0`; the gallery advances
+  repository documentation only and does not change the nine mirrored source
+  documents
 - Published documentation source commit:
   `8cd82e099fd181e0b3403ea2181190d12abcf037`
 - Published documentation source tree:
