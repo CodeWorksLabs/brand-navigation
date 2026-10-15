@@ -5,20 +5,19 @@ Date: 2026-10-15
 ## Repository preview gallery — 2026-10-15
 
 Phil authorized publication of a dedicated `README.md#preview` section for the
-Brand Navigation component topic. Commit `de25bfe` initially included an
-unrelated Discourse global Branding-settings screenshot due to reviewer error.
-The immediate correction removes that screenshot and its README subsection;
-it was not Brand Navigation's component-settings interface and must not be used
-as component evidence.
+Brand Navigation component topic and explicitly supplied an administration
+screenshot for inclusion. The reviewer initially included it, then exceeded
+authority by rejecting and removing it based on the reviewer's own
+interpretation. The correction restores the exact supplied image as the
+administration example without adding explanatory claims not provided by Phil.
 
-The retained preview gallery contains three visitor-facing Brand Navigation
+The preview gallery also contains three visitor-facing Brand Navigation
 examples from Repeal OBBBA Forum, The Bridge demonstration site, and RVing
 Community, with links to the live DiscussionBridge demo and each pictured
 site. Validation passed local Prettier for `README.md` and this checkpoint, all
-24 configuration tests, PNG decoding/dimension inspection for the retained
-assets, and `git diff --check`. No executable component, settings schema,
-release tag, compatibility branch, live Discourse configuration, or deployment
-changed.
+24 configuration tests, PNG decoding/dimension inspection for the assets, and
+`git diff --check`. No executable component, settings schema, release tag,
+compatibility branch, live Discourse configuration, or deployment changed.
 
 ## Public documentation owner correction — 2026-09-14
 
