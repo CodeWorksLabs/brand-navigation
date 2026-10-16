@@ -140,12 +140,17 @@ RSpec.describe "Brand Navigation" do
                 const header = document.querySelector(".d-header").getBoundingClientRect();
                 return {
                   header: { top: header.top, bottom: header.bottom },
+                  logoContainer: (() => {
+                    const r = document.querySelector(".home-logo-wrapper-outlet").getBoundingClientRect();
+                    return { left: r.left, right: r.right, top: r.top, bottom: r.bottom };
+                  })(),
                   viewportWidth: innerWidth, viewportHeight: innerHeight,
                   documentWidth: document.documentElement.scrollWidth,
                   targets: arguments[0].map((selector) => {
                     const node = document.querySelector(selector);
                     const r = node.getBoundingClientRect();
                     return {
+                      selector,
                       left: r.left, right: r.right, top: r.top, bottom: r.bottom,
                       width: r.width, height: r.height,
                       hits: [[.5,.5],[.25,.5],[.75,.5],[.5,.25],[.5,.75]].map(([x,y]) => {
@@ -171,9 +176,17 @@ RSpec.describe "Brand Navigation" do
               expect(target.fetch("right")).to be <= geometry.fetch("viewportWidth")
               expect(target.fetch("top")).to be >= header_top
               expect(target.fetch("bottom")).to be <= header_bottom
-              expect(target.fetch("hits")).to all(eq(true))
+              expect(target.fetch("hits")).to all(eq(true)),
+                "#{target.fetch('selector')} was clipped or covered: #{target.inspect}"
             end
             menu, logo = geometry.fetch("targets")
+            [menu, logo].each do |target|
+              container = geometry.fetch("logoContainer")
+              expect(target.fetch("left")).to be >= container.fetch("left")
+              expect(target.fetch("right")).to be <= container.fetch("right")
+              expect(target.fetch("top")).to be >= container.fetch("top")
+              expect(target.fetch("bottom")).to be <= container.fetch("bottom")
+            end
             menu_center = (menu.fetch("top") + menu.fetch("bottom")) / 2
             logo_center = (logo.fetch("top") + logo.fetch("bottom")) / 2
             expect((menu_center - logo_center).abs).to be <= 1
