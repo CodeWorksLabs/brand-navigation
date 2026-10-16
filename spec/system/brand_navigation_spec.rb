@@ -106,6 +106,89 @@ RSpec.describe "Brand Navigation" do
 
   context "with a mobile device", mobile: true do
     include_examples "a core-header text link"
+
+    [320, 390].each do |width|
+      it "aligns the compact menu and logo beside header controls at #{width}px" do
+        theme.update_setting(:mobile_mode, "menu")
+        theme.update_setting(
+          :navigation_items,
+          [
+            { label: "Home", url: "/latest", surface: "bar" },
+            {
+              label: "Versions & Status",
+              url: "/about",
+              surface: "site_header",
+              header_presentation: "label_only",
+            },
+          ],
+        )
+        theme.save!
+
+        resize_window(width: width, height: 900) do
+          visit("/")
+          selectors = [
+            "#brand-navigation-menu",
+            ".d-header .home-logo-wrapper-outlet .title a",
+            ".d-header-icons .brand-navigation-header-link a",
+            ".d-header button.login-button",
+          ]
+          selectors.each { |selector| expect(page).to have_css(selector, count: 1) }
+
+          try_until_success do
+            geometry = page.evaluate_script(<<~JS, selectors)
+              (() => {
+                const header = document.querySelector(".d-header").getBoundingClientRect();
+                return {
+                  header: { top: header.top, bottom: header.bottom },
+                  viewportWidth: innerWidth, viewportHeight: innerHeight,
+                  documentWidth: document.documentElement.scrollWidth,
+                  targets: arguments[0].map((selector) => {
+                    const node = document.querySelector(selector);
+                    const r = node.getBoundingClientRect();
+                    return {
+                      left: r.left, right: r.right, top: r.top, bottom: r.bottom,
+                      width: r.width, height: r.height,
+                      hits: [[.5,.5],[.25,.5],[.75,.5],[.5,.25],[.5,.75]].map(([x,y]) => {
+                        const hit = document.elementFromPoint(r.left+r.width*x, r.top+r.height*y);
+                        return !!hit && (hit === node || node.contains(hit));
+                      })
+                    };
+                  })
+                };
+              })()
+            JS
+
+            header_top = [0, geometry.fetch("header").fetch("top")].max
+            header_bottom = [
+              geometry.fetch("viewportHeight"),
+              geometry.fetch("header").fetch("bottom"),
+            ].min
+            expect(geometry.fetch("documentWidth")).to be <= width + 1
+            geometry.fetch("targets").each do |target|
+              expect(target.fetch("width")).to be > 0
+              expect(target.fetch("height")).to be > 0
+              expect(target.fetch("left")).to be >= 0
+              expect(target.fetch("right")).to be <= geometry.fetch("viewportWidth")
+              expect(target.fetch("top")).to be >= header_top
+              expect(target.fetch("bottom")).to be <= header_bottom
+              expect(target.fetch("hits")).to all(eq(true))
+            end
+            menu, logo = geometry.fetch("targets")
+            menu_center = (menu.fetch("top") + menu.fetch("bottom")) / 2
+            logo_center = (logo.fetch("top") + logo.fetch("bottom")) / 2
+            expect((menu_center - logo_center).abs).to be <= 1
+            separate_targets =
+              menu.fetch("right") <= logo.fetch("left") ||
+                logo.fetch("right") <= menu.fetch("left")
+            expect(separate_targets).to eq(true)
+          end
+
+          find("#brand-navigation-menu").click
+          expect(page).to have_css(".brand-navigation--menu")
+          expect(page).to have_link("Home", href: "/latest", visible: true)
+        end
+      end
+    end
   end
 
   it "uses the intentional compact menu on mobile", mobile: true do

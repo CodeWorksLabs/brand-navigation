@@ -485,6 +485,11 @@
   }
 }
 
+.d-header .home-logo-wrapper-outlet:has(#brand-navigation-menu) {
+  display: flex;
+  align-items: center;
+}
+
 .brand-navigation-menu {
   display: flex;
   align-items: center;
