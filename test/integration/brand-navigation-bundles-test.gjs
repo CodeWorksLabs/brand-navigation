@@ -1,6 +1,6 @@
-import { destroy } from "@ember/destroyable";
 import { trackedArray, trackedObject } from "@ember/reactive/collections";
 import {
+  clearRender,
   click,
   fillIn,
   find,
@@ -61,16 +61,30 @@ function deferredPersistence() {
   };
 }
 
-function nativeObjectsEditor(owner, data, updateSetting) {
+async function nativeObjectsEditor(owner, data, updateSetting) {
   const navigationSetting = setting("navigation_items", []);
   navigationSetting.updateSetting = updateSetting;
   const Editor = owner.factoryFor("component:schema-setting/editor").class;
-  const editor = new Editor(owner, {
-    id: 42,
-    setting: navigationSetting,
-    schema: { name: "brand_navigation_item_v1", properties: {} },
-  });
-  editor.data = data;
+  const schema = { name: "brand_navigation_item_v1", properties: {} };
+  let editor;
+
+  class CapturedEditor extends Editor {
+    constructor() {
+      super(...arguments);
+      this.data = data;
+      editor = this;
+    }
+  }
+
+  await render(
+    <template>
+      <CapturedEditor
+        @id={{42}}
+        @setting={{navigationSetting}}
+        @schema={{schema}}
+      />
+    </template>
+  );
   return { editor, navigationSetting };
 }
 
@@ -116,7 +130,7 @@ module(
         const pending = new Promise((resolve) => {
           release = resolve;
         });
-        const { editor, navigationSetting } = nativeObjectsEditor(
+        const { editor, navigationSetting } = await nativeObjectsEditor(
           this.owner,
           data,
           async (id, value) => {
@@ -166,7 +180,7 @@ module(
           editor.saveButtonDisabled,
           "save is restored after completion"
         );
-        destroy(editor);
+        await clearRender();
       });
     }
 
@@ -174,7 +188,7 @@ module(
       const data = trackedNavigationItems("label_only");
       data[0].children[0].url = "http://example.com/unsafe";
       let updates = 0;
-      const { editor, navigationSetting } = nativeObjectsEditor(
+      const { editor, navigationSetting } = await nativeObjectsEditor(
         this.owner,
         data,
         async () => updates++
@@ -198,7 +212,7 @@ module(
         editor.saveButtonDisabled,
         "save is restored after rejection"
       );
-      destroy(editor);
+      await clearRender();
     });
 
     test("only the latest file or pasted bundle can replace pending import state", async function (assert) {
