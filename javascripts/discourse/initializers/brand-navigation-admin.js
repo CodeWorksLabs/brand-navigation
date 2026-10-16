@@ -2,7 +2,10 @@ import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { validateNavigationItems } from "../lib/configuration-bundle";
-import { isBrandNavigationObjectsEditor } from "../lib/brand-navigation-admin";
+import {
+  isBrandNavigationObjectsEditor,
+  snapshotPlainData,
+} from "../lib/brand-navigation-admin";
 
 export default {
   name: "brand-navigation-admin",
@@ -23,7 +26,8 @@ export default {
               this.validationErrorMessage = undefined;
 
               try {
-                const errors = validateNavigationItems(this.data);
+                const submittedData = snapshotPlainData(this.data);
+                const errors = validateNavigationItems(submittedData);
 
                 if (errors.length) {
                   this.validationErrorMessage = errors.join(" ");
@@ -32,7 +36,7 @@ export default {
 
                 const result = await this.args.setting.updateSetting(
                   this.args.id,
-                  this.data
+                  submittedData
                 );
 
                 if (result) {
