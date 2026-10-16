@@ -20,6 +20,60 @@ module(
   function (hooks) {
     setupRenderingTest(hooks);
 
+    test("text links render safely without sprite readiness and combined links acquire their icon", async function (assert) {
+      const primarySprite = document.querySelector("#svg-sprites .fontawesome");
+      const originalSprite = primarySprite.innerHTML;
+      this.textItem = {
+        label: "Versions & Status <script>",
+        title: "Live status",
+        url: "/status",
+        target: "_blank",
+        header_presentation: "label_only",
+        icon: "d-tracking",
+      };
+      this.combinedItem = {
+        label: "Help",
+        url: "/faq",
+        icon: "d-tracking",
+        header_presentation: "icon_and_label",
+      };
+      primarySprite.innerHTML = "";
+      try {
+        await render(
+          <template>
+            <BrandNavigationHeaderIcon @item={{this.textItem}} />
+            <BrandNavigationHeaderIcon @item={{this.combinedItem}} />
+          </template>
+        );
+        assert
+          .dom('a[href="/status"]')
+          .hasText("Versions & Status <script>")
+          .hasAttribute("aria-label", "Versions & Status <script>")
+          .hasAttribute("title", "Live status")
+          .hasAttribute("rel", "noopener noreferrer")
+          .hasAttribute("target", "_blank")
+          .doesNotHaveClass("no-text");
+        assert.dom('a[href="/status"] script').doesNotExist();
+        assert.dom('a[href="/status"] svg').doesNotExist();
+        assert.dom('a[href="/faq"]').hasText("Help");
+        assert.dom('a[href="/faq"] svg').doesNotExist();
+        assert.strictEqual(
+          primarySpriteWatcher.callbacks.size,
+          1,
+          "only the combined link waits for its optional icon"
+        );
+        primarySprite.innerHTML = '<svg><symbol id="bell"></symbol></svg>';
+        await settled();
+        assert.dom('a[href="/faq"] .d-icon-d-tracking').exists();
+        assert.dom('a[href="/faq"] span').hasText("Help");
+        assert.dom('a[href="/status"] svg').doesNotExist();
+        assert.strictEqual(primarySpriteWatcher.callbacks.size, 0);
+      } finally {
+        await clearRender();
+        primarySprite.innerHTML = originalSprite;
+      }
+    });
+
     test("recovers after delayed primary-sprite loading and unsubscribes destroyed consumers", async function (assert) {
       const spriteContainer = document.querySelector("#svg-sprites");
       const primarySprite = spriteContainer.querySelector(".fontawesome");

@@ -1,6 +1,124 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-10-15
+Date: 2026-10-16
+
+## RC2 main integration handoff
+
+Phil instructed completing [PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25)
+and putting `main` on RC2 after the completed engineering review. This authorizes
+the bounded release-record update, push and PR merge, not a GitHub Release,
+tag publication or live-site mutation. Ask before any additional product-code
+change. The Bridge's Versions & Status link has not been migrated.
+
+The reviewed executable candidate is
+`e7a16be653be8ccc045b73833d44ab38330689f1`, tree
+`7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`, already pushed to
+`feature/site-header-text-links`. The final integration delta changes only
+`CHANGELOG.md`, `docs/TESTING.md` and this checkpoint. Resolve the PR's current
+head, checks, merge state and remote `main` before acting; this preparation
+record does not predict the eventual merge commit.
+
+Current engineering evidence and honest RC2 limits are recorded at the top of
+[`docs/TESTING.md`](docs/TESTING.md#rc2-final-engineering-verification--2026-10-16).
+Configuration CI passed 33 tests; each of four Discourse lanes passed 30
+frontend tests and 36 system examples. Additional isolated evidence passed 21
+mobile/header examples, exact native ZIP import with 19 old and 19 new fields
+verified, and 30 installed-component frontend tests on Core `3086c087`.
+Native Git upgrade/rollback/lifecycle observations are explicitly bounded
+carry-forward evidence, not a new complete replay on every later revision.
+
+Independent engineering review used the complete CodeWorksLabs Discourse review
+package and closed the CLI, editor-save and mobile-layout findings. No required
+engineering finding remains in that reviewed scope. Documentation-only changes
+must receive proportional independent identity/claim review and fresh CI; prior
+runtime observations carry only across the proven unchanged executable boundary.
+
+Final manual acceptance is not fabricated: genuine browser zoom and native
+palette/focused-color transitions remain unverified; full RTL, real external
+classic embed and complete human screen-reader acceptance remain stable-v1
+gates. The RC2 changelog is not proof of a published tag or GitHub prerelease.
+
+Both owned test environments are parked. Their databases, original backup,
+component 34 and all failed/successful evidence are retained. The current
+environment's PostgreSQL and Redis were shut down natively before container
+stop. No reset, prune, broad cleanup or live cutover is required. External
+`rc2-review-evidence/FINAL-STATE.json` and `HANDOFF.md` retain the detailed
+recovery identities; do not recreate the test framework or rerun passing suites
+merely because release documentation changed. The disclosed untracked
+`.pnpm-store/` is excluded from the candidate and must be preserved.
+
+All entries below are historical records. Their old pending gates, resource
+owners, candidate identities and dispositions do not override this handoff or
+the current PR/remote state.
+
+## Historical checkpoint — 2026-10-15
+
+## Current correction — CLI diagnostic escaping
+
+Phil approved fixing `BN-RC2-CLI-01` before RC2 and freezing a replacement
+candidate for correction review. The CLI diagnostic sink now escapes all C0,
+DEL and C1 controls, including parser/filesystem errors; explicitly trusted
+usage/validation line breaks are retained. Seven new real-process regression
+tests bring the local configuration suite to 33 passing tests. Browser/runtime,
+schema, dependencies and lock are unchanged. The first malformed-input fixture
+needed shortening to fit V8's diagnostic excerpt. The pnpm launcher failed its
+registry/version-verification fetch; no security setting was weakened, and
+installed Prettier was invoked directly with Node.
+
+The prior complete source review of `81bda1e` / tree `2e7ddfe` reported no
+P0/P1 and one P2, with `INTERNAL CODE REVIEW PASS WITH P2/P3 FINDINGS`.
+That disposition does not carry forward to these changed bytes. A replacement
+freeze and focused correction-closure review are next; no release acceptance
+is claimed. Durable review/control evidence is outside the repository at
+`C:/Users/Owner/.codex/visualizations/2026/09/08/01a08236-bcfa-73f2-85b0-b2be66290512/rc2-review-evidence/`.
+
+Phil approved isolated local WSL/Docker installation, upgrade, rollback and
+compatibility checks, conditioned on resource coordination. Coordination with
+`5th YACCTTWF - Yet Another Crap Codex Task That Will Fail` is complete, but it
+has not admitted another Discourse stack during its retained-forum phase.
+Keep all Brand Navigation services stopped until an agreed serial window and
+fresh capacity/port checks. No mutation of existing resources or shared caps,
+cache release, or pruning is authorized. The six-slot matrix plan and prior RC1
+archive are saved externally; the old candidate archive must be replaced for
+these corrected bytes. No publication, merge, tag or live migration has occurred.
+
+## Active RC2 work — core-header text links
+
+Phil authorized adding the text-link capability missing from the separate
+Custom Header Links component and accepted `v1.0.0-rc.2` as the next candidate.
+The Bridge currently retains Custom Header Links component 5 for Versions &
+Status; Brand Navigation is component 6. That text link has not been migrated.
+Implementation adds `header_presentation` to top-level navigation items with
+an `icon_only` default so existing core-header icons retain their appearance.
+Explicit `label_only` and `icon_and_label` support direct text links using the
+existing supported header API and shared audience/device/embed/safe-URL rules.
+Implementation and verification are prepared in draft
+[PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25), targeting
+main from `feature/site-header-text-links`.
+
+- Tested implementation commit: `6c7383dd5597d65c7f1e0f9ffdf123d075fab898`.
+- Tested tree: `4682d861dec9029622459a5a3e633730d63aba94`.
+- CI merge commit: `0fa60378a91d11bd2dc5f6a645cf0e348cbf3975`, with that same
+  tree, based on main `3129838a8e102219e05568ea5c7058420723593c`.
+- [Discourse CI run 38812437699](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437699)
+  passed the full lint gate and all four frontend/backend/system lanes.
+  Each frontend lane passed 27 tests and each system lane passed 34 examples.
+- [Configuration run 38812437412](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437412)
+  passed all 26 tests. Local configuration tests, template/style/type checks,
+  Ruby syntax, and formatting also passed.
+
+Windows ESLint reproduces a local environment failure on unchanged HEAD
+(Babel file-URL path handling and theme globals); the clean Linux CI lint gate
+passes. The first CI attempt at `93f7c24` found two test-harness issues (RSpec
+context wording and a Selenium-only keyboard API); both are corrected, and the
+replacement run above is green. CI screenshots were inspected for desktop text
+rendering and mobile truncation with the full accessible label retained.
+
+The subsequent evidence-record update changes documentation only. Resolve the
+latest PR head and checks before release review. No RC2 release or live-site
+change has occurred. Formal review, manual release acceptance, and The Bridge
+cutover remain pending. The screenshot-gallery administration image is still
+waiting for Phil's replacement attachment and has not been re-added.
 
 ## Repository preview gallery — 2026-10-15
 
@@ -235,14 +353,17 @@ model.
 
 ## Exact next actions
 
-1. Continue `v1.0.0-rc.1` aging, triage meaningful compatibility or
-   operator reports, and keep [`docs/TESTING.md`](docs/TESTING.md) current as
-   supported Discourse versions and installation refs change.
-2. Treat future product or shared-documentation changes as a new bounded update;
-   do not mutate the published RC tag.
-3. When stable-release criteria are met, freeze a new exact `v1.0.0`
-   candidate, run required CI and doctrine-controlled review, perform final
-   manual acceptance, then merge, tag, and publish the exact accepted tree.
+1. Resolve the latest head and checks of draft PR 25, then freeze the RC2
+   candidate and obtain the required doctrine-controlled release review and
+   manual acceptance. Implementation CI is green at the identity above.
+2. After release acceptance and publication authority, merge/tag/publish
+   `v1.0.0-rc.2` under the existing release procedure. Preserve the RC1 tag.
+3. Migrate The Bridge's Versions & Status link to Brand Navigation only after
+   the accepted version is installed and live cutover is authorized; verify
+   the link once per theme and retire the separate text-link component there.
+4. Resume the administration screenshot insertion when Phil supplies the
+   replacement image. Embed it directly after “screenshots are captured.” and
+   before “Repeal OBBBA Forum,” as requested.
 
 ## Out of scope
 

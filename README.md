@@ -18,8 +18,8 @@ supplemented by the explicit manual evidence and open checks in the
   submenu caret.
 - Organizes top-level items into left and right sections with intentional
   one-level dropdown navigation.
-- Moves compact destinations such as social links into the Discourse core
-  header when navigation-bar space is limited.
+- Places direct text links, icon links, or icons with labels in the Discourse
+  core header when navigation-bar space is limited.
 - Controls every item's audience and desktop/mobile visibility independently.
 - Provides responsive mobile menu, full-bar, and hidden presentation modes.
 - Offers administrator color controls for the bar, text, hover state, and
@@ -77,7 +77,11 @@ screenshots are captured.
 
 [Open the live demo](https://bridge.demo.discussionbridge.dev/)
 
-![Brand Navigation on The Bridge demonstration site, with publishing, release, and ecosystem navigation plus core-header destinations](docs/images/previews/the-bridge-header.png)
+![Brand Navigation on The Bridge demonstration site, with publishing, release, and ecosystem navigation](docs/images/previews/the-bridge-header.png)
+
+In this screenshot, the “Versions & Status” text link is supplied by the
+separate Custom Header Links component. The new site-header text capability
+is being prepared for `v1.0.0-rc.2`; the demo has not yet migrated that link.
 
 ### RVing Community
 

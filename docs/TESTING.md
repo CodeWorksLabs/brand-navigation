@@ -1,5 +1,147 @@
 # Testing and acceptance
 
+## RC2 final engineering verification — 2026-10-16
+
+The final executable candidate for `v1.0.0-rc.2` is commit
+`e7a16be653be8ccc045b73833d44ab38330689f1`, tree
+`7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`. Its canonical 57-file ZIP is
+263,117 bytes, SHA-256
+`f2ad43cb6a98106a4efeac8eeeeed2082bf48616a2f9885b54841dece794532a`.
+The subsequent RC2 integration update changes only the changelog, this testing
+record, and the successor checkpoint. It does not change runtime code, tests,
+settings, dependencies, workflows, or installation/update behavior. The evidence
+below belongs to the identified executable candidate, not an untested new
+runtime or a future tag.
+
+[Configuration CI 38973081900](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38973081900)
+passed all 33 configuration/CLI tests.
+[Discourse CI 38973082167](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38973082167)
+tested merge commit `659f2d7ba77fc44b9b1d68fc38afe816785de8ad`, whose tree
+matches the candidate exactly:
+
+| Lane          | Exact Discourse Core commit                | Frontend  | System    |
+| ------------- | ------------------------------------------ | --------- | --------- |
+| Development   | `821e9e2f9f94483a3be8d1e077cde0fd94970479` | 30 passed | 36 passed |
+| Repeal 2026.7 | `988c31e00fb73713c81b93cd47f68af0fb4c6273` | 30 passed | 36 passed |
+| R744 2026.7   | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | 30 passed | 36 passed |
+| 2026.8.0      | `badad7b0456a628e578bc48b9f8c1259422b5d58` | 30 passed | 36 passed |
+
+Each system lane includes 16 component examples and 20 shared Core examples.
+The lint gate passed; the jobs named backend tests performed English-locale
+validation, not backend RSpec. These are exact tested targets, not claims for
+every newer patch, production 2026.9, or every browser.
+
+Additional isolated local checks used Core
+`3086c087a2bceb3d607c6389f77204fec054b018`:
+
+- The two shipped 320px/390px mobile regressions, three mode/keyboard interaction
+  examples, and 16 mobile presentation/audience examples passed: 21 total.
+  Captured geometry and pointer/keyboard operations verified visible usable
+  targets, menu/logo containment, native controls, and no document overflow.
+- Native import of the exact ZIP returned component ID 34. All 19 candidate
+  fields matched canonical source, and all 19 fields of the pre-existing
+  component were preserved. Installation had no field errors or unexpected
+  attachments.
+- The installed component passed all 30 named frontend tests, including both
+  tracked-row save modes and invalid nested-data rejection. The profile used
+  Puma 8.0.2 with one request thread, Chrome 155.0 and the existing frontend
+  build; the runner reported plugins disabled. It does not establish default
+  Pitchfork startup performance or all-plugin frontend coverage.
+- Earlier native lifecycle evidence covered configured RC1-to-candidate source
+  updates, rollback, return, settings retention, disable/re-enable, attachment
+  and removal. Its unchanged storage/update protocol carries forward with
+  explicit impact analysis; it is not represented as a fresh complete Git
+  lifecycle replay at `e7a16be` or at a future RC2 tag.
+
+Independent reviewers closed the CLI diagnostic, native-editor save and mobile
+layout findings. The CodeWorksLabs Discourse review package was applied to the
+source, execution and artifact evidence. The final bounded engineering review
+identified no open required findings; it is not official Discourse approval,
+stable-version certification or a claim that unexecuted manual checks passed.
+Local test databases, backups and all failed/successful evidence were retained;
+owned test services were stopped after verification.
+
+### RC2 limits and release boundaries
+
+At 320px, long header text can be heavily truncated, especially beside an icon,
+and the logo is compact. Full title/accessible labels and operable targets are
+retained; full visible text, unlimited header capacity and universal readability
+are not claimed. Prefer short labels and fewer narrow-screen destinations.
+
+Genuine browser zoom and native light/dark palette/focused-color transitions
+remain unverified. Complete RTL, a real allowed-host classic external embed and
+complete human screen-reader acceptance remain the stable `v1.0.0` gates below.
+Physical-device/Safari and general accessibility certification are not claimed.
+
+Phil requested completing PR 25 and putting RC2 on `main` after receiving the
+engineering result and these outstanding acceptance boundaries. This records
+merge authority, not completion of those unexecuted manual cases. RC2 tag and
+GitHub prerelease publication remain separate. The Bridge's Versions & Status
+link still belongs to Custom Header Links until a separately authorized live
+migration is verified.
+
+## RC2 CLI diagnostic correction — 2026-10-15
+
+Phil authorized correcting review finding `BN-RC2-CLI-01` before RC2. The CLI
+now escapes C0, DEL and C1 controls at its final diagnostic sink. Trusted usage
+and validator line separators are inserted only after each line is escaped.
+The browser validator and header implementation are unchanged.
+
+Local Node `22.22.2` configuration/CLI tests passed 33/33. Seven new tests
+capture real CLI subprocess output for malformed JSON containing ESC/BEL,
+other controls and newlines, filesystem errors, inert unknown fields, ordinary
+parse failures, valid input, and multiline usage. Fixtures use newly created
+temporary directories and are cleaned up by the harness. The initial regression
+expected a full long payload in V8's truncated error excerpt; shortening the
+payload made the assertion exercise both ESC and BEL without relying on omitted
+bytes. This was a test-fixture correction, not a candidate bypass.
+
+The pnpm launcher could not verify its requested version because registry
+fetches failed. No signature policy was weakened and no dependency changed;
+formatting used the already-installed Prettier directly through Node. This
+local result does not establish replacement-candidate CI or installed lifecycle
+acceptance. Correction closure and the resource-held Discourse matrix remain
+separate pending gates.
+
+## RC2 core-header text-link candidate — 2026-10-15
+
+The next candidate adds `header_presentation` for direct core-header links.
+Existing items default to `icon_only`; explicit `label_only` and
+`icon_and_label` preserve the label without requiring an available icon.
+The Bridge's current Versions & Status link remains supplied by its separate
+Custom Header Links component until an accepted candidate is installed and
+that link is migrated.
+
+Implementation commit `6c7383dd5597d65c7f1e0f9ffdf123d075fab898`, tree
+`4682d861dec9029622459a5a3e633730d63aba94`, passed
+[Discourse CI run 38812437699](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437699)
+in [draft PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25).
+The CI merge commit `0fa60378a91d11bd2dc5f6a645cf0e348cbf3975` has the same tree.
+
+| Lane           | Discourse core                             | Frontend  | System    |
+| -------------- | ------------------------------------------ | --------- | --------- |
+| Current        | `60cbc8e4e4e52253d3fa2175b7f2431a38cb9487` | 27 passed | 34 passed |
+| Repeal 2026.7  | `988c31e00fb73713c81b93cd47f68af0fb4c6273` | 27 passed | 34 passed |
+| R744 2026.7    | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | 27 passed | 34 passed |
+| 2026.8 release | `badad7b0456a628e578bc48b9f8c1259422b5d58` | 27 passed | 34 passed |
+
+The full Linux lint gate and backend lanes passed.
+[Configuration run 38812437412](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38812437412)
+passed 26 tests, including text-link round trips, legacy icon defaults, unsafe
+URLs, invalid presentation, groups, and children. Local configuration tests,
+template/style/type checks, Ruby syntax, and formatting also passed. Windows
+ESLint reproduces local Babel path/theme-global failures on unchanged HEAD;
+the clean CI lint gate passes.
+
+QUnit verifies rendering before sprite readiness, escaped label text, safe
+new-window attributes, optional-icon recovery, and visibility boundaries.
+System tests verify desktop/mobile sizing, retained core controls, keyboard
+focus, and embed exclusion. Desktop/mobile CI screenshots were inspected.
+The initial run at `93f7c24` failed an RSpec context-name check and a
+Selenium-only keyboard-test call; the corrected run above passes both.
+This is implementation/test evidence; release review, manual acceptance, and
+the live demo cutover remain pending.
+
 ## In use on
 
 ### Verified installations

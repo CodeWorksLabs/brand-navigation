@@ -6,6 +6,29 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+## 1.0.0-rc.2 - 2026-10-16
+
+- Escape terminal control characters in local bundle-validation diagnostics,
+  including malformed JSON and filesystem errors, while preserving trusted
+  usage and validation line breaks.
+- Add direct text links and icons with labels to the Discourse core header.
+  The new `header_presentation` control defaults to `icon_only`, preserving
+  existing site-header entries. Text remains available when an optional icon
+  has not loaded or is unavailable.
+- Validate and round-trip the new presentation setting in configuration
+  bundles, retaining safe URLs, audience/device rules, and embed exclusion.
+- Document migration from the separate text-based Custom Header Links
+  component and identify its current contribution to The Bridge screenshot.
+- Save native administrator-editor tracked rows through a validated plain-data
+  snapshot, without weakening configuration-bundle validation.
+- Keep the mobile menu and logo usable alongside core-header text links at
+  320px and 390px, with bounded text truncation and the full accessible label.
+
+This release candidate retains the documented narrow-header and manual
+acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-final-engineering-verification--2026-10-16).
+The RC2 source is prepared for `main`; this entry does not assert that its Git
+tag or GitHub prerelease has been published, or that the live demo is migrated.
+
 ## 1.0.0-rc.1 - 2026-09-08
 
 - Remove the duplicate Brand Navigation `enabled` setting and use Discourse's

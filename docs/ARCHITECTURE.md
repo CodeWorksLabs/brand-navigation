@@ -55,23 +55,28 @@ snapshot. This does not assert a server-side transaction guarantee; after a
 server error, reload the current settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
-registered as direct icon links through `api.headerIcons`. They require a URL
-and icon and do not support children. A locally authored lexical component
-factory binds each validated item to its header component without
+registered as direct links through `api.headerIcons`. They require a URL
+and do not support children. `header_presentation` selects icon-only (the
+backward-compatible default), label-only, or icon-and-label rendering.
+Text links use a bounded auto-width control, inherit header colors, and retain
+their full accessible label when the visible text is truncated. A locally
+authored lexical component factory binds each validated item to its header component without
 repository-specific owner state.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain
 required and provide accessible names even when visually omitted. An icon-only
 bar or submenu entry with no usable icon falls back to visible label text.
-Site-header entries with unavailable icons do not render, avoiding an empty
-core-header control. Availability is determined from the symbols actually
+Icon-only site-header entries with unavailable icons do not render, avoiding
+an empty core-header control. Label-only entries do not wait for or subscribe to icon
+readiness. Combined entries retain text while waiting for their optional icon.
+Availability is determined from the symbols actually
 loaded in Discourse's production SVG sprite; development-only icon-list
 metadata is not used. One shared `MutationObserver` watches Discourse's primary
 Font Awesome sprite until it contains symbols, then notifies all live Brand
 Navigation consumers once and disconnects. This works with both the 2026.7 ESR
 loader and current Discourse without issuing per-icon network requests. Until
 the primary sprite is ready, icon-only bar/submenu entries expose their labels
-and direct header entries stay omitted. Destroyed components unsubscribe, and
+and icon-only header entries stay omitted. Destroyed components unsubscribe, and
 the tracked readiness update is scheduled after the active render transaction.
 A retained direct-header component synchronizes its subscription whenever its
 responsive eligibility is reevaluated, so becoming eligible before sprite

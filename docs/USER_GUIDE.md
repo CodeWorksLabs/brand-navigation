@@ -199,20 +199,21 @@ to the component's main settings page.
 
 Each top-level entry supports:
 
-| Field               | Purpose                                                                                    |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| `label`             | Required visible text.                                                                     |
-| `url`               | Destination for the top-level label. It may also be used when the entry has submenu items. |
-| `link_mode`         | Use the parent label as a live link or as a submenu-only grouping control.                 |
-| `title`             | Optional hover tooltip.                                                                    |
-| `icon`              | Optional Font Awesome 6 icon name.                                                         |
-| `presentation`      | Show the icon and label, label only, or icon only.                                         |
-| `section`           | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
-| `surface`           | Show the item in the Brand Navigation `bar` or as a `site_header` icon.                    |
-| `device_visibility` | Show on both device classes, desktop/tablet only, or mobile phones only.                   |
-| `target`            | Open in the same window (`_self`) or a new window (`_blank`).                              |
-| `visibility`        | Show to everyone, anonymous visitors, or authenticated users.                              |
-| `children`          | Ordered submenu links below this entry.                                                    |
+| Field                 | Purpose                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `label`               | Required visible text.                                                                     |
+| `url`                 | Destination for the top-level label. It may also be used when the entry has submenu items. |
+| `link_mode`           | Use the parent label as a live link or as a submenu-only grouping control.                 |
+| `title`               | Optional hover tooltip.                                                                    |
+| `icon`                | Optional Font Awesome 6 icon name.                                                         |
+| `presentation`        | For bar items, show the icon and label, label only, or icon only.                          |
+| `header_presentation` | For site-header items, choose `icon_only` (default), `label_only`, or `icon_and_label`.    |
+| `section`             | Keep the item beside the brand (`left`) or align it to the far edge (`right`).             |
+| `surface`             | Show the item in the Brand Navigation `bar` or as a direct `site_header` link.             |
+| `device_visibility`   | Show on both device classes, desktop/tablet only, or mobile phones only.                   |
+| `target`              | Open in the same window (`_self`) or a new window (`_blank`).                              |
+| `visibility`          | Show to everyone, anonymous visitors, or authenticated users.                              |
+| `children`            | Ordered submenu links below this entry.                                                    |
 
 A top-level entry behaves as:
 
@@ -241,13 +242,28 @@ Top-level items in the `left` section appear beside the brand. Items in the
 account links and calls to action. On mobile, both sections become one compact
 ordered list so every item remains easy to reach.
 
-Set a direct icon link's `surface` to `site_header` to place it among
-Discourse's core header icons instead of in the Brand Navigation bar. This is
-useful for social destinations when bar space is limited. Site-header items
-must have a URL and icon and cannot contain children. Their label remains the
-accessible name and their title remains the optional tooltip. A direct
-site-header item whose icon is unavailable is omitted instead of rendering an
-empty header control. Other items keep the default `bar` surface.
+Set a direct link's `surface` to `site_header` to place it before Discourse's
+core header controls instead of in the Brand Navigation bar. Choose its
+**Site-header presentation** (`header_presentation`):
+
+- `icon_only` retains the existing compact icon behavior and requires an icon.
+  An unavailable icon omits the link until the icon becomes available.
+- `label_only` displays text such as “Versions & Status” and needs no icon.
+- `icon_and_label` displays both, retaining the text when its optional icon is
+  unavailable or still loading.
+
+Site-header items require a safe URL and cannot contain children or use group
+mode. Their label remains the accessible name and their title remains the
+optional tooltip. Existing entries default to `icon_only`; their separate bar
+`presentation` value does not change their header appearance. Header links
+follow the navigation list order; `section` applies only to bar items.
+
+Text is constrained to the smaller of 14rem and 30% of the viewport and uses
+an ellipsis when needed. Its full label stays available to assistive technology
+and as the default tooltip. Keep labels short and use device visibility to
+reserve mobile space for Discourse's controls. Other items keep the default
+`bar` surface. This capability is planned for `v1.0.0-rc.2`; the published RC1
+supports only icon links in this surface.
 
 Use `device_visibility` to control constrained mobile layouts independently for
 each item:

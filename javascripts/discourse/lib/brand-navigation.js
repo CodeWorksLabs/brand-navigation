@@ -124,6 +124,16 @@ export function isUsableIcon(icon, iconExists = hasSpriteSymbol) {
   return Boolean(iconExists(resolvedIconId(icon)));
 }
 
+export function headerLinkPresentation(item, iconExists = hasSpriteSymbol) {
+  const presentation = item.header_presentation || "icon_only";
+  const showLabel = ["label_only", "icon_and_label"].includes(presentation);
+  const showIcon =
+    ["icon_only", "icon_and_label"].includes(presentation) &&
+    isUsableIcon(item.icon, iconExists);
+
+  return { showLabel, showIcon };
+}
+
 export function shouldRenderHeaderIcon({
   item,
   embedMode,
@@ -133,12 +143,16 @@ export function shouldRenderHeaderIcon({
   mobileDevice,
   iconExists = hasSpriteSymbol,
 }) {
+  const { showLabel, showIcon } = headerLinkPresentation(item, iconExists);
+
   return (
     !embedMode &&
     !(mobileView && mobileMode === "hidden") &&
     item.link_mode !== "group" &&
     Boolean(item.url) &&
-    isUsableIcon(item.icon, iconExists) &&
+    typeof item.label === "string" &&
+    Boolean(item.label.trim()) &&
+    (showLabel || showIcon) &&
     !(item.children || []).length &&
     isVisibleToUser(item, currentUser) &&
     isVisibleOnDevice(item, mobileDevice) &&

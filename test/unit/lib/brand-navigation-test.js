@@ -2,6 +2,7 @@ import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
   hasSpriteSymbol,
+  headerLinkPresentation,
   isUsableIcon,
   isPrimarySpriteReady,
   isVisibleOnDevice,
@@ -321,6 +322,90 @@ module("Unit | Lib | brand-navigation", function () {
     assert.false(
       shouldRenderHeaderIcon({ ...base, embedMode: true }),
       "embed mode omits the icon"
+    );
+  });
+
+  test("site-header presentation defaults to legacy icons and supports text without a sprite", function (assert) {
+    const item = {
+      label: "Versions & Status",
+      url: "/status",
+      icon: "user",
+      presentation: "icon_and_label",
+    };
+    assert.deepEqual(
+      headerLinkPresentation(item, () => true),
+      { showLabel: false, showIcon: true }
+    );
+    assert.deepEqual(
+      headerLinkPresentation(item, () => false),
+      { showLabel: false, showIcon: false }
+    );
+    assert.deepEqual(
+      headerLinkPresentation(
+        { ...item, header_presentation: "label_only" },
+        () => true
+      ),
+      { showLabel: true, showIcon: false }
+    );
+    assert.deepEqual(
+      headerLinkPresentation(
+        { ...item, header_presentation: "icon_and_label" },
+        () => false
+      ),
+      { showLabel: true, showIcon: false }
+    );
+    assert.deepEqual(
+      headerLinkPresentation(
+        { ...item, header_presentation: "icon_and_label" },
+        () => true
+      ),
+      { showLabel: true, showIcon: true }
+    );
+    assert.deepEqual(
+      headerLinkPresentation(
+        { ...item, header_presentation: "unknown" },
+        () => true
+      ),
+      { showLabel: false, showIcon: false }
+    );
+  });
+
+  test("text header links retain the safe-link, audience, device, mobile, and embed boundaries", function (assert) {
+    const item = {
+      label: "Versions & Status",
+      url: "/status",
+      header_presentation: "label_only",
+    };
+    const base = {
+      item,
+      embedMode: false,
+      mobileView: false,
+      mobileMode: "menu",
+      currentUser: null,
+      mobileDevice: false,
+      iconExists: () => false,
+    };
+    assert.true(shouldRenderHeaderIcon(base), "text needs no icon or sprite");
+    for (const overrides of [
+      { embedMode: true },
+      { mobileView: true, mobileMode: "hidden" },
+      { item: { ...item, url: "javascript:alert(1)" } },
+      { item: { ...item, label: " " } },
+      { item: { ...item, link_mode: "group" } },
+      { item: { ...item, children: [{ label: "Child", url: "/faq" }] } },
+      { item: { ...item, visibility: "authenticated" } },
+      { item: { ...item, visibility: "anonymous" }, currentUser: { id: 1 } },
+      { item: { ...item, device_visibility: "mobile" } },
+      { item: { ...item, device_visibility: "desktop" }, mobileDevice: true },
+    ]) {
+      assert.false(
+        shouldRenderHeaderIcon({ ...base, ...overrides }),
+        JSON.stringify(overrides)
+      );
+    }
+    assert.true(
+      shouldRenderHeaderIcon({ ...base, mobileView: true, mobileDevice: true }),
+      "menu mode can retain mobile text links"
     );
   });
 

@@ -1,4 +1,6 @@
+import { trackedArray, trackedObject } from "@ember/reactive/collections";
 import {
+  clearRender,
   click,
   fillIn,
   find,
@@ -10,6 +12,7 @@ import {
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import BrandNavigationBundles from "../../discourse/connectors/admin-customize-theme-before-controls/brand-navigation-bundles";
+import { validateNavigationItems } from "../../discourse/lib/configuration-bundle";
 
 function setting(name, value = "") {
   return {
@@ -58,6 +61,51 @@ function deferredPersistence() {
   };
 }
 
+async function nativeObjectsEditor(owner, data, updateSetting) {
+  const navigationSetting = setting("navigation_items", []);
+  navigationSetting.updateSetting = updateSetting;
+  const Editor = owner.factoryFor("component:schema-setting/editor").class;
+  const schema = { name: "brand_navigation_item_v1", properties: {} };
+  let editor;
+
+  class CapturedEditor extends Editor {
+    constructor() {
+      super(...arguments);
+      this.data = data;
+      editor = this;
+    }
+  }
+
+  await render(
+    <template>
+      <CapturedEditor
+        @id={{42}}
+        @setting={{navigationSetting}}
+        @schema={{schema}}
+      />
+    </template>
+  );
+  return { editor, navigationSetting };
+}
+
+function trackedNavigationItems(presentation) {
+  return trackedArray([
+    trackedObject({
+      label: "Resources",
+      children: trackedArray([
+        trackedObject({ label: "Documentation", url: "/faq" }),
+      ]),
+    }),
+    trackedObject({
+      label: "Versions & Status",
+      url: "/latest",
+      surface: "site_header",
+      header_presentation: presentation,
+      icon: "circle-info",
+    }),
+  ]);
+}
+
 module(
   "Integration | Brand Navigation | administrator bundles",
   function (hooks) {
@@ -71,6 +119,100 @@ module(
       BrandNavigationBundles.prototype.persistSettings =
         originalPersistSettings;
       BrandNavigationBundles.prototype.readBundle = originalReadBundle;
+    });
+
+    for (const presentation of ["label_only", "icon_and_label"]) {
+      test(`native editor saves a plain immutable ${presentation} snapshot from tracked rows`, async function (assert) {
+        const data = trackedNavigationItems(presentation);
+        const expected = JSON.parse(JSON.stringify(data));
+        let submitted;
+        let release;
+        const pending = new Promise((resolve) => {
+          release = resolve;
+        });
+        const { editor, navigationSetting } = await nativeObjectsEditor(
+          this.owner,
+          data,
+          async (id, value) => {
+            assert.strictEqual(id, 42);
+            submitted = value;
+            assert.deepEqual(
+              validateNavigationItems(value),
+              [],
+              "the submitted snapshot satisfies the unchanged strict validator"
+            );
+            await pending;
+            return { navigation_items: value };
+          }
+        );
+
+        const save = editor.saveChanges();
+        assert.true(editor.saveButtonDisabled, "save is disabled in flight");
+        assert.deepEqual(submitted, expected);
+        assert.notStrictEqual(submitted, data);
+        assert.notStrictEqual(submitted[0], data[0]);
+        assert.notStrictEqual(submitted[0].children, data[0].children);
+        assert.notStrictEqual(submitted[0].children[0], data[0].children[0]);
+        assert.strictEqual(
+          Object.getPrototypeOf(submitted[0]),
+          Object.prototype
+        );
+        assert.strictEqual(
+          Object.getPrototypeOf(submitted[0].children[0]),
+          Object.prototype,
+          "nested tracked objects are deeply converted"
+        );
+
+        data[0].children[0].url = "http://example.com/unsafe";
+        data[1].label = "Later draft";
+        assert.deepEqual(
+          submitted,
+          expected,
+          "later edits do not change the request"
+        );
+        release();
+        await save;
+
+        assert.strictEqual(navigationSetting.value, submitted);
+        assert.deepEqual(navigationSetting.value, expected);
+        assert.strictEqual(editor.validationErrorMessage, undefined);
+        assert.false(
+          editor.saveButtonDisabled,
+          "save is restored after completion"
+        );
+        await clearRender();
+      });
+    }
+
+    test("native editor rejects invalid nested tracked data without persistence", async function (assert) {
+      const data = trackedNavigationItems("label_only");
+      data[0].children[0].url = "http://example.com/unsafe";
+      let updates = 0;
+      const { editor, navigationSetting } = await nativeObjectsEditor(
+        this.owner,
+        data,
+        async () => updates++
+      );
+
+      await editor.saveChanges();
+
+      assert.strictEqual(
+        updates,
+        0,
+        "invalid data never reaches updateSetting"
+      );
+      assert.true(
+        editor.validationErrorMessage.includes(
+          "navigation_items[0].children[0].url"
+        ),
+        "the invalid nested URL is reported, not a tracked-object shape error"
+      );
+      assert.deepEqual(navigationSetting.value, []);
+      assert.false(
+        editor.saveButtonDisabled,
+        "save is restored after rejection"
+      );
+      await clearRender();
     });
 
     test("only the latest file or pasted bundle can replace pending import state", async function (assert) {

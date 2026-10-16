@@ -168,6 +168,13 @@ navigation_items:
         choices:
           - bar
           - site_header
+      header_presentation:
+        type: enum
+        default: icon_only
+        choices:
+          - icon_only
+          - label_only
+          - icon_and_label
       device_visibility:
         type: enum
         default: both

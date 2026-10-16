@@ -25,6 +25,28 @@ export {
   validateBundle,
 };
 
+class CliDiagnosticError extends Error {
+  constructor(lines) {
+    super(lines.join("\n"));
+    this.lines = lines;
+  }
+}
+
+function formatDiagnostic(error) {
+  const lines =
+    error instanceof CliDiagnosticError ? error.lines : [error.message];
+
+  return lines
+    .map((line) =>
+      line.replace(
+        /[\u0000-\u001f\u007f-\u009f]/g,
+        (character) =>
+          `\\u${character.charCodeAt(0).toString(16).toUpperCase().padStart(4, "0")}`
+      )
+    )
+    .join("\n");
+}
+
 async function readBundle(file) {
   const fileStats = await stat(file);
 
@@ -38,7 +60,7 @@ async function readBundle(file) {
   const errors = validateBundle(bundle);
 
   if (errors.length) {
-    throw new Error(errors.join("\n"));
+    throw new CliDiagnosticError(errors);
   }
 
   return bundle;
@@ -53,7 +75,7 @@ async function main() {
   const [command, file, ...options] = process.argv.slice(2);
 
   if (command !== "validate" || !file || options.length) {
-    throw new Error(usage());
+    throw new CliDiagnosticError(usage().split("\n"));
   }
 
   await readBundle(file);
@@ -65,7 +87,7 @@ if (
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
   main().catch((error) => {
-    process.stderr.write(`${error.message}\n`);
+    process.stderr.write(`${formatDiagnostic(error)}\n`);
     process.exitCode = 1;
   });
 }
