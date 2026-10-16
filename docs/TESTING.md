@@ -1,5 +1,85 @@
 # Testing and acceptance
 
+## RC2 final engineering verification — 2026-10-16
+
+The final executable candidate for `v1.0.0-rc.2` is commit
+`e7a16be653be8ccc045b73833d44ab38330689f1`, tree
+`7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`. Its canonical 57-file ZIP is
+263,117 bytes, SHA-256
+`f2ad43cb6a98106a4efeac8eeeeed2082bf48616a2f9885b54841dece794532a`.
+The subsequent RC2 integration update changes only the changelog, this testing
+record, and the successor checkpoint. It does not change runtime code, tests,
+settings, dependencies, workflows, or installation/update behavior. The evidence
+below belongs to the identified executable candidate, not an untested new
+runtime or a future tag.
+
+[Configuration CI 38973081900](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38973081900)
+passed all 33 configuration/CLI tests.
+[Discourse CI 38973082167](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/38973082167)
+tested merge commit `659f2d7ba77fc44b9b1d68fc38afe816785de8ad`, whose tree
+matches the candidate exactly:
+
+| Lane          | Exact Discourse Core commit                | Frontend  | System    |
+| ------------- | ------------------------------------------ | --------- | --------- |
+| Development   | `821e9e2f9f94483a3be8d1e077cde0fd94970479` | 30 passed | 36 passed |
+| Repeal 2026.7 | `988c31e00fb73713c81b93cd47f68af0fb4c6273` | 30 passed | 36 passed |
+| R744 2026.7   | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | 30 passed | 36 passed |
+| 2026.8.0      | `badad7b0456a628e578bc48b9f8c1259422b5d58` | 30 passed | 36 passed |
+
+Each system lane includes 16 component examples and 20 shared Core examples.
+The lint gate passed; the jobs named backend tests performed English-locale
+validation, not backend RSpec. These are exact tested targets, not claims for
+every newer patch, production 2026.9, or every browser.
+
+Additional isolated local checks used Core
+`3086c087a2bceb3d607c6389f77204fec054b018`:
+
+- The two shipped 320px/390px mobile regressions, three mode/keyboard interaction
+  examples, and 16 mobile presentation/audience examples passed: 21 total.
+  Captured geometry and pointer/keyboard operations verified visible usable
+  targets, menu/logo containment, native controls, and no document overflow.
+- Native import of the exact ZIP returned component ID 34. All 19 candidate
+  fields matched canonical source, and all 19 fields of the pre-existing
+  component were preserved. Installation had no field errors or unexpected
+  attachments.
+- The installed component passed all 30 named frontend tests, including both
+  tracked-row save modes and invalid nested-data rejection. The profile used
+  Puma 8.0.2 with one request thread, Chrome 155.0 and the existing frontend
+  build; the runner reported plugins disabled. It does not establish default
+  Pitchfork startup performance or all-plugin frontend coverage.
+- Earlier native lifecycle evidence covered configured RC1-to-candidate source
+  updates, rollback, return, settings retention, disable/re-enable, attachment
+  and removal. Its unchanged storage/update protocol carries forward with
+  explicit impact analysis; it is not represented as a fresh complete Git
+  lifecycle replay at `e7a16be` or at a future RC2 tag.
+
+Independent reviewers closed the CLI diagnostic, native-editor save and mobile
+layout findings. The CodeWorksLabs Discourse review package was applied to the
+source, execution and artifact evidence. The final bounded engineering review
+identified no open required findings; it is not official Discourse approval,
+stable-version certification or a claim that unexecuted manual checks passed.
+Local test databases, backups and all failed/successful evidence were retained;
+owned test services were stopped after verification.
+
+### RC2 limits and release boundaries
+
+At 320px, long header text can be heavily truncated, especially beside an icon,
+and the logo is compact. Full title/accessible labels and operable targets are
+retained; full visible text, unlimited header capacity and universal readability
+are not claimed. Prefer short labels and fewer narrow-screen destinations.
+
+Genuine browser zoom and native light/dark palette/focused-color transitions
+remain unverified. Complete RTL, a real allowed-host classic external embed and
+complete human screen-reader acceptance remain the stable `v1.0.0` gates below.
+Physical-device/Safari and general accessibility certification are not claimed.
+
+Phil requested completing PR 25 and putting RC2 on `main` after receiving the
+engineering result and these outstanding acceptance boundaries. This records
+merge authority, not completion of those unexecuted manual cases. RC2 tag and
+GitHub prerelease publication remain separate. The Bridge's Versions & Status
+link still belongs to Custom Header Links until a separately authorized live
+migration is verified.
+
 ## RC2 CLI diagnostic correction — 2026-10-15
 
 Phil authorized correcting review finding `BN-RC2-CLI-01` before RC2. The CLI

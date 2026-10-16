@@ -1,6 +1,57 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-10-15
+Date: 2026-10-16
+
+## RC2 main integration handoff
+
+Phil instructed completing [PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25)
+and putting `main` on RC2 after the completed engineering review. This authorizes
+the bounded release-record update, push and PR merge, not a GitHub Release,
+tag publication or live-site mutation. Ask before any additional product-code
+change. The Bridge's Versions & Status link has not been migrated.
+
+The reviewed executable candidate is
+`e7a16be653be8ccc045b73833d44ab38330689f1`, tree
+`7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`, already pushed to
+`feature/site-header-text-links`. The final integration delta changes only
+`CHANGELOG.md`, `docs/TESTING.md` and this checkpoint. Resolve the PR's current
+head, checks, merge state and remote `main` before acting; this preparation
+record does not predict the eventual merge commit.
+
+Current engineering evidence and honest RC2 limits are recorded at the top of
+[`docs/TESTING.md`](docs/TESTING.md#rc2-final-engineering-verification--2026-10-16).
+Configuration CI passed 33 tests; each of four Discourse lanes passed 30
+frontend tests and 36 system examples. Additional isolated evidence passed 21
+mobile/header examples, exact native ZIP import with 19 old and 19 new fields
+verified, and 30 installed-component frontend tests on Core `3086c087`.
+Native Git upgrade/rollback/lifecycle observations are explicitly bounded
+carry-forward evidence, not a new complete replay on every later revision.
+
+Independent engineering review used the complete CodeWorksLabs Discourse review
+package and closed the CLI, editor-save and mobile-layout findings. No required
+engineering finding remains in that reviewed scope. Documentation-only changes
+must receive proportional independent identity/claim review and fresh CI; prior
+runtime observations carry only across the proven unchanged executable boundary.
+
+Final manual acceptance is not fabricated: genuine browser zoom and native
+palette/focused-color transitions remain unverified; full RTL, real external
+classic embed and complete human screen-reader acceptance remain stable-v1
+gates. The RC2 changelog is not proof of a published tag or GitHub prerelease.
+
+Both owned test environments are parked. Their databases, original backup,
+component 34 and all failed/successful evidence are retained. The current
+environment's PostgreSQL and Redis were shut down natively before container
+stop. No reset, prune, broad cleanup or live cutover is required. External
+`rc2-review-evidence/FINAL-STATE.json` and `HANDOFF.md` retain the detailed
+recovery identities; do not recreate the test framework or rerun passing suites
+merely because release documentation changed. The disclosed untracked
+`.pnpm-store/` is excluded from the candidate and must be preserved.
+
+All entries below are historical records. Their old pending gates, resource
+owners, candidate identities and dispositions do not override this handoff or
+the current PR/remote state.
+
+## Historical checkpoint — 2026-10-15
 
 ## Current correction — CLI diagnostic escaping
 
