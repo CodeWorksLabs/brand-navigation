@@ -1,5 +1,10 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import {
   isBrandNavigationTheme,
@@ -22,6 +27,123 @@ import {
   themeSettingValue,
   validateBundle,
 } from "../../scripts/brand-navigation-config.mjs";
+
+const cliPath = fileURLToPath(
+  new URL("../../scripts/brand-navigation-config.mjs", import.meta.url)
+);
+
+function invokeCli(args) {
+  const result = spawnSync(process.execPath, [cliPath, ...args], {
+    encoding: "utf8",
+    windowsHide: true,
+  });
+  assert.ifError(result.error);
+  assert.equal(result.signal, null);
+  assert.doesNotMatch(
+    result.stderr,
+    /[\u0000-\u0009\u000b-\u001f\u007f-\u009f]/
+  );
+  return result;
+}
+
+async function validateCliFixture(t, content) {
+  const directory = await mkdtemp(join(tmpdir(), "brand-navigation-cli-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const file = join(directory, "bundle.json");
+  await writeFile(file, content, "utf8");
+  return invokeCli(["validate", file]);
+}
+
+test("CLI parser diagnostics escape terminal controls from malformed JSON", async (t) => {
+  // Keep the entire sequence inside V8's bounded diagnostic excerpt.
+  const result = await validateCliFixture(t, "[\u001b]52;c;YQ==\u0007]");
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, "");
+  assert.match(result.stderr, /\\u001B\]52;c;YQ==\\u0007/);
+  assert.equal(result.stderr.split("\n").length, 2);
+});
+
+test("CLI malformed-input diagnostics cannot inject C0, DEL, C1 or new lines", async (t) => {
+  for (const character of [
+    "\u0000",
+    "\u0007",
+    "\u001b",
+    "\u007f",
+    "\u009b",
+    "\r",
+    "\n",
+    "\t",
+  ]) {
+    const result = await validateCliFixture(t, `[${character}x]`);
+    assert.equal(result.status, 1);
+    assert.equal(result.stdout, "");
+    assert.equal(result.stderr.split("\n").length, 2);
+  }
+});
+
+test("CLI filesystem diagnostics escape controls in untrusted paths", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "brand-navigation-cli-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const result = invokeCli([
+    "validate",
+    join(directory, "missing-\u001b]52;c;Y2FsYw==\u0007.json"),
+  ]);
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, "");
+  assert.match(result.stderr, /ENOENT|EINVAL/);
+  assert.match(result.stderr, /\\u001B\]52;c;Y2FsYw==\\u0007/);
+});
+
+test("CLI preserves separate validation lines and inert unknown-field diagnostics", async (t) => {
+  const result = await validateCliFixture(
+    t,
+    JSON.stringify({
+      format: BUNDLE_FORMAT,
+      version: BUNDLE_VERSION,
+      settings: { ["unsafe\u001b[2J\u0007"]: true, enabled: true },
+    })
+  );
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, "");
+  assert.equal(
+    result.stderr,
+    "Unsupported setting: unsafe\\u001B[2J\\u0007.\nUnsupported setting: enabled.\n"
+  );
+});
+
+test("CLI ordinary parse failures remain readable and fail closed", async (t) => {
+  const result = await validateCliFixture(t, "{");
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, "");
+  assert.match(result.stderr, /JSON|property name/);
+  assert.equal(result.stderr.split("\n").length, 2);
+});
+
+test("CLI valid bundles retain success output and exit status", async (t) => {
+  const result = await validateCliFixture(
+    t,
+    serializeBundle(createBundle({ brand_name: "Example" }))
+  );
+
+  assert.equal(result.status, 0);
+  assert.equal(result.stderr, "");
+  assert.equal(
+    result.stdout,
+    `Valid ${BUNDLE_FORMAT} v${BUNDLE_VERSION} bundle\n`
+  );
+});
+
+test("CLI usage retains trusted multiline formatting and failure status", () => {
+  const result = invokeCli([]);
+
+  assert.equal(result.status, 1);
+  assert.equal(result.stdout, "");
+  assert.equal(result.stderr, "Usage:\n  pnpm bundle validate <bundle.json>\n");
+});
 
 test("validates a portable configuration bundle", () => {
   const bundle = createBundle({

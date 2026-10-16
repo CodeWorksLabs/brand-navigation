@@ -8,6 +8,9 @@ to discover component updates from commits on the installed remote branch.
 
 Planned candidate: `v1.0.0-rc.2`.
 
+- Escape terminal control characters in local bundle-validation diagnostics,
+  including malformed JSON and filesystem errors, while preserving trusted
+  usage and validation line breaks.
 - Add direct text links and icons with labels to the Discourse core header.
   The new `header_presentation` control defaults to `icon_only`, preserving
   existing site-header entries. Text remains available when an optional icon

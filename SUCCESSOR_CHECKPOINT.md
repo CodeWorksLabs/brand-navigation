@@ -2,6 +2,35 @@
 
 Date: 2026-10-15
 
+## Current correction — CLI diagnostic escaping
+
+Phil approved fixing `BN-RC2-CLI-01` before RC2 and freezing a replacement
+candidate for correction review. The CLI diagnostic sink now escapes all C0,
+DEL and C1 controls, including parser/filesystem errors; explicitly trusted
+usage/validation line breaks are retained. Seven new real-process regression
+tests bring the local configuration suite to 33 passing tests. Browser/runtime,
+schema, dependencies and lock are unchanged. The first malformed-input fixture
+needed shortening to fit V8's diagnostic excerpt. The pnpm launcher failed its
+registry/version-verification fetch; no security setting was weakened, and
+installed Prettier was invoked directly with Node.
+
+The prior complete source review of `81bda1e` / tree `2e7ddfe` reported no
+P0/P1 and one P2, with `INTERNAL CODE REVIEW PASS WITH P2/P3 FINDINGS`.
+That disposition does not carry forward to these changed bytes. A replacement
+freeze and focused correction-closure review are next; no release acceptance
+is claimed. Durable review/control evidence is outside the repository at
+`C:/Users/Owner/.codex/visualizations/2026/09/08/01a08236-bcfa-73f2-85b0-b2be66290512/rc2-review-evidence/`.
+
+Phil approved isolated local WSL/Docker installation, upgrade, rollback and
+compatibility checks, conditioned on resource coordination. Coordination with
+`5th YACCTTWF - Yet Another Crap Codex Task That Will Fail` is complete, but it
+has not admitted another Discourse stack during its retained-forum phase.
+Keep all Brand Navigation services stopped until an agreed serial window and
+fresh capacity/port checks. No mutation of existing resources or shared caps,
+cache release, or pruning is authorized. The six-slot matrix plan and prior RC1
+archive are saved externally; the old candidate archive must be replaced for
+these corrected bytes. No publication, merge, tag or live migration has occurred.
+
 ## Active RC2 work — core-header text links
 
 Phil authorized adding the text-link capability missing from the separate

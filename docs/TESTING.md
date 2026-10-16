@@ -1,5 +1,28 @@
 # Testing and acceptance
 
+## RC2 CLI diagnostic correction — 2026-10-15
+
+Phil authorized correcting review finding `BN-RC2-CLI-01` before RC2. The CLI
+now escapes C0, DEL and C1 controls at its final diagnostic sink. Trusted usage
+and validator line separators are inserted only after each line is escaped.
+The browser validator and header implementation are unchanged.
+
+Local Node `22.22.2` configuration/CLI tests passed 33/33. Seven new tests
+capture real CLI subprocess output for malformed JSON containing ESC/BEL,
+other controls and newlines, filesystem errors, inert unknown fields, ordinary
+parse failures, valid input, and multiline usage. Fixtures use newly created
+temporary directories and are cleaned up by the harness. The initial regression
+expected a full long payload in V8's truncated error excerpt; shortening the
+payload made the assertion exercise both ESC and BEL without relying on omitted
+bytes. This was a test-fixture correction, not a candidate bypass.
+
+The pnpm launcher could not verify its requested version because registry
+fetches failed. No signature policy was weakened and no dependency changed;
+formatting used the already-installed Prettier directly through Node. This
+local result does not establish replacement-candidate CI or installed lifecycle
+acceptance. Correction closure and the resource-held Discourse matrix remain
+separate pending gates.
+
 ## RC2 core-header text-link candidate — 2026-10-15
 
 The next candidate adds `header_presentation` for direct core-header links.
