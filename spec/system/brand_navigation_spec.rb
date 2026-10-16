@@ -144,6 +144,11 @@ RSpec.describe "Brand Navigation" do
                     const r = document.querySelector(".home-logo-wrapper-outlet").getBoundingClientRect();
                     return { left: r.left, right: r.right, top: r.top, bottom: r.bottom };
                   })(),
+                  headerItem: (() => {
+                    const r = document.querySelector(".brand-navigation-header-link").getBoundingClientRect();
+                    return { left: r.left, right: r.right };
+                  })(),
+                  labelWidth: document.querySelector(".brand-navigation-header-link__label").getBoundingClientRect().width,
                   viewportWidth: innerWidth, viewportHeight: innerHeight,
                   documentWidth: document.documentElement.scrollWidth,
                   targets: arguments[0].map((selector) => {
@@ -169,6 +174,7 @@ RSpec.describe "Brand Navigation" do
               geometry.fetch("header").fetch("bottom"),
             ].min
             expect(geometry.fetch("documentWidth")).to be <= width + 1
+            expect(geometry.fetch("labelWidth")).to be > 0
             geometry.fetch("targets").each do |target|
               expect(target.fetch("width")).to be > 0
               expect(target.fetch("height")).to be > 0
@@ -180,6 +186,10 @@ RSpec.describe "Brand Navigation" do
                 "#{target.fetch('selector')} was clipped or covered: #{target.inspect}"
             end
             menu, logo = geometry.fetch("targets")
+            header_link = geometry.fetch("targets")[2]
+            header_item = geometry.fetch("headerItem")
+            expect(header_link.fetch("left")).to be >= header_item.fetch("left")
+            expect(header_link.fetch("right")).to be <= header_item.fetch("right")
             [menu, logo].each do |target|
               container = geometry.fetch("logoContainer")
               expect(target.fetch("left")).to be >= container.fetch("left")

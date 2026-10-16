@@ -488,7 +488,14 @@
 .d-header .home-logo-wrapper-outlet:has(#brand-navigation-menu) {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+}
+
+.d-header:has(#brand-navigation-menu):has(
+    .brand-navigation-header-link--with-text
+  )
+  .home-logo-wrapper-outlet:has(#brand-navigation-menu) {
+  flex: 1 0 min-content;
+  min-width: min-content;
 }
 
 .d-header:has(#brand-navigation-menu)
