@@ -28,11 +28,16 @@ Discourse theme-component pattern.
 
 ## Historical implementation study
 
-Brand Navigation's core-header icon integration uses Discourse's documented
-`api.headerIcons` API. During development, an early implementation adapted the
+An earlier Brand Navigation core-header integration used Discourse's documented
+`api.headerIcons` API. During development, that implementation adapted the
 narrow `curryComponent` registration pattern used by Custom Header Links
-(icons). Before the first tagged release, that implementation was replaced by
-an independently authored lexical component factory.
+(icons). Before the first tagged release, the adapted expression was replaced
+by an independently authored lexical component factory.
+
+The current integration uses independently authored alignment-specific lists
+through Discourse's supported `renderAfterWrapperOutlet` and `renderInOutlet`
+APIs. It places links beside the logo or before the native header controls;
+it no longer registers them through `api.headerIcons`.
 
 Permanent upstream reference:
 [initialize-for-header-icon-links.gjs at `dee14e3`](https://github.com/discourse/discourse-icon-header-links/blob/dee14e37185e5e4db38497bd952352405a5826af/javascripts/discourse/initializers/initialize-for-header-icon-links.gjs#L1-L27).

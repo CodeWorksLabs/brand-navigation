@@ -21,13 +21,15 @@ or composer behavior.
 
 ## Components
 
-- `brand-navigation` initializer: guarded bar outlet and site-header icon
-  registration.
+- `brand-navigation` initializer: guarded bar outlet and left/right site-header
+  link outlet registration.
 - `BrandNavigationBar`: desktop and optional mobile-bar boundary.
 - `brand-navigation-menu`: guarded compact mobile header entry.
 - `BrandNavigationContent`: shared brand and navigation presentation.
-- `BrandNavigationHeaderIcon`: guarded direct links registered through
-  Discourse's supported `api.headerIcons` API.
+- `BrandNavigationHeaderLinks`: alignment-specific lists rendered through
+  Discourse's supported header outlets.
+- `BrandNavigationHeaderIcon`: shared guarded direct-link presentation for
+  icon-only, label-only, and combined header entries.
 - `brand-navigation` library: audience and safe-link policy.
 
 ## Configuration model
@@ -55,12 +57,18 @@ snapshot. This does not assert a server-side transaction guarantee; after a
 server error, reload the current settings before retrying.
 
 Top-level items with the `site_header` surface are excluded from the bar and
-registered as direct links through `api.headerIcons`. They require a URL
+rendered as direct links in alignment-specific lists. The initializer uses
+`api.renderAfterWrapperOutlet("home-logo", ...)` for the left list and
+`api.renderInOutlet("before-header-panel", ...)` for the right list. The right
+list therefore appears before the native authentication controls, not after
+Sign Up and Log In. These positions follow the reading direction on RTL sites.
+Header entries require a URL
 and do not support children. `header_presentation` selects icon-only (the
 backward-compatible default), label-only, or icon-and-label rendering.
 Text links use a bounded auto-width control, inherit header colors, and retain
 their full accessible label when the visible text is truncated. A locally
-authored lexical component factory binds each validated item to its header component without
+authored lexical component factory binds each alignment to its list; the list
+passes validated items to the shared header-link component without
 repository-specific owner state.
 
 Each item can render as icon-and-label, label-only, or icon-only. Labels remain

@@ -2,233 +2,139 @@
 
 [![Latest release](https://img.shields.io/github/v/release/CodeWorksLabs/brand-navigation?include_prereleases&sort=semver&label=release)](https://github.com/CodeWorksLabs/brand-navigation/releases)
 
-> A brand header and submenu navigation theme component for Discourse.
+Give your Discourse community a recognizable header and clear navigation.
+Brand Navigation combines your logo, links and dropdowns with text or icon
+destinations in Discourse's own header. It is independently maintained, not an
+official Discourse product.
 
-Brand Navigation gives a Discourse site one coherent place for brand identity,
-primary links, submenus, and compact header icons. It is responsive,
-keyboard-aware, straightforward to administer, and independently maintained.
-It is not an official Discourse product. Automated accessibility coverage is
-supplemented by the explicit manual evidence and open checks in the
-[testing record](docs/TESTING.md).
-
-## What Brand Navigation does
-
-- Adds an optional logo, brand name, destination, and light/dark logo pairing.
-- Supports direct links, submenu-only groups, and linked parents with a separate
-  submenu caret.
-- Organizes top-level items into left and right sections with intentional
-  one-level dropdown navigation.
-- Places direct text links, icon links, or icons with labels in the Discourse
-  core header when navigation-bar space is limited.
-- Controls every item's audience and desktop/mobile visibility independently.
-- Provides responsive mobile menu, full-bar, and hidden presentation modes.
-- Offers administrator color controls for the bar, text, hover state, and
-  submenus while allowing each value to inherit the active Discourse palette.
-- Imports and exports validated, versioned JSON configuration bundles for
-  migration, backup, and repeatable multi-site setup.
-- Uses structured object settings with validation rather than delimiter-based
-  configuration text.
-- Provides keyboard-operable submenus, accessible labels, safe new-window
-  links, and graceful icon fallbacks.
-- Ships translation-ready interface text that administrators can override per
-  locale.
-- Renders on normal Discourse application pages but never mounts in supported
-  Discourse embed contexts.
-- Leaves Discourse authentication, topic navigation, and composer behavior
-  untouched and contains no DiscussionBridge-specific compatibility code.
-
-## Installation
-
-In Discourse, open **Admin → Appearance → Themes & components**, select the
-**Components** tab, choose **Install → From a git repository**, and use:
-
-```text
-https://github.com/CodeWorksLabs/brand-navigation.git
-```
-
-Then include **Brand Navigation** on the theme or themes that should use it.
-Use Discourse's component-level **Enabled?** control as the single activation
-switch. Brand Navigation does not add a second enable setting.
-
-For an unpublished setup or configuration-bundle import, first attach the
-enabled component only to a non-default staging theme and use Discourse's theme
-preview. The [administrator guide](docs/USER_GUIDE.md#install-the-component) explains
-the complete preparation workflow; a disabled component cannot load its custom
-bundle panel.
-
-The component starts with practical sample navigation and a compact mobile
-menu. Configure the structured `navigation_items` editor directly, or use a
-validated configuration bundle to move settings without re-entering each row.
+**[Install](#installation) · [Documentation](https://docs.codeworkslabs.dev/brand-navigation/) · [Live examples](#preview)**
 
 ## Preview
 
-See Brand Navigation running on the
-[DiscussionBridge demo](https://bridge.demo.discussionbridge.dev/), or compare
-these live configurations. Site content and navigation may change after the
-screenshots are captured.
+Compare these live configurations. Site content and navigation may change
+after the screenshots are captured.
 
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)
 
-![Brand Navigation on the Repeal OBBBA Forum, with a red brand bar, linked parents, submenu carets, and a core-header social-icon row](docs/images/previews/repeal-obbba-header.png)
+![Repeal OBBBA Forum: red brand bar, dropdowns and social icons](docs/images/previews/repeal-obbba-header.png)
 
 ### The Bridge demonstration site
 
 [Open the live demo](https://bridge.demo.discussionbridge.dev/)
 
-![Brand Navigation on The Bridge demonstration site, with publishing, release, and ecosystem navigation](docs/images/previews/the-bridge-header.png)
+![The Bridge: publishing, release and ecosystem navigation](docs/images/previews/the-bridge-header.png)
 
 In this screenshot, the “Versions & Status” text link is supplied by the
-separate Custom Header Links component. The new site-header text capability
-is being prepared for `v1.0.0-rc.2`; the demo has not yet migrated that link.
+separate Custom Header Links component. Brand Navigation now supports header
+text links on `main`; this screenshot does not demonstrate that newer capability.
 
 ### RVing Community
 
 [Open the live community](https://www.rving.community/)
 
-![Brand Navigation on RVing Community, with a blue brand bar, community and resource menus, and anonymous sign-up controls](docs/images/previews/rving-community-header.png)
+![RVing Community: blue brand bar, community menus and sign-up controls](docs/images/previews/rving-community-header.png)
+
+## What Brand Navigation does
+
+- Add a brand name and optional light/dark logos, plus one-level dropdowns.
+- Put text, icons or icons with labels beside the logo or with the core header
+  controls, before **Sign Up** and **Log In**. Existing links default to right.
+- Set separate header-icon normal and hover/keyboard-focus colors, inheriting
+  the active theme by default without recoloring text or Discourse's icons.
+- Choose each link's audience and device visibility; use a mobile menu, bar or
+  hidden mode.
+- Edit friendly **Menu item** and **Submenu item** rows; back up or transfer
+  settings with validated JSON bundles.
+
+## Installation
+
+In **Admin → Appearance → Themes & components → Components**, choose
+**Install → From a git repository**:
+
+```text
+https://github.com/CodeWorksLabs/brand-navigation.git
+```
+
+Start on a non-default staging theme. Attach Brand Navigation there, turn its
+native **Enabled?** control on, then use Discourse's theme **Preview** to
+configure and verify it before attaching it to visitor-facing themes.
+
+If the component is already used by a live theme, use a separate test copy or
+staging site. Themes attached to the same component share its code and settings.
+
+**Enabled?** is the only activation switch. A disabled component cannot load
+its custom bundle panel. Follow the
+[administrator guide](docs/USER_GUIDE.md#install-the-component) for setup,
+bundle import and verification. Sample navigation is included.
 
 ## Known working Discourse versions
 
-Brand Navigation has recorded manual and native-update evidence across
-Discourse 2026.7 ESR, 2026.8, and 2026.9 installations. Exact builds, core
-commits, component refs, dates, and coverage limits change as sites are updated,
-so the canonical evidence lives only in the
-[testing record](docs/TESTING.md). These known-working builds are not minimum
-version declarations.
+Recorded checks cover Discourse 2026.7 ESR, 2026.8 and 2026.9 installations.
+See the [testing record](docs/TESTING.md) for exact builds and limits—not a
+blanket compatibility or accessibility guarantee. Keep labels short on narrow
+screens; header space is finite.
 
 ## In use on
 
-### Production installations
-
-- [Repeal OBBBA Forum](https://forum.repealobbba.org/) — configured navigation,
-  descriptions, audience/device visibility, and core-header social icons.
-- [DiscussionBridge Forum](https://forum.discussionbridge.dev/) — configured
-  navigation and accessible core-header links for GitHub, Bluesky, Discord, and
-  YouTube.
-- [Citizen Activist Network](https://forum.citizenactivist.network/) —
-  configured community and issue navigation.
-- [RVing Community](https://www.rving.community/) — configured community and
-  RVing Network navigation.
-- [R744 Community](https://www.r744.community/) — compatibility installation
-  pinned to the Discourse 2026.7 ESR release branch.
-
-### Demonstration installation
-
-- [The Bridge](https://bridge.demo.discussionbridge.dev/) — publishing-focused
-  navigation and the same restrained DiscussionBridge social set.
-
-### Test and compatibility installation
-
-- [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/) —
-  current Discourse administrator and rendering checks.
-
-Sites are added here only after Brand Navigation has been installed and its
-stated coverage has been verified. These groupings describe site purpose, not
-an assurance that every site runs the same component commit. Exact installed
-versions and planned checks are tracked in the
-[testing record](docs/TESTING.md).
+Alongside the previews above, recorded installations include
+[DiscussionBridge Forum](https://forum.discussionbridge.dev/),
+[Citizen Activist Network](https://forum.citizenactivist.network/),
+[R744 Community](https://www.r744.community/) and the
+[DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/).
+They do not necessarily run the same revision; consult the testing record.
 
 ## Navigation model
 
-Each top-level item may be either:
-
-- a direct link, when it has a URL and no children; or
-- a submenu trigger, when it has children but no URL; or
-- a linked parent with a separate submenu caret, when it has both a URL and
-  children.
-
-Only one child level is supported intentionally. Visibility can be `everyone`,
-`anonymous`, or `authenticated`. Use `_self` for normal forum navigation and
-`_blank` only when a new browsing context is genuinely useful.
-
-Start with the [administrator guide](docs/USER_GUIDE.md) for installation,
-configuration, verification, and troubleshooting. See [`docs/`](docs/) for
-scope, architecture, migration, testing, and release procedures. The
-[project history](docs/PROJECT_HISTORY.md) preserves the product decisions and
-development narrative behind the current release.
+Use direct links, submenu-only groups, or linked parents with separate carets.
+Core-header destinations are direct links, not submenus. See the
+[administrator guide](docs/USER_GUIDE.md) and [technical reference](docs/) for
+configuration, architecture, testing and [project history](docs/PROJECT_HISTORY.md).
 
 ## Versions and updates
 
-Discourse detects updates from commits on the installed remote branch. Brand
-Navigation additionally uses Semantic Versioning tags and matching GitHub
-Releases as human-readable release, support, and revision-recovery identities.
-The same-component procedure is documented in
-[Migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag).
-Treat it as provisional until the complete pin-and-return workflow is recorded
-on staging in the [testing record](docs/TESTING.md).
-`main` targets current Discourse; maintained older releases use Discourse's
-`d-compat/<YYYY>.<M>` compatibility branches. Development occurs on short-lived
-branches, and fixes for an older supported release are reviewed and backported
-to its matching compatibility branch.
+Git installation tracks branch commits: `main` contains the RC2 features
+described here and can be newer than a tagged download. Use the release badge
+above and [GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
+to find published versions, and read the [changelog](CHANGELOG.md) before updating.
 
-The reviewed `v0.9.0` preview was published on 2026-09-07. The current
-stable-track release candidate, `v1.0.0-rc.1`, was published on 2026-09-08;
-GitHub presents it as a prerelease while it ages on the verified installations.
-The public documentation is published at
-[docs.codeworkslabs.dev/brand-navigation](https://docs.codeworkslabs.dev/brand-navigation/).
-Version `v1.0.0` remains reserved for the documented, multi-site-tested release
-with no known release blockers. See the [changelog](CHANGELOG.md) and
-[release procedure](docs/RELEASE.md).
+`main` targets current Discourse; maintained older versions use
+`d-compat/<YYYY>.<M>`. Review
+[migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag)
+and its testing limits before relying on pin-and-return recovery. Older
+compatibility branches may not include every feature shown here.
 
 ## Translations
 
-Brand Navigation uses Discourse's theme-translation system for its visitor
-accessibility labels, administration panels, setting descriptions, and status
-messages. Detailed bundle-schema validation messages are generated in English.
-The current `v1.0.0-rc.1` release bundles only English. Additional bundled
-locales would be future release scope rather than part of the current RC.
-Administrators can provide local per-locale overrides in **Theme
-translations**, and reviewed translations are welcome as repository pull
-requests.
-
-Navigation labels, tooltips, and visible descriptions entered in component
-settings are site content rather than translation keys. The same configured
-content is currently shown in every visitor locale. See the
-[administrator guide](docs/USER_GUIDE.md#translate-the-interface) for details.
+English is bundled; administrators can override interface text in **Theme
+translations**. Detailed validation messages remain English. Configured link
+labels are shared site content, not per-locale translations.
 
 ## Thanks
 
-Brand Navigation was newly authored from its product specifications. Thanks to
+Brand Navigation was newly authored from its specifications. Thanks to
 [Discourse Brand Header](https://github.com/discourse/discourse-brand-header)
 and
 [Discourse Header Submenus](https://github.com/discourse/discourse-header-submenus)
-for product inspiration and for their contributions to the Discourse theme
-component ecosystem. Thanks also to
+for product inspiration, and
 [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links)
-for demonstrating compact, accessible icon destinations in the core header.
-Brand Navigation's header-icon registration follows Discourse's documented
-`api.headerIcons` API. Its current component-binding implementation is
-independently authored; the earlier implementation study is preserved in the
-provenance record. Pavilion's
+for demonstrating compact header destinations. Pavilion's
 [Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
-also informed the presentation and administration exploration. See
-[Attribution and licensing](docs/ATTRIBUTION.md) for the precise source
-classifications, and the
-[authorship and provenance record](docs/PROVENANCE.md) for the AI-assisted
-authorship model and reproducible source ledger.
+also informed presentation and administration exploration. The current header
+binding is independently authored using Discourse's documented API. See
+[attribution and licensing](docs/ATTRIBUTION.md) and
+[AI-assisted authorship/provenance](docs/PROVENANCE.md) for precise source credits.
 
 ## Support
 
-Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
-for bug reports, installation or configuration questions, compatibility
-reports, and feature requests. Search existing issues first and, where
-relevant, include:
-
-- the Brand Navigation release, branch, or commit;
-- the Discourse version and active theme;
-- browser, device, viewport, and signed-in state;
-- steps to reproduce, expected behavior, and actual behavior; and
-- a sanitized configuration bundle or relevant settings and console output.
-
-Never post credentials, personal data, or non-public vulnerability details in
-a public issue. Report suspected vulnerabilities privately to
-[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) and follow the
+Ask questions or report bugs through
+[GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues).
+Include component/Discourse versions, theme, browser/device, reproduction steps
+and sanitized settings. Never post credentials, personal data or private vulnerability details;
+report suspected vulnerabilities to
+[security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
 [security policy](SECURITY.md).
-
-This independent-stage repository does not use Discourse logos, official
-badges, or language implying Discourse ownership or maintenance.
 
 ## License
 
