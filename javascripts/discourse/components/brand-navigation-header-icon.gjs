@@ -1,8 +1,10 @@
+/* global settings */
+
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { registerDestructor } from "@ember/destroyable";
 import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
-import { tracked } from "@glimmer/tracking";
 import dIcon from "discourse/helpers/d-icon";
 import EmbedMode from "discourse/lib/embed-mode";
 import {
@@ -43,12 +45,14 @@ export default class BrandNavigationHeaderIcon extends Component {
     }
 
     this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
-      scheduleOnce("afterRender", this, () => {
-        if (!this.destroyed) {
-          this.iconRevision++;
-        }
-      });
+      scheduleOnce("afterRender", this, this.refreshIconRevision);
     });
+  }
+
+  refreshIconRevision() {
+    if (!this.destroyed) {
+      this.iconRevision++;
+    }
   }
 
   get shouldRender() {

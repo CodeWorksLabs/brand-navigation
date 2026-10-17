@@ -55,6 +55,13 @@ const APPEARANCE_COLORS = [
     fallback: "#222222",
   },
   {
+    setting: "submenu_hover_text_color",
+    label: "submenu_hover_text",
+    variable: "--primary",
+    inheritsFrom: "submenu_text_color",
+    fallback: "#222222",
+  },
+  {
     setting: "header_icon_color",
     label: "header_icon",
     variable: "--d-header-icon-color",
@@ -65,6 +72,24 @@ const APPEARANCE_COLORS = [
     label: "header_icon_hover",
     variable: "--d-header-icon-color--hover",
     fallback: "#222222",
+  },
+  {
+    setting: "header_text_color",
+    label: "header_text",
+    variable: "--header_primary",
+    fallback: "#222222",
+  },
+  {
+    setting: "header_text_hover_color",
+    label: "header_text_hover",
+    variable: "--header_primary",
+    fallback: "#222222",
+  },
+  {
+    setting: "header_hover_background_color",
+    label: "header_hover_background",
+    variable: "--primary-low",
+    fallback: "#e9e9e9",
   },
 ];
 
@@ -177,6 +202,13 @@ export default class BrandNavigationBundles extends Component {
   }
 
   inheritedColor(color) {
+    const configuredParent = normalizedHexColor(
+      this.appearanceValues[color.inheritsFrom]
+    );
+    if (configuredParent) {
+      return configuredParent;
+    }
+
     const siteColor = getComputedStyle(document.documentElement)
       .getPropertyValue(color.variable)
       .trim();

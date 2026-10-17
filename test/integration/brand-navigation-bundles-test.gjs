@@ -26,6 +26,19 @@ function setting(name, value = "") {
   };
 }
 
+const ADDITIONAL_COLORS = [
+  "submenu_hover_text_color",
+  "header_text_color",
+  "header_text_hover_color",
+  "header_hover_background_color",
+];
+const HEADER_SIZES = [
+  "header_icon_size_desktop",
+  "header_icon_size_mobile",
+  "header_text_size_desktop",
+  "header_text_size_mobile",
+];
+
 function adminTheme() {
   return {
     id: 42,
@@ -42,6 +55,8 @@ function adminTheme() {
       setting("submenu_text_color"),
       setting("header_icon_color"),
       setting("header_icon_hover_color"),
+      ...ADDITIONAL_COLORS.map((name) => setting(name)),
+      ...HEADER_SIZES.map((name) => setting(name, 0)),
     ],
   };
 }
@@ -519,9 +534,11 @@ module(
       const theme = adminTheme();
       theme.settings = theme.settings.filter(
         (item) =>
-          !["header_icon_color", "header_icon_hover_color"].includes(
-            item.setting
-          )
+          ![
+            "header_icon_color",
+            "header_icon_hover_color",
+            ...ADDITIONAL_COLORS,
+          ].includes(item.setting)
       );
       let submitted;
       this.outletArgs = { theme };
@@ -593,6 +610,115 @@ module(
       assert
         .dom('input[type="checkbox"][data-setting="header_icon_hover_color"]')
         .isChecked();
+      assert
+        .dom(".brand-navigation-admin-panel__appearance-controls .btn-primary")
+        .isDisabled();
+    });
+
+    test("additional color controls save and reset without changing header sizes", async function (assert) {
+      const theme = adminTheme();
+      theme.settings.find(
+        (item) => item.setting === "submenu_text_color"
+      ).value = "#002147";
+      theme.settings.find(
+        (item) => item.setting === "header_icon_size_desktop"
+      ).value = 24;
+      const submitted = [];
+      this.outletArgs = { theme };
+      BrandNavigationBundles.prototype.persistSettings = async (values) => {
+        submitted.push(structuredClone(values));
+        return structuredClone(values);
+      };
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+      assert
+        .dom('input[type="color"][data-setting="submenu_hover_text_color"]')
+        .hasValue(
+          "#002147",
+          "inherited hover swatch follows the configured normal submenu color"
+        );
+      for (const name of ADDITIONAL_COLORS) {
+        assert.dom(`input[type="color"][data-setting="${name}"]`).isDisabled();
+        await click(`input[type="checkbox"][data-setting="${name}"]`);
+        await fillIn(`input[type="color"][data-setting="${name}"]`, "#abcdef");
+      }
+      await click(
+        ".brand-navigation-admin-panel__appearance-controls .btn-primary"
+      );
+      for (const name of ADDITIONAL_COLORS) {
+        assert.strictEqual(submitted[0][name], "#ABCDEF");
+        assert.strictEqual(
+          theme.settings.find((item) => item.setting === name).value,
+          "#ABCDEF"
+        );
+      }
+      assert.strictEqual(Object.keys(submitted[0]).length, 11);
+      for (const name of HEADER_SIZES) {
+        assert.false(
+          Object.hasOwn(submitted[0], name),
+          "saving colors leaves sizes untouched"
+        );
+      }
+      await click(
+        ".brand-navigation-admin-panel__appearance-controls .btn-default"
+      );
+      assert.true(Object.values(submitted[1]).every((value) => value === ""));
+      assert.strictEqual(Object.keys(submitted[1]).length, 11);
+      assert.strictEqual(
+        theme.settings.find(
+          (item) => item.setting === "header_icon_size_desktop"
+        ).value,
+        24
+      );
+    });
+
+    test("imported sizes and additional colors persist and reconcile", async function (assert) {
+      const theme = adminTheme();
+      this.outletArgs = { theme };
+      BrandNavigationBundles.prototype.persistSettings = async (values) =>
+        structuredClone(values);
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+      const settings = Object.fromEntries([
+        ...ADDITIONAL_COLORS.map((name) => [name, "123abc"]),
+        ...HEADER_SIZES.map((name, index) => [
+          name,
+          index === 0 ? 0 : 24 + index,
+        ]),
+      ]);
+      await fillIn(
+        ".brand-navigation-bundles textarea",
+        JSON.stringify({
+          format: "brand-navigation-settings",
+          version: 1,
+          settings,
+        })
+      );
+      await click(".brand-navigation-bundles__controls .btn-primary");
+      for (const name of ADDITIONAL_COLORS) {
+        assert
+          .dom(`input[type="color"][data-setting="${name}"]`)
+          .hasValue("#123abc");
+        assert
+          .dom(`input[type="checkbox"][data-setting="${name}"]`)
+          .isChecked();
+        assert.strictEqual(
+          theme.settings.find((item) => item.setting === name).value,
+          "#123ABC"
+        );
+      }
+      for (const name of HEADER_SIZES) {
+        assert.strictEqual(
+          theme.settings.find((item) => item.setting === name).value,
+          settings[name]
+        );
+      }
       assert
         .dom(".brand-navigation-admin-panel__appearance-controls .btn-primary")
         .isDisabled();

@@ -75,6 +75,11 @@ submenu_text_color:
   default: ""
   max: 7
 
+submenu_hover_text_color:
+  type: string
+  default: ""
+  max: 7
+
 header_icon_color:
   type: string
   default: ""
@@ -84,6 +89,45 @@ header_icon_hover_color:
   type: string
   default: ""
   max: 7
+
+header_text_color:
+  type: string
+  default: ""
+  max: 7
+
+header_text_hover_color:
+  type: string
+  default: ""
+  max: 7
+
+header_hover_background_color:
+  type: string
+  default: ""
+  max: 7
+
+header_icon_size_desktop:
+  type: integer
+  default: 0
+  min: 0
+  max: 48
+
+header_icon_size_mobile:
+  type: integer
+  default: 0
+  min: 0
+  max: 48
+
+header_text_size_desktop:
+  type: integer
+  default: 0
+  min: 0
+  max: 48
+
+header_text_size_mobile:
+  type: integer
+  default: 0
+  min: 0
+  max: 48
 
 navigation_items:
   type: objects

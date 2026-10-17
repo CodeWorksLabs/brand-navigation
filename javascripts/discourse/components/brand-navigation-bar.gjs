@@ -1,3 +1,5 @@
+/* global settings */
+
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import EmbedMode from "discourse/lib/embed-mode";

@@ -31,8 +31,18 @@ const COLOR_SETTINGS = [
   "hover_background_color",
   "submenu_background_color",
   "submenu_text_color",
+  "submenu_hover_text_color",
   "header_icon_color",
   "header_icon_hover_color",
+  "header_text_color",
+  "header_text_hover_color",
+  "header_hover_background_color",
+];
+const SIZE_SETTINGS = [
+  "header_icon_size_desktop",
+  "header_icon_size_mobile",
+  "header_text_size_desktop",
+  "header_text_size_mobile",
 ];
 
 const TOP_LEVEL_KEYS = new Set(["format", "version", "metadata", "settings"]);
@@ -73,6 +83,7 @@ export const PORTABLE_SETTINGS = [
   "brand_target",
   "mobile_mode",
   ...COLOR_SETTINGS,
+  ...SIZE_SETTINGS,
   "navigation_items",
   "custom_font_awesome_icons",
 ];
@@ -161,6 +172,7 @@ function validateSettings(settings, errors) {
   validateOptionalEnum(settings, "brand_target", TARGET_VALUES, errors);
   validateOptionalEnum(settings, "mobile_mode", MOBILE_MODE_VALUES, errors);
   COLOR_SETTINGS.forEach((key) => validateOptionalColor(settings, key, errors));
+  SIZE_SETTINGS.forEach((key) => validateOptionalSize(settings, key, errors));
 
   if ("navigation_items" in settings) {
     errors.push(...validateNavigationItems(settings.navigation_items));
@@ -211,6 +223,17 @@ function validateOptionalColor(value, key, errors) {
   ) {
     errors.push(
       `${key} must be blank or a six-digit hex color such as #1A2B3C.`
+    );
+  }
+}
+
+function validateOptionalSize(value, key, errors) {
+  if (
+    key in value &&
+    (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > 48)
+  ) {
+    errors.push(
+      `${key} must be an integer from 0 to 48 (0 inherits the theme).`
     );
   }
 }

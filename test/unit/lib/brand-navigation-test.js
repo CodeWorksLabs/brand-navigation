@@ -2,11 +2,11 @@ import { module, test } from "qunit";
 import {
   arrangeNavigationItems,
   hasSpriteSymbol,
-  headerLinkPresentation,
   headerAlignment,
   headerItemsForAlignment,
-  isUsableIcon,
+  headerLinkPresentation,
   isPrimarySpriteReady,
+  isUsableIcon,
   isVisibleOnDevice,
   isVisibleToUser,
   linkRel,
@@ -14,8 +14,10 @@ import {
   PrimarySpriteWatcher,
   shouldRenderHeaderIcon,
 } from "../../../discourse/lib/brand-navigation";
-import { isBrandNavigationObjectsEditor } from "../../../discourse/lib/brand-navigation-admin";
-import { isBrandNavigationTheme } from "../../../discourse/lib/brand-navigation-admin";
+import {
+  isBrandNavigationObjectsEditor,
+  isBrandNavigationTheme,
+} from "../../../discourse/lib/brand-navigation-admin";
 import { isSafeNavigationUrl } from "../../../discourse/lib/configuration-bundle";
 
 module("Unit | Lib | brand-navigation", function () {
@@ -74,6 +76,7 @@ module("Unit | Lib | brand-navigation", function () {
     assert.true(isSafeNavigationUrl("https://example.com/path"));
     assert.false(isSafeNavigationUrl("//example.com/path"));
     assert.false(isSafeNavigationUrl("http://example.com/path"));
+    // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
     assert.false(isSafeNavigationUrl("javascript:alert(1)"));
   });
 
@@ -206,7 +209,10 @@ module("Unit | Lib | brand-navigation", function () {
 
     const unsubscribe = watcher.subscribe(() => notifications++);
     assert.strictEqual(watcher.callbacks.size, 1);
-    assert.ok(watcher.observer, "one shared observer services subscribers");
+    assert.true(
+      Boolean(watcher.observer),
+      "one shared observer services subscribers"
+    );
 
     unsubscribe();
 
@@ -413,6 +419,7 @@ module("Unit | Lib | brand-navigation", function () {
     for (const overrides of [
       { embedMode: true },
       { mobileView: true, mobileMode: "hidden" },
+      // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
       { item: { ...item, url: "javascript:alert(1)" } },
       { item: { ...item, label: " " } },
       { item: { ...item, link_mode: "group" } },
@@ -509,6 +516,7 @@ module("Unit | Lib | brand-navigation", function () {
   test("inert and unsafe navigation rows are removed", function (assert) {
     const items = arrangeNavigationItems([
       { label: "Inert" },
+      // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
       { label: "Unsafe", url: "javascript:alert(1)" },
       { label: "Safe", url: "/safe" },
     ]);
