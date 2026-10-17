@@ -33,6 +33,17 @@ export function linkTarget(target) {
   return target === "_blank" ? "_blank" : "_self";
 }
 
+export function headerAlignment(item) {
+  return item.header_alignment === "left" ? "left" : "right";
+}
+
+export function headerItemsForAlignment(items, alignment) {
+  return items.filter(
+    (item) =>
+      item.surface === "site_header" && headerAlignment(item) === alignment
+  );
+}
+
 export function resolvedIconId(icon) {
   return REPLACEMENTS[icon] || icon;
 }

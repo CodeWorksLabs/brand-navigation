@@ -3,6 +3,9 @@ en:
     open_menu: "Open the brand navigation menu"
     open_submenu: "Open %{label} submenu"
     navigation_label: "Brand navigation"
+    editor:
+      menu_item: "Menu item"
+      submenu_item: "Submenu item"
     bundles:
       title: "Configuration bundles"
       description: "Export these settings or choose a validated Brand Navigation JSON bundle and import it without re-entering each navigation item. Bundles cannot attach or enable the component."
@@ -28,6 +31,8 @@ en:
       hover_background: "Hover and highlight"
       submenu_background: "Submenu background"
       submenu_text: "Submenu text"
+      header_icon: "Core-header icon"
+      header_icon_hover: "Core-header icon hover"
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
     settings:
@@ -45,6 +50,8 @@ en:
       hover_background_color: "Optional six-digit hex override for hover and active highlights. A leading # is optional. Leave blank to inherit --quaternary-low."
       submenu_background_color: "Optional six-digit hex override for submenu backgrounds. A leading # is optional. Leave blank to inherit --secondary."
       submenu_text_color: "Optional six-digit hex override for submenu text and icons. A leading # is optional. Leave blank to inherit --primary."
+      header_icon_color: "Optional six-digit hex override for Brand Navigation core-header icons only. A leading # is optional. Leave blank to inherit the theme's --d-header-icon-color. Does not change link text or Discourse's own icons."
+      header_icon_hover_color: "Optional six-digit hex override for Brand Navigation core-header icons on hover and keyboard focus. A leading # is optional. Leave blank to inherit the theme's --d-header-icon-color--hover."
       navigation_items:
         description: "Ordered top-level links and one-level submenus."
         schema:
@@ -69,18 +76,22 @@ en:
               description: "For bar items, show the icon and label, label only, or icon only."
             section:
               label: "Section"
-              description: "Keep this item beside the brand or align it to the far edge."
+              description: "For brand-bar items only, keep this item beside the brand or align it to the far edge. Use Site-header alignment for core-header links."
             surface:
               label: "Surface"
               description: "Show this item in the Brand Navigation bar or as a direct link in the Discourse site header. Site-header items require a URL and cannot contain children."
             header_presentation:
               label: "Site-header presentation"
               description: "For site-header items, show icon only (the existing default), label only, or icon and label. Icon-only links require an icon; text links can omit it."
+            header_alignment:
+              label: "Site-header alignment"
+              description: "For site-header items, place the link beside the logo (left) or before the header controls (right, the default). Links and icons always precede Sign Up and Log In. Left and right follow the reading direction in RTL layouts."
             device_visibility:
               label: "Device visibility"
               description: "Show on both device classes, desktop/tablet only, or mobile phones only. Rotation does not change the device class. Existing blank values behave as both."
             target:
               label: "Target"
+              description: "Open this link in the same tab (_self) or a new tab (_blank). Save changes, then refresh the forum page to load the updated navigation."
             visibility:
               label: "Audience"
             children:

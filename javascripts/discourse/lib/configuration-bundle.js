@@ -31,6 +31,8 @@ const COLOR_SETTINGS = [
   "hover_background_color",
   "submenu_background_color",
   "submenu_text_color",
+  "header_icon_color",
+  "header_icon_hover_color",
 ];
 
 const TOP_LEVEL_KEYS = new Set(["format", "version", "metadata", "settings"]);
@@ -42,6 +44,7 @@ const NAVIGATION_ITEM_KEYS = new Set([
   "icon",
   "presentation",
   "header_presentation",
+  "header_alignment",
   "section",
   "surface",
   "device_visibility",
@@ -235,6 +238,7 @@ function validateNavigationItem(item, index, errors) {
     path
   );
   validateOptionalEnum(item, "section", SECTION_VALUES, errors, path);
+  validateOptionalEnum(item, "header_alignment", SECTION_VALUES, errors, path);
   validateOptionalEnum(
     item,
     "header_presentation",

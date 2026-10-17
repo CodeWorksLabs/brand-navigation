@@ -3,6 +3,8 @@ import {
   arrangeNavigationItems,
   hasSpriteSymbol,
   headerLinkPresentation,
+  headerAlignment,
+  headerItemsForAlignment,
   isUsableIcon,
   isPrimarySpriteReady,
   isVisibleOnDevice,
@@ -43,6 +45,28 @@ module("Unit | Lib | brand-navigation", function () {
     assert.strictEqual(linkRel("_self"), null);
     assert.strictEqual(linkTarget("_blank"), "_blank");
     assert.strictEqual(linkTarget("unexpected"), "_self");
+  });
+
+  test("header alignment defaults to the existing right side and preserves per-side order", function (assert) {
+    assert.strictEqual(headerAlignment({}), "right");
+    assert.strictEqual(headerAlignment({ header_alignment: "" }), "right");
+    assert.strictEqual(headerAlignment({ header_alignment: "left" }), "left");
+    assert.strictEqual(headerAlignment({ section: "left" }), "right");
+    const items = [
+      { label: "Bar", url: "/bar", header_alignment: "left" },
+      { label: "Legacy", surface: "site_header" },
+      { label: "Left 1", surface: "site_header", header_alignment: "left" },
+      { label: "Right", surface: "site_header", header_alignment: "right" },
+      { label: "Left 2", surface: "site_header", header_alignment: "left" },
+    ];
+    assert.deepEqual(
+      headerItemsForAlignment(items, "left").map((item) => item.label),
+      ["Left 1", "Left 2"]
+    );
+    assert.deepEqual(
+      headerItemsForAlignment(items, "right").map((item) => item.label),
+      ["Legacy", "Right"]
+    );
   });
 
   test("navigation URLs fail closed", function (assert) {

@@ -8,6 +8,7 @@ import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import BrandNavigationContent from "../../../discourse/components/brand-navigation-content";
 import BrandNavigationHeaderIcon from "../../../discourse/components/brand-navigation-header-icon";
+import BrandNavigationHeaderLinks from "../../../discourse/components/brand-navigation-header-links";
 import { primarySpriteWatcher } from "../../../discourse/lib/brand-navigation";
 
 class TestState {
@@ -19,6 +20,128 @@ module(
   "Integration | Component | Brand Navigation icon readiness",
   function (hooks) {
     setupRenderingTest(hooks);
+
+    test("right header list includes legacy and explicit right items, not left items", async function (assert) {
+      const originalItems = settings.navigation_items;
+      settings.navigation_items = [
+        {
+          label: "Legacy",
+          url: "/latest",
+          surface: "site_header",
+          header_presentation: "label_only",
+        },
+        {
+          label: "Left",
+          url: "/about",
+          surface: "site_header",
+          header_alignment: "left",
+          header_presentation: "label_only",
+        },
+        {
+          label: "Versions & Status",
+          url: "/status",
+          surface: "site_header",
+          header_alignment: "right",
+          header_presentation: "label_only",
+        },
+      ];
+      try {
+        await render(
+          <template><BrandNavigationHeaderLinks @alignment="right" /></template>
+        );
+        assert
+          .dom(".brand-navigation-header-links--right > li")
+          .exists({ count: 2 });
+        assert
+          .dom(".brand-navigation-header-links--right > li:first-child a")
+          .hasText("Legacy");
+        assert
+          .dom(".brand-navigation-header-links--right > li:last-child a")
+          .hasText("Versions & Status");
+        assert.dom('a[href="/about"]').doesNotExist();
+        assert.dom(".brand-navigation-header-links--left").doesNotExist();
+      } finally {
+        await clearRender();
+        settings.navigation_items = originalItems;
+      }
+    });
+
+    test("left header links retain order, target, and eligibility without duplicating right or bar items", async function (assert) {
+      const originalItems = settings.navigation_items;
+      settings.navigation_items = [
+        { label: "Bar", url: "/bar", header_alignment: "left" },
+        {
+          label: "Legacy right",
+          url: "/right",
+          surface: "site_header",
+          header_presentation: "label_only",
+        },
+        {
+          label: "Versions & Status",
+          url: "/status",
+          surface: "site_header",
+          header_presentation: "label_only",
+          header_alignment: "left",
+          target: "_blank",
+        },
+        {
+          label: "Help",
+          url: "/faq",
+          surface: "site_header",
+          header_presentation: "label_only",
+          header_alignment: "left",
+          target: "_self",
+        },
+        {
+          label: "Unsafe",
+          // eslint-disable-next-line no-script-url -- negative URL-validation fixture
+          url: "javascript:alert(1)",
+          surface: "site_header",
+          header_presentation: "label_only",
+          header_alignment: "left",
+        },
+      ];
+      try {
+        await render(<template><BrandNavigationHeaderLinks /></template>);
+        assert
+          .dom(".brand-navigation-header-links--left > li")
+          .exists({ count: 2 });
+        assert
+          .dom(".brand-navigation-header-links--left > li:first-child a")
+          .hasText("Versions & Status")
+          .hasAttribute("target", "_blank")
+          .hasAttribute("rel", "noopener noreferrer");
+        assert
+          .dom('a[href="/faq"]')
+          .hasAttribute("target", "_self")
+          .doesNotHaveAttribute("rel");
+        assert.dom('a[href="/bar"]').doesNotExist();
+        assert.dom('a[href="/right"]').doesNotExist();
+        assert.dom('a[href^="javascript:"]').doesNotExist();
+      } finally {
+        await clearRender();
+        settings.navigation_items = originalItems;
+      }
+    });
+
+    test("no left list is mounted for legacy right-only configurations", async function (assert) {
+      const originalItems = settings.navigation_items;
+      settings.navigation_items = [
+        {
+          label: "Versions & Status",
+          url: "/status",
+          surface: "site_header",
+          header_presentation: "label_only",
+        },
+      ];
+      try {
+        await render(<template><BrandNavigationHeaderLinks /></template>);
+        assert.dom(".brand-navigation-header-links--left").doesNotExist();
+      } finally {
+        await clearRender();
+        settings.navigation_items = originalItems;
+      }
+    });
 
     test("text links render safely without sprite readiness and combined links acquire their icon", async function (assert) {
       const primarySprite = document.querySelector("#svg-sprites .fontawesome");
