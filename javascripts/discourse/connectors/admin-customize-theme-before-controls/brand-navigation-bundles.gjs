@@ -164,6 +164,14 @@ export default class BrandNavigationBundles extends Component {
     return isBrandNavigationTheme(this.theme);
   }
 
+  get appearanceNoticeAnchor() {
+    return typeof document === "undefined"
+      ? null
+      : document.querySelector(
+          '.theme-setting[data-setting="bar_background_color"]'
+        );
+  }
+
   get importDisabled() {
     return (
       !this.bundle ||
@@ -457,12 +465,32 @@ export default class BrandNavigationBundles extends Component {
 
   <template>
     {{#if this.isBrandNavigation}}
-      <section class="brand-navigation-admin-panel control-unit">
+      {{#if this.appearanceNoticeAnchor}}
+        {{#in-element
+          this.appearanceNoticeAnchor.parentElement
+          insertBefore=this.appearanceNoticeAnchor
+        }}
+          <p class="alert alert-info brand-navigation-color-notice" role="note">
+            {{i18n (themePrefix "brand_navigation.appearance.notice_before")}}
+            <a href="#brand-navigation-appearance">
+              {{i18n (themePrefix "brand_navigation.appearance.title")}}
+            </a>
+            {{i18n (themePrefix "brand_navigation.appearance.notice_after")}}
+          </p>
+        {{/in-element}}
+      {{/if}}
+      <section
+        id="brand-navigation-appearance"
+        class="brand-navigation-admin-panel control-unit"
+      >
         <div class="mini-title">
           {{i18n (themePrefix "brand_navigation.appearance.title")}}
         </div>
         <p class="description">
           {{i18n (themePrefix "brand_navigation.appearance.description")}}
+        </p>
+        <p class="description brand-navigation-admin-panel__scope">
+          {{i18n (themePrefix "brand_navigation.appearance.scope")}}
         </p>
 
         <div class="brand-navigation-admin-panel__color-grid">

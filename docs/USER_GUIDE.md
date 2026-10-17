@@ -156,6 +156,117 @@ Do not edit a Git-installed remote component locally to patch an upgrade.
 Maintain custom overrides in a separate local component, or use a maintained
 fork when code changes are required.
 
+## Settings reference
+
+Open Brand Navigation under **Appearance → Themes & components → Components**.
+This reference follows its administration page. Your saved values may differ
+from the installation defaults below.
+
+The **navigation bar** is Brand Navigation's separate branded bar. The
+**Discourse header** is the area containing the forum logo and login/profile
+controls. Header color and size settings affect only the links and icons added
+by Brand Navigation, not Discourse's own controls.
+
+### Component and update controls
+
+| Control                               | What it does                                                                                                                                    |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Component name                        | Identifies this installed copy in administration. Renaming it does not change the brand name visitors see.                                      |
+| Repository and License links          | Open the installed component's source repository and license.                                                                                   |
+| Check for updates / Update to latest  | Check the configured remote source, then install its newer revision when an update is available. Back up settings first.                        |
+| Change source                         | Changes the component's Git source or tracked revision. This is not a navigation setting; do not change it merely to configure links or colors. |
+| Auto update when Discourse is updated | Allows Discourse to update this remote component during a Discourse update. It does not select or save navigation options.                      |
+| Include component on these themes     | Chooses which themes use this component. Removing one attachment affects that theme; disabling the component affects every attached theme.      |
+| View change history                   | Opens the staff action log for the component or individual setting.                                                                             |
+| Extra files                           | Lists additional files supplied by the component. It is not a place to configure navigation.                                                    |
+| Reset beside a setting                | Restores that setting's supplied default, not the whole component. A dot/highlight indicates a value changed from its default.                  |
+
+### Brand and placement settings
+
+| On-screen setting / saved name            | Options and purpose                                                                                                                                         |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Outlet (`outlet`)                         | `above-site-header` (default): bar above Discourse's header. `below-site-header`: bar below it. Does not reposition links assigned to the Discourse header. |
+| Show brand (`show_brand`)                 | On by default. Show the configured logo/name area; turn off for navigation without a brand link. Does not disable the menus or header links.                |
+| Brand name (`brand_name`)                 | The visible name and accessible name of the brand link; default `Brand Navigation`. Up to 100 characters.                                                   |
+| Brand URL (`brand_url`)                   | Where the brand logo/name links; default `/`. Use a site-relative path or a complete HTTPS URL.                                                             |
+| Brand logo (`brand_logo`)                 | Upload the light-theme logo. Empty by default.                                                                                                              |
+| Brand logo dark (`brand_logo_dark`)       | Optional dark-theme logo. When empty, uses the light logo.                                                                                                  |
+| Brand presentation (`brand_presentation`) | `logo_and_name` (default), `logo_only`, or `name_only`. A missing logo/name is not invented automatically.                                                  |
+| Brand target (`brand_target`)             | `_self` (default): same tab. `_blank`: new tab. Applies only to the brand logo/name; menu links have their own Target.                                      |
+| Mobile mode (`mobile_mode`)               | `menu` (default): compact menu button. `bar`: full navigation bar. `hidden`: hide Brand Navigation, including its Discourse-header links, in mobile view.   |
+
+### Color settings and Appearance
+
+Use the color pickers in **Appearance**, below Theme translations. All eleven
+settings below have a picker: turn **Custom** on, choose a color, then select
+**Save colors**. With Custom off, the default color stays in effect. You do not
+need to know a CSS variable name or type a hex code to use the pickers.
+
+| On-screen setting / saved name                                  | What changes                                                                                                             |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Bar background color (`bar_background_color`)                   | Background of the separate navigation bar.                                                                               |
+| Bar text color (`bar_text_color`)                               | Text and icons in that bar.                                                                                              |
+| Hover background color (`hover_background_color`)               | Background of navigation menu items on hover/focus and active highlights, including dropdown destinations.               |
+| Submenu background color (`submenu_background_color`)           | Dropdown menu background.                                                                                                |
+| Submenu text color (`submenu_text_color`)                       | Normal dropdown text and icons, including descriptions.                                                                  |
+| Submenu hover text color (`submenu_hover_text_color`)           | Dropdown text and icons on hover/focus. With no override, follows the normal dropdown text color.                        |
+| Header icon color (`header_icon_color`)                         | Normal color of Brand Navigation's icons in the Discourse header. Does not recolor link text.                            |
+| Header icon hover color (`header_icon_hover_color`)             | Those icons on hover/focus. With no override, uses the theme's header-icon hover color.                                  |
+| Header text color (`header_text_color`)                         | Normal color of Brand Navigation's link text in the Discourse header. Does not recolor icons.                            |
+| Header text hover color (`header_text_hover_color`)             | That text on hover/focus. With no override, uses the theme's header text color independently of any custom normal color. |
+| Header hover background color (`header_hover_background_color`) | Background behind both Brand Navigation text links and icon links in the Discourse header on hover/focus.                |
+
+The raw fields above Theme translations are the same saved color settings, not
+a second set of colors. A blank field means no override; a custom field accepts
+six hexadecimal digits with or without `#`, such as `#002147`. **Inherit all**
+in Appearance clears color overrides only. It does not reset sizes, links or
+logos. Choose custom colors that remain readable in both light and dark themes.
+
+### Header size settings
+
+These number controls stay in the component settings; they are not color
+pickers. Each is independent. Enter `0` to keep the theme/component default,
+or a whole number from `1` to `48` for pixels. For example, `20` means 20px.
+
+| On-screen setting / saved name                        | What changes                                                                        |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Header icon size desktop (`header_icon_size_desktop`) | Brand Navigation icons in the Discourse header in desktop view.                     |
+| Header icon size mobile (`header_icon_size_mobile`)   | Those icons in Discourse's mobile view. Does not inherit a custom desktop value.    |
+| Header text size desktop (`header_text_size_desktop`) | Brand Navigation link text in the Discourse header in desktop view.                 |
+| Header text size mobile (`header_text_size_mobile`)   | That link text in Discourse's mobile view. Does not inherit a custom desktop value. |
+
+Mobile means Discourse's mobile view, not just a narrow desktop window. These
+settings do not resize the separate navigation bar or native Discourse controls.
+
+### Navigation and icon settings
+
+**Navigation items** (`navigation_items`) opens the structured menu editor.
+Its defaults are sample Community/Resources links plus visitor/account links;
+replace them with your destinations. See [Add navigation](#add-navigation) for
+every menu-item field, option and example. Save there, then refresh the forum
+page to load the changed navigation.
+
+**Custom font awesome icons** (`custom_font_awesome_icons`) is the list of icon
+names Discourse needs to include for your navigation. Add each icon you use,
+one entry per name; this list does not create links by itself. The supplied
+examples use `comments`, `book-open`, `circle-info`, `globe`, `user-plus` and
+`user-gear`. See [Configure icons](#configure-icons).
+
+### Configuration bundles and bottom-page actions
+
+| Control              | What it does                                                                                                                                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Choose bundle        | Select a Brand Navigation JSON configuration previously exported from another installation or backup.                                                                                                                  |
+| Or paste bundle JSON | Supply the same configuration as text instead of a file. Validation errors must be resolved before import.                                                                                                             |
+| Import settings      | Apply the validated configuration. Does not attach/enable the component, upload logos, or import Theme translations.                                                                                                   |
+| Export settings      | Download a portable settings backup. Does not include uploaded logos, theme attachments or translation overrides.                                                                                                      |
+| Preview              | Open a preview using Discourse's theme preview controls. Does not publish settings to another site.                                                                                                                    |
+| Export               | Discourse's component archive export, distinct from Brand Navigation's JSON settings export.                                                                                                                           |
+| Convert              | Convert this component into a theme. Not needed to use Brand Navigation; it changes how Discourse treats the installed copy.                                                                                           |
+| Disable / Enable     | Stop or resume the component on every attached theme without deleting its settings.                                                                                                                                    |
+| Settings Editor      | Advanced JSON editor for setting names and values. It is not the component's source-code editor or Brand Navigation's portable bundle format. Back up settings first; use the individual controls for routine changes. |
+| Delete               | Remove this installed component. Back up configuration first; disabling is the appropriate temporary stop.                                                                                                             |
+
 ## Configure the brand
 
 The brand area is optional. Set `show_brand` off when you only want navigation.
@@ -195,14 +306,14 @@ Blank values inherit the active theme's `--d-header-icon-color` and
 `--d-header-icon-color--hover`, including light/dark palette changes. Custom
 colors are fixed across palettes; choose readable colors for both modes.
 
-Use **Core-header link text** and **Core-header link text on hover** to control
-text separately from icons. **Core-header hover background** applies to both
+Use the Discourse-header **link text** and **link text on hover/focus** pickers to control
+text separately from icons. The **link and icon background on hover/focus** picker applies to both
 text and icon links. Blank values retain the theme/default colors. These
 settings do not recolor Discourse's own header controls.
 
-Use **Submenu text on hover** for the text and icons of a submenu destination
+Use **Dropdown menus — text and icons on hover/focus** for a submenu destination
 on hover and keyboard focus, including its description. If your normal text
-and **Hover and highlight** background are both navy, choose a contrasting
+and the menu highlight background are both navy, choose a contrasting
 hover text color such as white. With Custom off, submenu hover text uses the
 normal submenu text color.
 
@@ -236,22 +347,22 @@ to the component's main settings page.
 
 Each top-level entry supports:
 
-| Field                 | Purpose                                                                                             |
-| --------------------- | --------------------------------------------------------------------------------------------------- |
-| `label`               | Required visible text.                                                                              |
-| `url`                 | Destination for the top-level label. It may also be used when the entry has submenu items.          |
-| `link_mode`           | Use the parent label as a live link or as a submenu-only grouping control.                          |
-| `title`               | Optional hover tooltip.                                                                             |
-| `icon`                | Optional Font Awesome 6 icon name.                                                                  |
-| `presentation`        | For bar items, show the icon and label, label only, or icon only.                                   |
-| `header_presentation` | For site-header items, choose `icon_only` (default), `label_only`, or `icon_and_label`.             |
-| `header_alignment`    | For site-header items, choose `left` beside the logo or `right` with the header controls (default). |
-| `section`             | Keep the item beside the brand (`left`) or align it to the far edge (`right`).                      |
-| `surface`             | Show the item in the Brand Navigation `bar` or as a direct `site_header` link.                      |
-| `device_visibility`   | Show on both device classes, desktop/tablet only, or mobile phones only.                            |
-| `target`              | Open in the same window (`_self`) or a new window (`_blank`).                                       |
-| `visibility`          | Show to everyone, anonymous visitors, or authenticated users.                                       |
-| `children`            | Ordered submenu links below this entry.                                                             |
+| Field                 | Purpose                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `label`               | Required visible text.                                                                                            |
+| `url`                 | Destination for the top-level label. It may also be used when the entry has submenu items.                        |
+| `link_mode`           | `link` (default): label opens its URL. `group`: label only opens its submenu and keeps any saved URL unused.      |
+| `title`               | Optional hover tooltip.                                                                                           |
+| `icon`                | Optional Font Awesome 6 icon name.                                                                                |
+| `presentation`        | Bar: `icon_and_label` (default), `label_only`, or `icon_only`. Does not select the Discourse-header presentation. |
+| `header_presentation` | For site-header items, choose `icon_only` (default), `label_only`, or `icon_and_label`.                           |
+| `header_alignment`    | For site-header items, choose `left` beside the logo or `right` with the header controls (default).               |
+| `section`             | Keep the item beside the brand (`left`) or align it to the far edge (`right`).                                    |
+| `surface`             | Show the item in the Brand Navigation `bar` or as a direct `site_header` link.                                    |
+| `device_visibility`   | `both` (default), `desktop`, or `mobile`. Follows device capability, not window width.                            |
+| `target`              | Open in the same window (`_self`) or a new window (`_blank`).                                                     |
+| `visibility`          | `everyone` (default), `anonymous` (signed out), or `authenticated` (signed in). Not an access-permission rule.    |
+| `children`            | Ordered submenu links below this entry.                                                                           |
 
 A top-level entry behaves as:
 
@@ -269,6 +380,18 @@ tooltip, optional visible description, icon, target, audience visibility, and
 device visibility. A visible description appears as secondary text below its
 label. Empty descriptions retain the compact menu. Only one submenu level is
 supported; child entries cannot contain another submenu.
+
+| Submenu field                           | Options and purpose                                                                                |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Label (`label`)                         | Required text and accessible link name, up to 100 characters.                                      |
+| URL (`url`)                             | Required safe destination, up to 2,048 characters.                                                 |
+| Tooltip (`title`)                       | Optional hover text, up to 200 characters.                                                         |
+| Visible description (`description`)     | Optional second line below the label, up to 300 characters.                                        |
+| Icon (`icon`)                           | Optional Font Awesome icon name. Add it to Custom font awesome icons.                              |
+| Presentation (`presentation`)           | `icon_and_label` (default), `label_only`, or `icon_only`.                                          |
+| Device visibility (`device_visibility`) | `both` (default), `desktop`, or `mobile`. Parent visibility must also allow the item.              |
+| Target (`target`)                       | `_self` (default): same tab. `_blank`: new tab.                                                    |
+| Audience (`visibility`)                 | `everyone` (default), `anonymous`, or `authenticated`. Parent visibility must also allow the item. |
 
 For an icon-only link, keep a clear `label`: Brand Navigation uses it as the
 link's accessible name. If the configured icon is missing from Discourse's
@@ -358,7 +481,7 @@ If an icon does not appear, verify its name and confirm it is included in
 
 ## Choose placement and mobile behavior
 
-`outlet` controls the desktop bar location:
+`outlet` controls the bar location:
 
 - `above-site-header` places Brand Navigation above the normal Discourse
   header.
@@ -385,7 +508,49 @@ Each top-level and child item has an independent visibility setting:
 Visibility only controls presentation. It is not an authorization mechanism;
 protect restricted destinations with Discourse permissions.
 
-## Translate the interface
+## Theme translations
+
+**Theme translations** changes the words used by the component, not what its
+settings do. For example, editing `brand_navigation.appearance.header_text`
+renames a color picker's label; it does not change that link's color. Use
+**Appearance** for colors and **Navigation items** for your link destinations.
+
+1. Open **Theme translations** on Brand Navigation's component page.
+2. Choose the language in its locale selector (English is bundled).
+3. Find the key for the label or message you want to change and edit its text.
+4. Save the row's change and refresh the page where that text appears.
+
+Preserve placeholders exactly: `%{label}` inserts a menu item's name,
+`%{count}` inserts the file-size limit, and older inherited-color wording may
+contain `%{variable}`. Translate the surrounding words, not the placeholder.
+
+The available keys are grouped as follows; all start with `brand_navigation.`:
+
+| Key after that prefix                                                                       | Text it changes                                                                          |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `open_menu`                                                                                 | Accessible instruction for the compact mobile menu button.                               |
+| `open_submenu`                                                                              | Accessible instruction for a submenu button; keep `%{label}`.                            |
+| `navigation_label`                                                                          | Accessible name for the navigation area.                                                 |
+| `editor.menu_item`, `editor.submenu_item`                                                   | Friendly names in the structured editor's add-item controls.                             |
+| `bundles.title`, `bundles.description`                                                      | Configuration bundles heading and explanation.                                           |
+| `bundles.choose`, `bundles.paste`, `bundles.paste_placeholder`                              | File chooser label and JSON paste-field instructions.                                    |
+| `bundles.import`, `bundles.export`                                                          | Import and export button text.                                                           |
+| `bundles.import_success`, `bundles.import_error`                                            | Import outcome messages.                                                                 |
+| `bundles.file_too_large`                                                                    | Oversized-file message; keep `%{count}`.                                                 |
+| `appearance.title`, `appearance.description`, `appearance.scope`                            | Appearance heading, explanation and affected-area guidance.                              |
+| `appearance.notice_before`, `appearance.notice_after`                                       | Words around the Appearance link in the color-picker notice.                             |
+| `appearance.custom`, `appearance.inherited`                                                 | Custom checkbox label and default-color status.                                          |
+| `appearance.save`, `appearance.reset`                                                       | Save colors and Inherit all button labels. Renaming them does not change their behavior. |
+| `appearance.save_success`, `appearance.save_error`                                          | Color-saving outcome messages.                                                           |
+| `appearance.bar_background`, `appearance.bar_text`, `appearance.hover_background`           | Navigation-bar and menu-highlight color picker labels.                                   |
+| `appearance.submenu_background`, `appearance.submenu_text`, `appearance.submenu_hover_text` | Dropdown background, normal text/icons and hover/focus text/icons labels.                |
+| `appearance.header_icon`, `appearance.header_icon_hover`                                    | Discourse-header icon normal and hover/focus color labels.                               |
+| `appearance.header_text`, `appearance.header_text_hover`                                    | Discourse-header link-text normal and hover/focus color labels.                          |
+| `appearance.header_hover_background`                                                        | Shared header-link/icon hover-background picker label.                                   |
+
+New guidance keys appear after the component update containing them; an older
+installed revision may show fewer rows. Translation overrides are local to this
+site and language and are not included in Brand Navigation configuration bundles.
 
 Brand Navigation uses Discourse's theme-translation system for fixed visitor
 and administrator interface text. Brand Navigation bundles only English in

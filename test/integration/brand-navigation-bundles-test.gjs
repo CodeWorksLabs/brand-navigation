@@ -467,6 +467,82 @@ module(
         );
     });
 
+    test("color-picker notice appears immediately before the first native color setting", async function (assert) {
+      this.outletArgs = { theme: adminTheme() };
+      await render(
+        <template>
+          <div class="theme-setting" data-setting="bar_background_color"></div>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+      assert
+        .dom(".brand-navigation-color-notice")
+        .includesText("Color pickers are available");
+      assert
+        .dom(".brand-navigation-color-notice a")
+        .hasText("Appearance")
+        .hasAttribute("href", "#brand-navigation-appearance");
+      assert.strictEqual(
+        find(".brand-navigation-color-notice").nextElementSibling,
+        find('.theme-setting[data-setting="bar_background_color"]'),
+        "notice precedes Bar background color, not a later setting"
+      );
+      assert.dom("#brand-navigation-appearance").exists();
+      await clearRender();
+      assert
+        .dom(".brand-navigation-color-notice")
+        .doesNotExist("portal notice is removed with the panel");
+    });
+
+    test("Appearance exposes every color setting with clear destination labels", async function (assert) {
+      const theme = adminTheme();
+      this.outletArgs = { theme };
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      const pickers = Array.from(
+        document.querySelectorAll(
+          '.brand-navigation-admin-panel input[type="color"]'
+        )
+      );
+      assert.deepEqual(
+        pickers.map((picker) => picker.dataset.setting).sort(),
+        theme.settings
+          .map((item) => item.setting)
+          .filter((name) => name.endsWith("_color"))
+          .sort(),
+        "every Brand Navigation color has a picker in Appearance"
+      );
+      assert
+        .dom(".brand-navigation-admin-panel__scope")
+        .includesText("Brand Navigation only");
+      for (const [name, label] of [
+        [
+          "submenu_hover_text_color",
+          "Dropdown menus — text and icons on hover/focus",
+        ],
+        ["header_text_color", "Discourse header — link text"],
+        [
+          "header_text_hover_color",
+          "Discourse header — link text on hover/focus",
+        ],
+        [
+          "header_hover_background_color",
+          "Discourse header — link and icon background on hover/focus",
+        ],
+      ]) {
+        assert
+          .dom(`input[type="color"][data-setting="${name}"]`)
+          .hasAttribute("aria-label", label);
+      }
+      assert
+        .dom('.brand-navigation-admin-panel input[type="number"]')
+        .doesNotExist("size controls have not been moved into the color panel");
+    });
+
     test("core-header color pickers save independently and reset to theme inheritance", async function (assert) {
       const theme = adminTheme();
       const submitted = [];
