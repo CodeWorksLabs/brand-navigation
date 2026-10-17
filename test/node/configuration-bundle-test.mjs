@@ -5,7 +5,6 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-
 import {
   isBrandNavigationTheme,
   persistThemeSettings,
@@ -17,7 +16,6 @@ import {
   normalizeColorSetting,
   readBundleFile,
 } from "../../javascripts/discourse/lib/configuration-bundle.js";
-
 import {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,
@@ -518,6 +516,7 @@ test("rejects malformed settings and unknown nested fields", () => {
       navigation_items: [
         {
           label: "Home",
+          // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
           url: "javascript:alert(1)",
           surprise: true,
         },
@@ -692,6 +691,7 @@ test("text header links still reject unsafe, missing, grouped, nested, and unkno
     header_presentation: "label_only",
   };
   for (const invalid of [
+    // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
     { ...base, url: "javascript:alert(1)" },
     { ...base, url: "" },
     { ...base, label: " " },
@@ -896,6 +896,7 @@ test("URL and administrator component identities fail closed", () => {
   assert.equal(isSafeNavigationUrl("/\\attacker.example/path"), false);
   assert.equal(isSafeNavigationUrl("//attacker.example/path"), false);
   assert.equal(isSafeNavigationUrl("http://example.com"), false);
+  // eslint-disable-next-line no-script-url -- deliberate unsafe-URL rejection fixture
   assert.equal(isSafeNavigationUrl("javascript:alert(1)"), false);
 
   const settings = [

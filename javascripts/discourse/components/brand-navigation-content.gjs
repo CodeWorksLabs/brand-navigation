@@ -1,14 +1,15 @@
+/* global settings, themePrefix */
+
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { registerDestructor } from "@ember/destroyable";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
-import { tracked } from "@glimmer/tracking";
 import LightDarkImg from "discourse/components/light-dark-img";
 import dIcon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
-import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 import {
   arrangeNavigationItems,
   isVisibleOnDevice,
@@ -17,6 +18,7 @@ import {
   linkTarget,
   primarySpriteWatcher,
 } from "../lib/brand-navigation";
+import { isSafeNavigationUrl } from "../lib/configuration-bundle";
 
 export default class BrandNavigationContent extends Component {
   @service capabilities;
@@ -94,12 +96,14 @@ export default class BrandNavigationContent extends Component {
 
     if (hasEligibleIcon) {
       this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
-        scheduleOnce("afterRender", this, () => {
-          if (!this.destroyed) {
-            this.iconRevision++;
-          }
-        });
+        scheduleOnce("afterRender", this, this.refreshIconRevision);
       });
+    }
+  }
+
+  refreshIconRevision() {
+    if (!this.destroyed) {
+      this.iconRevision++;
     }
   }
 

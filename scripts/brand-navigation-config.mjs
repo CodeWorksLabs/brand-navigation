@@ -3,7 +3,6 @@
 import { readFile, stat } from "node:fs/promises";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
-
 import {
   BUNDLE_FORMAT,
   BUNDLE_VERSION,

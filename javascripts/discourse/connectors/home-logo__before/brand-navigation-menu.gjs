@@ -1,3 +1,5 @@
+/* global settings, themePrefix */
+
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import DMenu from "discourse/float-kit/components/d-menu";

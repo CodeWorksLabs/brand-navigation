@@ -4,12 +4,12 @@ import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { i18n } from "discourse-i18n";
-import { validateNavigationItems } from "../lib/configuration-bundle";
 import {
   brandNavigationEditorSchema,
   isBrandNavigationObjectsEditor,
   snapshotPlainData,
 } from "../lib/brand-navigation-admin";
+import { validateNavigationItems } from "../lib/configuration-bundle";
 
 export default {
   name: "brand-navigation-admin",
