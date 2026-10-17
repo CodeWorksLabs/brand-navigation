@@ -457,12 +457,18 @@ export default class BrandNavigationBundles extends Component {
 
   <template>
     {{#if this.isBrandNavigation}}
-      <section class="brand-navigation-admin-panel control-unit">
+      <section
+        id="brand-navigation-appearance"
+        class="brand-navigation-admin-panel control-unit"
+      >
         <div class="mini-title">
           {{i18n (themePrefix "brand_navigation.appearance.title")}}
         </div>
         <p class="description">
           {{i18n (themePrefix "brand_navigation.appearance.description")}}
+        </p>
+        <p class="description brand-navigation-admin-panel__scope">
+          {{i18n (themePrefix "brand_navigation.appearance.scope")}}
         </p>
 
         <div class="brand-navigation-admin-panel__color-grid">
