@@ -77,13 +77,19 @@ RSpec.describe "Brand Navigation" do
       theme.save!
       visit("/")
 
-      link = find(".d-header-icons .brand-navigation-header-link a", text: "Versions & Status")
+      link = find(".brand-navigation-header-links--right .brand-navigation-header-link a", text: "Versions & Status")
       expect(link["rel"]).to eq("noopener noreferrer")
       expect(link["target"]).to eq("_blank")
       expect(link["aria-label"]).to eq("Versions & Status")
       expect(link).not_to have_css("svg")
       expect(page).not_to have_css(".brand-navigation__items", text: "Versions & Status")
       expect(page).to have_css(".d-header .login-button", visible: true)
+      expect(
+        page.evaluate_script(
+          "(() => { const controls = document.querySelectorAll('.d-header .login-button, .d-header .sign-up-button'); return controls.length > 0 && [...controls].every(control => Boolean(arguments[0].compareDocumentPosition(control) & Node.DOCUMENT_POSITION_FOLLOWING)); })()",
+          link,
+        ),
+      ).to eq(true)
       expect(
         page.evaluate_script(
           "arguments[0].getBoundingClientRect().width <= Math.min(224, innerWidth * 0.3) + 1",
@@ -129,7 +135,7 @@ RSpec.describe "Brand Navigation" do
           selectors = [
             "#brand-navigation-menu",
             ".d-header .home-logo-wrapper-outlet .title a",
-            ".d-header-icons .brand-navigation-header-link a",
+            ".brand-navigation-header-links--right .brand-navigation-header-link a",
             ".d-header button.login-button",
           ]
           selectors.each { |selector| expect(page).to have_css(selector, count: 1) }
@@ -210,6 +216,239 @@ RSpec.describe "Brand Navigation" do
           expect(page).to have_css(".brand-navigation--menu")
           expect(page).to have_link("Home", href: "/latest", visible: true)
         end
+      end
+    end
+  end
+
+  [320, 390].each do |width|
+    %w[en ar].each do |locale|
+      it "keeps mixed compact header links clear of native controls at #{width}px in #{locale}", mobile: true do
+        SiteSetting.default_locale = locale
+        SiteSetting.title = "CWL"
+        theme.update_setting(:mobile_mode, "menu")
+        theme.update_setting(
+          :navigation_items,
+          [
+            { label: "Home", url: "/latest", surface: "bar" },
+            {
+              label: "Home",
+              url: "/about",
+              surface: "site_header",
+              header_alignment: "left",
+              header_presentation: "label_only",
+              target: "_blank",
+            },
+            {
+              label: "Versions & Status",
+              url: "/latest",
+              surface: "site_header",
+              header_alignment: "right",
+              header_presentation: "icon_and_label",
+              icon: "circle-info",
+              target: "_self",
+            },
+          ],
+        )
+        theme.save!
+
+        resize_window(width: width, height: 900) do
+          visit("/")
+          selectors = [
+            "#brand-navigation-menu",
+            ".d-header .home-logo-wrapper-outlet .title a",
+            ".brand-navigation-header-links--left a",
+            ".brand-navigation-header-links--right a",
+          ]
+          selectors.each { |selector| expect(page).to have_css(selector, count: 1) }
+          expect(page).to have_css(".d-header button.login-button", count: 1)
+          expect(page).to have_css(".brand-navigation-header-links--right a svg", count: 1)
+          expect(page.evaluate_script("getComputedStyle(document.documentElement).direction")).to eq(locale == "ar" ? "rtl" : "ltr")
+
+          try_until_success do
+            geometry = page.evaluate_script(<<~JS, selectors)
+              (() => {
+                const rect = (node) => {
+                  const r = node.getBoundingClientRect();
+                  return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};
+                };
+                const visible = (node) => {
+                  const r = node.getBoundingClientRect();
+                  return r.width > 0 && r.height > 0 && getComputedStyle(node).visibility !== "hidden";
+                };
+                const right = document.querySelector(".brand-navigation-header-links--right a");
+                const controls = [...document.querySelectorAll(".d-header .panel button")].filter(visible);
+                const targets = [...arguments[0].map(s => document.querySelector(s)), ...controls];
+                return {
+                  viewport:innerWidth, documentWidth:document.documentElement.scrollWidth,
+                  header:rect(document.querySelector(".d-header")),
+                  logoContainer:rect(document.querySelector(".home-logo-wrapper-outlet")),
+                  rightContainer:rect(document.querySelector(".before-header-panel-outlet")),
+                  labelWidth:document.querySelector(".brand-navigation-header-links--right .brand-navigation-header-link__label").getBoundingClientRect().width,
+                  auth:[...document.querySelectorAll(".d-header .auth-buttons button")].filter(visible).map(rect),
+                  beforeAuth:[...document.querySelectorAll(".d-header .auth-buttons button")].every(n => Boolean(right.compareDocumentPosition(n) & Node.DOCUMENT_POSITION_FOLLOWING)),
+                  targets:targets.map(node => ({...rect(node), hits:[[.5,.5],[.25,.5],[.75,.5],[.5,.25],[.5,.75]].map(([x,y]) => {
+                    const r = node.getBoundingClientRect();
+                    const hit = document.elementFromPoint(r.left+r.width*x,r.top+r.height*y);
+                    return !!hit && (hit === node || node.contains(hit));
+                  })}))
+                };
+              })()
+            JS
+
+            expect(geometry.fetch("documentWidth")).to be <= width + 1
+            expect(geometry.fetch("beforeAuth")).to eq(true)
+            expect(geometry.fetch("labelWidth")).to be > 0
+            geometry.fetch("targets").each do |target|
+              expect(target.fetch("width")).to be > 0
+              expect(target.fetch("height")).to be > 0
+              expect(target.fetch("left")).to be >= 0
+              expect(target.fetch("right")).to be <= geometry.fetch("viewport")
+              expect(target.fetch("top")).to be >= [0, geometry.fetch("header").fetch("top")].max
+              expect(target.fetch("bottom")).to be <= geometry.fetch("header").fetch("bottom")
+              expect(target.fetch("hits")).to all(eq(true)), "Mixed header target clipped or covered: #{target.inspect}"
+            end
+            menu, logo, left, right = geometry.fetch("targets")
+            # The native fixture logo must remain meaningful, not a tiny hit target.
+            expect(logo.fetch("width")).to be >= logo.fetch("height")
+            [menu, logo, left].each do |target|
+              container = geometry.fetch("logoContainer")
+              expect(target.fetch("left")).to be >= container.fetch("left")
+              expect(target.fetch("right")).to be <= container.fetch("right")
+            end
+            expect(right.fetch("left")).to be >= geometry.fetch("rightContainer").fetch("left")
+            expect(right.fetch("right")).to be <= geometry.fetch("rightContainer").fetch("right")
+            expect(geometry.fetch("auth")).not_to be_empty
+            geometry.fetch("auth").each do |auth|
+              if locale == "ar"
+                expect(right.fetch("left")).to be >= auth.fetch("right")
+              else
+                expect(right.fetch("right")).to be <= auth.fetch("left")
+              end
+            end
+          end
+
+          find("#brand-navigation-menu").click
+          expect(page).to have_css(".brand-navigation--menu")
+          expect(page).to have_link("Home", href: "/latest", visible: true)
+          find("#brand-navigation-menu").click
+          find(".brand-navigation-header-links--right a").click
+          expect(page).to have_current_path("/latest", ignore_query: true)
+        end
+      end
+    end
+  end
+
+  %w[en ar].each do |locale|
+    it "keeps the native minimized topic title operable beside mixed links in #{locale}", mobile: true do
+      SiteSetting.default_locale = locale
+      SiteSetting.title = "CWL"
+      theme.update_setting(:mobile_mode, "menu")
+      theme.update_setting(
+        :navigation_items,
+        [
+          { label: "Home", url: "/latest", surface: "bar" },
+          {
+            label: "Home",
+            url: "/about",
+            surface: "site_header",
+            header_alignment: "left",
+            header_presentation: "label_only",
+          },
+          {
+            label: "Versions & Status",
+            url: "/latest",
+            surface: "site_header",
+            header_alignment: "right",
+            header_presentation: "icon_and_label",
+            icon: "circle-info",
+          },
+        ],
+      )
+      theme.save!
+      topic = Fabricate(:topic)
+      Fabricate.times(21, :post, topic: topic)
+
+      resize_window(width: 320, height: 900) do
+        visit("/t/#{topic.slug}/#{topic.id}")
+        expect(page).to have_css("#topic-title")
+        expect(page).to have_css(".d-header button.login-button")
+        expect(page).to have_css(".brand-navigation-header-links--left a", text: "Home")
+        expect(page).to have_css(".brand-navigation-header-links--right a", text: "Versions & Status")
+        expect(page.evaluate_script("getComputedStyle(document.documentElement).direction")).to eq(locale == "ar" ? "rtl" : "ltr")
+        page.execute_script("document.querySelector('#post_4').scrollIntoView()")
+        expect(page).to have_css(".d-header .extra-info-wrapper .topic-link", text: topic.title)
+        # Preserve Core's own mobile minimized visibility, rather than forcing
+        # authentication or icons into the native topic-title state.
+        expect(page).not_to have_css(".d-header .panel .auth-buttons button")
+        expect(page).not_to have_css(".d-header .panel .d-header-icons")
+
+        try_until_success do
+          geometry = page.evaluate_script(<<~JS)
+            (() => {
+              const rect = (node) => {
+                const r = node.getBoundingClientRect();
+                return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};
+              };
+              const selectors = [
+                "#brand-navigation-menu",
+                ".home-logo-wrapper-outlet .title a",
+                ".brand-navigation-header-links--left a",
+                ".brand-navigation-header-links--right a",
+                ".extra-info-wrapper .topic-link"
+              ];
+              return {
+                documentWidth:document.documentElement.scrollWidth, viewport:innerWidth,
+                header:rect(document.querySelector(".d-header")),
+                offset:parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-offset")),
+                targets:selectors.map((selector,index) => {
+                  const node = document.querySelector(selector);
+                  const r = node.getBoundingClientRect();
+                  const parents = index < 3 ? [".home-logo-wrapper-outlet"] : index === 3 ? [".before-header-panel-outlet"] : [".extra-info-wrapper", ".extra-info"];
+                  return {...rect(node), selector, parents:parents.map(s => rect(node.closest(s))),
+                    hits:[[.5,.5],[.25,.5],[.75,.5],[.5,.25],[.5,.75]].map(([x,y]) => {
+                      const hit = document.elementFromPoint(r.left+r.width*x,r.top+r.height*y);
+                      return !!hit && (hit === node || node.contains(hit));
+                    })};
+                })
+              };
+            })()
+          JS
+
+          expect(geometry.fetch("documentWidth")).to be <= geometry.fetch("viewport") + 1
+          expect((geometry.fetch("offset") - geometry.fetch("header").fetch("bottom")).abs).to be <= 1
+          geometry.fetch("targets").each do |target|
+            expect(target.fetch("width")).to be > 0
+            expect(target.fetch("height")).to be > 0
+            expect(target.fetch("left")).to be >= 0
+            expect(target.fetch("right")).to be <= geometry.fetch("viewport")
+            expect(target.fetch("top")).to be >= [0, geometry.fetch("header").fetch("top")].max
+            expect(target.fetch("bottom")).to be <= geometry.fetch("header").fetch("bottom")
+            expect(target.fetch("hits")).to all(eq(true)), "Minimized header target clipped or covered: #{target.inspect}"
+            target.fetch("parents").each do |parent|
+              expect(target.fetch("left")).to be >= parent.fetch("left")
+              expect(target.fetch("right")).to be <= parent.fetch("right")
+              expect(target.fetch("top")).to be >= parent.fetch("top")
+              expect(target.fetch("bottom")).to be <= parent.fetch("bottom")
+            end
+          end
+          logo = geometry.fetch("targets")[1]
+          expect(logo.fetch("width")).to be >= logo.fetch("height")
+        end
+
+        find("#brand-navigation-menu").click
+        expect(page).to have_css(".brand-navigation--menu")
+        page.driver.with_playwright_page { |p| p.keyboard.press("Escape") }
+        expect(page).not_to have_css(".brand-navigation--menu")
+        expect(page.evaluate_script("document.activeElement.id")).to eq("brand-navigation-menu")
+        # Exercise Core's real jump-to-top action; do not restore with injected
+        # scrolling or force its title/control visibility in either state.
+        find(".extra-info-wrapper .topic-link").click
+        expect(page).to have_css("#topic-title")
+        expect(page).not_to have_css(".d-header .extra-info-wrapper")
+        expect(page).to have_css(".d-header button.login-button")
+        expect(page).to have_css(".d-header .panel .d-header-icons")
+        find(".d-header button.login-button").click
+        expect(page).to have_css(".login-fullpage")
       end
     end
   end
@@ -324,6 +563,62 @@ RSpec.describe "Brand Navigation" do
         "getComputedStyle(document.querySelector('.brand-navigation__nav')).overflowX",
       ),
     ).to eq("visible")
+  end
+
+  [false, true].each do |custom|
+    it "#{custom ? 'overrides' : 'inherits'} core-header icon colors without recoloring native controls or text" do
+      SiteSetting.interface_color_selector = "header"
+      if custom
+        theme.update_setting(:header_icon_color, "123456")
+        theme.update_setting(:header_icon_hover_color, "#ABCDEF")
+      end
+      items = ["left", "right"].flat_map do |alignment|
+        ["icon_only", "icon_and_label"].map do |presentation|
+          {
+            label: "#{alignment} #{presentation}",
+            url: "/latest",
+            icon: "circle-info",
+            surface: "site_header",
+            header_alignment: alignment,
+            header_presentation: presentation,
+          }
+        end
+      end
+      theme.update_setting(:navigation_items, items)
+      theme.save!
+      visit("/")
+
+      native_icon = find(".d-header .d-header-icons .d-icon", match: :first)
+      native_before = page.evaluate_script("getComputedStyle(arguments[0]).color", native_icon)
+      links = all(".brand-navigation-header-link > a", count: 4)
+      links.each do |link|
+        icon = link.find(".d-icon")
+        normal = page.evaluate_script("getComputedStyle(arguments[0]).color", icon)
+        if custom
+          expect(normal).to eq("rgb(18, 52, 86)")
+        else
+          expect(normal).to eq(native_before)
+        end
+        text = link.first(".brand-navigation-header-link__label", minimum: 0)
+        text_before = page.evaluate_script("getComputedStyle(arguments[0]).color", text) if text
+        link.hover
+        expected_hover = "rgb(171, 205, 239)"
+        # Resolve the theme variable via the native control's own hover state.
+        unless custom
+          native_icon.find(:xpath, "..").hover
+          expected_hover = page.evaluate_script("getComputedStyle(arguments[0]).color", native_icon)
+          link.hover
+        end
+        expect(page.evaluate_script("getComputedStyle(arguments[0]).color", icon)).to eq(expected_hover)
+        expect(page.evaluate_script("getComputedStyle(arguments[0]).color", text)).to eq(text_before) if text
+        link.send_keys(:tab)
+        find(":focus").send_keys([:shift, :tab])
+        expect(link).to match_selector(":focus-visible")
+        expect(page.evaluate_script("getComputedStyle(arguments[0]).color", icon)).to eq(expected_hover)
+      end
+      find(".brand-navigation__brand").hover
+      expect(page.evaluate_script("getComputedStyle(arguments[0]).color", native_icon)).to eq(native_before)
+    end
   end
 
   it "uses configured submenu colors for labels, descriptions, and hover" do

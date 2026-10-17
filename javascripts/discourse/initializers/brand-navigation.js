@@ -1,9 +1,9 @@
+/* global settings */
+
 import EmbedMode from "discourse/lib/embed-mode";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import BrandNavigationBar from "../components/brand-navigation-bar";
-import { headerIconFor } from "../components/brand-navigation-header-icon";
-
-const BEFORE_HEADER_ICONS = ["chat", "search", "hamburger", "user-menu"];
+import { headerLinksFor } from "../components/brand-navigation-header-links";
 
 export default {
   name: "brand-navigation",
@@ -15,16 +15,10 @@ export default {
 
     withPluginApi((api) => {
       api.renderInOutlet(settings.outlet, BrandNavigationBar);
-
-      (settings.navigation_items || []).forEach((item, index) => {
-        if ((item.surface || "bar") !== "site_header") {
-          return;
-        }
-
-        api.headerIcons.add(`brand-navigation-${index}`, headerIconFor(item), {
-          before: BEFORE_HEADER_ICONS,
-        });
-      });
+      api.renderAfterWrapperOutlet("home-logo", headerLinksFor("left"));
+      // Core's panel places authentication buttons before its icon list.
+      // A separate native outlet keeps our links before those buttons too.
+      api.renderInOutlet("before-header-panel", headerLinksFor("right"));
     });
   },
 };

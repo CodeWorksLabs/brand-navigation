@@ -1,51 +1,63 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-10-16
+Date: 2026-10-17
 
-## RC2 main integration handoff
+## RC2 feature release-preparation handoff
 
-Phil instructed completing [PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25)
-and putting `main` on RC2 after the completed engineering review. This authorizes
-the bounded release-record update, push and PR merge, not a GitHub Release,
-tag publication or live-site mutation. Ask before any additional product-code
-change. The Bridge's Versions & Status link has not been migrated.
+Phil chose to include the new features in RC2, not RC3, and authorized finishing
+the checks, independent results review, then commit/push/open a new draft PR.
+That instruction does not authorize merge, tag, GitHub Release or live changes.
+Ask before any further product-code correction. The Bridge migration remains
+separate. Prior [PR 25](https://github.com/CodeWorksLabs/brand-navigation/pull/25)
+is already merged; it is not the pending feature PR.
 
-The reviewed executable candidate is
-`e7a16be653be8ccc045b73833d44ab38330689f1`, tree
-`7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`, already pushed to
-`feature/site-header-text-links`. The final integration delta changes only
-`CHANGELOG.md`, `docs/TESTING.md` and this checkpoint. Resolve the PR's current
-head, checks, merge state and remote `main` before acting; this preparation
-record does not predict the eventual merge commit.
+Current baseline is main `1ddfef2872855289763b10fc39800ec1ba7f455a`. The
+runtime-tested `admin-label-test-r2` candidate is an uncommitted 58-member
+package with no candidate commit/tree: ZIP 269,937 bytes, SHA-256
+`58123c4c03f1ce8e8cf98cceaa1f9c92225c8b8cb1040f3abb17b82cb7da8f34`.
+This final record preparation changes only CHANGELOG, TESTING, this checkpoint
+and USER_GUIDE release wording. Root must stop/hash those four files, build the
+separate final package and obtain independent claims/member/native-mapping
+association before the authorized commit/push/draft PR. Do not call the new ZIP
+an already tested native archive or invent the eventual commit identity.
 
-Current engineering evidence and honest RC2 limits are recorded at the top of
-[`docs/TESTING.md`](docs/TESTING.md#rc2-final-engineering-verification--2026-10-16).
-Configuration CI passed 33 tests; each of four Discourse lanes passed 30
-frontend tests and 36 system examples. Additional isolated evidence passed 21
-mobile/header examples, exact native ZIP import with 19 old and 19 new fields
-verified, and 30 installed-component frontend tests on Core `3086c087`.
-Native Git upgrade/rollback/lifecycle observations are explicitly bounded
-carry-forward evidence, not a new complete replay on every later revision.
+Current evidence and limits are in
+[`docs/TESTING.md`](docs/TESTING.md#current-rc2-feature-verification):
 
-Independent engineering review used the complete CodeWorksLabs Discourse review
-package and closed the CLI, editor-save and mobile-layout findings. No required
-engineering finding remains in that reviewed scope. Documentation-only changes
-must receive proportional independent identity/claim review and fresh CI; prior
-runtime observations carry only across the proven unchanged executable boundary.
+- Normal stock 24 variants and old shipped 22 examples carry through explicit
+  unchanged-effective-source analysis, with fresh minimized two and new shipped
+  two regressions. No new full replacement suite is claimed.
+- Three prior feature positives plus five fresh selected positives cover the
+  adopted eight scenarios, including real light/dark colors, pointer-away
+  keyboard focus, friendly native labels and Appearance persistence.
+- Native ID35 contains all 20 exact Core-consumed fields; retained replacement
+  20-field and original 19-field estates were preserved. Installed frontend
+  coverage passed all 40 named cases (21 unit, six icon/readiness, 13 admin).
+  Independent bounded review closed the friendly-label and test-context findings.
+- The original feature failures, zero-selection retry and first 37/40 frontend
+  result remain historical evidence, followed by explicit correction outcomes.
+  No timeout/assertion/count relaxation or hidden retry is represented.
 
-Final manual acceptance is not fabricated: genuine browser zoom and native
-palette/focused-color transitions remain unverified; full RTL, real external
-classic embed and complete human screen-reader acceptance remain stable-v1
-gates. The RC2 changelog is not proof of a published tag or GitHub prerelease.
+Fresh configuration checks passed 37 cases; types/CSS/templates passed.
+Generic Windows ESLint remains an unqualified environment diagnostic, not a
+green gate. The earlier same-effective-source baseline comparison found 12
+inherited messages, zero introduced and 24 resolved; its scope does not replace
+fresh remote CI. The new feature PR and exact-head CI are still pending.
 
-Both owned test environments are parked. Their databases, original backup,
-component 34 and all failed/successful evidence are retained. The current
-environment's PostgreSQL and Redis were shut down natively before container
-stop. No reset, prune, broad cleanup or live cutover is required. External
-`rc2-review-evidence/FINAL-STATE.json` and `HANDOFF.md` retain the detailed
-recovery identities; do not recreate the test framework or rerun passing suites
-merely because release documentation changed. The disclosed untracked
-`.pnpm-store/` is excluded from the candidate and must be preserved.
+Bounded stock palette/focus and RTL layout evidence is positive, not complete
+manual acceptance. Genuine zoom, full RTL, allowed-host classic external embed
+and complete human screen-reader verification retain the stable-v1 boundaries.
+OS picker, physical-device/Safari and all-plugin qualification are not claimed.
+Historical Git lifecycle evidence is bounded carry-forward, not a fresh full
+replay on every later archive or future tag. RC2 is prepared, not published.
+
+Owned current PostgreSQL and Redis were cleanly parked at 08:42:57 UTC, then
+the owned container stopped at 08:43:27 UTC on 2026-10-17. Its sleeping PID1
+exit137 was not a PostgreSQL crash or OOM; no active tests remain. Retained
+databases, backups, native installations and all failed/positive artifacts are
+preserved. External `rc2-review-evidence/HANDOFF.md` and the R4 receipts retain
+recovery details. Do not reset/prune/recreate infrastructure or rerun passing
+header cases for documentation edits. The excluded `.pnpm-store/` is preserved.
 
 All entries below are historical records. Their old pending gates, resource
 owners, candidate identities and dispositions do not override this handoff or

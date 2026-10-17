@@ -191,6 +191,75 @@ test("normalizes color settings to canonical uppercase hex", () => {
   assert.equal(bundle.settings.bar_background_color, "#16324F");
 });
 
+test("core-header icon colors round trip independently and normalize for import", () => {
+  const bundle = createBundle({
+    header_icon_color: "a1b2c3",
+    header_icon_hover_color: "#d4e5f6",
+  });
+  const restored = JSON.parse(serializeBundle(bundle));
+  assert.deepEqual(validateBundle(restored), []);
+  assert.deepEqual(restored.settings, {
+    header_icon_color: "#A1B2C3",
+    header_icon_hover_color: "#D4E5F6",
+  });
+  assert.deepEqual(
+    prepareThemeSettingsImport(
+      {
+        settings: [
+          { setting: "header_icon_color" },
+          { setting: "header_icon_hover_color" },
+        ],
+      },
+      restored
+    ),
+    restored.settings
+  );
+  assert.equal(themeSettingValue("header_icon_color", "123abc"), "#123ABC");
+  assert.equal(
+    themeSettingValue("header_icon_hover_color", "#abcdef"),
+    "#ABCDEF"
+  );
+});
+
+test("core-header colors accept independent inheritance and preserve old bundles", () => {
+  for (const settings of [
+    { header_icon_color: "", header_icon_hover_color: "#123456" },
+    { header_icon_color: "#123456", header_icon_hover_color: "" },
+    { header_icon_color: "", header_icon_hover_color: "" },
+    { brand_name: "Legacy" },
+  ]) {
+    const bundle = createBundle(settings);
+    assert.deepEqual(validateBundle(bundle), []);
+    assert.deepEqual(bundle.settings, settings);
+  }
+});
+
+test("core-header color validation rejects CSS payloads and non-string values", () => {
+  for (const key of ["header_icon_color", "header_icon_hover_color"]) {
+    for (const value of [
+      "red",
+      "#fff",
+      "#1234567",
+      "#123456; background:url(https://example.com)",
+      "var(--primary)",
+      123456,
+      null,
+      true,
+      [],
+      {},
+    ]) {
+      assert.deepEqual(
+        validateBundle({
+          format: BUNDLE_FORMAT,
+          version: BUNDLE_VERSION,
+          settings: { [key]: value },
+        }),
+        [`${key} must be blank or a six-digit hex color such as #1A2B3C.`]
+      );
+    }
+  }
+});
+
 test("rejects malformed appearance colors", () => {
   assert.deepEqual(
     validateBundle({
@@ -452,6 +521,40 @@ test("text header links still reject unsafe, missing, grouped, nested, and unkno
   ]) {
     assert.throws(() => createBundle({ navigation_items: [invalid] }));
   }
+});
+
+test("header alignment round trips without relocating legacy header links", () => {
+  const items = [
+    { label: "Legacy", url: "/latest", icon: "house", surface: "site_header" },
+    ...["left", "right"].map((header_alignment) => ({
+      label: "Versions & Status",
+      url: "/status",
+      surface: "site_header",
+      header_presentation: "label_only",
+      header_alignment,
+      target: "_blank",
+    })),
+  ];
+  const bundle = createBundle({ navigation_items: items });
+  assert.deepEqual(validateBundle(bundle), []);
+  assert.deepEqual(
+    JSON.parse(serializeBundle(bundle)).settings.navigation_items,
+    items
+  );
+  for (const header_alignment of ["center", false, 1]) {
+    assert.throws(
+      () =>
+        createBundle({ navigation_items: [{ ...items[1], header_alignment }] }),
+      /header_alignment/
+    );
+  }
+  assert.throws(
+    () =>
+      createBundle({
+        navigation_items: [{ label: "Parent", children: [items[1]] }],
+      }),
+    /header_alignment/
+  );
 });
 
 test("exports are validated and icon lists round trip losslessly", () => {

@@ -1,8 +1,12 @@
+/* global themePrefix */
+
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { withPluginApi } from "discourse/lib/plugin-api";
+import { i18n } from "discourse-i18n";
 import { validateNavigationItems } from "../lib/configuration-bundle";
 import {
+  brandNavigationEditorSchema,
   isBrandNavigationObjectsEditor,
   snapshotPlainData,
 } from "../lib/brand-navigation-admin";
@@ -16,6 +20,38 @@ export default {
         "component:schema-setting/editor",
         (Superclass) =>
           class extends Superclass {
+            brandNavigationViewSchema(schema) {
+              if (!isBrandNavigationObjectsEditor(this.args)) {
+                return schema;
+              }
+
+              return brandNavigationEditorSchema(
+                this.args,
+                {
+                  menuItem: i18n(
+                    themePrefix("brand_navigation.editor.menu_item")
+                  ),
+                  submenuItem: i18n(
+                    themePrefix("brand_navigation.editor.submenu_item")
+                  ),
+                },
+                schema
+              );
+            }
+
+            get activeSchema() {
+              return this.brandNavigationViewSchema(super.activeSchema);
+            }
+
+            @action
+            generateSchemaTitle(object, schema, index) {
+              return super.generateSchemaTitle(
+                object,
+                this.brandNavigationViewSchema(schema),
+                index
+              );
+            }
+
             @action
             async saveChanges() {
               if (!isBrandNavigationObjectsEditor(this.args)) {

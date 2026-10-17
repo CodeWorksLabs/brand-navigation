@@ -513,7 +513,43 @@
   align-items: center;
 }
 
-.d-header-icons .brand-navigation-header-link {
+// Scope overrides to this component, whether hosted in the native icon list
+// or either of the component's aligned lists. Text and native controls retain
+// their own colors. Theme variables stay live when an override is blank.
+.d-header .brand-navigation-header-link {
+  --brand-navigation-header-icon-color: var(
+    --d-header-icon-color,
+    var(--header_primary-low-mid)
+  );
+  --brand-navigation-header-icon-hover-color: var(
+    --d-header-icon-color--hover,
+    var(--header_primary)
+  );
+
+  @if $header-icon-color != "" {
+    --brand-navigation-header-icon-color: #{brand-navigation-color(
+        $header-icon-color
+      )};
+  }
+
+  @if $header-icon-hover-color != "" {
+    --brand-navigation-header-icon-hover-color: #{brand-navigation-color(
+        $header-icon-hover-color
+      )};
+  }
+
+  > a.icon > .d-icon {
+    color: var(--brand-navigation-header-icon-color);
+  }
+
+  > a.icon:hover > .d-icon,
+  > a.icon:focus-visible > .d-icon {
+    color: var(--brand-navigation-header-icon-hover-color);
+  }
+}
+
+:is(.d-header-icons, .brand-navigation-header-links)
+  .brand-navigation-header-link {
   flex: 0 1 auto;
   min-width: 0;
 
@@ -547,5 +583,87 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+.brand-navigation-header-links {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-inline-size: 0;
+  max-inline-size: min(28rem, 30vw);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .brand-navigation-header-link {
+    display: flex;
+    min-inline-size: 0;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    padding: 0.5em;
+    color: var(--header_primary);
+  }
+}
+
+.d-header
+  .before-header-panel-outlet:has(.brand-navigation-header-links--right a) {
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-inline-start: auto;
+}
+
+.d-header:has(.brand-navigation-header-links--right a) .panel {
+  margin-left: 0;
+  margin-inline-start: 0;
+}
+
+.d-header
+  .home-logo-wrapper-outlet:has(.brand-navigation-header-links--left a) {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 0.5em;
+  min-width: 0;
+
+  .title {
+    flex: 0 1 auto;
+    min-width: var(--d-logo-height, 2.4em);
+  }
+}
+
+// A mixed compact header cannot always fit meaningful logo/menu/link targets
+// beside Core's non-shrinking authentication panel. Keep the logo-adjacent
+// group together, with the right links before native controls on a second row.
+// At Core's compact breakpoint, the native minimized topic title shares that
+// second row too, rather than being clipped between both owned link groups.
+@media (width < 40rem) {
+  .d-header:has(#brand-navigation-menu):has(
+      .brand-navigation-header-links--left a
+    ):has(.brand-navigation-header-links--right a) {
+    height: auto;
+
+    > .wrap {
+      height: auto;
+
+      .contents {
+        flex-wrap: wrap;
+        height: auto;
+      }
+    }
+
+    .home-logo-wrapper-outlet:has(#brand-navigation-menu) {
+      flex: 1 0 100%;
+      min-width: 0;
+    }
+
+    .before-header-panel-outlet:has(.brand-navigation-header-links--right a) {
+      min-inline-size: min-content;
+    }
   }
 }

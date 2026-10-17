@@ -1,3 +1,5 @@
+/* global themePrefix */
+
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
@@ -8,19 +10,18 @@ import { not, or } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 import {
-  createBundle,
-  MAX_BUNDLE_BYTES,
-  PORTABLE_SETTINGS,
-  readBundleFile,
-  serializeBundle,
-  validateBundle,
-} from "../../lib/configuration-bundle";
-import {
   isBrandNavigationTheme,
   persistThemeSettings,
   prepareThemeSettingsImport,
   snapshotPlainData,
 } from "../../lib/brand-navigation-admin";
+import {
+  createBundle,
+  MAX_BUNDLE_BYTES,
+  readBundleFile,
+  serializeBundle,
+  validateBundle,
+} from "../../lib/configuration-bundle";
 
 const APPEARANCE_COLORS = [
   {
@@ -51,6 +52,18 @@ const APPEARANCE_COLORS = [
     setting: "submenu_text_color",
     label: "submenu_text",
     variable: "--primary",
+    fallback: "#222222",
+  },
+  {
+    setting: "header_icon_color",
+    label: "header_icon",
+    variable: "--d-header-icon-color",
+    fallback: "#919191",
+  },
+  {
+    setting: "header_icon_hover_color",
+    label: "header_icon_hover",
+    variable: "--d-header-icon-color--hover",
     fallback: "#222222",
   },
 ];
@@ -103,7 +116,7 @@ export default class BrandNavigationBundles extends Component {
   constructor() {
     super(...arguments);
     this.appearanceValues = Object.fromEntries(
-      APPEARANCE_COLORS.map(({ setting }) => [
+      this.appearanceColorDefinitions.map(({ setting }) => [
         setting,
         normalizedHexColor(
           this.theme.settings.find((candidate) => candidate.setting === setting)
@@ -135,8 +148,15 @@ export default class BrandNavigationBundles extends Component {
     );
   }
 
+  get appearanceColorDefinitions() {
+    const settingNames = new Set(
+      this.theme.settings.map((setting) => setting.setting)
+    );
+    return APPEARANCE_COLORS.filter((color) => settingNames.has(color.setting));
+  }
+
   get appearanceColors() {
-    return APPEARANCE_COLORS.map((color) => ({
+    return this.appearanceColorDefinitions.map((color) => ({
       ...color,
       enabled: Boolean(this.appearanceValues[color.setting]),
       value:
@@ -146,7 +166,7 @@ export default class BrandNavigationBundles extends Component {
   }
 
   get appearanceDirty() {
-    return APPEARANCE_COLORS.some(({ setting }) => {
+    return this.appearanceColorDefinitions.some(({ setting }) => {
       const persisted =
         normalizedHexColor(
           this.theme.settings.find((candidate) => candidate.setting === setting)
@@ -260,7 +280,7 @@ export default class BrandNavigationBundles extends Component {
   @action
   toggleAppearanceColor(event) {
     const { setting } = event.target.dataset;
-    const color = APPEARANCE_COLORS.find(
+    const color = this.appearanceColorDefinitions.find(
       (candidate) => candidate.setting === setting
     );
     this.appearanceValues = {
@@ -313,7 +333,7 @@ export default class BrandNavigationBundles extends Component {
   @action
   async resetAppearance() {
     this.appearanceValues = Object.fromEntries(
-      APPEARANCE_COLORS.map(({ setting }) => [setting, ""])
+      this.appearanceColorDefinitions.map(({ setting }) => [setting, ""])
     );
     await this.saveAppearance();
   }
@@ -348,7 +368,7 @@ export default class BrandNavigationBundles extends Component {
       }
 
       this.appearanceValues = Object.fromEntries(
-        APPEARANCE_COLORS.map(({ setting }) => [
+        this.appearanceColorDefinitions.map(({ setting }) => [
           setting,
           setting in submittedSettings
             ? normalizedHexColor(submittedSettings[setting]) || ""

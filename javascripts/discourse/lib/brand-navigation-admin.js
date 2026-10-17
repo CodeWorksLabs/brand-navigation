@@ -1,4 +1,5 @@
 const UNIQUE_SCHEMA_NAME = "brand_navigation_item_v1";
+const UNIQUE_CHILD_SCHEMA_NAME = "brand_navigation_child_v1";
 const COMPONENT_SETTING_SIGNATURE = [
   "brand_presentation",
   "custom_font_awesome_icons",
@@ -57,5 +58,31 @@ export function isBrandNavigationObjectsEditor(args) {
     args?.setting?.setting === "navigation_items" &&
     args?.schema?.name === UNIQUE_SCHEMA_NAME
   );
+}
+
+export function brandNavigationEditorSchema(
+  args,
+  labels,
+  resolvedSchema = args?.schema
+) {
+  if (!isBrandNavigationObjectsEditor(args)) {
+    return resolvedSchema;
+  }
+
+  // Core uses schema names as display labels. Keep its original identity and
+  // the persisted schema untouched; only the editor's view gets friendly names.
+  const schema = snapshotPlainData(resolvedSchema);
+  if (schema.name === UNIQUE_SCHEMA_NAME) {
+    schema.name = labels.menuItem;
+  } else if (schema.name === UNIQUE_CHILD_SCHEMA_NAME) {
+    schema.name = labels.submenuItem;
+  }
+
+  const childSchema = schema.properties?.children?.schema;
+  if (childSchema?.name === UNIQUE_CHILD_SCHEMA_NAME) {
+    childSchema.name = labels.submenuItem;
+  }
+
+  return schema;
 }
 import { themeSettingValue } from "./configuration-bundle.js";

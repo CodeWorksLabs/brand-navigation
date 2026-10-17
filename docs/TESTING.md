@@ -1,8 +1,109 @@
 # Testing and acceptance
 
-## RC2 final engineering verification — 2026-10-16
+## Current RC2 feature verification
 
-The final executable candidate for `v1.0.0-rc.2` is commit
+Updated 2026-10-17. Phil selected the alignment, icon-color and friendly-editor
+features for `v1.0.0-rc.2`, before its first publication. The runtime-tested
+candidate is the frozen `admin-label-test-r2` delta over main commit
+`1ddfef2872855289763b10fc39800ec1ba7f455a`: 58 members, with no candidate
+commit/tree claimed. Its canonical ZIP is 269,937 bytes, SHA-256
+`58123c4c03f1ce8e8cf98cceaa1f9c92225c8b8cb1040f3abb17b82cb7da8f34`.
+The subsequent four-record preparation changes only the changelog, this record,
+the successor checkpoint and administrator-guide release wording. The final
+package must be associated separately with these tested bytes: a changed ZIP
+hash is not a new native-install result, and unchanged Core-consumed fields must
+be verified before carrying the installed evidence forward.
+
+Isolated actual checks used Discourse Core
+`3086c087a2bceb3d607c6389f77204fec054b018`:
+
+- Normal Foundation/Horizon coverage passed 12 cases/24 layout variants, and
+  the earlier shipped component suite passed 22 examples. Explicit
+  unchanged-effective-source analysis supports their applicability through the
+  focused corrections; these were not replayed as a fresh full replacement suite.
+- Fresh Foundation/Horizon 320px RTL minimized-topic checks and two new shipped
+  English/Arabic regressions passed: four examples, zero failures. Owned/native
+  hit targets, measured header offsets, menu/Escape/focus return and actual
+  native topic-link restoration were reached and verified.
+- Three prior positive feature cases (Foundation dark colors and both stock
+  minimized-header keyboard cases) carry across the unchanged relevant source.
+  A fresh, exactly selected five-case run passed Foundation light, Horizon
+  light/dark, native friendly-editor persistence and Appearance persistence.
+  This qualifies the eight adopted scenarios through bounded evidence, not a
+  fresh single eight-case run. Browser feature captures used Chrome 151.0.
+- The four palette cases exercise blank, normal-only, hover-only and combined
+  icon-color settings across both alignments and icon-only/icon-label links.
+  Actual hover and pointer-away keyboard focus were checked independently.
+  Inheritance follows the declared theme variables; native icons, link text and
+  brand-bar colors remain unaffected. Native light/dark selection was exercised
+  on both stock themes. This closes the earlier overlapping-hover and untested
+  palette limitations for these exact cases, not every third-party theme.
+- The actual native editor adds Menu item/Submenu item rows, saves, stays open,
+  reloads and edits persisted values without changing stored schema identities.
+  Appearance saves/reloads both colors, clears them with Inherit all, then
+  imports/reloads them. Native color-input events were used; the OS picker
+  dialog was not exercised.
+- Native ZIP import returned component ID 35. All 20 fields matched exact
+  Core-consumed names, targets, types and canonical digests, without field
+  errors or unexpected attachments. The prior replacement's 20 fields and the
+  original 19-field component were preserved, with census/default/joins guards;
+  the separate historical installation was also retained.
+- Installed component 35 passed all 40 unique named frontend tests: 21 unit,
+  six icon/readiness and 13 administrator/bundle cases; zero failures, skips or
+  todos. This includes real native-editor API regressions, strict tracked-data
+  saves and older five-color component-copy behavior. The profile used Puma
+  8.0.2 with one request thread and Chrome 155.0; the runner reported plugins
+  disabled. It does not qualify default server startup or all-plugin behavior.
+
+Historical failures remain recorded, not relabeled as passes. The first
+eight-case feature attempt passed three and failed five: it exposed the
+friendly-label product defect alongside a compilation timeout, color-oracle
+mismatch and detached test control. The bounded product/test corrections and
+fresh selected outcomes supplied the missing observations. A subsequent retry
+selected zero cases because its filter used the wrong RSpec option; the strict
+count guard failed that run. The first installed frontend run passed 37/40;
+three native-helper cases failed before assertions because the initializer lacked
+its application owner. A one-line test-only context correction, with runtime
+bytes unchanged, preceded the final 40/40 result. No assertion, count or timeout
+was relaxed to obtain these outcomes.
+
+Independent source, artifact and actual-results review closed the friendly-label,
+mixed/minimized-header and test-harness findings within their stated boundaries.
+The CodeWorksLabs Discourse package informed the review; this is not official
+Discourse approval, stable-version certification or a claim of unexecuted manual
+acceptance. Historical native Git upgrade/rollback/return evidence carries only
+across the explicitly unchanged storage/update boundary, not as a fresh full
+lifecycle replay on this archive or a future tag.
+
+Fresh remote CI for the final feature commit is pending. Older main/PR25 green
+runs below belong to their identified historical source, not this new delta.
+Local configuration checks passed 37 cases; types, CSS and template checks
+passed. A generic Windows ESLint invocation remained an unqualified environment
+diagnostic, not lint green. A separate same-effective-source baseline comparison
+reported 12 inherited messages, zero introduced and 24 resolved; it does not
+replace exact-head CI lint evidence.
+
+### Current limits and release boundary
+
+Prefer short labels and fewer narrow-screen destinations. Long text can be
+heavily truncated and logos compact; full accessible labels and usable tested
+targets do not imply unlimited capacity or universal readability. The completed
+stock RTL/compact/minimized cases are bounded positive evidence, not the full
+RTL acceptance matrix. Genuine browser zoom, the full RTL matrix, an allowed-host
+classic external embed and complete human screen-reader acceptance remain the
+established stable-v1 boundaries below. Physical-device/Safari, OS picker,
+all-plugin compatibility and general accessibility certification are not claimed.
+
+Phil authorized the remaining checks and independent review, then commit/push
+and a new draft release-preparation PR. No new PR or final-feature CI result is
+asserted yet. Merge, tag, GitHub prerelease and live changes remain separate;
+the Bridge's Versions & Status migration is not included. Owned test PostgreSQL
+and Redis were cleanly stopped at 08:42:57 UTC on 2026-10-17 before container
+stop; databases, backups and failed/positive evidence were preserved.
+
+## Historical RC2 engineering verification — 2026-10-16
+
+The earlier executable candidate for `v1.0.0-rc.2` was commit
 `e7a16be653be8ccc045b73833d44ab38330689f1`, tree
 `7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`. Its canonical 57-file ZIP is
 263,117 bytes, SHA-256
@@ -61,7 +162,10 @@ stable-version certification or a claim that unexecuted manual checks passed.
 Local test databases, backups and all failed/successful evidence were retained;
 owned test services were stopped after verification.
 
-### RC2 limits and release boundaries
+### Historical RC2 limits and release boundaries
+
+These statements describe the earlier candidate's evidence at that gate. The
+current feature verification and acceptance limits above supersede them.
 
 At 320px, long header text can be heavily truncated, especially beside an icon,
 and the logo is compact. Full title/accessible labels and operable targets are

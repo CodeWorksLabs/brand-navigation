@@ -6,8 +6,21 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
-## 1.0.0-rc.2 - 2026-10-16
+## 1.0.0-rc.2 - 2026-10-17
 
+- Add separate core-header icon and hover/focus color controls, inheriting the
+  active theme by default, with Appearance pickers and configuration portability.
+- Add per-link core-header alignment beside the logo or with the header controls;
+  existing links retain their right-side placement.
+- Keep core-header links and icons before Sign Up and Log In in both alignments,
+  including the default right-side position.
+- Replace internal schema names in the native editor with friendly Menu item and
+  Submenu item display labels, without changing saved schema identities.
+- Clarify that Section controls the brand bar and that saved navigation changes
+  require a refreshed forum page for verification.
+- Keep mixed left/right header links and native controls usable on compact
+  screens and minimized-topic headers, including bounded RTL checks, measured
+  header offsets, and menu/keyboard restoration.
 - Escape terminal control characters in local bundle-validation diagnostics,
   including malformed JSON and filesystem errors, while preserving trusted
   usage and validation line breaks.
@@ -25,8 +38,8 @@ to discover component updates from commits on the installed remote branch.
   320px and 390px, with bounded text truncation and the full accessible label.
 
 This release candidate retains the documented narrow-header and manual
-acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-final-engineering-verification--2026-10-16).
-The RC2 source is prepared for `main`; this entry does not assert that its Git
+acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#current-rc2-feature-verification).
+The RC2 source is prepared for review; this entry does not assert that its Git
 tag or GitHub prerelease has been published, or that the live demo is migrated.
 
 ## 1.0.0-rc.1 - 2026-09-08

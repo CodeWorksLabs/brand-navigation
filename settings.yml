@@ -75,6 +75,16 @@ submenu_text_color:
   default: ""
   max: 7
 
+header_icon_color:
+  type: string
+  default: ""
+  max: 7
+
+header_icon_hover_color:
+  type: string
+  default: ""
+  max: 7
+
 navigation_items:
   type: objects
   default:
@@ -175,6 +185,12 @@ navigation_items:
           - icon_only
           - label_only
           - icon_and_label
+      header_alignment:
+        type: enum
+        default: right
+        choices:
+          - left
+          - right
       device_visibility:
         type: enum
         default: both
