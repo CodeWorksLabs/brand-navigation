@@ -31,8 +31,12 @@ en:
       hover_background: "Hover and highlight"
       submenu_background: "Submenu background"
       submenu_text: "Submenu text"
+      submenu_hover_text: "Submenu text on hover"
       header_icon: "Core-header icon"
       header_icon_hover: "Core-header icon hover"
+      header_text: "Core-header link text"
+      header_text_hover: "Core-header link text on hover"
+      header_hover_background: "Core-header hover background"
   theme_metadata:
     description: "A brand header and submenu navigation theme component for Discourse."
     settings:
@@ -50,8 +54,16 @@ en:
       hover_background_color: "Optional six-digit hex override for hover and active highlights. A leading # is optional. Leave blank to inherit --quaternary-low."
       submenu_background_color: "Optional six-digit hex override for submenu backgrounds. A leading # is optional. Leave blank to inherit --secondary."
       submenu_text_color: "Optional six-digit hex override for submenu text and icons. A leading # is optional. Leave blank to inherit --primary."
+      submenu_hover_text_color: "Optional six-digit hex submenu text/icon color on hover and keyboard focus. A leading # is optional. Leave blank to use the normal submenu text color. Choose a color that contrasts with Hover and highlight."
       header_icon_color: "Optional six-digit hex override for Brand Navigation core-header icons only. A leading # is optional. Leave blank to inherit the theme's --d-header-icon-color. Does not change link text or Discourse's own icons."
       header_icon_hover_color: "Optional six-digit hex override for Brand Navigation core-header icons on hover and keyboard focus. A leading # is optional. Leave blank to inherit the theme's --d-header-icon-color--hover."
+      header_text_color: "Optional six-digit hex color for Brand Navigation core-header link text. A leading # is optional. Leave blank to follow the theme's --header_primary."
+      header_text_hover_color: "Optional six-digit hex core-header link text color on hover and keyboard focus. A leading # is optional. Leave blank to follow the theme's --header_primary."
+      header_hover_background_color: "Optional six-digit hex hover and keyboard-focus background for Brand Navigation core-header links and icons. A leading # is optional. Leave blank to keep the theme/default background."
+      header_icon_size_desktop: "Core-header icon size on desktop/tablet, in pixels (1–48). Use 0 for the Discourse theme/default size. Does not resize Discourse's own icons."
+      header_icon_size_mobile: "Core-header icon size in Discourse's mobile view, in pixels (1–48). Use 0 for the Discourse theme/default size, independently of the desktop setting."
+      header_text_size_desktop: "Core-header link text size on desktop/tablet, in pixels (1–48). Use 0 for the Discourse theme/default size. Does not resize bar links or native controls."
+      header_text_size_mobile: "Core-header link text size in Discourse's mobile view, in pixels (1–48). Use 0 for the Discourse theme/default size, independently of the desktop setting."
       navigation_items:
         description: "Ordered top-level links and one-level submenus."
         schema:

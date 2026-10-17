@@ -667,6 +667,200 @@ RSpec.describe "Brand Navigation" do
     ).to eq("rgb(18, 52, 86)")
   end
 
+  shared_examples "optional navigation appearance controls" do |device, width|
+    def appearance_style(node, property)
+      page.evaluate_script("getComputedStyle(arguments[0])[arguments[1]]", node, property)
+    end
+
+    def appearance_palette(node, expression)
+      page.evaluate_script(<<~JS, node, expression)
+        (() => {
+          const probe = document.createElement("span");
+          probe.style.cssText = "position:absolute;visibility:hidden;pointer-events:none";
+          probe.style.setProperty("color", arguments[1], "important");
+          arguments[0].append(probe);
+          try { return getComputedStyle(probe).color; } finally { probe.remove(); }
+        })()
+      JS
+    end
+
+    def appearance_keyboard_focus(node)
+      page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+      reached = false
+      80.times do
+        page.driver.with_playwright_page { |p| p.keyboard.press("Tab") }
+        reached = page.evaluate_script("document.activeElement === arguments[0]", node)
+        break if reached
+      end
+      expect(reached).to eq(true)
+      expect(node).to match_selector(":focus-visible")
+      expect(node).not_to match_selector(":hover")
+    end
+
+    def appearance_native_styles
+      page.evaluate_script(<<~JS)
+        [".d-header .d-header-icons .d-icon", ".d-header button.login-button"].map(selector => {
+          const node = document.querySelector(selector);
+          if (!node) { throw new Error("Missing native appearance reference: " + selector); }
+          const style = getComputedStyle(node), rect = node.getBoundingClientRect();
+          return {selector, font:style.fontSize, color:style.color,
+            background:style.backgroundColor, width:rect.width, height:rect.height};
+        })
+      JS
+    end
+
+    it "applies independent optional header sizes and interaction colors on #{device}" do
+      SiteSetting.interface_color_selector = "header"
+      SiteSetting.title = "CWL"
+      theme.update_setting(
+        :navigation_items,
+        [
+          { label: "Home", url: "/latest" },
+          { label: "Info", url: "/about", icon: "circle-info", surface: "site_header",
+            header_alignment: "left", header_presentation: "icon_only" },
+          { label: "Status", url: "/latest", icon: "circle-info", surface: "site_header",
+            header_alignment: "right", header_presentation: "icon_and_label" },
+        ],
+      )
+      theme.save!
+
+      resize_window(width: width, height: 900) do
+        visit("/")
+        page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+        native_before = appearance_native_styles
+        baseline_icons = all(".brand-navigation-header-link > a > .d-icon", count: 2).map do |icon|
+          appearance_style(icon, "fontSize")
+        end
+        baseline_text = appearance_style(find(".brand-navigation-header-link__label"), "fontSize")
+        baseline_backgrounds = all(".brand-navigation-header-link > a", count: 2).map do |link|
+          link.hover
+          appearance_style(link, "backgroundColor")
+        end
+        baseline_focus_backgrounds = all(".brand-navigation-header-link > a", count: 2).map do |link|
+          appearance_keyboard_focus(link)
+          appearance_style(link, "backgroundColor")
+        end
+        sizes = {
+          header_icon_size_desktop: 28, header_text_size_desktop: 18,
+          header_icon_size_mobile: 20, header_text_size_mobile: 17,
+        }
+        colors = {
+          header_icon_color: "#123456", header_icon_hover_color: "#ABCDEF",
+          header_text_color: "#234567", header_text_hover_color: "#FFFFFF",
+          header_hover_background_color: "#002147",
+        }
+
+        sizes.each { |key, value| theme.update_setting(key, value) }
+        # Reload Core's preloaded setting records before the phase updates.
+        theme.save!
+        selected_icon = sizes.fetch(:"header_icon_size_#{device}")
+        selected_text = sizes.fetch(:"header_text_size_#{device}")
+        [
+          [:both, selected_icon, selected_text],
+          [:text_only, 0, selected_text],
+          [:icon_only, selected_icon, 0],
+          [:both_zero, 0, 0],
+        ].each do |phase, icon_size, text_size|
+          custom = phase != :both_zero
+          theme.update_setting(:"header_icon_size_#{device}", icon_size)
+          theme.update_setting(:"header_text_size_#{device}", text_size)
+          colors.each { |key, value| theme.update_setting(key, custom ? value : "") }
+          theme.save!
+          visit("/")
+          page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+          expect(appearance_native_styles).to eq(native_before)
+
+          icons = all(".brand-navigation-header-link > a > .d-icon", count: 2)
+          expected_icons = icon_size > 0 ? ["#{icon_size}px"] * 2 : baseline_icons
+          expect(icons.map { |icon| appearance_style(icon, "fontSize") }).to eq(expected_icons)
+          label = find(".brand-navigation-header-link__label")
+          expected_text = text_size > 0 ? "#{text_size}px" : baseline_text
+          expect(appearance_style(label, "fontSize")).to eq(expected_text)
+          other = device == :desktop ? :mobile : :desktop
+          [:header_icon_size, :header_text_size].each do |prefix|
+            key = :"#{prefix}_#{other}"
+            expect(theme.reload.settings.fetch(key).value).to eq(sizes.fetch(key))
+          end
+
+          all(".brand-navigation-header-link > a", count: 2).each_with_index do |link, index|
+            icon = link.find(".d-icon")
+            text = link.first(".brand-navigation-header-link__label", minimum: 0)
+            normal_icon = custom ? "rgb(18, 52, 86)" : appearance_palette(link, "var(--d-header-icon-color,var(--header_primary-low-mid))")
+            hover_icon = custom ? "rgb(171, 205, 239)" : appearance_palette(link, "var(--d-header-icon-color--hover,var(--header_primary))")
+            normal_text = custom ? "rgb(35, 69, 103)" : appearance_palette(link, "var(--header_primary)")
+            hover_text = custom ? "rgb(255, 255, 255)" : appearance_palette(link, "var(--header_primary)")
+            hover_background = custom ? "rgb(0, 33, 71)" : baseline_backgrounds.fetch(index)
+            focus_background = custom ? "rgb(0, 33, 71)" : baseline_focus_backgrounds.fetch(index)
+            page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+            expect(appearance_style(icon, "color")).to eq(normal_icon)
+            expect(appearance_style(text, "color")).to eq(normal_text) if text
+            link.hover
+            expect(link).to match_selector(":hover")
+            expect(appearance_style(icon, "color")).to eq(hover_icon)
+            expect(appearance_style(text, "color")).to eq(hover_text) if text
+            expect(appearance_style(link, "backgroundColor")).to eq(hover_background)
+            appearance_keyboard_focus(link)
+            expect(appearance_style(icon, "color")).to eq(hover_icon)
+            expect(appearance_style(text, "color")).to eq(hover_text) if text
+            expect(appearance_style(link, "backgroundColor")).to eq(focus_background)
+          end
+          expect(appearance_native_styles).to eq(native_before)
+        end
+      end
+    end
+
+    it "keeps optional submenu hover foreground inherited or independently white on #{device}" do
+      theme.update_setting(:hover_background_color, "#002147")
+      theme.update_setting(:submenu_background_color, "#FFFFFF")
+      theme.update_setting(:submenu_text_color, "#002147")
+      theme.update_setting(
+        :navigation_items,
+        [
+          {
+            label: "Explore", url: "/categories",
+            children: [
+              { label: "Categories", url: "/categories", icon: "circle-info",
+                description: "Browse every category" },
+            ],
+          },
+        ],
+      )
+      theme.save!
+
+      resize_window(width: width, height: 900) do
+        ["", "#FFFFFF"].each do |foreground|
+          theme.update_setting(:submenu_hover_text_color, foreground)
+          theme.save!
+          visit("/")
+          find("#brand-navigation-menu").click if device == :mobile
+          find('summary[aria-label="Open Explore submenu"]').click
+          child = find(".brand-navigation__submenu > ul a", text: "Categories")
+          pieces = [child.find(".d-icon"), child.find(".brand-navigation__child-label"),
+                    child.find(".brand-navigation__child-description")]
+          page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+          expect(pieces.map { |node| appearance_style(node, "color") }).to all(eq("rgb(0, 33, 71)"))
+          expect(appearance_style(child.find(".brand-navigation__child-description"), "opacity")).to eq("0.78")
+          expected = foreground.empty? ? "rgb(0, 33, 71)" : "rgb(255, 255, 255)"
+          child.hover
+          expect(child).to match_selector(":hover")
+          expect(appearance_style(child, "backgroundColor")).to eq("rgb(0, 33, 71)")
+          expect(pieces.map { |node| appearance_style(node, "color") }).to all(eq(expected))
+          appearance_keyboard_focus(child)
+          expect(appearance_style(child, "backgroundColor")).to eq("rgb(0, 33, 71)")
+          expect(pieces.map { |node| appearance_style(node, "color") }).to all(eq(expected))
+        end
+      end
+    end
+  end
+
+  context "with desktop optional appearance controls" do
+    include_examples "optional navigation appearance controls", :desktop, 1280
+  end
+
+  context "with mobile optional appearance controls", mobile: true do
+    include_examples "optional navigation appearance controls", :mobile, 390
+  end
+
   it "keeps an administrator in the navigation editor after saving" do
     sign_in(Fabricate(:admin))
     editor_path = "/admin/customize/themes/#{theme.id}/schema/navigation_items"

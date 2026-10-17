@@ -176,13 +176,14 @@ empty even when `show_brand` is on.
 
 The **Appearance** panel on the Brand Navigation administration page provides
 color pickers for the bar background, bar text and icons, hover/highlight
-background, submenu background, submenu text and icons, **Core-header icon**,
-and **Core-header icon hover**. Each color can be overridden independently.
+background, submenu background, submenu text and icons, submenu hover text,
+core-header icons, core-header link text and the core-header hover background.
+Normal and hover/focus colors can be overridden independently.
 
 Leave **Custom** off to inherit the active Discourse color scheme. This is the
 recommended starting point because inherited colors automatically follow the
 site's light and dark palettes. Turn **Custom** on for a color, choose a value,
-and select **Save colors** to override it. **Inherit all** clears all seven
+and select **Save colors** to override it. **Inherit all** clears all eleven
 overrides and returns the component to Discourse's palette variables.
 
 The two core-header controls (`header_icon_color` and
@@ -194,9 +195,36 @@ Blank values inherit the active theme's `--d-header-icon-color` and
 `--d-header-icon-color--hover`, including light/dark palette changes. Custom
 colors are fixed across palettes; choose readable colors for both modes.
 
+Use **Core-header link text** and **Core-header link text on hover** to control
+text separately from icons. **Core-header hover background** applies to both
+text and icon links. Blank values retain the theme/default colors. These
+settings do not recolor Discourse's own header controls.
+
+Use **Submenu text on hover** for the text and icons of a submenu destination
+on hover and keyboard focus, including its description. If your normal text
+and **Hover and highlight** background are both navy, choose a contrasting
+hover text color such as white. With Custom off, submenu hover text uses the
+normal submenu text color.
+
 Appearance values are included in Brand Navigation configuration bundle
 exports. Colors may be entered as `#1A2B3C` or `1A2B3C`; the component renders
 both forms and normalizes picker and bundle values to canonical `#RRGGBB`.
+
+## Core-header sizes
+
+The component settings provide separate **header_icon_size_desktop**,
+**header_icon_size_mobile**, **header_text_size_desktop** and
+**header_text_size_mobile** values. Leave each at `0` to use the Discourse
+theme/default size, or choose an integer pixel size from `1` to `48`.
+
+Icon and text sizes are independent, as are desktop and mobile values. Mobile
+means Discourse's mobile view, not simply a narrow desktop window. Sizes apply
+only to Brand Navigation's core-header links; the brand bar and native Discourse
+icons are unchanged. Check larger values on a phone and in both alignments,
+because long labels still have to fit the available header space.
+
+Size settings are included in configuration bundles. **Inherit all** in
+Appearance resets colors only; reset a size to `0` to restore its default.
 
 ## Add navigation
 
@@ -283,8 +311,8 @@ Text is constrained to the smaller of 14rem and 30% of the viewport and uses
 an ellipsis when needed. Its full label stays available to assistive technology
 and as the default tooltip. Keep labels short and use device visibility to
 reserve mobile space for Discourse's controls. Other items keep the default
-`bar` surface. These capabilities are included in the prepared
-`v1.0.0-rc.2` source; the published RC1 supports only icon links in this surface.
+`bar` surface. These capabilities are included in `v1.0.0-rc.2` and later;
+RC1 supports only icon links in this surface.
 Use the repository's tags and releases to identify published versions.
 
 Use `device_visibility` to control constrained mobile layouts independently for
@@ -360,9 +388,9 @@ protect restricted destinations with Discourse permissions.
 ## Translate the interface
 
 Brand Navigation uses Discourse's theme-translation system for fixed visitor
-and administrator interface text. The current `v1.0.0-rc.1` release bundles
-only English in `locales/en.yml`. Additional bundled locales would be future
-release scope rather than part of the current RC. The English catalog includes
+and administrator interface text. Brand Navigation bundles only English in
+`locales/en.yml`. Other languages can be customized through Discourse's theme
+translations. The English catalog includes
 navigation accessibility labels, appearance and configuration-bundle controls,
 setting descriptions, and status messages.
 

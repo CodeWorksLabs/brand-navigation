@@ -32,6 +32,19 @@ const cliPath = fileURLToPath(
   new URL("../../scripts/brand-navigation-config.mjs", import.meta.url)
 );
 
+const ADDITIONAL_COLOR_SETTINGS = [
+  "submenu_hover_text_color",
+  "header_text_color",
+  "header_text_hover_color",
+  "header_hover_background_color",
+];
+const HEADER_SIZE_SETTINGS = [
+  "header_icon_size_desktop",
+  "header_icon_size_mobile",
+  "header_text_size_desktop",
+  "header_text_size_mobile",
+];
+
 function invokeCli(args) {
   const result = spawnSync(process.execPath, [cliPath, ...args], {
     encoding: "utf8",
@@ -258,6 +271,179 @@ test("core-header color validation rejects CSS payloads and non-string values", 
       );
     }
   }
+});
+
+test("additional appearance colors round trip and normalize independently", () => {
+  for (const key of ADDITIONAL_COLOR_SETTINGS) {
+    for (const [value, expected] of [
+      ["", ""],
+      ["a1B2c3", "#A1B2C3"],
+      ["#d4E5f6", "#D4E5F6"],
+    ]) {
+      const bundle = createBundle({ [key]: value });
+      const restored = JSON.parse(serializeBundle(bundle));
+      assert.equal(restored.version, 1);
+      assert.deepEqual(validateBundle(restored), []);
+      assert.deepEqual(restored.settings, { [key]: expected });
+      assert.equal(themeSettingValue(key, value), expected);
+      assert.deepEqual(
+        prepareThemeSettingsImport({ settings: [{ setting: key }] }, restored),
+        { [key]: expected }
+      );
+    }
+  }
+});
+
+test("additional appearance colors reject CSS payloads and non-strings", () => {
+  for (const key of ADDITIONAL_COLOR_SETTINGS) {
+    for (const value of [
+      "red",
+      "#fff",
+      "#1234567",
+      "#123456; background:url(https://example.com)",
+      "var(--primary)",
+      " #123456",
+      "#123456 ",
+      123456,
+      null,
+      undefined,
+      true,
+      [],
+      {},
+    ]) {
+      const settings = { [key]: value };
+      assert.deepEqual(
+        validateBundle({
+          format: BUNDLE_FORMAT,
+          version: BUNDLE_VERSION,
+          settings,
+        }),
+        [`${key} must be blank or a six-digit hex color such as #1A2B3C.`]
+      );
+      assert.throws(
+        () => createBundle(settings),
+        /Cannot export invalid settings/
+      );
+    }
+  }
+});
+
+test("header sizes round trip every integer from inheritance zero through 48", () => {
+  for (let value = 0; value <= 48; value++) {
+    const settings = Object.fromEntries(
+      HEADER_SIZE_SETTINGS.map((key) => [key, value])
+    );
+    const bundle = createBundle(settings);
+    const restored = JSON.parse(serializeBundle(bundle));
+    assert.equal(restored.version, 1);
+    assert.deepEqual(validateBundle(restored), []);
+    assert.deepEqual(restored.settings, settings);
+    assert.deepEqual(
+      prepareThemeSettingsImport(
+        { settings: HEADER_SIZE_SETTINGS.map((setting) => ({ setting })) },
+        restored
+      ),
+      settings
+    );
+    for (const key of HEADER_SIZE_SETTINGS) {
+      assert.equal(themeSettingValue(key, value), value);
+    }
+  }
+});
+
+test("header size validation rejects out-of-range or non-integer values without coercion", () => {
+  for (const key of HEADER_SIZE_SETTINGS) {
+    for (const value of [
+      -1,
+      49,
+      0.5,
+      47.9,
+      NaN,
+      Infinity,
+      -Infinity,
+      "0",
+      "48",
+      "1.5",
+      "",
+      null,
+      undefined,
+      true,
+      false,
+      [],
+      {},
+      Object(12),
+    ]) {
+      const settings = { [key]: value };
+      assert.deepEqual(
+        validateBundle({
+          format: BUNDLE_FORMAT,
+          version: BUNDLE_VERSION,
+          settings,
+        }),
+        [`${key} must be an integer from 0 to 48 (0 inherits the theme).`]
+      );
+      assert.throws(
+        () => createBundle(settings),
+        /Cannot export invalid settings/
+      );
+    }
+  }
+});
+
+test("new appearance fields stay optional and independently preserve defaults", () => {
+  const legacy = createBundle({ brand_name: "Legacy" });
+  assert.deepEqual(legacy.settings, { brand_name: "Legacy" });
+  assert.deepEqual(validateBundle(legacy), []);
+
+  const settings = {
+    submenu_hover_text_color: "",
+    header_text_color: "#112233",
+    header_text_hover_color: "",
+    header_hover_background_color: "#445566",
+    header_icon_size_desktop: 48,
+    header_icon_size_mobile: 0,
+    header_text_size_desktop: 0,
+    header_text_size_mobile: 16,
+  };
+  assert.deepEqual(
+    JSON.parse(serializeBundle(createBundle(settings))).settings,
+    settings
+  );
+});
+
+test("older components reject unavailable optional appearance fields before import", () => {
+  const theme = { settings: [{ setting: "brand_name", value: "Original" }] };
+  for (const key of [...ADDITIONAL_COLOR_SETTINGS, ...HEADER_SIZE_SETTINGS]) {
+    const bundle = createBundle({
+      brand_name: "Changed",
+      [key]: HEADER_SIZE_SETTINGS.includes(key) ? 0 : "",
+    });
+    assert.throws(
+      () => prepareThemeSettingsImport(theme, bundle),
+      new RegExp(`does not define setting ${key}`)
+    );
+    assert.deepEqual(theme, {
+      settings: [{ setting: "brand_name", value: "Original" }],
+    });
+  }
+  assert.deepEqual(
+    prepareThemeSettingsImport(theme, createBundle({ brand_name: "Legacy" })),
+    { brand_name: "Legacy" }
+  );
+});
+
+test("CLI validates additive version-one appearance controls with inheritance zero", async (t) => {
+  const settings = Object.fromEntries([
+    ...ADDITIONAL_COLOR_SETTINGS.map((key) => [key, "a1b2c3"]),
+    ...HEADER_SIZE_SETTINGS.map((key) => [key, 0]),
+  ]);
+  const result = await validateCliFixture(
+    t,
+    serializeBundle(createBundle(settings))
+  );
+  assert.equal(result.status, 0);
+  assert.equal(result.stderr, "");
+  assert.equal(result.stdout, `Valid ${BUNDLE_FORMAT} v1 bundle\n`);
 });
 
 test("rejects malformed appearance colors", () => {

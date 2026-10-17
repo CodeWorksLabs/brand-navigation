@@ -6,6 +6,17 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
+### Planned v1.0.0-rc.3
+
+- Add independent desktop/mobile sizes for Brand Navigation core-header icons
+  and link text, defaulting to Discourse's theme sizing.
+- Add core-header normal and hover/focus text colors and a shared hover/focus
+  background override, without changing native Discourse controls.
+- Add submenu hover/focus text and icon color so administrators can keep normal
+  text readable against a different hover background.
+- Include the optional colors and sizes in configuration bundles, preserving
+  default inheritance and older bundles.
+
 ## 1.0.0-rc.2 - 2026-10-17
 
 - Add separate core-header icon and hover/focus color controls, inheriting the
