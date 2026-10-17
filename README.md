@@ -1,5 +1,7 @@
 # Brand Navigation
 
+[![Release v1.0.0-rc.2](https://img.shields.io/badge/release-v1.0.0--rc.2-orange)](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.2)
+
 Give your Discourse community a recognizable identity and clear navigation.
 Brand Navigation adds a branded bar with your logo, useful links and dropdown
 menus. It can also add links to Discourse's own header. It is independently
