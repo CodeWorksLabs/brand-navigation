@@ -324,8 +324,7 @@ presently verified. Do not imply otherwise.
 Public-ready summary:
 
 > Brand Navigation was newly authored from its product specifications under
-> Phil Henry's product direction, with implementation and documentation
-> generated and modified by OpenAI Codex. It is independently maintained by
+> Phil Henry's product direction. It is independently maintained by
 > CodeWorksLabs and licensed under `GPL-2.0-or-later`.
 
 Discourse Brand Header, Discourse Header Submenus, Pavilion Dropdown Header,

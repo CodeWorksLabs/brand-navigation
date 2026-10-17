@@ -81,12 +81,12 @@ The prior complete source review of `81bda1e` / tree `2e7ddfe` reported no
 P0/P1 and one P2, with `INTERNAL CODE REVIEW PASS WITH P2/P3 FINDINGS`.
 That disposition does not carry forward to these changed bytes. A replacement
 freeze and focused correction-closure review are next; no release acceptance
-is claimed. Durable review/control evidence is outside the repository at
-`C:/Users/Owner/.codex/visualizations/2026/09/08/01a08236-bcfa-73f2-85b0-b2be66290512/rc2-review-evidence/`.
+is claimed. Durable review/control evidence is outside the repository in the
+owner's `rc2-review-evidence` archive.
 
 Phil approved isolated local WSL/Docker installation, upgrade, rollback and
 compatibility checks, conditioned on resource coordination. Coordination with
-`5th YACCTTWF - Yet Another Crap Codex Task That Will Fail` is complete, but it
+the prior infrastructure task is complete, but it
 has not admitted another Discourse stack during its retained-forum phase.
 Keep all Brand Navigation services stopped until an agreed serial window and
 fresh capacity/port checks. No mutation of existing resources or shared caps,
@@ -196,7 +196,7 @@ its release-candidate aging period. It is independently maintained by
 CodeWorksLabs and is not an official Discourse product. No release-blocking
 defect is known at this checkpoint.
 
-The Codex application no longer displays the original development transcript.
+The development application no longer displays the original development transcript.
 The active task still received retained context, but that context is not a
 durable user-visible archive. A readable reconstruction is now preserved in
 [`docs/PROJECT_HISTORY.md`](docs/PROJECT_HISTORY.md). Exact claims continue to

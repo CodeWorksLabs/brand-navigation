@@ -12,7 +12,7 @@ review.
 
 Phil Henry directed the product requirements, naming, licensing posture,
 administrator experience, supported contexts, testing sites, and acceptance
-decisions. OpenAI Codex generated and modified implementation and documentation
+decisions. Implementation and documentation were developed with AI assistance
 under that direction. Phil performed iterative administrator and device testing
 on real Discourse installations, supplied product feedback, and accepted or
 rejected behavior throughout development.

@@ -77,7 +77,7 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   preserved; it reports zero commits behind and no import error, HTTP
   availability passed, and Phil confirmed the administrator UI reports it up
   to date with `d-compat/2026.7`. Historical component `2` remains untouched,
-  unattached, and pinned to `codex/r744-compatibility`; its component-level
+  unattached, and pinned to the historical R744 compatibility-test branch; its component-level
   enabled setting is false although its Discourse theme-record flag is true.
   Fresh browser interaction confirmation remains separate. Phil directed that
   R744 intentionally remain on the supported 2026.7 ESR line as the oldest
@@ -271,7 +271,7 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   coverage (BN8-02), the Discourse object-setting byte preflight (BN8-03),
   unavailable-icon fallback (BN8-04), and this checkpoint reconciliation
   (BN8-01).
-- Current working branch: `codex/v0.9.0-release-metadata`, based on merged pull
+- Current working branch: the v0.9.0 release-metadata branch, based on merged pull
   request 7. The first four-finding correction batch was committed, pushed,
   frozen, and dual-reviewed. The P1/P3 replacement batch described below is the
   current work and requires its own exact-head CI, freeze, and closure review.
@@ -447,7 +447,7 @@ direction.
 
 - Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
-- Current branch: `codex/v0.9.0-release-metadata`.
+- Current branch: the v0.9.0 release-metadata branch.
 - Current committed PR 8 head before the authorized correction batch:
   `24e8c680616fe2ecb7a0d1ca37abbeb8adb51ccb`; tree
   `7283ea8e06f693e77b239cf7a7e31269bb0ef6b9`.
@@ -466,7 +466,7 @@ branch, head, candidate, or release-gate claims:
 - Top-level behavior implementation commit: `e53a7d0`; evidence commit:
   `2cb2b2a`; merged pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/3`.
-- Previous compatibility branch: `codex/r744-compatibility`
+- Previous compatibility branch: the historical R744 compatibility-test branch
 - Closed obsolete compatibility pull request:
   `https://github.com/CodeWorksLabs/brand-navigation/pull/2`
 - Compatibility commits: `1c99057`, `ae92961`, and `ab82591`.
@@ -670,7 +670,7 @@ or **Canonical locations** above.
 
 - Sandbox testing found that Discourse's underlying string setting accepts
   both `16324F` and `#FFFFFF`; the database retained those exact forms.
-- Branch `codex/normalize-color-values` makes rendering accept either six-digit
+- The color-normalization branch makes rendering accept either six-digit
   form, normalizes appearance-panel and configuration-bundle values to
   uppercase `#RRGGBB`, and documents the accepted input.
 - Local ESLint, Ember template lint, Stylelint, type checking, changed-file
@@ -754,7 +754,7 @@ or **Canonical locations** above.
 - Pull request 3 merged as `317c4be`, and all checks are green. Official Discourse workflow
   run `34019282463` passed linting, frontend QUnit, backend, and Ruby system
   tests; configuration workflow run `34019282181` passed all 19 Node tests.
-- Sandbox component id `2` tracked `codex/top-level-link-behavior` for candidate
+- Sandbox component id `2` tracked the top-level link-behavior branch for candidate
   testing. After a
   required application reload following the source switch, the administrator
   editor displayed **Top-level behavior** and saved normally without leaving
@@ -786,7 +786,7 @@ or **Canonical locations** above.
 - Pull request 1 was marked ready and merged into `main` as `e22dce2`; merging
   did not create a tag, GitHub Release, or deployment.
 - Sandbox component id `2` was changed from
-  `codex/v0.9.0-verification` to `main`. Discourse reported it up to date with
+  the v0.9.0 verification branch to `main`. Discourse reported it up to date with
   `main`, whose remote head was independently confirmed as `e22dce2`.
 - Authenticated normal-page smoke testing passed after the source change: one
   Brand Navigation landmark rendered with Community, Resources, My Preferences,
@@ -820,7 +820,7 @@ or **Canonical locations** above.
   for the theme update endpoint. Commit `1789301` aligned the browser importer
   with that endpoint while retaining the parsed array in the local admin model;
   the structured sandbox bundle then imported successfully.
-- Sandbox component id `2` tracks `codex/v0.9.0-verification`, is enabled and
+- Sandbox component id `2` tracks the v0.9.0 verification branch, is enabled and
   attached to Foundation and Horizon, and is updated through `13005b7`.
   Component id `1` is preserved, disabled, and detached as rollback material;
   it was not deleted. This sandbox-only change prevents duplicate administrator
@@ -1237,8 +1237,8 @@ declared necessary.
 
 Phil directed that Brand Navigation retain a durable, defensible record of its
 AI-assisted authorship and upstream source classifications before release. The new
-`docs/PROVENANCE.md` records Phil's product and acceptance authority, Codex's
-implementation role, pinned upstream revisions and licenses, the exact
+`docs/PROVENANCE.md` records Phil's product and acceptance authority, the
+AI-assisted implementation role, pinned upstream revisions and licenses, the exact
 historical header-icon registration source, and release-time provenance
 controls. The historical adapted source supplies GPL version 2 text but no
 explicit “or later” grant was found in the inspected upstream materials.

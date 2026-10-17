@@ -1,13 +1,31 @@
 # Brand Navigation
 
-[![Latest release](https://img.shields.io/github/v/release/CodeWorksLabs/brand-navigation?include_prereleases&sort=semver&label=release)](https://github.com/CodeWorksLabs/brand-navigation/releases)
-
-Give your Discourse community a recognizable header and clear navigation.
-Brand Navigation combines your logo, links and dropdowns with text or icon
-destinations in Discourse's own header. It is independently maintained, not an
-official Discourse product.
+Give your Discourse community a recognizable identity and clear navigation.
+Brand Navigation adds a branded bar with your logo, useful links and dropdown
+menus. It can also add links to Discourse's own header. It is independently
+maintained, not an official Discourse product.
 
 **[Install](#installation) · [Documentation](https://docs.codeworkslabs.dev/brand-navigation/) · [Live examples](#preview)**
+
+## What Brand Navigation does
+
+- **Give your forum its own identity.** Display your brand name, a logo, or
+  both, with separate logos for light and dark themes. Place the navigation
+  bar above or below Discourse's header.
+- **Organize links into useful menus.** Add direct links and one level of
+  dropdowns. A parent can open a page while a separate arrow opens its menu,
+  or act only as a menu heading. Use text, icons and optional descriptions.
+- **Adapt navigation to your visitors.** Choose which items appear for
+  signed-in or signed-out visitors and on desktop or mobile. On phones, use
+  a compact menu, a wrapping bar, or hide the component.
+- **Fit your forum's colors.** Follow the active light/dark palette by
+  default, or customize the bar, dropdowns and header-icon colors.
+- **Manage everything in Discourse.** Edit Menu item and Submenu item rows
+  in the component settings, then export a backup or import your saved
+  configuration on another installation.
+- **Add optional links to the core header.** Place text, icons, or both beside
+  the forum logo or before the native header controls. Choose alignment,
+  same-tab/new-tab behavior and separate normal/hover icon colors.
 
 ## Preview
 
@@ -27,26 +45,13 @@ after the screenshots are captured.
 ![The Bridge: publishing, release and ecosystem navigation](docs/images/previews/the-bridge-header.png)
 
 In this screenshot, the “Versions & Status” text link is supplied by the
-separate Custom Header Links component. Brand Navigation now supports header
-text links on `main`; this screenshot does not demonstrate that newer capability.
+separate Custom Header Links component.
 
 ### RVing Community
 
 [Open the live community](https://www.rving.community/)
 
 ![RVing Community: blue brand bar, community menus and sign-up controls](docs/images/previews/rving-community-header.png)
-
-## What Brand Navigation does
-
-- Add a brand name and optional light/dark logos, plus one-level dropdowns.
-- Put text, icons or icons with labels beside the logo or with the core header
-  controls, before **Sign Up** and **Log In**. Existing links default to right.
-- Set separate header-icon normal and hover/keyboard-focus colors, inheriting
-  the active theme by default without recoloring text or Discourse's icons.
-- Choose each link's audience and device visibility; use a mobile menu, bar or
-  hidden mode.
-- Edit friendly **Menu item** and **Submenu item** rows; back up or transfer
-  settings with validated JSON bundles.
 
 ## Installation
 
@@ -94,15 +99,15 @@ configuration, architecture, testing and [project history](docs/PROJECT_HISTORY.
 
 ## Versions and updates
 
-Git installation tracks branch commits: `main` contains the RC2 features
-described here and can be newer than a tagged download. Use the release badge
-above and [GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
-to find published versions, and read the [changelog](CHANGELOG.md) before updating.
+Use Discourse's component updater to check for updates. Back up your settings
+and read the [changelog](CHANGELOG.md) first. Versioned downloads and their
+notes are available from
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases).
 
 `main` targets current Discourse; maintained older versions use
 `d-compat/<YYYY>.<M>`. Review
 [migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag)
-and its testing limits before relying on pin-and-return recovery. Older
+and its testing limits before restoring an earlier version and updating again. Older
 compatibility branches may not include every feature shown here.
 
 ## Translations
@@ -124,7 +129,7 @@ for demonstrating compact header destinations. Pavilion's
 also informed presentation and administration exploration. The current header
 binding is independently authored using Discourse's documented API. See
 [attribution and licensing](docs/ATTRIBUTION.md) and
-[AI-assisted authorship/provenance](docs/PROVENANCE.md) for precise source credits.
+[authorship and provenance](docs/PROVENANCE.md) for precise source credits.
 
 ## Support
 
