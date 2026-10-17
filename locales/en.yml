@@ -23,8 +23,6 @@ en:
       custom: "Custom"
       inherited: "Default color (no override)"
       scope: "These colors change Brand Navigation only. Discourse header means the area with your forum logo and login/profile controls; navigation bar means Brand Navigation's separate bar."
-      notice_before: "Color pickers are available in"
-      notice_after: "below for all Brand Navigation colors. Turn on Custom, choose a color, then select Save colors."
       save: "Save colors"
       reset: "Inherit all"
       save_success: "Brand Navigation colors saved."

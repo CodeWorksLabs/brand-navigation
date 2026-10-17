@@ -538,7 +538,6 @@ The available keys are grouped as follows; all start with `brand_navigation.`:
 | `bundles.import_success`, `bundles.import_error`                                            | Import outcome messages.                                                                 |
 | `bundles.file_too_large`                                                                    | Oversized-file message; keep `%{count}`.                                                 |
 | `appearance.title`, `appearance.description`, `appearance.scope`                            | Appearance heading, explanation and affected-area guidance.                              |
-| `appearance.notice_before`, `appearance.notice_after`                                       | Words around the Appearance link in the color-picker notice.                             |
 | `appearance.custom`, `appearance.inherited`                                                 | Custom checkbox label and default-color status.                                          |
 | `appearance.save`, `appearance.reset`                                                       | Save colors and Inherit all button labels. Renaming them does not change their behavior. |
 | `appearance.save_success`, `appearance.save_error`                                          | Color-saving outcome messages.                                                           |

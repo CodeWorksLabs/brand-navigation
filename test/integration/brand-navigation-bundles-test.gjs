@@ -467,33 +467,6 @@ module(
         );
     });
 
-    test("color-picker notice appears immediately before the first native color setting", async function (assert) {
-      this.outletArgs = { theme: adminTheme() };
-      await render(
-        <template>
-          <div class="theme-setting" data-setting="bar_background_color"></div>
-          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
-        </template>
-      );
-      assert
-        .dom(".brand-navigation-color-notice")
-        .includesText("Color pickers are available");
-      assert
-        .dom(".brand-navigation-color-notice a")
-        .hasText("Appearance")
-        .hasAttribute("href", "#brand-navigation-appearance");
-      assert.strictEqual(
-        find(".brand-navigation-color-notice").nextElementSibling,
-        find('.theme-setting[data-setting="bar_background_color"]'),
-        "notice precedes Bar background color, not a later setting"
-      );
-      assert.dom("#brand-navigation-appearance").exists();
-      await clearRender();
-      assert
-        .dom(".brand-navigation-color-notice")
-        .doesNotExist("portal notice is removed with the panel");
-    });
-
     test("Appearance exposes every color setting with clear destination labels", async function (assert) {
       const theme = adminTheme();
       this.outletArgs = { theme };
