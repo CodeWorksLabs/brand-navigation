@@ -282,8 +282,12 @@ module(
 
     test("native ordering arrows keep their draft and save behavior with ordering help", async function (assert) {
       const initialValue = [
-        { label: "Versions & Status", url: "/latest" },
-        { label: "GitHub", url: "https://github.com/CodeWorksLabs" },
+        { label: "Versions & Status", url: "/latest", children: [] },
+        {
+          label: "GitHub",
+          url: "https://github.com/CodeWorksLabs",
+          children: [],
+        },
       ];
       let submitted;
       const { navigationSetting } = await nativeObjectsEditor(
@@ -307,7 +311,11 @@ module(
       assert.dom(".schema-setting-editor__move-down-btn").isDisabled();
       assert.deepEqual(navigationSetting.value, initialValue, "draft only");
       await click(".schema-setting-editor__footer .btn-primary");
-      assert.deepEqual(submitted, [initialValue[1], initialValue[0]]);
+      assert.deepEqual(
+        submitted,
+        [initialValue[1], initialValue[0]],
+        "save preserves both complete records in moved order"
+      );
       await click(".schema-setting-editor__move-up-btn");
       await click(".schema-setting-editor__footer .btn-primary");
       assert.deepEqual(submitted, initialValue, "moving back restores order");
