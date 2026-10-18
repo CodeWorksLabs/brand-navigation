@@ -157,7 +157,7 @@ also informed presentation and administration exploration. See
 
 ## Support
 
-Ask questions, get setup help and share your configuration in the
+Ask questions, get setup help and share your configuration in
 [CodeWorksLabs community Support](https://forum.codeworkslabs.dev/c/support/5).
 
 Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
