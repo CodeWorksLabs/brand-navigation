@@ -210,7 +210,7 @@ module(
       assert
         .dom(".brand-navigation-ordering-hint")
         .hasText(
-          "Use ↑ and ↓ to change the display order. Items in the same area appear in the order listed."
+          "Use ↑ and ↓ to change the display order. Items in the same area (Surface) appear in the order listed."
         );
       assert
         .dom(".schema-setting-editor__move-up-btn")
