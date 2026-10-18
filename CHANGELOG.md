@@ -4,7 +4,7 @@ Brand Navigation follows [Semantic Versioning](https://semver.org/). Git tags
 and matching GitHub Releases identify published versions; Discourse continues
 to discover component updates from commits on the installed remote branch.
 
-## Unreleased
+## 1.0.0-rc.4 - 2026-10-18
 
 - Clarify administration labels, direct color entry and theme inheritance.
 - Explain menu ordering within each Surface and label the Move up / Move down controls.
