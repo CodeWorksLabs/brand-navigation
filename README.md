@@ -31,9 +31,15 @@ maintained, not an official Discourse product.
 
 ## Preview
 
-Compare these live configurations. Site content and navigation may change
-after the screenshots are captured. These desktop views were captured while
-signed in.
+Explore the settings page and compare these live configurations. Site content
+and navigation may change after the screenshots are captured. These desktop
+views were captured while signed in.
+
+### Brand Navigation settings
+
+The complete component settings page, without the admin sidebar.
+
+![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
 
 ### Repeal OBBBA Forum
 
