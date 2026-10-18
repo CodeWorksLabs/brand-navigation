@@ -344,6 +344,8 @@ Appearance resets colors only; reset a size to `0` to restore its default.
 ## Add navigation
 
 Open `navigation_items` and add entries in the order they should appear.
+Select an item and use **↑ Move up** or **↓ Move down** to change its position.
+Items in the same area appear in the order listed; submenu items have their own order.
 Selecting **Save Changes** persists the complete navigation configuration and
 keeps you in the structured editor so you can continue working or verify the
 saved entry. Use the Brand Navigation breadcrumb when you are ready to return
@@ -536,6 +538,7 @@ The available keys are grouped as follows; all start with `brand_navigation.`:
 | `open_submenu`                                                                              | Accessible instruction for a submenu button; keep `%{label}`.                            |
 | `navigation_label`                                                                          | Accessible name for the navigation area.                                                 |
 | `editor.menu_item`, `editor.submenu_item`                                                   | Friendly names in the structured editor's add-item controls.                             |
+| `editor.ordering_hint`, `editor.move_up`, `editor.move_down`                                | Ordering instructions and the up/down arrow tooltips and accessible labels.              |
 | `bundles.title`, `bundles.description`                                                      | Configuration bundles heading and explanation.                                           |
 | `bundles.choose`, `bundles.paste`, `bundles.paste_placeholder`                              | File chooser label and JSON paste-field instructions.                                    |
 | `bundles.import`, `bundles.export`                                                          | Import and export button text.                                                           |

@@ -207,6 +207,19 @@ module(
         .hasText("Submenu item");
       assert.deepEqual(schema, originalSchema);
       assert.deepEqual(navigationSetting.value, originalValue);
+      assert
+        .dom(".brand-navigation-ordering-hint")
+        .hasText(
+          "Use ↑ and ↓ to change the display order. Items in the same area appear in the order listed."
+        );
+      assert
+        .dom(".schema-setting-editor__move-up-btn")
+        .hasAttribute("title", "Move up")
+        .hasAttribute("aria-label", "Move up");
+      assert
+        .dom(".schema-setting-editor__move-down-btn")
+        .hasAttribute("title", "Move down")
+        .hasAttribute("aria-label", "Move down");
 
       await click(".schema-setting-editor__tree-add-button.--root");
       assert
@@ -224,6 +237,13 @@ module(
       assert
         .dom(".schema-setting-editor__tree-add-button.--root")
         .hasText("Submenu item", "the resolved child schema is projected");
+      assert.dom(".brand-navigation-ordering-hint").exists({ count: 1 });
+      assert
+        .dom(".schema-setting-editor__move-up-btn")
+        .hasAttribute("title", "Move up");
+      assert
+        .dom(".schema-setting-editor__move-down-btn")
+        .hasAttribute("title", "Move down");
       assert
         .dom(".schema-setting-editor__tree-node.--parent.--active")
         .includesText("Submenu item 1", "unnamed child titles are friendly");
@@ -260,6 +280,41 @@ module(
       assert.dom(".schema-setting-editor__errors").doesNotExist();
     });
 
+    test("native ordering arrows keep their draft and save behavior with ordering help", async function (assert) {
+      const initialValue = [
+        { label: "Versions & Status", url: "/latest" },
+        { label: "GitHub", url: "https://github.com/CodeWorksLabs" },
+      ];
+      let submitted;
+      const { navigationSetting } = await nativeObjectsEditor(
+        this.owner,
+        undefined,
+        async (_id, value) => {
+          submitted = value;
+          return { navigation_items: value };
+        },
+        { schema: navigationEditorSchema(), initialValue, nativeClass: true }
+      );
+
+      assert.dom(".schema-setting-editor__move-up-btn").isDisabled();
+      assert.dom(".schema-setting-editor__move-down-btn").isNotDisabled();
+      await click(".schema-setting-editor__move-down-btn");
+      assert.dom(".brand-navigation-ordering-hint").exists({ count: 1 });
+      assert
+        .dom(".schema-setting-editor__move-up-btn")
+        .hasAttribute("title", "Move up")
+        .isNotDisabled();
+      assert.dom(".schema-setting-editor__move-down-btn").isDisabled();
+      assert.deepEqual(navigationSetting.value, initialValue, "draft only");
+      await click(".schema-setting-editor__footer .btn-primary");
+      assert.deepEqual(submitted, [initialValue[1], initialValue[0]]);
+      await click(".schema-setting-editor__move-up-btn");
+      await click(".schema-setting-editor__footer .btn-primary");
+      assert.deepEqual(submitted, initialValue, "moving back restores order");
+      await clearRender();
+      assert.dom(".brand-navigation-ordering-hint").doesNotExist();
+    });
+
     for (const unrelated of ["setting", "schema"]) {
       test(`native editor leaves an unrelated ${unrelated} unchanged`, async function (assert) {
         const schema = navigationEditorSchema();
@@ -291,6 +346,13 @@ module(
         assert.deepEqual(schema, originalSchema);
         assert.deepEqual(navigationSetting.value, originalValue);
         assert.deepEqual(initialValue, originalValue);
+        assert.dom(".brand-navigation-ordering-hint").doesNotExist();
+        assert
+          .dom(".schema-setting-editor__move-up-btn")
+          .doesNotHaveAttribute("title");
+        assert
+          .dom(".schema-setting-editor__move-down-btn")
+          .doesNotHaveAttribute("title");
         assert.verifySteps([]);
       });
     }
