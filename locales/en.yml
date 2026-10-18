@@ -6,6 +6,9 @@ en:
     editor:
       menu_item: "Menu item"
       submenu_item: "Submenu item"
+      ordering_hint: "Use ↑ and ↓ to change the display order. Items in the same area appear in the order listed."
+      move_up: "Move up"
+      move_down: "Move down"
     bundles:
       title: "Configuration bundles"
       description: "Export these settings or choose a validated Brand Navigation JSON bundle and import it without re-entering each navigation item. Bundles cannot attach or enable the component."
