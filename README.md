@@ -101,11 +101,20 @@ screens; header space is finite.
 
 ## In use on
 
-Alongside the previews above, recorded installations include
-[Citizen Activist Network](https://forum.citizenactivist.network/),
-[R744 Community](https://www.r744.community/) and the
-[DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/).
-They do not necessarily run the same revision; consult the testing record.
+Brand Navigation is used on:
+
+- [Repeal OBBBA Forum](https://forum.repealobbba.org/)
+- [The Bridge](https://bridge.demo.discussionbridge.dev/)
+- [DiscussionBridge Forum](https://forum.discussionbridge.dev/)
+- [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/)
+- [Citizen Activist Network](https://forum.citizenactivist.network/)
+- [RVing Community](https://www.rving.community/)
+- [R744 Community](https://www.r744.community/)
+- [CodeWorksLabs Forum](https://forum.codeworkslabs.dev/)
+
+Want your site listed? Post in [CodeWorksLabs Support](https://forum.codeworkslabs.dev/c/support/5)
+with the `brand-navigation` tag. Include your site's name, public URL and permission
+to list it here.
 
 ## Navigation model
 
