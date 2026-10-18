@@ -151,7 +151,7 @@ binding is independently authored using Discourse's documented API. See
 ## Support
 
 Ask questions, get setup help and share your configuration in the
-[CodeWorksLabs community forum](https://forum.codeworkslabs.dev/).
+[CodeWorksLabs community Support](https://forum.codeworkslabs.dev/c/support/5).
 
 Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
 for bug reports, feature requests and documentation corrections. Include your
