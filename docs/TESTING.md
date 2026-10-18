@@ -1,6 +1,38 @@
 # Testing and acceptance
 
-## Current RC2 feature verification
+## Live follow-up: Repeal OBBBA Forum — 2026-10-17
+
+Brand Navigation component 19 on Repeal OBBBA Forum was updated through
+Discourse's native updater from `d6904df88d9975a3046381173e6764d8ec0ed165`
+to `e791167cf0f0aac16884de6f730694fbdeebfc4e`. The updater reported
+up-to-date, and a fresh page load displayed the revised Surface wording.
+Published RC2 and RC3 tags were not moved.
+
+Environment: Chrome, signed-in administrator, 1680 × 901 desktop viewport,
+the site's active theme without theme switching. The page reported Discourse
+`2026.10.0-latest`, Core `bf55a44c2872738f7ae2664d6fec3d6d8779190f`.
+
+Confirmed after the update:
+
+- The editor displays “Items in the same area (Surface) appear in the order
+  listed.” Both arrows have **Move up** / **Move down** titles and accessible
+  labels. Move up is disabled for the first item.
+- Move down moved the selected item below its neighbor; Move up restored the
+  original order. This was an unsaved draft check: **Save Changes was not
+  pressed**, and the saved navigation was not reordered.
+- All eleven Appearance color pickers were present. The visible setting-field
+  values and navigation-tree order matched the pre-update observations.
+- Social opened its submenu. Keyboard focus on Bluesky produced visible white
+  text and icon fill (`#FFFFFF`) on the navy background (`#002147`). Escape
+  closed the submenu and returned focus to its control. White submenu-hover
+  text was already configured before this update; no colors were changed.
+
+This is a focused live desktop check, not a new release qualification or a full
+theme/device matrix. Pointer hover, mobile, other themes and live setting-save
+persistence were not replayed in this session. Automated reorder/save coverage
+passed separately in PRs #31 and #32; it is not presented as a live-site save.
+
+## RC2 feature verification (historical)
 
 Updated 2026-10-17. Phil selected the alignment, icon-color and friendly-editor
 features for `v1.0.0-rc.2`, before its first publication. The runtime-tested
