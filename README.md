@@ -41,6 +41,12 @@ The complete component settings page, without the admin sidebar.
 
 ![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
 
+### Navigation-items editor
+
+Create and order menu items, add submenus and choose where each link appears.
+
+![Brand Navigation menu editor: menu tree, submenu items, link options and ordering controls](docs/images/previews/brand-navigation-menu-editor.png)
+
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)
