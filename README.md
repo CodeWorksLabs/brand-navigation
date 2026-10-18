@@ -31,45 +31,50 @@ maintained, not an official Discourse product.
 
 ## Preview
 
-Explore the settings page and compare these live configurations. Site content
-and navigation may change after the screenshots are captured. These desktop
-views were captured while signed in.
+Compare [header and navigation examples](#header-and-navigation-examples), or
+explore the [administration screenshots](#administration-screenshots). Site
+content and navigation may change after the screenshots are captured. These
+desktop views were captured while signed in.
 
-### Brand Navigation settings
+### Header and navigation examples
 
-The complete component settings page, without the admin sidebar.
-
-![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
-
-### Navigation-items editor
-
-Create and order menu items, add submenus and choose where each link appears.
-
-![Brand Navigation menu editor: menu tree, submenu items, link options and ordering controls](docs/images/previews/brand-navigation-menu-editor.png)
-
-### Repeal OBBBA Forum
+#### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)
 
 ![Repeal OBBBA Forum: red navigation bar and social icons in the forum header](docs/images/previews/repeal-obbba-header.jpg)
 
-### The Bridge demonstration site
+#### The Bridge demonstration site
 
 [Open the live demo](https://bridge.demo.discussionbridge.dev/)
 
 ![The Bridge: publishing menus, Versions & Status text link and header icons](docs/images/previews/the-bridge-header.jpg)
 
-### RVing Community
+#### RVing Community
 
 [Open the live community](https://www.rving.community/)
 
 ![RVing Community: blue navigation bar, community menus and forum logo](docs/images/previews/rving-community-header.jpg)
 
-### DiscussionBridge Forum
+#### DiscussionBridge Forum
 
 [Open the live forum](https://forum.discussionbridge.dev/)
 
 ![DiscussionBridge Forum: product, documentation, demo and community navigation with header icons](docs/images/previews/discussionbridge-header.jpg)
+
+### Administration screenshots
+
+#### Brand Navigation settings
+
+The complete component settings page, without the admin sidebar.
+
+![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
+
+#### Navigation-items editor
+
+Create and order menu items, add submenus and choose where each link appears.
+
+![Brand Navigation menu editor: menu tree, submenu items, link options and ordering controls](docs/images/previews/brand-navigation-menu-editor.png)
 
 ## Installation
 

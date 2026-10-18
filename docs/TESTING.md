@@ -2,20 +2,21 @@
 
 ## Seven-forum update follow-up — 2026-10-17
 
-All seven active installations now follow the repository's `main` branch.
-This is a Git-installed component update; published RC2 and RC3 tags remain
-unchanged. Historical compatibility-branch results below describe earlier
-installations, not the current source selection.
+All seven forums were confirmed to follow `main` on October 17, 2026.
+Earlier compatibility-branch checks below describe previous installations.
 
-| Forum                    | Active component | Source selection         |
-| ------------------------ | ---------------- | ------------------------ |
-| Repeal OBBBA Forum       | 19               | Repository default: main |
-| The Bridge               | 6                | Repository default: main |
-| DiscussionBridge Forum   | 3                | Repository default: main |
-| DiscussionBridge sandbox | 3                | Explicit main            |
-| Citizen Activist Network | 1                | Repository default: main |
-| RVing Community          | 16               | Explicit main            |
-| R744 Community           | 1                | Explicit main            |
+The component ID identifies Brand Navigation in each forum's Discourse admin;
+it is not a version number.
+
+| Forum                    | Discourse component ID | Update branch |
+| ------------------------ | ---------------------- | ------------- |
+| Repeal OBBBA Forum       | 19                     | main          |
+| The Bridge               | 6                      | main          |
+| DiscussionBridge Forum   | 3                      | main          |
+| DiscussionBridge sandbox | 3                      | main          |
+| Citizen Activist Network | 1                      | main          |
+| RVing Community          | 16                     | main          |
+| R744 Community           | 1                      | main          |
 
 The live source settings and native updater status were checked on all seven.
 The sandbox's active component was changed from its RC1 release-branch pin to
@@ -71,7 +72,6 @@ Brand Navigation component 19 on Repeal OBBBA Forum was updated through
 Discourse's native updater from `d6904df88d9975a3046381173e6764d8ec0ed165`
 to `e791167cf0f0aac16884de6f730694fbdeebfc4e`. The updater reported
 up-to-date, and a fresh page load displayed the revised Surface wording.
-Published RC2 and RC3 tags were not moved.
 
 Environment: Chrome, signed-in administrator, 1680 × 901 desktop viewport,
 the site's active theme without theme switching. The page reported Discourse
