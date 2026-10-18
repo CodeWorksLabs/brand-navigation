@@ -111,7 +111,7 @@ Brand Navigation is used on:
 - [RVing Community](https://www.rving.community/)
 - [R744 Community](https://www.r744.community/)
 
-Want your site listed? Post in [CodeWorksLabs Support](https://forum.codeworkslabs.dev/c/support/5)
+Want your site listed? Post in [Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7)
 with the `brand-navigation` tag. Include your site's name, public URL and permission
 to list it here.
 
@@ -158,7 +158,7 @@ also informed presentation and administration exploration. See
 ## Support
 
 Ask questions, get setup help and share your configuration in
-[CodeWorksLabs community Support](https://forum.codeworkslabs.dev/c/support/5).
+[Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7).
 
 Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
 for bug reports, feature requests and documentation corrections. Include your
