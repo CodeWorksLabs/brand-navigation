@@ -6,7 +6,11 @@ to discover component updates from commits on the installed remote branch.
 
 ## Unreleased
 
-### Planned v1.0.0-rc.3
+- Clarify administration labels, direct color entry and theme inheritance.
+- Explain menu ordering within each Surface and label the Move up / Move down controls.
+- Update documentation, support links and header/settings previews.
+
+## 1.0.0-rc.3 - 2026-10-17
 
 - Add independent desktop/mobile sizes for Brand Navigation core-header icons
   and link text, defaulting to Discourse's theme sizing.
@@ -16,6 +20,7 @@ to discover component updates from commits on the installed remote branch.
   text readable against a different hover background.
 - Include the optional colors and sizes in configuration bundles, preserving
   default inheritance and older bundles.
+- Correct JavaScript lint coverage and resolve the uncovered findings.
 
 ## 1.0.0-rc.2 - 2026-10-17
 
@@ -49,9 +54,7 @@ to discover component updates from commits on the installed remote branch.
   320px and 390px, with bounded text truncation and the full accessible label.
 
 This release candidate retains the documented narrow-header and manual
-acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#current-rc2-feature-verification).
-The RC2 source is prepared for review; this entry does not assert that its Git
-tag or GitHub prerelease has been published, or that the live demo is migrated.
+acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-feature-verification-historical).
 
 ## 1.0.0-rc.1 - 2026-09-08
 

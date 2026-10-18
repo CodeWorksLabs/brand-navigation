@@ -150,10 +150,16 @@ binding is independently authored using Discourse's documented API. See
 
 ## Support
 
-Ask questions or report bugs through
-[GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues).
-Include component/Discourse versions, theme, browser/device, reproduction steps
-and sanitized settings. Never post credentials, personal data or private vulnerability details;
+Ask questions, get setup help and share your configuration in the
+[CodeWorksLabs community forum](https://forum.codeworkslabs.dev/).
+
+Use [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues)
+for bug reports, feature requests and documentation corrections. Include your
+component/Discourse versions, theme, browser/device and steps to reproduce the
+problem. See the [Support guide](https://docs.codeworkslabs.dev/brand-navigation/support/)
+for more help.
+
+Never post credentials, personal data or private vulnerability details;
 report suspected vulnerabilities to
 [security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
 [security policy](SECURITY.md).
