@@ -1,5 +1,70 @@
 # Testing and acceptance
 
+## Seven-forum update follow-up — 2026-10-17
+
+All seven active installations now follow the repository's `main` branch.
+This is a Git-installed component update; published RC2 and RC3 tags remain
+unchanged. Historical compatibility-branch results below describe earlier
+installations, not the current source selection.
+
+| Forum                    | Active component | Source selection         |
+| ------------------------ | ---------------- | ------------------------ |
+| Repeal OBBBA Forum       | 19               | Repository default: main |
+| The Bridge               | 6                | Repository default: main |
+| DiscussionBridge Forum   | 3                | Repository default: main |
+| DiscussionBridge sandbox | 3                | Explicit main            |
+| Citizen Activist Network | 1                | Repository default: main |
+| RVing Community          | 16               | Explicit main            |
+| R744 Community           | 1                | Explicit main            |
+
+The live source settings and native updater status were checked on all seven.
+The sandbox's active component was changed from its RC1 release-branch pin to
+`main`. RVing and R744 were changed from automatic compatibility selection to
+explicit `main`, without upgrading Discourse or touching detached rollback
+copies. The remaining forums already followed the default branch, `main`.
+
+The update follow-up covered administrator controls, saved-setting preservation,
+unsaved Move down / Move up checks, and submenu keyboard interaction. Repeal's
+focused results are recorded separately below. RVing and R744 were checked
+again **after** their switches to `main`; the earlier compatibility-branch
+checks were not reused as proof of their new installations.
+
+### RVing and R744: fresh checks on main
+
+Both sites reported **Theme is up-to-date with main**. Checks used Chrome,
+signed-in administrators, a 1680 × 901 desktop viewport and each site's active
+theme, without switching themes.
+
+| Forum           | Discourse version | Core commit                                | Attached themes              |
+| --------------- | ----------------- | ------------------------------------------ | ---------------------------- |
+| RVing Community | 2026.9.0-latest   | `9cccc5837dc83a7af376dd40d4cb709cd25b0228` | Default, Foundation, Horizon |
+| R744 Community  | 2026.7.2          | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | Foundation, Horizon          |
+
+Confirmed on both sites:
+
+- All eleven Appearance color pickers and all four desktop/mobile header-size
+  fields were present. The size fields retained their default value, `0`.
+- All sixteen settings present immediately before the switch retained their
+  exact values, including navigation and colors. The current settings editor
+  listed twenty-six settings after the new controls were added.
+- The object editor displayed the same-area (**Surface**) ordering hint and
+  **Move up** / **Move down** titles and accessible labels. Move up was disabled
+  for the first item. Move down changed the draft order; Move up restored the
+  complete original tree. **Save Changes was not pressed.**
+- Fresh forum pages rendered the configured navigation. RVing's Community
+  submenu and R744's Resources submenu opened. Tab focused a visible child:
+  Latest discussions on RVing and About on R744. Escape closed each submenu
+  and returned focus to its own control.
+- Focused submenu text was dark (`#222222`) on the light highlight
+  (`#F7CDC2`). The configured Discourse Meta new-tab links had
+  `rel="noopener noreferrer"`; same-tab links retained `_self`. No visible
+  error alerts were found on the checked pages.
+
+These are live desktop smoke checks, not a new release qualification or a full
+theme/device matrix. Mobile, anonymous sessions, pointer hover, theme switching,
+live color/size changes and setting-save persistence were not replayed. No live
+navigation or color values were changed during these checks.
+
 ## Live follow-up: Repeal OBBBA Forum — 2026-10-17
 
 Brand Navigation component 19 on Repeal OBBBA Forum was updated through
