@@ -1,6 +1,6 @@
 # Brand Navigation
 
-[![Release v1.0.0-rc.3](https://img.shields.io/badge/release-v1.0.0--rc.3-orange)](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.3)
+[![Release v1.0.0-rc.4](https://img.shields.io/badge/release-v1.0.0--rc.4-orange)](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.4)
 
 Give your Discourse community a recognizable identity and clear navigation.
 Brand Navigation adds a branded bar with your logo, useful links and dropdown
@@ -103,14 +103,13 @@ screens; header space is finite.
 
 Brand Navigation is used on:
 
-- [Repeal OBBBA Forum](https://forum.repealobbba.org/)
-- [The Bridge](https://bridge.demo.discussionbridge.dev/)
+- [CodeWorksLabs Forum](https://forum.codeworkslabs.dev/)
 - [DiscussionBridge Forum](https://forum.discussionbridge.dev/)
-- [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/)
+- [The Bridge](https://bridge.demo.discussionbridge.dev/)
+- [Repeal OBBBA Forum](https://forum.repealobbba.org/)
 - [Citizen Activist Network](https://forum.citizenactivist.network/)
 - [RVing Community](https://www.rving.community/)
 - [R744 Community](https://www.r744.community/)
-- [CodeWorksLabs Forum](https://forum.codeworkslabs.dev/)
 
 Want your site listed? Post in [CodeWorksLabs Support](https://forum.codeworkslabs.dev/c/support/5)
 with the `brand-navigation` tag. Include your site's name, public URL and permission
@@ -152,8 +151,7 @@ for product inspiration, and
 [Custom Header Links (icons)](https://github.com/discourse/discourse-icon-header-links)
 for demonstrating compact header destinations. Pavilion's
 [Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
-also informed presentation and administration exploration. The current header
-binding is independently authored using Discourse's documented API. See
+also informed presentation and administration exploration. See
 [attribution and licensing](docs/ATTRIBUTION.md) and
 [authorship and provenance](docs/PROVENANCE.md) for precise source credits.
 
