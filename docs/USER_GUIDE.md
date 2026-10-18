@@ -345,7 +345,7 @@ Appearance resets colors only; reset a size to `0` to restore its default.
 
 Open `navigation_items` and add entries in the order they should appear.
 Select an item and use **↑ Move up** or **↓ Move down** to change its position.
-Items in the same area appear in the order listed; submenu items have their own order.
+Items in the same area (Surface) appear in the order listed; submenu items have their own order.
 Selecting **Save Changes** persists the complete navigation configuration and
 keeps you in the structured editor so you can continue working or verify the
 saved entry. Use the Brand Navigation breadcrumb when you are ready to return
