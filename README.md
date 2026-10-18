@@ -1,6 +1,6 @@
 # Brand Navigation
 
-[![Release v1.0.0-rc.2](https://img.shields.io/badge/release-v1.0.0--rc.2-orange)](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.2)
+[![Release v1.0.0-rc.3](https://img.shields.io/badge/release-v1.0.0--rc.3-orange)](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.3)
 
 Give your Discourse community a recognizable identity and clear navigation.
 Brand Navigation adds a branded bar with your logo, useful links and dropdown
@@ -64,17 +64,12 @@ desktop views were captured while signed in.
 
 ### Administration screenshots
 
-#### Brand Navigation settings
+Select either preview to open the full-size screenshot.
 
-The complete component settings page, without the admin sidebar.
-
-![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
-
-#### Navigation-items editor
-
-Create and order menu items, add submenus and choose where each link appears.
-
-![Brand Navigation menu editor: menu tree, submenu items, link options and ordering controls](docs/images/previews/brand-navigation-menu-editor.png)
+| Brand Navigation settings                                                                                                                                                                                                              | Navigation-items editor                                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Preview of the Brand Navigation settings page](docs/images/previews/brand-navigation-settings-thumb.png)](https://raw.githubusercontent.com/CodeWorksLabs/brand-navigation/main/docs/images/previews/brand-navigation-settings.png) | [![Preview of the navigation-items editor](docs/images/previews/brand-navigation-menu-editor-thumb.png)](https://raw.githubusercontent.com/CodeWorksLabs/brand-navigation/main/docs/images/previews/brand-navigation-menu-editor.png) |
+| Component settings, Appearance and configuration bundles.                                                                                                                                                                              | Menus, submenu items, link options and ordering controls.                                                                                                                                                                             |
 
 ## Installation
 
