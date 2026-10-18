@@ -95,7 +95,7 @@ en:
               description: "For brand-bar items only, keep this item beside the brand or align it to the far edge. Use Site-header alignment for core-header links."
             surface:
               label: "Surface"
-              description: "Show this item in the Brand Navigation bar or as a direct link in the Discourse site header. Site-header items require a URL and cannot contain children."
+              description: "Default: Brand Navigation bar (bar). A blank value also uses the bar. Choose site_header for Discourse's own header; a URL is required and submenu items are not allowed."
             header_presentation:
               label: "Site-header presentation"
               description: "For site-header items, show icon only (the existing default), label only, or icon and label. Icon-only links require an icon; text links can omit it."

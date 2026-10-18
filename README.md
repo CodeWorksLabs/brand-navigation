@@ -31,29 +31,45 @@ maintained, not an official Discourse product.
 
 ## Preview
 
-Compare these live configurations. Site content and navigation may change
-after the screenshots are captured.
+Explore the settings page and compare these live configurations. Site content
+and navigation may change after the screenshots are captured. These desktop
+views were captured while signed in.
+
+### Brand Navigation settings
+
+The complete component settings page, without the admin sidebar.
+
+![Brand Navigation settings: navigation, colors and sizes, Theme translations, Appearance and configuration bundles](docs/images/previews/brand-navigation-settings.png)
+
+### Navigation-items editor
+
+Create and order menu items, add submenus and choose where each link appears.
+
+![Brand Navigation menu editor: menu tree, submenu items, link options and ordering controls](docs/images/previews/brand-navigation-menu-editor.png)
 
 ### Repeal OBBBA Forum
 
 [Open the live forum](https://forum.repealobbba.org/)
 
-![Repeal OBBBA Forum: red brand bar, dropdowns and social icons](docs/images/previews/repeal-obbba-header.png)
+![Repeal OBBBA Forum: red navigation bar and social icons in the forum header](docs/images/previews/repeal-obbba-header.jpg)
 
 ### The Bridge demonstration site
 
 [Open the live demo](https://bridge.demo.discussionbridge.dev/)
 
-![The Bridge: publishing, release and ecosystem navigation](docs/images/previews/the-bridge-header.png)
-
-In this screenshot, the “Versions & Status” text link is supplied by the
-separate Custom Header Links component.
+![The Bridge: publishing menus, Versions & Status text link and header icons](docs/images/previews/the-bridge-header.jpg)
 
 ### RVing Community
 
 [Open the live community](https://www.rving.community/)
 
-![RVing Community: blue brand bar, community menus and sign-up controls](docs/images/previews/rving-community-header.png)
+![RVing Community: blue navigation bar, community menus and forum logo](docs/images/previews/rving-community-header.jpg)
+
+### DiscussionBridge Forum
+
+[Open the live forum](https://forum.discussionbridge.dev/)
+
+![DiscussionBridge Forum: product, documentation, demo and community navigation with header icons](docs/images/previews/discussionbridge-header.jpg)
 
 ## Installation
 
@@ -86,7 +102,6 @@ screens; header space is finite.
 ## In use on
 
 Alongside the previews above, recorded installations include
-[DiscussionBridge Forum](https://forum.discussionbridge.dev/),
 [Citizen Activist Network](https://forum.citizenactivist.network/),
 [R744 Community](https://www.r744.community/) and the
 [DiscussionBridge sandbox](https://sandbox-forum.discussionbridge.dev/).
