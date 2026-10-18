@@ -197,10 +197,13 @@ by Brand Navigation, not Discourse's own controls.
 
 ### Color settings and Appearance
 
-Use the color pickers in **Appearance**, below Theme translations. All eleven
-settings below have a picker: turn **Custom** on, choose a color, then select
-**Save colors**. With Custom off, the default color stays in effect. You do not
-need to know a CSS variable name or type a hex code to use the pickers.
+Set any of these eleven colors in either of two ways:
+
+- **Direct entry:** enter a six-digit hex color in the setting field, with or
+  without `#` (for example, `#002147`), then save the setting. Leave it blank
+  to use the default color.
+- **Color picker:** in **Appearance**, below Theme translations, turn **Custom**
+  on, choose a color, then select **Save colors**.
 
 | On-screen setting / saved name                                  | What changes                                                                                                             |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -216,11 +219,9 @@ need to know a CSS variable name or type a hex code to use the pickers.
 | Header text hover color (`header_text_hover_color`)             | That text on hover/focus. With no override, uses the theme's header text color independently of any custom normal color. |
 | Header hover background color (`header_hover_background_color`) | Background behind both Brand Navigation text links and icon links in the Discourse header on hover/focus.                |
 
-The raw fields above Theme translations are the same saved color settings, not
-a second set of colors. A blank field means no override; a custom field accepts
-six hexadecimal digits with or without `#`, such as `#002147`. **Inherit all**
-in Appearance clears color overrides only. It does not reset sizes, links or
-logos. Choose custom colors that remain readable in both light and dark themes.
+Both methods update the same saved colors. **Inherit all** in Appearance clears
+color overrides only, not sizes, links or logos. Choose custom colors that remain
+readable in both light and dark themes.
 
 ### Header size settings
 
@@ -284,6 +285,9 @@ If neither a usable logo nor a brand name is configured, the brand area stays
 empty even when `show_brand` is on.
 
 ## Configure colors
+
+You can enter a six-digit hex color directly in each color setting (for example,
+`#002147`) and save it, or use a color picker in **Appearance**.
 
 The **Appearance** panel on the Brand Navigation administration page provides
 color pickers for the bar background, bar text and icons, hover/highlight
