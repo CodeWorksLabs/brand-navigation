@@ -46,8 +46,7 @@ to discover component updates from commits on the installed remote branch.
   has not loaded or is unavailable.
 - Validate and round-trip the new presentation setting in configuration
   bundles, retaining safe URLs, audience/device rules, and embed exclusion.
-- Document migration from the separate text-based Custom Header Links
-  component and identify its current contribution to The Bridge screenshot.
+- Document migration from the separate text-based Custom Header Links component.
 - Save native administrator-editor tracked rows through a validated plain-data
   snapshot, without weakening configuration-bundle validation.
 - Keep the mobile menu and logo usable alongside core-header text links at
@@ -85,9 +84,6 @@ acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-feature-verificatio
 - Join that shared readiness observer when a retained site-header item becomes
   eligible after its initial render, so responsive visibility changes cannot
   strand a valid icon while the primary sprite is still loading.
-- Reconcile the successor checkpoint into one unambiguous current release
-  state while retaining dated historical evidence.
-
 - Make administrator imports and color saves use immutable request snapshots,
   disable conflicting controls while writes are pending, and reconcile imported
   colors with their visible controls after success.
@@ -108,9 +104,7 @@ acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-feature-verificatio
   local copies, mirrors, repository transfers, and maintained forks.
 - Add translated fallback messages and accurately document the English-only
   detailed bundle-validation boundary.
-- Add a durable AI-assisted authorship and source-provenance record with pinned
-  upstream revisions, license evidence, implementation history, and release
-  controls.
+- Document source credits, licensing and project history.
 - Accept six-digit administrator color values with or without a leading `#`
   and normalize picker and configuration-bundle values to `#RRGGBB`.
 - Add administrator color pickers for bar background, bar text, hover/highlight,

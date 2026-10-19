@@ -107,7 +107,7 @@ history requires an accurate record, not special support or continued release
 of those commits. Do not erase the historical fact that the earlier pattern was
 consulted.
 
-## Release controls
+## Source and license checks before release
 
 Before each release:
 

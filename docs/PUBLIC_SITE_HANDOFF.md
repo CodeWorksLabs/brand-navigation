@@ -1,12 +1,23 @@
-# CodeWorksLabs public-site handoff
+# Historical public-site handoff — September 8, 2026
 
 Prepared: 2026-09-08
 
-This is the source-backed content bundle for presenting Brand Navigation on the
-CodeWorksLabs Astro product site and shared Starlight documentation site. It is
-not a deployment specification and does not authorize publishing or changing a
-live site. Product, release, compatibility, testing, security, licensing, and
-provenance claims remain governed by this repository.
+This archived handoff records the original website preparation. Its release
+details, proposed copy, deployment status and asset inventory are historical—not
+current instructions. For current information, use the [README](../README.md),
+[Administrator guide](USER_GUIDE.md) and [release procedure](RELEASE.md).
+
+This record does not authorize publishing or changing a live site. Product,
+release, compatibility, testing, security, licensing and provenance claims
+remain governed by this repository. The sections below preserve the original
+dated handoff, including its publication safeguards.
+
+## Current resources
+
+- [Brand Navigation product page](https://codeworkslabs.dev/products/brand-navigation/)
+- [Brand Navigation documentation](https://docs.codeworkslabs.dev/brand-navigation/)
+- [GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
+- [Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7)
 
 ## Evidence snapshot
 

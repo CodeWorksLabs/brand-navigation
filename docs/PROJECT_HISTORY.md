@@ -2,6 +2,15 @@
 
 Reconstructed: 2026-09-08
 
+Coverage: development through September 8, 2026. This is a historical account,
+not a current feature list, release status or operating procedure. For current
+information, use the [README](../README.md), [Administrator guide](USER_GUIDE.md),
+[release procedure](RELEASE.md) and
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases).
+The support routes and website proposals below describe the position at that
+time, not current destinations. Current help is available in
+[Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7).
+
 This document preserves the readable development history of Brand Navigation
 after a development-tool update stopped displaying the original task
 transcript. It is a reconstruction, not a verbatim transcript. Repository
@@ -13,11 +22,11 @@ technical claims.
 
 This history was reconstructed from:
 
-- the Git history and current repository tree;
+- the Git history and repository tree available at reconstruction;
 - [`CHANGELOG.md`](../CHANGELOG.md);
 - [`TESTING.md`](TESTING.md), [`PROVENANCE.md`](PROVENANCE.md), and
   [`ATTRIBUTION.md`](ATTRIBUTION.md);
-- the current and historical successor checkpoints;
+- the successor checkpoints available at reconstruction;
 - retained task context containing the product decisions, operator feedback,
   review gates, and release sequence; and
 - the published GitHub tag and release metadata.
@@ -138,9 +147,13 @@ presentation.
 ## Responsive behavior and accessibility
 
 Desktop, mobile portrait, and mobile landscape behavior were tested on real
-sites. Device visibility was defined by responsive layout rather than physical
-device orientation, so desktop-only items can appear when a landscape viewport
-crosses the desktop breakpoint. Phil accepted that behavior after testing.
+sites. At that stage, device visibility followed responsive layout, so
+desktop-only items could appear when a landscape viewport crossed the desktop
+breakpoint. The contemporary checkpoint records this as a defect found by Phil,
+corrected in `61db961` and verified by him on a physical iPhone. It was not the
+intended device-visibility behavior. Device visibility now follows Discourse's
+device capability, and rotating a phone does not expose desktop-only items.
+See the [navigation settings guidance](USER_GUIDE.md#add-navigation).
 
 An iPhone portrait pass found that too many core-header social icons can crowd
 Discourse's anonymous login and menu controls. Marking less important icons
@@ -192,6 +205,11 @@ evaluate all findings together, remediate coherently, perform correction
 closure, complete manual acceptance, merge the accepted tree, then tag and
 publish that exact tree.
 
+That sequence describes the required process. It does not establish that every
+required check was completed on every candidate. The review reports and
+[`TESTING.md`](TESTING.md) identify the actual checks, results and limitations
+for each recorded candidate.
+
 Important candidates were reviewed through two complementary lanes:
 
 - an internal subagent lane for fast, candidate-bound technical inspection and
@@ -199,11 +217,12 @@ Important candidates were reviewed through two complementary lanes:
 - the visible sidebar Code Reviewer task for independent, operator-observable
   formal release gates.
 
-Both followed the controlling Code Review Doctrine. Their overlap was useful,
-not redundant: the internal lane found a substantive icon-readiness regression
-late in remediation, while the sidebar lane supplied durable independent
-scrutiny. Findings were collected before corrections and reviewed as coherent
-batches rather than patched opportunistically.
+Both lanes were required to follow the controlling Code Review Doctrine; their
+individual reports determine what was actually reviewed and verified. The
+internal lane found a substantive icon-readiness regression late in remediation,
+while the sidebar lane supplied independent scrutiny. Findings were collected
+before corrections and reviewed as coherent batches. These recorded activities
+are not a claim that every testing requirement was satisfied.
 
 The review and compatibility work added or strengthened:
 
@@ -239,7 +258,7 @@ The exact versions, commits, component identifiers, and coverage boundaries
 are maintained in [`TESTING.md`](TESTING.md). R744 served as the oldest
 real-world compatibility canary during the initial cycle.
 
-## Published versions
+## Published versions recorded through September 8, 2026
 
 ### `v0.9.0`
 
@@ -261,11 +280,12 @@ single activation switch, documented staging preparation, async import-race
 protection, corrected mobile linked-parent flow, compatibility-branch
 automation, and a visible latest-release badge.
 
-Version `v1.0.0` remains reserved for the stable release after the candidate
-has aged on the verified installations, release blockers remain absent, and
-the planned public CodeWorksLabs documentation surfaces are ready.
+At reconstruction, version `v1.0.0` was reserved for the stable release after
+candidate observation, resolution of release blockers and preparation of the
+planned public CodeWorksLabs documentation. This records the plan at that time;
+the current release requirements are in [`RELEASE.md`](RELEASE.md).
 
-## Durable product decisions
+## Product decisions recorded at reconstruction
 
 - **Brand Navigation** is the public name; `brand-navigation` is the repository
   slug.
@@ -282,8 +302,9 @@ the planned public CodeWorksLabs documentation surfaces are ready.
 - Releases use Semantic Versioning tags and GitHub Releases while Discourse
   continues to detect updates from the installed remote branch.
 - The license is `GPL-2.0-or-later`.
-- GitHub Issues is the public support route; private security reports go to
-  `security@codeworkslabs.dev`.
+- GitHub Issues was the public support route at that time; private security
+  reports went to `security@codeworkslabs.dev`. Use the current README and
+  [security policy](../SECURITY.md) for today's reporting routes.
 
 ## Incidents that are not product doctrine
 
@@ -302,8 +323,11 @@ the planned public CodeWorksLabs documentation surfaces are ready.
 
 ## Position as reconstructed on 2026-09-08
 
-This section records the position understood on its reconstruction date. For
-current state and next actions, use [`SUCCESSOR_CHECKPOINT.md`](../SUCCESSOR_CHECKPOINT.md).
+This section records the position understood on its reconstruction date, not
+current status or next actions. Use the [README](../README.md),
+[release procedure](RELEASE.md) and
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
+for current product information and release requirements.
 
 Brand Navigation is published at `v1.0.0-rc.1` and is in its release-candidate
 aging period. The next work is observation and issue triage, continued testing

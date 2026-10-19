@@ -2,13 +2,21 @@
 
 This file preserves the development and release chronology accumulated through
 2026-09-07. It is historical evidence, not the operative continuation record.
-For current state and next actions, use
-[`SUCCESSOR_CHECKPOINT.md`](../SUCCESSOR_CHECKPOINT.md).
+For current product information and procedures, use the [README](../README.md),
+[Administrator guide](USER_GUIDE.md), [release procedure](RELEASE.md) and
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases).
+For a readable account of this development period, see the
+[project history](PROJECT_HISTORY.md).
+
+Instructions, permissions, next actions, branch and site statuses, and review
+dispositions below are records from that period. They do not grant current
+authority, direct new operations or establish current verification. Recorded
+failures, incomplete checks and safeguards are preserved as historical evidence.
 
 Date: 2026-09-05 (refreshed through 2026-09-07 UTC)
-Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
+Historical disposition as recorded: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
 
-## Current release-documentation checkpoint
+## Release-documentation checkpoint through September 7, 2026
 
 - Installation-verification pass on 2026-09-07 is active. DiscussionBridge
   Forum component `3` was first updated through Discourse's native updater from
@@ -413,8 +421,8 @@ Disposition: **v0.9.0 RELEASED / d-compat ADOPTED AND VERIFIED ON `main`**
   Visual UI evidence must be gathered with Phil in the authenticated browser;
   existing Pageant/SSH access may be used only when a read-only server check is
   necessary.
-- The controlling nine-step release sequence is recorded under **Exact next
-  actions** below. Pull request 7 completed the implementation review,
+- The controlling nine-step release sequence is recorded under **Release actions
+  recorded at the time** below. Pull request 7 completed the implementation review,
   remediation, correction closure, manual acceptance, and merge gates. Pull
   request 8 is the release-metadata successor candidate. Its complete review is
   finished and the authorized four-finding correction batch is implemented.
@@ -486,7 +494,7 @@ directory. Use the canonical local repository path above.
 ## Formal review and remediation checkpoint
 
 This section is a dated history of PR 7 review and remediation. It does not
-override the current PR 8 state in **Current release-documentation checkpoint**
+override the PR 8 state recorded in **Release-documentation checkpoint through September 7, 2026**
 or **Canonical locations** above.
 
 - Draft pull request 7 is the single `v0.9.0` release-preparation pull request.
@@ -679,7 +687,7 @@ or **Canonical locations** above.
   sandbox currently has `bar_background_color=16324F` and
   `bar_text_color=#FFFFFF`; no production forum was changed.
 
-## Current multi-site checkpoint
+## Historical multi-site checkpoint
 
 - Main is installed, configured, and browser-smoke-tested on Repeal OBBBA
   Forum, DiscussionBridge Forum, The Bridge, Citizen Activist Network, and
@@ -1282,7 +1290,7 @@ Any clarification for the icon component must be addressed to the Discourse
 maintainers or another confirmed rights holder rather than assuming one
 historical contributor can grant it.
 
-## Exact next actions
+## Release actions recorded at the time
 
 1. Finish release preparation and manual documentation/product polish.
 2. Open one clean draft `v0.9.0` release-preparation pull request.
