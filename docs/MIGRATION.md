@@ -1,6 +1,10 @@
 # Migration and rollback
 
-Migrate in a staging theme or a copied production theme first.
+Prepare the replacement on a non-default preview theme first. If Brand Navigation
+is already used by visitors, use a separate component copy or staging site:
+copying a theme alone does not isolate a shared component's code or settings.
+Detach an old component only from the theme you are changing. Disable it globally
+only when you intend to stop it on every theme using it.
 
 ## Configuration bundles
 
@@ -36,12 +40,11 @@ fixture. It was assembled from observed Brand Header, Dropdown Header, and
 Custom Header Links (icons) settings and is also useful for exercising larger
 menus, external destinations, icon-only links, and left/right sections.
 
-`v1.0.0-rc.1` intentionally provides no credentialed command-line apply/export
-client; adding one would be future product scope rather than part of the current
-RC. A local checkout can validate a saved bundle without contacting a forum by
-running
-`pnpm bundle validate configurations/repeal-obbba.json`. Logo uploads remain a
-separate site-local step.
+Import and export use the administration panel in your browser. A local checkout
+can validate a saved bundle without contacting a forum by running
+`pnpm bundle validate configurations/repeal-obbba.json`; this command does not
+import or export settings on a forum. Logo uploads remain a separate site-local
+step.
 
 ## From Brand Header
 
@@ -59,8 +62,8 @@ separate site-local step.
    accessibility.
 7. Select the equivalent outlet and mobile mode.
 8. During the controlled cutover, attach the prepared Brand Navigation
-   component to the intended visitor-facing theme, disable Brand Header, confirm
-   Brand Navigation's native **Enabled?** control remains on, and immediately
+   component to the intended visitor-facing theme, detach Brand Header from that
+   theme, confirm Brand Navigation's native **Enabled?** control remains on, and immediately
    run the acceptance checks. Restore Brand Header if the replacement is not
    visible and usable.
 
@@ -81,8 +84,8 @@ separate site-local step.
 7. Keep color customization in the parent theme when needed; Brand Navigation
    defaults to Discourse color-scheme variables.
 8. During the controlled cutover, attach the prepared Brand Navigation
-   component to the intended visitor-facing theme, disable Header Submenus,
-   confirm Brand Navigation's native **Enabled?** control remains on, and
+   component to the intended visitor-facing theme, detach Header Submenus from
+   that theme, confirm Brand Navigation's native **Enabled?** control remains on, and
    immediately run the acceptance checks. Restore Header Submenus if the
    replacement is not visible and usable.
 
@@ -105,15 +108,15 @@ its icon list becomes `custom_font_awesome_icons`.
    component-wide mobile mode. For crowded mobile headers, keep only priority
    icons on `both` and mark the rest `desktop`.
 7. During the controlled cutover, attach the prepared Brand Navigation
-   component to the intended visitor-facing theme, disable Custom Header Links
-   (icons), confirm Brand Navigation's native **Enabled?** control remains on,
-   and immediately verify the header at desktop and narrow mobile widths.
+   component to the intended visitor-facing theme, detach Custom Header Links
+   (icons) from that theme, confirm Brand Navigation's native **Enabled?** control
+   remains on, and immediately verify the header at desktop and narrow mobile widths.
 
 ## From Custom Header Links (text links)
 
 The text-based Custom Header Links component is separate from Custom Header
-Links (icons). Its replacement capability is planned for `v1.0.0-rc.2` and is
-not available in RC1.
+Links (icons). Brand Navigation can replace its links with text-only or
+icon-and-text entries in Discourse's header.
 
 1. Record each label, URL, tooltip, target, and desktop/mobile visibility.
 2. Add a top-level item with `surface: site_header` and
@@ -122,7 +125,7 @@ not available in RC1.
 3. Prepare and test the replacement on a staging theme. Keep long labels short
    enough for the available header space; use desktop-only visibility when
    appropriate. Header links remain direct links; they do not support submenus.
-4. During cutover, detach or disable the text-based Custom Header Links
+4. During cutover, detach the text-based Custom Header Links
    component on the affected themes, refresh, and confirm each link appears
    exactly once. Verify desktop/mobile layout, keyboard focus, anonymous and
    signed-in controls, and topic-header scrolling before accepting the change.
@@ -130,11 +133,12 @@ not available in RC1.
 
 ## Roll back to an earlier component
 
-Do not remove either earlier component until the replacement has passed
-staging. Rollback is:
+Keep the original components and their saved settings until the replacement has
+passed staging. To restore them on a theme:
 
-1. Disable Brand Navigation.
-2. Re-enable the earlier component on the parent theme.
+1. Detach Brand Navigation from the affected theme.
+2. Reattach the earlier component to that theme. If it was disabled, enable it,
+   bearing in mind that this enables it on every theme still using it.
 3. Restore its exported settings if they were changed.
 4. Verify normal pages, mobile navigation, authentication, and an embedded
    discussion.
@@ -176,8 +180,8 @@ To pin the existing component to a release:
    and attachment state.
 4. Select **Change source**. Leave the repository URL as
    `https://github.com/CodeWorksLabs/brand-navigation.git`.
-5. Enter the exact release tag, such as `v0.9.0`, in **Branch**, then submit the
-   source change. Current Discourse uses this field for a named Git branch or
+5. Enter the exact tag of your chosen compatible release in **Branch**, then
+   submit the source change. Current Discourse uses this field for a named Git branch or
    tag; the release tag pins the component to that immutable revision.
 6. In the staging-theme preview, confirm the component reports the intended
    tag/commit with no import error and that its settings remain present.
@@ -215,7 +219,7 @@ To return to the supported current channel:
    is required and supported by the selected version.
 5. Verify the staging preview, restore the recorded visitor-facing parent-theme
    attachments, and repeat the focused acceptance checks. On the current
-   channel, native **Enabled?** is the only activation control; the `v0.9.0`
+   channel, native **Enabled?** is the only activation control; the
    legacy setting is no longer shown or read.
 
 Do not edit a Git-installed remote component locally, force-move a release tag,

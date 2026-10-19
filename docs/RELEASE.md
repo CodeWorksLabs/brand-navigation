@@ -1,5 +1,7 @@
 # Release procedure
 
+## CI dependencies and evidence
+
 Direct actions in the component-owned configuration workflow and the outer
 Discourse reusable workflow are pinned to reviewed commit SHAs. The pinned
 Discourse workflow intentionally follows its own maintained action tags,
@@ -24,31 +26,68 @@ move an existing release tag.
 2. Open one clean draft `v<VERSION>` release-preparation pull request.
 3. Run CI and freeze the exact candidate commit and tree.
 4. Conduct the formal complete codebase review against that immutable
-   candidate.
+   candidate, including the Discourse review requirements below.
 5. Evaluate all findings together and remediate them as one coherent batch.
-6. Perform the required correction-closure review and rerun affected tests.
+6. After corrections, freeze the replacement candidate commit and tree, rerun
+   CI and affected tests, and complete independent correction-closure review.
+   Associate every result with the candidate it actually tested; do not carry
+   an earlier candidate's approval forward as approval of changed bytes.
 7. Conduct final manual acceptance on the resulting candidate.
 8. Merge only when review, CI, documentation, and manual acceptance are
-   complete.
+   complete and every required finding is resolved. An unexecuted required
+   check means verification is incomplete, not passed.
 9. Confirm the merged tree matches the accepted candidate, then create the
    annotated `v<VERSION>` tag and matching GitHub Release.
 
-### Completed `v0.9.0` release record
+Published identities and release history are recorded in
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
+and [`CHANGELOG.md`](../CHANGELOG.md). Historical development and compatibility
+bootstrap records remain in [`HISTORICAL_CHECKPOINT.md`](HISTORICAL_CHECKPOINT.md);
+they are not instructions to repeat those operations.
 
-The `v0.9.0` preview sequence is complete and must not be repeated. It was
-published on 2026-09-07 at merge commit
-`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, tree
-`23328df16e2703920778d71c226abe0a00f97cfb`. The annotated `v0.9.0` tag and
-[GitHub Release](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v0.9.0)
-identify that release. Later documentation and compatibility work on `main`
-does not change the immutable `v0.9.0` identity.
+## Required Discourse review
+
+Review the exact Brand Navigation candidate as a **theme component** using all
+three files below from the `CodeWorksLabs/review-skills` repository, under
+`.agents/skills/codeworkslabs-platform-review/references/platforms/discourse/`:
+
+- [DiscourseSkill.md](https://github.com/CodeWorksLabs/review-skills/blob/main/.agents/skills/codeworkslabs-platform-review/references/platforms/discourse/DiscourseSkill.md) — Discourse Extension Review instructions.
+- [DiscourseSkill.json](https://github.com/CodeWorksLabs/review-skills/blob/main/.agents/skills/codeworkslabs-platform-review/references/platforms/discourse/DiscourseSkill.json) — structured review rules.
+- [LOCAL_TEST_MATRIX.md](https://github.com/CodeWorksLabs/review-skills/blob/main/.agents/skills/codeworkslabs-platform-review/references/platforms/discourse/LOCAL_TEST_MATRIX.md) — isolated compatibility and lifecycle testing requirements.
+
+The Markdown guidance and structured rules must both be used; a summary,
+source-only review, lint result or green CI run does not replace the required
+installed verification. Record the exact `CodeWorksLabs/review-skills` Git
+commit used for all three files.
+
+Refresh supported Discourse targets from official support data before the
+review. Test the same exact candidate in isolated installations for every
+materially distinct supported release line claimed by Brand Navigation,
+including applicable monthly and ESR targets, and development-head coverage
+specified by the method. Do not infer one target's compatibility from another.
+
+Complete clean-install and native upgrade, settings-retention, rollback or
+recovery, and return-to-candidate checks in the separate lifecycle environment.
+Preserve working configurations and use non-production fixtures and services.
+Record exact candidate and Core identities, environments, commands, results,
+review findings and correction closure in the release evidence.
+
+Identify every applicable check as passed, failed or not verified, and explain
+any not-applicable classification. Skipped jobs and missing evidence are not
+passes. If a required check cannot be completed, report testing as incomplete
+and do not claim release readiness or publish the release. Independent review
+must check the evidence and outstanding findings, not merely repeat a green
+summary. This process does not constitute official Discourse approval.
 
 ## Release gates
 
 Before completing a release sequence:
 
 1. Confirm the default branch is `main`.
-2. Run all lint, type, configuration, unit, and system-test gates.
+2. Run all lint, type, configuration, unit, and system-test gates against the
+   exact candidate. Confirm lint commands cover the full intended source and
+   test file inventory, including scripts, rather than relying on the job name
+   or exit status alone. Record commands, coverage, failures and skipped checks.
 3. Execute the manual acceptance matrix in `TESTING.md`.
 4. Verify the migration and rollback procedures on a staging theme.
 5. Review dependency and Discourse compatibility changes.
@@ -57,7 +96,8 @@ Before completing a release sequence:
    which languages are bundled. Treat additional locale files as reviewed
    release content.
 7. Confirm the README thanks and product-inspiration credit remain accurate and
-   `docs/ATTRIBUTION.md` identifies any copied or adapted code precisely.
+   `docs/ATTRIBUTION.md` identifies any copied or adapted code precisely. Complete
+   the [source and license checks before release](PROVENANCE.md#source-and-license-checks-before-release).
 8. Confirm no secrets, site-specific hosts in executable defaults, special
    DiscussionBridge logic, official badges, Discourse logos, or official-status
    claims are present. Named compatibility evidence and migration fixtures may
@@ -69,43 +109,34 @@ Before completing a release sequence:
     Release all identify the same tree. Include compatibility, upgrade,
     migration, and rollback notes in the release.
 
-## Public documentation architecture
+## Documentation and support
 
-The settled CodeWorksLabs architecture uses `https://codeworkslabs.dev/` for
-the apex and product catalog, `https://docs.codeworkslabs.dev/` for shared Astro
-Starlight documentation, and `https://demo.codeworkslabs.dev/` for the demo
-index and chooser. Platform-specific demonstrations live at hosts such as
-`https://astro.demo.codeworkslabs.dev/` and
-`https://discourse.demo.codeworkslabs.dev/`, with future platforms following
-the `{platform}.demo.codeworkslabs.dev` convention.
+Keep the README, administrator guide, changelog, release notes,
+[product page](https://codeworkslabs.dev/products/brand-navigation/) and
+[public documentation](https://docs.codeworkslabs.dev/brand-navigation/)
+consistent with the shipped release. Screenshots, installation instructions,
+compatibility claims and known limitations must describe the actual release.
+Site publication requires separate authorization; completing a component
+release does not authorize deploying documentation or another website.
 
-Brand Navigation is the first product ready to feature. Its source-backed copy,
-claim limits, links, asset inventory, and canonical-source contract are in
-[`PUBLIC_SITE_HANDOFF.md`](PUBLIC_SITE_HANDOFF.md). Product and procedural truth
-remains governed by this repository even when the shared sites adapt it for
-discovery. A public site was not required for the `v0.9.0` or
-`v1.0.0-rc.1` release. This architecture record and handoff do not authorize
-publishing or deploying a site.
-
-`support.codeworkslabs.dev` is the selected durable umbrella support front door.
-It may route visitors to documentation, repositories, issue trackers, shared
-CodeWorksLabs community resources, or an independent product community as
-appropriate. Mature product communities remain independent; in particular,
-`forum.discussionbridge.dev` remains the DiscussionBridge community and support
-forum. This support-routing decision does not authorize creating or deploying
-the support site or a shared CodeWorksLabs forum.
-
-The current public intake route is
+Use [Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7)
+for installation and configuration help,
+[Feature Requests](https://forum.codeworkslabs.dev/c/brand-navigation/feature-requests/8)
+for proposals, and the [Roadmap](https://forum.codeworkslabs.dev/t/brand-navigation-roadmap/14)
+for planned work and status. Use
 [GitHub Issues](https://github.com/CodeWorksLabs/brand-navigation/issues) for
-bugs, installation and configuration questions, compatibility reports, and
-feature requests. Reports should identify the component release, branch, or
-commit; Discourse version; active theme; browser/device context; reproduction
-steps; and sanitized settings or console evidence when relevant.
+non-sensitive bugs, compatibility reports and documentation corrections.
+Reports should identify the component release, branch or commit; Discourse
+version; active theme; browser/device context; reproduction steps; and settings
+or console evidence with sensitive information removed.
 
 Suspected vulnerabilities must be reported privately to
 [security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
 repository's [security policy](../SECURITY.md). Credentials, personal data, and
-non-public vulnerability details must not be posted in a public issue.
+non-public vulnerability details must not be posted in a public forum topic or
+GitHub issue.
+
+## Update channels and compatibility branches
 
 `main` is the stable update channel for current Discourse. Build changes on
 short-lived branches and merge only a complete, reviewed batch. Maintained
@@ -114,18 +145,11 @@ daily compatibility workflow creates a branch for each newly released
 Discourse version from the last first-parent `main` commit predating that core
 release.
 
-The one-time manual bootstrap for `2026.7` and `2026.8` was completed on
-2026-09-07. Both compatibility branches currently identify reviewed commit
-`a628dcd74c9465903c7eacd59f63e50f6c9d37b6`. That commit contains released
-`v0.9.0` merge commit
-`d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, leaves the accepted product runtime
-unchanged, and adds the corrected compatibility-pull-request workflow. The
-branch-creation workflow fails closed unless both branches contain the accepted
-`v0.9.0` seed, and serialized runs prevent concurrent branch writers. Do not
-reseed or force-move either existing branch as routine release preparation. If
-a branch is ever found at the wrong commit, stop the workflow, inspect the ref,
-and correct it only through an explicitly authorized and reviewed release
-operation.
+The original manual bootstrap is historical, not routine release preparation.
+The branch-creation workflow retains accepted-seed checks and serialized writes.
+Do not reseed or force-move existing compatibility branches. If a branch is
+found at the wrong commit, stop the workflow, inspect the ref, and correct it
+only through an explicitly authorized and reviewed release operation.
 
 When a compatible fix lands on `main`, backport it through a reviewed pull
 request whose base is the affected `d-compat` branch. Do not merge new features
@@ -144,15 +168,16 @@ in `TESTING.md`. Record the Brand Navigation version, component commit,
 configured Branch field value, resolved compatibility ref, Discourse version,
 and exact core commit in every compatibility result.
 
-Use `v0.9.x` for reviewed preview releases. Publish `v1.0.0` only after the
-documentation and planned multi-site compatibility work are complete and no
-known release blocker remains. After `v1.0.0`, increment PATCH for compatible
-fixes, MINOR for compatible features, and MAJOR for intentionally breaking
-configuration or migration changes.
+## Versioning and publication
 
-Use SemVer prerelease identifiers such as `v1.0.0-rc.1`, `v1.0.0-rc.2`, and so
-on for immutable release candidates. Mark each matching GitHub Release as a
-prerelease. The human-facing title may use “Brand Navigation v1.0.0 RC1,” but
-the Git tag remains `v1.0.0-rc.1`. If an RC changes, publish the next numbered
-RC rather than moving or reusing its tag. Final `v1.0.0` may identify the same
-accepted tree as the last RC when no repository change is required.
+Use SemVer prerelease identifiers in the form
+`v<MAJOR>.<MINOR>.<PATCH>-rc.<N>` for release candidates. Mark each matching
+GitHub Release as a prerelease. If a published RC changes, publish the next
+numbered RC rather than moving or reusing its tag.
+
+Publish the stable release only after documentation, required verification and
+manual acceptance are complete and no required finding remains unresolved.
+The stable tag may identify the same accepted tree as the final RC when no
+repository change is required. For subsequent stable releases, increment PATCH
+for compatible fixes, MINOR for compatible features, and MAJOR for intentionally
+breaking configuration or migration changes.

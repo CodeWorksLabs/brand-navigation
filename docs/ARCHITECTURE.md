@@ -1,5 +1,9 @@
 # Architecture
 
+This developer reference explains how Brand Navigation integrates with Discourse,
+renders navigation and validates settings. For installation and configuration,
+see the [Administrator guide](USER_GUIDE.md).
+
 ## Render boundary
 
 The initializer registers the configured full-application outlet only when
@@ -81,8 +85,7 @@ Availability is determined from the symbols actually
 loaded in Discourse's production SVG sprite; development-only icon-list
 metadata is not used. One shared `MutationObserver` watches Discourse's primary
 Font Awesome sprite until it contains symbols, then notifies all live Brand
-Navigation consumers once and disconnects. This works with both the 2026.7 ESR
-loader and current Discourse without issuing per-icon network requests. Until
+Navigation consumers once and disconnects. This avoids per-icon network requests. Until
 the primary sprite is ready, icon-only bar/submenu entries expose their labels
 and icon-only header entries stay omitted. Destroyed components unsubscribe, and
 the tracked readiness update is scheduled after the active render transaction.
