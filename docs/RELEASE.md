@@ -89,7 +89,9 @@ Before completing a release sequence:
    test file inventory, including scripts, rather than relying on the job name
    or exit status alone. Record commands, coverage, failures and skipped checks.
 3. Execute the manual acceptance matrix in `TESTING.md`.
-4. Verify the migration and rollback procedures on a staging theme.
+4. Verify migration and rollback on a staging site or separate component copy.
+   A different parent theme or Preview alone does not isolate shared code,
+   settings or enabled state from live themes using the same component.
 5. Review dependency and Discourse compatibility changes.
 6. Confirm every referenced translation key exists in `locales/en.yml`, the
    English fallback is complete, and the README and administrator guide state

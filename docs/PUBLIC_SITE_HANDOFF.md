@@ -165,6 +165,12 @@ verify it there, and attach the component to a visitor-facing theme only when
 it is ready. Discourse's component-level **Enabled?** control is the single
 activation switch; Brand Navigation has no second enable setting.
 
+If the component is already attached to a live theme, prepare changes on a
+separate component copy or staging site. All themes attached to one component
+share its code, settings and enabled state; a theme preview alone does not
+isolate changes. Detach a component to remove it from one theme; disabling it
+stops it on every attached theme.
+
 The public site should link to the complete [administrator guide](USER_GUIDE.md)
 instead of reproducing advanced bundle, update, disable, or troubleshooting
 procedures.

@@ -24,6 +24,7 @@ en:
       title: "Appearance"
       description: "Choose component colors or leave individual values inherited from the active Discourse color palette."
       custom: "Custom"
+      custom_for: "Use a custom color for %{setting}"
       inherited: "Default color (no override)"
       scope: "These colors change Brand Navigation only. Discourse header means the area with your forum logo and login/profile controls; navigation bar means Brand Navigation's separate bar."
       save: "Save colors"

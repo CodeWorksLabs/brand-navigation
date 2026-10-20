@@ -111,7 +111,11 @@ settings request is sent; the complete bundle retains its separate
 ## Intentional constraints
 
 Native `details`/`summary` provides keyboard operation without a custom focus
-state machine. Brand Navigation permits one open submenu at a time and closes
-it after outside interaction, Escape, or link selection. Escape returns focus
-to the submenu summary. Internal and external URLs use the same validated
+state machine. An explicit zero tabindex on each summary also makes that native
+control discoverable to the compact menu's trigger-to-content focus selector.
+Brand Navigation permits one open submenu at a time and closes it after outside
+interaction or link selection. In the bar, Escape from an open submenu closes
+it and returns focus to its summary. In compact mobile-menu mode, Discourse
+owns Escape dismissal of the containing menu and returns focus to the header
+menu button. Internal and external URLs use the same validated
 setting; `_blank` links automatically receive `noopener noreferrer`.

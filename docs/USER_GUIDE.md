@@ -22,6 +22,10 @@ Discourse embed contexts.
 
 ## Install the component
 
+Use a new installation or a separate test copy that is not attached to live
+themes. If Brand Navigation is already in use, do not reconfigure that shared
+component as a way to stage changes; use a separate copy or staging site.
+
 1. In Discourse administration, open **Appearance → Themes & components**.
 2. Select the **Components** tab, choose **Install → From a git repository**,
    and enter:
@@ -113,6 +117,9 @@ installed component, use the non-default staging-theme procedure in
 theme, enable the component, open the staging theme's Discourse preview, and
 then open Brand Navigation's settings within the preview context. Import and
 verify the bundle before attaching the component to a visitor-facing theme.
+For an existing live installation, import into a separate test copy or staging
+site first. A theme preview does not isolate an import: it changes the settings
+of the selected component on every theme using that component.
 
 Turning the native **Enabled?** control off also removes the custom bundle
 panel. This is expected Discourse component loading behavior, not a separate
@@ -586,12 +593,15 @@ navigation entries open immediately. For a linked parent with children, select
 its label to visit the parent destination or its down-caret to open the submenu.
 When a parent has no URL, the complete entry opens its submenu.
 
-Keyboard users can press Tab to reach links and submenu controls separately. Press Enter
-or Space on a submenu control to expand or collapse it, or Escape to close it
-and return focus to its control. Opening another submenu, selecting one of its
-links, or selecting outside the submenu also closes it. On mobile sites using
-`menu` mode, open the Brand Navigation menu from its menu button in the
-Discourse header.
+Keyboard users can press Tab to reach links and submenu controls separately.
+Press Enter or Space on a submenu control to expand or collapse it. In the
+navigation bar, Escape from an open submenu closes it and returns focus to its
+submenu control. Opening another submenu, selecting one of its links, or
+selecting outside the submenu also closes it.
+
+On mobile sites using `menu` mode, open Brand Navigation from its menu button
+in the Discourse header. Escape dismisses the containing menu and returns focus
+to that header button, rather than leaving the menu open at a submenu control.
 
 ## Verify the configuration
 
@@ -602,8 +612,10 @@ Before enabling the component broadly, check:
 3. Mobile layout in the selected mobile mode.
 4. Every direct link, linked submenu parent, child link, and brand destination.
 5. Light and dark color schemes.
-6. Keyboard navigation: tab to links and submenu summaries, then use Enter or
-   Space to open a submenu and Escape to close it.
+6. Keyboard navigation: tab to links and submenu controls, then use Enter or
+   Space to open a submenu. In the bar, Escape closes the submenu and focuses
+   its control. In compact mobile-menu mode, it dismisses the whole menu and
+   focuses the header menu button.
 7. New-window links.
 8. A supported embedded discussion, confirming that Brand Navigation is absent
    while the embedded discussion and its core controls remain available.
@@ -615,8 +627,9 @@ and outstanding checks.
 ## Disable or roll back
 
 Turn off Discourse's component-level **Enabled?** control to stop Brand
-Navigation from rendering. Disabling the component does not delete its
-configuration.
+Navigation on every theme attached to that component. To remove it from just
+one theme, detach it from that theme instead. Disabling or detaching the
+component does not delete its configuration.
 
 When replacing Brand Header, Header Submenus, or Custom Header Links (icons),
 keep the earlier component and an export of its settings until Brand Navigation

@@ -453,7 +453,8 @@ direction.
 
 ## Canonical locations
 
-- Local repository: `C:\CodeProjects\Products\Discourse Brand Navigation`
+- Local repository: the checkout of this `brand-navigation` Git repository,
+  named **Discourse Brand Navigation** in the original workspace.
 - Git remote: `https://github.com/CodeWorksLabs/brand-navigation.git`
 - Current branch: the v0.9.0 release-metadata branch.
 - Current committed PR 8 head before the authorized correction batch:
@@ -488,8 +489,8 @@ branch, head, candidate, or release-gate claims:
 - Historical runtime evidence below identifies its own commit. It is not a
   claim that those earlier commits are current.
 
-`C:\CodeProjects\CodeWorksLabs\Discourse` is not this repository's working
-directory. Use the canonical local repository path above.
+The separate **CodeWorksLabs/Discourse** workspace was not this repository's
+working directory. Use the Brand Navigation checkout identified above.
 
 ## Formal review and remediation checkpoint
 
@@ -870,7 +871,8 @@ or **Canonical locations** above.
 ## 2026-09-05 doctrine review and remediation
 
 - Complete Static Review `BN-CODEBASE-20260905` used the approved Code Review
-  Doctrine at `C:\CodeProjects\Governance\Boss\CODE_REVIEW_DOCTRINE.md`,
+  Doctrine (`CODE_REVIEW_DOCTRINE.md` in the governance repository's `Boss/`
+  directory),
   52,273 bytes, SHA-256
   `5610F2AB5B2E9DC2CD649E2E11321DEC6B5F1BACD174A1C32BABD49174888C5D`.
 - The independent reviewer inspected all 39 tracked members. Opening and

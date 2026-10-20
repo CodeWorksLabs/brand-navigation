@@ -138,15 +138,19 @@ export default class BrandNavigationBundles extends Component {
 
   bundleSelection = 0;
 
-  constructor() {
-    super(...arguments);
-    this.appearanceValues = Object.fromEntries(
+  get currentAppearanceValues() {
+    // Only locally edited colors are drafts. Untouched colors follow native
+    // setting saves instead of retaining a snapshot from component creation.
+    return Object.fromEntries(
       this.appearanceColorDefinitions.map(({ setting }) => [
         setting,
-        normalizedHexColor(
-          this.theme.settings.find((candidate) => candidate.setting === setting)
-            ?.value
-        ) || "",
+        Object.hasOwn(this.appearanceValues, setting)
+          ? this.appearanceValues[setting]
+          : normalizedHexColor(
+              this.theme.settings.find(
+                (candidate) => candidate.setting === setting
+              )?.value
+            ) || "",
       ])
     );
   }
@@ -181,29 +185,31 @@ export default class BrandNavigationBundles extends Component {
   }
 
   get appearanceColors() {
+    const values = this.currentAppearanceValues;
     return this.appearanceColorDefinitions.map((color) => ({
       ...color,
-      enabled: Boolean(this.appearanceValues[color.setting]),
+      enabled: Boolean(values[color.setting]),
       value:
-        normalizedHexColor(this.appearanceValues[color.setting]) ||
+        normalizedHexColor(values[color.setting]) ||
         this.inheritedColor(color),
     }));
   }
 
   get appearanceDirty() {
+    const values = this.currentAppearanceValues;
     return this.appearanceColorDefinitions.some(({ setting }) => {
       const persisted =
         normalizedHexColor(
           this.theme.settings.find((candidate) => candidate.setting === setting)
             ?.value
         ) || "";
-      return persisted !== this.appearanceValues[setting];
+      return persisted !== values[setting];
     });
   }
 
   inheritedColor(color) {
     const configuredParent = normalizedHexColor(
-      this.appearanceValues[color.inheritsFrom]
+      this.currentAppearanceValues[color.inheritsFrom]
     );
     if (configuredParent) {
       return configuredParent;
@@ -328,7 +334,7 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
-    const submittedAppearance = snapshotPlainData(this.appearanceValues);
+    const submittedAppearance = snapshotPlainData(this.currentAppearanceValues);
 
     this.saving = true;
     this.errors = [];
@@ -343,7 +349,7 @@ export default class BrandNavigationBundles extends Component {
           ?.set("value", value);
       }
 
-      this.appearanceValues = submittedAppearance;
+      this.appearanceValues = {};
 
       this.success = i18n(
         themePrefix("brand_navigation.appearance.save_success")
@@ -400,12 +406,9 @@ export default class BrandNavigationBundles extends Component {
       }
 
       this.appearanceValues = Object.fromEntries(
-        this.appearanceColorDefinitions.map(({ setting }) => [
-          setting,
-          setting in submittedSettings
-            ? normalizedHexColor(submittedSettings[setting]) || ""
-            : this.appearanceValues[setting],
-        ])
+        Object.entries(this.appearanceValues).filter(
+          ([setting]) => !Object.hasOwn(submittedSettings, setting)
+        )
       );
 
       this.success = i18n(
@@ -500,6 +503,14 @@ export default class BrandNavigationBundles extends Component {
                     checked={{color.enabled}}
                     disabled={{this.saving}}
                     data-setting={{color.setting}}
+                    aria-label={{i18n
+                      (themePrefix "brand_navigation.appearance.custom_for")
+                      setting=(i18n
+                        (themePrefix
+                          (concat "brand_navigation.appearance." color.label)
+                        )
+                      )
+                    }}
                     {{on "change" this.toggleAppearanceColor}}
                   />
                   {{i18n (themePrefix "brand_navigation.appearance.custom")}}

@@ -77,22 +77,9 @@ export default class BrandNavigationContent extends Component {
       this.openSubmenus.clear();
     });
 
-    const hasEligibleIcon = (settings.navigation_items || [])
-      .filter(
-        (item) =>
-          (item.surface || "bar") === "bar" &&
-          isVisibleToUser(item, this.currentUser) &&
-          isVisibleOnDevice(item, this.capabilities.isMobileDevice)
-      )
-      .flatMap((item) => [
-        item,
-        ...(item.children || []).filter(
-          (child) =>
-            isVisibleToUser(child, this.currentUser) &&
-            isVisibleOnDevice(child, this.capabilities.isMobileDevice)
-        ),
-      ])
-      .some((item) => Boolean(item.icon));
+    const hasEligibleIcon = this.visibleItems
+      .flatMap((item) => [item, ...item.children])
+      .some((item) => Boolean(item.icon) && item.presentation !== "label_only");
 
     if (hasEligibleIcon) {
       this.unsubscribeFromPrimarySprite = primarySpriteWatcher.subscribe(() => {
@@ -255,6 +242,7 @@ export default class BrandNavigationContent extends Component {
                       {{on "toggle" this.submenuToggled}}
                     >
                       <summary
+                        tabindex="0"
                         class={{if item.url "brand-navigation__submenu-toggle"}}
                         aria-label={{if
                           item.url

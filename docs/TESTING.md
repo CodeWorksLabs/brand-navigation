@@ -823,16 +823,16 @@ Test the current stable and tests-passed Discourse branches where practical.
 
 | Context                     | Required result                                                                                        |
 | --------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Desktop, anonymous          | Allowed links render; only one submenu opens and Escape restores focus                                 |
+| Desktop, anonymous          | Allowed links render; only one submenu opens; Escape from it returns focus to its submenu control       |
 | Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                                            |
-| Mobile menu                 | One header control opens usable brand navigation                                                       |
+| Mobile menu                 | Header button opens navigation; Tab reaches the first link or submenu control; Escape dismisses the menu and returns focus to the header button |
 | Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus                                         |
 | Mobile hidden               | No brand-navigation surface renders                                                                    |
 | Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel                              |
 | Device-specific item        | Renders only for its selected device class, unchanged across phone rotation                            |
 | Descriptive submenu         | Description appears below its label; empty entries remain compact                                      |
 | Administrator object save   | Settings persist and the structured editor remains open                                                |
-| Administrator bundle import | Prepare through an enabled non-live staging theme; complete preflight occurs before one update request |
+| Administrator bundle import | Use a separate component copy or staging site for a live installation; complete preflight occurs before one update request |
 | Light/dark schemes          | Correct logo fallback and readable scheme colors                                                       |
 | RTL locale                  | Logical positioning and submenu alignment remain usable                                                |
 | `embed_mode=true` full app  | No bar or mobile trigger mounts                                                                        |

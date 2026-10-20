@@ -54,8 +54,8 @@ identity as:
   maintenance.
 
 The canonical repository became
-<https://github.com/CodeWorksLabs/brand-navigation>, with the local checkout at
-`C:\CodeProjects\Products\Discourse Brand Navigation`.
+<https://github.com/CodeWorksLabs/brand-navigation>, with the local checkout in
+a workspace directory named **Discourse Brand Navigation**.
 
 ## Non-negotiable architecture
 

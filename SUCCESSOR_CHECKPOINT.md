@@ -1,6 +1,39 @@
 # Brand Navigation successor checkpoint
 
-Date: 2026-10-17
+## Current correction handoff — 2026-10-20
+
+Phil authorized the four product fixes and four documentation corrections in
+the consolidated RC4 action list, then authorized committing and pushing those
+corrections. Testing and building remain stopped. The next release would be
+RC5; this push does not authorize publishing it, deployment or live-site
+changes, or changing the published RC4 tag.
+
+The working changes start from `main` commit
+`54a9cdb44b36f493138a016be8ee3501558d7fd4`. They change Appearance to retain
+only locally edited color drafts and read untouched colors from the current
+native settings; name each Custom checkbox with its localized color purpose;
+make submenu summaries discoverable to compact-menu focus forwarding; and
+exclude label-only entries from sprite-readiness subscriptions.
+
+Documentation clarifies shared-component staging and global enabling/disabling
+versus single-theme detachment, distinguishes bar and compact-menu Escape
+behavior, and replaces machine-specific historical paths. No new testing result
+or finding-closure disposition is claimed. These working changes have not been
+tested or built.
+
+For current product information, use the [README](README.md),
+[Administrator guide](docs/USER_GUIDE.md), [testing record](docs/TESTING.md) and
+[GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases).
+The testing record describes its dated evidence, not acceptance of these changes.
+
+## Historical checkpoint archive — 2026-10-17
+
+Everything below is retained history. Its RC2 candidates, instructions,
+permissions, pending actions and results are not the current handoff, current
+repository state or authority to resume work. In particular, the old
+"prepared, not published" wording does not describe the current release state.
+
+Historical date: 2026-10-17
 
 ## RC2 feature release-preparation handoff
 
@@ -205,8 +238,8 @@ be governed by Git, the release metadata, and the repository evidence records.
 ## Authoritative repository state
 
 - Repository: `https://github.com/CodeWorksLabs/brand-navigation`
-- Canonical local checkout:
-  `C:\CodeProjects\Products\Discourse Brand Navigation`
+- Local checkout: this repository's workspace directory, named
+  **Discourse Brand Navigation** in the original workspace.
 - Documentation branch: `docs/project-history`
 - Preview-gallery content commit:
   `de25bfe` (tree `8d64a050527cac8b98e78259131f03d2d2ed5dae`)
