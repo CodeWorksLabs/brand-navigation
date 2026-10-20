@@ -373,6 +373,11 @@ export default class BrandNavigationBundles extends Component {
     this.appearanceValues = Object.fromEntries(
       this.appearanceColorDefinitions.map(({ setting }) => [setting, ""])
     );
+    if (!this.appearanceDirty) {
+      // A no-op reset must not mask subsequent saves in the native editor.
+      this.appearanceValues = {};
+      return;
+    }
     await this.saveAppearance();
   }
 

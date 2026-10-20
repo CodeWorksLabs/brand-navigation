@@ -8,6 +8,17 @@ corrections. Testing and building remain stopped. The next release would be
 RC5; this push does not authorize publishing it, deployment or live-site
 changes, or changing the published RC4 tag.
 
+The initial correction batch was committed and pushed as
+`2481a24b9393ec2a902450cce306e2123fd66394`. A subsequent read-only review
+identified a no-op **Inherit all** reset that retained empty drafts and a stale
+historical checkout reference. Phil authorized those two corrections through
+Temp Brand Navigation. The local follow-up clears drafts immediately when the
+reset has nothing to save, and removes the stale reference without restoring a
+machine-specific path. Phil subsequently authorized committing and pushing this
+follow-up, then sending its commit to Temp Brand Navigation and Brand Navigation
+Checker for read-only review. It remains untested; testing, building,
+publication and RC4 tag changes are not authorized.
+
 The working changes start from `main` commit
 `54a9cdb44b36f493138a016be8ee3501558d7fd4`. They change Appearance to retain
 only locally edited color drafts and read untouched colors from the current

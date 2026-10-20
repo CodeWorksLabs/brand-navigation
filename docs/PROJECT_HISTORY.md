@@ -309,7 +309,8 @@ the current release requirements are in [`RELEASE.md`](RELEASE.md).
 ## Incidents that are not product doctrine
 
 - The local task working directory temporarily pointed to a path that no
-  longer existed. The canonical checkout is the Products path recorded above.
+  longer existed. Use the Brand Navigation repository checkout, not that
+  obsolete local location.
 - Browser-control availability changed across development-tool crashes and
   updates. That tooling incident does not define the product's browser or test
   requirements.
