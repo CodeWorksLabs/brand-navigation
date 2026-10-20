@@ -908,6 +908,75 @@ RSpec.describe "Brand Navigation" do
     expect(page).to have_button("Save colors", disabled: true)
   end
 
+  it "preserves a native color save after a no-op Inherit all and a different Appearance save" do
+    color_names = %i[
+      bar_background_color
+      bar_text_color
+      hover_background_color
+      submenu_background_color
+      submenu_text_color
+      submenu_hover_text_color
+      header_icon_color
+      header_icon_hover_color
+      header_text_color
+      header_text_hover_color
+      header_hover_background_color
+    ]
+    expected = color_names.to_h { |name| [name, ""] }
+    color_names.each { |name| theme.update_setting(name, "") }
+    theme.save!
+    sign_in(Fabricate(:admin))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+
+    visit(settings_path)
+    expect(page).to have_css('.brand-navigation-admin-panel input[type="color"]', count: 11)
+    appearance_panel = find(".brand-navigation-admin-panel")
+    color_names.each do |name|
+      expect(page).to have_css("input[type='checkbox'][data-setting='#{name}']:not(:checked)")
+    end
+    click_button("Inherit all")
+    expect(page).to have_button("Save colors", disabled: true)
+
+    # Keep the same page and Appearance instance throughout both editors' saves.
+    native_row = find("section.theme.settings .setting[data-setting='bar_background_color']")
+    native_row.find("input.input-setting-string").set("#123456")
+    native_row.find(".setting-controls__ok").click
+    expect(native_row).not_to have_css(".setting-controls__ok")
+    expect(theme.reload.settings.fetch(:bar_background_color).value).to eq("#123456")
+    expect(
+      page.evaluate_script("arguments[0] === document.querySelector('.brand-navigation-admin-panel')", appearance_panel),
+    ).to eq(true)
+
+    within(".brand-navigation-admin-panel") do
+      find("input[type='checkbox'][data-setting='header_icon_color']").check
+      picker = find("input[type='color'][data-setting='header_icon_color']")
+      page.execute_script(
+        "arguments[0].value='#456789'; arguments[0].dispatchEvent(new Event('input',{bubbles:true}));",
+        picker,
+      )
+      click_button("Save colors")
+    end
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expected[:bar_background_color] = "#123456"
+    expected[:header_icon_color] = "#456789"
+
+    [false, true].each do |reload_page|
+      visit(settings_path) if reload_page
+      expect(page).to have_button("Save colors", disabled: true)
+      saved_settings = theme.reload.settings
+      expected.each do |name, value|
+        expect(saved_settings.fetch(name).value).to eq(value)
+        row = find("section.theme.settings .setting[data-setting='#{name}']")
+        expect(row).to have_field(with: value)
+        checkbox = "input[type='checkbox'][data-setting='#{name}']"
+        expect(page).to have_css("#{checkbox}#{value.empty? ? ':not(:checked)' : ':checked'}")
+      end
+      %i[bar_background_color header_icon_color].each do |name|
+        expect(find("input[type='color'][data-setting='#{name}']").value).to eq(expected.fetch(name))
+      end
+    end
+  end
+
   context "with an unpublished staging theme" do
     let(:staging_theme) { Fabricate(:theme, enabled: true, user_selectable: false) }
     let(:theme) { upload_theme_component(parent_theme_id: staging_theme.id) }
