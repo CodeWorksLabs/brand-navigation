@@ -948,7 +948,8 @@ RSpec.describe "Brand Navigation" do
     ).to eq(true)
 
     within(".brand-navigation-admin-panel") do
-      find("input[type='checkbox'][data-setting='header_icon_color']").check
+      find("input[type='checkbox'][data-setting='header_icon_color']").click
+      expect(page).to have_css("input[type='checkbox'][data-setting='header_icon_color']:checked")
       picker = find("input[type='color'][data-setting='header_icon_color']")
       page.execute_script(
         "arguments[0].value='#456789'; arguments[0].dispatchEvent(new Event('input',{bubbles:true}));",
