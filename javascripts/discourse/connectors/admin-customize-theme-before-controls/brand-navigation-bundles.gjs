@@ -138,6 +138,11 @@ export default class BrandNavigationBundles extends Component {
 
   bundleSelection = 0;
 
+  willDestroy() {
+    this.bundleSelection++;
+    super.willDestroy();
+  }
+
   get currentAppearanceValues() {
     // Only locally edited colors are drafts. Untouched colors follow native
     // setting saves instead of retaining a snapshot from component creation.
@@ -153,11 +158,6 @@ export default class BrandNavigationBundles extends Component {
             ) || "",
       ])
     );
-  }
-
-  willDestroy() {
-    this.bundleSelection++;
-    super.willDestroy();
   }
 
   get theme() {
@@ -190,8 +190,7 @@ export default class BrandNavigationBundles extends Component {
       ...color,
       enabled: Boolean(values[color.setting]),
       value:
-        normalizedHexColor(values[color.setting]) ||
-        this.inheritedColor(color),
+        normalizedHexColor(values[color.setting]) || this.inheritedColor(color),
     }));
   }
 

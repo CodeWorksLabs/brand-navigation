@@ -821,24 +821,24 @@ submenu button is present and no Resources parent link is rendered. Its saved
 
 Test the current stable and tests-passed Discourse branches where practical.
 
-| Context                     | Required result                                                                                        |
-| --------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Desktop, anonymous          | Allowed links render; only one submenu opens; Escape from it returns focus to its submenu control       |
-| Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                                            |
+| Context                     | Required result                                                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Desktop, anonymous          | Allowed links render; only one submenu opens; Escape from it returns focus to its submenu control                                               |
+| Desktop, authenticated      | Authenticated entries render; anonymous-only entries do not                                                                                     |
 | Mobile menu                 | Header button opens navigation; Tab reaches the first link or submenu control; Escape dismisses the menu and returns focus to the header button |
-| Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus                                         |
-| Mobile hidden               | No brand-navigation surface renders                                                                    |
-| Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel                              |
-| Device-specific item        | Renders only for its selected device class, unchanged across phone rotation                            |
-| Descriptive submenu         | Description appears below its label; empty entries remain compact                                      |
-| Administrator object save   | Settings persist and the structured editor remains open                                                |
-| Administrator bundle import | Use a separate component copy or staging site for a live installation; complete preflight occurs before one update request |
-| Light/dark schemes          | Correct logo fallback and readable scheme colors                                                       |
-| RTL locale                  | Logical positioning and submenu alignment remain usable                                                |
-| `embed_mode=true` full app  | No bar or mobile trigger mounts                                                                        |
-| Classic embedded comments   | No global brand/navigation content appears                                                             |
-| Embedded interaction        | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged                            |
-| Normal sign-in              | Full-application sign-in remains core Discourse behavior                                               |
+| Mobile bar                  | Responsive bar wraps navigation and exposes unclipped submenus                                                                                  |
+| Mobile hidden               | No brand-navigation surface renders                                                                                                             |
+| Site-header item            | Direct icon appears once with its tooltip, audience, target, and safe rel                                                                       |
+| Device-specific item        | Renders only for its selected device class, unchanged across phone rotation                                                                     |
+| Descriptive submenu         | Description appears below its label; empty entries remain compact                                                                               |
+| Administrator object save   | Settings persist and the structured editor remains open                                                                                         |
+| Administrator bundle import | Use a separate component copy or staging site for a live installation; complete preflight occurs before one update request                      |
+| Light/dark schemes          | Correct logo fallback and readable scheme colors                                                                                                |
+| RTL locale                  | Logical positioning and submenu alignment remain usable                                                                                         |
+| `embed_mode=true` full app  | No bar or mobile trigger mounts                                                                                                                 |
+| Classic embedded comments   | No global brand/navigation content appears                                                                                                      |
+| Embedded interaction        | Core topic, sign-in, reply, like, quote, and composer behavior is unchanged                                                                     |
+| Normal sign-in              | Full-application sign-in remains core Discourse behavior                                                                                        |
 
 Also test long labels, empty configuration, missing optional icons, external
 links, browser zoom, reduced viewport width, keyboard-only use, and screen
