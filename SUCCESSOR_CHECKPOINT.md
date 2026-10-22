@@ -1,6 +1,12 @@
 # Brand Navigation successor checkpoint
 
-## Main update content — 2026-10-21
+## Product main update pushed — 2026-10-21
+
+Committed and pushed the selected update as
+dcb01b28744aec1f06441ddacf713c1f8c407958, with parent 238d5ad. A fresh
+git ls-remote origin refs/heads/main confirmed that exact remote commit after
+the push. The tracked working tree was clean at that point. This follow-on
+checkpoint-only change records the confirmed result.
 
 Phil requested updating main. The update packages the accumulated product edits,
 existing tracked test-source edits, support-policy/release documentation, current
@@ -14,6 +20,8 @@ The three tracked test edits have no new dependency on those external procedure
 or preparation trees. The new RC5 release notes remain a draft; E01 immediate
 display staleness remains unresolved. Older local/uncommitted preparation
 statuses below describe their historical point, not a new testing assignment.
+No tests/builds or CI checks were invoked. No RC5 tag, release, Discourse update,
+production change, or modification of the published RC4 was performed.
 
 ## Phil's final testing closure — 2026-10-21
 
