@@ -1,5 +1,26 @@
 # Brand Navigation successor checkpoint
 
+## Documentation accuracy correction — 2026-10-21
+
+Phil requested correcting docs/RELEASE_NOTES_RC5.md and docs/KNOWN_ISSUES.md
+to separate implemented changes, verified results, and unresolved items.
+Both now identify product implementation on main at dcb01b2, historical CI at
+238d5ad, and later focused execution/browser results with their actual limits.
+No whole-suite or release-acceptance claim is made for the later main revision.
+
+Both records state that the lengthy process failed to produce a clear overall
+answer: a testing-process failure, not evidence of more product bugs. Phil's
+assessment is recorded explicitly: the testing execution is a failure that will
+have a resolution. That process issue remains unresolved; its resolution has
+not been specified or initiated by these document changes.
+
+E01 immediate native-field/picker display staleness remains unresolved. Other
+incomplete checks remain missing coverage, not demonstrated product bugs.
+Testing stays closed; reopening requires new explicit instruction from Phil.
+This change affects only the two requested documents and this checkpoint.
+No product changes, tests, builds, runtime actions, or new investigation. The
+documentation update to main uses [skip ci]; RC5 is still an unpublished draft.
+
 ## Product main update pushed — 2026-10-21
 
 Committed and pushed the selected update as

@@ -1,48 +1,84 @@
 # Brand Navigation Known Issues
 
-## Final disposition — closed by Phil, October 21, 2026
+## Current disposition — October 21, 2026
 
 The lengthy process failed to produce a clear overall answer. That is a
 testing-process failure, not evidence of more product bugs.
 
-Discourse Work's recorded Chrome results establish the following limited facts:
-
-- The long-label mobile-bar overflow and empty compact trigger/popup defects
-  were fixed and passed their exact retests. The former used Foundation at
-  390x844; the latter used Foundation and Horizon. Installed mobile SCSS SHA-256:
-  `32070f6abc896ed43d700368d5a2269188807f2411709c789a05ec6cf828c9e6`;
-  menu connector SHA-256:
-  `0cb5d98b66c72315061792eabbdde7c79ac73733b8f2c6337ccc2449a1130447`.
-- The E03 checkbox-focus correction was verified in Chrome. Keyboard operation
-  and saved state were retained.
-- Tested E02 English/Arabic, light/dark, Foundation/Horizon compact keyboard
-  sequences showed no issue in the actual desktop-Chrome mobile-view contexts.
-  This does not establish the complete eight-context gate or native-phone coverage.
-- E01 remains **unresolved**. Immediate native-field/picker display staleness was
-  observed; saved values persisted in the corrected save/reload sequence, but
-  the cause of the stale display remains unresolved.
-
-Other incomplete checks are missing coverage, not demonstrated bugs. Unknown
-coverage remains unknown; it is not evidence that the product is broken.
+Phil's assessment is explicit: **"The testing execution is a failure that will
+have a resolution."** That execution failure remains an unresolved process
+issue. Its resolution has not yet been specified; closing this testing effort
+does not resolve the execution failure or initiate a new investigation.
 
 **Phil closed this testing effort.** No new testing, investigation, gap chasing,
 or campaigns are authorized. Reopening requires new explicit instruction from
 Phil. Closure is the human stopping decision, not all-nine verification,
 release acceptance, or an E01 fix.
 
-Original configuration and normal viewport were restored. The two authorized
-layout fixes remain installed in the local test fixture; no production or RC4
-changes were made. Exact fixtures, hashes and evidence are in the
+## Implemented on main
+
+The accumulated product changes were committed and pushed in
+[`dcb01b2`](https://github.com/CodeWorksLabs/brand-navigation/commit/dcb01b28744aec1f06441ddacf713c1f8c407958).
+Implementation does not establish that every behavior has been verified.
+
+| Change | Implementation status | Verification status |
+|---|---|---|
+| Appearance color handling | Sparse saves submit explicitly edited colors; successful responses reconcile saved colors. Native-color observers and a native-save synchronization extension are also implemented. | Saved values persisted in the named corrected browser sequence. Immediate native-field/picker display staleness remains unresolved; the display additions did not establish an E01 fix. |
+| No-op Inherit all | Empty drafts are cleared when no color change is needed. | The exact no-op reset/native-save/different Appearance save/reload regression passed at `238d5ad`. |
+| Compact-menu keyboard entry | The group-only submenu control was made keyboard-focusable. | Tested E02 contexts showed no issue; complete eight-context/native-phone coverage was not established. |
+| Custom checkbox names and focus | Purpose-specific names and stable setting keys are implemented. | Names, keyboard operation, saved state, and the E03 focus correction were verified in Chrome. |
+| Long linked-parent mobile label | Mobile-bar item width is bounded and the label can truncate while retaining the caret. | The exact Foundation 390x844 case passed in Chrome. |
+| Empty compact menu | The trigger requires a renderable brand or visible navigation content. | The exact empty-content case passed in Foundation and Horizon in Chrome. |
+| Label-only icon subscriptions | Unnecessary subscriptions are avoided for entries that cannot display icons. | E04's label-only group/child subscription and cleanup case passed on the representative frontend target. |
+
+RC5 has not been published. The published RC4 tag/release is unchanged.
+
+## What was verified, and its limits
+
+- **Earlier CI:** commit `238d5ad829eb6053e5c2aefc94f495cf5f83791f` passed four
+  system-test lanes with 49 examples each and 45 configuration/lint-coverage
+  cases. These results apply to that commit and its recorded Core revisions,
+  not the later `dcb01b2` main update. No suite was rerun for that update; its
+  commit used `[skip ci]` to preserve testing closure.
+- **Later representative execution:** the recorded run completed 53 system
+  examples with 51 passes and 2 failures, plus 45 frontend tests with 45 passes.
+  All 21 installed fields matched that run's candidate. These are historical
+  results for that snapshot, not whole-product acceptance or a suite result for
+  current main.
+- **Focused layout retests in Chrome:** the long-label case passed in Foundation
+  at 390x844; the empty compact trigger/popup case passed in Foundation and
+  Horizon. Installed mobile SCSS SHA-256:
+  `32070f6abc896ed43d700368d5a2269188807f2411709c789a05ec6cf828c9e6`;
+  menu connector SHA-256:
+  `0cb5d98b66c72315061792eabbdde7c79ac73733b8f2c6337ccc2449a1130447`.
+- **E03 in Chrome:** the checkbox-focus correction passed; names, keyboard
+  operation and saved state were retained.
+- **E02 in Chrome:** tested English/Arabic, light/dark, Foundation/Horizon
+  compact keyboard sequences showed no issue in the actual desktop-Chrome
+  mobile-view contexts. Complete eight-context and native-phone coverage were
+  not established.
+- **E04:** the missing label-only subscription case passed on the representative
+  frontend target, within that recorded case's scope.
+
+## What remains unresolved
+
+- **E01:** immediate native-field/picker display staleness remains unresolved.
+  Saved values persisted in the corrected save/reload sequence, but the cause
+  of the stale display remains unknown. E01 is not recorded as fixed or closed.
+- **Testing execution:** the process failed to produce a clear overall answer.
+  Phil states that this failure will have a resolution. That resolution remains
+  open; this record does not assign investigation, testing, or a new campaign.
+- **Incomplete coverage:** unrun or unreached checks remain missing coverage,
+  not demonstrated product bugs. Unknown coverage is not evidence that the
+  product is broken. Detailed limits are retained below.
+
+Original configuration and normal viewport were restored after the focused
+browser work. The two layout fixes remained installed in the local test fixture;
+no production or published RC4 changes were made. Exact fixtures, hashes and
+evidence are in the
 [Discourse Work closure record](<C:/CodeProjects/Planning/Procedure Docs/notes/brand-navigation-live-browser-results-20261021.md>).
-This disposition supersedes older statuses below only where expressly stated;
-original observations and failures remain historical evidence.
-
-### Earlier representative run
-
-The earlier representative run completed 53 system examples with 51 passes and
-2 failures, plus 45 frontend tests with 45 passes. All 21 installed fields
-matched that local candidate. These are historical run results, not fresh
-execution or whole-product acceptance.
+The implementation commit does not create whole-release acceptance or replace
+the original observations and failures retained below.
 
 ## Classification meanings
 
@@ -63,7 +99,7 @@ execution or whole-product acceptance.
 |---|---|---|
 | E01 immediate display staleness and historical native-save overwrite | **Stale display confirmed and unresolved; overwrite corrected in the named later sequence** | On the earlier candidate, initial background #112233, text #334455, icon #223344 were verified after reload. Native background #123456 saved, while displayed background remained #112233. Saving only Appearance icon #456789 then lost the native background save; reload confirmed background #112233. After the sparse-save correction, Discourse Work observed the native value persist through the different Appearance save and reload. Immediate native-field/picker staleness remained. Its cause is unresolved; E01 is not closed. |
 | E03 original keyboard helper stops after 80 Tab presses | **Testing limitation; likely test-caused failure** | The helper had a fixed 80-key limit. The failure screenshot showed focus still in native controls preceding Appearance. This strongly supports premature exhaustion, but the full focus sequence was not recorded. The limit was replaced; the replacement has not been verified. |
-| E03 latest example fails during initial page navigation | **Confirmed test/page-settle failure; cause unresolved** | The 10000ms client-settle limit expired with pending scroll events on the admin sidebar. Failure occurred at the initial visit, before the changed Tab helper, initial name/value checks, Space operation and reload assertions. It does not establish broken checkbox behavior. |
+| E03 automated example failed during initial page navigation | **Historical test/page-settle failure; cause unresolved** | The 10000ms client-settle limit expired with pending scroll events on the admin sidebar. Failure occurred at the initial visit, before the changed Tab helper, initial name/value checks, Space operation and reload assertions. It does not establish broken checkbox behavior. Later manual browser results are recorded separately. |
 | E03 direct browser names, keyboard operation and persistence | **Confirmed working on the local browser target** | All eleven exact checkbox purpose names were unique. Actual Tab/Shift+Tab reached every checkbox with visible focus; Space correctly toggled checked state and picker enablement. All eleven custom values matched native fields and pickers after save/reload. Six alternating controls then returned to inherited, and all mixed states/values persisted after save/reload. This is a manual result, not a passing execution of the forward-only RSpec helper. The first control took122 forward Tabs from this session's starting focus. |
 | E03 checkbox lost keyboard focus after Space | **Historical defect; correction verified in Chrome** | Earlier Space toggles moved activeElement to BODY; original screenshots and keyboard observations are preserved. After the stable-setting-key correction, Discourse Work verified that all eleven Custom checkboxes retained visible focus through Space on/off toggles. Keyboard operation and saved state were retained. |
 | Chromium launches collide on DevTools port 50062 | **Confirmed testing-procedure defect; absent in the latest observed run** | Failed launches recorded Address already in use and Cannot start http server for devtools. Both requested the same port while the procedure used two workers. After command-scoped CHROME_REMOTE_DEBUGGING_PORT=0, the previously blocked mobile-submenu example passed and no collision was captured. The collision's role in the entire earlier launch timeout was not conclusively established. |
@@ -90,10 +126,12 @@ first exposed focus loss, and later verified the focus correction.
 | E08 Genuine zoom, OS chooser and screen readers | **Unverified or deferred human/native coverage** | Genuine zoom and OS-chooser procedures were not run. Twelve screen-reader procedures remain deferred. No corresponding product defect was demonstrated. |
 | E09 Classic embed, HTTPS and transitions into Core | **Unverified coverage and procedure admission** | Dedicated procedures were not run. Ordinary embed/Core-feature passes do not establish those specific results. No HTTPS or classic-embed defect was demonstrated. |
 
-The latest runtime evidence covers one exact Discourse 2026.9.0 Core revision
-and a local uncommitted candidate snapshot. It does not establish compatibility
-for every release, operating system or browser. Broader coverage remains a
-coverage limitation rather than an observed incompatibility.
+The representative runtime evidence was gathered against one exact Discourse
+2026.9.0 Core revision and a snapshot that was local and uncommitted at the time.
+The later main publication does not turn that evidence into a full-suite result
+for current main or establish compatibility for every release, operating system
+or browser. Broader coverage remains a limitation rather than an observed
+incompatibility.
 
 ## Issues created by verification tooling
 
@@ -117,10 +155,12 @@ product failures:
 - That the nine acceptance gaps represent nine confirmed product bugs.
 
 The earlier automated stale-picker failures did not establish stored-value loss;
-their later save was unreached. The subsequent direct browser sequence now
-demonstrates that loss for E01's initially custom-color case. The separate
-no-op Inherit/native-save/different Appearance regression passed in the earlier
-completed run; it does not close this directly reproduced case.
+their later save was unreached. The original-candidate direct browser sequence
+then demonstrated loss for E01's initially custom-color case. After the
+sparse-save correction, saved values persisted in the named corrected sequence.
+The separate no-op Inherit/native-save/different Appearance regression also
+passed in its earlier run. Neither result closes the remaining immediate
+native-field/picker display staleness.
 
 Themes attached to the same component share its code and settings. That is
 documented behavior, not a newly observed isolation defect.
@@ -129,7 +169,7 @@ documented behavior, not a newly observed isolation defect.
 
 ### E01 implementation follow-up — October 21, 2026
 
-After the direct Chrome reproduction, Brand Navigation changed the local
+After the direct Chrome reproduction, Brand Navigation changed the
 Appearance save to submit only explicitly edited colors. Untouched page values
 are omitted even if the page is stale; **Inherit all** still explicitly resets
 every defined color. Successful settings responses reconcile saved color
@@ -146,17 +186,17 @@ evidence is preserved.
 
 ### Earlier stopped verification state
 
-At the stop, the E01 product edit remained local and uncommitted, with Brand
-Navigation's approval to retain it. The failing native case does not establish
-that the edit solved E01. Product implementation remains with Brand Navigation.
-No additional product/test edit, test, build or runtime operation was performed
-to compile this list.
+At that earlier stop, the E01 product edit remained local and uncommitted, with
+Brand Navigation's approval to retain it. Subsequent implementation publication
+and focused browser outcomes are recorded above. That earlier failing native
+case did not establish an E01 fix, and E01 remains unresolved. No new product
+edit, test, build or runtime operation was performed to correct this record.
 
-- [Latest completed verification and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/RESULT.md>).
+- [Earlier completed verification and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/RESULT.md>).
 - [Direct Chrome E01 result and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/e01-navigation-repair/MANUAL-BROWSER-RESULT.md>).
 - [Direct Chrome E03 result and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/e03-manual-browser/RESULT.md>).
-- [Latest named system outcomes](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/SYSTEM-RESULT.json>).
-- [Latest system failure traces](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/f2-external/host/receipts/rc5-approved-fixes-system-a1/worker.stdout.log:87>).
+- [Earlier named system outcomes](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/SYSTEM-RESULT.json>).
+- [Earlier system failure traces](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/f2-external/host/receipts/rc5-approved-fixes-system-a1/worker.stdout.log:87>).
 - [Earlier completed run and interrupted-run history](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/FINAL-RESULT.md>).
 - [E01 assertion helper](</C:/CodeProjects/Products/Discourse Brand Navigation/spec/system/brand_navigation_spec.rb:67>).
 - [Existing procedure inventory](</C:/CodeProjects/Products/Discourse Brand Navigation/test/rc5-procedures/README.md>).
