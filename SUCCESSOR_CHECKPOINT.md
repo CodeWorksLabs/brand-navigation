@@ -1,5 +1,30 @@
 # Brand Navigation successor checkpoint
 
+## Public docs cleanup deployed; seven-forum updates await user — October 22, 2026
+
+The canonical public testing record cleanup was pushed in product commit
+81499e6356394386c2bc5396fcfb0496f1a81690 with [skip ci]. CWL's full nine-page
+mirror/manifest was refreshed from that exact source. RC1 reference-link
+formatting was also corrected. Site source d2b41cb7ee96848675cd52d148335a8687acbdc1
+was committed/pushed and deployed successfully as Worker version
+9c660f11-067c-4a81-84a9-db860a74054e before the latest reported app interruption.
+
+After resuming, both public pages returned HTTP200. Read-back confirmed no
+personal references/internal instructions in the testing record; actual failed
+CI, unresolved E01, unresolved testing-execution failure and the October17
+seven-forum anchor remain. RC1's three reference links are a separate paragraph.
+No product tests, new CI, forum updates or new product-verification claims.
+The docs build/offline mirror check and deployment dry run passed. The RC5
+tag remains unchanged. These documentation requests are complete.
+
+Next phase is explicit: the user performs each forum update, one at a time;
+this task verifies installed revision/native updater status after each completed
+update signal. Do not update forums or run regression tests. No current forum
+update has been reported yet; wait for the first forum. The user has reported
+repeated app crashes/forced updates; do not restart completed build/deploy work.
+
+The snapshots below are historical.
+
 ## Public testing-record copy cleanup ready — October 22, 2026
 
 Current request: remove personal references and internal instructions from the
