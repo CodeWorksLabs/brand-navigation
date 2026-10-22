@@ -1258,7 +1258,7 @@ RSpec.describe "Brand Navigation" do
     expect_appearance_checkbox_names
 
     appearance_color_labels.each_key.with_index do |name, index|
-      next unless index.even?
+      next if index.odd?
       tab_to_appearance_checkbox(name)
       page.driver.with_playwright_page { |browser_page| browser_page.keyboard.press("Space") }
       expect(page).to have_css("input[type='checkbox'][data-setting='#{name}']:not(:checked)")

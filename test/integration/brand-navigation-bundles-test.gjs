@@ -1,5 +1,5 @@
-import { trackedArray, trackedObject } from "@ember/reactive/collections";
 import EmberObject from "@ember/object";
+import { trackedArray, trackedObject } from "@ember/reactive/collections";
 import {
   clearRender,
   click,
@@ -647,7 +647,11 @@ module(
 
         for (const enabled of [true, false]) {
           await click(checkbox);
-          assert.strictEqual(find(selector), checkbox, `${name} keeps its node`);
+          assert.strictEqual(
+            find(selector),
+            checkbox,
+            `${name} keeps its node`
+          );
           assert.strictEqual(
             document.activeElement,
             checkbox,
@@ -731,7 +735,9 @@ module(
 
     test("native color save accepts its submitted value after a stale buffer update", async function (assert) {
       brandNavigationAdmin.initialize(this.owner);
-      const Editor = this.owner.factoryFor("component:theme-setting-editor").class;
+      const Editor = this.owner.factoryFor(
+        "component:theme-setting-editor"
+      ).class;
       let complete;
       const pending = new Promise((resolve) => {
         complete = resolve;

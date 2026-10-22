@@ -71,14 +71,14 @@ no new suite was run for that push.
 
 ### Later local execution and focused Chrome results
 
-| Area | Recorded result | Limit |
-| --- | --- | --- |
-| E01 corrected save sequence | The independently native-saved value survived a different Appearance save and reload. | Immediate native-field/picker display remained stale; E01 is unresolved. |
-| E03 Custom controls | Names, keyboard operation and saved states were observed; the later focus correction retained focus through Space on/off toggles for all eleven checkboxes. | Focused Chrome observations on the local target, not whole-product accessibility acceptance. |
-| Long-label mobile bar | The original overflow fixture passed after correction; the label and caret stayed within bounds and the submenu was usable. | Foundation, English, 390x844 desktop-Chrome mobile view. |
-| Empty compact menu | No empty trigger or popup remained; Core controls stayed present. | Exact empty fixture in Foundation/Horizon, English, 390x844 desktop-Chrome mobile view. |
-| E02 compact keyboard | Tested English/Arabic, light/dark, Foundation/Horizon sequences showed no issue. | Actual desktop-Chrome mobile-view contexts; no full eight-context or native-phone gate closure claimed. |
-| E04 label-only subscriptions | The missing label-only group/child subscription and cleanup case passed in representative frontend runs. | That representative target and case, not blanket compatibility. |
+| Area                         | Recorded result                                                                                                                                             | Limit                                                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| E01 corrected save sequence  | The independently native-saved value survived a different Appearance save and reload.                                                                       | Immediate native-field/picker display remained stale; E01 is unresolved.                                |
+| E03 Custom controls          | Names, keyboard operation and saved states were observed; the later focus correction retained focus through Space on/off toggles for all eleven checkboxes. | Focused Chrome observations on the local target, not whole-product accessibility acceptance.            |
+| Long-label mobile bar        | The original overflow fixture passed after correction; the label and caret stayed within bounds and the submenu was usable.                                 | Foundation, English, 390x844 desktop-Chrome mobile view.                                                |
+| Empty compact menu           | No empty trigger or popup remained; Core controls stayed present.                                                                                           | Exact empty fixture in Foundation/Horizon, English, 390x844 desktop-Chrome mobile view.                 |
+| E02 compact keyboard         | Tested English/Arabic, light/dark, Foundation/Horizon sequences showed no issue.                                                                            | Actual desktop-Chrome mobile-view contexts; no full eight-context or native-phone gate closure claimed. |
+| E04 label-only subscriptions | The missing label-only group/child subscription and cleanup case passed in representative frontend runs.                                                    | That representative target and case, not blanket compatibility.                                         |
 
 The [known-issues record](KNOWN_ISSUES.md) preserves the installed source hashes,
 evidence references, original failures and coverage limits. Original configuration

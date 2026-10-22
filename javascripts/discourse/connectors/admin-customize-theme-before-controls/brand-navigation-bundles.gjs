@@ -174,6 +174,9 @@ export default class BrandNavigationBundles extends Component {
     this.observedTheme = this.theme;
     this.nativeColorSettings = settings;
     for (const setting of settings) {
+      // Native ThemeSettings remains Ember-observable; cleanup is paired in
+      // stopObservingNativeColors rather than retaining a global observer.
+      // eslint-disable-next-line ember/no-observers
       addObserver(setting, "value", this, this.nativeColorChanged);
     }
   }

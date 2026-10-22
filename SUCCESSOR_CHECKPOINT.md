@@ -1,5 +1,28 @@
 # Brand Navigation successor checkpoint
 
+## RC5 standard CI in progress — October 22, 2026
+
+Candidate 6c9befbf82f4d17d68f69f1287562aebda344e96 was pushed to main.
+Existing runs: Configuration bundles 39742545843 (44 behavior cases passed;
+lint-coverage check failed), Discourse Theme 39742546313 (still running).
+Actual lint diagnostics: ember/no-observers at the existing native-setting
+bridge, import order in the bundle integration test, Prettier in that test
+and three documentation files, and Ruby invertible-unless style in an
+existing checkbox example. Mechanical corrections are prepared; the bridge
+has a line-scoped documented legacy-model lint exception, with no behavior
+change or E01-fix claim. No runtime assertion has been disabled or new test added.
+All four backend jobs passed; frontend jobs failed and their actual logs are
+being read. Four system jobs remain running. Do not label outcomes beyond
+their actual evidence. No local product test suite has been run.
+
+CWL curated RC5 release notes are prepared but not committed/deployed. Its
+required npm ci finished; production dependency audit reported nine findings
+(four moderate/five high). Dependencies were not modified or auto-fixed.
+No documentation build, dry run, or deployment has run yet. No RC5 tag or
+GitHub prerelease has been created. Continue only the authorized existing CI
+and publication/documentation work; prior campaign and E01 investigation stay
+closed. Never claim ESR schedule catch-up from the adopted policy alone.
+
 ## RC5 authorized: existing GitHub CI only — 2026-10-22
 
 The pending clarification below is resolved: Phil answered **"Run existing
@@ -41,6 +64,7 @@ released patches for the configured supported lines; development latest is
 separate. No new compatibility outcome was inferred from that check.
 
 Prepared, uncommitted documentation only:
+
 - Product docs/TESTING.md: current testing-execution failure and Known Issues
   reference; committed-but-unrun ESR status; no new execution result.
 - CWL curated src/content/docs/brand-navigation/release-notes.md under
@@ -110,6 +134,7 @@ No more chasing ghosts."
 
 The lengthy process failed to produce a clear overall answer. This is a testing-
 process failure, not evidence of further product bugs. Recorded Chrome evidence:
+
 - Both exact layout fixes passed: long-label mobile-bar overflow and empty
   compact trigger/popup; detailed hashes/fixtures/results follow below.
 - E03 checkbox-focus correction passed; operation and saved state retained.
@@ -140,6 +165,7 @@ acceptance. Under Phil's closure boundary, this testing effort is now closed;
 do not manufacture a further campaign from the remaining recorded limitations.
 
 Reported outcomes:
+
 - Foundation, 390x844 long-label bar: no horizontal overflow; document width
   375px; group right 365.67px; caret 337.67-365.67px; visible/usable submenu,
   with child links ending at 351.33px.
@@ -163,11 +189,12 @@ issues, then retest them in the live browser." That chat relayed the exact two
 defects and owns installation/retest in its existing local fixture.
 
 Only two product files changed in this chat:
+
 - mobile/mobile.scss:22 constrains mobile-bar items to available width and
   ellipsizes a linked-parent label inside its flex link, preserving space for
   the separate caret. Popup overflow is not hidden.
   SHA256 32070f6abc896ed43d700368d5a2269188807f2411709c789a05ec6cf828c9e6.
-- javascripts/discourse/connectors/home-logo__before/brand-navigation-menu.gjs:21
+- javascripts/discourse/connectors/home-logo\_\_before/brand-navigation-menu.gjs:21
   gates the compact trigger on actual content: a renderable brand or bar items
   after existing user/device/child filtering and item preparation. Hidden brand
   plus empty navigation no longer meets the render condition.
@@ -181,7 +208,7 @@ English, 390x844, mobile_mode=bar, show_brand=false, inherited colors. Empty
 case: Foundation/Horizon, show_brand=false, navigation_items=[], mobile_mode=menu.
 
 Minimal installation handoff: replace only the existing mobile SCSS field and
-home-logo__before/brand-navigation-menu connector field with the two files above.
+home-logo\_\_before/brand-navigation-menu connector field with the two files above.
 Preserve settings and all other installed fields, including c862af6f Appearance
 connector and b1993866 initializer. Discourse Work applies the exact existing
 fixtures and retests these two observed behaviors in Chrome, then restores its
@@ -210,13 +237,14 @@ Discourse Work outcomes recorded below. No correction was requested or made.
 
 Newest commit observed: 238d5ad (2026-10-20). The working tree has newer
 uncommitted product edits matching the predecessor's final recorded hashes:
+
 - javascripts/discourse/connectors/admin-customize-theme-before-controls/
   brand-navigation-bundles.gjs: observer bridge at line 141, saved-value get()
   reads at 200/250, response reconciliation at 285, sparse Appearance save at
   412, observer lifecycle at 554/555, stable checkbox row key at 568.
   SHA256 c862af6faff4a8f42fad43c8f61757a09af41a7cbc61a969ba7d37d9aa037c77.
 - javascripts/discourse/initializers/brand-navigation-admin.js: lines 21-46
-  extend native color-setting _save to reconcile submitted buffer/setting
+  extend native color-setting \_save to reconcile submitted buffer/setting
   values after the original save resolves.
   SHA256 b1993866e024b6718fd047701bf359655b072f7b72c65c8233a53fcef2e348f1.
 
@@ -237,6 +265,7 @@ runtime operations, publication, deployment, or messaging those chats.
 
 Current chat ID: 01a16140-4294-7e61-a561-e6b666908eb6.
 Source chat IDs (host local):
+
 - Original Brand Navigation: 01a08236-bcfa-73f2-85b0-b2be66290512.
 - Brand Nav Tester: 01a15bb9-cc0e-7ea0-8894-a5d5a8269c6f.
 - Temp Brand Navigation: 01a14bcd-80cd-7a11-98b0-45f0d1ceec35.
@@ -258,6 +287,7 @@ followed by unsupported blame of the testing procedure. Do not convert old
 verification gaps or historical assignments into authorization for new work.
 
 Source handoff anchors:
+
 - Tester: TESTER_CHECKPOINT.md; final direct instruction transferred testing
   to Discourse Work. Its browser evidence reproduced the native-save overwrite
   and eleven-checkbox focus loss. Corrected E01 comparison was unreached in
@@ -323,8 +353,8 @@ reload preserved those values. Thus the observer-only addition did NOT resolve
 the remaining immediate display staleness. Preserve that failed outcome.
 
 Under Phil's existing request to fix this remaining E01 behavior, prepared a
-scoped native theme-setting-editor _save extension in brand-navigation-admin.js.
-Only Brand Navigation component settings ending in _color take this path;
+scoped native theme-setting-editor \_save extension in brand-navigation-admin.js.
+Only Brand Navigation component settings ending in \_color take this path;
 other themes/settings keep Core's original method. It captures the value before
 the original native request and, only after that method resolves successfully,
 sets both its original buffer and saved setting to that submitted value before
@@ -336,6 +366,7 @@ inspection did not establish why the original buffer/model stayed stale.
 Discourse Work should install these two product files only, then repeat exactly
 the already requested native save / different Appearance save / reload browser
 sequence. Current local SHA-256 identities:
+
 - initializer brand-navigation-admin.js:
   `b1993866e024b6718fd047701bf359655b072f7b72c65c8233a53fcef2e348f1`.
 - connector brand-navigation-bundles.gjs (unchanged from prior candidate):
