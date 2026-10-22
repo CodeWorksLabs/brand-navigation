@@ -1,6 +1,65 @@
 # Brand Navigation successor checkpoint
 
-## All seven forum updates verified; documentation update in progress — October 22, 2026
+## DB Forum latest observation: docs update in progress — October 22, 2026
+
+Latest user direction: "update docs please". Update the October 22 rollout row
+to the verified DB Forum Discourse 2026.10.0-latest+613 and component 3a7eb19,
+retaining the other six earlier observations at 412448f. Intro now identifies
+per-row observation times instead of claiming all seven share one revision.
+No repeat forum inspection or product tests are needed. Publish with [skip ci],
+refresh the complete CWL mirror from the exact new source, build/dry-run/deploy
+the docs and read back only the changed public record. Keep CWL concise.
+
+## DB Forum post-swap update verified — October 22, 2026
+
+The user reported DB Forum updated after the swap change and requested only
+installed revision, Discourse version, and updater status; no testing.
+Authenticated read-only inspection at forum.discussionbridge.dev confirmed:
+
+- Brand Navigation component ID 3; repository
+  https://github.com/CodeWorksLabs/brand-navigation.git.
+- Stored branch null: repository default, main.
+- Installed and remote component revisions both
+  3a7eb19d7c4d520f52b71fc5518b9a5e574cf146; commits_behind 0.
+- Native updater: "Theme is up-to-date, last checked: 2 mins ago".
+- Admin dashboard: Discourse 2026.10.0-latest, +613 commits; Core
+  f7e2cea9314ccf7fefc608848d67cd6cb8f4c4ba; "You're up to date!".
+- Independent origin/main lookup matched at 2026-10-22 18:51:54 UTC
+  (11:51:54 PDT).
+
+No tests, update/check-for-updates actions, setting changes, server changes,
+new CI, source-doc edits, commits, pushes, or deployment in this status-only
+turn. This supersedes the wait below. Keep this new observation local. The
+published rollout table retains its earlier observation at 412448f and DB Core
++142; the newer component commits changed documentation only. Further work
+awaits user direction.
+
+## Earlier documentation deployment and update wait — October 22, 2026
+
+The requested documentation update is complete. Canonical rollout source
+cd817288a417d055b338b9dca85469034ffaef4a and branch-policy follow-up
+3a7eb19d7c4d520f52b71fc5518b9a5e574cf146 were pushed with [skip ci].
+CWL source 051df452da3188b52c7b717fdeffc3a2225ca698 was pushed and deployed
+as Worker version 0b549400-9948-40ed-991d-15e6d69845e3. Its complete nine-page
+mirror and manifest identify exact product source 3a7eb19. Offline mirror
+verification, 34-page docs build and 140-asset deployment dry run succeeded.
+Both public testing-record and updates-and-compatibility URLs returned HTTP 200;
+read-back showed the dated seven-forum table, actual versions/unknowns and
+concise native-default/main-head/tag guidance. No product tests or new CI ran.
+RC5 tag, release notes and forum source settings were unchanged.
+
+During deployment, user reported: "updating DB forum after swap change".
+Wait for that update-complete signal before any further read-only revision,
+Discourse-version and updater-status check. Do not assume a new installed
+revision or repeat tests, updates, settings changes, or server work. Current
+published table remains explicitly an observation record at 412448f; later
+product pushes changed documentation only. The existing explicit main settings
+on RVing/R744 have not been reset to native default selection. The reason the
+October 17 forcing was necessary is not established by the available record.
+
+Final completion checkpoints are local-only; no extra push or deployment needed.
+
+## Earlier verification and documentation preparation — October 22, 2026
 
 The user reported DiscussionBridge Forum fixed and updated, and authorized
 revision/version/updater verification followed by docs publication, with concise

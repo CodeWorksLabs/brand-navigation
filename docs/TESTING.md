@@ -206,15 +206,15 @@ and retirement of expired lines. Other coverage limits remain separate.
 
 ## Seven-forum update follow-up — 2026-10-22
 
-All seven installations reported matching local and remote Brand Navigation
-revision [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b),
-matching `main` when checked, with zero commits behind.
+Each row records a read-only installation check. All seven installations
+reported matching local and remote Brand Navigation revisions, matching `main`
+at the time of their check, with zero commits behind.
 
 | Forum | Discourse version | Discourse component ID | Update branch | Installed revision | Updater status |
 | --- | --- | --- | --- | --- | --- |
-| Repeal OBBBA Forum | Not recorded | 19 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| Repeal OBBBA Forum | Not recorded | 19 | Default (`main`) | [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b) | Up-to-date; 0 behind |
 | The Bridge | Not recorded | 6 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
-| DiscussionBridge Forum | `2026.10.0-latest+142` | 3 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| DiscussionBridge Forum | `2026.10.0-latest+613` | 3 | Default (`main`) | [`3a7eb19`](https://github.com/CodeWorksLabs/brand-navigation/commit/3a7eb19d7c4d520f52b71fc5518b9a5e574cf146) | Up-to-date; 0 behind |
 | DiscussionBridge sandbox | Not recorded | 3 | `main` | `412448f` | Up-to-date; 0 behind |
 | Citizen Activist Network | Not recorded | 1 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
 | RVing Community | Not recorded | 16 | `main` | `412448f` | Up-to-date; 0 behind |
