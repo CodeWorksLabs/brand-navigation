@@ -213,6 +213,14 @@ local matrix, or investigation campaign. Report actual CI outcomes and existing
 limitations; publication does not claim all-nine verification or stable-release
 acceptance. The testing-execution failure still awaits its resolution.
 
+The October 22 existing CI at `676cc4a` completed with configuration, lint,
+backend and all four system lanes passing, and seven failed frontend assertions
+per target. RC5 publication follows Phil's direction with those failures
+explicitly disclosed in the release notes, Known Issues and testing record.
+It does not claim clean CI, completed ESR catch-up, or complete acceptance.
+Further testing remains on hold pending Phil's protocol/task-management work
+and new explicit direction.
+
 Use SemVer prerelease identifiers in the form
 `v<MAJOR>.<MINOR>.<PATCH>-rc.<N>` for release candidates. Mark each matching
 GitHub Release as a prerelease. If a published RC changes, publish the next

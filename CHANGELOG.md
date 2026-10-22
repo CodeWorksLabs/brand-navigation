@@ -18,6 +18,8 @@ to discover component updates from commits on the installed remote branch.
 - Record the prior testing-execution failure and focused verified fixes.
   E01 immediate native-field/picker display staleness remains unresolved;
   incomplete coverage is not evidence of additional product bugs.
+- Record October 22 standard CI: configuration, lint, backend and system checks
+  passed; seven frontend assertions failed per target and remain unresolved.
 
 ## 1.0.0-rc.4 - 2026-10-18
 

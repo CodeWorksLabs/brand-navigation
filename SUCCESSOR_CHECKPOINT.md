@@ -1,6 +1,48 @@
 # Brand Navigation successor checkpoint
 
-## RC5 standard CI in progress — October 22, 2026
+## RC5 CI complete; publication/docs next — October 22, 2026
+
+Current main is 676cc4ae2982093551c2b46f66abecd5b93e74cb. The authorized
+existing corrected CI cycle completed: Configuration bundles 39743682475
+passed 45/45; Discourse Theme 39743682761 failed overall. Shared lint and
+all four backend jobs passed; all four system lanes passed 53 examples each,
+zero failures. Each frontend target ran 49 tests, 42 passed and the same seven
+administrator-bundle assertions failed. Exact failures/Core identities and
+available tooling/image identities are now recorded in TESTING.md and Known
+Issues. Their causes are unestablished; no further investigation is authorized.
+
+The preceding 6c9befb run failed lint and the same frontend assertions;
+676cc4a contains mechanical formatting/import/Ruby style corrections and a
+line-scoped documented legacy observer lint exception only. No runtime test
+assertion was disabled and no new test or local product suite was run.
+
+Phil explicitly said to run existing GitHub CI and get RC5 published. Continue
+publication with failed CI clearly disclosed, E01 unresolved and the prior
+failed testing effort closed. Further testing awaits Phil's protocol/testing-
+task management work and explicit direction. Do not launch another review,
+local suite, harness, environment, rerun or investigation. ESR policy is in
+place for subsequent releases/prereleases; execution now exists for the current
+pins, but failed frontend checks prevent clean compatibility/catch-up claims.
+
+Prepared final release evidence documentation will be committed with [skip ci]
+as a documentation-only descendant of the tested candidate, then tagged as the
+new immutable v1.0.0-rc.5 and published as a GitHub prerelease. No RC5 tag or
+release exists yet. RC4 must remain unchanged. Do not claim tests on the later
+docs-only commit. Use the exact public final commit for the full nine-page CWL
+source mirror and colocated provenance manifest.
+
+CWL repo: C:/CodeProjects/Sites/CodeWorksLabs/codeworkslabs.dev/docs.codeworkslabs.dev/site,
+main at 8a45f11. Only curated release-notes.md changed there so far, with final
+CI counts/publication status still to update. npm ci succeeded; required npm
+audit --omit=dev reported nine findings (4 moderate/5 high), no dependencies
+changed. Required build/dry-run and authorized docs deployment remain to do.
+Apply the advisory exact-commit mirror candidate as the complete set; ordinary
+builds only verify offline. No live forum changes are authorized.
+
+Untracked product AGENTS.md, .pnpm-store, Media, RC5_VERIFICATION_PLAN.md,
+TESTER_CHECKPOINT.md, rc5-preparation and test/rc5-procedures stay excluded.
+
+### Earlier in-progress snapshot (superseded)
 
 Candidate 6c9befbf82f4d17d68f69f1287562aebda344e96 was pushed to main.
 Existing runs: Configuration bundles 39742545843 (44 behavior cases passed;

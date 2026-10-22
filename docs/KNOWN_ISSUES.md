@@ -1,6 +1,6 @@
 # Brand Navigation Known Issues
 
-## Current disposition — October 21, 2026
+## Current disposition — October 22, 2026
 
 The lengthy process failed to produce a clear overall answer. That is a
 testing-process failure, not evidence of more product bugs.
@@ -18,7 +18,37 @@ release acceptance, or an E01 fix.
 On October 22 Phil separately authorized **only the existing GitHub CI workflows**
 for RC5 publication. That bounded cycle does not reopen the failed campaign or
 authorize local product suites, new tests, or investigation of E01. Its results
-must be recorded against the candidate actually run; they are pending here.
+are recorded against the candidate actually run below. Further testing remains
+on hold pending Phil's protocol/task-management work and explicit direction.
+
+## RC5 standard CI failures — October 22, 2026
+
+At component commit `676cc4ae2982093551c2b46f66abecd5b93e74cb`,
+[Configuration bundles CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682475)
+passed all 45 cases. In
+[Discourse Theme CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682761),
+lint and all four backend jobs passed. All four system lanes passed 53 examples
+each with zero failures. The theme workflow failed overall. All four frontend
+targets each ran 49 tests with 42 passes and
+the following seven failures:
+
+| Administrator-bundle test                                                          | Observed actual → expected                                  |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| imported sizes and additional colors persist and reconcile                         | `#222222` → `#123abc`                                       |
+| appearance completion reconciles the submitted snapshot                            | `#222222` → `#111111`                                       |
+| core-header color pickers save independently and reset to theme inheritance        | `Assert.deepEqual`; log prints objects as `[object Object]` |
+| imported core-header colors reconcile with their pickers                           | `#919191` → `#123abc`                                       |
+| bundle completion uses its submitted snapshot and preserves unrelated color drafts | `#0088cc` → `#123456`                                       |
+| additional color controls save and reset without changing header sizes             | empty string → `#ABCDEF`                                    |
+| older component copies expose and save only settings they define                   | `1` → `5`                                                   |
+
+These failed checks remain unresolved. The logs do not establish their root
+cause or seven new product bugs; no additional investigation is authorized.
+They also do not erase the earlier scoped browser results. Exact Core
+identities and the initial lint-failing run are retained in
+[TESTING.md](TESTING.md#october-22-rc5-github-ci). E01 remains separately
+unresolved. Publication under Phil's bounded RC5 direction is not an all-green
+CI or complete acceptance claim.
 
 ## Implemented on main
 
@@ -36,7 +66,8 @@ Implementation does not establish that every behavior has been verified.
 | Empty compact menu              | The trigger requires a renderable brand or visible navigation content.                                                                                                              | The exact empty-content case passed in Foundation and Horizon in Chrome.                                                                                                                |
 | Label-only icon subscriptions   | Unnecessary subscriptions are avoided for entries that cannot display icons.                                                                                                        | E04's label-only group/child subscription and cleanup case passed on the representative frontend target.                                                                                |
 
-RC5 has not been published. The published RC4 tag/release is unchanged.
+The RC5 release identity is `v1.0.0-rc.5`; its tag and matching GitHub prerelease
+identify the published source. The published RC4 tag/release is unchanged.
 
 ## What was verified, and its limits
 

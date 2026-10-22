@@ -1,6 +1,6 @@
 # Brand Navigation v1.0.0-rc.5
 
-RC5 prerelease notes. Publication is being prepared under Phil's October 22
+These notes accompany the `v1.0.0-rc.5` prerelease under Phil's October 22
 instruction to run the existing GitHub CI workflows and publish RC5.
 
 The source and documentation changes below were implemented and pushed to
@@ -43,6 +43,27 @@ does not isolate changes to that component. See the
 [administrator guide](USER_GUIDE.md#updates-and-upgrades).
 
 ## Verified results and their limits
+
+### October 22 existing GitHub CI
+
+The tested component commit was
+[`676cc4a`](https://github.com/CodeWorksLabs/brand-navigation/commit/676cc4ae2982093551c2b46f66abecd5b93e74cb).
+[Configuration bundles CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682475)
+passed all 45 cases, including the lint-coverage guard.
+[Discourse Theme CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682761)
+passed lint, all four backend jobs and all four system lanes (53 examples each,
+zero failures). Each frontend lane ran 49 tests with 42 passes and 7 failures;
+the same seven administrator-bundle assertions failed on all targets. Four
+conditional skips are not counted as passes. The theme workflow failed overall.
+
+The failed assertions remain unresolved. Their root cause has not been
+established; they do not by themselves prove seven new product bugs. See
+[Known Issues](KNOWN_ISSUES.md#rc5-standard-ci-failures--october-22-2026)
+for exact failures and [TESTING.md](TESTING.md#october-22-rc5-github-ci)
+for candidate/Core identities and the initial lint-failing run. The release
+documentation is a documentation-only descendant of the tested candidate;
+no later product suite or full acceptance is claimed. RC5 is published with
+these limits under Phil's instruction, not with an all-green CI result.
 
 ### Historical CI at `238d5ad`
 
@@ -92,11 +113,11 @@ ESR and monthly lines at their latest patches, including the oldest supported
 ESR and both ESRs during an overlap, plus separate development coverage.
 
 The workflow pins committed on main select 2026.7.3 ESR, 2026.8.1, 2026.9.0
-and development `latest`. Current schedule catch-up is incomplete; the policy
-and committed pins do not prove completed compliance. Phil has now authorized
-only the existing GitHub CI cycle for RC5. Its outcomes are pending. Existing
-results remain valid for their actual revisions, not the new pins. Subsequent
-cycles follow the then-current support schedule.
+and development `latest`. The October 22 existing CI exercised these targets;
+failed frontend checks prevent a clean compatibility claim. Current schedule
+catch-up remains incomplete. The policy is in place for subsequent releases
+and prereleases; adoption and target selection do not prove completed
+compliance. Subsequent cycles follow the then-current support schedule.
 See the
 [phased adoption plan](TESTING.md#discourse-support-policy-adoption).
 
@@ -126,8 +147,9 @@ acceptance, or an E01 fix.
 
 ## Publication status
 
-RC5 publication is pending the authorized GitHub workflow run. The release tag
-and matching GitHub prerelease will identify the exact candidate. RC4's
+The immutable [RC5 tag and GitHub prerelease](https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.5)
+identify the release source, with the actual CI failures and limitations above.
+The final follow-up changes only documentation after the tested candidate. RC4's
 published tag/release remains unchanged. No stable-release acceptance is claimed.
 
 ## Support

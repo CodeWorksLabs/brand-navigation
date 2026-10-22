@@ -22,8 +22,62 @@ one existing GitHub CI cycle and RC5 publication: **"Run existing GitHub CI only
 This authorizes the existing workflows, not another campaign, new procedures,
 local product suites, or investigation of E01. Record that cycle's actual
 candidate, Core revisions and results here and in the CWL testing record.
-Execution is pending; the earlier CI results below apply to `238d5ad`, not a
-newly tested RC5 candidate.
+The existing workflows ran, including a mechanical lint correction. Their
+actual outcomes are recorded below. No local product suite or new testing
+campaign was started. Further testing remains on hold pending Phil's protocol
+and testing-task management work and a new explicit instruction.
+
+### October 22 RC5 GitHub CI
+
+Tested component commit:
+[`676cc4a`](https://github.com/CodeWorksLabs/brand-navigation/commit/676cc4ae2982093551c2b46f66abecd5b93e74cb).
+The release documentation is a documentation-only descendant of that candidate;
+it does not receive a new product-suite claim.
+
+- [Configuration bundles](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682475):
+  45 tests passed, zero failed or skipped, including the lint-coverage guard.
+- [Discourse Theme](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39743682761):
+  shared lint and all four backend jobs passed. Each frontend lane ran 49 tests:
+  42 passed and 7 failed. All four system lanes passed 53 examples each with
+  zero failures. The theme workflow failed overall because of the frontend jobs.
+  Three duplicate lint jobs and the compatibility-branch-only job were
+  conditionally skipped; they are not executed passes.
+
+| Target             | Exact Core revision                        |
+| ------------------ | ------------------------------------------ |
+| 2026.7.3 ESR       | `8a4ea10470790eba93f5dec65f3cacb0ffae1191` |
+| 2026.8.1 monthly   | `1dce604a018931ff85572ce9815f7637e843f08c` |
+| 2026.9.0 monthly   | `343b20f97ef5f6bd70826ee0e993ba348b210fd5` |
+| Development latest | `224e31bc757037f482682ee130fd948947947871` |
+
+The component's reusable Discourse workflow reference is
+`05b8c4ee75d2408ffd23a2fbfb948dd82037fc57`. Available logged identities
+include `discourse/.github@v1` at
+`bee9ee78c8e6fd574a8496f415e08c6eb412d3df` and the latest frontend's
+`discourse/discourse_test:slim-browsers` image digest
+`sha256:23c91b5755b9a76bfe3be39e3daeac7730c27947347923ed06cb7ccfc35deb5a`.
+The configuration job recorded Node 22.23.3, npm 10.9.9, pnpm 10.28.0,
+Git 2.55.0, runner 2.338.0 and Ubuntu 24.04. These are recorded identities,
+not a claim that every transitive dependency is immutable.
+
+All four frontend lanes reported the same seven failed administrator-bundle
+assertions: imported additional colors, Appearance submitted-snapshot
+reconciliation, independent core-header save/reset, imported core-header
+picker reconciliation, bundle snapshot/draft preservation, additional-color
+save/reset, and older-copy setting selection. See
+[Known Issues](KNOWN_ISSUES.md#rc5-standard-ci-failures--october-22-2026) for
+the exact names and observed values. These are failed checks; their cause has
+not been established and they are not seven independently demonstrated product
+bugs. The CI result is not all green, and publication does not close them or E01.
+
+The initial candidate `6c9befbf82f4d17d68f69f1287562aebda344e96`
+([configuration](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39742545843),
+[theme](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39742546313))
+passed 44 configuration behavior cases and all backend/system lanes, but failed
+lint and the same seven frontend assertions per target. The follow-up only
+sorted/formatted existing sources, made an equivalent Ruby style correction,
+and documented a line-scoped observer lint exception for the existing legacy
+ThemeSettings API. It added no test and disabled no runtime assertion.
 
 ## Main update and testing closure — October 21, 2026
 
@@ -52,9 +106,9 @@ The RC5 working candidate at commit
 completed GitHub CI on October 20, 2026. These results identify that tested
 commit, not a later main revision or a subsequent RC5 release identity.
 
-[Draft RC5 release notes](RELEASE_NOTES_RC5.md) summarize the corrections,
-completed verification, phased support policy and remaining acceptance limits.
-They are preparation material, not publication approval.
+[RC5 release notes](RELEASE_NOTES_RC5.md) summarize the corrections,
+scoped verification, support policy and remaining limits. This section retains
+the earlier candidate's evidence; October 22 outcomes are recorded above.
 
 ### Discourse versions tested
 
@@ -128,18 +182,19 @@ both ESR lines remain targets during a support overlap. See the
 revisions, not results for newer patches. No test campaign was restarted to
 adopt this policy. The published RC4 tag remains unchanged.
 
-**What is implemented, not tested:** the existing four-lane workflow was
+**What is implemented and executed:** the existing four-lane workflow was
 retargeted and committed on main in `dcb01b2` to the supported releases and
-development lane below. The policy and workflow selection are in place; their
-new execution evidence is still pending. No additional lane, runner or test
-case was added. The main update used `[skip ci]`; it did not execute these pins.
+development lane below. The policy and workflow selection are in place. The
+October 22 existing CI ran these targets at `676cc4a`, with failed frontend
+checks as recorded above. No additional lane, runner or test case was added.
+The earlier main update used `[skip ci]`; October 22 execution is separate.
 
-| Next CI target   | Exact released Core commit / selection               | Status                 |
-| ---------------- | ---------------------------------------------------- | ---------------------- |
-| 2026.7.3 ESR     | `8a4ea10470790eba93f5dec65f3cacb0ffae1191`           | Committed; not yet run |
-| 2026.8.1 monthly | `1dce604a018931ff85572ce9815f7637e843f08c`           | Committed; not yet run |
-| 2026.9.0 monthly | `343b20f97ef5f6bd70826ee0e993ba348b210fd5`           | Committed; not yet run |
-| Development      | `latest`, with resolved Core commit recorded per run | Existing lane retained |
+| October 22 CI target | Exact released Core commit / selection     | Status                    |
+| -------------------- | ------------------------------------------ | ------------------------- |
+| 2026.7.3 ESR         | `8a4ea10470790eba93f5dec65f3cacb0ffae1191` | Executed; frontend failed |
+| 2026.8.1 monthly     | `1dce604a018931ff85572ce9815f7637e843f08c` | Executed; frontend failed |
+| 2026.9.0 monthly     | `343b20f97ef5f6bd70826ee0e993ba348b210fd5` | Executed; frontend failed |
+| Development          | `224e31bc757037f482682ee130fd948947947871` | Executed; frontend failed |
 
 These versions were checked against the
 [official release schedule](https://releases.discourse.org/) and released Git
@@ -150,9 +205,9 @@ refresh the list before execution rather than retaining an expired target.
 **Policy in place; schedule catch-up incomplete:** Phil adopted ESR tracking
 for subsequent releases or prereleases. The policy is established; current
 testing coverage is behind the schedule. Committed pins alone do not prove
-compliance. The October 22 instruction authorizes only the existing GitHub CI
-cycle for RC5. Record its actual candidate/Core identities and outcomes without
-claiming broader compatibility. Future cycles follow the then-current support
+compliance. The October 22 existing GitHub CI exercised the current targets,
+but failed frontend checks prevent a clean compatibility claim. Future cycles
+follow the then-current support
 schedule, including overlapping supported ESRs and retirement of expired lines.
 The failed prior effort remains closed; other coverage limits remain separate.
 
