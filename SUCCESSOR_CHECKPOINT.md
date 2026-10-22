@@ -1,6 +1,27 @@
 # Brand Navigation successor checkpoint
 
-## Known Issues first-person rewrite ready to publish — October 22, 2026
+## Known Issues neutral-voice correction ready to publish — October 22, 2026
+
+The user corrected the requested voice: person-neutral, rather than first person.
+Rewrite only docs/KNOWN_ISSUES.md into impersonal factual prose, preserving facts,
+decisions, evidence, statuses and historical task attribution. Remove I/my and
+personal Phil framing. E01, CI failures and the testing-execution failure stay
+unresolved; the testing effort stays closed. No tests, CI, code, tags, forums,
+CWL mirror refresh or deployment. The document-only diff is inspected; all
+evidence table rows match the original and no I/my/we/our/Phil framing remains.
+Next: publish the neutral voice correction on main with [skip ci].
+
+## Known Issues first-person rewrite published — October 22, 2026
+
+Complete: commit 5d64ca975fb2e9bc9d63bdc92a3dd7ce3482ca92 was pushed to main
+with [skip ci]. docs/KNOWN_ISSUES.md now uses first person for the user's
+judgments and decisions. All evidence table rows are unchanged; no third-person
+Phil reference remains. E01, CI failures and the process failure remain unresolved,
+and testing remains closed. No tests, new CI, CWL refresh/deployment, source code,
+tag or forum changes. Link the main document; the supplied old commit URL remains
+an immutable historical version. Final checkpoint is local only.
+
+### Rewrite scope and implementation
 
 Latest user request: write the linked docs/KNOWN_ISSUES.md in first person.
 Current file matches the linked d94534f version. Rewrite in the user's voice,
