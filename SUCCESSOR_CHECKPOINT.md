@@ -1,5 +1,17 @@
 # Brand Navigation successor checkpoint
 
+## RC5 release-copy attribution correction — October 22, 2026
+
+The publisher requested removing personal attribution from the public RC5
+release notes, explicitly the opening reference to the October 22 instruction
+to run CI and publish. docs/RELEASE_NOTES_RC5.md now uses neutral wording
+throughout while retaining CI outcomes, policy, unresolved E01 and the testing
+failure/hold. The live GitHub release body was corrected and read back with
+zero personal-name references; its opening is now "These notes accompany the
+`v1.0.0-rc.5` prerelease." The source correction is committed with [skip ci].
+The published RC5 tag remains unchanged. No tests, reviews,
+investigation, product changes or deployment are part of this copy correction.
+
 ## RC5 and CWL publication complete — October 22, 2026
 
 RC5 was published at 2026-10-22T08:07:15Z as a GitHub prerelease:

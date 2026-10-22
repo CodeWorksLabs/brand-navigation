@@ -1,7 +1,6 @@
 # Brand Navigation v1.0.0-rc.5
 
-These notes accompany the `v1.0.0-rc.5` prerelease under Phil's October 22
-instruction to run the existing GitHub CI workflows and publish RC5.
+These notes accompany the `v1.0.0-rc.5` prerelease.
 
 The source and documentation changes below were implemented and pushed to
 `main` in [`dcb01b2`](https://github.com/CodeWorksLabs/brand-navigation/commit/dcb01b28744aec1f06441ddacf713c1f8c407958).
@@ -63,7 +62,7 @@ for exact failures and [TESTING.md](TESTING.md#october-22-rc5-github-ci)
 for candidate/Core identities and the initial lint-failing run. The release
 documentation is a documentation-only descendant of the tested candidate;
 no later product suite or full acceptance is claimed. RC5 is published with
-these limits under Phil's instruction, not with an all-green CI result.
+these limits; its CI result is not all green.
 
 ### Historical CI at `238d5ad`
 
@@ -107,7 +106,7 @@ and normal viewport were restored after the focused Chrome work.
 
 ## Supported-release policy and transition
 
-Phil adopted a policy for subsequent releases and prereleases to follow
+The policy for subsequent releases and prereleases follows
 Discourse's supported-release schedule: supported
 ESR and monthly lines at their latest patches, including the oldest supported
 ESR and both ESRs during an overlap, plus separate development coverage.
@@ -133,15 +132,15 @@ coverage remains unestablished. It is not a list of demonstrated product bugs.
 ## Testing execution failure and closure
 
 The lengthy process failed to produce a clear overall answer. That is a
-testing-process failure, not evidence of more product bugs. Phil's assessment
-is explicit: **the testing execution is a failure that will have a resolution.**
+testing-process failure, not evidence of more product bugs.
+**The testing execution is a failure that will have a resolution.**
 That process failure remains unresolved; its resolution has not been specified
 by these notes. Closing the testing effort does not mark the execution failure
 resolved or authorize a new investigation.
 
-Phil closed the prior testing effort. His October 22 instruction authorizes only
-the existing GitHub CI workflows for RC5 publication, not another testing or
-investigation campaign. E01 remains unresolved and missing coverage remains
+The prior testing effort is closed. RC5 used only the existing GitHub CI
+workflows; further testing and investigation remain on hold. E01 remains
+unresolved and missing coverage remains
 missing coverage. The prior closure is not all-nine verification, release
 acceptance, or an E01 fix.
 
