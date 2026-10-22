@@ -1,5 +1,40 @@
 # Brand Navigation successor checkpoint
 
+## RC5 and CWL publication complete — October 22, 2026
+
+RC5 was published at 2026-10-22T08:07:15Z as a GitHub prerelease:
+https://github.com/CodeWorksLabs/brand-navigation/releases/tag/v1.0.0-rc.5
+Annotated tag ec0902018921811ed5796628b5f04f6bf174ebb7 resolves to
+c6997595bd55c7b814840352841c6979b3299fec, the documentation-only follow-up
+to tested candidate 676cc4a. Remote tag and published prerelease were read back
+and confirmed. Actual failed frontend checks are disclosed; E01 is unresolved.
+
+CWL's complete nine-page source mirror and manifest were refreshed from that
+exact release source. Curated release notes and the mirrored testing record
+were committed/pushed as 87ccb96b1be57b010e5bfd544b9d55b1819db6da, tree
+1c0cb49c216171e5f9380300dc2534cf3e356923. Normal deployment succeeded with
+Worker version d37d4cbb-42aa-4542-8c1f-f06cdaf691eb. Both requested live URLs
+returned HTTP200 and contained the RC5 release/source links, actual failed CI,
+unresolved E01, process-failure/hold wording and adopted ESR policy:
+https://docs.codeworkslabs.dev/brand-navigation/release-notes/
+https://docs.codeworkslabs.dev/brand-navigation/source/testing-record/
+
+Offline mirror verification, the 34-page build and 140-asset deployment dry
+run passed. Build emitted i18n/404-content warnings; the required production
+dependency audit had nine findings (4 moderate/5 high). No dependencies or
+site configuration changed. Site/root follow-up checkpoints are documentation
+only and use [skip ci]; they do not move the RC5 tag or change deployed pages.
+
+Authorized publication/documentation work is complete. E01 and the seven failed
+frontend assertions per target remain unresolved, as does the prior overall
+testing-execution failure. No root-cause investigation or additional testing
+was performed. Further testing remains on hold pending Phil's protocol/testing-
+task management work and new explicit instruction. ESR policy is actually in
+place for subsequent releases/prereleases, with workflow targets implemented;
+the failed CI does not establish completed schedule catch-up or compatibility.
+
+The snapshots below are historical; this section is the current handoff.
+
 ## RC5 CI complete; publication/docs next — October 22, 2026
 
 Current main is 676cc4ae2982093551c2b46f66abecd5b93e74cb. The authorized
