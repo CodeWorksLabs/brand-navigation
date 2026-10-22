@@ -2,9 +2,9 @@
 
 ## Current testing disposition and RC5 sequence — October 22, 2026
 
-The lengthy testing process failed to produce a clear overall answer. The
-testing execution is a failure that will have a resolution. Finding reproducible
-issues and verifying corrections did not make that overall execution successful.
+The previous testing effort failed to produce a complete overall assessment.
+That testing-execution failure remains unresolved. Finding reproducible issues
+and verifying corrections did not make the overall execution successful.
 This is a testing-process failure, not evidence of additional product bugs.
 See [Brand Navigation Known Issues](KNOWN_ISSUES.md) for the unresolved process
 issue, implemented changes, scoped verification, and remaining limitations.
@@ -17,15 +17,10 @@ saved values persisted in the corrected save/reload sequence, but its display
 cause remains unknown. Other incomplete checks remain missing coverage, not
 demonstrated product defects.
 
-The prior testing effort remains closed. On October 22 Phil explicitly directed
-one existing GitHub CI cycle and RC5 publication: **"Run existing GitHub CI only."**
-This authorizes the existing workflows, not another campaign, new procedures,
-local product suites, or investigation of E01. Record that cycle's actual
-candidate, Core revisions and results here and in the CWL testing record.
-The existing workflows ran, including a mechanical lint correction. Their
-actual outcomes are recorded below. No local product suite or new testing
-campaign was started. Further testing remains on hold pending Phil's protocol
-and testing-task management work and a new explicit instruction.
+The October 22 evidence below comes from the existing GitHub workflows,
+including a mechanical lint correction. No local product suite was run for
+that cycle. The results identify the actual component and Core revisions;
+they do not resolve the earlier execution failure or its remaining coverage gaps.
 
 ### October 22 RC5 GitHub CI
 
@@ -86,18 +81,18 @@ checkbox-focus correction, compact-menu content guard, mobile linked-label
 containment, existing regression sources, and support-policy documentation.
 It is not an RC5 tag or release acceptance.
 
-Discourse Work verified the two layout corrections and E03 focus correction in
-Chrome. Its tested English/Arabic, light/dark, Foundation/Horizon compact
+Focused Chrome checks verified the two layout corrections and E03 focus
+correction. Tested English/Arabic, light/dark, Foundation/Horizon compact
 keyboard sequences showed no issue in the actual desktop-Chrome mobile-view
 contexts. E01 immediate native-field/picker display staleness remains unresolved;
 saved values persisted in the corrected save/reload sequence, but its cause is
 unknown. Other incomplete checks are missing coverage, not demonstrated bugs.
 See [Known Issues](KNOWN_ISSUES.md) for the disposition and exact limits.
 
-Phil closed this testing effort. Reopening requires a new explicit instruction
-from Phil. No new testing is part of this main update; its commit uses
-`[skip ci]`. The refreshed CI pins below remain prepared, not newly tested.
-Historical passing results retain their exact candidate and scope.
+This main update used `[skip ci]` and did not run a new suite. The refreshed
+CI pins had not yet been executed on October 21; their later October 22 results
+are recorded above. Historical passing results retain their exact candidate
+and scope.
 
 ## RC5 candidate verification
 
@@ -166,7 +161,7 @@ The passing full save-and-reload example verifies that specific correction.
 The green shipped suites do not by themselves establish every other corrected
 interaction, a complete installation/upgrade/recovery sequence or complete
 manual accessibility acceptance. Twelve human screen-reader procedures remain
-owner-deferred. Historical results below retain their own candidates and limits;
+deferred. Historical results below retain their own candidates and limits;
 they are not fresh verification of this RC5 candidate.
 
 ### Discourse support policy adoption
@@ -179,8 +174,7 @@ both ESR lines remain targets during a support overlap. See the
 
 **What is complete:** the results above cover the 2026.7.2+14 ESR-line revision, released
 2026.8.0 and two development snapshots. They are valid evidence for those exact
-revisions, not results for newer patches. No test campaign was restarted to
-adopt this policy. The published RC4 tag remains unchanged.
+revisions, not results for newer patches. The published RC4 tag remains unchanged.
 
 **What is implemented and executed:** the existing four-lane workflow was
 retargeted and committed on main in `dcb01b2` to the supported releases and
@@ -202,14 +196,13 @@ tags on October 20. The 2026.1 ESR ended support September 22 and is not a
 current target. The supported 2026.8 monthly line ends support October 27;
 refresh the list before execution rather than retaining an expired target.
 
-**Policy in place; schedule catch-up incomplete:** Phil adopted ESR tracking
-for subsequent releases or prereleases. The policy is established; current
+**Policy in place; schedule catch-up incomplete:** ESR tracking is adopted
+for subsequent releases and prereleases. The policy is established; current
 testing coverage is behind the schedule. Committed pins alone do not prove
 compliance. The October 22 existing GitHub CI exercised the current targets,
 but failed frontend checks prevent a clean compatibility claim. Future cycles
-follow the then-current support
-schedule, including overlapping supported ESRs and retirement of expired lines.
-The failed prior effort remains closed; other coverage limits remain separate.
+follow the then-current support schedule, including overlapping supported ESRs
+and retirement of expired lines. Other coverage limits remain separate.
 
 ## Seven-forum update follow-up — 2026-10-17
 
@@ -310,17 +303,16 @@ passed separately in PRs #31 and #32; it is not presented as a live-site save.
 
 ## RC2 feature verification (historical)
 
-Updated 2026-10-17. Phil selected the alignment, icon-color and friendly-editor
-features for `v1.0.0-rc.2`, before its first publication. The runtime-tested
+Updated 2026-10-17. The alignment, icon-color and friendly-editor features were
+included in `v1.0.0-rc.2` before its first publication. The runtime-tested
 candidate is the frozen `admin-label-test-r2` delta over main commit
 `1ddfef2872855289763b10fc39800ec1ba7f455a`: 58 members, with no candidate
 commit/tree claimed. Its canonical ZIP is 269,937 bytes, SHA-256
 `58123c4c03f1ce8e8cf98cceaa1f9c92225c8b8cb1040f3abb17b82cb7da8f34`.
-The subsequent four-record preparation changes only the changelog, this record,
-the successor checkpoint and administrator-guide release wording. The final
-package must be associated separately with these tested bytes: a changed ZIP
-hash is not a new native-install result, and unchanged Core-consumed fields must
-be verified before carrying the installed evidence forward.
+The subsequent documentation preparation changed no runtime source. These
+results apply to the identified installed bytes; a changed ZIP hash is not a new
+native-install result. Applicability to a later archive depends on whether its
+Core-consumed fields match the tested installation.
 
 Isolated actual checks used Discourse Core
 `3086c087a2bceb3d607c6389f77204fec054b018`:
@@ -383,8 +375,9 @@ acceptance. Historical native Git upgrade/rollback/return evidence carries only
 across the explicitly unchanged storage/update boundary, not as a fresh full
 lifecycle replay on this archive or a future tag.
 
-Fresh remote CI for the final feature commit is pending. Older main/PR25 green
-runs below belong to their identified historical source, not this new delta.
+Fresh remote CI for the final feature commit had not been recorded at this
+historical point. Older main/PR25 green runs below belong to their identified
+source, not this delta.
 Local configuration checks passed 37 cases; types, CSS and template checks
 passed. A generic Windows ESLint invocation remained an unqualified environment
 diagnostic, not lint green. A separate same-effective-source baseline comparison
@@ -402,11 +395,8 @@ classic external embed and complete human screen-reader acceptance remain the
 established stable-v1 boundaries below. Physical-device/Safari, OS picker,
 all-plugin compatibility and general accessibility certification are not claimed.
 
-Phil authorized the remaining checks and independent review, then commit/push
-and a new draft release-preparation PR. No new PR or final-feature CI result is
-asserted yet. Merge, tag, GitHub prerelease and live changes remain separate;
-the Bridge's Versions & Status migration is not included. Owned test PostgreSQL
-and Redis were cleanly stopped at 08:42:57 UTC on 2026-10-17 before container
+The Bridge's Versions & Status migration was not included. Test PostgreSQL and
+Redis were cleanly stopped at 08:42:57 UTC on 2026-10-17 before container
 stop; databases, backups and failed/positive evidence were preserved.
 
 ## Historical RC2 engineering verification — 2026-10-16
@@ -416,9 +406,9 @@ The earlier executable candidate for `v1.0.0-rc.2` was commit
 `7eee3e5416a9ed2c15bc36b15b54d1bb65c84960`. Its canonical 57-file ZIP is
 263,117 bytes, SHA-256
 `f2ad43cb6a98106a4efeac8eeeeed2082bf48616a2f9885b54841dece794532a`.
-The subsequent RC2 integration update changes only the changelog, this testing
-record, and the successor checkpoint. It does not change runtime code, tests,
-settings, dependencies, workflows, or installation/update behavior. The evidence
+The subsequent RC2 integration update changes only documentation. It does not
+change runtime code, tests, settings, dependencies, workflows, or
+installation/update behavior. The evidence
 below belongs to the identified executable candidate, not an untested new
 runtime or a future tag.
 
@@ -485,16 +475,13 @@ remain unverified. Complete RTL, a real allowed-host classic external embed and
 complete human screen-reader acceptance remain the stable `v1.0.0` gates below.
 Physical-device/Safari and general accessibility certification are not claimed.
 
-Phil requested completing PR 25 and putting RC2 on `main` after receiving the
-engineering result and these outstanding acceptance boundaries. This records
-merge authority, not completion of those unexecuted manual cases. RC2 tag and
-GitHub prerelease publication remain separate. The Bridge's Versions & Status
-link still belongs to Custom Header Links until a separately authorized live
-migration is verified.
+The unexecuted manual cases remained incomplete at this historical point.
+The Bridge's Versions & Status link was still supplied by Custom Header Links;
+its live migration was not part of this verification.
 
 ## RC2 CLI diagnostic correction — 2026-10-15
 
-Phil authorized correcting review finding `BN-RC2-CLI-01` before RC2. The CLI
+Review finding `BN-RC2-CLI-01` was corrected before RC2. The CLI
 now escapes C0, DEL and C1 controls at its final diagnostic sink. Trusted usage
 and validator line separators are inserted only after each line is escaped.
 The browser validator and header implementation are unchanged.
@@ -512,17 +499,17 @@ The pnpm launcher could not verify its requested version because registry
 fetches failed. No signature policy was weakened and no dependency changed;
 formatting used the already-installed Prettier directly through Node. This
 local result does not establish replacement-candidate CI or installed lifecycle
-acceptance. Correction closure and the resource-held Discourse matrix remain
-separate pending gates.
+acceptance. Correction closure and the Discourse matrix had not been completed
+at this historical point.
 
 ## RC2 core-header text-link candidate — 2026-10-15
 
-The next candidate adds `header_presentation` for direct core-header links.
+This candidate adds `header_presentation` for direct core-header links.
 Existing items default to `icon_only`; explicit `label_only` and
 `icon_and_label` preserve the label without requiring an available icon.
-The Bridge's current Versions & Status link remains supplied by its separate
-Custom Header Links component until an accepted candidate is installed and
-that link is migrated.
+At this historical point, the Bridge's Versions & Status link was supplied by
+its separate Custom Header Links component; the live migration was not part of
+this candidate's evidence.
 
 Implementation commit `6c7383dd5597d65c7f1e0f9ffdf123d075fab898`, tree
 `4682d861dec9029622459a5a3e633730d63aba94`, passed
@@ -551,8 +538,8 @@ System tests verify desktop/mobile sizing, retained core controls, keyboard
 focus, and embed exclusion. Desktop/mobile CI screenshots were inspected.
 The initial run at `93f7c24` failed an RSpec context-name check and a
 Selenium-only keyboard-test call; the corrected run above passes both.
-This is implementation/test evidence; release review, manual acceptance, and
-the live demo cutover remain pending.
+This is implementation/test evidence. Release review, manual acceptance and
+the live demo cutover had not been completed at this historical point.
 
 ## In use on
 
@@ -599,8 +586,8 @@ Canonical component `3` was disabled through Discourse's component-level
 **Enabled?** control, then changed from repository-default `main` to immutable
 tag `v0.9.0`. Read-only inventory confirmed exact release commit
 `d2527bfb3acdcf4204a33d35e0b13504f6d7c36e`, no import error, and preserved
-Foundation and Horizon attachments. Phil enabled the `v0.9.0` legacy internal
-setting and confirmed the navigation rendered correctly.
+Foundation and Horizon attachments. The `v0.9.0` legacy internal setting was
+enabled, and navigation was visually confirmed to render correctly.
 
 The exercise exposed a product flaw: Discourse's component-level **Enabled?**
 control and the component's legacy internal `Enabled` setting could contradict
@@ -622,8 +609,8 @@ commits behind, preserved settings and both parent-theme attachments, and no
 longer defined `enabled` as a component setting. The earlier value remains as
 an inert stored row, which allows an intentional `v0.9.0` rollback to recover
 it. Component `3` was enabled through Discourse's native control and the public
-forum returned HTTP 200. Phil then confirmed the RC rendered correctly in the
-sandbox and that Discourse reported the component up to date with
+forum returned HTTP 200. Visual confirmation established that the RC rendered
+correctly in the sandbox and that Discourse reported the component up to date with
 `release/v1.0.0-rc.1`. Server inspection separately confirmed that the
 administrator schema no longer defines an internal `enabled` setting.
 
@@ -749,7 +736,7 @@ preservation on the recorded 2026.8 build. It is server-side installation and
 availability evidence; it does not claim a fresh browser visual, anonymous,
 mobile, accessibility, or embed pass.
 
-Phil then upgraded the forum through Discourse's administrator UI. During the
+The forum was then upgraded through Discourse's administrator UI. During the
 upgrade, the public site served its branded maintenance page with a temporary
 unavailability explanation and automatic two-minute refresh. The forum
 returned successfully on Discourse `2026.9.0-latest+358` at core commit
@@ -761,8 +748,8 @@ commit `56de8bd30f4d4e1deb5ce766dab4fa62f216d1ec`. Local and remote commits
 matched, zero commits were behind, both compatibility refs were empty, and no
 import error was present. The component remained enabled and attached to both
 Foundation and Horizon. All 15 setting hashes and lengths still matched the
-pre-update snapshot, the public forum returned HTTP 200, and Phil confirmed the
-administrator UI reported **Theme is up-to-date, last checked: just now**. This
+pre-update snapshot, the public forum returned HTTP 200, and the administrator
+UI was confirmed to report **Theme is up-to-date, last checked: just now**. This
 proves the native compatibility-to-default-branch transition and configuration
 preservation across the recorded Discourse core upgrade; a fresh post-upgrade
 browser interaction matrix remains separate.
@@ -804,8 +791,8 @@ to that compatibility commit. Post-update inspection reported matching local
 and remote commits, zero commits behind, matching local and remote
 compatibility refs, and no import error. All three stored setting values
 retained their exact pre-update hashes and lengths, both theme attachments
-remained present, and the public forum returned HTTP 200. Phil refreshed the
-administrator UI and confirmed **Theme is up-to-date with
+remained present, and the public forum returned HTTP 200. The refreshed
+administrator UI was confirmed to report **Theme is up-to-date with
 `d-compat/2026.8`**.
 
 This establishes a successful native compatibility-branch update with settings
@@ -813,7 +800,7 @@ preservation on the recorded 2026.8 build. It is server-side installation and
 availability evidence plus administrator status confirmation; it does not
 claim a fresh visual, anonymous, mobile, accessibility, or embed pass.
 
-Phil then upgraded the forum's PostgreSQL and Discourse containers. The forum
+The forum's PostgreSQL and Discourse containers were then upgraded. The forum
 returned on Discourse `2026.9.0-latest+358` at core commit
 `f914fcb43e349d1b3bd6e6dc6106ca78a1e2cc74`. Post-upgrade inspection
 confirmed that Discourse automatically moved Brand Navigation from
@@ -822,8 +809,8 @@ confirmed that Discourse automatically moved Brand Navigation from
 matched, zero commits were behind, both compatibility refs were empty, and no
 import error was present. The component remained enabled on Foundation and
 Horizon, and all three setting hashes and lengths still matched the pre-update
-snapshot. The public forum returned HTTP 200, and Phil confirmed the refreshed
-administrator UI reported the theme up to date.
+snapshot. The public forum returned HTTP 200, and the refreshed administrator UI
+was confirmed to report the theme up to date.
 
 This proves the native compatibility-to-default-branch transition and
 configuration preservation across the recorded PostgreSQL and Discourse core
@@ -843,8 +830,8 @@ to that compatibility commit. Post-update inspection reported matching local
 and remote commits, zero commits behind, matching local and remote
 compatibility refs, and no import error. All four stored setting values
 retained their exact pre-update hashes and lengths, all three theme attachments
-remained present, and the public forum returned HTTP 200. Phil refreshed the
-administrator UI and confirmed **Theme is up-to-date with
+remained present, and the public forum returned HTTP 200. The refreshed
+administrator UI was confirmed to report **Theme is up-to-date with
 `d-compat/2026.8`**.
 
 This establishes a successful native compatibility-branch update with settings
@@ -873,19 +860,18 @@ compatibility commit. Post-update inspection reported matching local and
 remote commits, zero commits behind, matching local and remote compatibility
 refs, and no import error. Its stored enabled setting retained its exact
 pre-update hash and length, both live theme attachments remained present, and
-the public forum returned HTTP 200. Phil refreshed the administrator UI and
-confirmed **Theme is up-to-date with `d-compat/2026.7`**. Historical component
-`2` was not changed.
+the public forum returned HTTP 200. The refreshed administrator UI was
+confirmed to report **Theme is up-to-date with `d-compat/2026.7`**. Historical
+component `2` was not changed.
 
 This establishes the oldest recorded supported-line native update with
 settings preservation. It is server-side installation and availability
 evidence plus administrator status confirmation; it does not claim a fresh
 visual, anonymous, mobile, accessibility, or embed pass.
 
-R744 will intentionally remain on the supported 2026.7 ESR line as Brand
-Navigation's oldest real-world compatibility canary. Its Discourse core should
-advance when security or support requirements demand it, or before that release
-line leaves support, rather than solely to match newer test sites.
+R744's recorded 2026.7 ESR build served as Brand Navigation's oldest live
+supported-line compatibility target. Its evidence applies to the recorded
+revision and support period, not to later patches or future support status.
 
 ### Automated release compatibility
 
@@ -962,7 +948,7 @@ Full-app `?embed_mode=true` again excluded Brand Navigation while retaining
 `#main-outlet`, with no warning or captured console error. The browser was
 restored to the normal sandbox forum page.
 
-After that smoke test, Phil chose the new behavior for the live sandbox sample.
+After that smoke test, the new behavior was selected for the live sandbox sample.
 Resources is currently saved as `group`: browser inspection confirmed a
 submenu button is present and no Resources parent link is rendered. Its saved
 `/about` value and both child destinations remain available in configuration.
@@ -1073,9 +1059,7 @@ two but does not substitute for final human confirmation:
    focus return, visible descriptions, icon links, responsive controls, and
    embed exclusion.
 
-Execute these on a controlled test environment after the operator-documentation
-correction closes. Record the Discourse build and core commit, Brand Navigation
-commit/ref, theme, browser, viewport/device, account state, assistive technology
-and version when applicable, exact steps, and pass/fail result. Gather all
-findings before making a correction batch; automated accessibility tests do not
-substitute for these human checks.
+The required evidence includes the Discourse build and core commit, Brand
+Navigation commit/ref, theme, browser, viewport/device, account state, assistive technology
+and version when applicable, exact steps, and pass/fail result. Automated
+accessibility tests do not substitute for these human checks.

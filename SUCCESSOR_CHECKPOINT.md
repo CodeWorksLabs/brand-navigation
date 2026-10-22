@@ -1,5 +1,25 @@
 # Brand Navigation successor checkpoint
 
+## Public testing-record copy cleanup ready — October 22, 2026
+
+Current request: remove personal references and internal instructions from the
+public testing record while preserving actual results and unresolved issues.
+Canonical docs/TESTING.md is now cleaned throughout, preserving historical
+headings/anchors, dates, hashes, result counts, failed CI and verification limits.
+Next is a documentation-only commit/push followed by an exact-commit
+complete nine-page CWL source-mirror refresh and normal docs publication.
+Use [skip ci]; no product tests, new CI runs, reviews or investigation.
+Existing E01, failed frontend assertions and testing-execution failure remain
+unresolved. Preserve the October 17 seven-forum heading/anchor and historical
+results; they are not current rollout evidence.
+
+Seven-forum scope is now explicit: the user performs each update, one forum
+at a time; this task verifies installed revision and native updater status after
+the user reports that forum updated. Do not perform forum updates or regression
+testing. Finish publishing this cleanup first, then wait for the first forum
+and its completed-update signal. The user reported an unprompted Codex restart;
+resume from these actual files/checkpoints, without inventing completed steps.
+
 ## RC5 release-copy attribution correction — October 22, 2026
 
 The publisher requested removing personal attribution from the public RC5
