@@ -2,24 +2,27 @@
 
 ## Current disposition — October 22, 2026
 
-The lengthy process failed to produce a clear overall answer. That is a
-testing-process failure, not evidence of more product bugs.
+I consider the lengthy process a testing-process failure because it failed to
+produce a clear overall answer. I do not take that failure as evidence of more
+product bugs.
 
-Phil's assessment is explicit: **"The testing execution is a failure that will
-have a resolution."** That execution failure remains an unresolved process
-issue. Its resolution has not yet been specified; closing this testing effort
-does not resolve the execution failure or initiate a new investigation.
+My assessment is explicit: **"The testing execution is a failure that will
+have a resolution."** I continue to record that execution failure as an
+unresolved process issue. I have not yet specified its resolution; closing this
+testing effort does not resolve the execution failure or initiate a new
+investigation.
 
-**Phil closed this testing effort.** No new testing, investigation, gap chasing,
-or campaigns are authorized. Reopening requires new explicit instruction from
-Phil. Closure is the human stopping decision, not all-nine verification,
-release acceptance, or an E01 fix.
+**I closed this testing effort.** I have not authorized new testing,
+investigation, gap chasing, or campaigns. Reopening requires a new explicit
+instruction from me. My decision to stop is not all-nine verification, release
+acceptance, or an E01 fix.
 
-On October 22 Phil separately authorized **only the existing GitHub CI workflows**
-for RC5 publication. That bounded cycle does not reopen the failed campaign or
-authorize local product suites, new tests, or investigation of E01. Its results
-are recorded against the candidate actually run below. Further testing remains
-on hold pending Phil's protocol/task-management work and explicit direction.
+On October 22 I separately authorized **only the existing GitHub CI workflows**
+for RC5 publication. I did not reopen the failed campaign or authorize local
+product suites, new tests, or investigation of E01. I record that bounded
+cycle's results against the candidate actually run below. I am keeping further
+testing on hold pending my protocol/task-management work and explicit
+direction.
 
 ## RC5 standard CI failures — October 22, 2026
 
@@ -42,19 +45,19 @@ the following seven failures:
 | additional color controls save and reset without changing header sizes             | empty string → `#ABCDEF`                                    |
 | older component copies expose and save only settings they define                   | `1` → `5`                                                   |
 
-These failed checks remain unresolved. The logs do not establish their root
-cause or seven new product bugs; no additional investigation is authorized.
-They also do not erase the earlier scoped browser results. Exact Core
-identities and the initial lint-failing run are retained in
+I continue to record these failed checks as unresolved. The logs do not
+establish their root cause or seven new product bugs, and I have not authorized
+additional investigation. I also retain the earlier scoped browser results.
+Exact Core identities and the initial lint-failing run are retained in
 [TESTING.md](TESTING.md#october-22-rc5-github-ci). E01 remains separately
-unresolved. Publication under Phil's bounded RC5 direction is not an all-green
-CI or complete acceptance claim.
+unresolved. My bounded authorization to publish RC5 is not a claim of all-green
+CI or complete acceptance.
 
 ## Implemented on main
 
-The accumulated product changes were committed and pushed in
+I record the accumulated product changes as committed and pushed in
 [`dcb01b2`](https://github.com/CodeWorksLabs/brand-navigation/commit/dcb01b28744aec1f06441ddacf713c1f8c407958).
-Implementation does not establish that every behavior has been verified.
+I do not treat implementation as verification of every behavior.
 
 | Change                          | Implementation status                                                                                                                                                               | Verification status                                                                                                                                                                     |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -66,10 +69,12 @@ Implementation does not establish that every behavior has been verified.
 | Empty compact menu              | The trigger requires a renderable brand or visible navigation content.                                                                                                              | The exact empty-content case passed in Foundation and Horizon in Chrome.                                                                                                                |
 | Label-only icon subscriptions   | Unnecessary subscriptions are avoided for entries that cannot display icons.                                                                                                        | E04's label-only group/child subscription and cleanup case passed on the representative frontend target.                                                                                |
 
-The RC5 release identity is `v1.0.0-rc.5`; its tag and matching GitHub prerelease
-identify the published source. The published RC4 tag/release is unchanged.
+I identify the published RC5 source by the `v1.0.0-rc.5` tag and its matching
+GitHub prerelease. The published RC4 tag/release is unchanged.
 
 ## What was verified, and its limits
+
+I record the following results within their stated limits:
 
 - **Earlier CI:** commit `238d5ad829eb6053e5c2aefc94f495cf5f83791f` passed four
   system-test lanes with 49 examples each and 45 configuration/lint-coverage
@@ -98,23 +103,25 @@ identify the published source. The published RC4 tag/release is unchanged.
 
 ## What remains unresolved
 
-- **E01:** immediate native-field/picker display staleness remains unresolved.
+- **E01:** I continue to record immediate native-field/picker display staleness
+  as unresolved.
   Saved values persisted in the corrected save/reload sequence, but the cause
   of the stale display remains unknown. E01 is not recorded as fixed or closed.
 - **Testing execution:** the process failed to produce a clear overall answer.
-  Phil states that this failure will have a resolution. That resolution remains
-  open; this record does not assign investigation, testing, or a new campaign.
-- **Incomplete coverage:** unrun or unreached checks remain missing coverage,
-  not demonstrated product bugs. Unknown coverage is not evidence that the
-  product is broken. Detailed limits are retained below.
+  I have stated that this failure will have a resolution. I have not yet
+  resolved it; I am not assigning investigation, testing, or a new campaign
+  through this record.
+- **Incomplete coverage:** I treat unrun or unreached checks as missing coverage,
+  not demonstrated product bugs. I do not take unknown coverage as evidence that
+  the product is broken. I retain the detailed limits below.
 
 Original configuration and normal viewport were restored after the focused
 browser work. The two layout fixes remained installed in the local test fixture;
 no production or published RC4 changes were made. Exact fixtures, hashes and
 evidence are in the
 [Discourse Work closure record](<C:/CodeProjects/Planning/Procedure Docs/notes/brand-navigation-live-browser-results-20261021.md>).
-The implementation commit does not create whole-release acceptance or replace
-the original observations and failures retained below.
+I do not treat the implementation commit as whole-release acceptance or as a
+replacement for the original observations and failures retained below.
 
 ## Classification meanings
 
@@ -144,7 +151,7 @@ the original observations and failures retained below.
 
 For E01, the existing no-op Inherit/native-save regression, intentional
 same-field draft/reset example and rejection-before-persistence/recovery example
-passed. These results narrow the failing observation; they do not erase it.
+passed. I use these results to narrow the failing observation, not to erase it.
 
 The earlier native name checks and frontend checkbox-name/state checks passed.
 Direct Chrome checks confirmed E03 keyboard reach, toggling and saved states,
@@ -164,10 +171,10 @@ first exposed focus loss, and later verified the focus correction.
 
 The representative runtime evidence was gathered against one exact Discourse
 2026.9.0 Core revision and a snapshot that was local and uncommitted at the time.
-The later main publication does not turn that evidence into a full-suite result
-for current main or establish compatibility for every release, operating system
-or browser. Broader coverage remains a limitation rather than an observed
-incompatibility.
+I do not treat the later main publication as turning that evidence into a
+full-suite result for current main or establishing compatibility for every
+release, operating system or browser. I record broader coverage as a limitation
+rather than an observed incompatibility.
 
 ## Issues created by verification tooling
 
@@ -181,8 +188,8 @@ incompatibility.
 
 ## Ghost claims and expected behavior
 
-The following product-defect claims are **unsubstantiated**, rather than known
-product failures:
+I classify the following product-defect claims as **unsubstantiated**, rather
+than known product failures:
 
 - That the E03 results prove the checkboxes are unreachable or incorrectly
   named. The first traversal was capped; the latest example stopped before
@@ -195,11 +202,11 @@ their later save was unreached. The original-candidate direct browser sequence
 then demonstrated loss for E01's initially custom-color case. After the
 sparse-save correction, saved values persisted in the named corrected sequence.
 The separate no-op Inherit/native-save/different Appearance regression also
-passed in its earlier run. Neither result closes the remaining immediate
-native-field/picker display staleness.
+passed in its earlier run. I do not treat either result as closing the remaining
+immediate native-field/picker display staleness.
 
-Themes attached to the same component share its code and settings. That is
-documented behavior, not a newly observed isolation defect.
+Themes attached to the same component share its code and settings. I classify
+that as documented behavior, not a newly observed isolation defect.
 
 ## Recorded state and evidence
 
@@ -216,17 +223,18 @@ Matching payload assertions and a stale-page persistence regression were
 prepared. Discourse Work subsequently installed the correction in the existing
 local fixture and observed the native value persist through a different
 Appearance save and reload. Immediate native-field/picker staleness remained
-after the later display corrections. E01 is **unresolved**; its cause is not
-established, and no further investigation or retest is queued. Original failure
-evidence is preserved.
+after the later display corrections. I continue to record E01 as
+**unresolved**; its cause is not established, and no further investigation or
+retest is queued. I retain the original failure evidence.
 
 ### Earlier stopped verification state
 
 At that earlier stop, the E01 product edit remained local and uncommitted, with
 Brand Navigation's approval to retain it. Subsequent implementation publication
-and focused browser outcomes are recorded above. That earlier failing native
-case did not establish an E01 fix, and E01 remains unresolved. No new product
-edit, test, build or runtime operation was performed to correct this record.
+and focused browser outcomes are recorded above. I do not treat that earlier
+failing native case as establishing an E01 fix; I continue to record E01 as
+unresolved. No new product edit, test, build or runtime operation was performed
+to correct this record.
 
 - [Earlier completed verification and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/RESULT.md>).
 - [Direct Chrome E01 result and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/e01-navigation-repair/MANUAL-BROWSER-RESULT.md>).
@@ -238,5 +246,5 @@ edit, test, build or runtime operation was performed to correct this record.
 - [Existing procedure inventory](</C:/CodeProjects/Products/Discourse Brand Navigation/test/rc5-procedures/README.md>).
 - [Original host-tool findings](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/repair/TEMP-REVIEW.md>) and [subsequent exercised repairs](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/FINAL-RESULT.md:79>).
 
-The verification campaign is stopped. These classifications do not create a
-follow-up work assignment or authorize further execution.
+I have stopped the verification campaign. I am not creating a follow-up work
+assignment or authorizing further execution through these classifications.

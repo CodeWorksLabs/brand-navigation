@@ -1,6 +1,38 @@
 # Brand Navigation successor checkpoint
 
-## New top follow-up and restored history in progress — October 22, 2026
+## Known Issues first-person rewrite ready to publish — October 22, 2026
+
+Latest user request: write the linked docs/KNOWN_ISSUES.md in first person.
+Current file matches the linked d94534f version. Rewrite in the user's voice,
+converting personal decisions and judgments to I/my while preserving recorded
+facts, exact evidence, historical agent attribution and unresolved statuses.
+Do not claim the user personally ran agent/Discourse Work tests or wrote code.
+E01, CI failures and the testing-execution failure remain unresolved; testing
+stays closed. Only this GitHub product document and required local handoff are
+in scope. No new tests, CI, browser/server work, source code, tags, CWL mirror
+refresh or deployment. The narrative now uses I/my for the user's judgments,
+decisions and authorization, retaining factual technical descriptions and
+historical agent attribution. Inspected the document-only diff; evidence tables,
+links, versions, hashes and statuses are preserved. Next: publish with [skip ci]
+to main; link the updated main document, since the old SHA is immutable.
+
+## New top follow-up and restored history deployed — October 22, 2026
+
+This correction is complete. Product source
+d94534fdb71eb02d9e182768fbbe1b8ca7ba59aa was pushed with [skip ci]. CWL source
+9b971d98e84f56937d801e57493d47ea7597d79e was pushed and deployed as Worker
+302f3a06-e6c2-43b8-aba8-7a2998131837. Exact-source nine-page mirror verification,
+34-page docs build and 140-asset dry run passed. Public testing record returned
+HTTP 200 and source d94534f. New first section anchor:
+seven-forum-installation-follow-up--october-22-2026.
+Read-back showed all seven collected versions and five table columns without
+component ID. Direct local comparison confirmed October22 history restored
+exactly from3a7eb19 and October17/following history unchanged; published older
+DB row is again +142/412448f, while new top row records +613/3a7eb19.
+No product tests, new CI, updater actions, forum settings or server changes.
+This final checkpoint is local only; no further push/deploy is needed.
+
+### Implementation and version observations
 
 User correction: restore older section; add a new seven-forum section at the
 top; omit Discourse component ID; collect Discourse versions for that new section.
