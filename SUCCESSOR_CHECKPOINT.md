@@ -19,6 +19,16 @@ null before the failed updates and remains null afterward; sandbox/RVing/R744
 explicitly store main. The update advanced installed content, without an
 observed branch-setting change. Both selection methods resolve to main here.
 
+Subsequent user direction: follow Discourse norms, with a possible sandbox
+exception; main means its branch head independently of release tags. Existing
+USER_GUIDE.md and CWL update guidance already recommend default Git Branch and
+native compatibility selection. Added a precise blank/default vs forced-main
+clarification, allowing deliberate sandbox branch-head tracking. The rollout
+table records actual settings and does not claim existing explicit main pins
+were changed. No forum source changes were made. Historical October 17 work
+switched sandbox from RC1 and RVing/R744 from automatic compatibility to explicit
+main; available records do not establish why forcing main was necessary.
+
 Added a concise October 22 seven-forum table to docs/TESTING.md, retaining the
 October 17 heading/history. First five Discourse versions remain "Not recorded"
 rather than reusing historical values. R744 and DB Forum versions are recorded.

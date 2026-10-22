@@ -70,6 +70,13 @@ matching `d-compat/<YYYY>.<M>` branch when one exists. This selection is part of
 Discourse's native remote-theme update behavior; administrators do not need to
 choose the compatibility branch manually.
 
+Leave **Git Branch** blank for normal installations. An explicit `main` selection
+forces that branch instead of automatic compatibility selection. A sandbox may
+deliberately track the head of `main`, independently of release tags. A release
+tag identifies a fixed revision; it does not redefine `main` or the updater's
+latest revision. See Discourse's
+[compatibility guidance](https://github.com/discourse/discourse/blob/main/docs/developer-guides/docs/03-code-internals/05-version-compatibility.md).
+
 This tracking only applies when Brand Navigation was installed from its Git
 repository. A component imported from a file or created locally is not linked
 to this repository and therefore cannot receive its updates through the normal

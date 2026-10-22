@@ -225,6 +225,10 @@ says "Theme is up-to-date"; explicit `main` adds "with main". DiscussionBridge
 Forum retained its default-branch setting before and after this update, which
 completed after the earlier HTTP 500 failures.
 
+The table records existing source selections. Normal installations leave
+**Git Branch** blank for automatic compatibility selection; see the
+[update guidance](USER_GUIDE.md#updates-and-upgrades).
+
 These are read-only installation/status observations, with no new product
 testing. They do not resolve the existing CI failures, E01, or testing-execution
 failure recorded in [Known Issues](KNOWN_ISSUES.md). Discourse versions marked
