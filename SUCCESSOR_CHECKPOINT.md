@@ -1,6 +1,50 @@
 # Brand Navigation successor checkpoint
 
-## DB Forum latest observation: docs update in progress — October 22, 2026
+## New top follow-up and restored history in progress — October 22, 2026
+
+User correction: restore older section; add a new seven-forum section at the
+top; omit Discourse component ID; collect Discourse versions for that new section.
+Restored the exact October22 block from product3a7eb19 (before2240fe7 altered it).
+October17 block/history remain unchanged. New top heading: Seven-forum installation
+follow-up — October22,2026. Five columns; all seven newly read Discourse versions.
+
+Read-only authenticated admin dashboard observations collected by19:07:36UTC
+(12:07:36PDT), October22,2026:
+- Repeal OBBBA:2026.10.0-latest+114; Corebf55a44c2872738f7ae2664d6fec3d6d8779190f.
+- The Bridge:2026.10.0-latest+138; Cored6516e0b6e9ccfc1ebe789e15ee943522b67e8d7.
+- DB Forum:2026.10.0-latest+613; Coref7e2cea9314ccf7fefc608848d67cd6cb8f4c4ba.
+- Sandbox:2026.10.0-latest+142; Coreacf8e70129f5359635f8227ad8a91a792204147e.
+- Citizen Activist:2026.10.0-latest+142; Coreacf8e70129f5359635f8227ad8a91a792204147e.
+- RVing:2026.9.0-latest+565; Core9cccc5837dc83a7af376dd40d4cb709cd25b0228.
+- R744 installed:2026.7.2+14; Core2e46cff73b07ecddbcc5603eb3fbf41d563577f6.
+
+No product tests, update retries, settings changes or server changes. Temporary
+version tabs closed. New record explicitly separates freshly collected versions
+from earlier installed-component/updater observations; do not claim a fresh
+seven-forum updater pass. Existing issues remain unresolved. Next: docs-only
+[skip ci] commit/push, exact-source full CWL mirror refresh, offline verifier,
+docs build/dry-run/deploy and focused public read-back.
+
+## DB Forum latest observation published — October 22, 2026
+
+The requested docs update is complete. Product source
+2240fe73119258bc613a2c077bb29acbaae4590b was pushed with [skip ci]. CWL source
+b57a611ce1d2f31e48d79e80a7e4656fd1ac39b5 was pushed and deployed as Worker
+373010ea-3fef-41a6-853c-7eb5f555af39. The complete nine-page mirror and manifest
+use exact product source 2240fe7. Offline verification, 34-page docs build and
+140-asset deployment dry run passed. Live testing record returned HTTP 200 and
+showed DB Forum 2026.10.0-latest+613, component3, default/main, installed3a7eb19,
+up-to-date/0behind, with the other six earlier observations preserved.
+No repeat forum inspection, product tests or CI ran. Final checkpoint local only.
+
+The subsequent CWL editorial correction is also complete. Removed only the
+redundant "Implemented changes" RC5 subheading, preserving its bullets/links.
+Site source 746499e27933acb887c3ca22bc1c71cb4a0a4256 was pushed and deployed as
+Worker ad90710c-3a87-4d70-b554-4580152e4604. Public RC5 release-notes HTTP 200
+read-back showed the unchanged change bullets directly under RC5 and no removed
+subheading. Mirror remains at exact product source2240fe7; no refresh, product
+code, tag, source settings, tests or CI changes. Both docs requests are complete.
+This final checkpoint is local only; no additional push/deploy is needed.
 
 Latest user direction: "update docs please". Update the October 22 rollout row
 to the verified DB Forum Discourse 2026.10.0-latest+613 and component 3a7eb19,

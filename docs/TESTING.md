@@ -1,5 +1,25 @@
 # Testing and acceptance
 
+## Seven-forum installation follow-up — October 22, 2026
+
+Discourse versions were read from all seven administrator dashboards on October 22.
+Component revisions and updater status below come from their latest recorded
+update checks. These are read-only observations; no product testing was run.
+
+| Forum | Discourse version | Update branch | Installed revision | Updater status |
+| --- | --- | --- | --- | --- |
+| Repeal OBBBA Forum | `2026.10.0-latest+114` | Default (`main`) | [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b) | Up-to-date; 0 behind |
+| The Bridge | `2026.10.0-latest+138` | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| DiscussionBridge Forum | `2026.10.0-latest+613` | Default (`main`) | [`3a7eb19`](https://github.com/CodeWorksLabs/brand-navigation/commit/3a7eb19d7c4d520f52b71fc5518b9a5e574cf146) | Up-to-date; 0 behind |
+| DiscussionBridge sandbox | `2026.10.0-latest+142` | `main` | `412448f` | Up-to-date; 0 behind |
+| Citizen Activist Network | `2026.10.0-latest+142` | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| RVing Community | `2026.9.0-latest+565` | `main` | `412448f` | Up-to-date; 0 behind |
+| R744 Community | `2026.7.2+14` | `main` | `412448f` | Up-to-date; 0 behind |
+
+Earlier follow-ups below retain their original observations. These installation
+records do not resolve E01, the recorded CI failures, or the testing-execution
+failure; see [Known Issues](KNOWN_ISSUES.md).
+
 ## Current testing disposition and RC5 sequence — October 22, 2026
 
 The previous testing effort failed to produce a complete overall assessment.
@@ -206,15 +226,15 @@ and retirement of expired lines. Other coverage limits remain separate.
 
 ## Seven-forum update follow-up — 2026-10-22
 
-Each row records a read-only installation check. All seven installations
-reported matching local and remote Brand Navigation revisions, matching `main`
-at the time of their check, with zero commits behind.
+All seven installations reported matching local and remote Brand Navigation
+revision [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b),
+matching `main` when checked, with zero commits behind.
 
 | Forum | Discourse version | Discourse component ID | Update branch | Installed revision | Updater status |
 | --- | --- | --- | --- | --- | --- |
-| Repeal OBBBA Forum | Not recorded | 19 | Default (`main`) | [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b) | Up-to-date; 0 behind |
+| Repeal OBBBA Forum | Not recorded | 19 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
 | The Bridge | Not recorded | 6 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
-| DiscussionBridge Forum | `2026.10.0-latest+613` | 3 | Default (`main`) | [`3a7eb19`](https://github.com/CodeWorksLabs/brand-navigation/commit/3a7eb19d7c4d520f52b71fc5518b9a5e574cf146) | Up-to-date; 0 behind |
+| DiscussionBridge Forum | `2026.10.0-latest+142` | 3 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
 | DiscussionBridge sandbox | Not recorded | 3 | `main` | `412448f` | Up-to-date; 0 behind |
 | Citizen Activist Network | Not recorded | 1 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
 | RVing Community | Not recorded | 16 | `main` | `412448f` | Up-to-date; 0 behind |
