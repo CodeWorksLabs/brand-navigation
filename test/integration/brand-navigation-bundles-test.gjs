@@ -1,4 +1,5 @@
 import { trackedArray, trackedObject } from "@ember/reactive/collections";
+import EmberObject from "@ember/object";
 import {
   clearRender,
   click,
@@ -38,6 +39,51 @@ const HEADER_SIZES = [
   "header_text_size_desktop",
   "header_text_size_mobile",
 ];
+
+const APPEARANCE_COLOR_LABELS = {
+  bar_background_color: "Navigation bar — background",
+  bar_text_color: "Navigation bar — text and icons",
+  hover_background_color: "Navigation menus — hover/highlight background",
+  submenu_background_color: "Dropdown menus — background",
+  submenu_text_color: "Dropdown menus — text and icons",
+  submenu_hover_text_color: "Dropdown menus — text and icons on hover/focus",
+  header_icon_color: "Discourse header — icons",
+  header_icon_hover_color: "Discourse header — icons on hover/focus",
+  header_text_color: "Discourse header — link text",
+  header_text_hover_color: "Discourse header — link text on hover/focus",
+  header_hover_background_color:
+    "Discourse header — link and icon background on hover/focus",
+};
+
+function assertAppearanceCheckboxNames(
+  assert,
+  names = Object.keys(APPEARANCE_COLOR_LABELS)
+) {
+  const checkboxes = Array.from(
+    document.querySelectorAll(
+      '.brand-navigation-admin-panel input[type="checkbox"][data-setting]'
+    )
+  );
+  assert.deepEqual(
+    checkboxes.map((checkbox) => checkbox.dataset.setting).sort(),
+    [...names].sort(),
+    "only the defined color settings have Custom checkboxes"
+  );
+  assert.strictEqual(
+    new Set(checkboxes.map((checkbox) => checkbox.getAttribute("aria-label")))
+      .size,
+    names.length,
+    "every Custom checkbox has a distinct purpose name"
+  );
+  for (const name of names) {
+    assert
+      .dom(`input[type="checkbox"][data-setting="${name}"]`)
+      .hasAttribute(
+        "aria-label",
+        `Use a custom color for ${APPEARANCE_COLOR_LABELS[name]}`
+      );
+  }
+}
 
 function adminTheme() {
   return {
@@ -584,6 +630,32 @@ module(
       assert
         .dom('.brand-navigation-admin-panel input[type="number"]')
         .doesNotExist("size controls have not been moved into the color panel");
+      assertAppearanceCheckboxNames(assert);
+    });
+
+    test("Custom toggles retain their checkbox nodes and focus", async function (assert) {
+      this.outletArgs = { theme: adminTheme() };
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      for (const name of Object.keys(APPEARANCE_COLOR_LABELS)) {
+        const selector = `input[type="checkbox"][data-setting="${name}"]`;
+        const checkbox = find(selector);
+
+        for (const enabled of [true, false]) {
+          await click(checkbox);
+          assert.strictEqual(find(selector), checkbox, `${name} keeps its node`);
+          assert.strictEqual(
+            document.activeElement,
+            checkbox,
+            `${name} keeps focus when Custom is ${enabled}`
+          );
+          assert.strictEqual(checkbox.checked, enabled);
+        }
+      }
     });
 
     test("core-header color pickers save independently and reset to theme inheritance", async function (assert) {
@@ -609,6 +681,7 @@ module(
           .isNotChecked();
         assert.dom(`input[type="color"][data-setting="${name}"]`).isDisabled();
       }
+      assertAppearanceCheckboxNames(assert);
       await click('input[type="checkbox"][data-setting="header_icon_color"]');
       await fillIn(
         'input[type="color"][data-setting="header_icon_color"]',
@@ -618,7 +691,7 @@ module(
         ".brand-navigation-admin-panel__appearance-controls .btn-primary"
       );
       assert.strictEqual(submitted[0].header_icon_color, "#123456");
-      assert.strictEqual(submitted[0].header_icon_hover_color, "");
+      assert.deepEqual(submitted[0], { header_icon_color: "#123456" });
 
       await click(
         'input[type="checkbox"][data-setting="header_icon_hover_color"]'
@@ -630,8 +703,14 @@ module(
       await click(
         ".brand-navigation-admin-panel__appearance-controls .btn-primary"
       );
-      assert.strictEqual(submitted[1].header_icon_color, "#123456");
-      assert.strictEqual(submitted[1].header_icon_hover_color, "#ABCDEF");
+      assert.deepEqual(submitted[1], { header_icon_hover_color: "#ABCDEF" });
+      assert.strictEqual(
+        theme.settings.find((item) => item.setting === "header_icon_color")
+          .value,
+        "#123456",
+        "the untouched saved icon color is retained without resubmitting it"
+      );
+      assertAppearanceCheckboxNames(assert);
 
       await click(
         ".brand-navigation-admin-panel__appearance-controls .btn-default"
@@ -647,6 +726,135 @@ module(
           .isNotChecked();
         assert.dom(`input[type="color"][data-setting="${name}"]`).isDisabled();
       }
+      assertAppearanceCheckboxNames(assert);
+    });
+
+    test("native color save accepts its submitted value after a stale buffer update", async function (assert) {
+      brandNavigationAdmin.initialize(this.owner);
+      const Editor = this.owner.factoryFor("component:theme-setting-editor").class;
+      let complete;
+      const pending = new Promise((resolve) => {
+        complete = resolve;
+      });
+      const theme = adminTheme();
+      const nativeSetting = EmberObject.create({
+        setting: "bar_background_color",
+        value: "#112233",
+        async updateSetting(id, value) {
+          assert.strictEqual(id, theme.id);
+          assert.strictEqual(value, "#123456");
+          await pending;
+          return { bar_background_color: value };
+        },
+      });
+      const buffered = EmberObject.create({ value: "#123456" });
+      const save = Editor.prototype._save.call({
+        args: { model: theme },
+        setting: nativeSetting,
+        buffered,
+        toasts: { success() {} },
+      });
+      buffered.set("value", "#112233");
+      complete();
+      await save;
+
+      assert.strictEqual(nativeSetting.value, "#123456");
+      assert.strictEqual(buffered.get("value"), "#123456");
+    });
+
+    test("native color saves redraw Appearance before a different color save", async function (assert) {
+      const theme = adminTheme();
+      for (const [name, value] of Object.entries({
+        bar_background_color: "#112233",
+        bar_text_color: "#334455",
+        header_icon_color: "#223344",
+      })) {
+        const index = theme.settings.findIndex((item) => item.setting === name);
+        theme.settings[index] = EmberObject.create({ setting: name, value });
+      }
+      this.outletArgs = { theme };
+      let submitted;
+      BrandNavigationBundles.prototype.persistSettings = async (values) => {
+        submitted = structuredClone(values);
+        return structuredClone(values);
+      };
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      const background = theme.settings.find(
+        (item) => item.setting === "bar_background_color"
+      );
+      background.set("value", "#123456");
+      await settled();
+      assert
+        .dom('input[type="color"][data-setting="bar_background_color"]')
+        .hasValue("#123456");
+      assert
+        .dom(".brand-navigation-admin-panel__appearance-controls .btn-primary")
+        .isDisabled("a native save creates no Appearance draft");
+
+      await fillIn(
+        'input[type="color"][data-setting="header_icon_color"]',
+        "#456789"
+      );
+      await click(
+        ".brand-navigation-admin-panel__appearance-controls .btn-primary"
+      );
+      assert.deepEqual(submitted, { header_icon_color: "#456789" });
+      assert.strictEqual(background.value, "#123456");
+      assert
+        .dom('input[type="color"][data-setting="bar_background_color"]')
+        .hasValue("#123456");
+    });
+
+    test("an Appearance save does not resubmit untouched stale native colors", async function (assert) {
+      const theme = adminTheme();
+      const saved = {
+        bar_background_color: "#112233",
+        bar_text_color: "#334455",
+        header_icon_color: "#223344",
+      };
+      for (const [name, value] of Object.entries(saved)) {
+        theme.settings.find((item) => item.setting === name).value = value;
+      }
+      let submitted;
+      this.outletArgs = { theme };
+      BrandNavigationBundles.prototype.persistSettings = async (values) => {
+        submitted = structuredClone(values);
+        Object.assign(saved, values);
+        return structuredClone(values);
+      };
+
+      await render(
+        <template>
+          <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
+        </template>
+      );
+
+      // Model the observed failure: the native save reached storage, but this
+      // page still has its previous accepted value. Do not fix the test premise
+      // by updating that stale model before exercising the Appearance save.
+      saved.bar_background_color = "#123456";
+      assert
+        .dom('input[type="color"][data-setting="bar_background_color"]')
+        .hasValue("#112233");
+      await fillIn(
+        'input[type="color"][data-setting="header_icon_color"]',
+        "#456789"
+      );
+      await click(
+        ".brand-navigation-admin-panel__appearance-controls .btn-primary"
+      );
+
+      assert.deepEqual(submitted, { header_icon_color: "#456789" });
+      assert.deepEqual(saved, {
+        bar_background_color: "#123456",
+        bar_text_color: "#334455",
+        header_icon_color: "#456789",
+      });
     });
 
     test("older component copies expose and save only settings they define", async function (assert) {
@@ -670,6 +878,14 @@ module(
           <BrandNavigationBundles @outletArgs={{this.outletArgs}} />
         </template>
       );
+      const subsetColors = [
+        "bar_background_color",
+        "bar_text_color",
+        "hover_background_color",
+        "submenu_background_color",
+        "submenu_text_color",
+      ];
+      assertAppearanceCheckboxNames(assert, subsetColors);
       assert.dom('input[data-setting="header_icon_color"]').doesNotExist();
       assert
         .dom('input[data-setting="header_icon_hover_color"]')
@@ -687,12 +903,14 @@ module(
       assert.strictEqual(submitted.bar_background_color, "#123456");
       assert.false(Object.hasOwn(submitted, "header_icon_color"));
       assert.false(Object.hasOwn(submitted, "header_icon_hover_color"));
-      assert.strictEqual(Object.keys(submitted).length, 5);
+      assert.strictEqual(Object.keys(submitted).length, 1);
+      assertAppearanceCheckboxNames(assert, subsetColors);
       await click(
         ".brand-navigation-admin-panel__appearance-controls .btn-default"
       );
       assert.strictEqual(Object.keys(submitted).length, 5);
       assert.true(Object.values(submitted).every((value) => value === ""));
+      assertAppearanceCheckboxNames(assert, subsetColors);
     });
 
     test("imported core-header colors reconcile with their pickers", async function (assert) {
@@ -774,7 +992,10 @@ module(
           "#ABCDEF"
         );
       }
-      assert.strictEqual(Object.keys(submitted[0]).length, 11);
+      assert.strictEqual(
+        Object.keys(submitted[0]).length,
+        ADDITIONAL_COLORS.length
+      );
       for (const name of HEADER_SIZES) {
         assert.false(
           Object.hasOwn(submitted[0], name),

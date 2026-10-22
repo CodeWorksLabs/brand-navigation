@@ -47,6 +47,35 @@ they are not instructions to repeat those operations.
 
 ## Required Discourse review
 
+### Discourse support policy
+
+Follow Discourse's [official support schedule](https://releases.discourse.org/)
+and [release data](https://github.com/discourse/discourse/blob/main/versions.json).
+Maintain compatibility with supported ESR lines, including the oldest still-supported
+ESR, and supported monthly releases. Test released lines at their latest published
+patch; a development snapshot is not a substitute for a released ESR. Keep a
+separate development `latest` lane as an early warning of upcoming changes.
+During an ESR overlap, retain both ESR lines until the older one reaches end of
+support. An expired ESR is historical evidence, not a required current target.
+
+Before a normal release verification cycle, check the schedule, refresh exact
+Core pins and record the component commit, Core commits and results. Before
+publication, compare those results with the support claims; identify gaps or
+explicitly approved exceptions rather than implying untested compatibility.
+New features must not silently break a supported ESR: preserve compatibility,
+maintain a compatible product version, or obtain explicit approval for a changed
+support requirement and document it.
+
+Adoption is phased, not a new retrospective testing campaign. RC5's completed
+evidence and prepared target updates are recorded in
+[Testing and acceptance](TESTING.md#discourse-support-policy-adoption).
+Use the existing workflows in the next authorized regular CI cycle; do not
+create another runner or repeat completed checks solely to introduce this policy.
+This transition neither turns untested targets into passes nor waives other
+existing release safeguards.
+
+### Review method
+
 Review the exact Brand Navigation candidate as a **theme component** using all
 three files below from the `CodeWorksLabs/review-skills` repository, under
 `.agents/skills/codeworkslabs-platform-review/references/platforms/discourse/`:

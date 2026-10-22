@@ -1,5 +1,136 @@
 # Testing and acceptance
 
+## Main update and testing closure — October 21, 2026
+
+This update includes the accumulated Appearance state-handling changes,
+checkbox-focus correction, compact-menu content guard, mobile linked-label
+containment, existing regression sources, and support-policy documentation.
+It is not an RC5 tag or release acceptance.
+
+Discourse Work verified the two layout corrections and E03 focus correction in
+Chrome. Its tested English/Arabic, light/dark, Foundation/Horizon compact
+keyboard sequences showed no issue in the actual desktop-Chrome mobile-view
+contexts. E01 immediate native-field/picker display staleness remains unresolved;
+saved values persisted in the corrected save/reload sequence, but its cause is
+unknown. Other incomplete checks are missing coverage, not demonstrated bugs.
+See [Known Issues](KNOWN_ISSUES.md) for the disposition and exact limits.
+
+Phil closed this testing effort. Reopening requires a new explicit instruction
+from Phil. No new testing is part of this main update; its commit uses
+`[skip ci]`. The refreshed CI pins below remain prepared, not newly tested.
+Historical passing results retain their exact candidate and scope.
+
+## RC5 candidate verification
+
+The RC5 working candidate at commit
+[`238d5ad`](https://github.com/CodeWorksLabs/brand-navigation/commit/238d5ad829eb6053e5c2aefc94f495cf5f83791f)
+completed GitHub CI on October 20, 2026. RC5 is not yet published; these results
+identify the tested commit, not a released RC5 download.
+
+[Draft RC5 release notes](RELEASE_NOTES_RC5.md) summarize the corrections,
+completed verification, phased support policy and remaining acceptance limits.
+They are preparation material, not publication approval.
+
+### Discourse versions tested
+
+| Discourse version | Release type                                          | Exact Core revision                        | System-test result         |
+| ----------------- | ----------------------------------------------------- | ------------------------------------------ | -------------------------- |
+| 2026.10.0-latest  | Development snapshot from Discourse's `latest` branch | `121f4209defec81d9d167646fb7743683f7f6883` | 49 examples, zero failures |
+| 2026.7.0-latest   | Earlier development snapshot from the 2026.7 cycle    | `988c31e00fb73713c81b93cd47f68af0fb4c6273` | 49 examples, zero failures |
+| 2026.7.2+14       | Site-derived revision on the 2026.7 ESR line          | `2e46cff73b07ecddbcc5603eb3fbf41d563577f6` | 49 examples, zero failures |
+| 2026.8.0          | Regular monthly release                               | `badad7b0456a628e578bc48b9f8c1259422b5d58` | 49 examples, zero failures |
+
+These are isolated GitHub CI targets, not the current installed versions of the
+live example forums. The `repeal` and `r744` job names identify the compatibility
+revisions originally selected for those sites. R744's operating policy is to
+remain on the oldest still-supported ESR, with updates within that line; the
+fixed CI revision is not a recommendation to remain on that particular patch.
+Discourse's [official release data](https://github.com/discourse/discourse/blob/main/versions.json)
+identifies ESR lines and support periods. The `2026.7.0-latest` snapshot is not
+a published ESR patch.
+
+The R744-derived `2026.7.2+14` revision is not the exact official `v2026.7.2`
+tag, which resolves to `3ab62a8397926ed934b667a5db06284c45b4c774`.
+Its result applies to the exact Core commit in the table.
+
+### Completed checks
+
+[Discourse Theme CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39506144090)
+passed backend, frontend and system-test jobs on all four targets, plus the
+shared lint job. Each system run completed the same 49 examples: 29 Brand
+Navigation checks and 20 Discourse core checks, not 196 different scenarios.
+They cover navigation and submenu rendering, mobile modes and header alignment,
+English/Arabic layouts, colors and sizes, editor saves, Appearance import
+reconciliation, staging-preview imports, application embed exclusion and core
+forum interactions while the component is active.
+
+The added regression completed no-op **Inherit all**, a native color save, a
+different Appearance color save on the same panel, and reload. It checked all
+eleven persisted colors, native fields and Custom states before and after
+reload, plus both changed color pickers. The initial `90abb5a` attempt failed
+at a detached checkbox interaction before finishing that sequence; `238d5ad`
+changed only the test interaction, and the complete example passed on all four
+targets. These results replace neither OS color-dialog nor human accessibility checks.
+
+[Configuration bundles CI](https://github.com/CodeWorksLabs/brand-navigation/actions/runs/39506143547)
+passed all 45 tests, including the full JavaScript lint-coverage guard. Overall,
+18 jobs passed and none failed. Three duplicate lint jobs were covered by the
+passing shared lint job; the compatibility-branch-only job did not apply to this
+`main` push. Those four skips are not counted as passes or unfinished RC5 work.
+
+### What these results do not establish
+
+The source corrections received focused read-only review at `57649be`; the
+tested `9708b01` follow-up only reordered a class member and formatted two files.
+The later `90abb5a` and `238d5ad` commits changed only the regression test.
+The passing full save-and-reload example verifies that specific correction.
+The green shipped suites do not by themselves establish every other corrected
+interaction, a complete installation/upgrade/recovery sequence or complete
+manual accessibility acceptance. Twelve human screen-reader procedures remain
+owner-deferred. Historical results below retain their own candidates and limits;
+they are not fresh verification of this RC5 candidate.
+
+### Discourse support policy adoption
+
+**Policy adopted October 20, 2026:** follow Discourse's support schedule, test
+supported ESR and monthly lines at their latest released patches, and retain a
+separate development `latest` lane. The oldest still-supported ESR is required;
+both ESR lines remain targets during a support overlap. See the
+[release policy](RELEASE.md#discourse-support-policy) for publication safeguards.
+
+**What is complete:** the results above cover the 2026.7.2+14 ESR-line revision, released
+2026.8.0 and two development snapshots. They are valid evidence for those exact
+revisions, not results for newer patches. No test campaign was restarted to
+adopt this policy. The published RC4 tag remains unchanged.
+
+**What is prepared, not tested:** the existing four-lane workflow has been
+retargeted locally to the following current supported releases and development
+lane. No additional lane, runner or test case was added. No push or CI dispatch
+was performed for this update.
+
+| Next CI target   | Exact released Core commit / selection               | Status                 |
+| ---------------- | ---------------------------------------------------- | ---------------------- |
+| 2026.7.3 ESR     | `8a4ea10470790eba93f5dec65f3cacb0ffae1191`           | Prepared; not yet run  |
+| 2026.8.1 monthly | `1dce604a018931ff85572ce9815f7637e843f08c`           | Prepared; not yet run  |
+| 2026.9.0 monthly | `343b20f97ef5f6bd70826ee0e993ba348b210fd5`           | Prepared; not yet run  |
+| Development      | `latest`, with resolved Core commit recorded per run | Existing lane retained |
+
+These versions were checked against the
+[official release schedule](https://releases.discourse.org/) and released Git
+tags on October 20. The 2026.1 ESR ended support September 22 and is not a
+current target. The supported 2026.8 monthly line ends support October 27;
+refresh the list before execution rather than retaining an expired target.
+
+**Plan for full adoption:** use the next authorized normal CI cycle to exercise
+the refreshed targets, reuse applicable existing evidence, and record actual
+results here. At the next release decision, compare completed coverage with
+the then-current support schedule and document any gaps or approved exceptions.
+Thereafter refresh the existing target pins at normal release preparation,
+retain overlapping supported ESRs, and retire expired lines. Do not claim full
+adoption or compatibility with the prepared revisions before those results
+exist. This policy does not authorize more testing now or reopen historical
+environments as new tasks; other existing verification gaps remain separate.
+
 ## Seven-forum update follow-up — 2026-10-17
 
 All seven forums were confirmed to follow `main` on October 17, 2026.

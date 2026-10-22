@@ -197,6 +197,80 @@ module(
       }
     });
 
+    test("label-only bar and submenu content does not subscribe but icon-eligible content cleans up", async function (assert) {
+      const primarySprite = document.querySelector("#svg-sprites .fontawesome");
+      const originalSprite = primarySprite.innerHTML;
+      const originalItems = settings.navigation_items;
+      const labelOnlyItems = [
+        {
+          label: "Label-only bar",
+          url: "/latest",
+          icon: "d-tracking",
+          presentation: "label_only",
+        },
+        {
+          label: "Label-only group",
+          link_mode: "group",
+          icon: "d-tracking",
+          presentation: "label_only",
+          children: [
+            {
+              label: "Label-only child",
+              url: "/about",
+              icon: "d-tracking",
+              presentation: "label_only",
+            },
+          ],
+        },
+      ];
+
+      primarySprite.innerHTML = "";
+      settings.navigation_items = labelOnlyItems;
+      try {
+        await render(<template><BrandNavigationContent /></template>);
+        assert
+          .dom('.brand-navigation__items a[href="/latest"]')
+          .hasText("Label-only bar");
+        assert
+          .dom('.brand-navigation__items a[href="/latest"] svg')
+          .doesNotExist();
+        assert
+          .dom(".brand-navigation__submenu > summary")
+          .exists({ count: 1 })
+          .hasText("Label-only group");
+        assert
+          .dom('.brand-navigation__submenu a[href="/about"]')
+          .exists({ count: 1 })
+          .hasText("Label-only child");
+        assert
+          .dom('.brand-navigation__submenu a[href="/about"] svg')
+          .doesNotExist();
+        assert.strictEqual(primarySpriteWatcher.callbacks.size, 0);
+        assert.strictEqual(primarySpriteWatcher.observer, null);
+
+        await clearRender();
+        assert.strictEqual(primarySpriteWatcher.callbacks.size, 0);
+
+        // Content evaluates eligibility when constructed. Mount the changed
+        // configuration as a new content consumer, retaining the same sprite.
+        settings.navigation_items = [
+          { ...labelOnlyItems[0], presentation: "icon_and_label" },
+          labelOnlyItems[1],
+        ];
+        await render(<template><BrandNavigationContent /></template>);
+        assert.strictEqual(primarySpriteWatcher.callbacks.size, 1);
+        assert.notStrictEqual(primarySpriteWatcher.observer, null);
+
+        await clearRender();
+        assert.strictEqual(primarySpriteWatcher.callbacks.size, 0);
+        assert.strictEqual(primarySpriteWatcher.observer, null);
+      } finally {
+        await clearRender();
+        settings.navigation_items = originalItems;
+        primarySprite.innerHTML = originalSprite;
+      }
+    });
+
     test("recovers after delayed primary-sprite loading and unsubscribes destroyed consumers", async function (assert) {
       const spriteContainer = document.querySelector("#svg-sprites");
       const primarySprite = spriteContainer.querySelector(".fontawesome");

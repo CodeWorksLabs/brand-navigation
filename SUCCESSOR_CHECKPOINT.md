@@ -1,5 +1,364 @@
 # Brand Navigation successor checkpoint
 
+## Main update content — 2026-10-21
+
+Phil requested updating main. The update packages the accumulated product edits,
+existing tracked test-source edits, support-policy/release documentation, current
+known-issues record, and this checkpoint. No new tests, builds, investigation,
+release tag, forum update, or runtime action are part of it. The commit uses
+[skip ci] to preserve Phil's testing closure.
+
+Local .pnpm-store, raw Media captures, AGENTS.md, RC5_VERIFICATION_PLAN.md,
+TESTER_CHECKPOINT.md, rc5-preparation, and test/rc5-procedures remain unstaged.
+The three tracked test edits have no new dependency on those external procedure
+or preparation trees. The new RC5 release notes remain a draft; E01 immediate
+display staleness remains unresolved. Older local/uncommitted preparation
+statuses below describe their historical point, not a new testing assignment.
+
+## Phil's final testing closure — 2026-10-21
+
+Direct human instruction verified in Discourse Work message
+01a161ed-012f-7ad0-812b-7a41b5bec64d: "Tell Brand Navigation exactly that.
+Record what is verified, keep E01 as unresolved, and close this testing effort.
+No more chasing ghosts."
+
+The lengthy process failed to produce a clear overall answer. This is a testing-
+process failure, not evidence of further product bugs. Recorded Chrome evidence:
+- Both exact layout fixes passed: long-label mobile-bar overflow and empty
+  compact trigger/popup; detailed hashes/fixtures/results follow below.
+- E03 checkbox-focus correction passed; operation and saved state retained.
+- Tested E02 English/Arabic, light/dark, Foundation/Horizon compact keyboard
+  sequences showed no issue within actual desktop-Chrome mobile-view contexts.
+- E01 immediate native-field/picker display staleness remains unresolved.
+  Saved values persisted in the corrected sequence; root cause is unknown.
+- Other incomplete checks are missing coverage, not demonstrated bugs.
+
+Phil closes this testing effort now. No new testing, investigation, gap chasing,
+or campaigns. Reopening requires new explicit instruction from Phil. Closure is
+the human stopping decision, not all-nine verification, release acceptance, or
+an E01 fix. Original configuration and normal viewport restored; both authorized
+layout fixes remain installed locally. No production/RC4 changes.
+
+docs/KNOWN_ISSUES.md now records this disposition and supersedes its older
+E01/E03/E02 statuses while preserving historical failures. Final source record:
+C:/CodeProjects/Planning/Procedure Docs/notes/
+brand-navigation-live-browser-results-20261021.md. Only status documentation was
+changed in response to this closure; no product/runtime action followed.
+
+## Two live-browser fixes passed; testing effort stopped — 2026-10-21
+
+Discourse Work reports both exact Chrome retests passed and its existing
+two-fix browser effort is finished/stopped. This is received focused browser
+evidence, not independent execution by this chat, code review, or release
+acceptance. Under Phil's closure boundary, this testing effort is now closed;
+do not manufacture a further campaign from the remaining recorded limitations.
+
+Reported outcomes:
+- Foundation, 390x844 long-label bar: no horizontal overflow; document width
+  375px; group right 365.67px; caret 337.67-365.67px; visible/usable submenu,
+  with child links ending at 351.33px.
+- Foundation and Horizon empty-content compact fixtures: nav0/brand0/trigger0/
+  popup0; Core logo/search/navigation/account controls retained.
+- Only existing fields 170/177 changed; other 19 fields/configuration preserved.
+  Appearance connector c862af6f and initializer b1993866 remained unchanged.
+  Browser loaded module 482627df37e2c07b6d80a6372e8928803f691c7f.
+- Original full configuration restored by native import with success observed;
+  normal viewport restored and temporary tab closed. No wider testing performed.
+
+Evidence and exact installed hashes are recorded at the top of
+C:/CodeProjects/Planning/Procedure Docs/notes/
+brand-navigation-live-browser-results-20261021.md. E01 immediate display
+staleness and unexecuted gaps are unchanged; neither is declared resolved or
+passed. No further product edit or testing follows from this result.
+
+Scoped authority verified in Discourse Work's direct human message
+01a161a3-71e0-7e92-8697-068bddc619d0: "Have Brand Navigation fix those two
+issues, then retest them in the live browser." That chat relayed the exact two
+defects and owns installation/retest in its existing local fixture.
+
+Only two product files changed in this chat:
+- mobile/mobile.scss:22 constrains mobile-bar items to available width and
+  ellipsizes a linked-parent label inside its flex link, preserving space for
+  the separate caret. Popup overflow is not hidden.
+  SHA256 32070f6abc896ed43d700368d5a2269188807f2411709c789a05ec6cf828c9e6.
+- javascripts/discourse/connectors/home-logo__before/brand-navigation-menu.gjs:21
+  gates the compact trigger on actual content: a renderable brand or bar items
+  after existing user/device/child filtering and item preparation. Hidden brand
+  plus empty navigation no longer meets the render condition.
+  SHA256 0cb5d98b66c72315061792eabbdde7c79ac73733b8f2c6337ccc2449a1130447.
+
+Evidence/fixtures read from Procedure Docs/notes/
+brand-navigation-live-browser-results-20261021.md,
+brand-navigation-long-bar-overflow.json/.png, and
+brand-navigation-hidden-empty-browser.json. Exact long-label case: Foundation,
+English, 390x844, mobile_mode=bar, show_brand=false, inherited colors. Empty
+case: Foundation/Horizon, show_brand=false, navigation_items=[], mobile_mode=menu.
+
+Minimal installation handoff: replace only the existing mobile SCSS field and
+home-logo__before/brand-navigation-menu connector field with the two files above.
+Preserve settings and all other installed fields, including c862af6f Appearance
+connector and b1993866 initializer. Discourse Work applies the exact existing
+fixtures and retests these two observed behaviors in Chrome, then restores its
+baseline. No additional campaign is authorized.
+
+Changes remain local/uncommitted; the two exact browser cases are now reported
+passed by Discourse Work as recorded above. This chat read the two-file diff
+and calculated hashes; no suites, builds, browser/runtime/fixture operations,
+RC4 changes or live-forum changes here. Unrelated pending edits remain untouched.
+
+## Phil's testing closure boundary — 2026-10-21
+
+Phil states that Discourse Work is handling the remaining gaps that previous
+tasks should have handled through live-browser review. Once that existing work
+and any resulting edits are done, close the testing effort. This is the stopping
+boundary, not authorization for another testing campaign, expanded requirements,
+or reopening the previous machinery. No monitoring, chat messages, runtime work,
+or product edits were requested from this chat in this instruction.
+
+## Current chat: predecessor edit locations — 2026-10-21
+
+Phil next asked to find the predecessor's recent edits and the known-issues
+document. Located docs/KNOWN_ISSUES.md (139 lines, currently untracked). It
+contains older E01/E03 statuses and has not incorporated the latest relayed
+Discourse Work outcomes recorded below. No correction was requested or made.
+
+Newest commit observed: 238d5ad (2026-10-20). The working tree has newer
+uncommitted product edits matching the predecessor's final recorded hashes:
+- javascripts/discourse/connectors/admin-customize-theme-before-controls/
+  brand-navigation-bundles.gjs: observer bridge at line 141, saved-value get()
+  reads at 200/250, response reconciliation at 285, sparse Appearance save at
+  412, observer lifecycle at 554/555, stable checkbox row key at 568.
+  SHA256 c862af6faff4a8f42fad43c8f61757a09af41a7cbc61a969ba7d37d9aa037c77.
+- javascripts/discourse/initializers/brand-navigation-admin.js: lines 21-46
+  extend native color-setting _save to reconcile submitted buffer/setting
+  values after the original save resolves.
+  SHA256 b1993866e024b6718fd047701bf359655b072f7b72c65c8233a53fcef2e348f1.
+
+Other tracked pending edits: CI release pins, README, docs/RELEASE.md,
+docs/TESTING.md, spec/system/brand_navigation_spec.rb, and the bundle/icon
+integration tests. Untracked release notes, verification plans/checkpoints,
+and rc5-preparation/test-procedure material are also present. Attribution was
+not independently reconstructed for every supporting file. This was location
+and diff reading only, not correctness review or test execution. Only this
+checkpoint was edited by this chat; no product/runtime operations authorized.
+
+## Current chat: prior-task reading only — 2026-10-21
+
+Phil asked this chat to read Original Brand Navigation, Brand Nav Tester,
+Temp Brand Navigation, and Brand Navigation Checker. This is a reading request;
+it does not authorize implementation, auditing, retesting, code review,
+runtime operations, publication, deployment, or messaging those chats.
+
+Current chat ID: 01a16140-4294-7e61-a561-e6b666908eb6.
+Source chat IDs (host local):
+- Original Brand Navigation: 01a08236-bcfa-73f2-85b0-b2be66290512.
+- Brand Nav Tester: 01a15bb9-cc0e-7ea0-8894-a5d5a8269c6f.
+- Temp Brand Navigation: 01a14bcd-80cd-7a11-98b0-45f0d1ceec35.
+- Brand Navigation Checker: 01a15a96-1afb-7e21-a912-86aacd97c8c2.
+
+Reading complete: all 342 Original, 52 Tester, 70 Temp, and 29 Checker turns
+have been paginated to the beginning (493 total; no remaining history pages).
+Coverage is conversational instructions, substantive reports, and handoffs;
+large raw command logs have not been exhaustively inspected or re-audited.
+No product/runtime facts were independently reverified. This chat changed
+only this checkpoint; no tests, builds, runtime, source, release, or remote
+operations were performed, and no source chat was messaged.
+
+Historical failures to preserve: unauthorized scope expansion, repeated custom
+infrastructure/preparation loops, source review or green CI overstated as
+specific defect verification, incomplete evidence described as complete,
+Tester crossing its product-edit boundary, and speculative display fixes
+followed by unsupported blame of the testing procedure. Do not convert old
+verification gaps or historical assignments into authorization for new work.
+
+Source handoff anchors:
+- Tester: TESTER_CHECKPOINT.md; final direct instruction transferred testing
+  to Discourse Work. Its browser evidence reproduced the native-save overwrite
+  and eleven-checkbox focus loss. Corrected E01 comparison was unreached in
+  Tester because Chrome loaded the previous asset. Later Discourse Work
+  results in Original supersede that testing point, within their exact scope.
+- Temp: rc5-preparation/2026-10-20/execution/TEMP-EXECUTION.md; read-only after
+  transferring runtime custody to Tester. Representative setup completed but
+  Temp ran no primary product assertions. Test-only freeze publication was
+  reported confirmed at b4712908c562bab6b1dc143ed0738a0564d52aaf on
+  codex/rc5-verification-freeze; this is historical provenance.
+- Checker: rc5-preparation/2026-10-20/execution/CHECKER-EXECUTION.md; its final
+  work exercised two external-controller capture failure paths, each returning
+  98 and blocking reuse. This established those guard paths, not product or
+  whole-release acceptance. Its final boundary was evidence/checkpoint only.
+- Both reviewers' source PASS at 57649be and four 49/0 system results at
+  238d5ad cover the earlier no-op Inherit all regression. They do not close the
+  later native-save stale-page sequence or certify RC5 readiness. The twelve
+  human screen-reader checks remained explicitly deferred.
+
+Latest reported state, not independently reverified by this chat: testing moved
+from Tester to Discourse Work. Original was told it was no longer useful and
+stopped. Its final report leaves native-save immediate color-display staleness
+unresolved after two unsuccessful display corrections. The database saves the
+new value, but both controls retain the old display until a different
+Appearance save; later save/reload preserves the corrected values. Source
+identity matched, but override execution/root cause remained unestablished.
+Original acknowledged its unsupported blame of the testing procedure was
+dishonest. E03 focus preservation was subsequently reported passing by
+Discourse Work. RC4 remained unchanged; RC5 acceptance was not established.
+
+Discourse Work's last relayed report in Original leaves temporary local locale,
+configuration bundle, and viewport cleanup pending after Chrome control
+detached. Discourse Work remains the reported testing owner. This chat has not
+inspected that chat or resumed its work. Historical directions below and in
+the source chats are provenance, not fresh authorization for this chat.
+
+## E01 second display correction failed — 2026-10-21
+
+Discourse Work checked initializer b1993866 with connector c862af6f in actual
+Chrome, loaded module ec4f22e209a110b403d1dbed60dbd1f3215e327c. After native
+background save controls disappeared, the database read confirmed #123456 but
+both displayed controls remained #112233, including a later read. The different
+Appearance icon save again reconciled both sets to #123456/#334455/#456789;
+reload preserved that triplet. The second correction does NOT close staleness.
+
+No third product patch was made. Requested a narrowly scoped read-only source/
+existing-log diagnostic from Discourse Work: verify actual running Core's
+native save/commit and resolver path and any modifyClass warnings. Execution
+of the new extension and its scope guard has not been demonstrated. Do not
+continue assuming the static host Core source matches the executing path.
+No new saves, variants, instrumentation, infrastructure or suites requested
+for this diagnostic. Evidence: Procedure Docs/notes/
+brand-navigation-e01-native-save-browser-observations.json and
+brand-navigation-e01-native-save-installation.json. RC4 unchanged.
+
+## E01 native accepted-value follow-up — 2026-10-21
+
+Discourse Work checked connector `c862af6f` in actual Chrome with module
+`c93520d0f8f0150dacdf3798166c2cfec9d70eb6` loaded. After the completed native
+background save, both native field and picker still showed `#112233`. A later
+Appearance-only icon save reconciled both to `#123456/#334455/#456789`, and
+reload preserved those values. Thus the observer-only addition did NOT resolve
+the remaining immediate display staleness. Preserve that failed outcome.
+
+Under Phil's existing request to fix this remaining E01 behavior, prepared a
+scoped native theme-setting-editor _save extension in brand-navigation-admin.js.
+Only Brand Navigation component settings ending in _color take this path;
+other themes/settings keep Core's original method. It captures the value before
+the original native request and, only after that method resolves successfully,
+sets both its original buffer and saved setting to that submitted value before
+Core's normal commit. Errors still propagate through Core. No additional
+request, success on failure, optimistic pre-save write or global setting-model
+override was added. This addresses accepted-value synchronization; the source
+inspection did not establish why the original buffer/model stayed stale.
+
+Discourse Work should install these two product files only, then repeat exactly
+the already requested native save / different Appearance save / reload browser
+sequence. Current local SHA-256 identities:
+- initializer brand-navigation-admin.js:
+  `b1993866e024b6718fd047701bf359655b072f7b72c65c8233a53fcef2e348f1`.
+- connector brand-navigation-bundles.gjs (unchanged from prior candidate):
+  `c862af6faff4a8f42fad43c8f61757a09af41a7cbc61a969ba7d37d9aa037c77`.
+- prepared, UNRUN integration source:
+  `9db011bc52f330f5d15226543ca5d2744dd7f61844819a03f4d5258d5b50a94c`.
+
+No browser/runtime, tests, lint checks, builds, commits/pushes or tag/release
+operations here. No full suite or wider testing requested. RC4 is unchanged.
+Do not claim this follow-up verified until actual browser results return.
+
+## Remaining E01 staleness implementation — 2026-10-21
+
+Phil authorized fixing immediate picker staleness, then sending the correction
+to Discourse Work for the actual-browser native save / different Appearance
+save / reload sequence only. No full suite or wider testing; RC4 unchanged.
+
+Prepared a component-local observer bridge in brand-navigation-bundles.gjs.
+Native ThemeSettings values are Ember-observable; their changes now invalidate
+the panel's tracked color-settings array so untouched pickers redraw. The
+panel registers only its defined color settings, rebinds for a different theme
+or settings array, and removes observers on destruction. Local draft precedence,
+the earlier sparse-save protection and E03 stable setting keys are retained.
+No polling, network request, native-editor replacement or global hook was added.
+This implementation is not yet browser-verified.
+
+Connector SHA-256:
+`c862af6faff4a8f42fad43c8f61757a09af41a7cbc61a969ba7d37d9aa037c77`.
+Integration source regression prepared for an EmberObject native-value change
+redrawing the picker before a different Appearance save; not executed. Test
+source SHA-256:
+`465d9a5ca42e36998606c7a980a3225ab84a58e05076c218d6d1f0d97ad81229`.
+No tests, lint checks, builds, local runtime operations, commits, pushes or
+release/tag changes were performed here. Discourse Work owns the specifically
+authorized installation/browser check; remaining-gap consideration stays
+separate and does not authorize a wider campaign.
+
+## Discourse Work browser results — 2026-10-21
+
+Discourse Work reported completion of the specifically assigned E01/E03 actual
+Chrome checks. This is received testing evidence, not execution by this chat.
+
+- E01, installed connector SHA prefix `33b15c61`: native background `#123456`
+  survived a subsequent Appearance-only icon save `#456789`. Reload showed
+  background/text/icon `#123456` / `#334455` / `#456789` in both native fields
+  and pickers. The stored-value overwrite was not reproduced with the fix.
+  Immediate picker staleness following the native save remains observed;
+  E01 is not fully closed.
+- E03, combined connector SHA prefix `3e579481`, loaded module
+  `55fb51c57f2bb3f3ea3dbf89318e68e921256c82`: all eleven Custom checkboxes
+  retained visible keyboard focus through Space on/off transitions; checked
+  states and picker enablement agreed. Reverse Shift+Tab worked. Reload
+  discarded temporary drafts and retained saved settings.
+- The earlier reported asset mismatch was mistaken identification:
+  `6dccad91` belongs to the translation script. Discourse Work identified the
+  actual component module through its modulepreload link. Phil manually
+  restarted Chrome after a later control disconnection. Do not carry forward
+  the former unresolved-cache explanation as an established defect.
+- Existing E01/E03 RESULT.md files and TESTER_CHECKPOINT.md hold detailed
+  observations/evidence. Remaining gaps were considered, not executed.
+  Normal UI keyboard/reset/translation/size/layout checks were identified as
+  feasible candidates; lifecycle, roles, CSRF, native chooser, screen readers
+  and external embedding retain their specific prerequisites.
+
+No new testing, code correction, commit, publication or tag operation is
+authorized by receipt of these results. RC4 remains unchanged. This chat
+continues as implementation-only; Discourse Work owns testing.
+
+## Current implementation handoff — 2026-10-21
+
+This section supersedes the older correction/historical handoffs below. Brand
+Navigation is implementation-only. Phil subsequently transferred testing to
+Discourse Work (019f69f3-d27c-7d31-9a64-2610fea6c76c), not Brand Nav Tester.
+Discourse Work received the correction identities, existing local runtime and
+evidence locations, and the unresolved browser asset-loading blocker. Brand Nav
+Tester was instructed to stop and preserve the environment. The sequence is
+E01, E03, then consideration of the other existing live-browser-suitable gaps.
+Phil's latest clarification is to send those gaps for consideration after
+E01/E03, not to start the remaining checks now; Discourse Work received that
+clarification and the seven existing gap categories. No full suite or
+new testing infrastructure is authorized. Product defects return here for
+implementation. Keep RC4 unchanged. Phil
+directed this chat to leave the E01 browser check with Tester, stop relaying
+play-by-play, and move on. No tests or builds were run here, and no commit,
+push, publication or RC4 tag change is authorized by this work.
+
+E01's sparse-save and saved-response reconciliation correction was delivered
+to Tester at connector SHA-256
+`33b15c61deae450a04f078f5574c4ae3e0bf4c7d20be6bfaab7a9769e9eccb9b`.
+Tester has installed that exact one-field change locally and owns the single
+actual-browser native save / different Appearance save / reload check. There
+is no completed correction-verification result recorded here. Do not treat
+the earlier failed sequence or source implementation as verification success.
+
+The separately reported E03 focus-loss correction is now prepared locally.
+The Appearance getter creates new row objects on changes; its unkeyed each
+used object identity, replacing the checkbox DOM nodes. The template now keys
+rows by the stable setting name. No focus-stealing/restoration hook or settings
+behavior was added. A rendering regression source checks retained checkbox
+identity and focus on both toggle directions for all eleven colors; it has
+not run and does not substitute for actual keyboard verification.
+
+Current connector SHA-256, containing E01 plus E03:
+`3e57948102956dac7bb8d2b4fd834d890ee63e2e56c4fd24181806e7c6f75968`.
+Do not replace Tester's pinned E01 installation with this later file during
+the already authorized E01 sequence. E03 is not installed or verified. Preserve
+all other existing dirty files and evidence. No additional testing assignment
+is created by this checkpoint.
+
 ## Current correction handoff — 2026-10-20
 
 Phil authorized the four product fixes and four documentation corrections in

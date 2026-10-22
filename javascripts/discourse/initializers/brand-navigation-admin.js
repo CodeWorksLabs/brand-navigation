@@ -8,6 +8,7 @@ import { i18n } from "discourse-i18n";
 import {
   brandNavigationEditorSchema,
   isBrandNavigationObjectsEditor,
+  isBrandNavigationTheme,
   snapshotPlainData,
 } from "../lib/brand-navigation-admin";
 import { validateNavigationItems } from "../lib/configuration-bundle";
@@ -17,6 +18,34 @@ export default {
 
   initialize() {
     withPluginApi((api) => {
+      api.modifyClass(
+        "component:theme-setting-editor",
+        (Superclass) =>
+          class extends Superclass {
+            async _save() {
+              if (
+                !isBrandNavigationTheme(this.args.model) ||
+                !this.setting.setting.endsWith("_color")
+              ) {
+                return super._save(...arguments);
+              }
+
+              const setting = this.setting;
+              const buffered = this.buffered;
+              const submittedValue = buffered.get("value");
+              const result = await super._save(...arguments);
+
+              // Accept the value actually submitted, not a stale buffer restored
+              // while the request was pending. Core's normal commit then uses
+              // the same successful value, and Appearance observes that change.
+              buffered.set("value", submittedValue);
+              setting.set("value", submittedValue);
+              return result;
+            }
+          },
+        { ignoreMissing: true }
+      );
+
       api.modifyClass(
         "component:schema-setting/editor",
         (Superclass) =>

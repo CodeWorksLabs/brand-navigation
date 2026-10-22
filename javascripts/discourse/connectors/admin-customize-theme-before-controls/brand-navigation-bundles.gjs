@@ -4,7 +4,10 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
 import { on } from "@ember/modifier";
-import { action } from "@ember/object";
+import { action, get } from "@ember/object";
+import { addObserver, removeObserver } from "@ember/object/observers";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { ajax } from "discourse/lib/ajax";
 import { not, or } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
@@ -135,12 +138,57 @@ export default class BrandNavigationBundles extends Component {
   @tracked saving = false;
   @tracked success;
   @tracked appearanceValues = {};
+  @tracked nativeColorSettings = [];
+  @tracked observedTheme;
 
   bundleSelection = 0;
 
   willDestroy() {
     this.bundleSelection++;
+    this.stopObservingNativeColors();
     super.willDestroy();
+  }
+
+  stopObservingNativeColors() {
+    for (const setting of this.nativeColorSettings) {
+      removeObserver(setting, "value", this, this.nativeColorChanged);
+    }
+  }
+
+  @action
+  observeNativeColors() {
+    const settings = this.theme.settings.filter((setting) =>
+      APPEARANCE_COLORS.some((color) => color.setting === setting.setting)
+    );
+    if (
+      this.observedTheme === this.theme &&
+      settings.length === this.nativeColorSettings.length &&
+      settings.every(
+        (setting, index) => setting === this.nativeColorSettings[index]
+      )
+    ) {
+      return;
+    }
+
+    this.stopObservingNativeColors();
+    this.observedTheme = this.theme;
+    this.nativeColorSettings = settings;
+    for (const setting of settings) {
+      addObserver(setting, "value", this, this.nativeColorChanged);
+    }
+  }
+
+  @action
+  nativeColorChanged() {
+    // Native theme settings use Ember's observable value, not @tracked. Bridge
+    // its save notifications into this panel's tracked rendering dependencies.
+    this.nativeColorSettings = [...this.nativeColorSettings];
+  }
+
+  get appearanceSettings() {
+    return this.observedTheme === this.theme
+      ? this.nativeColorSettings
+      : this.theme.settings;
   }
 
   get currentAppearanceValues() {
@@ -152,9 +200,12 @@ export default class BrandNavigationBundles extends Component {
         Object.hasOwn(this.appearanceValues, setting)
           ? this.appearanceValues[setting]
           : normalizedHexColor(
-              this.theme.settings.find(
-                (candidate) => candidate.setting === setting
-              )?.value
+              get(
+                this.appearanceSettings.find(
+                  (candidate) => candidate.setting === setting
+                ),
+                "value"
+              )
             ) || "",
       ])
     );
@@ -199,8 +250,12 @@ export default class BrandNavigationBundles extends Component {
     return this.appearanceColorDefinitions.some(({ setting }) => {
       const persisted =
         normalizedHexColor(
-          this.theme.settings.find((candidate) => candidate.setting === setting)
-            ?.value
+          get(
+            this.appearanceSettings.find(
+              (candidate) => candidate.setting === setting
+            ),
+            "value"
+          )
         ) || "";
       return persisted !== values[setting];
     });
@@ -228,7 +283,25 @@ export default class BrandNavigationBundles extends Component {
   }
 
   persistSettings(settings) {
-    return persistThemeSettings(this.theme.id, settings, ajax);
+    const theme = this.theme;
+    return persistThemeSettings(theme.id, settings, async (url, options) => {
+      const response = await ajax(url, options);
+      const savedSettings = response?.theme?.settings ?? response?.settings;
+
+      if (Array.isArray(savedSettings)) {
+        // A native save can leave the page's accepted values stale. Reconcile
+        // saved colors from the response, not from the pre-save page snapshot.
+        for (const { setting, value } of savedSettings) {
+          if (APPEARANCE_COLORS.some((color) => color.setting === setting)) {
+            theme.settings
+              .find((candidate) => candidate.setting === setting)
+              ?.set("value", value);
+          }
+        }
+      }
+
+      return response;
+    });
   }
 
   readBundle(file) {
@@ -333,7 +406,18 @@ export default class BrandNavigationBundles extends Component {
       return;
     }
 
-    const submittedAppearance = snapshotPlainData(this.currentAppearanceValues);
+    // Submit only explicit edits. Untouched values may be stale after a native
+    // save and must never be sent back merely because another color changed.
+    // Inherit all intentionally puts every defined color in appearanceValues.
+    const submittedAppearance = snapshotPlainData(
+      Object.fromEntries(
+        this.appearanceColorDefinitions
+          .filter(({ setting }) =>
+            Object.hasOwn(this.appearanceValues, setting)
+          )
+          .map(({ setting }) => [setting, this.appearanceValues[setting]])
+      )
+    );
 
     this.saving = true;
     this.errors = [];
@@ -467,6 +551,8 @@ export default class BrandNavigationBundles extends Component {
       <section
         id="brand-navigation-appearance"
         class="brand-navigation-admin-panel control-unit"
+        {{didInsert this.observeNativeColors}}
+        {{didUpdate this.observeNativeColors this.theme this.theme.settings}}
       >
         <div class="mini-title">
           {{i18n (themePrefix "brand_navigation.appearance.title")}}
@@ -479,7 +565,7 @@ export default class BrandNavigationBundles extends Component {
         </p>
 
         <div class="brand-navigation-admin-panel__color-grid">
-          {{#each this.appearanceColors as |color|}}
+          {{#each this.appearanceColors key="setting" as |color|}}
             <div class="brand-navigation-admin-panel__color">
               <input
                 type="color"

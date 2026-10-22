@@ -19,6 +19,24 @@
     flex-wrap: wrap;
   }
 
+  .brand-navigation__item {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .brand-navigation__submenu-group--linked > .brand-navigation__parent-link {
+    min-width: 0;
+
+    > .d-icon {
+      flex-shrink: 0;
+    }
+
+    > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
   .brand-navigation__item--right-start {
     margin-inline-start: 0;
   }

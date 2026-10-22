@@ -3,6 +3,125 @@
 RSpec.describe "Brand Navigation" do
   let(:theme) { upload_theme_component }
 
+  let(:appearance_color_labels) do
+    {
+      bar_background_color: "Navigation bar — background",
+      bar_text_color: "Navigation bar — text and icons",
+      hover_background_color: "Navigation menus — hover/highlight background",
+      submenu_background_color: "Dropdown menus — background",
+      submenu_text_color: "Dropdown menus — text and icons",
+      submenu_hover_text_color: "Dropdown menus — text and icons on hover/focus",
+      header_icon_color: "Discourse header — icons",
+      header_icon_hover_color: "Discourse header — icons on hover/focus",
+      header_text_color: "Discourse header — link text",
+      header_text_hover_color: "Discourse header — link text on hover/focus",
+      header_hover_background_color: "Discourse header — link and icon background on hover/focus",
+    }
+  end
+
+  def inherited_appearance_values
+    appearance_color_labels.transform_values { "" }
+  end
+
+  def configure_appearance_values(values)
+    values.each { |name, value| theme.update_setting(name, value) }
+    theme.save!
+  end
+
+  def save_native_appearance_color(name, value)
+    selector = "section.theme.settings .setting[data-setting='#{name}']"
+    find(selector).find("input.input-setting-string").set(value)
+    find(selector).find(".setting-controls__ok").click
+    expect(page).not_to have_css("#{selector} .setting-controls__ok")
+    expect(theme.reload.settings.fetch(name).value).to eq(value)
+  end
+
+  def edit_appearance_color(name, value)
+    checkbox = ".brand-navigation-admin-panel input[type='checkbox'][data-setting='#{name}']"
+    expect(page).to have_css("#{checkbox}:checked")
+    picker = find(".brand-navigation-admin-panel input[type='color'][data-setting='#{name}']")
+    expect(picker).not_to be_disabled
+    # The established dispatched-input pattern exercises the HTML color input,
+    # not the operating system's color chooser (covered separately by E08).
+    page.execute_script(
+      "arguments[0].value=arguments[1]; arguments[0].dispatchEvent(new Event('input',{bubbles:true}));",
+      picker,
+      value,
+    )
+  end
+
+  def expect_persisted_appearance_values(expected)
+    expect(expected.keys.sort).to eq(appearance_color_labels.keys.sort)
+    try_until_success do
+      saved = theme.reload.settings
+      expected.each do |name, value|
+        expect(saved.fetch(name).value).to eq(value), "stored #{name}"
+      end
+    end
+    expected.each do |name, value|
+      row = find("section.theme.settings .setting[data-setting='#{name}']")
+      expect(row).to have_field(with: value)
+    end
+  end
+
+  def expect_appearance_controls(expected)
+    expected.each do |name, value|
+      checkbox = ".brand-navigation-admin-panel input[type='checkbox'][data-setting='#{name}']"
+      expect(page).to have_css("#{checkbox}#{value.empty? ? ':not(:checked)' : ':checked'}")
+      picker = find(".brand-navigation-admin-panel input[type='color'][data-setting='#{name}']")
+      if value.empty?
+        expect(picker).to be_disabled
+      else
+        expect(picker).not_to be_disabled
+        expect(picker.value).to eq(value.downcase)
+      end
+    end
+  end
+
+  def expect_appearance_values(expected)
+    expect_persisted_appearance_values(expected)
+    expect_appearance_controls(expected)
+  end
+
+  def expect_appearance_before_and_after_reload(expected, settings_path)
+    [false, true].each do |reload_page|
+      visit(settings_path) if reload_page
+      expect(page).to have_button("Save colors", disabled: true)
+      expect_appearance_values(expected)
+    end
+  end
+
+  def expect_appearance_checkbox_names
+    expect(page).to have_css(".brand-navigation-admin-panel input[type='checkbox'][data-setting]", count: 11)
+    page.driver.with_playwright_page do |browser_page|
+      appearance_color_labels.each_value do |label|
+        expect(
+          browser_page.get_by_role("checkbox", name: "Use a custom color for #{label}", exact: true).count,
+        ).to eq(1)
+      end
+    end
+  end
+
+  def tab_to_appearance_checkbox(name)
+    selector = ".brand-navigation-admin-panel input[type='checkbox'][data-setting='#{name}']"
+    # Include hidden and disabled controls for a conservative full-page bound,
+    # plus one Tab for wrapping back to the start of the document.
+    maximum_tabs = page.evaluate_script(<<~JS)
+      document.querySelectorAll(
+        "a[href], area[href], button, input, select, textarea, summary, iframe, " +
+        "object, embed, [tabindex], [contenteditable], audio[controls], video[controls]"
+      ).length + 1
+    JS
+    reached = false
+    maximum_tabs.times do
+      page.driver.with_playwright_page { |browser_page| browser_page.keyboard.press("Tab") }
+      reached = page.evaluate_script("document.activeElement?.matches(arguments[0]) === true", selector)
+      break if reached
+    end
+    expect(reached).to eq(true), "keyboard reaches #{name}"
+    expect(page).to have_css("#{selector}:focus-visible")
+  end
+
   before do
     theme.enabled = true
     theme.update_setting(:brand_name, "Example")
@@ -686,8 +805,15 @@ RSpec.describe "Brand Navigation" do
 
     def appearance_keyboard_focus(node)
       page.driver.with_playwright_page { |p| p.mouse.move(1, 850) }
+      # Bound traversal by the page's controls, including a wrap to its start.
+      maximum_tabs = page.evaluate_script(<<~JS)
+        document.querySelectorAll(
+          "a[href], area[href], button, input, select, textarea, summary, iframe, " +
+          "object, embed, [tabindex], [contenteditable], audio[controls], video[controls]"
+        ).length + 1
+      JS
       reached = false
-      80.times do
+      maximum_tabs.times do
         page.driver.with_playwright_page { |p| p.keyboard.press("Tab") }
         reached = page.evaluate_script("document.activeElement === arguments[0]", node)
         break if reached
@@ -976,6 +1102,175 @@ RSpec.describe "Brand Navigation" do
         expect(find("input[type='color'][data-setting='#{name}']").value).to eq(expected.fetch(name))
       end
     end
+  end
+
+  it "preserves initially custom colors after a native-only save and a different Appearance save" do
+    expected = inherited_appearance_values.merge(
+      bar_background_color: "#112233",
+      bar_text_color: "#334455",
+      header_icon_color: "#223344",
+    )
+    configure_appearance_values(expected)
+    sign_in(Fabricate(:admin, locale: "en"))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    visit(settings_path)
+    appearance_panel = find(".brand-navigation-admin-panel")
+    expect_appearance_values(expected)
+
+    save_native_appearance_color(:bar_background_color, "#123456")
+    expected[:bar_background_color] = "#123456"
+    try_until_success do
+      picker = find(".brand-navigation-admin-panel input[type='color'][data-setting='bar_background_color']")
+      expect(picker.value).to eq(expected.fetch(:bar_background_color).downcase)
+    end
+    expect_appearance_values(expected)
+    expect(page).to have_button("Save colors", disabled: true)
+    expect(
+      page.evaluate_script("arguments[0] === document.querySelector('.brand-navigation-admin-panel')", appearance_panel),
+    ).to eq(true)
+
+    edit_appearance_color(:header_icon_color, "#456789")
+    click_button("Save colors")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expected[:header_icon_color] = "#456789"
+    expect_appearance_before_and_after_reload(expected, settings_path)
+  end
+
+  it "preserves an intentional same-field Appearance draft and resets only color overrides" do
+    expected = inherited_appearance_values.merge(
+      bar_background_color: "#112233",
+      header_icon_color: "#223344",
+    )
+    configure_appearance_values(expected)
+    non_color_settings = lambda do
+      theme.reload.settings.reject { |name, _| appearance_color_labels.key?(name.to_sym) }.transform_values(&:value)
+    end
+    retained = JSON.parse(non_color_settings.call.to_json)
+    sign_in(Fabricate(:admin, locale: "en"))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    visit(settings_path)
+    appearance_panel = find(".brand-navigation-admin-panel")
+
+    edit_appearance_color(:bar_background_color, "#445566")
+    save_native_appearance_color(:bar_background_color, "#667788")
+    expected[:bar_background_color] = "#667788"
+    expect_persisted_appearance_values(expected)
+    expect_appearance_controls(expected.merge(bar_background_color: "#445566"))
+    expect(page).to have_button("Save colors", disabled: false)
+    expect(
+      page.evaluate_script("arguments[0] === document.querySelector('.brand-navigation-admin-panel')", appearance_panel),
+    ).to eq(true)
+
+    # This field was deliberately drafted before the native save. Its draft
+    # retains precedence; it is not an untouched-field preservation case.
+    click_button("Save colors")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expected[:bar_background_color] = "#445566"
+    expect_appearance_before_and_after_reload(expected, settings_path)
+
+    click_button("Inherit all")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expect_appearance_before_and_after_reload(inherited_appearance_values, settings_path)
+    expect(JSON.parse(non_color_settings.call.to_json)).to eq(retained)
+  end
+
+  it "retains an Appearance draft after rejection before persistence and saves it after recovery" do
+    expected = inherited_appearance_values.merge(
+      bar_background_color: "#112233",
+      header_icon_color: "#223344",
+    )
+    configure_appearance_values(expected)
+    sign_in(Fabricate(:admin, locale: "en"))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    visit(settings_path)
+    appearance_panel = find(".brand-navigation-admin-panel")
+    save_native_appearance_color(:bar_background_color, "#123456")
+    expected[:bar_background_color] = "#123456"
+    edit_appearance_color(:header_icon_color, "#456789")
+
+    pattern = %r{/admin/themes/#{theme.id}\.json(?:\?|$)}
+    rejected_requests = []
+    handler = lambda do |route, request|
+      if request.method == "PUT"
+        rejected_requests << request.post_data
+        route.fulfill(
+          status: 422,
+          contentType: "application/json",
+          body: JSON.generate(errors: ["Synthetic Appearance rejection before persistence"]),
+        )
+      else
+        route.continue
+      end
+    end
+
+    # Core's existing system specs use this routing/ensure-unroute mechanism.
+    # No request reaches Core during this rejection, so this case makes no
+    # assertion that a real partially processed bulk update is atomic.
+    page.driver.with_playwright_page do |browser_page|
+      browser_page.route(pattern, handler)
+      begin
+        click_button("Save colors")
+        expect(page).to have_css(".alert-error", text: "Synthetic Appearance rejection before persistence")
+        expect(page).not_to have_css(".alert-success", text: "Brand Navigation colors saved")
+        expect(rejected_requests.length).to eq(1)
+        expect_persisted_appearance_values(expected)
+        expect_appearance_controls(expected.merge(header_icon_color: "#456789"))
+        expect(page).to have_button("Save colors", disabled: false)
+        expect(
+          page.evaluate_script("arguments[0] === document.querySelector('.brand-navigation-admin-panel')", appearance_panel),
+        ).to eq(true)
+      ensure
+        browser_page.unroute(pattern, handler: handler)
+      end
+    end
+
+    # Planned recovery within the example: the next save uses real Core
+    # persistence after the test-only rejection has been removed.
+    click_button("Save colors")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expect(page).not_to have_css(".alert-error")
+    expected[:header_icon_color] = "#456789"
+    expect_appearance_before_and_after_reload(expected, settings_path)
+  end
+
+  it "names all eleven Custom checkboxes and preserves keyboard-operated custom and inherited states after reload" do
+    expected = inherited_appearance_values
+    configure_appearance_values(expected)
+    sign_in(Fabricate(:admin, locale: "en"))
+    settings_path = "/admin/customize/themes/#{theme.id}"
+    visit(settings_path)
+    expect_appearance_values(expected)
+    expect_appearance_checkbox_names
+
+    appearance_color_labels.each_key.with_index do |name, index|
+      tab_to_appearance_checkbox(name)
+      page.driver.with_playwright_page { |browser_page| browser_page.keyboard.press("Space") }
+      expect(page).to have_css("input[type='checkbox'][data-setting='#{name}']:checked")
+      expect(page).to have_css("input[type='color'][data-setting='#{name}']:enabled")
+      expected[name] = format("#%06d", 123450 + index)
+      edit_appearance_color(name, expected.fetch(name))
+    end
+    expect_appearance_controls(expected)
+    expect_appearance_checkbox_names
+    click_button("Save colors")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expect_appearance_before_and_after_reload(expected, settings_path)
+    expect_appearance_checkbox_names
+
+    appearance_color_labels.each_key.with_index do |name, index|
+      next unless index.even?
+      tab_to_appearance_checkbox(name)
+      page.driver.with_playwright_page { |browser_page| browser_page.keyboard.press("Space") }
+      expect(page).to have_css("input[type='checkbox'][data-setting='#{name}']:not(:checked)")
+      expect(page).to have_css("input[type='color'][data-setting='#{name}']:disabled")
+      expected[name] = ""
+    end
+    expect_appearance_controls(expected)
+    expect_appearance_checkbox_names
+    click_button("Save colors")
+    expect(page).to have_css(".alert-success", text: "Brand Navigation colors saved")
+    expect_appearance_before_and_after_reload(expected, settings_path)
+    expect_appearance_checkbox_names
   end
 
   context "with an unpublished staging theme" do

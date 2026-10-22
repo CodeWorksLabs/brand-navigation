@@ -14,25 +14,25 @@ jobs:
     if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
 
-  ci-repeal-2026-7:
+  ci-2026-7-esr:
     if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
     with:
-      core_ref: 988c31e00fb73713c81b93cd47f68af0fb4c6273
+      core_ref: 8a4ea10470790eba93f5dec65f3cacb0ffae1191 # v2026.7.3
       skip_linting: true
 
-  ci-r744-2026-7:
+  ci-2026-9-release:
     if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
     with:
-      core_ref: 2e46cff73b07ecddbcc5603eb3fbf41d563577f6
+      core_ref: 343b20f97ef5f6bd70826ee0e993ba348b210fd5 # v2026.9.0
       skip_linting: true
 
   ci-2026-8-release:
     if: ${{ !startsWith(github.base_ref, 'd-compat/') }}
     uses: discourse/.github/.github/workflows/discourse-theme.yml@05b8c4ee75d2408ffd23a2fbfb948dd82037fc57 # v1
     with:
-      core_ref: badad7b0456a628e578bc48b9f8c1259422b5d58
+      core_ref: 1dce604a018931ff85572ce9815f7637e843f08c # v2026.8.1
       skip_linting: true
 
   ci-compatibility-branch:
