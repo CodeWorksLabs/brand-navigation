@@ -15,6 +15,11 @@ or campaigns are authorized. Reopening requires new explicit instruction from
 Phil. Closure is the human stopping decision, not all-nine verification,
 release acceptance, or an E01 fix.
 
+On October 22 Phil separately authorized **only the existing GitHub CI workflows**
+for RC5 publication. That bounded cycle does not reopen the failed campaign or
+authorize local product suites, new tests, or investigation of E01. Its results
+must be recorded against the candidate actually run; they are pending here.
+
 ## Implemented on main
 
 The accumulated product changes were committed and pushed in

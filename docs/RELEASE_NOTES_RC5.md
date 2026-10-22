@@ -1,6 +1,7 @@
 # Brand Navigation v1.0.0-rc.5
 
-Draft release notes — RC5 is not published or approved for publication.
+RC5 prerelease notes. Publication is being prepared under Phil's October 22
+instruction to run the existing GitHub CI workflows and publish RC5.
 
 The source and documentation changes below were implemented and pushed to
 `main` in [`dcb01b2`](https://github.com/CodeWorksLabs/brand-navigation/commit/dcb01b28744aec1f06441ddacf713c1f8c407958).
@@ -85,15 +86,17 @@ and normal viewport were restored after the focused Chrome work.
 
 ## Supported-release policy and transition
 
-Brand Navigation is adopting Discourse's supported-release schedule: supported
+Phil adopted a policy for subsequent releases and prereleases to follow
+Discourse's supported-release schedule: supported
 ESR and monthly lines at their latest patches, including the oldest supported
 ESR and both ESRs during an overlap, plus separate development coverage.
 
 The workflow pins committed on main select 2026.7.3 ESR, 2026.8.1, 2026.9.0
-and development `latest`. The refreshed targets have **not run**. No cycle is
-queued by these notes; further testing requires new explicit instruction from
-Phil. Existing results remain valid for their actual revisions, not the new
-pins. Any future authorized cycle must use the then-current support schedule.
+and development `latest`. Current schedule catch-up is incomplete; the policy
+and committed pins do not prove completed compliance. Phil has now authorized
+only the existing GitHub CI cycle for RC5. Its outcomes are pending. Existing
+results remain valid for their actual revisions, not the new pins. Subsequent
+cycles follow the then-current support schedule.
 See the
 [phased adoption plan](TESTING.md#discourse-support-policy-adoption).
 
@@ -115,16 +118,17 @@ That process failure remains unresolved; its resolution has not been specified
 by these notes. Closing the testing effort does not mark the execution failure
 resolved or authorize a new investigation.
 
-Phil closed this testing effort. No new testing, investigation or campaign is
-assigned; reopening requires new explicit instruction from Phil. Closure is the
-human stopping decision, not all-nine verification, release acceptance, or an
-E01 fix.
+Phil closed the prior testing effort. His October 22 instruction authorizes only
+the existing GitHub CI workflows for RC5 publication, not another testing or
+investigation campaign. E01 remains unresolved and missing coverage remains
+missing coverage. The prior closure is not all-nine verification, release
+acceptance, or an E01 fix.
 
 ## Publication status
 
-The final RC5 commit, release date, changelog entry, badge and prerelease are
-not yet finalized. Do not treat the draft's tested commit as an accepted final
-release identity. Published RC4 remains unchanged.
+RC5 publication is pending the authorized GitHub workflow run. The release tag
+and matching GitHub prerelease will identify the exact candidate. RC4's
+published tag/release remains unchanged. No stable-release acceptance is claimed.
 
 ## Support
 

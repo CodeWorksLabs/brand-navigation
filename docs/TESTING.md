@@ -1,5 +1,30 @@
 # Testing and acceptance
 
+## Current testing disposition and RC5 sequence — October 22, 2026
+
+The lengthy testing process failed to produce a clear overall answer. The
+testing execution is a failure that will have a resolution. Finding reproducible
+issues and verifying corrections did not make that overall execution successful.
+This is a testing-process failure, not evidence of additional product bugs.
+See [Brand Navigation Known Issues](KNOWN_ISSUES.md) for the unresolved process
+issue, implemented changes, scoped verification, and remaining limitations.
+
+The two layout corrections and E03 checkbox-focus correction were verified in
+Chrome. Tested English/Arabic, light/dark, Foundation/Horizon compact keyboard
+sequences showed no issue in the observed desktop-Chrome mobile-view contexts.
+E01 immediate native-field/picker display staleness remains **unresolved**;
+saved values persisted in the corrected save/reload sequence, but its display
+cause remains unknown. Other incomplete checks remain missing coverage, not
+demonstrated product defects.
+
+The prior testing effort remains closed. On October 22 Phil explicitly directed
+one existing GitHub CI cycle and RC5 publication: **"Run existing GitHub CI only."**
+This authorizes the existing workflows, not another campaign, new procedures,
+local product suites, or investigation of E01. Record that cycle's actual
+candidate, Core revisions and results here and in the CWL testing record.
+Execution is pending; the earlier CI results below apply to `238d5ad`, not a
+newly tested RC5 candidate.
+
 ## Main update and testing closure — October 21, 2026
 
 This update includes the accumulated Appearance state-handling changes,
@@ -24,8 +49,8 @@ Historical passing results retain their exact candidate and scope.
 
 The RC5 working candidate at commit
 [`238d5ad`](https://github.com/CodeWorksLabs/brand-navigation/commit/238d5ad829eb6053e5c2aefc94f495cf5f83791f)
-completed GitHub CI on October 20, 2026. RC5 is not yet published; these results
-identify the tested commit, not a released RC5 download.
+completed GitHub CI on October 20, 2026. These results identify that tested
+commit, not a later main revision or a subsequent RC5 release identity.
 
 [Draft RC5 release notes](RELEASE_NOTES_RC5.md) summarize the corrections,
 completed verification, phased support policy and remaining acceptance limits.
@@ -103,16 +128,17 @@ both ESR lines remain targets during a support overlap. See the
 revisions, not results for newer patches. No test campaign was restarted to
 adopt this policy. The published RC4 tag remains unchanged.
 
-**What is prepared, not tested:** the existing four-lane workflow has been
-retargeted locally to the following current supported releases and development
-lane. No additional lane, runner or test case was added. No push or CI dispatch
-was performed for this update.
+**What is implemented, not tested:** the existing four-lane workflow was
+retargeted and committed on main in `dcb01b2` to the supported releases and
+development lane below. The policy and workflow selection are in place; their
+new execution evidence is still pending. No additional lane, runner or test
+case was added. The main update used `[skip ci]`; it did not execute these pins.
 
 | Next CI target   | Exact released Core commit / selection               | Status                 |
 | ---------------- | ---------------------------------------------------- | ---------------------- |
-| 2026.7.3 ESR     | `8a4ea10470790eba93f5dec65f3cacb0ffae1191`           | Prepared; not yet run  |
-| 2026.8.1 monthly | `1dce604a018931ff85572ce9815f7637e843f08c`           | Prepared; not yet run  |
-| 2026.9.0 monthly | `343b20f97ef5f6bd70826ee0e993ba348b210fd5`           | Prepared; not yet run  |
+| 2026.7.3 ESR     | `8a4ea10470790eba93f5dec65f3cacb0ffae1191`           | Committed; not yet run |
+| 2026.8.1 monthly | `1dce604a018931ff85572ce9815f7637e843f08c`           | Committed; not yet run |
+| 2026.9.0 monthly | `343b20f97ef5f6bd70826ee0e993ba348b210fd5`           | Committed; not yet run |
 | Development      | `latest`, with resolved Core commit recorded per run | Existing lane retained |
 
 These versions were checked against the
@@ -121,15 +147,14 @@ tags on October 20. The 2026.1 ESR ended support September 22 and is not a
 current target. The supported 2026.8 monthly line ends support October 27;
 refresh the list before execution rather than retaining an expired target.
 
-**Plan for full adoption:** use the next authorized normal CI cycle to exercise
-the refreshed targets, reuse applicable existing evidence, and record actual
-results here. At the next release decision, compare completed coverage with
-the then-current support schedule and document any gaps or approved exceptions.
-Thereafter refresh the existing target pins at normal release preparation,
-retain overlapping supported ESRs, and retire expired lines. Do not claim full
-adoption or compatibility with the prepared revisions before those results
-exist. This policy does not authorize more testing now or reopen historical
-environments as new tasks; other existing verification gaps remain separate.
+**Policy in place; schedule catch-up incomplete:** Phil adopted ESR tracking
+for subsequent releases or prereleases. The policy is established; current
+testing coverage is behind the schedule. Committed pins alone do not prove
+compliance. The October 22 instruction authorizes only the existing GitHub CI
+cycle for RC5. Record its actual candidate/Core identities and outcomes without
+claiming broader compatibility. Future cycles follow the then-current support
+schedule, including overlapping supported ESRs and retirement of expired lines.
+The failed prior effort remains closed; other coverage limits remain separate.
 
 ## Seven-forum update follow-up — 2026-10-17
 

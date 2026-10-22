@@ -66,6 +66,9 @@ New features must not silently break a supported ESR: preserve compatibility,
 maintain a compatible product version, or obtain explicit approval for a changed
 support requirement and document it.
 
+Phil adopted this policy for subsequent releases and prereleases. Current
+testing coverage is behind the ESR schedule; adopting the policy and committing
+target pins do not establish completed operational adoption or compatibility.
 Adoption is phased, not a new retrospective testing campaign. RC5's completed
 evidence and prepared target updates are recorded in
 [Testing and acceptance](TESTING.md#discourse-support-policy-adoption).
@@ -200,6 +203,15 @@ configured Branch field value, resolved compatibility ref, Discourse version,
 and exact core commit in every compatibility result.
 
 ## Versioning and publication
+
+### RC5 publication direction — October 22, 2026
+
+Phil explicitly directed running the existing GitHub CI workflows and publishing
+RC5, with E01 unresolved and the prior failed testing effort closed. For this
+prerelease, use that bounded instruction rather than starting a new review,
+local matrix, or investigation campaign. Report actual CI outcomes and existing
+limitations; publication does not claim all-nine verification or stable-release
+acceptance. The testing-execution failure still awaits its resolution.
 
 Use SemVer prerelease identifiers in the form
 `v<MAJOR>.<MINOR>.<PATCH>-rc.<N>` for release candidates. Mark each matching

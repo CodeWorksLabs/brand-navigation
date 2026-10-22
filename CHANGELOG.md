@@ -4,6 +4,21 @@ Brand Navigation follows [Semantic Versioning](https://semver.org/). Git tags
 and matching GitHub Releases identify published versions; Discourse continues
 to discover component updates from commits on the installed remote branch.
 
+## 1.0.0-rc.5 - 2026-10-22
+
+- Submit only explicitly edited Appearance colors and reconcile successful
+  saved values; clear no-op Inherit all drafts.
+- Improve compact submenu keyboard entry and Custom checkbox names/focus.
+- Keep long linked-parent labels and their caret within the mobile bar.
+- Hide the compact trigger when no brand or navigation content can render.
+- Avoid unnecessary icon subscriptions for label-only navigation entries.
+- Clarify shared-component staging, disabling/detaching, and Escape behavior.
+- Adopt ESR tracking for subsequent releases/prereleases; retain exact tested
+  versions and distinguish policy adoption from catching up with the schedule.
+- Record the prior testing-execution failure and focused verified fixes.
+  E01 immediate native-field/picker display staleness remains unresolved;
+  incomplete coverage is not evidence of additional product bugs.
+
 ## 1.0.0-rc.4 - 2026-10-18
 
 - Clarify administration labels, direct color entry and theme inheritance.

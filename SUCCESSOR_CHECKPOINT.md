@@ -1,5 +1,62 @@
 # Brand Navigation successor checkpoint
 
+## RC5 authorized: existing GitHub CI only — 2026-10-22
+
+The pending clarification below is resolved: Phil answered **"Run existing
+GitHub CI only."** Proceed with the existing product workflows and RC5
+publication, no local product suites, new test machinery, new code review,
+E01 investigation, or expanded campaign. Keep the failed prior effort closed
+and record actual CI results separately. ESR policy itself is in place for
+subsequent releases/prereleases; schedule catch-up remains incomplete until
+evidence establishes the actual targets exercised. Do not describe policy
+adoption as completed schedule compliance.
+
+Release preparation now updates the RC5 changelog/badge/release notes and
+TESTING.md status. The next candidate push intentionally starts standard CI
+(no skip marker). Publish a new immutable v1.0.0-rc.5 prerelease identity after
+the bounded run, with accurate outcomes and unresolved E01. CWL curated
+release notes are prepared locally; source mirror refresh/deployment will use
+the exact published source and recorded results. No production forum changes.
+
+### Superseded clarification state
+
+Phil requested RC5 publication, CWL release-notes and TESTING.md updates, and
+confirmation of the adopted ESR policy. He clarified publication authority:
+"we have done days of testing, run standard Github tests, and get it published".
+He then stated that protocols/test-task management need sorting and further
+testing is folly until his part is done, correcting his wording to emphasize
+that we are NOT doing another round of endless testing.
+
+No new GitHub run, local product suite, documentation build/deploy, RC5 tag,
+GitHub release, or new testing machinery has been started. A pending question
+asks whether to hold even the single standard GitHub CI cycle or run only that
+existing cycle. Do not start CI or publish RC5 while that distinction is pending.
+No broader testing campaign is authorized.
+
+ESR confirmation: the policy itself is adopted and documented in RELEASE.md
+and TESTING.md for subsequent releases/prereleases; current schedule coverage
+is behind. Committed pins do not mean completed adoption. Official schedule
+was read on October 22: 2026.7.3 ESR, 2026.8.1 and 2026.9.0 are the latest
+released patches for the configured supported lines; development latest is
+separate. No new compatibility outcome was inferred from that check.
+
+Prepared, uncommitted documentation only:
+- Product docs/TESTING.md: current testing-execution failure and Known Issues
+  reference; committed-but-unrun ESR status; no new execution result.
+- CWL curated src/content/docs/brand-navigation/release-notes.md under
+  C:/CodeProjects/Sites/CodeWorksLabs/codeworkslabs.dev/docs.codeworkslabs.dev/site:
+  RC5 section with publication/tests pending, E01 unresolved, scoped prior
+  results, and future ESR policy/current lag. RC4 history retained.
+- This checkpoint. No product-code changes were made for this request.
+
+Last confirmed product origin/main is 5f878673141ab4802e340c55a7dd32090042b646;
+GitHub has RC4 as latest published prerelease, with no RC5 tag. CWL docs source
+is main at 8a45f11 with only the prepared curated release-notes edit. Its
+generated source mirror/testing-record/manifest remain unchanged. Site builds
+must verify the committed mirror offline; refresh is an explicit exact-commit
+operation producing a temporary candidate, never an automatic build rewrite.
+Do not claim RC5 publication, new test results, or docs deployment.
+
 ## Documentation accuracy correction — 2026-10-21
 
 Phil requested correcting docs/RELEASE_NOTES_RC5.md and docs/KNOWN_ISSUES.md
