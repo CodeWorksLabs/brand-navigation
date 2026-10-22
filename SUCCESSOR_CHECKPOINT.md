@@ -1,5 +1,234 @@
 # Brand Navigation successor checkpoint
 
+## All seven forum updates verified; documentation update in progress — October 22, 2026
+
+The user reported DiscussionBridge Forum fixed and updated, and authorized
+revision/version/updater verification followed by docs publication, with concise
+CWL copy and no testing. This supersedes the wait below.
+
+Read-only authenticated observation of component 3 at forum.discussionbridge.dev:
+installed and remote revisions both 412448fc5e5abc396c4f668f1fe76eb31e239b1b,
+commits_behind 0, repository CodeWorksLabs/brand-navigation.git, branch null
+(repository default). Native UI: "Theme is up-to-date, last checked: 2 mins ago".
+Admin dashboard: Discourse 2026.10.0-latest, +142 commits, Core acf8e70129.
+Independent origin/main lookup matched at 2026-10-22 18:27:50 UTC
+(11:27:50 PDT); subsequent git ls-remote --symref confirmed HEAD is main.
+
+The user asked why DB Forum omits "with main". Its stored branch was already
+null before the failed updates and remains null afterward; sandbox/RVing/R744
+explicitly store main. The update advanced installed content, without an
+observed branch-setting change. Both selection methods resolve to main here.
+
+Added a concise October 22 seven-forum table to docs/TESTING.md, retaining the
+October 17 heading/history. First five Discourse versions remain "Not recorded"
+rather than reusing historical values. R744 and DB Forum versions are recorded.
+All seven local/remote component revisions match 412448f and zero commits behind.
+No product tests, updater actions, settings edits, server repairs, or new CI.
+E01, failed CI and prior testing-execution failure remain unresolved.
+
+Next: commit/push only requested documentation with [skip ci], refresh the
+complete CWL nine-page mirror + manifest from that exact commit, run the offline
+mirror verifier and docs deployment build/dry run, then deploy and read back the
+published new section. Do not alter release notes, RC5 tag, or product code.
+Same-day site npm ci/audit results are recorded and dependency files unchanged.
+
+## Historical stopping boundary before remaining forum was fixed — October 22, 2026
+
+Latest user direction: "we wait for fix on the one forum then update docs".
+Hold the documentation update until DiscussionBridge Forum is fixed. Six forum
+component updates have been verified; its update remains incomplete. Do not
+start testing, update retries, repairs, or additional investigation. Resume the
+rollout record and documentation work after the remaining forum's fix is ready.
+Keep this checkpoint local during the wait; no commit, push, or deployment now.
+
+## Seven-forum follow-up: R744 verified — October 22, 2026
+
+The user reported R744 updated and requested installed revision, Discourse
+version, and native updater status only; no testing. Read-only authenticated
+inspection at www.r744.community confirmed:
+
+- Brand Navigation component ID: 1; update branch: main.
+- Installed and remote component revisions:
+  412448fc5e5abc396c4f668f1fe76eb31e239b1b.
+- Native updater: "Theme is up-to-date with main, last checked: just now";
+  commits_behind: 0.
+- Independent origin/main lookup matched at 2026-10-22 18:14:48 UTC
+  (11:14:48 PDT).
+- Discourse installed version shown on the native admin dashboard:
+  2026.7.2+14, core commit 2e46cff73b07ecddbcc5603eb3fbf41d563577f6.
+
+No tests, updater actions, or forum changes. Six forum component updates are now
+verified; DiscussionBridge Forum remains incomplete after its three HTTP 500
+failures. Its read-only diagnosis is recorded below; further work awaits direction.
+Keep this checkpoint local, without a commit or push. The user now requires
+results tables to include Forum, Discourse version, Discourse component ID,
+Update branch, Installed revision, and Updater status. Discourse versions were
+not collected during the five earlier status checks; do not invent them or
+retroactively claim they were verified.
+
+## Seven-forum follow-up: RVing Community verified — October 22, 2026
+
+The user reported RVing Community updated and requested only installed revision
+and native updater status, with no testing. Authenticated read-only inspection
+of Brand Navigation component 16 at www.rving.community confirmed:
+
+- Repository: https://github.com/CodeWorksLabs/brand-navigation.git; branch main.
+- Installed and remote revisions: 412448fc5e5abc396c4f668f1fe76eb31e239b1b.
+- Native updater: "Theme is up-to-date with main, last checked: just now";
+  commits_behind: 0.
+- Independent origin/main lookup matched at 2026-10-22 18:11:58 UTC
+  (11:11:58 PDT).
+
+No tests, updater actions, or forum settings changes. Keep this checkpoint local;
+do not advance main merely to publish rollout observations. Five forums verified:
+Repeal OBBBA, Citizen Activist, The Bridge, DiscussionBridge sandbox, and RVing
+Community. DiscussionBridge Forum's update remains incomplete; R744 awaits the
+user's update signal.
+
+Discourse Work returned the separately authorized read-only diagnosis: all three
+DiscussionBridge Forum update requests failed with AssetProcessor::TimeoutError,
+"Script terminated: timeout after 15s". The immediate HTTP 500 cause is the
+Discourse JavaScript asset-processing time limit. A specific slow file/phase or
+underlying resource/code cause was not established. No tests, retries, or server
+changes were performed. Its report is at
+C:\CodeProjects\Planning\Procedure Docs\notes\discussionbridge-forum-brand-navigation-update-500-diagnosis-20261022.md.
+Further diagnostic or corrective work awaits separate user direction.
+
+## Seven-forum follow-up: DiscussionBridge sandbox verified — October 22, 2026
+
+The user reported the sandbox updated and requested only installed revision
+and updater status, with no testing. Authenticated Chrome read-only inspection
+of Brand Navigation component 3 at sandbox-forum.discussionbridge.dev confirmed:
+
+- Installed local_version and recorded remote_version both equal
+  412448fc5e5abc396c4f668f1fe76eb31e239b1b; commits_behind is 0.
+- Stored branch is explicitly main; repository is the expected
+  https://github.com/CodeWorksLabs/brand-navigation.git.
+- Fresh origin/main lookup returned the same commit at 2026-10-22 18:08:18 UTC
+  (11:08:18 PDT).
+- Native updater UI: "Theme is up-to-date with main, last checked: just now".
+
+No tests, interaction checks, setting changes, updater actions or forum updates.
+Completed status observations now cover Repeal OBBBA, Citizen Activist, The
+Bridge and DiscussionBridge sandbox. DiscussionBridge Forum remains pending
+the separate read-only diagnosis assigned to Discourse Work; RVing and R744
+await their completed-update signals. The user performs all forum updates.
+This checkpoint is local only; no commit/push changes remote main.
+
+## DiscussionBridge Forum 500 diagnosis sent to Discourse Work — October 22, 2026
+
+The user explicitly authorized sending this diagnosis to existing chat
+Discourse Work, thread 019f69f3-d27c-7d31-9a64-2610fea6c76c on local.
+The original handoff included the three failed manual attempts, component 3,
+installed e42f98f, cached target 238d5ad/33 behind and current main 412448f
+with full identities retained below. The send succeeded.
+
+The user then corrected the scope: do not limit inspection to logs only.
+A follow-up correction was sent successfully: any relevant read-only inspection
+needed to diagnose this specific HTTP500 is allowed, including current server/
+application/container, configuration/source/dependencies and repository/update
+state. The user's boundaries remain no testing, no update retries and no changes.
+No repair or broader audit is authorized. Discourse Work is to report cause
+and evidence or the exact unresolved blocker. Root has not begun a duplicate
+server investigation. This checkpoint remains local only; no remote main change.
+
+## DiscussionBridge Forum: three 500 attempts; update incomplete — October 22, 2026
+
+After the user reported repeated HTTP500 responses, including a third attempt,
+read-only inspection checked whether the intended revision had been installed.
+Brand Navigation component 3 at forum.discussionbridge.dev reports:
+
+- Installed local_version: e42f98fdd0e24cedab08a7960e3b64f947b7ff16.
+- Cached remote_version: 238d5ad829eb6053e5c2aefc94f495cf5f83791f.
+- commits_behind: 33, relative to that cached remote target, not current main.
+- Native UI: "Theme is 33 commits behind!" and "Update to latest".
+- Stored branch is null (repository default); repository is the expected
+  CodeWorksLabs/brand-navigation.git.
+- Current origin/main independently read at 2026-10-22 17:56:33 UTC
+  (10:56:33 PDT): 412448fc5e5abc396c4f668f1fe76eb31e239b1b.
+
+The intended update is not complete; this forum remains pending, not verified
+as updated. The HTTP500 cause is unestablished. No agent update retry, tests,
+setting changes, source investigation or server-log investigation occurred.
+Prior completed observations remain Repeal OBBBA, Citizen Activist and The
+Bridge. This checkpoint is local only; no commit/push advances remote main.
+Await the user's next direction or a completed-update signal.
+
+## Seven-forum follow-up: DiscussionBridge Forum update pending — October 22, 2026
+
+The user reports a 500 error while updating DiscussionBridge Forum and is
+retrying. This is not a completed-update signal: do not mark this forum updated
+or verified. No cause or product defect has been established. No investigation,
+tests, server changes or agent-initiated retry is authorized. Wait for the
+user's retry result before the requested revision/updater-status verification.
+Prior completed observations remain Repeal OBBBA, Citizen Activist and The
+Bridge. This checkpoint is local only; remote main is unchanged.
+
+## Seven-forum follow-up: The Bridge verified — October 22, 2026
+
+The user reported The Bridge updated and requested only installed revision and
+updater status, with no testing. Authenticated Chrome read-only inspection of
+Brand Navigation component 6 at bridge.demo.discussionbridge.dev confirmed:
+
+- Installed local_version and recorded remote_version both equal
+  412448fc5e5abc396c4f668f1fe76eb31e239b1b; commits_behind is 0.
+- Remote repository is https://github.com/CodeWorksLabs/brand-navigation.git;
+  stored branch is null (repository default). A fresh git ls-remote of main
+  returned the same commit at 2026-10-22 17:49:30 UTC (10:49:30 PDT).
+- Native updater UI: "Theme is up-to-date, last checked: 1 min ago".
+
+No product tests, interaction checks, setting changes, updater actions or forum
+updates. Current rollout status observations now cover Repeal OBBBA, Citizen
+Activist and The Bridge at their respective timestamps. Await the next forum's
+completed-update signal; the user performs all updates one at a time. This
+checkpoint remains local only, with no commit/push advancing remote main.
+
+The snapshots below are historical.
+
+## Seven-forum follow-up: Citizen Activist verified — October 22, 2026
+
+The user reported Citizen Activist updated and requested only its installed
+revision and updater status, with no testing. Authenticated Chrome read-only
+inspection of Brand Navigation component 1 at forum.citizenactivist.network:
+
+- Installed local_version and recorded remote_version both equal
+  412448fc5e5abc396c4f668f1fe76eb31e239b1b; commits_behind is 0.
+- Remote repository is https://github.com/CodeWorksLabs/brand-navigation.git;
+  stored branch is null (repository default). A fresh git ls-remote of main
+  returned that same exact commit at 2026-10-22 17:42:04 UTC (10:42:04 PDT).
+- Native updater UI reports "Theme is up-to-date, last checked: just now".
+
+No tests, interaction checks, forum updates, setting changes or updater actions.
+This status check is complete. Current rollout observations: Repeal OBBBA and
+Citizen Activist verified at their respective timestamps; other forums await
+the user's completed-update signal. The user updates one forum at a time.
+This checkpoint remains local only; no commit/push changes remote main.
+
+The snapshots below are historical.
+
+## Seven-forum follow-up: Repeal OBBBA verified — October 22, 2026
+
+The user reported Repeal OBBBA updated and requested only installed revision
+and updater status, with no testing. Read-only authenticated Chrome inspection
+of Brand Navigation component 19 at forum.repealobbba.org confirmed:
+
+- Installed local_version: 412448fc5e5abc396c4f668f1fe76eb31e239b1b.
+- Recorded remote_version: the same exact commit; commits_behind: 0.
+- Remote repository: https://github.com/CodeWorksLabs/brand-navigation.git.
+- Stored branch is null (repository default), rather than an explicit branch
+  override. git ls-remote origin refs/heads/main independently returned that
+  same commit at 2026-10-22 17:26:44 UTC (10:26:44 PDT).
+- Native component UI: "Theme is up-to-date, last checked: 3 mins ago" at
+  observation. No Check for updates, Update, Save or settings action was used.
+
+Verification is complete for this forum's revision/updater status only. No
+product tests, interaction checks, setting changes, forum updates or claims
+about other forums. Wait for the user to update and identify the next forum;
+the user performs all updates one at a time. This checkpoint is local only;
+no commit/push advances main solely for this read-only status check.
+
+The snapshots below are historical.
+
 ## Public docs cleanup deployed; seven-forum updates await user — October 22, 2026
 
 The canonical public testing record cleanup was pushed in product commit

@@ -204,6 +204,32 @@ but failed frontend checks prevent a clean compatibility claim. Future cycles
 follow the then-current support schedule, including overlapping supported ESRs
 and retirement of expired lines. Other coverage limits remain separate.
 
+## Seven-forum update follow-up — 2026-10-22
+
+All seven installations reported matching local and remote Brand Navigation
+revision [`412448f`](https://github.com/CodeWorksLabs/brand-navigation/commit/412448fc5e5abc396c4f668f1fe76eb31e239b1b),
+matching `main` when checked, with zero commits behind.
+
+| Forum | Discourse version | Discourse component ID | Update branch | Installed revision | Updater status |
+| --- | --- | --- | --- | --- | --- |
+| Repeal OBBBA Forum | Not recorded | 19 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| The Bridge | Not recorded | 6 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| DiscussionBridge Forum | `2026.10.0-latest+142` | 3 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| DiscussionBridge sandbox | Not recorded | 3 | `main` | `412448f` | Up-to-date; 0 behind |
+| Citizen Activist Network | Not recorded | 1 | Default (`main`) | `412448f` | Up-to-date; 0 behind |
+| RVing Community | Not recorded | 16 | `main` | `412448f` | Up-to-date; 0 behind |
+| R744 Community | `2026.7.2+14` | 1 | `main` | `412448f` | Up-to-date; 0 behind |
+
+"Default (`main`)" means no explicit branch is stored. The native updater then
+says "Theme is up-to-date"; explicit `main` adds "with main". DiscussionBridge
+Forum retained its default-branch setting before and after this update, which
+completed after the earlier HTTP 500 failures.
+
+These are read-only installation/status observations, with no new product
+testing. They do not resolve the existing CI failures, E01, or testing-execution
+failure recorded in [Known Issues](KNOWN_ISSUES.md). Discourse versions marked
+"Not recorded" were not collected during those update checks.
+
 ## Seven-forum update follow-up — 2026-10-17
 
 All seven forums were confirmed to follow `main` on October 17, 2026.
