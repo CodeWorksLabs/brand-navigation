@@ -42,34 +42,34 @@ desktop views were captured while signed in.
 
 [Open the live forum](https://forum.repealobbba.org/)
 
-![Repeal OBBBA Forum: red navigation bar and social icons in the forum header](docs/images/previews/repeal-obbba-header.jpg)
+![Repeal OBBBA Forum: red navigation bar and social icons in the forum header](https://docs.codeworkslabs.dev/images/brand-navigation/repeal-obbba-header.jpg)
 
 #### The Bridge demonstration site
 
 [Open the live demo](https://bridge.demo.discussionbridge.dev/)
 
-![The Bridge: publishing menus, Versions & Status text link and header icons](docs/images/previews/the-bridge-header.jpg)
+![The Bridge: publishing menus, Versions & Status text link and header icons](https://docs.codeworkslabs.dev/images/brand-navigation/the-bridge-header.jpg)
 
 #### RVing Community
 
 [Open the live community](https://www.rving.community/)
 
-![RVing Community: blue navigation bar, community menus and forum logo](docs/images/previews/rving-community-header.jpg)
+![RVing Community: blue navigation bar, community menus and forum logo](https://docs.codeworkslabs.dev/images/brand-navigation/rving-community-header.jpg)
 
 #### DiscussionBridge Forum
 
 [Open the live forum](https://forum.discussionbridge.dev/)
 
-![DiscussionBridge Forum: product, documentation, demo and community navigation with header icons](docs/images/previews/discussionbridge-header.jpg)
+![DiscussionBridge Forum: product, documentation, demo and community navigation with header icons](https://docs.codeworkslabs.dev/images/brand-navigation/discussionbridge-header.jpg)
 
 ### Administration screenshots
 
-Select either preview to open the full-size screenshot.
-
-| Brand Navigation settings                                                                                                                                                                                                              | Navigation-items editor                                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![Preview of the Brand Navigation settings page](docs/images/previews/brand-navigation-settings-thumb.png)](https://raw.githubusercontent.com/CodeWorksLabs/brand-navigation/main/docs/images/previews/brand-navigation-settings.png) | [![Preview of the navigation-items editor](docs/images/previews/brand-navigation-menu-editor-thumb.png)](https://raw.githubusercontent.com/CodeWorksLabs/brand-navigation/main/docs/images/previews/brand-navigation-menu-editor.png) |
-| Component settings, Appearance and configuration bundles.                                                                                                                                                                              | Menus, submenu items, link options and ordering controls.                                                                                                                                                                             |
+Open the [Brand Navigation settings screenshot](https://docs.codeworkslabs.dev/images/brand-navigation/brand-navigation-settings.png)
+for component settings, Appearance and configuration bundles, or the
+[navigation-items editor screenshot](https://docs.codeworkslabs.dev/images/brand-navigation/brand-navigation-menu-editor.png)
+for menus, submenu items, link options and ordering controls. See the
+[documentation preview](https://docs.codeworkslabs.dev/brand-navigation/preview/)
+for compact previews of both screens.
 
 ## Installation
 
@@ -89,17 +89,17 @@ staging site. Themes attached to the same component share its code and settings.
 
 **Enabled?** is the only activation switch. A disabled component cannot load
 its custom bundle panel. Follow the
-[administrator guide](docs/USER_GUIDE.md#install-the-component) for setup,
+[installation guide](https://docs.codeworkslabs.dev/brand-navigation/install/) for setup,
 bundle import and verification. Sample navigation is included.
 
 ## Known working Discourse versions
 
 Recorded checks cover Discourse 2026.7 ESR, 2026.8 and 2026.9 installations.
-For RC5, see the [exact CI versions and results](docs/TESTING.md#rc5-candidate-verification),
+For RC5, see the [exact CI versions and results](https://docs.codeworkslabs.dev/brand-navigation/source/testing-record/#rc5-candidate-verification),
 including the ESR-line revision, monthly release and development snapshots.
-The [known-issues record](docs/KNOWN_ISSUES.md) records unresolved E01 display
+The [known-issues record](https://docs.codeworkslabs.dev/brand-navigation/known-issues/) records unresolved E01 display
 staleness and verification limits.
-See the [testing record](docs/TESTING.md) for exact builds and limits—not a
+See the [testing record](https://docs.codeworkslabs.dev/brand-navigation/source/testing-record/) for exact builds and limits—not a
 blanket compatibility or accessibility guarantee. Keep labels short on narrow
 screens; header space is finite.
 
@@ -123,8 +123,11 @@ to list it here.
 
 Use direct links, submenu-only groups, or linked parents with separate carets.
 Core-header destinations are direct links, not submenus. See the
-[administrator guide](docs/USER_GUIDE.md) and [technical reference](docs/) for
-configuration, architecture and testing.
+[administrator guide](https://docs.codeworkslabs.dev/brand-navigation/source/administrator-guide/)
+and [configuration guide](https://docs.codeworkslabs.dev/brand-navigation/configure/)
+for setup, and the [technical reference](https://docs.codeworkslabs.dev/brand-navigation/source/architecture/)
+and [testing record](https://docs.codeworkslabs.dev/brand-navigation/source/testing-record/)
+for architecture and verification details.
 
 ## Versions and updates
 
@@ -134,8 +137,9 @@ notes are available from
 [GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases).
 
 `main` targets current Discourse; maintained older versions use
-`d-compat/<YYYY>.<M>`. Review
-[migration and rollback](docs/MIGRATION.md#roll-back-brand-navigation-to-a-release-tag)
+`d-compat/<YYYY>.<M>`. See the
+[update and compatibility guidance](https://docs.codeworkslabs.dev/brand-navigation/updates-and-compatibility/).
+Review [migration and rollback](https://docs.codeworkslabs.dev/brand-navigation/migration-and-rollback/)
 and its testing limits before restoring an earlier version and updating again. Older
 compatibility branches may not include every feature shown here.
 
@@ -156,8 +160,8 @@ for product inspiration, and
 for demonstrating compact header destinations. Pavilion's
 [Dropdown Header](https://github.com/paviliondev/discourse-dropdown-header)
 also informed presentation and administration exploration. See
-[attribution and licensing](docs/ATTRIBUTION.md) and
-[authorship and provenance](docs/PROVENANCE.md) for precise source credits.
+[attribution and licensing](https://docs.codeworkslabs.dev/brand-navigation/source/attribution/) and
+[authorship and provenance](https://docs.codeworkslabs.dev/brand-navigation/source/provenance/) for precise source credits.
 
 ## Support
 
@@ -173,7 +177,7 @@ for more help.
 Never post credentials, personal data or private vulnerability details;
 report suspected vulnerabilities to
 [security@codeworkslabs.dev](mailto:security@codeworkslabs.dev) under the
-[security policy](SECURITY.md).
+[security policy](https://docs.codeworkslabs.dev/brand-navigation/security/).
 
 ## License
 

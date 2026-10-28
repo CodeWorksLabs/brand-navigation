@@ -70,7 +70,7 @@ to discover component updates from commits on the installed remote branch.
   320px and 390px, with bounded text truncation and the full accessible label.
 
 This release candidate retains the documented narrow-header and manual
-acceptance limits in [`docs/TESTING.md`](docs/TESTING.md#rc2-feature-verification-historical).
+acceptance limits in [the testing record](https://docs.codeworkslabs.dev/brand-navigation/source/testing-record/#rc2-feature-verification-historical).
 
 ## 1.0.0-rc.1 - 2026-09-08
 

@@ -12,6 +12,10 @@ tsconfig.tsbuildinfo
 /RC5_VERIFICATION_PLAN.md
 /rc5-preparation/
 /test/rc5-procedures/
-/docs/HISTORICAL_CHECKPOINT.md
-/docs/PUBLIC_SITE_HANDOFF.md
-/docs/PROJECT_HISTORY.md
+
+# Maintained outside the component distribution repository
+/configurations/
+/docs/
+/test/
+/SECURITY.md
+/.github/workflows/configuration.yml
