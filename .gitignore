@@ -16,10 +16,4 @@ tsconfig.tsbuildinfo
 # Maintained outside the component distribution repository
 /configurations/
 /docs/
-/test/
 /SECURITY.md
-/.github/workflows/configuration.yml
-/spec/system/
-/.github/workflows/discourse-theme.yml
-/Gemfile
-/.rubocop.yml

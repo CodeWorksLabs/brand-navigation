@@ -2,6 +2,7 @@
   "extends": "discourse/tsconfig-plugin",
   "include": [
     "javascripts/**/*",
+    "test/unit/**/*",
     "node_modules/discourse/declarations/**/*"
   ],
   "compilerOptions": {
