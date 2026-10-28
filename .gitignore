@@ -20,3 +20,6 @@ tsconfig.tsbuildinfo
 /SECURITY.md
 /.github/workflows/configuration.yml
 /spec/system/
+/.github/workflows/discourse-theme.yml
+/Gemfile
+/.rubocop.yml
