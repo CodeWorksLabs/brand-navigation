@@ -19,3 +19,4 @@ tsconfig.tsbuildinfo
 /test/
 /SECURITY.md
 /.github/workflows/configuration.yml
+/spec/system/
