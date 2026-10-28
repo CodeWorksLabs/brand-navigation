@@ -10,16 +10,13 @@ execution failure remains an unresolved process issue. Its resolution has not
 yet been specified; closing this testing effort does not resolve the execution
 failure or initiate a new investigation.
 
-**This testing effort is closed.** No new testing, investigation, gap chasing,
-or campaigns are authorized. Reopening requires new explicit instruction.
-Closure is a stopping decision, not all-nine verification, release acceptance,
-or an E01 fix.
+**This testing effort is closed.** Closure does not establish complete
+verification, release acceptance, or an E01 fix.
 
-On October 22, **only the existing GitHub CI workflows** were authorized for RC5
-publication. That bounded cycle does not reopen the failed campaign or
-authorize local product suites, new tests, or investigation of E01. Its results
-are recorded against the candidate actually run below. Further testing remains
-on hold pending protocol/task-management work and explicit direction.
+RC5 publication used the existing standard GitHub CI workflows on October 22.
+Their results are recorded against the candidate actually run below. That cycle
+does not establish complete product coverage or resolve the earlier
+testing-process failure.
 
 ## RC5 standard CI failures — October 22, 2026
 
@@ -43,11 +40,11 @@ the following seven failures:
 | older component copies expose and save only settings they define                   | `1` → `5`                                                   |
 
 These failed checks remain unresolved. The logs do not establish their root
-cause or seven new product bugs; no additional investigation is authorized.
+cause or seven new product bugs.
 They also do not erase the earlier scoped browser results. Exact Core
 identities and the initial lint-failing run are retained in
 [TESTING.md](TESTING.md#october-22-rc5-github-ci). E01 remains separately
-unresolved. Publication within the bounded RC5 scope is not an all-green
+unresolved. RC5 publication is not an all-green
 CI or complete acceptance claim.
 
 ## Implemented on main
@@ -74,8 +71,7 @@ identify the published source. The published RC4 tag/release is unchanged.
 - **Earlier CI:** commit `238d5ad829eb6053e5c2aefc94f495cf5f83791f` passed four
   system-test lanes with 49 examples each and 45 configuration/lint-coverage
   cases. These results apply to that commit and its recorded Core revisions,
-  not the later `dcb01b2` main update. No suite was rerun for that update; its
-  commit used `[skip ci]` to preserve testing closure.
+  not the later `dcb01b2` main update. No suite was rerun for that update.
 - **Later representative execution:** the recorded run completed 53 system
   examples with 51 passes and 2 failures, plus 45 frontend tests with 45 passes.
   All 21 installed fields matched that run's candidate. These are historical
@@ -102,17 +98,15 @@ identify the published source. The published RC4 tag/release is unchanged.
   Saved values persisted in the corrected save/reload sequence, but the cause
   of the stale display remains unknown. E01 is not recorded as fixed or closed.
 - **Testing execution:** the process failed to produce a clear overall answer.
-  This failure will have a resolution. That resolution remains open; this record
-  does not assign investigation, testing, or a new campaign.
+  This failure will have a resolution. That resolution remains open.
 - **Incomplete coverage:** unrun or unreached checks remain missing coverage,
   not demonstrated product bugs. Unknown coverage is not evidence that the
   product is broken. Detailed limits are retained below.
 
 Original configuration and normal viewport were restored after the focused
 browser work. The two layout fixes remained installed in the local test fixture;
-no production or published RC4 changes were made. Exact fixtures, hashes and
-evidence are in the
-[Discourse Work closure record](<C:/CodeProjects/Planning/Procedure Docs/notes/brand-navigation-live-browser-results-20261021.md>).
+no production or published RC4 changes were made. The browser results and their
+limits are summarized in the [testing record](TESTING.md).
 The implementation commit does not create whole-release acceptance or replace
 the original observations and failures retained below.
 
@@ -133,11 +127,11 @@ the original observations and failures retained below.
 
 | Item                                                                       | Classification                                                                              | Evidence and disposition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| E01 immediate display staleness and historical native-save overwrite       | **Stale display confirmed and unresolved; overwrite corrected in the named later sequence** | On the earlier candidate, initial background #112233, text #334455, icon #223344 were verified after reload. Native background #123456 saved, while displayed background remained #112233. Saving only Appearance icon #456789 then lost the native background save; reload confirmed background #112233. After the sparse-save correction, Discourse Work observed the native value persist through the different Appearance save and reload. Immediate native-field/picker staleness remained. Its cause is unresolved; E01 is not closed. |
+| E01 immediate display staleness and historical native-save overwrite       | **Stale display confirmed and unresolved; overwrite corrected in the named later sequence** | On the earlier candidate, initial background #112233, text #334455, icon #223344 were verified after reload. Native background #123456 saved, while displayed background remained #112233. Saving only Appearance icon #456789 then lost the native background save; reload confirmed background #112233. After the sparse-save correction, a focused browser check observed the native value persist through the different Appearance save and reload. Immediate native-field/picker staleness remained. Its cause is unresolved; E01 is not closed. |
 | E03 original keyboard helper stops after 80 Tab presses                    | **Testing limitation; likely test-caused failure**                                          | The helper had a fixed 80-key limit. The failure screenshot showed focus still in native controls preceding Appearance. This strongly supports premature exhaustion, but the full focus sequence was not recorded. The limit was replaced; the replacement has not been verified.                                                                                                                                                                                                                                                            |
 | E03 automated example failed during initial page navigation                | **Historical test/page-settle failure; cause unresolved**                                   | The 10000ms client-settle limit expired with pending scroll events on the admin sidebar. Failure occurred at the initial visit, before the changed Tab helper, initial name/value checks, Space operation and reload assertions. It does not establish broken checkbox behavior. Later manual browser results are recorded separately.                                                                                                                                                                                                       |
 | E03 direct browser names, keyboard operation and persistence               | **Confirmed working on the local browser target**                                           | All eleven exact checkbox purpose names were unique. Actual Tab/Shift+Tab reached every checkbox with visible focus; Space correctly toggled checked state and picker enablement. All eleven custom values matched native fields and pickers after save/reload. Six alternating controls then returned to inherited, and all mixed states/values persisted after save/reload. This is a manual result, not a passing execution of the forward-only RSpec helper. The first control took122 forward Tabs from this session's starting focus.  |
-| E03 checkbox lost keyboard focus after Space                               | **Historical defect; correction verified in Chrome**                                        | Earlier Space toggles moved activeElement to BODY; original screenshots and keyboard observations are preserved. After the stable-setting-key correction, Discourse Work verified that all eleven Custom checkboxes retained visible focus through Space on/off toggles. Keyboard operation and saved state were retained.                                                                                                                                                                                                                   |
+| E03 checkbox lost keyboard focus after Space                               | **Historical defect; correction verified in Chrome**                                        | Earlier Space toggles moved activeElement to BODY; original screenshots and keyboard observations are preserved. After the stable-setting-key correction, a focused Chrome check verified that all eleven Custom checkboxes retained visible focus through Space on/off toggles. Keyboard operation and saved state were retained.                                                                                                                                                                                                                   |
 | Chromium launches collide on DevTools port 50062                           | **Confirmed testing-procedure defect; absent in the latest observed run**                   | Failed launches recorded Address already in use and Cannot start http server for devtools. Both requested the same port while the procedure used two workers. After command-scoped CHROME_REMOTE_DEBUGGING_PORT=0, the previously blocked mobile-submenu example passed and no collision was captured. The collision's role in the entire earlier launch timeout was not conclusively established.                                                                                                                                           |
 | English minimized topic-title example fails in the interrupted first run   | **Historical failure; not reproduced in later completed runs**                              | It failed in the interrupted seed21569 run, then passed in completed seed44114 and seed10005 runs. Cause remains unknown. It is not a currently reproduced product defect.                                                                                                                                                                                                                                                                                                                                                                   |
 | Local administrator-enhancement example fails in the interrupted first run | **Historical failure; not reproduced in later completed runs**                              | It failed in the interrupted first run and passed in both later completed runs. Cause remains unknown.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -154,7 +148,7 @@ first exposed focus loss, and later verified the focus correction.
 
 | Gap                                                | Classification                                                 | Recorded status                                                                                                                                                                                                                                                                                    |
 | -------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| E02 Compact-menu keyboard contexts                 | **Partly verified; remaining coverage unestablished**          | Tested English/Arabic, light/dark, Foundation/Horizon compact keyboard sequences showed no issue in the observed desktop-Chrome mobile-view contexts. No complete eight-context or native-phone gate closure is claimed. Remaining coverage is not a demonstrated bug or a new testing assignment. |
+| E02 Compact-menu keyboard contexts                 | **Partly verified; remaining coverage unestablished**          | Tested English/Arabic, light/dark, Foundation/Horizon compact keyboard sequences showed no issue in the observed desktop-Chrome mobile-view contexts. No complete eight-context or native-phone gate closure is claimed. Remaining coverage is not a demonstrated bug. |
 | E04 Label-only content and icon subscriptions      | **Resolved verification gap on the representative target**     | The missing label-only group/child subscription and cleanup case passed in both completed frontend runs. No defect was observed in that case.                                                                                                                                                      |
 | E05 Installation, updates and restart preservation | **Partly verified; remaining coverage and fixture limitation** | ZIP import and exact 21-field identity passed. Git/update, four-prior-version flows and committed-state application restart/database/uploads preservation were not qualified. Container resume is not that durability proof. No restart or update product defect was demonstrated.                 |
 | E06 Copies, removal, reinstall and restoration     | **Unverified coverage**                                        | Dedicated shared/separate-copy isolation and lifecycle procedures were not run. No removal or restoration defect was demonstrated.                                                                                                                                                                 |
@@ -213,30 +207,21 @@ values in the page model. This is intended to prevent the demonstrated
 overwrite and display the saved server values after an Appearance save.
 
 Matching payload assertions and a stale-page persistence regression were
-prepared. Discourse Work subsequently installed the correction in the existing
-local fixture and observed the native value persist through a different
+prepared. The correction was subsequently installed in the existing local
+fixture, where the native value persisted through a different
 Appearance save and reload. Immediate native-field/picker staleness remained
 after the later display corrections. E01 is **unresolved**; its cause is not
-established, and no further investigation or retest is queued. Original failure
-evidence is preserved.
+established. Original failure evidence is preserved.
 
 ### Earlier stopped verification state
 
-At that earlier stop, the E01 product edit remained local and uncommitted, with
-Brand Navigation's approval to retain it. Subsequent implementation publication
+At that earlier stop, the E01 product edit remained local and uncommitted.
+Subsequent implementation publication
 and focused browser outcomes are recorded above. That earlier failing native
-case did not establish an E01 fix, and E01 remains unresolved. No new product
-edit, test, build or runtime operation was performed to correct this record.
+case did not establish an E01 fix, and E01 remains unresolved.
 
-- [Earlier completed verification and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/RESULT.md>).
-- [Direct Chrome E01 result and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/e01-navigation-repair/MANUAL-BROWSER-RESULT.md>).
-- [Direct Chrome E03 result and evidence](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/e03-manual-browser/RESULT.md>).
-- [Earlier named system outcomes](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/approved-fixes-verification/SYSTEM-RESULT.json>).
-- [Earlier system failure traces](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/f2-external/host/receipts/rc5-approved-fixes-system-a1/worker.stdout.log:87>).
-- [Earlier completed run and interrupted-run history](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/FINAL-RESULT.md>).
-- [E01 assertion helper](</C:/CodeProjects/Products/Discourse Brand Navigation/spec/system/brand_navigation_spec.rb:67>).
-- [Existing procedure inventory](</C:/CodeProjects/Products/Discourse Brand Navigation/test/rc5-procedures/README.md>).
-- [Original host-tool findings](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/repair/TEMP-REVIEW.md>) and [subsequent exercised repairs](</C:/CodeProjects/Products/Discourse Brand Navigation/rc5-preparation/2026-10-20/execution/FINAL-RESULT.md:79>).
+- [Recorded verification results and limits](TESTING.md).
+- [System regression coverage](../spec/system/brand_navigation_spec.rb).
 
-The verification campaign is stopped. These classifications do not create a
-follow-up work assignment or authorize further execution.
+The verification campaign remains closed. Coverage limits and unresolved issues
+remain as recorded above.

@@ -7,7 +7,7 @@ The source and documentation changes below were implemented and pushed to
 Implementation and verification are separate: the recorded results establish
 only the candidates and scenarios named below.
 
-## Implemented changes
+## What changed
 
 - Appearance saves submit only explicitly edited colors; **Inherit all** still
   explicitly resets every defined color. Successful save responses reconcile
@@ -26,7 +26,6 @@ only the candidates and scenarios named below.
 - Label-only navigation items omit unnecessary icon-loading subscriptions.
 - Documentation clarifies separate-copy staging, shared component settings,
   global disabling versus single-theme detachment, and Escape/focus behavior.
-  Outdated handoff information and historical path references were corrected.
 - Existing regression-source additions are included on main. Their presence is
   not proof that they ran against the final main revision.
 
@@ -134,15 +133,12 @@ coverage remains unestablished. It is not a list of demonstrated product bugs.
 The lengthy process failed to produce a clear overall answer. That is a
 testing-process failure, not evidence of more product bugs.
 **The testing execution is a failure that will have a resolution.**
-That process failure remains unresolved; its resolution has not been specified
-by these notes. Closing the testing effort does not mark the execution failure
-resolved or authorize a new investigation.
+The process failure remains unresolved. Closing the testing effort does not
+resolve it.
 
-The prior testing effort is closed. RC5 used only the existing GitHub CI
-workflows; further testing and investigation remain on hold. E01 remains
-unresolved and missing coverage remains
-missing coverage. The prior closure is not all-nine verification, release
-acceptance, or an E01 fix.
+The prior testing effort is closed. RC5 verification results and their limits
+are recorded above. E01 remains unresolved, and incomplete coverage remains
+unverified.
 
 ## Publication status
 

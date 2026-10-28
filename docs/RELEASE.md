@@ -41,9 +41,7 @@ move an existing release tag.
 
 Published identities and release history are recorded in
 [GitHub Releases](https://github.com/CodeWorksLabs/brand-navigation/releases)
-and [`CHANGELOG.md`](../CHANGELOG.md). Historical development and compatibility
-bootstrap records remain in [`HISTORICAL_CHECKPOINT.md`](HISTORICAL_CHECKPOINT.md);
-they are not instructions to repeat those operations.
+and [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## Required Discourse review
 
@@ -66,14 +64,13 @@ New features must not silently break a supported ESR: preserve compatibility,
 maintain a compatible product version, or obtain explicit approval for a changed
 support requirement and document it.
 
-Phil adopted this policy for subsequent releases and prereleases. Current
+This policy applies to subsequent releases and prereleases. Current
 testing coverage is behind the ESR schedule; adopting the policy and committing
 target pins do not establish completed operational adoption or compatibility.
 Adoption is phased, not a new retrospective testing campaign. RC5's completed
 evidence and prepared target updates are recorded in
 [Testing and acceptance](TESTING.md#discourse-support-policy-adoption).
-Use the existing workflows in the next authorized regular CI cycle; do not
-create another runner or repeat completed checks solely to introduce this policy.
+The existing workflows provide the target lanes for regular CI cycles.
 This transition neither turns untested targets into passes nor waives other
 existing release safeguards.
 
@@ -150,8 +147,7 @@ Keep the README, administrator guide, changelog, release notes,
 [public documentation](https://docs.codeworkslabs.dev/brand-navigation/)
 consistent with the shipped release. Screenshots, installation instructions,
 compatibility claims and known limitations must describe the actual release.
-Site publication requires separate authorization; completing a component
-release does not authorize deploying documentation or another website.
+Website documentation is published separately from component releases.
 
 Use [Brand Navigation Support](https://forum.codeworkslabs.dev/c/brand-navigation/support/7)
 for installation and configuration help,
@@ -204,22 +200,18 @@ and exact core commit in every compatibility result.
 
 ## Versioning and publication
 
-### RC5 publication direction — October 22, 2026
+### RC5 publication record — October 22, 2026
 
-Phil explicitly directed running the existing GitHub CI workflows and publishing
-RC5, with E01 unresolved and the prior failed testing effort closed. For this
-prerelease, use that bounded instruction rather than starting a new review,
-local matrix, or investigation campaign. Report actual CI outcomes and existing
-limitations; publication does not claim all-nine verification or stable-release
-acceptance. The testing-execution failure still awaits its resolution.
+RC5 was published with E01 unresolved and the prior failed testing effort
+closed. Publication does not establish complete verification or stable-release
+acceptance. The testing-execution failure remains unresolved.
 
 The October 22 existing CI at `676cc4a` completed with configuration, lint,
 backend and all four system lanes passing, and seven failed frontend assertions
-per target. RC5 publication follows Phil's direction with those failures
-explicitly disclosed in the release notes, Known Issues and testing record.
+per target. Those failures are disclosed in the release notes, Known Issues
+and testing record.
 It does not claim clean CI, completed ESR catch-up, or complete acceptance.
-Further testing remains on hold pending Phil's protocol/task-management work
-and new explicit direction.
+The prior testing campaign remains closed.
 
 Use SemVer prerelease identifiers in the form
 `v<MAJOR>.<MINOR>.<PATCH>-rc.<N>` for release candidates. Mark each matching

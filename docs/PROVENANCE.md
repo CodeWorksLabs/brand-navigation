@@ -30,10 +30,7 @@ not place Brand Navigation in a formal succession lineage with those projects.
 
 The durable specification and acceptance basis is distributed across
 [`SCOPE.md`](SCOPE.md), [`ARCHITECTURE.md`](ARCHITECTURE.md),
-[`TESTING.md`](TESTING.md), the settings schema, Git history, and the repository
-successor checkpoint. Development transcripts provide additional working
-history but are not treated as the only evidence required to reconstruct the
-product position.
+[`TESTING.md`](TESTING.md), the settings schema, and Git history.
 
 ## Recorded upstream sources and classifications
 

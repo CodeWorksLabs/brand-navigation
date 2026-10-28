@@ -95,10 +95,10 @@ bundle import and verification. Sample navigation is included.
 ## Known working Discourse versions
 
 Recorded checks cover Discourse 2026.7 ESR, 2026.8 and 2026.9 installations.
-For the upcoming RC5, see the [exact CI versions and results](docs/TESTING.md#rc5-candidate-verification),
+For RC5, see the [exact CI versions and results](docs/TESTING.md#rc5-candidate-verification),
 including the ESR-line revision, monthly release and development snapshots.
 The [known-issues record](docs/KNOWN_ISSUES.md) records unresolved E01 display
-staleness, focused browser results, and Phil's testing closure decision.
+staleness and verification limits.
 See the [testing record](docs/TESTING.md) for exact builds and limits—not a
 blanket compatibility or accessibility guarantee. Keep labels short on narrow
 screens; header space is finite.
@@ -124,7 +124,7 @@ to list it here.
 Use direct links, submenu-only groups, or linked parents with separate carets.
 Core-header destinations are direct links, not submenus. See the
 [administrator guide](docs/USER_GUIDE.md) and [technical reference](docs/) for
-configuration, architecture, testing and [project history](docs/PROJECT_HISTORY.md).
+configuration, architecture and testing.
 
 ## Versions and updates
 

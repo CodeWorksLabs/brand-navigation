@@ -3,3 +3,15 @@ node_modules/
 .pnpm-install.out
 .pnpm-install.err
 tsconfig.tsbuildinfo
+
+# Local development and private working records
+.pnpm-store/
+/AGENTS.md
+/SUCCESSOR_CHECKPOINT.md
+/TESTER_CHECKPOINT.md
+/RC5_VERIFICATION_PLAN.md
+/rc5-preparation/
+/test/rc5-procedures/
+/docs/HISTORICAL_CHECKPOINT.md
+/docs/PUBLIC_SITE_HANDOFF.md
+/docs/PROJECT_HISTORY.md
