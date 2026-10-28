@@ -34,7 +34,6 @@ export default class BrandNavigationHeaderLinks extends Component {
         mobileMode: settings.mobile_mode,
         currentUser: this.currentUser,
         mobileDevice: this.capabilities.isMobileDevice,
-        // The shared link component handles sprite readiness and cleanup.
         iconExists: () => true,
       })
     );
